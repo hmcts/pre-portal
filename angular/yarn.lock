@@ -2366,6 +2366,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mediakind/mkplayer@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "@mediakind/mkplayer@npm:1.6.0"
+  dependencies:
+    bitmovin-player: 8.130.0
+    bitmovin-player-ui: ^3.50.0
+  checksum: 78c1d7117a82f7b4976805896febeea6fbacb960ab51b00f1a81a5272bd9df9cffba9595762f82c64af9f2ba263471209248b0078aba9b214345ba71289d81ad
+  languageName: node
+  linkType: hard
+
 "@ngtools/webpack@npm:16.2.2":
   version: 16.2.2
   resolution: "@ngtools/webpack@npm:16.2.2"
@@ -3927,6 +3937,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bitmovin-player-ui@npm:^3.50.0":
+  version: 3.52.0
+  resolution: "bitmovin-player-ui@npm:3.52.0"
+  checksum: 9e2ffe552cf81d6881dcfa5bb161ab6c584e3c06affa3e3f66c47bbdc2248658786af15f6cc9aaffad0cccd455ccea0cfcf118042b8472b898d14e90c014074f
+  languageName: node
+  linkType: hard
+
+"bitmovin-player@npm:8.130.0":
+  version: 8.130.0
+  resolution: "bitmovin-player@npm:8.130.0"
+  checksum: 06349d707e752746e41154229bcb62050eb928ba4edd635c8043e7746bffaf57c7cfc0f60a2a43f5f18dbd3ef64abae4e3ecf9e4983b20040b56b4d8f47ce506
+  languageName: node
+  linkType: hard
+
 "bl@npm:^4.0.3, bl@npm:^4.1.0":
   version: 4.1.0
   resolution: "bl@npm:4.1.0"
@@ -4305,6 +4329,7 @@ __metadata:
     "@angular/platform-browser": ^16.1.0
     "@angular/platform-browser-dynamic": ^16.1.0
     "@angular/router": ^16.1.0
+    "@mediakind/mkplayer": ^1.6.0
     "@types/jasmine": ~4.3.0
     "@typescript-eslint/eslint-plugin": 6.7.2
     "@typescript-eslint/parser": 6.7.2
