@@ -20,9 +20,12 @@
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/assets"],
             "styles": [
-              "node_modules/govuk-frontend/govuk/all.scss"
+              "node_modules/govuk-frontend/govuk/all.scss",
+              "node_modules/@mediakind/mkplayer/mkplayer-ui.css"
             ],
-            "scripts": ["node_modules/govuk-frontend/govuk/all.js"]
+            "scripts": ["node_modules/govuk-frontend/govuk/all.js",
+              "node_modules/@mediakind/mkplayer/mkplayer.js"
+            ]
           },
           "configurations": {
             "production": {
