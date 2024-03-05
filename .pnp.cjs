@@ -9278,7 +9278,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/d-npm-1.0.1-64afbbc689-49ca0639c7.zip/node_modules/d/",\
           "packageDependencies": [\
             ["d", "npm:1.0.1"],\
-            ["es5-ext", "npm:0.10.62"],\
+            ["es5-ext", "npm:0.10.64"],\
             ["type", "npm:1.2.0"]\
           ],\
           "linkType": "HARD"\
@@ -10246,12 +10246,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["es5-ext", [\
-        ["npm:0.10.62", {\
-          "packageLocation": "./.yarn/unplugged/es5-ext-npm-0.10.62-f20aca46cb/node_modules/es5-ext/",\
+        ["npm:0.10.64", {\
+          "packageLocation": "./.yarn/unplugged/es5-ext-npm-0.10.64-c30cdc3d60/node_modules/es5-ext/",\
           "packageDependencies": [\
-            ["es5-ext", "npm:0.10.62"],\
+            ["es5-ext", "npm:0.10.64"],\
             ["es6-iterator", "npm:2.0.3"],\
             ["es6-symbol", "npm:3.1.3"],\
+            ["esniff", "npm:2.0.1"],\
             ["next-tick", "npm:1.1.0"]\
           ],\
           "linkType": "HARD"\
@@ -10263,7 +10264,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["es6-iterator", "npm:2.0.3"],\
             ["d", "npm:1.0.1"],\
-            ["es5-ext", "npm:0.10.62"],\
+            ["es5-ext", "npm:0.10.64"],\
             ["es6-symbol", "npm:3.1.3"]\
           ],\
           "linkType": "HARD"\
@@ -10275,7 +10276,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["es6-map", "npm:0.1.5"],\
             ["d", "npm:1.0.1"],\
-            ["es5-ext", "npm:0.10.62"],\
+            ["es5-ext", "npm:0.10.64"],\
             ["es6-iterator", "npm:2.0.3"],\
             ["es6-set", "npm:0.1.6"],\
             ["es6-symbol", "npm:3.1.3"],\
@@ -10299,7 +10300,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["es6-set", "npm:0.1.6"],\
             ["d", "npm:1.0.1"],\
-            ["es5-ext", "npm:0.10.62"],\
+            ["es5-ext", "npm:0.10.64"],\
             ["es6-iterator", "npm:2.0.3"],\
             ["es6-symbol", "npm:3.1.3"],\
             ["event-emitter", "npm:0.3.5"],\
@@ -10325,7 +10326,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["es6-weak-map", "npm:2.0.3"],\
             ["d", "npm:1.0.1"],\
-            ["es5-ext", "npm:0.10.62"],\
+            ["es5-ext", "npm:0.10.64"],\
             ["es6-iterator", "npm:2.0.3"],\
             ["es6-symbol", "npm:3.1.3"]\
           ],\
@@ -10692,6 +10693,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["esniff", [\
+        ["npm:2.0.1", {\
+          "packageLocation": "./.yarn/cache/esniff-npm-2.0.1-26cea8766c-d814c0e5c3.zip/node_modules/esniff/",\
+          "packageDependencies": [\
+            ["esniff", "npm:2.0.1"],\
+            ["d", "npm:1.0.1"],\
+            ["es5-ext", "npm:0.10.64"],\
+            ["event-emitter", "npm:0.3.5"],\
+            ["type", "npm:2.7.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["espree", [\
         ["npm:3.5.4", {\
           "packageLocation": "./.yarn/cache/espree-npm-3.5.4-9b1f250d35-cbc8da4caf.zip/node_modules/espree/",\
@@ -10782,7 +10796,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["event-emitter", "npm:0.3.5"],\
             ["d", "npm:1.0.1"],\
-            ["es5-ext", "npm:0.10.62"]\
+            ["es5-ext", "npm:0.10.64"]\
           ],\
           "linkType": "HARD"\
         }]\
