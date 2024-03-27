@@ -143,5 +143,5 @@
     "**/*": "prettier --write --ignore-unknown",
     "**/*.{js,ts}": "eslint --cache --fix"
   },
-  "packageManager": "yarn@3.8.1"
+  "packageManager": "yarn@4.1.1"
 }
