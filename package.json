@@ -101,7 +101,7 @@
     "axios-debug-log": "1.0.0",
     "babel-loader": "9.1.3",
     "chai": "4.4.1",
-    "chai-as-promised": "7.1.1",
+    "chai-as-promised": "7.1.2",
     "chokidar": "3.6.0",
     "codeceptjs": "3.3.6",
     "copy-webpack-plugin": "12.0.2",
