@@ -38,7 +38,10 @@ export class PropertiesVolume {
     if (server.locals.ENV === 'production') {
       this.logger.info('Loading properties from mounted KV');
       propertiesVolume.addTo(config);
-      this.setSecret('secrets.pre-hmctskv.AppInsightsInstrumentationKey', 'appInsights.instrumentationKey');
+      this.setSecret(
+        'secrets.pre-hmctskv.app-insights-connection-string',
+        'appInsights.app-insights-connection-string'
+      );
       this.setSecret('secrets.pre-hmctskv.redis6-access-key', 'session.redis.key');
       this.setSecret('secrets.pre-hmctskv.session-secret', 'session.secret');
       this.setSecret('secrets.pre-hmctskv.apim-sub-portal-primary-key', 'pre.apiKey.primary');

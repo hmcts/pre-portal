@@ -1,7 +1,8 @@
 {
   "useCSRFProtection": true,
   "appInsights": {
-    "instrumentationKey": false
+    "instrumentationKey": false,
+    "app-insights-connection-string": false
   },
   "pre": {
     "apiUrl": "",

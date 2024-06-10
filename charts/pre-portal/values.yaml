@@ -8,6 +8,7 @@ nodejs:
       secrets:
         - redis6-access-key
         - AppInsightsInstrumentationKey
+        - app-insights-connection-string
         - apim-sub-portal-primary-key
         - apim-sub-portal-secondary-key
         - pp-authorization
