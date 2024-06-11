@@ -1,4 +1,5 @@
 import { AccessStatus } from '../../types/access-status';
+import { TermsNotAcceptedError } from '../../types/errors';
 import { UserProfile } from '../../types/user-profile';
 
 import { Pagination, PutAuditRequest, Recording, RecordingPlaybackData, SearchRecordingsRequest } from './types';
@@ -94,6 +95,8 @@ export class PreClient {
       throw new Error('User does not have access to the portal: ' + email);
     } else if (userProfile.portal_access[0].status === AccessStatus.INACTIVE) {
       throw new Error('User is not active: ' + email);
+    } else if (!userProfile.portal_access[0].is_terms_accepted) {
+      throw new TermsNotAcceptedError(email);
     }
     return userProfile;
   }
@@ -188,6 +191,21 @@ export class PreClient {
         return null;
       }
 
+      this.logger.error(e);
+      throw e;
+    }
+  }
+
+  public async acceptTermsAndConditions(xUserId: string): Promise<UserProfile> {
+    try {
+      const response = await axios.post('/users/acceptPortalTerms', {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+      });
+
+      return response.data as UserProfile;
+    } catch (e) {
       this.logger.error(e);
       throw e;
     }

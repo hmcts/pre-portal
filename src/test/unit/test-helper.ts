@@ -35,6 +35,8 @@ export const mockeduser = {
       last_access: null,
       registered_at: null,
       status: AccessStatus.INVITATION_SENT,
+      terms_accepted_at: (Date.now() - 86400000).toString(), // 24 hours ago
+      is_terms_accepted: true,
     },
   ],
   user: {
