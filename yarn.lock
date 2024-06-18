@@ -2416,6 +2416,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mediakind/mkplayer@npm:^1.10.1":
+  version: 1.10.1
+  resolution: "@mediakind/mkplayer@npm:1.10.1"
+  dependencies:
+    bitmovin-player: 8.159.0
+    bitmovin-player-ui: ^3.52.0
+  checksum: 019f0b21a6afcaa594abab81048c5b6b406432884797c51c670f01b601b4c88ae5fa683359b6e05d3bbf1673b9725d6b6d3b01f9a560ed72e250429714cbe7cb
+  languageName: node
+  linkType: hard
+
 "@microsoft/applicationinsights-web-snippet@npm:1.0.1":
   version: 1.0.1
   resolution: "@microsoft/applicationinsights-web-snippet@npm:1.0.1"
@@ -4590,6 +4600,20 @@ __metadata:
   version: 2.3.0
   resolution: "binary-extensions@npm:2.3.0"
   checksum: bcad01494e8a9283abf18c1b967af65ee79b0c6a9e6fcfafebfe91dbe6e0fc7272bafb73389e198b310516ae04f7ad17d79aacf6cb4c0d5d5202a7e2e52c7d98
+  languageName: node
+  linkType: hard
+
+"bitmovin-player-ui@npm:^3.52.0":
+  version: 3.62.0
+  resolution: "bitmovin-player-ui@npm:3.62.0"
+  checksum: 9d49ba1d9fbb711397aa49689789056e1eb02dde9875a19dc7350babaecba251ea172751935d4dd0efe2a3e4f99299afc1353f80eb8b7f7a42ebb63154e95513
+  languageName: node
+  linkType: hard
+
+"bitmovin-player@npm:8.159.0":
+  version: 8.159.0
+  resolution: "bitmovin-player@npm:8.159.0"
+  checksum: 21a537caef471db3fff28b773c9e69b3c943fc001d518731ec918b6e39ef25a457a2c825832a2bcde41ae90c8ca563650cb36d38226617751dc437b8c1ab90ed
   languageName: node
   linkType: hard
 
@@ -11897,6 +11921,7 @@ __metadata:
     "@hmcts/nodejs-logging": 4.0.4
     "@hmcts/properties-volume": 1.1.0
     "@jest/globals": 29.7.0
+    "@mediakind/mkplayer": ^1.10.1
     "@types/body-parser": 1.19.5
     "@types/chai-as-promised": 7.1.8
     "@types/compression": 1.7.5

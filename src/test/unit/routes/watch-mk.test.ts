@@ -18,32 +18,32 @@ describe('Watch page failure', () => {
     new Nunjucks(false).enableFor(app);
     const request = require('supertest');
 
-    const watch = require('../../../main/routes/watch').default;
+    const watch = require('../../../main/routes/watch-mk').default;
     watch(app);
 
     test('should return 404 when getRecording returns null', async () => {
       mockGetRecording(null);
       await request(app)
-        .get('/watch/12345678-1234-1234-1234-1234567890ff')
+        .get('/watch-mk/12345678-1234-1234-1234-1234567890ff')
         .expect(res => expect(res.status).to.equal(404));
     });
     test('should return 404 when getRecordingPlaybackData returns null', async () => {
       mockGetRecordingPlaybackData(null);
       await request(app)
-        .get('/watch/12345678-1234-1234-1234-1234567890ff/playback')
+        .get('/watch-mk/12345678-1234-1234-1234-1234567890ff/playback')
         .expect(res => expect(res.status).to.equal(404));
     });
 
     test('should return 404 when getRecording id is invalid', async () => {
       mockGetRecording(null);
       await request(app)
-        .get('/watch/something')
+        .get('/watch-mk/something')
         .expect(res => expect(res.status).to.equal(404));
     });
     test('should return 404 when getRecordingPlaybackData id is invalid', async () => {
       mockGetRecordingPlaybackData(null);
       await request(app)
-        .get('/watch/something/playback')
+        .get('/watch-mk/something/playback')
         .expect(res => expect(res.status).to.equal(404));
     });
 
@@ -52,7 +52,7 @@ describe('Watch page failure', () => {
         throw new Error('Error');
       });
       await request(app)
-        .get('/watch/12345678-1234-1234-1234-1234567890ab')
+        .get('/watch-mk/12345678-1234-1234-1234-1234567890ab')
         .expect(res => expect(res.status).to.equal(500));
     });
     test('should return 500 when getRecordingPlaybackData fails', async () => {
@@ -62,7 +62,7 @@ describe('Watch page failure', () => {
           throw new Error('Error');
         });
       await request(app)
-        .get('/watch/12345678-1234-1234-1234-1234567890ab/playback')
+        .get('/watch-mk/12345678-1234-1234-1234-1234567890ab/playback')
         .expect(res => expect(res.status).to.equal(500));
     });
   });
@@ -78,7 +78,7 @@ describe('Watch page success', () => {
     new Nunjucks(false).enableFor(app);
     const request = require('supertest');
 
-    const watch = require('../../../main/routes/watch').default;
+    const watch = require('../../../main/routes/watch-mk').default;
     watch(app);
 
     test('should return 200 when getRecording and getRecordingPlaybackData succeed', async () => {
@@ -86,10 +86,10 @@ describe('Watch page success', () => {
       mockGetRecordingPlaybackData();
       mockPutAudit();
       await request(app)
-        .get('/watch/12345678-1234-1234-1234-1234567890ab')
+        .get('/watch-mk/12345678-1234-1234-1234-1234567890ab')
         .expect(res => expect(res.status).to.equal(200));
       await request(app)
-        .get('/watch/12345678-1234-1234-1234-1234567890ab/playback')
+        .get('/watch-mk/12345678-1234-1234-1234-1234567890ab/playback')
         .expect(res => expect(res.status).to.equal(200));
     });
   });

@@ -1,0 +1,161 @@
+{% extends "template.njk" %}
+
+{% block pageTitle %}Recording {{ recording.id }} - PRE Portal{% endblock %}
+
+{% block head %}
+  {% include "webpack/css.njk" %}
+  <script type="text/javascript" src="/assets/js/mkplayer.js"></script>
+  <link rel="stylesheet" href="/assets/css/mkplayer-ui.css">
+{% endblock %}
+
+{% block beforeContent %}
+  {{
+    govukBackLink({
+      "href": "javascript:history.back()"
+    })
+  }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+    <div class="govuk-notification-banner__header">
+      <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+        Note
+      </h2>
+    </div>
+    <div class="govuk-notification-banner__content">
+      <p class="govuk-notification-banner__heading">
+        This page is using the new MediaKind API and video player.
+      </p>
+    </div>
+  </div>
+
+  <h1 class="govuk-heading-xl">Case Ref: {{ recording.case_reference }}</h1>
+
+  <div id="videoError" class="govuk-error-summary" data-module="govuk-error-summary" style="display: none;">
+    <div role="alert">
+      <h2 class="govuk-error-summary__title">
+        There is a problem
+      </h2>
+      <div class="govuk-error-summary__body">
+        <ul class="govuk-list govuk-error-summary__list">
+          <li class="govuk-error-message">
+            The recording is not currently available
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="videoWrapper" class="govuk-!-margin-bottom-2 video-wrapper">
+    <div id="video-container"></div>
+  </div>
+
+  <div class="govuk-warning-text">
+    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+    <strong class="govuk-warning-text__text">
+      <span class="govuk-warning-text__assistive">Please note</span>
+      playback is preferred on non-mobile devices. If possible, please use a
+      preferred device.
+    </strong>
+  </div>
+
+  <h2 class="govuk-heading-m">Recording details</h2>
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key" data-testid="summary-title-date">
+        Date
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+        data-testid="summary-value-date">
+        {{ recording.capture_session.started_at | formatDate }}
+      </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key" data-testid="summary-title-uid">
+        Recording UID
+      </dt>
+      <dd class="govuk-summary-list__value" data-testid="summary-value-uid">
+        {{ recording.id }}
+      </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt
+        class="govuk-summary-list__key"
+        data-testid="summary-title-version">
+        Recording Version
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+        data-testid="summary-value-version">
+        {{ recording.version }}
+      </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key" data-testid="summary-title-court">
+        Court
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+        data-testid="summary-value-court">
+        {{ recording.capture_session.court_name }}
+      </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt
+        class="govuk-summary-list__key"
+        data-testid="summary-title-witness">
+        Witness
+      </dt>
+
+        <dd
+          class="govuk-summary-list__value"
+          data-testid="summary-value-witness">
+          {% for participant in recording.participants %}
+            {% if participant.participant_type == "WITNESS" %}
+              {{ participant.first_name }} {{ participant.last_name }}<br />
+            {% endif %}
+          {% endfor %}
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt
+        class="govuk-summary-list__key"
+        data-testid="summary-title-defendants">
+        Defendants
+      </dt>
+        <dd
+          class="govuk-summary-list__value"
+          data-testid="summary-value-defendants">
+          {% for participant in recording.participants %}
+            {% if participant.participant_type == "DEFENDANT" %}
+              {{ participant.first_name }} {{ participant.last_name }}<br />
+            {% endif %}
+          {% endfor %}
+        </dd>
+    </div>
+  </dl>
+  <script type="text/javascript" crossorigin="anonymous" data-testid="recording-video-script">
+    const videoContainer = document.getElementById("video-container");
+
+    const playerConfig = {
+        key: "d0167b1c-9767-4287-9ddc-e0fa09d31e02",
+        ui: true,
+        playback: {
+            muted: false,
+            autoplay: false
+        }
+    };
+
+    let player = new mkplayer.MKPlayer(videoContainer, playerConfig);
+
+    const sourceConfig = {
+      title: "Test",
+      description: "Test",
+      hls: "https://mkplayer.azureedge.net/$web/streams/slate/hls/index.m3u8"
+    };
+
+    player.load(sourceConfig);
+  </script>
+{% endblock %}

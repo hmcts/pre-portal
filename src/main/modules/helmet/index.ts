@@ -19,6 +19,8 @@ export class Helmet {
     const azureMediaServices = config.get('ams.azureMediaServices') as string;
     const azureMediaServicesKeyDelivery = config.get('ams.azureMediaServicesKeyDelivery') as string;
     const dynatraceDomain = '*.dynatrace.com';
+    const mkPlayer = 'https://mkplayer.azureedge.net';
+    const bitmovinLicensing = 'https://licensing.bitmovin.com';
 
     // include default helmet functions
     const scriptSrc = [self, googleAnalyticsDomain, "'unsafe-inline'", azureMediaPlayer, dynatraceDomain];
@@ -36,7 +38,15 @@ export class Helmet {
       helmet({
         contentSecurityPolicy: {
           directives: {
-            connectSrc: [self, azureMediaPlayer, azureMediaServices, azureMediaServicesKeyDelivery, dynatraceDomain],
+            connectSrc: [
+              self,
+              azureMediaPlayer,
+              azureMediaServices,
+              azureMediaServicesKeyDelivery,
+              dynatraceDomain,
+              mkPlayer,
+              bitmovinLicensing,
+            ],
             defaultSrc: ["'none'"],
             fontSrc: [self, azureMediaPlayer, 'data:'],
             imgSrc: [self, googleAnalyticsDomain, azureMediaPlayer, 'data:'],

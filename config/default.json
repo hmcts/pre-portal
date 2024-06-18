@@ -9,7 +9,8 @@
       "primary": "",
       "secondary": ""
     },
-    "portalUrl": "https://localhost:4551"
+    "portalUrl": "https://localhost:4551",
+    "enableMkWatchPage": false
   },
   "ams": {
     "azureMediaServices": "",

@@ -34,6 +34,7 @@ export class PropertiesVolume {
       'ams.azureMediaServicesKeyDelivery',
       process.env.AMS_AZURE_MEDIA_SERVICES_KEY_DELIVERY ?? 'https://preamstest.keydelivery.uksouth.media.azure.net'
     );
+    set(config, 'pre.enableMkWatchPage', process.env.ENABLE_MK_WATCH_PAGE ?? 'false');
 
     if (server.locals.ENV === 'production') {
       this.logger.info('Loading properties from mounted KV');

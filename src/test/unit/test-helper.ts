@@ -46,3 +46,27 @@ export const mockeduser = {
     organisation: null,
   },
 };
+
+export function mockUser() {
+  jest.mock('express-openid-connect', () => {
+    return {
+      requiresAuth: jest.fn().mockImplementation(() => {
+        return (req: any, res: any, next: any) => {
+          next();
+        };
+      }),
+    };
+  });
+  jest.mock('../../main/services/session-user/session-user', () => {
+    return {
+      SessionUser: {
+        getLoggedInUserPortalId: jest.fn().mockImplementation((req: Express.Request) => {
+          return '123';
+        }),
+        getLoggedInUserProfile: jest.fn().mockImplementation((req: Express.Request) => {
+          return mockeduser;
+        }),
+      },
+    };
+  });
+}
