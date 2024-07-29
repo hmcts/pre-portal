@@ -6,6 +6,22 @@
   {% include "webpack/css.njk" %}
   <script type="text/javascript" src="/assets/js/mkplayer.js"></script>
   <link rel="stylesheet" href="/assets/css/mkplayer-ui.css">
+  <style>
+    .custom-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .volume-control {
+      display: flex;
+      align-items: center;
+    }
+    #volumeSlider {
+      width: 100px;
+      margin-left: 5px;
+    }
+  </style>
 {% endblock %}
 
 {% block beforeContent %}
@@ -49,6 +65,12 @@
 
   <div id="videoWrapper" class="govuk-!-margin-bottom-2 video-wrapper">
     <div id="video-container"></div>
+    <div class="custom-controls">
+      <div class="volume-control">
+        <label for="volumeSlider">Volume:</label>
+        <input type="range" id="volumeSlider" min="0" max="100" value="50">
+      </div>
+    </div>
   </div>
 
   <div class="govuk-warning-text">
@@ -138,6 +160,7 @@
   </dl>
   <script type="text/javascript" crossorigin="anonymous" data-testid="recording-video-script">
     const videoContainer = document.getElementById("video-container");
+    const volumeSlider = document.getElementById("volumeSlider");
     var videoError = document.getElementById("videoError");
 
     const playerConfig = {
@@ -145,32 +168,80 @@
         ui: true,
         playback: {
             muted: false,
-            autoplay: false
-        }
+            autoplay: false,
+            preferredTech: [{ player: 'html5', streaming: 'hls'}]
+        },
+        controls: {
+        volume: {
+          enabled: true,
+          vertical: true
+        },
+      }
     };
 
-    let player = new mkplayer.MKPlayer(videoContainer, playerConfig);
 
-    fetch("{{ recordingPlaybackDataUrl }}", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    }).then(function (response) {
-      if (!response.ok) {
-        throw new Error(response);
-      }
+    let player;
 
-      return response.json();
-    }).then(function (data) {
-      const sourceConfig = {
-        hls: data.hlsUrl,
-      };
+    function initializePlayer() {
+      console.log('Initialising player...');
+      player = new mkplayer.MKPlayer(videoContainer, playerConfig);
+      fetch("{{ recordingPlaybackDataUrl }}", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        }).then(function (response) {
+          if (!response.ok) {
+            throw new Error(response);
+          }
 
-      player.load(sourceConfig);
-    }).catch(function (error) {
-      console.error("Error:", error);
-      videoError.style.display = "block";
-    });
+          return response.json();
+        }).then(function (data) {
+          const sourceConfig = {
+            hls: data.hlsUrl,
+          };
+
+          player.load(sourceConfig);
+        }).catch(function (error) {
+          console.error("Error:", error);
+          videoError.style.display = "block";
+      });
+    }
+
+    function setupEventListeners() {
+      player.on("sourceloaded", onSourceLoaded);
+      player.on("error", onError);
+      player.on("volumechange", onVolumeChange);
+
+      volumeSlider.addEventListener('input', adjustVolume);
+    }
+
+    function onSourceLoaded() {
+      console.log('Player loaded');
+      const initialVolume = volumeSlider.value / 100;
+      player.setVolume(initialVolume);
+      console.log('Initial vol set:', initialVolume);
+    }
+
+    function onError(error) {
+      console.error('Player error:', error);
+      videoError.style.display = 'block';
+    }
+
+    function onVolumeChange(data) {
+      console.log('Volume change:', data.volume);
+      volumeSlider.value = data.volume * 100;
+    }
+
+    function adjustVolume(event) {
+      const volume = event.target.value / 100;
+      player.setVolume(volume);
+      console.log('Player vol set:', player.getVolume());
+    }
+
+    window.onload = function() {
+      initializePlayer();
+      setupEventListeners();
+    };
   </script>
 {% endblock %}
