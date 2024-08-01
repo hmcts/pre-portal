@@ -21,7 +21,7 @@ Then('I am on the {string} page', (path: string) => {
   I.amOnPage(url.toString());
 });
 
-Then('I sign in as the test user', () => {
+Then('I sign in with valid credentials as the test user', () => {
   I.fillField('Email Address', config.b2c.testLogin.email as string);
   I.fillField('Password', config.b2c.testLogin.password as string);
   I.click('Sign in');
@@ -40,7 +40,22 @@ Then('I see the link {string}', (text: string) => {
   I.seeElement(locate('a').withText(text));
 });
 
-Then('I sign in as an unknown user', () => {
+Then('I click the link {string}', (text: string) => {
+  I.click(locate('a').withText(text));
+});
+
+Then('I enter a valid email address', () => {
+  I.fillField('Email Address', config.b2c.testLogin.email as string);
+  I.click('Send verification code');
+});
+
+Then('I sign in with an unknown user', () => {
+  I.fillField('Email Address', 'email@hmcts.net');
+  I.fillField('Password', 'this is a password');
+  I.click('Sign in');
+})
+
+Then('I sign in with the wrong password', () => {
   I.fillField('Email Address', config.b2c.testLogin.email as string);
   I.fillField('Password', 'this is not the password');
   I.click('Sign in');
