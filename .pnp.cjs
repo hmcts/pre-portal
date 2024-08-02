@@ -107,7 +107,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lodash", "npm:4.17.21"],\
             ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.0"],\
             ["nock", "npm:13.5.4"],\
-            ["node-mocks-http", "npm:1.15.0"],\
+            ["node-mocks-http", "npm:1.15.1"],\
             ["nodemon", "npm:3.1.4"],\
             ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
             ["pa11y", "npm:8.0.0"],\
@@ -16056,10 +16056,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["node-mocks-http", [\
-        ["npm:1.15.0", {\
-          "packageLocation": "./.yarn/cache/node-mocks-http-npm-1.15.0-4ad94c6ed9-9be3ef4eec.zip/node_modules/node-mocks-http/",\
+        ["npm:1.15.1", {\
+          "packageLocation": "./.yarn/cache/node-mocks-http-npm-1.15.1-65cc61bd4e-f6e64065ab.zip/node_modules/node-mocks-http/",\
           "packageDependencies": [\
-            ["node-mocks-http", "npm:1.15.0"],\
+            ["node-mocks-http", "npm:1.15.1"],\
             ["@types/express", "npm:4.17.21"],\
             ["@types/node", "npm:20.12.7"],\
             ["accepts", "npm:1.3.8"],\
@@ -17296,7 +17296,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lodash", "npm:4.17.21"],\
             ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.0"],\
             ["nock", "npm:13.5.4"],\
-            ["node-mocks-http", "npm:1.15.0"],\
+            ["node-mocks-http", "npm:1.15.1"],\
             ["nodemon", "npm:3.1.4"],\
             ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
             ["pa11y", "npm:8.0.0"],\
