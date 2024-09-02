@@ -19,8 +19,6 @@ export class Helmet {
     const azureMediaServices = config.get('ams.azureMediaServices') as string;
     const azureMediaServicesKeyDelivery = config.get('ams.azureMediaServicesKeyDelivery') as string;
     const dynatraceDomain = '*.dynatrace.com';
-    const mkPlayer = 'https://mkplayer.azureedge.net';
-    const bitmovinLicensing = 'https://licensing.bitmovin.com';
     const mkStreaming = '*.uksouth.streaming.mediakind.com';
     const mkLicense = 'ottapp-appgw-amp.prodc.mkio.tv3cloud.com';
 
@@ -46,8 +44,6 @@ export class Helmet {
               azureMediaServices,
               azureMediaServicesKeyDelivery,
               dynatraceDomain,
-              mkPlayer,
-              bitmovinLicensing,
               mkStreaming,
               mkLicense,
             ],

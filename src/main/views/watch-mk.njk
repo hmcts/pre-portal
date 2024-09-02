@@ -4,8 +4,7 @@
 
 {% block head %}
   {% include "webpack/css.njk" %}
-  <script type="text/javascript" src="/assets/js/mkplayer.js"></script>
-  <link rel="stylesheet" href="/assets/css/mkplayer-ui.css">
+  <link rel="stylesheet" href="/assets/css/video-js.min.css">
 {% endblock %}
 
 {% block beforeContent %}
@@ -25,7 +24,7 @@
     </div>
     <div class="govuk-notification-banner__content">
       <p class="govuk-notification-banner__heading">
-        This page is using the new MediaKind API and video player.
+        This page is using the new MediaKind API and videojs video player.
       </p>
     </div>
   </div>
@@ -54,7 +53,15 @@
   </div>
 
   <div id="videoWrapper" class="govuk-!-margin-bottom-2 video-wrapper" style="display: none;">
-    <div id="video-container"></div>
+    <video-js id="video" class="video-js">
+      <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a
+        web browser that
+        <a href="https://videojs.com/html5-video-support/" target="_blank"
+          >supports HTML5 video</a
+        >
+      </p>
+    </video-js>
   </div>
 
   <div class="govuk-warning-text">
@@ -142,20 +149,30 @@
         </dd>
     </div>
   </dl>
-  <script type="text/javascript" crossorigin="anonymous" data-testid="recording-video-script">
-    const videoContainer = document.getElementById("video-container");
-    var videoError = document.getElementById("videoError");
 
-    const playerConfig = {
-        key: "d0167b1c-9767-4287-9ddc-e0fa09d31e02",
-        ui: true,
-        playback: {
-            muted: false,
-            autoplay: false
-        }
+  <script type="text/javascript" src="/assets/js/video.min.js"></script>
+  <script type="text/javascript" crossorigin="anonymous" data-testid="recording-video-script">
+    const playerOptions = {
+      controls: true,
+      preload: 'auto',
+      controlBar: {
+        volumePanel: {
+          inline: false,
+        },
+        children: [
+          'playToggle',
+          'currentTimeDisplay',
+          'progressControl',
+          'durationDisplay',
+          'volumePanel',
+          'fullscreenToggle',
+        ],
+      },
+      inactivityTimeout: 0,
+      disablePictureInPicture: true,
     };
 
-    let player = new mkplayer.MKPlayer(videoContainer, playerConfig);
+    let video = videojs("video", playerOptions);
 
     fetch("{{ recordingPlaybackDataUrl }}", {
     method: "GET",
@@ -180,19 +197,24 @@
         hlsAvailable = headResult.status === 200;
         retries--;
       } while (hlsAvailable === false && retries > 0);
-      const sourceConfig = {
-        hls: data.hls_url,
-        drm: {
-          clearkey: {
-            LA_URL: 'HLS_AES',
-            headers: {
-              Authorization: 'Bearer=' + data.token || '',
-            },
-          },
+
+      videojs.Vhs.xhr.beforeRequest = (options) => {
+        const targetUrl = 'mkio.tv3cloud.com';
+        if (!options.uri.includes(targetUrl)) {
+          return options;
         }
+
+        options.headers = {
+          ...options.headers,
+          Authorization: `Bearer=${data.token}`,
+        };
       };
 
-      player.load(sourceConfig);
+      video.src({
+        src: data.hls_url,
+        type: 'application/x-mpegURL',
+      });
+
       document.getElementById("loading").style.display = "none";
       document.getElementById("videoWrapper").style.display = "block";
     }).catch(function (error) {

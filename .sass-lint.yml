@@ -9,3 +9,4 @@ rules:
     - 1
     - 'extra-properties':
         - 'aspect-ratio'
+  no-important: 0
