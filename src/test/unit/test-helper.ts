@@ -1,6 +1,7 @@
 import { AccessStatus } from '../../main/types/access-status';
+import { UserProfile } from '../../main/types/user-profile';
 
-export const mockeduser = {
+export const mockeduser: UserProfile = {
   app_access: [
     {
       active: true,
@@ -44,6 +45,9 @@ export const mockeduser = {
     email: 'test@testy.com',
     phone_number: null,
     organisation: null,
+    terms_accepted: {
+      portal: true,
+    },
   },
 };
 

@@ -1,4 +1,6 @@
 import { AccessStatus } from '../../types/access-status';
+import { TermsNotAcceptedError } from '../../types/errors';
+import { Terms } from '../../types/terms';
 import { UserProfile } from '../../types/user-profile';
 
 import { Pagination, PutAuditRequest, Recording, RecordingPlaybackData, SearchRecordingsRequest } from './types';
@@ -36,7 +38,10 @@ export class PreClient {
       throw new Error('User has not been invited to the portal');
     }
 
-    if (!userProfile.portal_access || userProfile.portal_access.length === 0) {
+    if (
+      !userProfile.portal_access ||
+      (Array.isArray(userProfile.portal_access) && userProfile.portal_access.length === 0)
+    ) {
       const invitedUser = await this.isInvitedUser(email);
       if (!invitedUser) {
         throw new Error(
@@ -94,6 +99,8 @@ export class PreClient {
       throw new Error('User does not have access to the portal: ' + email);
     } else if (userProfile.portal_access[0].status === AccessStatus.INACTIVE) {
       throw new Error('User is not active: ' + email);
+    } else if (!userProfile.user.terms_accepted || !userProfile.user.terms_accepted['portal']) {
+      throw new TermsNotAcceptedError(email);
     }
     return userProfile;
   }
@@ -187,7 +194,7 @@ export class PreClient {
         return null;
       }
 
-      this.logger.error(e);
+      this.logger.error(e.message);
       throw e;
     }
   }
@@ -206,7 +213,34 @@ export class PreClient {
         return null;
       }
 
-      this.logger.error(e);
+      this.logger.error(e.message);
+      throw e;
+    }
+  }
+
+  public async getLatestTermsAndConditions(): Promise<Terms> {
+    try {
+      const response = await axios.get('/api/portal-terms-and-conditions/latest');
+      return response.data as Terms;
+    } catch (e) {
+      this.logger.error(e.message);
+      throw e;
+    }
+  }
+
+  public async acceptTermsAndConditions(xUserId: string, termsId: string): Promise<void> {
+    try {
+      const response = await axios.post(`/accept-terms-and-conditions/${termsId}`, {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+      });
+
+      if (response.status !== 200) {
+        throw new Error('Failed to accept terms and conditions');
+      }
+    } catch (e) {
+      this.logger.error(e.message);
       throw e;
     }
   }

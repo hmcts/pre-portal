@@ -2,14 +2,11 @@ import { PreClient } from '../services/pre-api/pre-client';
 import { SearchRecordingsRequest } from '../services/pre-api/types';
 import { SessionUser } from '../services/session-user/session-user';
 
-import { Logger } from '@hmcts/nodejs-logging';
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
 
 export default function (app: Application): void {
-  const logger = Logger.getLogger('browse');
-
-  app.get('/browse', requiresAuth(), async (req, res) => {
+  app.get('/browse', requiresAuth(), async (req, res, next) => {
     try {
       const client = new PreClient();
 
@@ -111,9 +108,7 @@ export default function (app: Application): void {
         user: SessionUser.getLoggedInUserProfile(req).user,
       });
     } catch (e) {
-      res.status(500);
-      res.render('error', { status: 500, message: e.message });
-      logger.error(e.message);
+      next(e);
     }
   });
 }
