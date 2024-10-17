@@ -11778,10 +11778,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["cookie", [\
-        ["npm:0.7.2", {\
-          "packageLocation": "./.yarn/cache/cookie-npm-0.7.2-6ea9ee4231-9bf8555e33.zip/node_modules/cookie/",\
+        ["npm:1.0.1", {\
+          "packageLocation": "./.yarn/cache/cookie-npm-1.0.1-833b8795e1-e2ff4879d8.zip/node_modules/cookie/",\
           "packageDependencies": [\
-            ["cookie", "npm:0.7.2"]\
+            ["cookie", "npm:1.0.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -11791,7 +11791,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/cookie-parser-npm-1.4.7-970a70a2fd-243fa13f21.zip/node_modules/cookie-parser/",\
           "packageDependencies": [\
             ["cookie-parser", "npm:1.4.7"],\
-            ["cookie", "npm:0.7.2"],\
+            ["cookie", "npm:1.0.1"],\
             ["cookie-signature", "npm:1.0.6"]\
           ],\
           "linkType": "HARD"\
@@ -13804,7 +13804,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["body-parser", "npm:2.0.1"],\
             ["content-disposition", "npm:1.0.0"],\
             ["content-type", "npm:1.0.5"],\
-            ["cookie", "npm:0.7.2"],\
+            ["cookie", "npm:1.0.1"],\
             ["cookie-signature", "npm:1.2.1"],\
             ["debug", "virtual:fc49ae59dd7800ae9653c194c805458e853a919b000d090804edf74ceca13a84997c7828a8b157a74c47e22e5575dcca7bb1ab25bb4c9d9935cbd5bbcdb5da97#npm:4.3.6"],\
             ["depd", "npm:2.0.0"],\
@@ -13878,7 +13878,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/express", "npm:5.0.0"],\
             ["base64url", "npm:3.0.1"],\
             ["clone", "npm:2.1.2"],\
-            ["cookie", "npm:0.7.2"],\
+            ["cookie", "npm:1.0.1"],\
             ["debug", "virtual:0ca7b771fbda7ed3d254c2e1e404506aa1480055c4a8b31a28affad41d2151a687d8a05486480858e0838a72b5e8d0e6f885471f47f57eb9072df7e81b13c034#npm:4.3.7"],\
             ["express", "npm:5.0.1"],\
             ["futoin-hkdf", "npm:1.5.3"],\
@@ -13901,7 +13901,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/express-session-npm-1.18.1-b1aa040a8f-e712cb3399.zip/node_modules/express-session/",\
           "packageDependencies": [\
             ["express-session", "npm:1.18.1"],\
-            ["cookie", "npm:0.7.2"],\
+            ["cookie", "npm:1.0.1"],\
             ["cookie-signature", "npm:1.0.7"],\
             ["debug", "virtual:37bf8baeca06414792610f5848734f065f68d217cce7beb4a1d9bd9569043400ad86bff10abd3b2d89dfce2ed86950a2198136a029541a9dc70fc2e5959a3763#npm:2.6.9"],\
             ["depd", "npm:2.0.0"],\
