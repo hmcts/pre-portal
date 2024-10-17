@@ -7,6 +7,7 @@ import {
 } from '../main/services/pre-api/types';
 import { PreClient } from '../main/services/pre-api/pre-client';
 import { AxiosResponse } from 'axios';
+import { Terms } from '../main/types/terms';
 
 export const mockRecordings: Recording[] = [
   {
@@ -141,6 +142,24 @@ export const mockPutAudit = () => {
     } as AxiosResponse);
   });
 };
+
+export function mockGetLatestTermsAndConditions(data?: Terms | null) {
+  if (data !== undefined) {
+    jest
+      .spyOn(PreClient.prototype, 'getLatestTermsAndConditions')
+      .mockImplementation(async (xUserId: string, id: string) => {
+        return Promise.resolve(data);
+      });
+  }
+}
+
+export function mockAcceptTermsAndConditions() {
+  jest
+    .spyOn(PreClient.prototype, 'acceptTermsAndConditions')
+    .mockImplementation(async (xUserId: string, termsId: string) => {
+      return Promise.resolve();
+    });
+}
 
 export function mockGetRecordingPlaybackData(data?: RecordingPlaybackData | null) {
   if (data !== undefined) {
