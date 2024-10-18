@@ -141,7 +141,7 @@
     "@opentelemetry/instrumentation": "0.53.0",
     "semver": "^7.5.2",
     "express": "5.0.1",
-    "cookie": "0.7.2"
+    "cookie": "1.0.1"
   },
   "husky": {
     "hooks": {
