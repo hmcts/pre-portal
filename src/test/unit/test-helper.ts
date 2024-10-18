@@ -1,6 +1,7 @@
 import { AccessStatus } from '../../main/types/access-status';
+import { UserProfile } from '../../main/types/user-profile';
 
-export const mockeduser = {
+export const mockeduser: UserProfile = {
   app_access: [
     {
       active: true,
@@ -37,6 +38,9 @@ export const mockeduser = {
       status: AccessStatus.INVITATION_SENT,
     },
   ],
+  terms_accepted: {
+    PORTAL: true,
+  },
   user: {
     id: '9ffcc9fb-db21-4d77-a983-c39b01141c6a',
     first_name: 'test',

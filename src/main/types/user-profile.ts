@@ -49,6 +49,10 @@ export interface UserProfile {
       ]
     | [];
 
+  terms_accepted: {
+    [key: string]: boolean;
+  } | null;
+
   user: {
     id: string;
     first_name: string;
