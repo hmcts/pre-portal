@@ -39,7 +39,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@hmcts/nodejs-logging", "npm:4.0.4"],\
             ["@hmcts/properties-volume", "npm:1.2.0"],\
             ["@jest/globals", "npm:29.7.0"],\
-            ["@mediakind/mkplayer", "npm:1.16.0"],\
+            ["@mediakind/mkplayer", "npm:1.17.0"],\
             ["@types/body-parser", "npm:1.19.5"],\
             ["@types/compression", "npm:1.7.5"],\
             ["@types/config", "npm:3.3.5"],\
@@ -5386,11 +5386,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@mediakind/mkplayer", [\
-        ["npm:1.16.0", {\
-          "packageLocation": "./.yarn/cache/@mediakind-mkplayer-npm-1.16.0-1295fe837c-2f851a69f2.zip/node_modules/@mediakind/mkplayer/",\
+        ["npm:1.17.0", {\
+          "packageLocation": "./.yarn/cache/@mediakind-mkplayer-npm-1.17.0-fe635213e0-cf800a88f7.zip/node_modules/@mediakind/mkplayer/",\
           "packageDependencies": [\
-            ["@mediakind/mkplayer", "npm:1.16.0"],\
-            ["bitmovin-player", "npm:8.177.0"],\
+            ["@mediakind/mkplayer", "npm:1.17.0"],\
+            ["bitmovin-player", "npm:8.185.0"],\
             ["bitmovin-player-ui", "npm:3.73.0"]\
           ],\
           "linkType": "HARD"\
@@ -10367,10 +10367,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["bitmovin-player", [\
-        ["npm:8.177.0", {\
-          "packageLocation": "./.yarn/cache/bitmovin-player-npm-8.177.0-bbc9c86c16-c6cd1af186.zip/node_modules/bitmovin-player/",\
+        ["npm:8.185.0", {\
+          "packageLocation": "./.yarn/cache/bitmovin-player-npm-8.185.0-55fbed05c3-da29e73b33.zip/node_modules/bitmovin-player/",\
           "packageDependencies": [\
-            ["bitmovin-player", "npm:8.177.0"]\
+            ["bitmovin-player", "npm:8.185.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -20136,7 +20136,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@hmcts/nodejs-logging", "npm:4.0.4"],\
             ["@hmcts/properties-volume", "npm:1.2.0"],\
             ["@jest/globals", "npm:29.7.0"],\
-            ["@mediakind/mkplayer", "npm:1.16.0"],\
+            ["@mediakind/mkplayer", "npm:1.17.0"],\
             ["@types/body-parser", "npm:1.19.5"],\
             ["@types/compression", "npm:1.7.5"],\
             ["@types/config", "npm:3.3.5"],\
