@@ -16,7 +16,7 @@ export default function (app: Application): void {
 
   const useMkOnWatchPage = config.get('pre.useMkOnWatchPage')?.toString().toLowerCase() === 'true';
 
-  app.get('/watch/:id', requiresAuth(), async (req, res) => {
+  app.get('/watch/:id', requiresAuth(), async (req, res, next) => {
     if (!validateId(req.params.id)) {
       res.status(404);
       res.render('not-found');
@@ -61,8 +61,7 @@ export default function (app: Application): void {
         res.render('watch', { recording, recordingPlaybackDataUrl });
       }
     } catch (e) {
-      res.status(500);
-      res.render('error', { status: 500, message: e.message });
+      next(e);
     }
   });
 

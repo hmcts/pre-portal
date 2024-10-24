@@ -16,6 +16,10 @@ Then('the page should include {string}', (text: string) => {
   I.waitForText(text);
 });
 
+Then('the page title should include {string}', (text: string) => {
+  I.seeInTitle(text);
+});
+
 Then('I am on the {string} page', (path: string) => {
   const url = new URL(path, config.TEST_URL);
   I.amOnPage(url.toString());
@@ -34,6 +38,14 @@ Then('I sign in as the test user', () => {
       I.click('Sign in');
     }
   });
+});
+
+Then('I accept the terms and conditions if I need to', async () => {
+  const url = await I.grabCurrentUrl();
+  if (url.includes('/accept-terms-and-conditions')) {
+    I.checkOption('#terms');
+    I.click('Continue');
+  }
 });
 
 Then('I see the link {string}', (text: string) => {

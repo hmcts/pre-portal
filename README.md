@@ -1,6 +1,6 @@
 # pre-portal
 
-# Pre-Recorded Evidence Portal
+# Pre-Recorded Evidence Portal.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=pre-portal&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=pre-portal) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=pre-portal&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=pre-portal) [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=pre-portal&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=pre-portal) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=pre-portal&metric=coverage)](https://sonarcloud.io/summary/new_code?id=pre-portal)
 

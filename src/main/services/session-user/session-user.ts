@@ -16,6 +16,7 @@ export class SessionUser {
     // check the users profile in the API
     const client = new PreClient();
     await client.getActiveUserByEmail(user.user.email);
+
     return user.portal_access[0].id;
   }
 
