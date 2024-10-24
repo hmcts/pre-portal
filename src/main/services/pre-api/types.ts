@@ -25,6 +25,8 @@ export interface CaptureSession {
   status: string;
   deleted_at: string;
   court_name: string;
+  case_state: string;
+  case_closed_at?: string;
 }
 
 export interface Recording {

@@ -1,11 +1,12 @@
 /* eslint-disable jest/expect-expect */
 import { Nunjucks } from '../../../main/modules/nunjucks';
 import { mockGetRecordings, reset, mockRecordings } from '../../mock-api';
-import { beforeAll } from '@jest/globals';
+import { beforeAll, describe } from '@jest/globals';
 
 import { PreClient } from '../../../main/services/pre-api/pre-client';
 import { UserProfile } from '../../../main/types/user-profile';
 import { mockeduser } from '../test-helper';
+import { convertIsoToDate } from '../../../main/routes/browse';
 
 jest.mock('express-openid-connect', () => {
   return {
@@ -195,5 +196,29 @@ describe('Browse route', () => {
     const response = await request(app).get('/browse?page=4');
     expect(response.status).toEqual(200);
     expect(response.text).toContain('Recordings 41 to 50 of 100');
+  });
+});
+
+describe('convertIsoToDate', () => {
+  test('should return the date in dd/mm/yyyy format for a valid ISO string', () => {
+    const isoString = '2024-10-23T12:45:00Z';
+    const result = convertIsoToDate(isoString);
+    expect(result).toBe('23/10/2024');
+  });
+
+  test('should return undefined when the input is undefined', () => {
+    const result = convertIsoToDate(undefined);
+    expect(result).toBeUndefined();
+  });
+
+  test('should return undefined when the input is an empty string', () => {
+    const result = convertIsoToDate('');
+    expect(result).toBeUndefined();
+  });
+
+  test('should handle invalid date input gracefully', () => {
+    const isoString = 'invalid-date';
+    const result = convertIsoToDate(isoString);
+    expect(result).toBe('Invalid Date');
   });
 });

@@ -43,6 +43,7 @@
           <th scope="col" class="govuk-table__header">Witness</th>
           <th scope="col" class="govuk-table__header">Defendants</th>
           <th scope="col" class="govuk-table__header">Version</th>
+          <th scope="col" class="govuk-table__header">Status</th>
           <th scope="col" class="govuk-table__header"></th>
         </tr>
         </thead>
@@ -83,6 +84,19 @@
               </td>
               <td class="govuk-table__cell">
                 {{ recording.version }}
+              </td>
+              <td class="govuk-table__cell">
+                {% if recording.capture_session.case_state == "OPEN" %}
+                  <strong class="govuk-tag govuk-tag--green">
+                    Active
+                  </strong>
+                {% endif %}
+                {% if recording.capture_session.case_state == "PENDING_CLOSURE" %}
+                  <strong class="govuk-tag govuk-tag--yellow">
+                    Pending Closure
+                  </strong><br/>
+                  This will be unavailable after {{ recording.capture_session.case_closed_at }}
+                {% endif %}
               </td>
               <td class="govuk-table__cell">
                 <a class="govuk-link" href="/watch/{{ recording.id }}">Play</a>
