@@ -127,6 +127,7 @@ export default function (app: Application): void {
       title,
       user: SessionUser.getLoggedInUserProfile(req).user,
       enableCaseStateColumn: config.get('pre.enableCaseStateColumn') === 'true',
+      enableAutomatedEditing: config.get('pre.enableAutomatedEditing') === 'true',
       removeWitnessLastName: config.get('pre.removeWitnessLastName') === 'true',
     });
   });
