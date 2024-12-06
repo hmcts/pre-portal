@@ -1,6 +1,7 @@
 import { PreClient } from '../services/pre-api/pre-client';
 import { SearchRecordingsRequest } from '../services/pre-api/types';
 import { SessionUser } from '../services/session-user/session-user';
+import { UserLevel } from '../types/user-level';
 
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
@@ -45,6 +46,9 @@ export default function (app: Application): void {
     // Page starts at 0
     // Rolling window of 5 pages centered on the current page
     // The current page is 5 then 2 pages before and 2 pages after does not include the first+1 or last-1 pages so add in ellipsis
+
+    const userRole = SessionUser.getLoggedInUserProfile(req).app_access[0]?.role.name;
+    const isSuperUser = userRole === UserLevel.SUPER_USER;
 
     const updatedRecordings = recordings.map(recording => ({
       ...recording,
@@ -127,6 +131,7 @@ export default function (app: Application): void {
       title,
       user: SessionUser.getLoggedInUserProfile(req).user,
       enableCaseStateColumn: config.get('pre.enableCaseStateColumn') === 'true',
+      isSuperUser: isSuperUser,
       removeWitnessLastName: config.get('pre.removeWitnessLastName') === 'true',
     });
   });

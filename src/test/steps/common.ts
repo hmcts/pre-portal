@@ -40,6 +40,20 @@ Then('I sign in with valid credentials as the test user', () => {
   });
 });
 
+Then('I sign in with valid credentials as a super user', () => {
+  I.fillField('Email Address', config.b2c.testSuperUserLogin.email as string);
+  I.fillField('Password', config.b2c.testSuperUserLogin.password as string);
+  I.click('Sign in');
+
+  I.grabCurrentUrl().then(url => {
+    if (url.includes('/authorize')) {
+      I.fillField('Email Address', config.b2c.testSuperUserLogin.email as string);
+      I.fillField('Password', config.b2c.testSuperUserLogin.password as string);
+      I.click('Sign in');
+    }
+  });
+});
+
 Then('I accept the terms and conditions if I need to', async () => {
   const url = await I.grabCurrentUrl();
   if (url.includes('/accept-terms-and-conditions')) {
@@ -50,6 +64,10 @@ Then('I accept the terms and conditions if I need to', async () => {
 
 Then('I see the link {string}', (text: string) => {
   I.seeElement(locate('a').withText(text));
+});
+
+Then('I do not see the link {string}', async (text: string) => {
+  I.dontSeeElement(locate('a').withText(text));
 });
 
 Then('I click the link {string}', (text: string) => {
