@@ -8,7 +8,7 @@ data "azurerm_key_vault" "key_vault" {
 }
 
 module "pre-portal-redis6" {
-  source                        = "git@github.com:hmcts/cnp-module-redis?ref=master"
+  source                        = "git@github.com:hmcts/cnp-module-redis?ref=4.x"
   product                       = var.product
   name                          = "${var.product}-${var.component}-${var.env}"
   location                      = var.location
@@ -21,7 +21,7 @@ module "pre-portal-redis6" {
   sku_name                      = var.sku_name
   family                        = var.family
   capacity                      = var.capacity
-
+  data_persistence_authentication_method = var.data_persistence_authentication_method
 }
 
 resource "azurerm_key_vault_secret" "redis6_access_key" {

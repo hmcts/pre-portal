@@ -32,3 +32,11 @@ variable "capacity" {
   default     = "1"
   description = "The size of the Redis cache to deploy. Valid values are 1, 2, 3, 4, 5"
 }
+
+variable "data_persistence_authentication_method" {
+  default = "SAS"
+  validation {
+    condition     = contains(["SAS", "ManagedIdentity"], var.data_persistence_authentication_method)
+    error_message = "Must be either \"SAS\" or \"ManagedIdentity\"."
+  }
+}
