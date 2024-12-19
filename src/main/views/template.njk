@@ -4,6 +4,7 @@
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "govuk/components/cookie-banner/macro.njk" import govukCookieBanner %}
 {% from "govuk/components/skip-link/macro.njk" import govukSkipLink %}
+{% from "govuk/components/service-navigation/macro.njk" import govukServiceNavigation %}
 
 {% block pageTitle %}PRE Portal{% endblock %}
 
@@ -13,11 +14,21 @@
 
 {% block header %}
   {{ govukHeader({
+    classes: 'govuk-header--full-width-border',
     homepageUrl: "/",
     useTudorCrown: true,
     serviceName: "HMCTS Pre-Recorded Evidence Service",
     serviceUrl: "/"
   }) }}
+ {% if isSuperUser %}
+     {{ govukServiceNavigation({
+         navigation:
+             [{
+               href: '/admin',
+               text: "Admin"
+             }]
+  }) }}
+{% endif %}
 {% endblock %}
 
 {% block bodyStart %}

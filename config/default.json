@@ -33,6 +33,10 @@
       "email": "",
       "password": ""
     },
+    "testSuperUserLogin": {
+      "email": "",
+      "password": ""
+    },
     "callbackHostname": "localhost:4551"
   }
 }

@@ -15,6 +15,8 @@ nodejs:
         - b2c-test-login-email
         - b2c-test-login-password
         - media-kind-player-key
+        - b2c-test-super-user-email
+        - b2c-test-super-user-password
   environment:
     REDIS_HOST: pre-portal-{{ .Values.global.environment }}.redis.cache.windows.net
     PRE_API_URL: https://sds-api-mgmt.staging.platform.hmcts.net/pre-api
