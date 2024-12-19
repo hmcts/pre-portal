@@ -43,6 +43,7 @@ export interface Recording {
   case_reference: string;
   is_test_case: boolean;
   participants: Participant[];
+  edit_status?: string;
 }
 
 export interface Participant {
@@ -77,4 +78,54 @@ export interface PutAuditRequest {
   table_name?: string;
   table_record_id?: string;
   audit_details: { [key: string]: string };
+}
+
+export interface PutEditRequest {
+  id: string;
+  source_recording_id: string;
+  status: string;
+  edit_instructions: PutEditInstruction[];
+  jointly_agreed?: boolean;
+  rejection_reason?: string;
+  approved_by?: string;
+  approved_at?: string;
+}
+
+export interface PutEditInstruction {
+  start_of_cut: string;
+  end_of_cut: string;
+  difference?: string;
+  reason?: string;
+}
+
+export interface EditRequest {
+  id: string;
+  source_recording?: Recording;
+  status: string;
+  edit_instruction: EditInstruction;
+  jointly_agreed?: boolean;
+  rejection_reason?: string;
+  approved_by?: string;
+  approved_at?: string;
+  created_by: string;
+  created_at: string;
+  modified_at: string;
+}
+
+export interface EditInstruction {
+  requestedInstructions: PutEditInstruction[];
+}
+
+export interface RecordingAppliedEdits {
+  editRequestId: string;
+  editInstructions: EditInstruction;
+}
+
+export interface AppliedEditInstruction {
+  start: number;
+  end: number;
+  startOfCut: string;
+  endOfCut: string;
+  reason: number;
+  runtimeReference?: string;
 }

@@ -1,5 +1,6 @@
 import puppeteer, { Browser, Page } from 'puppeteer';
 import { config } from '../config';
+import { isFlagEnabled } from '../../main/utils/helpers';
 
 const pa11y = require('pa11y');
 
@@ -76,6 +77,94 @@ describe('Accessibility', () => {
       expectNoErrors(result.issues);
     });
   });
+
+  test('/edit-request/:id page', async () => {
+    if (!isFlagEnabled('pre.enableAutomatedEditing')) {
+      return;
+    }
+
+    const page = await signIn(browser);
+    await page.waitForSelector('a[href^="/edit-request/"]', { visible: true, timeout: 0 });
+
+    if (page.url().includes('/accept-terms-and-conditions')) {
+      await page.click('input#terms');
+      await page.click('button[type="submit"]');
+      await page.waitForSelector('a[href^="/watch/"]', { visible: true, timeout: 0 });
+    }
+    try {
+      await page.click('a[href^="/edit-request/"]:not([href$="/view"])');
+    } catch (e) {
+      console.error('Error: No editable requests found');
+      return;
+    }
+    const editUrl = page.url();
+
+    const result: Pa11yResult = await pa11y(editUrl, {
+      browser,
+      screenCapture: `${screenshotDir}/edit-request.png`,
+      waitUntil: 'domcontentloaded',
+    });
+    expect(result.issues).toEqual(expect.any(Array));
+    expectNoErrors(result.issues);
+  }, 65000);
+
+  test('/edit-request/:id/view page (for submissions)', async () => {
+    if (!isFlagEnabled('pre.enableAutomatedEditing')) {
+      return;
+    }
+    const page = await signIn(browser);
+    await page.waitForSelector('a[href^="/edit-request/"]', { visible: true, timeout: 0 });
+
+    if (page.url().includes('/accept-terms-and-conditions')) {
+      await page.click('input#terms');
+      await page.click('button[type="submit"]');
+      await page.waitForSelector('a[href^="/watch/"]', { visible: true, timeout: 0 });
+    }
+    try {
+      await page.click('a[href^="/edit-request/"]:not([href$="/view"])');
+    } catch (e) {
+      console.error('Error: No editable requests found');
+      return;
+    }
+    await page.waitForSelector('button[id^="submit-button"]', { visible: true, timeout: 0 });
+    await page.click('button[id^="submit-button"]');
+    const submitViewUrl = page.url();
+    const result: Pa11yResult = await pa11y(submitViewUrl, {
+      browser,
+      screenCapture: `${screenshotDir}/edit-request-view-submit.png`,
+      waitUntil: 'domcontentloaded',
+    });
+    expect(result.issues).toEqual(expect.any(Array));
+    expectNoErrors(result.issues);
+  }, 65000);
+
+  test('/edit-request/:id/view page (for viewing)', async () => {
+    if (!isFlagEnabled('pre.enableAutomatedEditing')) {
+      return;
+    }
+    const page = await signIn(browser);
+    await page.waitForSelector('a[href^="/edit-request/"]', { visible: true, timeout: 0 });
+
+    if (page.url().includes('/accept-terms-and-conditions')) {
+      await page.click('input#terms');
+      await page.click('button[type="submit"]');
+      await page.waitForSelector('a[href^="/watch/"]', { visible: true, timeout: 0 });
+    }
+    try {
+      await page.click('a[href^="/edit-request/"][href$="/view"]');
+    } catch (e) {
+      console.error('Error: No viewable edit requests found');
+      return;
+    }
+    const viewUrl = page.url();
+    const result: Pa11yResult = await pa11y(viewUrl, {
+      browser,
+      screenCapture: `${screenshotDir}/edit-request-view.png`,
+      waitUntil: 'domcontentloaded',
+    });
+    expect(result.issues).toEqual(expect.any(Array));
+    expectNoErrors(result.issues);
+  }, 65000);
 
   test('/browse, watch and terms pages', async () => {
     const page = await signIn(browser);

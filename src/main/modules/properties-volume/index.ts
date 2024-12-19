@@ -27,6 +27,7 @@ export class PropertiesVolume {
     set(config, 'pre.tsAndCsRedirectEnabled', process.env.TS_AND_CS_REDIRECT_ENABLED ?? 'false');
     set(config, 'pre.enableCaseStateColumn', process.env.ENABLE_CASE_STATE_COLUMN ?? 'false');
     set(config, 'pre.removeWitnessLastName', process.env.REMOVE_WITNESS_LAST_NAME ?? 'false');
+    set(config, 'pre.enableAutomatedEditing', process.env.ENABLE_AUTOMATED_EDITING ?? 'false');
 
     if (server.locals.ENV === 'production') {
       this.logger.info('Loading properties from mounted KV');

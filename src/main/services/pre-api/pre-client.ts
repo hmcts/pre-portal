@@ -3,7 +3,7 @@ import { TermsNotAcceptedError } from '../../types/errors';
 import { Terms } from '../../types/terms';
 import { UserProfile } from '../../types/user-profile';
 
-import { Pagination, PutAuditRequest, Recording, SearchRecordingsRequest } from './types';
+import { EditRequest, Pagination, PutAuditRequest, PutEditRequest, Recording, SearchRecordingsRequest } from './types';
 
 import { Logger } from '@hmcts/nodejs-logging';
 import axios, { AxiosResponse } from 'axios';
@@ -152,6 +152,62 @@ export class PreClient {
       });
 
       return response.data as Recording;
+    } catch (e) {
+      // handle 403 and 404 the same so we don't expose the existence of recordings
+      if (e.response?.status === 404 || e.response?.status === 403) {
+        return null;
+      }
+
+      throw e;
+    }
+  }
+
+  public async putEditRequest(xUserId: string, request: PutEditRequest): Promise<void> {
+    try {
+      await axios.put(`/edits/${request.id}`, request, {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+      });
+    } catch (e) {
+      this.logger.error(e.message);
+      throw e;
+    }
+  }
+
+  public async getEditRequest(xUserId: string, id: string): Promise<EditRequest | null> {
+    try {
+      const response = await axios.get(`/edits/${id}`, {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+      });
+
+      return response.data as EditRequest;
+    } catch (e) {
+      // handle 403 and 404 the same so we don't expose the existence of recordings
+      if (e.response?.status === 404 || e.response?.status === 403) {
+        return null;
+      }
+
+      throw e;
+    }
+  }
+
+  public async getMostRecentEditRequests(xUserId: string, sourceRecordingId: string): Promise<EditRequest[] | null> {
+    try {
+      const response = await axios.get('/edits', {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+        params: {
+          sourceRecordingId,
+          size: 1,
+        },
+      });
+      return response.data['page']['totalElements'] === 0
+        ? []
+        : (response.data['_embedded']['editRequestDTOList'] as EditRequest[]);
     } catch (e) {
       // handle 403 and 404 the same so we don't expose the existence of recordings
       if (e.response?.status === 404 || e.response?.status === 403) {
