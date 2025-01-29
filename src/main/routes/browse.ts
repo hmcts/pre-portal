@@ -6,6 +6,7 @@ import { UserLevel } from '../types/user-level';
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
 import config from 'config';
+import { isFlagEnabled } from '../helpers/helpers';
 
 export const convertIsoToDate = (isoString?: string): string | undefined => {
   if (!isoString) {
@@ -134,6 +135,7 @@ export default function (app: Application): void {
       enableCaseStateColumn: config.get('pre.enableCaseStateColumn') === 'true',
       isSuperUser: isSuperUser,
       removeWitnessLastName: config.get('pre.removeWitnessLastName') === 'true',
+      enableAdminApp: isFlagEnabled('pre.enableAdminApp'),
     });
   });
 }

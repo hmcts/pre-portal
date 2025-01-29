@@ -14,7 +14,8 @@
     "mediaKindPlayerKey": "",
     "tsAndCsRedirectEnabled": false,
     "enableCaseStateColumn": false,
-    "removeWitnessLastName": false
+    "removeWitnessLastName": false,
+    "enableAdminApp": false
   },
   "session": {
     "redis": {

@@ -1,0 +1,491 @@
+{% from "govuk/components/pagination/macro.njk" import govukPagination %}
+
+{% extends "template.njk" %}
+
+{% block pageTitle %}
+  {% if isUpdate %}
+    Update user: {{ user.first_name }} {{ user.last_name }} - PRE Portal
+  {% else %}
+    Add new user - PRE Portal
+  {% endif %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{
+  govukBackLink({
+    "href": "javascript:history.back()"
+  })
+  }}
+{% endblock %}
+
+{% block content %}
+  <script type="text/javascript" crossorigin="anonymous">
+    const onAppAccessChange = () => {
+      const formData = new FormData(document.getElementById('form'));
+      const hasAppAccess = formData.get('hasAppAccess') === 'true';
+      const appAccessInputTable = document.getElementById('app-access-input-table');
+      if (hasAppAccess) {
+        appAccessInputTable.classList.remove('govuk-visually-hidden');
+      } else {
+        appAccessInputTable.classList.add('govuk-visually-hidden');
+      }
+    }
+
+    const onRemoveClicked = (rowId) => {
+      document.getElementById(rowId).remove();
+    }
+
+    const onNewAppAccessClicked = () => {
+      const table = document.getElementById('app-access-inputs');
+      const currentRowCount = table.querySelectorAll('tr').length;
+      const newId = 'new' + currentRowCount;
+
+      const newRow = table.insertRow(0);
+      newRow.innerHTML = `
+        <td class="govuk-table__cell">
+              <label for="court_id_${newId}" hidden></label>
+              <select
+                      class="govuk-select"
+                      id="court_id_${newId}"
+                      name="court_id_${newId}"
+                      style="width: 100%;">
+                <option selected value="">Select a Court</option>
+                {% for court in courts %}
+                  <option value="{{ court.id }}">{{ court.name }}</option>
+                {% endfor %}
+              </select>
+            </td>
+            <td class="govuk-table__cell">
+              <label for="role_id_${newId}" hidden></label>
+              <select
+                      class="govuk-select"
+                      id="role_id_${newId}"
+                      name="role_id_${newId}"
+                      style="width: 100%;">
+                <option selected value="">Select a Level</option>
+                {% for role in roles %}
+                  <option value="{{ role.id }}">{{ role.name }}</option>
+                {% endfor %}
+              </select>
+            <td class="govuk-table__cell">
+              <label for="active_${newId}" hidden></label>
+              <select
+                      class="govuk-select"
+                      id="active_${newId}"
+                      name="active_${newId}"
+                      style="width: 100%;">
+                <option value="true" selected>
+                  Active
+                </option>
+                <option value="false">
+                  Inactive
+                </option>
+              </select>
+            </td>
+            <td class="govuk-table__cell">
+              <label for="default_court_${newId}" hidden></label>
+              <select
+                      class="govuk-select"
+                      id="default_court_${newId}"
+                      name="default_court_${newId}"
+                      style="width: 100%;">
+                <option value="true" {% if user.app_access.length === 0 %}selected{% endif %}>
+                  Primary
+                </option>
+                <option value="false" {% if user.app_access.length > 0 %}selected{% endif %}>
+                  Secondary
+                </option>
+              </select>
+            </td>
+            <td class="govuk-table__cell">
+              <a class="govuk-link" href="#app-access-inputs" onclick='onRemoveClicked("${newId}")'>Remove</a>
+            </td>
+          </tr>
+      `;
+      newRow.classList = 'govuk-table__row';
+      newRow.id = newId;
+    }
+
+    const showErrors = (errors) => {
+      const errorSummary = document.getElementById('error-summary');
+      errorSummary.innerHTML = `
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+          <div role="alert">
+            <h2 class="govuk-error-summary__title">
+              There is a problem
+            </h2>
+            <div class="govuk-error-summary__body">
+              <ul id= 'summary-list' class="govuk-list govuk-error-summary__list">
+              </ul>
+            </div>
+          </div>
+        </div`;
+      const errorList = errorSummary.querySelector('#summary-list');
+
+      // clear error messages
+      const inputs = document.querySelectorAll('.govuk-form-group');
+      inputs.forEach((input) => {
+        if (input.classList.contains('govuk-form-group--error')) {
+          input.classList.remove('govuk-form-group--error');
+        }
+        const errorMessage = input.querySelector('p');
+        if (!errorMessage) {
+          return;
+        }
+        errorMessage.classList.add('govuk-visually-hidden');
+        errorMessage.innerHTML = '';
+
+        const inputField = input.querySelector('.govuk-input');
+        if (inputField && inputField.classList.contains('govuk-input--error')) {
+          inputField.classList.remove('govuk-input--error');
+        }
+      });
+      const appAccessErrors = document.getElementById('app-access-errors');
+      appAccessErrors.hidden = true;
+      appAccessErrors.innerHTML = '';
+
+      Object.entries(errors).forEach(([location, message]) => {
+        // add to summary list
+        const item = document.createElement('li');
+        item.innerHTML = location.startsWith('app_access')
+                ? `<a href="#app-access-inputs">${message}</a>`
+                : `<a href="#${location}">${message}</a>`;
+        errorList.appendChild(item);
+
+        // add error message on input element
+        if (location.startsWith('app_access')) {
+          appAccessErrors.hidden = false;
+          appAccessErrors.classList.add('govuk-form-group--error');
+          const e = document.createElement('p');
+          e.classList.add('govuk-error-message');
+          e.innerHTML = `<span class="govuk-visually-hidden">Error:</span> ${message}`;
+          appAccessErrors.appendChild(e);
+          return;
+        }
+        const input = document.getElementById(`input-${location}`);
+        input.classList.add('govuk-form-group--error');
+        const errorMessage = input.querySelector('p');
+        errorMessage.classList.remove('govuk-visually-hidden');
+        errorMessage.innerHTML = `<span class="govuk-visually-hidden">Error:</span> ${message}`;
+        input.querySelector('.govuk-input').classList.add('govuk-input--error');
+      });
+    };
+
+    const generateAppAccess = () => {
+      const form = new FormData(document.getElementById('form'));
+      if (form.hasAppAccess === 'false') {
+        return [];
+      }
+      let formData = {};
+      const ignoreKeys = ['first_name', 'last_name', 'email', 'phone', 'organisation', 'hasAppAccess', 'hasPortalAccess'];
+      form.entries().forEach(([k, v]) => {
+        if (ignoreKeys.includes(k)) {
+          return;
+        }
+        const kSplit = k.split('_');
+        const accessId = kSplit[kSplit.length - 1];
+        if (formData[accessId] === undefined) {
+          formData[accessId] = {};
+        }
+        if (k.startsWith('court_id')) {
+          formData[accessId]['court_id'] = v.trim();
+        } else if (k.startsWith('role_id')) {
+          formData[accessId]['role_id'] = v.trim();
+        } else if (k.startsWith('active')) {
+          formData[accessId]['active'] = v === 'true';
+        } else if (k.startsWith('default_court')) {
+          formData[accessId]['default_court'] = v === 'true';
+        }
+      });
+      return Object.entries(formData).map(([id, data]) => {
+        return {
+          id,
+          ...data,
+        };
+      });
+    }
+
+    const onSubmit = (e) => {
+      e.preventDefault();
+
+      const form = e.target;
+      const formData = {
+        id: "{{ user.id }}",
+        first_name: form.first_name.value.trim(),
+        last_name: form.last_name.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+        organisation: form.organisation.value.trim(),
+        app_access: generateAppAccess(),
+        hasPortalAccess: form.hasPortalAccess.value === 'true',
+      };
+
+      fetch("{{ postUrl }}", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      }).then(async (response) => {
+        if (!response.redirected) {
+          const errors = (await response.json())['errors'];
+          showErrors(errors);
+          return;
+        }
+        window.location.href = response.url;
+      }).catch((error) => {
+        console.error('Error:', error);
+      });
+    };
+  </script>
+
+  <div id="error-summary"></div>
+
+  {% if isUpdate %}
+    <h1 class="govuk-heading-xl">Update user</h1>
+  {% else %}
+    <h1 class="govuk-heading-xl">Add new user</h1>
+  {% endif %}
+
+  <form id="form" onsubmit="onSubmit(event)">
+    <div
+      id="input-first_name"
+      class="govuk-form-group">
+      <label class="govuk-label" for="first_name">First name</label>
+      <p id="first_name-input-error" class="govuk-error-message govuk-visually-hidden"></p>
+      <input
+        class="govuk-input"
+        id="first_name"
+        name="first_name"
+        type="text"
+        placeholder="First name"
+        required
+        minlength="2"
+        maxlength="100"
+        value="{{ user.first_name }}"
+      />
+    </div>
+
+    <div id="input-last_name"
+         class="govuk-form-group">
+      <label class="govuk-label" for="last_name">Last name</label>
+      <p id="last_name-input-error" class="govuk-error-message govuk-visually-hidden"></p>
+      <input
+        class="govuk-input"
+        id="last_name"
+        name="last_name"
+        type="text"
+        placeholder="Last name"
+        required
+        minlength="2"
+        maxlength="100"
+        value="{{ user.last_name }}"
+      />
+    </div>
+
+    <div id="input-email" class="govuk-form-group">
+      <label class="govuk-label" for="email">Email Address</label>
+      <p id="email-input-error" class="govuk-error-message govuk-visually-hidden"></p>
+      <input
+        class="govuk-input"
+        id="email"
+        name="email"
+        type="email"
+        placeholder="Email address"
+        required
+        value="{{ user.email }}"
+      />
+    </div>
+
+    <div id="input-phone"
+         class="govuk-form-group">
+      <label class="govuk-label" for="phone">Phone number</label>
+      <p id="phone-input-error" class="govuk-error-message govuk-visually-hidden"></p>
+      <input
+        class="govuk-input"
+        id="phone"
+        name="phone"
+        type="tel"
+        placeholder="Phone number"
+        pattern="^\+?[0-9]{10,15}$"
+        value="{{ user.phone }}"
+      />
+    </div>
+
+    <div id="input-organisation" class="govuk-form-group">
+      <label class="govuk-label" for="organisation">Organisation</label>
+      <p id="organisation-input-error" class="govuk-error-message govuk-visually-hidden"></p>
+      <input
+        class="govuk-input"
+        id="organisation"
+        name="organisation"
+        type="text"
+        placeholder="Organisation"
+        minlength="2"
+        maxlength="100"
+        value="{{ user.organisation }}"
+      />
+    </div>
+
+    <div>
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" onchange="onAppAccessChange()">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h2 class="govuk-fieldset__heading">
+              Has application access
+            </h2>
+          </legend>
+          {% if hasAppAccess %}
+            <div id="hasAppAccess-hint" class="govuk-hint">
+              Disabling application access will disable all access to the application for this user.
+            </div>
+          {% endif %}
+          <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="hasAppAccess" name="hasAppAccess" type="radio" value="true" {% if hasAppAccess %}checked{% endif %}>
+              <label class="govuk-label govuk-radios__label" for="hasAppAccess">
+                Yes
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="hasAppAccess-2" name="hasAppAccess" type="radio" value="false" {% if not hasAppAccess %}checked{% endif %}>
+              <label class="govuk-label govuk-radios__label" for="hasAppAccess-2">
+                No
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <div id="app-access-input-table" class="{% if not hasAppAccess %}govuk-visually-hidden{% endif %}">
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+          <h3 class="govuk-heading-m">Application access details</h3>
+          <div style="display: flex;">
+            <button class="govuk-button" type="button" onclick="onNewAppAccessClicked()">Add new access</button>
+          </div>
+        </div>
+
+        <div id="app-access-errors" class="govuk-form-group">
+        </div>
+
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">Court</th>
+              <th scope="col" class="govuk-table__header">Level</th>
+              <th scope="col" class="govuk-table__header">Is Active</th>
+              <th scope="col" class="govuk-table__header">Is Default Court</th>
+              <th scope="col" class="govuk-table__header">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody id="app-access-inputs">
+          {% for appAccess in user.app_access %}
+            <tr class="govuk-table__row" id="{{ appAccess.id }}">
+              <td class="govuk-table__cell">
+                <label for="court_id_{{ appAccess.id }}" hidden></label>
+                <select
+                        class="govuk-select"
+                        id="court_id_{{ appAccess.id }}"
+                        name="court_id_{{ appAccess.id }}"
+                        style="width: 100%;">
+                  <option
+                          {% if appAccess.court.id == "" or appAccess.court.id is none %}selected{% endif %}
+                          value="">Select a Court</option>
+                  {% for court in courts %}
+                    <option
+                            {% if appAccess.court.id == court.id %}selected{% endif %}
+                            value="{{ court.id }}">{{ court.name }}</option>
+                  {% endfor %}
+                </select>
+              </td>
+              <td class="govuk-table__cell">
+                <label for="role_id_{{ appAccess.id }}" hidden></label>
+                <select
+                        class="govuk-select"
+                        id="role_id_{{ appAccess.id }}"
+                        name="role_id_{{ appAccess.id }}"
+                        style="width: 100%;">
+                  <option
+                          {% if appAccess.role.id == "" or appAccess.role.id is none %}selected{% endif %}
+                          value="">Select a Level</option>
+                  {% for role in roles %}
+                    <option
+                            {% if appAccess.role.id == role.id %}selected{% endif %}
+                            value="{{ role.id }}">{{ role.name }}</option>
+                  {% endfor %}
+                </select>
+              <td class="govuk-table__cell">
+                <select
+                        class="govuk-select"
+                        id="active_{{ appAccess.id }}"
+                        name="active_{{ appAccess.id }}"
+                        style="width: 100%;">
+                  <option value="true" {% if appAccess.active %}selected{% endif %}>
+                    Active
+                  </option>
+                    <option value="false" {% if not appAccess.active %}selected{% endif %}>
+                        Inactive
+                    </option>
+                </select>
+              </td>
+              <td class="govuk-table__cell">
+                <label for="default_court_{{ appAccess.id }}" hidden></label>
+                <select
+                        class="govuk-select"
+                        id="default_court_{{ appAccess.id }}"
+                        name="default_court_{{ appAccess.id }}"
+                        style="width: 100%;">
+                  <option value="true" {% if appAccess.default_court %}selected{% endif %}>
+                    Primary
+                  </option>
+                  <option value="false" {% if not appAccess.default_court %}selected{% endif %}>
+                    Secondary
+                  </option>
+                </select>
+              </td>
+              <td class="govuk-table__cell">
+                <a class="govuk-link" href="#app-access-inputs" onclick='onRemoveClicked("{{ appAccess.id }}")'>Remove</a>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div>
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h2 class="govuk-fieldset__heading">
+              Has portal access
+            </h2>
+          </legend>
+          <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="hasPortalAccess" name="hasPortalAccess" type="radio" value="true" {% if hasPortalAccess %}checked{% endif %}>
+              <label class="govuk-label govuk-radios__label" for="hasPortalAccess">
+                Yes
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="hasPortalAccess-2" name="hasPortalAccess" type="radio" value="false" {% if not hasPortalAccess %}checked{% endif %}>
+              <label class="govuk-label govuk-radios__label" for="hasPortalAccess-2">
+                No
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+
+    <button class="govuk-button" type="submit">
+      {% if isUpdate %}
+        Update
+      {% else %}
+        Add
+      {% endif %} user
+    </button>
+  </form>
+{% endblock %}
