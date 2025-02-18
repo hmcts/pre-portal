@@ -1,6 +1,19 @@
-import { mockedPaginatedRecordings, mockRecordings, mockXUserId } from '../mock-api';
+import {
+  mockedPaginatedCourts,
+  mockedPaginatedRecordings,
+  mockedPaginatedUsers,
+  mockRecordings,
+  mockRoles,
+  mockUsers,
+  mockXUserId,
+} from '../mock-api';
 import { PreClient } from '../../main/services/pre-api/pre-client';
-import { PutAuditRequest, SearchRecordingsRequest } from '../../main/services/pre-api/types';
+import {
+  PaginatedRequest,
+  PutAuditRequest,
+  SearchRecordingsRequest,
+  SearchUsersRequest,
+} from '../../main/services/pre-api/types';
 import { describe } from '@jest/globals';
 import axios from 'axios';
 import { mockeduser } from './test-helper';
@@ -130,6 +143,85 @@ describe('PreClient', () => {
         },
       });
     }
+    if (url === '/users') {
+      if (config['headers']['X-User-Id'] === mockXUserId) {
+        return Promise.resolve({
+          status: 200,
+          data: mockedPaginatedUsers,
+        });
+      } else if (config['params']['email'] == 'uhoh') {
+        return Promise.reject('Network Error');
+      }
+      return Promise.resolve({
+        status: 200,
+        data: {
+          page: {
+            size: 20,
+            totalElements: 0,
+            totalPages: 1,
+            number: 0,
+          },
+        },
+      });
+    }
+
+    if (url === '/courts') {
+      if (config['headers']['X-User-Id'] === mockXUserId) {
+        return Promise.resolve({
+          status: 200,
+          data: mockedPaginatedCourts,
+        });
+      } else if (config['params']['page'] == 999) {
+        return Promise.reject('Network Error');
+      }
+      return Promise.resolve({
+        status: 200,
+        data: {
+          page: {
+            size: 20,
+            totalElements: 0,
+            totalPages: 1,
+            number: 0,
+          },
+        },
+      });
+    }
+
+    if (url === '/roles') {
+      if (config['headers']['X-User-Id'] === mockXUserId) {
+        return Promise.resolve({
+          status: 200,
+          data: mockRoles,
+        });
+      }
+      return Promise.resolve({
+        status: 200,
+        data: [],
+      });
+    }
+
+    if (url === '/users/12345678-1234-1234-1234-1234567890ab') {
+      if (config['headers']['X-User-Id'] === mockXUserId) {
+        return Promise.resolve({
+          status: 200,
+          data: mockUsers[0],
+        });
+      }
+      return Promise.resolve({
+        status: 404,
+      });
+    }
+
+    if (url === '/users/nope') {
+      if (config['headers']['X-User-Id'] === mockXUserId) {
+        return Promise.reject({
+          response: {
+            status: 404,
+          },
+        });
+      }
+    }
+
     if (url === '/media-service/vod?recordingId=123') {
       return Promise.resolve({
         status: 200,
@@ -207,6 +299,75 @@ describe('PreClient', () => {
       expect(e).toBe('Network Error');
     }
   });
+  test('get users', async () => {
+    const request = {} as SearchUsersRequest;
+    const { users, pagination } = await preClient.getUsers(mockXUserId, request);
+    expect(users).toBeTruthy();
+    expect(users.length).toBe(1);
+    expect(pagination).toBeTruthy();
+  });
+  test('get users no results', async () => {
+    const request = {} as SearchUsersRequest;
+    const { users, pagination } = await preClient.getUsers(otherXUserId, request);
+    expect(users).toBeTruthy();
+    expect(users.length).toBe(0);
+    expect(pagination).toBeTruthy();
+  });
+  test('get users network error', async () => {
+    try {
+      await preClient.getUsers(otherXUserId, { email: 'uhoh' } as SearchRecordingsRequest);
+      expect(true).toBe(false); // shouldn't get here...
+    } catch (e) {
+      expect(e).toBe('Network Error');
+    }
+  });
+  test('get user by id ok', async () => {
+    const user = await preClient.getUser(mockXUserId, '12345678-1234-1234-1234-1234567890ab');
+    expect(user).toBeTruthy();
+  });
+  test('get user by id not found', async () => {
+    try {
+      await preClient.getUser(mockXUserId, 'nope');
+      expect(true).toBe(false); // shouldn't get here...
+    } catch (e) {
+      expect(e.response.status).toBe(404);
+    }
+  });
+
+  test('get courts', async () => {
+    const request = {} as PaginatedRequest;
+    const { courts, pagination } = await preClient.getCourts(mockXUserId, request);
+    expect(courts).toBeTruthy();
+    expect(courts.length).toBe(2);
+    expect(pagination).toBeTruthy();
+  });
+  test('get courts no results', async () => {
+    const request = {} as PaginatedRequest;
+    const { courts, pagination } = await preClient.getCourts(otherXUserId, request);
+    expect(courts).toBeTruthy();
+    expect(courts.length).toBe(0);
+    expect(pagination).toBeTruthy();
+  });
+  test('get courts network error', async () => {
+    try {
+      await preClient.getCourts(otherXUserId, { page: 999 } as PaginatedRequest);
+      expect(true).toBe(false); // shouldn't get here...
+    } catch (e) {
+      expect(e).toBe('Network Error');
+    }
+  });
+
+  test('get roles', async () => {
+    const roles = await preClient.getRoles(mockXUserId);
+    expect(roles).toBeTruthy();
+    expect(roles.length).toBe(3);
+  });
+  test('get roles no results', async () => {
+    const roles = await preClient.getRoles(otherXUserId);
+    expect(roles).toBeTruthy();
+    expect(roles.length).toBe(0);
+  });
+
   test('get user by email ok', async () => {
     const user = await preClient.getUserByClaimEmail('test@testy.com');
     expect(user).toBeTruthy();

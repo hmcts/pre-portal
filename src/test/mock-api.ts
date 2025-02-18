@@ -1,13 +1,18 @@
 import {
+  Court,
+  PaginatedRequest,
   Pagination,
   PutAuditRequest,
   Recording,
   RecordingPlaybackData,
   SearchRecordingsRequest,
+  SearchUsersRequest,
+  User,
 } from '../main/services/pre-api/types';
 import { PreClient } from '../main/services/pre-api/pre-client';
 import { AxiosResponse } from 'axios';
 import { Terms } from '../main/types/terms';
+import { AppAccess, PortalAccess, Role } from '../main/types/user-profile';
 
 export const mockRecordings: Recording[] = [
   {
@@ -70,6 +75,96 @@ export const mockRecordings: Recording[] = [
   } as Recording,
 ];
 
+export const mockRoles: Role[] = [
+  {
+    id: '12345678-1234-1234-1234-1234567890ab',
+    name: 'Example Role',
+    permissions: [],
+  } as Role,
+  {
+    id: '12345678-1234-1234-1234-1234567890ac',
+    name: 'Example Role 2',
+    permissions: [],
+  } as Role,
+  {
+    id: '12345678-1234-1234-1234-1234567890ad',
+    name: 'Level 3',
+    permissions: [],
+  } as Role,
+];
+
+export const mockCourts: Court[] = [
+  {
+    id: '12345678-1234-1234-1234-1234567890ab',
+    name: 'Example Court',
+    court_type: 'CROWN',
+    location_code: 'LOC',
+    regions: [
+      {
+        name: 'Region Name',
+      },
+    ],
+  } as Court,
+  {
+    id: '12345678-1234-1234-1234-1234567890ac',
+    name: 'Example Court 2',
+    court_type: 'CROWN',
+    location_code: 'LOC2',
+    regions: [
+      {
+        name: 'Region Name 2',
+      },
+    ],
+  } as Court,
+];
+
+export const mockUsers: User[] = [
+  {
+    id: '12345678-1234-1234-1234-1234567890ab',
+    first_name: 'Example',
+    last_name: 'User',
+    email: 'example@example.com',
+    phone: '0123456789',
+    organisation: 'Example Organisation',
+    terms_accepted: {},
+    app_access: [
+      {
+        id: '12345678-1234-1234-1234-1234567890ab',
+        active: true,
+        court: {
+          id: '12345678-1234-1234-1234-1234567890ab',
+          name: 'Example Court',
+          court_type: 'Crown',
+          location_code: 'LOC',
+          regions: [
+            {
+              name: 'Region Name',
+            },
+          ],
+          rooms: [],
+        },
+        last_access: '01/01/2025',
+        default_court: true,
+        role: {
+          id: '12345678-1234-1234-1234-1234567890ab',
+          name: 'Example Role',
+          permissions: [],
+        },
+      } as AppAccess,
+    ],
+    portal_access: [
+      {
+        id: '12345678-1234-1234-1234-1234567890ab',
+        invited_at: '01/01/2025',
+        registered_at: '01/01/2025',
+        last_access: '01/01/2025',
+        deleted_at: null,
+        status: 'ACTIVE',
+      } as PortalAccess,
+    ],
+  } as User,
+];
+
 export const mockPagination = {
   currentPage: 0,
   totalPages: 1,
@@ -81,6 +176,30 @@ export const mockPagination = {
 export const mockedPaginatedRecordings = {
   _embedded: {
     recordingDTOList: mockRecordings,
+  },
+  page: {
+    size: 20,
+    totalElements: 1,
+    totalPages: 1,
+    number: 0,
+  },
+};
+
+export const mockedPaginatedUsers = {
+  _embedded: {
+    userDTOList: mockUsers,
+  },
+  page: {
+    size: 20,
+    totalElements: 2,
+    totalPages: 1,
+    number: 0,
+  },
+};
+
+export const mockedPaginatedCourts = {
+  _embedded: {
+    courtDTOList: mockCourts,
   },
   page: {
     size: 20,
@@ -108,6 +227,79 @@ export function mockGetRecording(recording?: Recording | null) {
 
   jest.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (xUserId: string, id: string) => {
     return Promise.resolve(mockRecordings.find(r => r.id === id) || null);
+  });
+}
+
+export function mockGetUsers(users?: User[], page: number = 0) {
+  if (users !== undefined) {
+    const pagination = {
+      currentPage: page,
+      totalPages: Math.ceil(users.length / 10),
+      totalElements: users.length,
+      size: 10,
+    } as Pagination;
+    const userSubset = users.slice(page * 10, (page + 1) * 10);
+    jest
+      .spyOn(PreClient.prototype, 'getUsers')
+      .mockImplementation(async (xUserId: string, request: SearchUsersRequest) => {
+        return Promise.resolve({ users: userSubset, pagination });
+      });
+    return;
+  }
+
+  jest.spyOn(PreClient.prototype, 'getUsers').mockImplementation(async (xUserId: string, req: SearchUsersRequest) => {
+    return Promise.resolve({ users: mockUsers, pagination: mockPagination });
+  });
+}
+
+export function mockGetUser(user?: User, page: number = 0) {
+  if (user !== undefined) {
+    jest.spyOn(PreClient.prototype, 'getUser').mockImplementation(async (xUserId: string, id: string) => {
+      return Promise.resolve(user);
+    });
+    return;
+  }
+
+  jest.spyOn(PreClient.prototype, 'getUser').mockImplementation(async (xUserId: string, id: string) => {
+    return Promise.resolve(mockUsers[0]);
+  });
+}
+
+export function mockGetCourts(courts?: Court[], page: number = 0) {
+  if (courts !== undefined) {
+    const pagination = {
+      currentPage: page,
+      totalPages: Math.ceil(courts.length / 10),
+      totalElements: courts.length,
+      size: 10,
+    } as Pagination;
+    const courtSubset = courts.slice(page * 10, (page + 1) * 10);
+
+    jest
+      .spyOn(PreClient.prototype, 'getCourts')
+      .mockImplementation(async (xUserId: string, request: PaginatedRequest) => {
+        return Promise.resolve({ courts: courtSubset, pagination });
+      });
+    return;
+  }
+
+  jest.spyOn(PreClient.prototype, 'getCourts').mockImplementation(async (xUserId: string, req: PaginatedRequest) => {
+    return Promise.resolve({ courts: mockCourts, pagination: mockPagination });
+  });
+}
+
+export function mockGetRoles(roles?: Role[]) {
+  if (roles !== undefined) {
+    jest
+      .spyOn(PreClient.prototype, 'getRoles')
+      .mockImplementation(async (xUserId: string, request: PaginatedRequest) => {
+        return Promise.resolve(roles);
+      });
+    return;
+  }
+
+  jest.spyOn(PreClient.prototype, 'getRoles').mockImplementation(async (xUserId: string, req: PaginatedRequest) => {
+    return Promise.resolve(mockRoles);
   });
 }
 
@@ -188,4 +380,8 @@ export function reset() {
   jest.spyOn(PreClient.prototype, 'getRecording').mockRestore();
   jest.spyOn(PreClient.prototype, 'getRecordings').mockRestore();
   jest.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockRestore();
+  jest.spyOn(PreClient.prototype, 'getUsers').mockRestore();
+  jest.spyOn(PreClient.prototype, 'getUser').mockRestore();
+  jest.spyOn(PreClient.prototype, 'getCourts').mockRestore();
+  jest.spyOn(PreClient.prototype, 'getRoles').mockRestore();
 }

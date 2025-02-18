@@ -5,6 +5,7 @@ export const mockeduser: UserProfile = {
   app_access: [
     {
       active: true,
+      default_court: true,
       court: {
         id: 'e2ca657c-8f4f-4d41-b545-c434bb779f20',
         name: 'Leeds Youth',

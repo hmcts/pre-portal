@@ -1,5 +1,5 @@
-import { UserLevel } from '../types/user-level';
-import { SessionUser } from '../services/session-user/session-user';
+import { UserLevel } from '../../types/user-level';
+import { SessionUser } from '../../services/session-user/session-user';
 
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
@@ -10,7 +10,7 @@ export default function (app: Application): void {
       SessionUser.getLoggedInUserProfile(req).app_access.filter(role => role.role.name === UserLevel.SUPER_USER)
         .length > 0;
     if (isSuperUser) {
-      res.render('admin', {
+      res.render('admin/admin', {
         isSuperUser: isSuperUser,
       });
     } else {

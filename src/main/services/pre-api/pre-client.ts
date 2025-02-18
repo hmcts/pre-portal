@@ -1,9 +1,17 @@
 import { AccessStatus } from '../../types/access-status';
 import { TermsNotAcceptedError } from '../../types/errors';
 import { Terms } from '../../types/terms';
-import { UserProfile } from '../../types/user-profile';
-
-import { Pagination, PutAuditRequest, Recording, SearchRecordingsRequest } from './types';
+import { Role, UserProfile } from '../../types/user-profile';
+import {
+  Court,
+  PaginatedRequest,
+  Pagination,
+  PutAuditRequest,
+  Recording,
+  SearchRecordingsRequest,
+  SearchUsersRequest,
+  User,
+} from './types';
 
 import { Logger } from '@hmcts/nodejs-logging';
 import axios, { AxiosResponse } from 'axios';
@@ -25,6 +33,100 @@ export class PreClient {
       });
     } catch (e) {
       this.logger.error(e.message);
+      throw e;
+    }
+  }
+
+  public async getRoles(xUserId: string): Promise<Role[]> {
+    try {
+      const response = await axios.get('/roles', {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+      });
+      return response.data as Role[];
+    } catch (e) {
+      this.logger.error(e.message);
+      throw e;
+    }
+  }
+
+  public async getUser(xUserId: string, id: string): Promise<User | null> {
+    try {
+      const response = await axios.get(`/users/${id}`, {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+      });
+      return response.data as User;
+    } catch (e) {
+      this.logger.error(e.message);
+      throw e;
+    }
+  }
+
+  public async getUsers(
+    xUserId: string,
+    request: SearchUsersRequest
+  ): Promise<{ users: User[]; pagination: Pagination }> {
+    try {
+      const response = await axios.get('/users', {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+        params: request,
+      });
+
+      const pagination = {
+        currentPage: response.data['page']['number'],
+        totalPages: response.data['page']['totalPages'],
+        totalElements: response.data['page']['totalElements'],
+        size: response.data['page']['size'],
+      } as Pagination;
+      const users =
+        response.data['page']['totalElements'] === 0 ? [] : (response.data['_embedded']['userDTOList'] as User[]);
+
+      return { users, pagination };
+    } catch (e) {
+      // log the error
+      this.logger.info('path', e.response?.request.path);
+      this.logger.info('res headers', e.response?.headers);
+      this.logger.info('data', e.response?.data);
+      // rethrow the error for the UI
+      throw e;
+    }
+  }
+
+  public async getCourts(
+    xUserId: string,
+    request: PaginatedRequest
+  ): Promise<{ courts: Court[]; pagination: Pagination }> {
+    this.logger.debug('Getting courts with request: ' + JSON.stringify(request));
+
+    try {
+      const response = await axios.get('/courts', {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+        params: request,
+      });
+
+      const pagination = {
+        currentPage: response.data['page']['number'],
+        totalPages: response.data['page']['totalPages'],
+        totalElements: response.data['page']['totalElements'],
+        size: response.data['page']['size'],
+      } as Pagination;
+      const courts =
+        response.data['page']['totalElements'] === 0 ? [] : (response.data['_embedded']['courtDTOList'] as Court[]);
+
+      return { courts, pagination };
+    } catch (e) {
+      // log the error
+      this.logger.info('path', e.response?.request.path);
+      this.logger.info('res headers', e.response?.headers);
+      this.logger.info('data', e.response?.data);
+      // rethrow the error for the UI
       throw e;
     }
   }

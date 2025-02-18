@@ -1,4 +1,11 @@
-export interface SearchRecordingsRequest {
+import { AppAccess, PortalAccess } from '../../types/user-profile';
+
+export interface PaginatedRequest {
+  page?: number;
+  size?: number;
+}
+
+export interface SearchRecordingsRequest extends PaginatedRequest {
   captureSessionId?: string;
   parentRecordingId?: string;
   participantId?: string;
@@ -8,8 +15,16 @@ export interface SearchRecordingsRequest {
   scheduledFor?: string;
   courtId?: string;
   includeDeleted?: boolean;
-  page?: number;
-  size?: number;
+}
+
+export interface SearchUsersRequest extends PaginatedRequest {
+  name?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  organisation?: string;
+  courtId?: string;
+  roleId?: string;
 }
 
 export interface CaptureSession {
@@ -77,4 +92,30 @@ export interface PutAuditRequest {
   table_name?: string;
   table_record_id?: string;
   audit_details: { [key: string]: string };
+}
+
+export interface Court {
+  id: string;
+  name: string;
+  court_type: string;
+  location_code: string;
+  regions: { name: string }[];
+  rooms: { id: string; name: string }[];
+}
+
+export interface User {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone?: string;
+  organisation?: string;
+  app_access: AppAccess[];
+  portal_access: PortalAccess[];
+  terms_accepted: {
+    [key: string]: boolean;
+  } | null;
+  created_at: string;
+  modified_at: string;
+  deleted_at?: string;
 }

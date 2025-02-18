@@ -1,7 +1,7 @@
-import { Nunjucks } from '../../../main/modules/nunjucks';
+import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { beforeAll, describe, test, jest } from '@jest/globals';
-import { mockeduser } from '../test-helper';
-import { UserLevel } from '../../../main/types/user-level';
+import { mockeduser } from '../../test-helper';
+import { UserLevel } from '../../../../main/types/user-level';
 
 jest.mock('express-openid-connect', () => {
   return {
@@ -13,7 +13,7 @@ jest.mock('express-openid-connect', () => {
   };
 });
 
-jest.mock('../../../main/services/session-user/session-user', () => {
+jest.mock('../../../../main/services/session-user/session-user', () => {
   return {
     SessionUser: {
       getLoggedInUserPortalId: jest.fn().mockImplementation(() => '123'),
@@ -30,7 +30,7 @@ describe('Admin Page Access', () => {
     app = require('express')();
     new Nunjucks(false).enableFor(app);
     request = require('supertest');
-    const adminRoute = require('../../../main/routes/admin').default;
+    const adminRoute = require('../../../../main/routes/admin/admin').default;
     adminRoute(app);
   });
 
