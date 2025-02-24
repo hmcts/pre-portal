@@ -1,0 +1,266 @@
+{% from "govuk/components/pagination/macro.njk" import govukPagination %}
+
+{% extends "admin/admin.njk" %}
+
+{% block pageTitle %}User: {{ user.first_name }} {{ user.last_name }} - PRE Portal{% endblock %}
+
+{% block mainContent %}
+
+<div class="system-container">
+  <div class="gem-c-title govuk-!-margin-top-0 govuk-!-margin-bottom-8">
+
+  <h1 class="govuk-heading-xl">User: {{ user.first_name }} {{ user.last_name }}</h1>
+  <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+    <h2 class="govuk-heading-m">User details</h2>
+    <div style="display: flex; gap: 10px;">
+      <button class="govuk-button">Update</button>
+      <button class="govuk-button govuk-button--warning">Disable</button>
+    </div>
+  </div>
+  <dl data-testid="user-summary" class="govuk-summary-list govuk-!-margin-bottom-9">
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key" data-testid="summary-title-first-name">
+        First name
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+        data-testid="summary-value-first-name">
+        {{ user.first_name }}
+      </dd>
+    </div>
+
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key" data-testid="summary-title-last-name">
+        Last name
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+        data-testid="summary-value-last-name">
+        {{ user.last_name }}
+      </dd>
+    </div>
+
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key" data-testid="summary-title-email">
+        Email address
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+        data-testid="summary-value-email">
+        {{ user.email }}
+      </dd>
+    </div>
+
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key" data-testid="summary-title-phone">
+        Phone number
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+        data-testid="summary-value-phone">
+        {{ user.phone }}
+      </dd>
+    </div>
+
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key" data-testid="summary-title-org">
+        Organisation
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+        data-testid="summary-value-org">
+        {{ user.organisation }}
+      </dd>
+    </div>
+
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key" data-testid="summary-title-app-access">
+        Has application access
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+        data-testid="summary-value-app-access">
+        {% if hasAppAccess %}
+          Yes
+        {% else %}
+          No
+        {% endif %}
+      </dd>
+    </div>
+
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key" data-testid="summary-title-portal-access">
+        Has portal access
+      </dt>
+      <dd
+        class="govuk-summary-list__value"
+        data-testid="summary-value-portal-access">
+        {% if hasPortalAccess %}
+          Yes
+        {% else %}
+          No
+        {% endif %}
+      </dd>
+    </div>
+  </dl>
+
+  {% if hasAppAccess %}
+    <h2 class="govuk-heading-m">Application access details</h2>
+    <p class="govuk-body">Current Terms and Conditions:
+      {% if not user.terms_accepted.APP %}
+        <strong class="govuk-tag govuk-tag--grey">
+          Not Accepted
+        </strong>
+      {% endif %}
+      {% if user.terms_accepted.APP %}
+        <strong class="govuk-tag govuk-tag">
+          Accepted
+        </strong>
+      {% endif %}
+    </p>
+    <table class="govuk-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Court</th>
+          <th scope="col" class="govuk-table__header">Level</th>
+          <th scope="col" class="govuk-table__header">Last Access</th>
+          <th scope="col" class="govuk-table__header">Is Active</th>
+          <th scope="col" class="govuk-table__header">Is Default Court</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for appAccess in user.app_access %}
+          <tr class="govuk-table__row" id="{{ appAccess.court.id }}">
+            <td class="govuk-table__cell">{{ appAccess.court.name }}</td>
+            <td class="govuk-table__cell">{{ appAccess.role.name }}</td>
+            <td class="govuk-table__cell">
+              {% if appAccess.last_access %}
+                {{ appAccess.last_access | formatDate }}
+              {% endif %}
+            </td>
+            <td class="govuk-table__cell">
+              {% if appAccess.active %}
+                <strong class="govuk-tag govuk-tag">
+                  Active
+                </strong>
+              {% else %}
+                <strong class="govuk-tag govuk-tag--grey">
+                  Inactive
+                </strong>
+              {% endif %}
+            </td>
+            <td class="govuk-table__cell">
+              {% if appAccess.default_court %}
+                <strong class="govuk-tag govuk-tag">
+                  Primary
+                </strong>
+              {% else %}
+                <strong class="govuk-tag govuk-tag--grey">
+                  Secondary
+                </strong>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+
+  {% if hasPortalAccess %}
+    <h2 class="govuk-heading-m">Portal access details</h2>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key" data-testid="summary-title-portal-status">
+          Status
+        </dt>
+        <dd
+          class="govuk-summary-list__value"
+          data-testid="summary-value-portal-status">
+          {% if user.portal_access[0].status === 'INACTIVE' %}
+            <strong class="govuk-tag govuk-tag--grey">
+              Inactive
+            </strong>
+          {% endif %}
+          {% if user.portal_access[0].status === 'ACTIVE' %}
+            <strong class="govuk-tag govuk-tag">
+              Active
+            </strong>
+          {% endif %}
+          {% if user.portal_access[0].status === 'INVITATION_SENT' %}
+            <strong class="govuk-tag govuk-tag--yellow">
+              Invitation Sent
+            </strong>
+          {% endif %}
+          {% if user.portal_access[0].status === 'REGISTERED' %}
+            <strong class="govuk-tag govuk-tag--yellow">
+              Registered
+            </strong>
+          {% endif %}
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key" data-testid="summary-title-portal-terms-status">
+          Current Terms and Conditions
+        </dt>
+        <dd
+          class="govuk-summary-list__value"
+          data-testid="summary-value-portal-terms-status">
+          {% if not user.terms_accepted.PORTAL %}
+            <strong class="govuk-tag govuk-tag--grey">
+              Not Accepted
+            </strong>
+          {% endif %}
+          {% if user.terms_accepted.PORTAL %}
+            <strong class="govuk-tag govuk-tag">
+              Accepted
+            </strong>
+          {% endif %}
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key" data-testid="summary-title-portal-invited-at">
+          Invited at
+        </dt>
+        <dd
+          class="govuk-summary-list__value"
+          data-testid="summary-value-portal-invited-at">
+          {% if user.portal_access[0].invited_at %}
+            {{ user.portal_access[0].invited_at | formatDate }}
+          {% endif %}
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key" data-testid="summary-title-portal-registered-at">
+          Registered at
+        </dt>
+        <dd
+          class="govuk-summary-list__value"
+          data-testid="summary-value-portal-registered-at">
+          {% if user.portal_access[0].registered_at %}
+            {{ user.portal_access[0].registered_at | formatDate }}
+          {% endif %}
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key" data-testid="summary-title-portal-last-access">
+          Last access
+        </dt>
+        <dd
+          class="govuk-summary-list__value"
+          data-testid="summary-value-portal-last-access">
+          {% if user.portal_access[0].last_access %}
+            {{ user.portal_access[0].last_access | formatDate }}
+          {% endif %}
+        </dd>
+      </div>
+    </dl>
+  {% endif %}
+  </div>
+</div>
+{% endblock %}

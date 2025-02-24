@@ -1,0 +1,126 @@
+{% from "govuk/components/pagination/macro.njk" import govukPagination %}
+
+{% extends "admin/admin.njk" %}
+
+{% block pageTitle %}{{ title }} - PRE Portal{% endblock %}
+
+{% block mainContent %}
+  <div class="gem-c-title govuk-!-margin-top-0 govuk-!-margin-bottom-8">
+    <h1 class="govuk-heading-xl">Pre-Recorded Evidence: Users</h1>
+  </div>
+
+  <div id="filters" class="filters-box">
+    <h2 class="govuk-heading-l">Filters</h2>
+    <form>
+      <div class="govuk-form-group">
+        <div style="display: flex">
+          <div style="width: 50%; padding:0.5rem;">
+            <label class="govuk-label" for="firstName">Filter by first name</label>
+            <input class="govuk-input" id="firstName" name="firstName" type="text" placeholder="First name" value="{{ params.firstName }}"/>
+
+            <label class="govuk-label" for="lastName" style="margin-top: 0.5rem">Filter by last name</label>
+            <input class="govuk-input" id="lastName" name="lastName" type="text" placeholder="Last name" value="{{ params.lastName }}"/>
+
+            <label class="govuk-label" for="email" style="margin-top: 0.5rem">Filter by email address</label>
+            <input class="govuk-input" id="email" name="email" type="text" placeholder="Email address" value="{{ params.email }}"/>
+          </div>
+
+          <div style="width: 50%; padding:0.5rem;">
+            <label class="govuk-label" for="organisation">Filter by organisation</label>
+            <input class="govuk-input" id="organisation" name="organisation" type="text" placeholder="Organisation" value="{{ params.organisation }}"/>
+
+            <label class="govuk-label" for="courtId" style="margin-top: 0.5rem">Filter by court</label>
+            <select class="govuk-select" id="courtId" name="courtId" style="width: 100%;">
+              <option
+                {% if params.courtId == "" or params.courtId is none %}selected{% endif %}
+                value="">Select a Court</option>
+              {% for court in courts %}
+                <option
+                  {% if params.courtId == court.id %}selected{% endif %}
+                  value="{{ court.id }}">{{ court.name }}</option>
+              {% endfor %}
+            </select>
+
+            <label class="govuk-label" for="roleId" style="margin-top: 0.5rem">Filter by level (role)</label>
+            <select class="govuk-select" id="roleId" name="roleId" style="width: 100%">
+              <option
+                {% if params.roleId == "" or params.roleId is none %}selected{% endif %}
+                value="">Select a Level</option>
+              {% for role in roles %}
+                <option
+                  {% if params.roleId == role.id %}selected{% endif %}
+                  value="{{ role.id }}">{{ role.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div id="filter-controls" style="width: 100%; text-align: right; height: 40px;">
+        <a class="govuk-button" href="?">Reset</a>
+        <button class="govuk-button">Apply</button>
+      </div>
+    </form>
+  </div>
+
+  <div style="width: 100%; text-align: right; height: 40px; margin-bottom: 1rem">
+    <button class="govuk-button">Add new user</button>
+  </div>
+
+  <div style="overflow-x: auto; width: 100%;">
+    <table class="govuk-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header" style="position: sticky; left: 0; z-index: 1; background-color: #ffffff;">First Name</th>
+          <th scope="col" class="govuk-table__header">Last Name</th>
+          <th scope="col" class="govuk-table__header">Email</th>
+          {% if isFilteredByPortalAccess %}
+            <th scope="col" class="govuk-table__header">Organisation</th>
+          {% else %}
+            <th scope="col" class="govuk-table__header">Portal Access</th>
+          {% endif %}
+          <th scope="col" class="govuk-table__header">Court</th>
+          <th scope="col" class="govuk-table__header">Level</th>
+          <th scope="col" class="govuk-table__header">Actions</th>
+        </tr>
+      </thead>
+      {% if users.length === 0 %}
+        <tbody
+          class="govuk-table__body"
+          data-testid="no-data-message">
+          <td>No records found.</td>
+        </tbody>
+      {% else %}
+        <tbody class="govuk-table__body">
+          {% for user in users %}
+            <tr class="govuk-table__row" id="user-{{ user.id }}">
+              <td class="govuk-table__cell" style="overflow-wrap: anywhere; position: sticky; left: 0; z-index: 1; background-color: #ffffff;">{{ user.first_name }}</td>
+              <td class="govuk-table__cell" style="overflow-wrap: anywhere">{{ user.last_name }}</td>
+              <td class="govuk-table__cell" style="overflow-wrap: anywhere">{{ user.email }}</td>
+
+              {% if isFilteredByPortalAccess %}
+                <td scope="col" class="govuk-table__cell" style="overflow-wrap: anywhere">{{ user.organisation }}</td>
+              {% else %}
+                <td scope="col" class="govuk-table__cell" style="overflow-wrap: anywhere">{% if user.portal_access.length > 0 %}Yes{% else %}No{% endif %}</td>
+              {% endif %}
+
+              <td class="govuk-table__cell">{{ user.court }}</td>
+              <td class="govuk-table__cell"> {{ user.highestRole }}</td>
+              <td class="govuk-table__cell" style="text-align: right">
+                <a class="govuk-link" href="/admin/users/{{ user.id }}">
+                    View
+                  </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      {% endif %}
+    </table>
+  </div>
+
+  {% if paginationLinks.items.length > 1 %}
+    <div style="display: flex; justify-content: center;">
+      {{ govukPagination(paginationLinks) }}
+    </div>
+  {% endif %}
+{% endblock %}
