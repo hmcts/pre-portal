@@ -29,44 +29,45 @@ function expectNoErrors(messages: PallyIssue[]): void {
 
 async function signIn(browser: Browser): Promise<Page> {
   const page = await browser.newPage();
-  await page.goto(config.TEST_URL as string);
-  await page.waitForSelector('#signInName', { visible: true, timeout: 0 });
+  await page.goto(config.TEST_URL as string, { waitUntil: 'networkidle2' });
+  await page.waitForSelector('#signInName', { visible: true, timeout: 30000 });
   await page.type('#signInName', process.env.B2C_TEST_LOGIN_EMAIL as string);
   await page.type('#password', process.env.B2C_TEST_LOGIN_PASSWORD as string);
   await page.click('#next');
   return page;
 }
 
-jest.setTimeout(10000);
+async function signInSuperUser(browser: Browser): Promise<Page> {
+  const page = await browser.newPage();
+  await page.goto(config.TEST_URL as string, { waitUntil: 'networkidle2' });
+  await page.waitForSelector('#signInName', { visible: true, timeout: 30000 });
+  await page.type('#signInName', process.env.B2C_TEST_SUPER_USER_LOGIN_EMAIL as string);
+  await page.type('#password', process.env.B2C_TEST_SUPER_USER_LOGIN_PASSWORD as string);
+  await page.click('#next');
+  return page;
+}
+
+jest.setTimeout(65000);
 const screenshotDir = `${__dirname}/../../../functional-output/pa11y`;
+
 describe('Accessibility', () => {
-  let browser: Browser;
-  let hasAfterAllRun = false;
-
-  const setup = async () => {
-    if (hasAfterAllRun) {
-      return;
-    }
-    if (browser) {
-      await browser.close();
-    }
-    browser = await puppeteer.launch({
-      ignoreHTTPSErrors: true,
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
-  };
-
   const signedOutUrls = ['/accessibility-statement', '/cookies', '/not-found', '/'];
 
-  beforeAll(setup);
-
-  afterAll(async () => {
-    hasAfterAllRun = true;
-    await browser.close();
-  });
-
   describe.each(signedOutUrls)('Signed out page %s', url => {
+    let browser: Browser;
+
+    beforeEach(async () => {
+      browser = await puppeteer.launch({
+        ignoreHTTPSErrors: true,
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      });
+    });
+
+    afterEach(async () => {
+      await browser.close();
+    });
+
     test('should have no accessibility errors', async () => {
       const result: Pa11yResult = await pa11y(config.TEST_URL + url.replace('//', '/'), {
         screenCapture: `${screenshotDir}/${url}.png`,
@@ -77,21 +78,73 @@ describe('Accessibility', () => {
     });
   });
 
-  test('/browse, watch and terms pages', async () => {
+  test('admin/status page should have no accessibility errors', async () => {
+    const browser = await puppeteer.launch({
+      ignoreHTTPSErrors: true,
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
+
+    const page = await signInSuperUser(browser);
+    await page.waitForSelector('a[href^="/admin/status"]', { visible: true, timeout: 30000 });
+    await page.click('a[href^="/admin/status"]');
+
+    const result: Pa11yResult = await pa11y(page.url(), {
+      browser: browser,
+      screenCapture: `${screenshotDir}/admin-status.png`,
+    });
+
+    expect(result.issues).toEqual(expect.any(Array));
+    expectNoErrors(result.issues);
+    await browser.close();
+  }, 65000);
+
+  test('admin/MK-live-events page should have no accessibility errors', async () => {
+    const browser = await puppeteer.launch({
+      ignoreHTTPSErrors: true,
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
+
+    const page = await signInSuperUser(browser);
+    await page.waitForSelector('a[href^="/admin/status"]', { visible: true, timeout: 30000 });
+    await page.click('a[href^="/admin/status"]');
+    await page.waitForSelector('.govuk-grid-column-one-quarter', { visible: true, timeout: 60000 });
+    await page.waitForSelector('nav.govuk-grid-column-one-quarter.side-navigation', { visible: true, timeout: 60000 });
+    await page.waitForSelector('a[href^="/admin/MK-live-events"]', { visible: true, timeout: 60000 });
+    await page.click('a[href^="/admin/MK-live-events"]');
+
+    const liveEventsResult: Pa11yResult = await pa11y(page.url(), {
+      browser: browser,
+      screenCapture: `${screenshotDir}/admin-live-events.png`,
+    });
+
+    expect(liveEventsResult.issues).toEqual(expect.any(Array));
+    expectNoErrors(liveEventsResult.issues);
+    await browser.close();
+  }, 65000);
+
+  test('/browse, watch, and terms pages', async () => {
+    const browser = await puppeteer.launch({
+      ignoreHTTPSErrors: true,
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
+
     const page = await signIn(browser);
-    await page.waitForSelector('a[href^="/watch/"],input#terms', { visible: true, timeout: 0 });
+    await page.waitForSelector('a[href^="/watch/"],input#terms', { visible: true, timeout: 30000 });
 
     if (page.url().includes('/accept-terms-and-conditions')) {
       await page.click('input#terms');
       await page.click('button[type="submit"]');
-      await page.waitForSelector('a[href^="/watch/"]', { visible: true, timeout: 0 });
+      await page.waitForSelector('a[href^="/watch/"]', { visible: true, timeout: 30000 });
     }
+
     const browseUrl = page.url();
     await page.click('a[href^="/watch/"]');
     const watchUrl = page.url();
 
     await page.goto(config.TEST_URL + '/terms-and-conditions');
-
     const termsUrl = page.url();
     await page.close();
 
@@ -113,6 +166,9 @@ describe('Accessibility', () => {
       browser: browser,
       screenCapture: `${screenshotDir}/terms.png`,
     });
+
     expect(termsResult.issues.map(issue => issue.code)).toEqual([]);
+
+    await browser.close();
   }, 65000);
 });
