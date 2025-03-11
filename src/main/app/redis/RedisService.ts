@@ -9,9 +9,9 @@ export class RedisService {
     const client = redis.createClient({
       socket: {
         host,
-        port: 6380,
+        port: 6379,
         connectTimeout: 15000,
-        tls: true,
+        tls: false,
       },
       password: key,
     });

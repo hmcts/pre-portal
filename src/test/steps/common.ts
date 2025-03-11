@@ -14,7 +14,11 @@ Then('the page URL should be {string}', (url: string) => {
 });
 
 Then('the page should include {string}', (text: string) => {
-  I.waitForText(text);
+  I.waitForFunction(
+    text => document.body?.textContent?.includes(text) || false,
+    [text], // Wrap text in an array
+    10000 // Timeout in milliseconds
+  );
 });
 
 Then('the page title should include {string}', (text: string) => {

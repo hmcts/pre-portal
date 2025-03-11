@@ -4,7 +4,11 @@ import { Terms } from '../../types/terms';
 import { UserProfile } from '../../types/user-profile';
 
 import { Pagination, PutAuditRequest, Recording, SearchRecordingsRequest } from './types';
+import { RedisService } from '../../app/redis/RedisService';
+//import RedisStore from 'connect-redis';
+
 import { LiveEvent } from '../../types/live-event';
+import { CaptureSession } from './types';
 
 import { Logger } from '@hmcts/nodejs-logging';
 import axios, { AxiosResponse } from 'axios';
@@ -13,7 +17,24 @@ import { HealthResponse } from '../../types/health';
 
 export class PreClient {
   logger = Logger.getLogger('pre-client');
+  private redisService = new RedisService();
+  private redisClient: any;
 
+  constructor() {
+    const redisHost = config.get('session.redis.host') as string;
+    const redisKey = config.get('session.redis.key') as string;
+
+    this.initializeRedisClient(redisHost, redisKey);
+  }
+
+  private async initializeRedisClient(redisHost: string, redisKey: string) {
+    try {
+      this.redisClient = await this.redisService.getClient(redisHost, redisKey, this.logger);
+      this.logger.info('✅ Redis client initialized successfully');
+    } catch (error) {
+      this.logger.error('❌ Failed to initialize Redis client:', error);
+    }
+  }
   public healthCheck() {
     return axios.get<HealthResponse>('/health');
   }
@@ -33,9 +54,12 @@ export class PreClient {
 
   public async getUserByClaimEmail(email: string): Promise<UserProfile> {
     let userProfile: UserProfile;
+
     try {
       userProfile = await this.getUserByEmail(email);
+      console.log(userProfile);
     } catch (e) {
+      console.log(email);
       this.logger.error(e.message);
       throw new Error('User has not been invited to the portal');
     }
@@ -204,19 +228,72 @@ export class PreClient {
     }
   }
 
+  // public async getLiveEvents(xUserId: string): Promise<LiveEvent[]> {
+  //     try {
+  //
+  //       const cachedEvents = await this.redisClient.get(`live-events-${xUserId}`);
+  //       if (cachedEvents) {
+  //         return JSON.parse(cachedEvents) as LiveEvent[];
+  //       }
+  //
+  //       const response = await axios.get('/media-service/live-events', {
+  //         headers: {
+  //           'X-User-Id': xUserId,
+  //         },
+  //       });
+  //       const liveEvents = response.data as LiveEvent[];
+  //
+  //       await this.redisClient.setEx(`live-events-${xUserId}`, 30, JSON.stringify(liveEvents));
+  //
+  //       return liveEvents;
+  //     } catch (e) {
+  //       //this.logger.error('Error fetching live events:', e);
+  //       throw new Error(`Failed to fetch live events: ${e.message || e}`);
+  //     }
+  //   }
+
   public async getLiveEvents(xUserId: string): Promise<LiveEvent[]> {
     try {
-      const response = await axios.get('/media-service/live-events', {
-        headers: {
-          'X-User-Id': xUserId,
-        },
-      });
-      console.log(response.data);
-      return response.data as LiveEvent[];
-    } catch (e) {
-      console.error('Error fetching live events:', e);
+      if (!this.redisClient) {
+        this.logger.warn('Redis client is not available, fetching live events from API');
+        return this.fetchLiveEventsFromAPI(xUserId);
+      }
 
+      const cacheKey = `live-events-${xUserId}`;
+      const cachedEvents = await this.redisClient.get(cacheKey);
+
+      if (cachedEvents) {
+        this.logger.info('Returning cached live events');
+        return JSON.parse(cachedEvents) as LiveEvent[];
+      }
+
+      this.logger.info('Fetching live events from API...');
+      const liveEvents = await this.fetchLiveEventsFromAPI(xUserId);
+
+      await this.redisClient.setEx(cacheKey, 30, JSON.stringify(liveEvents));
+      this.logger.info('Live events cached successfully');
+
+      return liveEvents;
+    } catch (e) {
+      this.logger.error('Error fetching live events:', e);
       throw new Error(`Failed to fetch live events: ${e.message || e}`);
+    }
+  }
+
+  private async fetchLiveEventsFromAPI(xUserId: string): Promise<LiveEvent[]> {
+    const response = await axios.get('/media-service/live-events', {
+      headers: { 'X-User-Id': xUserId },
+    });
+    return response.data as LiveEvent[];
+  }
+
+  public async getCaptureSession(liveEventId: string): Promise<CaptureSession> {
+    try {
+      const response = await axios.get(`/capture-sessions/${liveEventId}`);
+      return response.data as CaptureSession;
+    } catch (e) {
+      this.logger.error(e.message);
+      throw e;
     }
   }
 }

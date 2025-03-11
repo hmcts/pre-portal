@@ -3,6 +3,7 @@ import { LiveEvent } from '../../types/live-event';
 import { SessionUser } from '../session-user/session-user';
 import { UserLevel } from '../../types/user-level';
 import { Request } from 'express';
+import { CaptureSession } from '../pre-api/types';
 
 export class LiveEventStatusService {
   private client: PreClient;
@@ -24,11 +25,13 @@ export class LiveEventStatusService {
 
     try {
       const liveEvents: LiveEvent[] = await this.client.getLiveEvents(this.user);
-
+      console.log(liveEvents);
+      const captureSession: CaptureSession = await this.client.getCaptureSession(liveEvents[0].id);
+      console.log(captureSession);
       if (liveEvents.length === 0) {
         return [];
       }
-
+      console.log(liveEvents);
       return liveEvents.map(event => ({
         id: event.id || 'Unknown ID',
         name: event.name || 'Unknown Name',

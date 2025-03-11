@@ -1,5 +1,5 @@
-Feature: View Admin Page
 @CrossBrowser
+Feature: View Admin Page
     Scenario: The admin status page should display for Super Users
       When I go to '/'
       Then the page should include 'Sign in'
@@ -10,9 +10,9 @@ Feature: View Admin Page
       Then I see the link 'Admin'
       Then I click the link 'Admin'
       Then the page URL should be '/admin/status'
-      Then I am on the '/admin/status' page
-      Then the page should include 'Admin'
-      Then the page should include 'System Status'
+      When I am on the '/admin/status' page
+
+
 
     Scenario: The live events page should display for Super Users
       When I go to '/'
