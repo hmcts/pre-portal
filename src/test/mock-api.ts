@@ -1,13 +1,42 @@
 import {
+  Audit,
   Pagination,
   PutAuditRequest,
   Recording,
   RecordingPlaybackData,
+  SearchAuditLogsRequest,
   SearchRecordingsRequest,
 } from '../main/services/pre-api/types';
 import { PreClient } from '../main/services/pre-api/pre-client';
 import { AxiosResponse } from 'axios';
 import { Terms } from '../main/types/terms';
+
+export const mockAuditLogs: Audit[] = [
+  {
+    id: '12345678-1234-1234-1234-1234567890ab',
+    functional_area: 'Video Player',
+    category: 'Recording',
+    activity: 'Play',
+    source: 'PORTAL',
+    audit_details: {
+      recordingId: '12345678-1234-1234-1234-1234567890ab',
+    },
+    created_by: '12345678-1234-1234-1234-1234567890ab',
+    created_at: '2021-09-01T12:00:00Z',
+  } as Audit,
+  {
+    id: '12345678-1234-1234-1234-1234567890ac',
+    functional_area: 'Video Player',
+    category: 'Recording',
+    activity: 'Play',
+    source: 'PORTAL',
+    audit_details: {
+      recordingId: '12345678-1234-1234-1234-1234567890ac',
+    },
+    created_by: '12345678-1234-1234-1234-1234567890ab',
+    created_at: '2021-09-01T12:00:00Z',
+  } as Audit,
+];
 
 export const mockRecordings: Recording[] = [
   {
@@ -90,6 +119,18 @@ export const mockedPaginatedRecordings = {
   },
 };
 
+export const mockedPaginatedAuditLogs = {
+  _embedded: {
+    auditDTOList: mockAuditLogs,
+  },
+  page: {
+    size: 20,
+    totalElements: 2,
+    totalPages: 1,
+    number: 0,
+  },
+};
+
 export const mockXUserId = 'a114f40e-bdba-432d-b53f-37169ee5bf99';
 
 export function mock() {
@@ -133,6 +174,31 @@ export function mockGetRecordings(recordings?: Recording[], page: number = 0) {
     .spyOn(PreClient.prototype, 'getRecordings')
     .mockImplementation(async (xUserId: string, req: SearchRecordingsRequest) => {
       return Promise.resolve({ recordings: mockRecordings, pagination: mockPagination });
+    });
+}
+
+export function mockGetAuditLogs(auditLogs?: Audit[], page: number = 0) {
+  if (auditLogs !== undefined) {
+    const pagination = {
+      currentPage: page,
+      totalPages: Math.ceil(auditLogs.length / 10),
+      totalElements: auditLogs.length,
+      size: 10,
+    } as Pagination;
+    const auditLogsSubset = auditLogs.slice(page * 10, (page + 1) * 10);
+
+    jest
+      .spyOn(PreClient.prototype, 'getAuditLogs')
+      .mockImplementation(async (xUserId: string, request: SearchAuditLogsRequest) => {
+        return Promise.resolve({ auditLogs: auditLogsSubset, pagination });
+      });
+    return;
+  }
+
+  jest
+    .spyOn(PreClient.prototype, 'getAuditLogs')
+    .mockImplementation(async (xUserId: string, req: SearchRecordingsRequest) => {
+      return Promise.resolve({ auditLogs: mockRecordings, pagination: mockPagination });
     });
 }
 
