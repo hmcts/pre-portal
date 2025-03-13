@@ -49,7 +49,7 @@
     "@types/serve-favicon": "2.5.7",
     "@types/session-file-store": "1.2.5",
     "applicationinsights": "3.2.2",
-    "axios": "^1.6.0",
+    "axios": "^1.8.0",
     "body-parser": "1.20.3",
     "compression": "^1.7.4",
     "config": "3.3.12",
@@ -142,7 +142,8 @@
     "@opentelemetry/instrumentation": "0.57.2",
     "semver": "^7.5.2",
     "express": "5.0.1",
-    "cookie": "0.7.2"
+    "cookie": "0.7.2",
+    "axios": "1.8.3"
   },
   "husky": {
     "hooks": {
