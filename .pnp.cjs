@@ -91,7 +91,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["html-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.6.3"],\
             ["husky", "npm:9.1.7"],\
             ["jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:29.7.0"],\
-            ["jest-html-reporter", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.0.1"],\
+            ["jest-html-reporter", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.1.0"],\
             ["jest-junit", "npm:16.0.0"],\
             ["jest-mock", "npm:29.7.0"],\
             ["jose", "npm:5.10.0"],\
@@ -4220,7 +4220,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@jest/core", "virtual:6b3d58bac8b9ff217c2bb9a4caa4d8a925983ca77ae00531258e6545a423a324ce307b159fdb7c747dd2cd29b4b16d75c4fd6343b29fb4b4c29ae47f878570fa#npm:29.7.0"],\
             ["@jest/console", "npm:29.7.0"],\
-            ["@jest/reporters", "virtual:825fc42ddcfa215cc33189e1ad4095a7c96ba8ec2f5b054ccb967b7da980385dbc603ea2aca25e5838e821a20131bebeb265fcddd808f00f7a862fa43224c3b3#npm:29.7.0"],\
+            ["@jest/reporters", "virtual:bc8c8e3019e959398e05c2a8c4414f556175207d094199864ed18fed317df2497dc4a82caba026c18aadc8d76c958cc63f47aa5c8306f83db1100f7f698d0d08#npm:29.7.0"],\
             ["@jest/test-result", "npm:29.7.0"],\
             ["@jest/transform", "npm:29.7.0"],\
             ["@jest/types", "npm:29.6.3"],\
@@ -4337,10 +4337,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:825fc42ddcfa215cc33189e1ad4095a7c96ba8ec2f5b054ccb967b7da980385dbc603ea2aca25e5838e821a20131bebeb265fcddd808f00f7a862fa43224c3b3#npm:29.7.0", {\
-          "packageLocation": "./.yarn/__virtual__/@jest-reporters-virtual-6f3121f23e/0/cache/@jest-reporters-npm-29.7.0-2561cd7a09-7eadabd62c.zip/node_modules/@jest/reporters/",\
+        ["virtual:bc8c8e3019e959398e05c2a8c4414f556175207d094199864ed18fed317df2497dc4a82caba026c18aadc8d76c958cc63f47aa5c8306f83db1100f7f698d0d08#npm:29.7.0", {\
+          "packageLocation": "./.yarn/__virtual__/@jest-reporters-virtual-37bb2a9d79/0/cache/@jest-reporters-npm-29.7.0-2561cd7a09-7eadabd62c.zip/node_modules/@jest/reporters/",\
           "packageDependencies": [\
-            ["@jest/reporters", "virtual:825fc42ddcfa215cc33189e1ad4095a7c96ba8ec2f5b054ccb967b7da980385dbc603ea2aca25e5838e821a20131bebeb265fcddd808f00f7a862fa43224c3b3#npm:29.7.0"],\
+            ["@jest/reporters", "virtual:bc8c8e3019e959398e05c2a8c4414f556175207d094199864ed18fed317df2497dc4a82caba026c18aadc8d76c958cc63f47aa5c8306f83db1100f7f698d0d08#npm:29.7.0"],\
             ["@bcoe/v8-coverage", "npm:0.2.3"],\
             ["@jest/console", "npm:29.7.0"],\
             ["@jest/test-result", "npm:29.7.0"],\
@@ -15400,18 +15400,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["jest-html-reporter", [\
-        ["npm:4.0.1", {\
-          "packageLocation": "./.yarn/cache/jest-html-reporter-npm-4.0.1-c7bff2fef8-370bd06efa.zip/node_modules/jest-html-reporter/",\
+        ["npm:4.1.0", {\
+          "packageLocation": "./.yarn/cache/jest-html-reporter-npm-4.1.0-334268b692-e7e482ab21.zip/node_modules/jest-html-reporter/",\
           "packageDependencies": [\
-            ["jest-html-reporter", "npm:4.0.1"]\
+            ["jest-html-reporter", "npm:4.1.0"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.0.1", {\
-          "packageLocation": "./.yarn/__virtual__/jest-html-reporter-virtual-825fc42ddc/0/cache/jest-html-reporter-npm-4.0.1-c7bff2fef8-370bd06efa.zip/node_modules/jest-html-reporter/",\
+        ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.1.0", {\
+          "packageLocation": "./.yarn/__virtual__/jest-html-reporter-virtual-bc8c8e3019/0/cache/jest-html-reporter-npm-4.1.0-334268b692-e7e482ab21.zip/node_modules/jest-html-reporter/",\
           "packageDependencies": [\
-            ["jest-html-reporter", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.0.1"],\
-            ["@jest/reporters", "virtual:825fc42ddcfa215cc33189e1ad4095a7c96ba8ec2f5b054ccb967b7da980385dbc603ea2aca25e5838e821a20131bebeb265fcddd808f00f7a862fa43224c3b3#npm:29.7.0"],\
+            ["jest-html-reporter", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.1.0"],\
+            ["@jest/reporters", "virtual:bc8c8e3019e959398e05c2a8c4414f556175207d094199864ed18fed317df2497dc4a82caba026c18aadc8d76c958cc63f47aa5c8306f83db1100f7f698d0d08#npm:29.7.0"],\
             ["@jest/test-result", "npm:29.7.0"],\
             ["@jest/types", "npm:29.6.3"],\
             ["@types/jest", "npm:29.5.14"],\
@@ -19363,7 +19363,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["html-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.6.3"],\
             ["husky", "npm:9.1.7"],\
             ["jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:29.7.0"],\
-            ["jest-html-reporter", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.0.1"],\
+            ["jest-html-reporter", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.1.0"],\
             ["jest-junit", "npm:16.0.0"],\
             ["jest-mock", "npm:29.7.0"],\
             ["jose", "npm:5.10.0"],\
