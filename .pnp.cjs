@@ -31,7 +31,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/core", "npm:7.26.10"],\
             ["@babel/preset-env", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.26.9"],\
             ["@codeceptjs/allure-legacy", "npm:1.0.2"],\
-            ["@codeceptjs/configure", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.2"],\
+            ["@codeceptjs/configure", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.3"],\
             ["@eslint/compat", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.2.7"],\
             ["@hmcts/cookie-manager", "npm:1.0.0"],\
             ["@hmcts/info-provider", "npm:1.2.3"],\
@@ -3708,17 +3708,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["npm:1.0.2", {\
-          "packageLocation": "./.yarn/cache/@codeceptjs-configure-npm-1.0.2-f7c8e277c3-bb1a5cbd3c.zip/node_modules/@codeceptjs/configure/",\
+        ["npm:1.0.3", {\
+          "packageLocation": "./.yarn/cache/@codeceptjs-configure-npm-1.0.3-456ecfd32e-bc6d1b3c82.zip/node_modules/@codeceptjs/configure/",\
           "packageDependencies": [\
-            ["@codeceptjs/configure", "npm:1.0.2"]\
+            ["@codeceptjs/configure", "npm:1.0.3"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.2", {\
-          "packageLocation": "./.yarn/__virtual__/@codeceptjs-configure-virtual-2f404ecb14/0/cache/@codeceptjs-configure-npm-1.0.2-f7c8e277c3-bb1a5cbd3c.zip/node_modules/@codeceptjs/configure/",\
+        ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.3", {\
+          "packageLocation": "./.yarn/__virtual__/@codeceptjs-configure-virtual-4bef8c0254/0/cache/@codeceptjs-configure-npm-1.0.3-456ecfd32e-bc6d1b3c82.zip/node_modules/@codeceptjs/configure/",\
           "packageDependencies": [\
-            ["@codeceptjs/configure", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.2"],\
+            ["@codeceptjs/configure", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.3"],\
             ["@types/codeceptjs", null],\
             ["codeceptjs", "npm:3.6.10"],\
             ["lodash.merge", "npm:4.6.2"],\
@@ -19303,7 +19303,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/core", "npm:7.26.10"],\
             ["@babel/preset-env", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.26.9"],\
             ["@codeceptjs/allure-legacy", "npm:1.0.2"],\
-            ["@codeceptjs/configure", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.2"],\
+            ["@codeceptjs/configure", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.3"],\
             ["@eslint/compat", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.2.7"],\
             ["@hmcts/cookie-manager", "npm:1.0.0"],\
             ["@hmcts/info-provider", "npm:1.2.3"],\
