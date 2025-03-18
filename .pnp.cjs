@@ -109,7 +109,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["nodemon", "npm:3.1.9"],\
             ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
             ["pa11y", "npm:8.0.0"],\
-            ["playwright", "npm:1.51.0"],\
+            ["playwright", "npm:1.51.1"],\
             ["prettier", "npm:3.5.3"],\
             ["puppeteer", "npm:22.15.0"],\
             ["react", "npm:19.0.0"],\
@@ -19067,21 +19067,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["playwright", [\
-        ["npm:1.51.0", {\
-          "packageLocation": "./.yarn/cache/playwright-npm-1.51.0-0433fef7b0-02ec1077e2.zip/node_modules/playwright/",\
+        ["npm:1.51.1", {\
+          "packageLocation": "./.yarn/cache/playwright-npm-1.51.1-d4d6df5ad4-2d78f53eed.zip/node_modules/playwright/",\
           "packageDependencies": [\
-            ["playwright", "npm:1.51.0"],\
+            ["playwright", "npm:1.51.1"],\
             ["fsevents", "patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"],\
-            ["playwright-core", "npm:1.51.0"]\
+            ["playwright-core", "npm:1.51.1"]\
           ],\
           "linkType": "HARD"\
         }]\
       ]],\
       ["playwright-core", [\
-        ["npm:1.51.0", {\
-          "packageLocation": "./.yarn/cache/playwright-core-npm-1.51.0-cc9435f4f7-e14798a732.zip/node_modules/playwright-core/",\
+        ["npm:1.51.1", {\
+          "packageLocation": "./.yarn/cache/playwright-core-npm-1.51.1-52a06837b9-1eb37e22e9.zip/node_modules/playwright-core/",\
           "packageDependencies": [\
-            ["playwright-core", "npm:1.51.0"]\
+            ["playwright-core", "npm:1.51.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -19381,7 +19381,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["nodemon", "npm:3.1.9"],\
             ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
             ["pa11y", "npm:8.0.0"],\
-            ["playwright", "npm:1.51.0"],\
+            ["playwright", "npm:1.51.1"],\
             ["prettier", "npm:3.5.3"],\
             ["puppeteer", "npm:22.15.0"],\
             ["react", "npm:19.0.0"],\
