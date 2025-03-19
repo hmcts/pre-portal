@@ -83,7 +83,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-prettier", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.2.3"],\
             ["express", "npm:5.0.1"],\
             ["express-nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.1.2"],\
-            ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.17.1"],\
+            ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.18.0"],\
             ["express-session", "npm:1.18.1"],\
             ["glob", "npm:11.0.1"],\
             ["govuk-frontend", "npm:5.9.0"],\
@@ -12844,17 +12844,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["express-openid-connect", [\
-        ["npm:2.17.1", {\
-          "packageLocation": "./.yarn/cache/express-openid-connect-npm-2.17.1-ab6b29f7f6-96c27f8e1a.zip/node_modules/express-openid-connect/",\
+        ["npm:2.18.0", {\
+          "packageLocation": "./.yarn/cache/express-openid-connect-npm-2.18.0-c97eacab29-3c452e0ad4.zip/node_modules/express-openid-connect/",\
           "packageDependencies": [\
-            ["express-openid-connect", "npm:2.17.1"]\
+            ["express-openid-connect", "npm:2.18.0"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.17.1", {\
-          "packageLocation": "./.yarn/__virtual__/express-openid-connect-virtual-3b592ff98a/0/cache/express-openid-connect-npm-2.17.1-ab6b29f7f6-96c27f8e1a.zip/node_modules/express-openid-connect/",\
+        ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.18.0", {\
+          "packageLocation": "./.yarn/__virtual__/express-openid-connect-virtual-9babd4bdde/0/cache/express-openid-connect-npm-2.18.0-c97eacab29-3c452e0ad4.zip/node_modules/express-openid-connect/",\
           "packageDependencies": [\
-            ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.17.1"],\
+            ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.18.0"],\
             ["@types/express", "npm:5.0.0"],\
             ["base64url", "npm:3.0.1"],\
             ["clone", "npm:2.1.2"],\
@@ -19362,7 +19362,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-prettier", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.2.3"],\
             ["express", "npm:5.0.1"],\
             ["express-nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.1.2"],\
-            ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.17.1"],\
+            ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.18.0"],\
             ["express-session", "npm:1.18.1"],\
             ["glob", "npm:11.0.1"],\
             ["govuk-frontend", "npm:5.9.0"],\
