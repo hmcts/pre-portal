@@ -128,7 +128,7 @@
     "prettier": "3.5.3",
     "react": "^19.0.0",
     "react-native": "^0.78.0",
-    "sass": "1.85.1",
+    "sass": "1.86.0",
     "sass-loader": "16.0.5",
     "style-loader": "4.0.0",
     "ts-jest": "29.2.6",
