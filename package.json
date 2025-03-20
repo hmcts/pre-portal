@@ -39,7 +39,7 @@
     "@types/config": "3.3.5",
     "@types/cookie-parser": "1.4.8",
     "@types/es6-promisify": "6.0.4",
-    "@types/express": "5.0.0",
+    "@types/express": "5.0.1",
     "@types/express-session": "1.18.1",
     "@types/glob": "8.1.0",
     "@types/lodash": "4.17.16",
