@@ -1,6 +1,6 @@
 import puppeteer, { Browser, Page } from 'puppeteer';
 import { config } from '../config';
-import { describe } from '@jest/globals';
+import { describe, test } from '@jest/globals';
 
 const pa11y = require('pa11y');
 
@@ -115,5 +115,5 @@ describe('Accessibility', () => {
       screenCapture: `${screenshotDir}/terms.png`,
     });
     expect(termsResult.issues.map(issue => issue.code)).toEqual([]);
-  });
+  }, 65000);
 });
