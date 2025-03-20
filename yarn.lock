@@ -11502,10 +11502,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jose@npm:^5.2.2":
-  version: 5.10.0
-  resolution: "jose@npm:5.10.0"
-  checksum: e80965ef3ab47baafac3517f53fa9c74b948b57690de524f51320c314cd545ef51ec7b18761605d58fb5965b7c5e12b2bb6ddae87a6ccf55e3f4ad077347d8d7
+"jose@npm:^6.0.0":
+  version: 6.0.10
+  resolution: "jose@npm:6.0.10"
+  checksum: 11481dc955fd466d51a58cfe59e8fff9f402f091793c917e424de6e4c6e6d58952405705a643fb4613fb85ba99025cbff573da81f9bc7a005b49b590ca329ccf
   languageName: node
   linkType: hard
 
@@ -14773,7 +14773,7 @@ __metadata:
     jest-html-reporter: 4.1.0
     jest-junit: 16.0.0
     jest-mock: 29.7.0
-    jose: ^5.2.2
+    jose: ^6.0.0
     jquery: 3.7.1
     lint-staged: 15.5.0
     lodash: 4.17.21
