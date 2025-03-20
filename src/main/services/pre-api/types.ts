@@ -1,3 +1,8 @@
+export interface SearchAuditLogsRequest {
+  page?: number;
+  size?: number;
+}
+
 export interface SearchRecordingsRequest {
   captureSessionId?: string;
   parentRecordingId?: string;
@@ -76,5 +81,18 @@ export interface PutAuditRequest {
   source: string;
   table_name?: string;
   table_record_id?: string;
+  audit_details: { [key: string]: string };
+}
+
+export interface Audit {
+  id: string;
+  category: string;
+  activity: string;
+  functional_area: string;
+  source: string;
+  table_name?: string;
+  table_record_id?: string;
+  created_by: string;
+  created_at: string;
   audit_details: { [key: string]: string };
 }
