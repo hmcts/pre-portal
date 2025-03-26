@@ -60,7 +60,7 @@ export class Auth {
           sameSite: 'Lax', // required for the oauth2 redirect
           secure: true,
         },
-        rolling: true, // Renew the cookie for another 20 minutes on each request\
+        rolling: true, // Renew the cookie for another `rollingDuration` minutes on each request
         /* eslint-disable  @typescript-eslint/no-explicit-any */
         store: this.getSessionStore(app, logger) as any, // https://github.com/auth0/express-openid-connect/issues/234
       },
