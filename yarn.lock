@@ -4883,13 +4883,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/supertest@npm:6.0.2":
-  version: 6.0.2
-  resolution: "@types/supertest@npm:6.0.2"
+"@types/supertest@npm:6.0.3":
+  version: 6.0.3
+  resolution: "@types/supertest@npm:6.0.3"
   dependencies:
     "@types/methods": ^1.1.4
     "@types/superagent": ^8.1.0
-  checksum: 1eafa472665757a6fd984439d11f388ae0480c6d243a6884066c474c4e0357de5373316488da503b1690c3163e075ca8c64c0c4853b3bb7deb09e05d1b64e556
+  checksum: 5f75e4190620bb06168cca6998c1af29168e7ca64de34abe522002573d96b37ce2611ee53a9a360b3f42d44f0bfea547d0bb258f038ab69ac50d90bd5b96fc13
   languageName: node
   linkType: hard
 
@@ -14736,7 +14736,7 @@ __metadata:
     "@types/require-directory": 2.1.6
     "@types/serve-favicon": 2.5.7
     "@types/session-file-store": 1.2.5
-    "@types/supertest": 6.0.2
+    "@types/supertest": 6.0.3
     "@types/uuid": 10.0.0
     "@typescript-eslint/eslint-plugin": 8.27.0
     "@typescript-eslint/parser": 8.27.0
