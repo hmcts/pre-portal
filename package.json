@@ -50,7 +50,7 @@
     "@types/session-file-store": "1.2.5",
     "applicationinsights": "3.2.2",
     "axios": "^1.8.0",
-    "body-parser": "1.20.3",
+    "body-parser": "2.2.0",
     "compression": "^1.7.4",
     "config": "3.3.12",
     "connect-redis": "^7.1.1",
