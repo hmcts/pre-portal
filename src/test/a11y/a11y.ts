@@ -1,5 +1,6 @@
 import puppeteer, { Browser, Page } from 'puppeteer';
 import { config } from '../config';
+import { describe, test } from '@jest/globals';
 
 const pa11y = require('pa11y');
 
