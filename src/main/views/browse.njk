@@ -1,8 +1,16 @@
 {% from "govuk/components/pagination/macro.njk" import govukPagination %}
+{% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}
 
 {% extends "template.njk" %}
 
 {% block pageTitle %}{{ title }} - PRE Portal{% endblock %}
+
+{% set bannerHtml %}
+  <p class="govuk-notification-banner__heading">Recordings are accessed on the basis of a
+    legitimate need and having full authorisation.</p>
+  <p class="govuk-notification-banner__heading">Please note, playback is preferred
+    on Laptop and Desktop devices only.</p>
+{% endset %}
 
 {% block beforeContent %}
   {{
@@ -21,14 +29,9 @@
 {% block content %}
     <h1 class="govuk-heading-xl">Welcome back, {{ user.first_name }} {{ user.last_name }}</h1>
 
-    <div class="govuk-warning-text">
-      <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-      <strong class="govuk-warning-text__text">
-        <span class="govuk-warning-text__assistive">Please note</span>
-        playback is preferred on non-mobile devices. If possible, please use a
-        preferred device.
-      </strong>
-    </div>
+    {{ govukNotificationBanner({
+      html: bannerHtml
+    }) }}
 
     <h2 class="govuk-heading-m">
       {{ title }}
