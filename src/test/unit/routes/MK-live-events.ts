@@ -1,5 +1,6 @@
 import { Nunjucks } from '../../../main/modules/nunjucks';
-import { beforeAll, describe, test, jest } from '@jest/globals';
+import { beforeAll, describe, test } from '@jest/globals';
+import { LiveEventStatusService } from '../../../main/services/system-status/live-events-status';
 import { mockeduser } from '../test-helper';
 import { UserLevel } from '../../../main/types/user-level';
 
@@ -22,41 +23,50 @@ jest.mock('../../../main/services/session-user/session-user', () => {
   };
 });
 
-describe('Admin Page Access', () => {
+jest.mock('../../../main/services/system-status/live-events-status');
+
+describe('MK Live Events route', () => {
   beforeAll(() => {
     jest.resetAllMocks();
   });
 
-  test('should display admin page for super user', async () => {
+  test('should display live events page for super user', async () => {
     const app = require('express')();
     new Nunjucks(false).enableFor(app);
     const request = require('supertest');
-    const adminRoute = require('../../../main/routes/admin/admin').default;
-    adminRoute(app);
+    const mkLiveEvents = require('../../../main/routes/admin/MK-live-events').default;
+    mkLiveEvents(app);
 
+    LiveEventStatusService.prototype.getMediaKindLiveEventStatuses = jest.fn().mockResolvedValue([
+      {
+        id: '123',
+        name: 'MK',
+        description: 'MK Live Event',
+        status: 'Live',
+      },
+    ]);
     if (mockeduser.app_access?.[0]?.role) {
       mockeduser.app_access[0].role.name = UserLevel.SUPER_USER;
     }
 
-    const response = await request(app).get('/admin');
+    const response = await request(app).get('/admin/MK-live-events');
     expect(response.status).toEqual(200);
-    expect(response.text).toContain('Admin');
-    expect(response.text).toContain('Status');
-    expect(response.text).toContain('Audit');
+    expect(response.text).toContain('Live Events');
+    expect(response.text).toContain('MK');
   });
 
   test('should display "Page Not Found" for non-super user', async () => {
     const app = require('express')();
     new Nunjucks(false).enableFor(app);
     const request = require('supertest');
-    const adminRoute = require('../../../main/routes/admin/admin').default;
-    adminRoute(app);
+    const mkLiveEvents = require('../../../main/routes/admin/MK-live-events').default;
+    mkLiveEvents(app);
 
     if (mockeduser.app_access?.[0]?.role) {
       mockeduser.app_access[0].role.name = UserLevel.ADMIN;
     }
 
-    const response = await request(app).get('/admin');
+    const response = await request(app).get('/admin/MK-live-events');
     expect(response.status).toEqual(404);
     expect(response.text).toContain('Page is not available');
   });
