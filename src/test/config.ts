@@ -30,8 +30,8 @@ export const config = {
       password: sysConfig.get('b2c.testLogin.password'),
     },
     testSuperUserLogin: {
-      email: sysConfig.get('b2c.testSuperUserLogin.email'),
-      password: sysConfig.get('b2c.testSuperUserLogin.password'),
+      email: sysConfig.get('b2c.testLogin.email'),
+      password: sysConfig.get('b2c.testLogin.password'),
     },
   },
   session: {
