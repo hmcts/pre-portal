@@ -1861,15 +1861,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codeceptjs/configure@npm:1.0.3":
-  version: 1.0.3
-  resolution: "@codeceptjs/configure@npm:1.0.3"
+"@codeceptjs/configure@npm:1.0.4":
+  version: 1.0.4
+  resolution: "@codeceptjs/configure@npm:1.0.4"
   dependencies:
     lodash.merge: ^4.6.2
     lodash.mergewith: ^4.6.2
   peerDependencies:
     codeceptjs: ">=2.3.3 <100.0.0"
-  checksum: bc6d1b3c82ca9c5363e8570aad2c410f57d75878807f1d32a582ff868972c232b564ccfd4704ac7c0e0269e1c15dd0d1ab3d97ccde4c6211a1ad313d53c27e0d
+  checksum: f9736b9aeb9f42b3c2aa0d9e520f72a7cec91eee670e5a58bac145ec37a990ae3c91baed79aee7351310b48cb20fbfe0c6534217d773474cf768093c934cd890
   languageName: node
   linkType: hard
 
@@ -14851,7 +14851,7 @@ __metadata:
     "@babel/core": ^7.25.2
     "@babel/preset-env": ^7.25.4
     "@codeceptjs/allure-legacy": ^1.0.2
-    "@codeceptjs/configure": 1.0.3
+    "@codeceptjs/configure": 1.0.4
     "@eslint/compat": ^1.1.1
     "@hmcts/cookie-manager": 1.0.0
     "@hmcts/info-provider": 1.2.3
