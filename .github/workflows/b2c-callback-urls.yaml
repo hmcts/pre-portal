@@ -19,7 +19,7 @@ jobs:
       - name: Azure login
         uses: azure/login@v2
         with:
-          creds: ${{ secrets.B2C_STG_CREDENTIALS }}
+          creds: "${{ secrets.B2C_STG_CREDENTIALS }}"
           allow-no-subscriptions: true
 
       - run: |
