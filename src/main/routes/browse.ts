@@ -134,6 +134,7 @@ export default function (app: Application): void {
       enableCaseStateColumn: config.get('pre.enableCaseStateColumn') === 'true',
       isSuperUser: isSuperUser,
       removeWitnessLastName: config.get('pre.removeWitnessLastName') === 'true',
+      pageUrl: req.url,
     });
   });
 }
