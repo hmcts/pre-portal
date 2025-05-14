@@ -96,7 +96,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-mock", "npm:29.7.0"],\
             ["jose", "npm:5.10.0"],\
             ["jquery", "npm:3.7.1"],\
-            ["lint-staged", "npm:15.5.1"],\
+            ["lint-staged", "npm:15.5.2"],\
             ["lodash", "npm:4.17.21"],\
             ["marked", "npm:15.0.7"],\
             ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.2"],\
@@ -16338,10 +16338,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["lint-staged", [\
-        ["npm:15.5.1", {\
-          "packageLocation": "./.yarn/cache/lint-staged-npm-15.5.1-a7bfb2de49-aa285bf6c5.zip/node_modules/lint-staged/",\
+        ["npm:15.5.2", {\
+          "packageLocation": "./.yarn/cache/lint-staged-npm-15.5.2-5de9f8ff0d-70380f07be.zip/node_modules/lint-staged/",\
           "packageDependencies": [\
-            ["lint-staged", "npm:15.5.1"],\
+            ["lint-staged", "npm:15.5.2"],\
             ["chalk", "npm:5.4.1"],\
             ["commander", "npm:13.1.0"],\
             ["debug", "virtual:bdeb9ff2c27652ab0b48e2b4b7da3b19c234e296477c492f7e86e093d9623a8d5d6d542fa002289eee5daadea58324c140cd734b64ffb6d3abf38cb16b56e15c#npm:4.4.0"],\
@@ -19444,7 +19444,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-mock", "npm:29.7.0"],\
             ["jose", "npm:5.10.0"],\
             ["jquery", "npm:3.7.1"],\
-            ["lint-staged", "npm:15.5.1"],\
+            ["lint-staged", "npm:15.5.2"],\
             ["lodash", "npm:4.17.21"],\
             ["marked", "npm:15.0.7"],\
             ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.2"],\
