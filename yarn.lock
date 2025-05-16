@@ -1963,14 +1963,14 @@ __metadata:
   linkType: hard
 
 "@eslint/compat@npm:^1.1.1":
-  version: 1.2.8
-  resolution: "@eslint/compat@npm:1.2.8"
+  version: 1.2.9
+  resolution: "@eslint/compat@npm:1.2.9"
   peerDependencies:
     eslint: ^9.10.0
   peerDependenciesMeta:
     eslint:
       optional: true
-  checksum: 521c9c401a6248c14d71ff37f45e93685d42d0e9a537074bc295a6c38ff29e0f004f35a925fa50db425f3f45da9c5e135c739e804d4925a3f4e0e9e1bddba33c
+  checksum: 5c1b792cba07caa274987517ed69461b9c91728021f65a49248bec41d3f715090c6d6266479d20b0aa646f269d5e58c9f7f4d9eeb086ec45caebc80e704d2378
   languageName: node
   linkType: hard
 
@@ -7678,7 +7678,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:4.4.0, debug@npm:^4, debug@npm:^4.0.0, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4, debug@npm:^4.3.5, debug@npm:^4.3.6, debug@npm:^4.4.0":
+"debug@npm:4, debug@npm:^4, debug@npm:^4.0.0, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4, debug@npm:^4.3.5, debug@npm:^4.3.6, debug@npm:^4.4.0":
   version: 4.4.0
   resolution: "debug@npm:4.4.0"
   dependencies:
@@ -7699,6 +7699,18 @@ __metadata:
     supports-color:
       optional: true
   checksum: 1630b748dea3c581295e02137a9f5cbe2c1d85fea35c1e6597a65ca2b16a6fce68cec61b299d480787ef310ba927dc8c92d3061faba0ad06c6a724672f66be7f
+  languageName: node
+  linkType: hard
+
+"debug@npm:4.4.1":
+  version: 4.4.1
+  resolution: "debug@npm:4.4.1"
+  dependencies:
+    ms: ^2.1.3
+  peerDependenciesMeta:
+    supports-color:
+      optional: true
+  checksum: a43826a01cda685ee4cec00fb2d3322eaa90ccadbef60d9287debc2a886be3e835d9199c80070ede75a409ee57828c4c6cd80e4b154f2843f0dc95a570dc0729
   languageName: node
   linkType: hard
 
@@ -8548,14 +8560,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-prettier@npm:10.1.2":
-  version: 10.1.2
-  resolution: "eslint-config-prettier@npm:10.1.2"
+"eslint-config-prettier@npm:10.1.5":
+  version: 10.1.5
+  resolution: "eslint-config-prettier@npm:10.1.5"
   peerDependencies:
     eslint: ">=7.0.0"
   bin:
     eslint-config-prettier: bin/cli.js
-  checksum: 6b317378214a5935457bd9d7c3220ec37fb621e07bf31cf1ffb82bf38eca1cd89f338d18284114d504a865a6bb932faa5df29a18a72e6e43484dbc959d087620
+  checksum: 6d8eb41c716fc2b073bfd9daede0c87c4c2b29055f15c94618eec00a19c5499024ddb89902d6793b5ac9102075e4739d7cc2d4d58c7e7ed4cc2dcf79e3fbcacc
   languageName: node
   linkType: hard
 
@@ -9716,9 +9728,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:11.0.1, glob@npm:^11.0.1":
-  version: 11.0.1
-  resolution: "glob@npm:11.0.1"
+"glob@npm:11.0.2":
+  version: 11.0.2
+  resolution: "glob@npm:11.0.2"
   dependencies:
     foreground-child: ^3.1.0
     jackspeak: ^4.0.1
@@ -9728,7 +9740,7 @@ __metadata:
     path-scurry: ^2.0.0
   bin:
     glob: dist/esm/bin.mjs
-  checksum: ffbbafe1d2dae2fa68f190ac76df7254e840b27f59df34129fd658bd9da0c50b538d144eb0962dc7fa71cdaccf3fe108f045d4a15b3f5815e465749a6bf00965
+  checksum: e936aa9b26d5c9687ec1cad53ead521122a7297528856f0c909bfff5a5af16be791d7da8289ab0cfe583470328287adff8f455c1fbf4fa2d8a040a55f9c8c50a
   languageName: node
   linkType: hard
 
@@ -9758,6 +9770,22 @@ __metadata:
   bin:
     glob: dist/esm/bin.mjs
   checksum: 0bc725de5e4862f9f387fd0f2b274baf16850dcd2714502ccf471ee401803997983e2c05590cb65f9675a3c6f2a58e7a53f9e365704108c6ad3cbf1d60934c4a
+  languageName: node
+  linkType: hard
+
+"glob@npm:^11.0.1":
+  version: 11.0.1
+  resolution: "glob@npm:11.0.1"
+  dependencies:
+    foreground-child: ^3.1.0
+    jackspeak: ^4.0.1
+    minimatch: ^10.0.0
+    minipass: ^7.1.2
+    package-json-from-dist: ^1.0.0
+    path-scurry: ^2.0.0
+  bin:
+    glob: dist/esm/bin.mjs
+  checksum: ffbbafe1d2dae2fa68f190ac76df7254e840b27f59df34129fd658bd9da0c50b538d144eb0962dc7fa71cdaccf3fe108f045d4a15b3f5815e465749a6bf00965
   languageName: node
   linkType: hard
 
@@ -11980,9 +12008,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:15.5.1":
-  version: 15.5.1
-  resolution: "lint-staged@npm:15.5.1"
+"lint-staged@npm:15.5.2":
+  version: 15.5.2
+  resolution: "lint-staged@npm:15.5.2"
   dependencies:
     chalk: ^5.4.1
     commander: ^13.1.0
@@ -11996,7 +12024,7 @@ __metadata:
     yaml: ^2.7.0
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: aa285bf6c55459030254536661e2cf4a69d8084ff945a088b1a60a94b96e3593c866b2804e7a5b6168f65ea675b785657e70ade9248e9c6f3023d3bd35b497b5
+  checksum: 70380f07be12b3557ae5857a6f081c03f3c62774afd3015ca77dd20fbad991c3b28de4981c3a7b0c61d482c1b3a0d2310f031f9d3ae36cb0e21e1e8a674ed30e
   languageName: node
   linkType: hard
 
@@ -13709,9 +13737,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nodemon@npm:3.1.9":
-  version: 3.1.9
-  resolution: "nodemon@npm:3.1.9"
+"nodemon@npm:3.1.10":
+  version: 3.1.10
+  resolution: "nodemon@npm:3.1.10"
   dependencies:
     chokidar: ^3.5.2
     debug: ^4
@@ -13725,7 +13753,7 @@ __metadata:
     undefsafe: ^2.0.5
   bin:
     nodemon: bin/nodemon.js
-  checksum: d045065dea08904f1356d18132538e71a61df12cb4e2852730310492943676d4789bedb28c343a5d85d5e07558bf47b73f000a8017409f0b7d522a3c1c42b2e5
+  checksum: cdd2bcae3ad810fcc0f00a01ed3b0addb76a1328ee024e483cdcadfab7eed2d24964e3feaf7e6c83895ad6154379d5403ffcf762a87841158fd3514c50ea9ef8
   languageName: node
   linkType: hard
 
@@ -14759,10 +14787,10 @@ __metadata:
     cookie-parser: 1.4.7
     copy-webpack-plugin: 13.0.0
     css-loader: 7.1.2
-    debug: 4.4.0
+    debug: 4.4.1
     dotenv: ^16.4.5
     eslint: 9.23.0
-    eslint-config-prettier: 10.1.2
+    eslint-config-prettier: 10.1.5
     eslint-plugin-import: 2.31.0
     eslint-plugin-jest: 28.11.0
     eslint-plugin-prettier: 5.2.6
@@ -14770,7 +14798,7 @@ __metadata:
     express-nunjucks: 3.1.2
     express-openid-connect: 2.18.0
     express-session: 1.18.1
-    glob: 11.0.1
+    glob: 11.0.2
     govuk-frontend: 5.9.0
     helmet: 8.1.0
     html-webpack-plugin: 5.6.3
@@ -14781,7 +14809,7 @@ __metadata:
     jest-mock: 29.7.0
     jose: ^5.2.2
     jquery: 3.7.1
-    lint-staged: 15.5.1
+    lint-staged: 15.5.2
     lodash: 4.17.21
     marked: ^15.0.0
     mini-css-extract-plugin: 2.9.2
@@ -14791,7 +14819,7 @@ __metadata:
     mochawesome-report-generator: ^6.2.0
     nock: 14.0.4
     node-mocks-http: 1.16.2
-    nodemon: 3.1.9
+    nodemon: 3.1.10
     nunjucks: 3.2.4
     pa11y: 8.0.0
     playwright: 1.51
