@@ -45,9 +45,7 @@
           <th scope="col" class="govuk-table__header">Witness</th>
           <th scope="col" class="govuk-table__header">Defendants</th>
           <th scope="col" class="govuk-table__header">Version</th>
-          {%  if enableCaseStateColumn == true %}
           <th scope="col" class="govuk-table__header">Status</th>
-          {% endif %}
           <th scope="col" class="govuk-table__header">Action</th>
         </tr>
         </thead>
@@ -75,7 +73,7 @@
               <td class="govuk-table__cell">
                 {% for participant in recording.participants %}
                   {% if participant.participant_type == "WITNESS" %}
-                    {{ participant.first_name }}{% if removeWitnessLastName == false %} {{ participant.last_name }}{% endif %}<br />
+                    {{ participant.first_name }}<br />
                   {% endif %}
                 {% endfor %}
               </td>
@@ -89,7 +87,6 @@
               <td class="govuk-table__cell">
                 {{ recording.version }}
               </td>
-              {%  if enableCaseStateColumn == true %}
               <td class="govuk-table__cell">
                 {% if recording.capture_session.case_state == "OPEN" %}
                   <strong class="govuk-tag govuk-tag--green">
@@ -103,7 +100,6 @@
                   This will be unavailable after {{ recording.capture_session.case_closed_at }}
                 {% endif %}
               </td>
-              {% endif %}
               <td class="govuk-table__cell">
                 <a class="govuk-link" href="/watch/{{ recording.id }}">
                 Play
