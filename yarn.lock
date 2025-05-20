@@ -8930,9 +8930,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express-openid-connect@npm:2.18.0":
-  version: 2.18.0
-  resolution: "express-openid-connect@npm:2.18.0"
+"express-openid-connect@npm:2.18.1":
+  version: 2.18.1
+  resolution: "express-openid-connect@npm:2.18.1"
   dependencies:
     base64url: ^3.0.1
     clone: ^2.1.2
@@ -8947,7 +8947,7 @@ __metadata:
     url-join: ^4.0.1
   peerDependencies:
     express: ">= 4.17.0"
-  checksum: 3c452e0ad485243e6b983539acd47906143ade2232f095dcd0a621dc22e246bd10f391ede2f096e8b9838674c386a30fe6fa03bed81a145419c73c6d0387a97e
+  checksum: 89c898c5bf5779a9063b45fae397212422848f723e89e2251e901da5c745de9d031fa6ae0809bd841c72ab808d7fba11455c22037b1d79406aa0a8ea0ccc35eb
   languageName: node
   linkType: hard
 
@@ -14796,7 +14796,7 @@ __metadata:
     eslint-plugin-prettier: 5.2.6
     express: 5.0.1
     express-nunjucks: 3.1.2
-    express-openid-connect: 2.18.0
+    express-openid-connect: 2.18.1
     express-session: 1.18.1
     glob: 11.0.2
     govuk-frontend: 5.9.0
