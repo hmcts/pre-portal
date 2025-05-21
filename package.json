@@ -48,7 +48,7 @@
     "@types/require-directory": "2.1.6",
     "@types/serve-favicon": "2.5.7",
     "@types/session-file-store": "1.2.5",
-    "applicationinsights": "3.2.2",
+    "applicationinsights": "3.7.0",
     "axios": "^1.8.0",
     "body-parser": "2.2.0",
     "compression": "^1.7.4",
