@@ -101,7 +101,7 @@ describe('Accessibility', () => {
       screenCapture: `${screenshotDir}/browse.png`,
       waitUntil: 'domcontentloaded',
     });
-    expect(result.issues.map(issue => issue.code)).toEqual(['WCAG2AA.Principle2.Guideline2_2.2_2_1.F41.2']);
+    expect(result.issues.map(issue => issue.code)).toEqual([]);
 
     const watchResult: Pa11yResult = await pa11y(watchUrl, {
       browser: browser,

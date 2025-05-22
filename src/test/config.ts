@@ -39,7 +39,7 @@ export const config = {
       key: '',
       host: '',
     },
-    maxAge: 86400000,
+    maxAge: 3600,
     secret: 'superlongrandomstringthatshouldbebetterinprod',
   },
 };
