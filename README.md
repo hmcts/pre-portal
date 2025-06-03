@@ -16,6 +16,7 @@
     - [With the Command Line](#with-the-command-line)
     - [With IntelliJ IDEA](#with-intellij-idea)
 - [Developing for Pre Portal](#developing-for-pre-portal)
+  - [Logging into the application](#logging-into-the-application)
   - [Code style](#code-style)
   - [Running the tests](#running-the-tests)
     - [Unit Tests](#unit-tests)
@@ -172,6 +173,13 @@ Click on the `Run 'start:dev'` button.
 
 ## Developing for Pre Portal
 
+### Logging into the application
+
+To access the portal you will need to login. When you start the application and go to [home page](https://localhost:4551)
+you will be redirected to an Azure B2C login screen. The login credentials you use will need to have permission to use PRE Portal.
+A PRE developer should be able to provide you with a test user to login to the portal with. If you are not able to login,
+please contact one of the [PRE developers](https://github.com/orgs/hmcts/teams/pre-rec-evidence)
+
 ### Code style
 
 We use [ESLint](https://github.com/typescript-eslint/typescript-eslint)
@@ -245,7 +253,7 @@ Here's an example setup:
 
 ```json
     "security": {
-      "referrerPolicy": "origin",
+      "referrerPolicy": "origin"
     }
 ```
 
