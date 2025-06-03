@@ -30,7 +30,6 @@
   - [Common issues](#common-issues)
     - [Error: checks.state argument is missing](#error-checksstate-argument-is-missing)
 
-
 ## Introduction
 
 ### Intro to Pre-Recorded Evidence System
@@ -188,7 +187,7 @@ alongside [sass-lint](https://github.com/sasstools/sass-lint)
 Running the linting with auto fix:
 
 ```bash
-yarn lint --fix
+yarn lint --write
 ```
 
 ### Running the tests
@@ -209,6 +208,7 @@ yarn test:functional
 ```
 
 #### Accessibility Tests
+
 Running accessibility tests:
 
 ```bash
