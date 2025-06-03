@@ -72,7 +72,7 @@
     "mochawesome-merge": "^5.0.0",
     "mochawesome-report-generator": "^6.2.0",
     "nunjucks": "3.2.4",
-    "puppeteer": "^22.6.5",
+    "puppeteer": "22.7.0",
     "redis": "^4.6.13",
     "require-directory": "2.1.1",
     "serve-favicon": "2.5.0",
