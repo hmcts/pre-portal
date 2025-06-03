@@ -6276,7 +6276,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["progress", "npm:2.0.3"],\
             ["proxy-agent", "npm:6.5.0"],\
             ["semver", "npm:7.7.2"],\
-            ["tar-fs", "npm:3.0.8"],\
+            ["tar-fs", "npm:3.0.9"],\
             ["unbzip2-stream", "npm:1.4.3"],\
             ["yargs", "npm:17.7.2"]\
           ],\
@@ -21763,10 +21763,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["tar-fs", [\
-        ["npm:3.0.8", {\
-          "packageLocation": "./.yarn/cache/tar-fs-npm-3.0.8-76b28a2b9e-5bebadd68e.zip/node_modules/tar-fs/",\
+        ["npm:3.0.9", {\
+          "packageLocation": "./.yarn/cache/tar-fs-npm-3.0.9-3078dff77a-ec1b1d83bc.zip/node_modules/tar-fs/",\
           "packageDependencies": [\
-            ["tar-fs", "npm:3.0.8"],\
+            ["tar-fs", "npm:3.0.9"],\
             ["bare-fs", "npm:4.0.1"],\
             ["bare-path", "npm:3.0.0"],\
             ["pump", "npm:3.0.2"],\
