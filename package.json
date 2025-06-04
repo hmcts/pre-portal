@@ -139,7 +139,7 @@
     "webpack-node-externals": "3.0.0"
   },
   "resolutions": {
-    "@opentelemetry/instrumentation": "0.200.0",
+    "@opentelemetry/instrumentation": "0.202.0",
     "semver": "^7.5.2",
     "express": "5.0.1",
     "cookie": "0.7.2",
