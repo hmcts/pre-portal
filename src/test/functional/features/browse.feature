@@ -21,5 +21,6 @@ Feature: View Browse and play Page
       Then the page should include 'Case Ref'
       And the page should include 'Recordings are accessed on the basis of a legitimate need and having full authorisation.'
       And the page should include 'Please note, playback is preferred on Laptop and Desktop devices only.'
+
       When  I play the recording
       Then recording is played
