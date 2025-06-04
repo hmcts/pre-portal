@@ -32,3 +32,7 @@ variable "capacity" {
   default     = "1"
   description = "The size of the Redis cache to deploy. Valid values are 1, 2, 3, 4, 5"
 }
+
+variable "web_test_url" {
+  description = "The URL to be used in the web test."
+}
