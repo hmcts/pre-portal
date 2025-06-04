@@ -104,7 +104,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["mochawesome", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.1.3"],\
             ["mochawesome-merge", "npm:5.0.0"],\
             ["mochawesome-report-generator", "npm:6.2.0"],\
-            ["nock", "npm:14.0.4"],\
+            ["nock", "npm:14.0.5"],\
             ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.16.2"],\
             ["nodemon", "npm:3.1.10"],\
             ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
@@ -4644,10 +4644,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@mswjs/interceptors", [\
-        ["npm:0.38.6", {\
-          "packageLocation": "./.yarn/cache/@mswjs-interceptors-npm-0.38.6-2d0b613e0e-6b16b2ecb2.zip/node_modules/@mswjs/interceptors/",\
+        ["npm:0.38.7", {\
+          "packageLocation": "./.yarn/cache/@mswjs-interceptors-npm-0.38.7-28675b078a-96debc7595.zip/node_modules/@mswjs/interceptors/",\
           "packageDependencies": [\
-            ["@mswjs/interceptors", "npm:0.38.6"],\
+            ["@mswjs/interceptors", "npm:0.38.7"],\
             ["@open-draft/deferred-promise", "npm:2.2.0"],\
             ["@open-draft/logger", "npm:0.3.0"],\
             ["@open-draft/until", "npm:2.1.0"],\
@@ -18063,11 +18063,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["nock", [\
-        ["npm:14.0.4", {\
-          "packageLocation": "./.yarn/cache/nock-npm-14.0.4-4cdbf599c8-60425c4b7a.zip/node_modules/nock/",\
+        ["npm:14.0.5", {\
+          "packageLocation": "./.yarn/cache/nock-npm-14.0.5-8f2d8ae8b4-441c2aa89d.zip/node_modules/nock/",\
           "packageDependencies": [\
-            ["nock", "npm:14.0.4"],\
-            ["@mswjs/interceptors", "npm:0.38.6"],\
+            ["nock", "npm:14.0.5"],\
+            ["@mswjs/interceptors", "npm:0.38.7"],\
             ["json-stringify-safe", "npm:5.0.1"],\
             ["propagate", "npm:2.0.1"]\
           ],\
@@ -19473,7 +19473,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["mochawesome", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.1.3"],\
             ["mochawesome-merge", "npm:5.0.0"],\
             ["mochawesome-report-generator", "npm:6.2.0"],\
-            ["nock", "npm:14.0.4"],\
+            ["nock", "npm:14.0.5"],\
             ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.16.2"],\
             ["nodemon", "npm:3.1.10"],\
             ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
