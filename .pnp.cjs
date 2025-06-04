@@ -121,7 +121,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["serve-favicon", "npm:2.5.0"],\
             ["session-file-store", "npm:1.5.0"],\
             ["style-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.0.0"],\
-            ["supertest", "npm:7.1.0"],\
+            ["supertest", "npm:7.1.1"],\
             ["ts-jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:29.3.4"],\
             ["ts-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:9.5.2"],\
             ["ts-node", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:10.9.2"],\
@@ -19490,7 +19490,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["serve-favicon", "npm:2.5.0"],\
             ["session-file-store", "npm:1.5.0"],\
             ["style-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.0.0"],\
-            ["supertest", "npm:7.1.0"],\
+            ["supertest", "npm:7.1.1"],\
             ["ts-jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:29.3.4"],\
             ["ts-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:9.5.2"],\
             ["ts-node", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:10.9.2"],\
@@ -21664,6 +21664,22 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["superagent", [\
+        ["npm:10.2.1", {\
+          "packageLocation": "./.yarn/cache/superagent-npm-10.2.1-76013dcce6-de13136174.zip/node_modules/superagent/",\
+          "packageDependencies": [\
+            ["superagent", "npm:10.2.1"],\
+            ["component-emitter", "npm:1.3.1"],\
+            ["cookiejar", "npm:2.1.4"],\
+            ["debug", "virtual:bdeb9ff2c27652ab0b48e2b4b7da3b19c234e296477c492f7e86e093d9623a8d5d6d542fa002289eee5daadea58324c140cd734b64ffb6d3abf38cb16b56e15c#npm:4.4.0"],\
+            ["fast-safe-stringify", "npm:2.1.1"],\
+            ["form-data", "npm:4.0.2"],\
+            ["formidable", "npm:3.5.4"],\
+            ["methods", "npm:1.1.2"],\
+            ["mime", "npm:2.6.0"],\
+            ["qs", "npm:6.14.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["npm:9.0.2", {\
           "packageLocation": "./.yarn/cache/superagent-npm-9.0.2-9e8cceb765-f471461b21.zip/node_modules/superagent/",\
           "packageDependencies": [\
@@ -21682,12 +21698,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["supertest", [\
-        ["npm:7.1.0", {\
-          "packageLocation": "./.yarn/cache/supertest-npm-7.1.0-76eb506602-366372311e.zip/node_modules/supertest/",\
+        ["npm:7.1.1", {\
+          "packageLocation": "./.yarn/cache/supertest-npm-7.1.1-53393c6b08-ec574fab95.zip/node_modules/supertest/",\
           "packageDependencies": [\
-            ["supertest", "npm:7.1.0"],\
+            ["supertest", "npm:7.1.1"],\
             ["methods", "npm:1.1.2"],\
-            ["superagent", "npm:9.0.2"]\
+            ["superagent", "npm:10.2.1"]\
           ],\
           "linkType": "HARD"\
         }]\
