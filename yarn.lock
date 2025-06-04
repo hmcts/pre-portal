@@ -3179,9 +3179,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mswjs/interceptors@npm:^0.38.5":
-  version: 0.38.6
-  resolution: "@mswjs/interceptors@npm:0.38.6"
+"@mswjs/interceptors@npm:^0.38.7":
+  version: 0.38.7
+  resolution: "@mswjs/interceptors@npm:0.38.7"
   dependencies:
     "@open-draft/deferred-promise": ^2.2.0
     "@open-draft/logger": ^0.3.0
@@ -3189,7 +3189,7 @@ __metadata:
     is-node-process: ^1.2.0
     outvariant: ^1.4.3
     strict-event-emitter: ^0.5.1
-  checksum: 6b16b2ecb28fce2a9b04718231a8e6f3a9d1ca30eac6f5091c04b5c891b8bbc1a2bb69e6777bd96a680b1e51e2f88a9738056471312fac7ccd82e4038c85f2e8
+  checksum: 96debc7595b02d45366e1d2a77b84e4b28f9db24796e058f7645f344fa0d20c477d3a11bcec25c1c3f147f22a3d3df9ba2d9d878f07635d77f2c69b3f2c6244d
   languageName: node
   linkType: hard
 
@@ -14165,14 +14165,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nock@npm:14.0.4":
-  version: 14.0.4
-  resolution: "nock@npm:14.0.4"
+"nock@npm:14.0.5":
+  version: 14.0.5
+  resolution: "nock@npm:14.0.5"
   dependencies:
-    "@mswjs/interceptors": ^0.38.5
+    "@mswjs/interceptors": ^0.38.7
     json-stringify-safe: ^5.0.1
     propagate: ^2.0.0
-  checksum: 60425c4b7a706775459479bef488c770ce93bc982cbdb5ea88473cdd4612f40633221bd678c9224d59b0efbfbcda39c282c52f756dbebbe5d5219e8415cd97ff
+  checksum: 441c2aa89d43d8a09bda9fe7ec2f30dbe31ed8e0511732005b5d363630dd8262ceea6f72f9b08049ecbd03fb25f7d3517b0930d218c668514c6123a5a7759c77
   languageName: node
   linkType: hard
 
@@ -15397,7 +15397,7 @@ __metadata:
     mochawesome: ^7.1.3
     mochawesome-merge: ^5.0.0
     mochawesome-report-generator: ^6.2.0
-    nock: 14.0.4
+    nock: 14.0.5
     node-mocks-http: 1.16.2
     nodemon: 3.1.10
     nunjucks: 3.2.4
