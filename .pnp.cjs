@@ -41,7 +41,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@jest/globals", "npm:29.7.0"],\
             ["@mediakind/mkplayer", "npm:1.22.0"],\
             ["@types/body-parser", "npm:1.19.5"],\
-            ["@types/compression", "npm:1.7.5"],\
+            ["@types/compression", "npm:1.8.0"],\
             ["@types/config", "npm:3.3.5"],\
             ["@types/cookie-parser", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.8"],\
             ["@types/es6-promisify", "npm:6.0.4"],\
@@ -6686,11 +6686,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/compression", [\
-        ["npm:1.7.5", {\
-          "packageLocation": "./.yarn/cache/@types-compression-npm-1.7.5-43eae9707b-2fc6e43760.zip/node_modules/@types/compression/",\
+        ["npm:1.8.0", {\
+          "packageLocation": "./.yarn/cache/@types-compression-npm-1.8.0-a540559543-d1bef38f83.zip/node_modules/@types/compression/",\
           "packageDependencies": [\
-            ["@types/compression", "npm:1.7.5"],\
-            ["@types/express", "npm:5.0.2"]\
+            ["@types/compression", "npm:1.8.0"],\
+            ["@types/express", "npm:5.0.2"],\
+            ["@types/node", "npm:22.15.29"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -17924,7 +17925,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@jest/globals", "npm:29.7.0"],\
             ["@mediakind/mkplayer", "npm:1.22.0"],\
             ["@types/body-parser", "npm:1.19.5"],\
-            ["@types/compression", "npm:1.7.5"],\
+            ["@types/compression", "npm:1.8.0"],\
             ["@types/config", "npm:3.3.5"],\
             ["@types/cookie-parser", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.8"],\
             ["@types/es6-promisify", "npm:6.0.4"],\
