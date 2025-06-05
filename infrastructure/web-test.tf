@@ -22,6 +22,7 @@ resource "azurerm_application_insights_standard_web_test" "b2c" {
 
 resource "azurerm_monitor_metric_alert" "b2c_web_test_alert" {
   name                = "b2c_web_test_alert"
+  count               = var.env == "prod" || var.env == "demo" ? 1 : 0
   resource_group_name = "${var.product}-${var.env}"
   scopes              = [data.azurerm_application_insights.app_insights.id]
   severity            = 4
@@ -39,7 +40,7 @@ resource "azurerm_monitor_metric_alert" "b2c_web_test_alert" {
     dimension {
       name     = "TestName"
       operator = "Include"
-      values   = [azurerm_application_insights_standard_web_test.b2c.name]
+      values   = [azurerm_application_insights_standard_web_test.b2c[0].name]
     }
   }
 
