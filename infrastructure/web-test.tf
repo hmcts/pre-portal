@@ -9,7 +9,7 @@ resource "azurerm_application_insights_standard_web_test" "b2c" {
 
 
   request {
-    url = var.web_test_url
+    url                      = var.web_test_url
     follow_redirects_enabled = true
   }
 

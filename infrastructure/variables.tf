@@ -34,5 +34,6 @@ variable "capacity" {
 }
 
 variable "web_test_url" {
+  default     = "web_test_url"
   description = "The URL to be used in the web test."
 }
