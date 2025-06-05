@@ -63,7 +63,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:8.28.0"],\
             ["allure-commandline", "npm:2.34.0"],\
             ["applicationinsights", "npm:3.2.2"],\
-            ["axios", "npm:1.8.4"],\
+            ["axios", "npm:1.9.0"],\
             ["axios-debug-log", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.0"],\
             ["body-parser", "npm:2.2.0"],\
             ["chokidar", "npm:4.0.3"],\
@@ -8463,11 +8463,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["axios", [\
-        ["npm:1.8.4", {\
-          "packageLocation": "./.yarn/cache/axios-npm-1.8.4-8cf735eb2b-e901dc1730.zip/node_modules/axios/",\
+        ["npm:1.9.0", {\
+          "packageLocation": "./.yarn/cache/axios-npm-1.9.0-007b36cf56-631f02c9c2.zip/node_modules/axios/",\
           "packageDependencies": [\
-            ["axios", "npm:1.8.4"],\
-            ["follow-redirects", "virtual:8cf735eb2b9f70962d771e00a864e9e0536f45b1a3899af224ac07f4fa06f6303e4a41f37b803333808763ece4c23df875efb5ad0daa70f6856aaaee39943a11#npm:1.15.9"],\
+            ["axios", "npm:1.9.0"],\
+            ["follow-redirects", "virtual:007b36cf567c5c0b0b89b54b5fd89ec08f3a2a884d74d5c6d450b18bf5cf65f53734a0c801662b1c2259c9afe08585fed46b3182771fef81b1aa08fab6405199#npm:1.15.9"],\
             ["form-data", "npm:4.0.2"],\
             ["proxy-from-env", "npm:1.1.0"]\
           ],\
@@ -8488,7 +8488,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["axios-debug-log", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.0"],\
             ["@types/axios", null],\
             ["@types/debug", "npm:4.1.12"],\
-            ["axios", "npm:1.8.4"],\
+            ["axios", "npm:1.9.0"],\
             ["debug", "virtual:fe457ebf1b2121fb4ef946d51b2e7f42978256d58f57e21a898cf244fe6b594c587b705308bc9979f27286ab0b0abe3a6af8e515a1871b9b0c87ff6fbafa882c#npm:4.4.1"]\
           ],\
           "packagePeers": [\
@@ -9780,7 +9780,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@xmldom/xmldom", "npm:0.9.8"],\
             ["acorn", "npm:8.14.1"],\
             ["arrify", "npm:3.0.0"],\
-            ["axios", "npm:1.8.4"],\
+            ["axios", "npm:1.9.0"],\
             ["chalk", "npm:4.1.2"],\
             ["cheerio", "npm:1.0.0"],\
             ["commander", "npm:11.1.0"],\
@@ -12464,10 +12464,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:8cf735eb2b9f70962d771e00a864e9e0536f45b1a3899af224ac07f4fa06f6303e4a41f37b803333808763ece4c23df875efb5ad0daa70f6856aaaee39943a11#npm:1.15.9", {\
-          "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-4727e0af6f/0/cache/follow-redirects-npm-1.15.9-539785d34c-859e2bacc7.zip/node_modules/follow-redirects/",\
+        ["virtual:007b36cf567c5c0b0b89b54b5fd89ec08f3a2a884d74d5c6d450b18bf5cf65f53734a0c801662b1c2259c9afe08585fed46b3182771fef81b1aa08fab6405199#npm:1.15.9", {\
+          "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-a2918e5d77/0/cache/follow-redirects-npm-1.15.9-539785d34c-859e2bacc7.zip/node_modules/follow-redirects/",\
           "packageDependencies": [\
-            ["follow-redirects", "virtual:8cf735eb2b9f70962d771e00a864e9e0536f45b1a3899af224ac07f4fa06f6303e4a41f37b803333808763ece4c23df875efb5ad0daa70f6856aaaee39943a11#npm:1.15.9"],\
+            ["follow-redirects", "virtual:007b36cf567c5c0b0b89b54b5fd89ec08f3a2a884d74d5c6d450b18bf5cf65f53734a0c801662b1c2259c9afe08585fed46b3182771fef81b1aa08fab6405199#npm:1.15.9"],\
             ["@types/debug", null],\
             ["debug", null]\
           ],\
@@ -17946,7 +17946,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:8.28.0"],\
             ["allure-commandline", "npm:2.34.0"],\
             ["applicationinsights", "npm:3.2.2"],\
-            ["axios", "npm:1.8.4"],\
+            ["axios", "npm:1.9.0"],\
             ["axios-debug-log", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.0"],\
             ["body-parser", "npm:2.2.0"],\
             ["chokidar", "npm:4.0.3"],\
