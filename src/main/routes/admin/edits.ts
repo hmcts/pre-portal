@@ -17,7 +17,7 @@ const csvFileFilter = (req: any, file: Express.Multer.File, callback: multer.Fil
   }
 };
 
-const upload = multer({ storage, fileFilter: csvFileFilter });
+const upload = multer({ storage, fileFilter: csvFileFilter, limits: { fileSize: 2000000 } });
 
 const getSuperUserId = (req: any): string | undefined => {
   return SessionUser.getLoggedInUserProfile(req).app_access.filter(role => role.role.name === UserLevel.SUPER_USER)[0]
