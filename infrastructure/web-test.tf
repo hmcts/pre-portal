@@ -16,6 +16,7 @@ resource "azurerm_application_insights_standard_web_test" "b2c" {
   validation_rules {
     content {
       content_match = "Sign in"
+      pass_if_text_found = true
     }
   }
 }
