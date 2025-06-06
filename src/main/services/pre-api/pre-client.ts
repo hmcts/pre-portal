@@ -20,6 +20,21 @@ import config from 'config';
 export class PreClient {
   logger = Logger.getLogger('pre-client');
 
+  private extractPaginationAndData<T>(response: any, embeddedKey: string): { data: T[]; pagination: Pagination } {
+    const pagination: Pagination = {
+      currentPage: response.data.page.number,
+      totalPages: response.data.page.totalPages,
+      totalElements: response.data.page.totalElements,
+      size: response.data.page.size,
+    };
+
+    const data: T[] = response.data.page.totalElements === 0
+      ? []
+      : response.data._embedded[embeddedKey] as T[];
+
+    return { data, pagination };
+  }
+
   public async healthCheck(): Promise<void> {
     await axios.get('/health');
   }
@@ -129,18 +144,8 @@ export class PreClient {
         params: request,
       });
 
-      const pagination = {
-        currentPage: response.data['page']['number'],
-        totalPages: response.data['page']['totalPages'],
-        totalElements: response.data['page']['totalElements'],
-        size: response.data['page']['size'],
-      } as Pagination;
-      const recordings =
-        response.data['page']['totalElements'] === 0
-          ? []
-          : (response.data['_embedded']['recordingDTOList'] as Recording[]);
-
-      return { recordings, pagination };
+      const { data, pagination } = this.extractPaginationAndData<Recording>(response, 'recordingDTOList');
+      return { recordings: data, pagination };
     } catch (e) {
       // log the error
       this.logger.info('path', e.response?.request.path);
@@ -165,18 +170,8 @@ export class PreClient {
         params: request,
       });
 
-      const pagination = {
-        currentPage: response.data['page']['number'],
-        totalPages: response.data['page']['totalPages'],
-        totalElements: response.data['page']['totalElements'],
-        size: response.data['page']['size'],
-      } as Pagination;
-      const edits =
-        response.data['page']['totalElements'] === 0
-          ? []
-          : (response.data['_embedded']['editRequestDTOList'] as EditRequest[]);
-
-      return { edits, pagination };
+      const { data, pagination } = this.extractPaginationAndData<EditRequest>(response, 'editRequestDTOList');
+      return { edits: data, pagination };
     } catch (e) {
       this.logger.info('path', e.response?.request.path);
       this.logger.info('res headers', e.response?.headers);
