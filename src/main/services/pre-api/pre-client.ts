@@ -28,9 +28,7 @@ export class PreClient {
       size: response.data.page.size,
     };
 
-    const data: T[] = response.data.page.totalElements === 0
-      ? []
-      : response.data._embedded[embeddedKey] as T[];
+    const data: T[] = response.data.page.totalElements === 0 ? [] : (response.data._embedded[embeddedKey] as T[]);
 
     return { data, pagination };
   }
