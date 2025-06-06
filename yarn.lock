@@ -7908,12 +7908,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-prettier@npm:5.2.6":
-  version: 5.2.6
-  resolution: "eslint-plugin-prettier@npm:5.2.6"
+"eslint-plugin-prettier@npm:5.4.1":
+  version: 5.4.1
+  resolution: "eslint-plugin-prettier@npm:5.4.1"
   dependencies:
     prettier-linter-helpers: ^1.0.0
-    synckit: ^0.11.0
+    synckit: ^0.11.7
   peerDependencies:
     "@types/eslint": ">=8.0.0"
     eslint: ">=8.0.0"
@@ -7924,7 +7924,7 @@ __metadata:
       optional: true
     eslint-config-prettier:
       optional: true
-  checksum: 2626c123916c4afe88d423bac9c3644d30af8beac4963b77bf447f42ba75ab592076716dfa9d43333bfde0ac482d8f8b6a49699403d128aee5effd609ca54bec
+  checksum: ddbfc60e478dd78602b1f1594db539bfc686161eba4531e4c59580c9cf5746919878beabfe31b559d783ad3ed753af158bfa16bd35bd05382c7d2d86c894c81b
   languageName: node
   linkType: hard
 
@@ -13461,7 +13461,7 @@ __metadata:
     eslint-config-prettier: 10.1.5
     eslint-plugin-import: 2.31.0
     eslint-plugin-jest: 28.12.0
-    eslint-plugin-prettier: 5.2.6
+    eslint-plugin-prettier: 5.4.1
     express: 5.0.1
     express-nunjucks: 3.1.2
     express-openid-connect: 2.18.1
@@ -15303,7 +15303,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"synckit@npm:^0.11.0":
+"synckit@npm:^0.11.7":
   version: 0.11.8
   resolution: "synckit@npm:0.11.8"
   dependencies:
