@@ -36,12 +36,6 @@ resource "azurerm_monitor_metric_alert" "b2c_web_test_alert" {
     aggregation      = "Average"
     operator         = "LessThan"
     threshold        = 99
-
-    dimension {
-      name     = "TestName"
-      operator = "Include"
-      values   = [azurerm_application_insights_standard_web_test.b2c[0].name]
-    }
   }
 
   action {
