@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* eslint-disable */
+ 
 "use strict";
 
 function $$SETUP_STATE(hydrateRuntimeState, basePath) {
@@ -52,6 +52,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/lodash", "npm:4.17.17"],\
             ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
             ["@types/mocha", "npm:10.0.10"],\
+            ["@types/multer", "npm:1.4.12"],\
             ["@types/node", "npm:20.12.7"],\
             ["@types/nunjucks", "npm:3.2.6"],\
             ["@types/require-directory", "npm:2.1.6"],\
@@ -85,6 +86,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["express-nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.1.2"],\
             ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.18.1"],\
             ["express-session", "npm:1.18.1"],\
+            ["form-data", "npm:4.0.2"],\
             ["glob", "npm:11.0.2"],\
             ["govuk-frontend", "npm:5.9.0"],\
             ["helmet", "npm:8.1.0"],\
@@ -104,6 +106,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["mochawesome", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.1.3"],\
             ["mochawesome-merge", "npm:5.0.0"],\
             ["mochawesome-report-generator", "npm:6.2.0"],\
+            ["multer", "npm:2.0.1"],\
             ["nock", "npm:14.0.5"],\
             ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.16.2"],\
             ["nodemon", "npm:3.1.10"],\
@@ -7011,6 +7014,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/multer", [\
+        ["npm:1.4.12", {\
+          "packageLocation": "./.yarn/cache/@types-multer-npm-1.4.12-1ec6cd63ed-719cacf88e.zip/node_modules/@types/multer/",\
+          "packageDependencies": [\
+            ["@types/multer", "npm:1.4.12"],\
+            ["@types/express", "npm:5.0.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/mysql", [\
         ["npm:2.15.26", {\
           "packageLocation": "./.yarn/cache/@types-mysql-npm-2.15.26-e8ee291ec4-c43395643a.zip/node_modules/@types/mysql/",\
@@ -8193,6 +8206,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["append-field", [\
+        ["npm:1.0.0", {\
+          "packageLocation": "./.yarn/cache/append-field-npm-1.0.0-bb98be199c-482ba08acc.zip/node_modules/append-field/",\
+          "packageDependencies": [\
+            ["append-field", "npm:1.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["applicationinsights", [\
         ["npm:3.2.2", {\
           "packageLocation": "./.yarn/cache/applicationinsights-npm-3.2.2-1031eaffc8-641bda5d7f.zip/node_modules/applicationinsights/",\
@@ -9244,6 +9266,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["busboy", [\
+        ["npm:1.6.0", {\
+          "packageLocation": "./.yarn/cache/busboy-npm-1.6.0-ebb5cbb04b-32801e2c01.zip/node_modules/busboy/",\
+          "packageDependencies": [\
+            ["busboy", "npm:1.6.0"],\
+            ["streamsearch", "npm:1.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["bytes", [\
         ["npm:3.1.2", {\
           "packageLocation": "./.yarn/cache/bytes-npm-3.1.2-28b8643004-e4bcd3948d.zip/node_modules/bytes/",\
@@ -9972,6 +10004,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/concat-map-npm-0.0.1-85a921b7ee-902a9f5d89.zip/node_modules/concat-map/",\
           "packageDependencies": [\
             ["concat-map", "npm:0.0.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["concat-stream", [\
+        ["npm:2.0.0", {\
+          "packageLocation": "./.yarn/cache/concat-stream-npm-2.0.0-8bb2ad5aa0-d7f75d48f0.zip/node_modules/concat-stream/",\
+          "packageDependencies": [\
+            ["concat-stream", "npm:2.0.0"],\
+            ["buffer-from", "npm:1.1.2"],\
+            ["inherits", "npm:2.0.4"],\
+            ["readable-stream", "npm:3.6.2"],\
+            ["typedarray", "npm:0.0.6"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -16564,6 +16609,22 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["multer", [\
+        ["npm:2.0.1", {\
+          "packageLocation": "./.yarn/cache/multer-npm-2.0.1-6192e70742-bcbc523108.zip/node_modules/multer/",\
+          "packageDependencies": [\
+            ["multer", "npm:2.0.1"],\
+            ["append-field", "npm:1.0.0"],\
+            ["busboy", "npm:1.6.0"],\
+            ["concat-stream", "npm:2.0.0"],\
+            ["mkdirp", "npm:0.5.6"],\
+            ["object-assign", "npm:4.1.1"],\
+            ["type-is", "npm:1.6.18"],\
+            ["xtend", "npm:4.0.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["multi-sort-stream", [\
         ["npm:1.0.4", {\
           "packageLocation": "./.yarn/cache/multi-sort-stream-npm-1.0.4-86d50681e6-b234754e0e.zip/node_modules/multi-sort-stream/",\
@@ -17928,6 +17989,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/lodash", "npm:4.17.17"],\
             ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
             ["@types/mocha", "npm:10.0.10"],\
+            ["@types/multer", "npm:1.4.12"],\
             ["@types/node", "npm:20.12.7"],\
             ["@types/nunjucks", "npm:3.2.6"],\
             ["@types/require-directory", "npm:2.1.6"],\
@@ -17961,6 +18023,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["express-nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.1.2"],\
             ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.18.1"],\
             ["express-session", "npm:1.18.1"],\
+            ["form-data", "npm:4.0.2"],\
             ["glob", "npm:11.0.2"],\
             ["govuk-frontend", "npm:5.9.0"],\
             ["helmet", "npm:8.1.0"],\
@@ -17980,6 +18043,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["mochawesome", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.1.3"],\
             ["mochawesome-merge", "npm:5.0.0"],\
             ["mochawesome-report-generator", "npm:6.2.0"],\
+            ["multer", "npm:2.0.1"],\
             ["nock", "npm:14.0.5"],\
             ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.16.2"],\
             ["nodemon", "npm:3.1.10"],\
@@ -19743,6 +19807,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["streamsearch", [\
+        ["npm:1.1.0", {\
+          "packageLocation": "./.yarn/cache/streamsearch-npm-1.1.0-fc3ad6536d-1cce16cea8.zip/node_modules/streamsearch/",\
+          "packageDependencies": [\
+            ["streamsearch", "npm:1.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["streamx", [\
         ["npm:2.22.1", {\
           "packageLocation": "./.yarn/cache/streamx-npm-2.22.1-65f9989b9f-26e66c75ec.zip/node_modules/streamx/",\
@@ -20745,6 +20818,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["qs", "npm:6.14.0"],\
             ["tunnel", "npm:0.0.6"],\
             ["underscore", "npm:1.13.7"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["typedarray", [\
+        ["npm:0.0.6", {\
+          "packageLocation": "./.yarn/cache/typedarray-npm-0.0.6-37638b2241-33b39f3d0e.zip/node_modules/typedarray/",\
+          "packageDependencies": [\
+            ["typedarray", "npm:0.0.6"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -31362,7 +31444,7 @@ function arg(
 		}
 
 		if (wholeArg.length > 1 && wholeArg[0] === '-') {
-			/* eslint-disable operator-linebreak */
+			 
 			const separatedArguments =
 				wholeArg[1] === '-' || wholeArg.length === 2
 					? [wholeArg]
@@ -31370,7 +31452,7 @@ function arg(
 							.slice(1)
 							.split('')
 							.map((a) => `-${a}`);
-			/* eslint-enable operator-linebreak */
+			 
 
 			for (let j = 0; j < separatedArguments.length; j++) {
 				const arg = separatedArguments[j];
@@ -31413,7 +31495,7 @@ function arg(
 							!(
 								argv[i + 1].match(/^-?\d*(\.(?=\d))?\d*$/) &&
 								(type === Number ||
-									// eslint-disable-next-line no-undef
+									 
 									(typeof BigInt !== 'undefined' && type === BigInt))
 							))
 					) {
