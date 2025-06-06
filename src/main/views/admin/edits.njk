@@ -1,0 +1,158 @@
+{% from "govuk/components/pagination/macro.njk" import govukPagination %}
+
+{% extends "template.njk" %}
+
+{% block pageTitle %}{{ title }} - PRE Portal{% endblock %}
+
+{% block beforeContent %}
+  {{
+  govukBackLink({
+    "text": "Sign out",
+    "href": "/logout"
+  })
+  }}
+{% endblock %}
+{% block content %}
+  <h1 class="govuk-heading-xl">Edit Request</h1>
+
+  <form action="/admin/edit-request/upload" method="POST" enctype="multipart/form-data">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="case-reference">
+        Case reference
+      </label>
+      <input class="govuk-input govuk-input--width-20" style="margin-right: 1rem;" id="case-reference" name="case-reference" type="text">
+
+      <button type="button" id="search-button" class="govuk-button govuk-button--secondary">
+        Search by case reference
+      </button>
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="source_recording">
+        Source recording id
+      </label>
+      <select required class="govuk-select" style="width: 50%" id="source_recording" name="source_recording" aria-describedby="source-recording-hint">
+        <option value="" selected>Choose source recording id</option>
+        {% for recording in recordings %}
+          <option value="{{ recording.id }}">{{ recording.id }}({{ recording.created_at }})</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="file-upload">
+        Upload a CSV file
+      </label>
+      <div
+        class="govuk-drop-zone"
+        data-module="govuk-file-upload">
+        <input required class="govuk-file-upload" id="file-upload" name="file-upload" type="file" accept=".csv">
+      </div>
+    </div>
+
+    <button class="govuk-button" type="submit">Submit edit request</button>
+  </form>
+
+  <h2 class="govuk-heading-l">Edit requests in the last week</h2>
+  <div style="overflow-x: auto; width: 100%;">
+    <table class="govuk-table">
+      <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header" style="position: sticky; left: 0; z-index: 1; background-color: #ffffff;">Edit Id</th>
+        <th scope="col" class="govuk-table__header">Case Reference</th>
+        <th scope="col" class="govuk-table__header">Court</th>
+        <th scope="col" class="govuk-table__header">Source Recording</th>
+        <th scope="col" class="govuk-table__header">Started At</th>
+        <th scope="col" class="govuk-table__header">Finished At</th>
+        <th scope="col" class="govuk-table__header">Status</th>
+      </tr>
+      </thead>
+      {% if edits.length === 0 %}
+        <tbody class="govuk-table__body" data-testid="no-data-message">
+          <td>No recent edits were found.</td>
+        </tbody>
+      {% else %}
+        <tbody class="govuk-table__body">
+        {% for edit in edits %}
+          <tr id="edit-{{ edit.id }}" class="govuk-table__row">
+            <td class="govuk-table__cell" style="position: sticky; left: 0; z-index: 1; background-color: #ffffff;">
+              {{ edit.id }}
+            </td>
+            <td class="govuk-table__cell">
+              {{ edit.source_recording.case_reference }}
+            </td>
+            <td class="govuk-table__cell">
+              {{ edit.source_recording.capture_session.court_name }}
+            </td>
+            <td class="govuk-table__cell">
+              {{ edit.source_recording.id }}
+            </td>
+            <td class="govuk-table__cell">
+              {{ edit.started_at }}
+            </td>
+            <td class="govuk-table__cell">
+              {{ edit.finished_at }}
+            </td>
+            <td class="govuk-table__cell">
+              {% if edit.status == "PENDING" %}
+                <strong class="govuk-tag govuk-tag--grey">
+                  Pending
+                </strong>
+              {% endif %}
+              {% if edit.status == "PROCESSING" %}
+                <strong class="govuk-tag govuk-tag">
+                  Processing
+                </strong>
+              {% endif %}
+              {% if edit.status == "FAILURE" %}
+                <strong class="govuk-tag govuk-tag--red">
+                  Failure
+                </strong>
+              {% endif %}
+              {% if edit.status == "COMPLETE" %}
+                <strong class="govuk-tag govuk-tag--green">
+                  Complete
+                </strong>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      {% endif %}
+    </table>
+  </div>
+
+  <script>
+    document.getElementById('search-button').addEventListener('click', async () => {
+      const caseReference = document.getElementById('case-reference').value.trim();
+      const select = document.getElementById('source_recording');
+
+      select.innerHTML = '<option value="" selected>Choose source recording id</option>';
+
+      if (!caseReference) {
+        return;
+      }
+
+      try {
+        const res = await fetch(`/edits/recordings?case_reference=${encodeURIComponent(caseReference)}`);
+        if (!res.ok) {
+          throw new Error('Failed to fetch recordings');
+        }
+
+        const recordings = await res.json();
+        if (recordings.length === 0) {
+          return;
+        }
+
+        recordings.forEach(rec => {
+          const opt = document.createElement('option');
+          opt.value = rec.id;
+          opt.textContent = `${rec.id} (${new Date(rec.created_at).toLocaleString()})`;
+          select.appendChild(opt);
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    });
+  </script>
+{% endblock %}
