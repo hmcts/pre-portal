@@ -91,7 +91,7 @@
     "@codeceptjs/configure": "1.0.4",
     "@eslint/compat": "^1.1.1",
     "@jest/globals": "29.7.0",
-    "@types/compression": "1.8.0",
+    "@types/compression": "1.8.1",
     "@types/jest": "29.5.14",
     "@types/mini-css-extract-plugin": "2.5.1",
     "@types/mocha": "10.0.10",
