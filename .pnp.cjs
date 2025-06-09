@@ -40,7 +40,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@hmcts/properties-volume", "npm:1.2.0"],\
             ["@jest/globals", "npm:29.7.0"],\
             ["@mediakind/mkplayer", "npm:1.22.0"],\
-            ["@types/body-parser", "npm:1.19.5"],\
+            ["@types/body-parser", "npm:1.19.6"],\
             ["@types/compression", "npm:1.8.1"],\
             ["@types/config", "npm:3.3.5"],\
             ["@types/cookie-parser", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.8"],\
@@ -6648,6 +6648,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-body-parser-npm-1.19.5-97fb106976-1e251118c4.zip/node_modules/@types/body-parser/",\
           "packageDependencies": [\
             ["@types/body-parser", "npm:1.19.5"],\
+            ["@types/connect", "npm:3.4.38"],\
+            ["@types/node", "npm:22.15.29"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:1.19.6", {\
+          "packageLocation": "./.yarn/cache/@types-body-parser-npm-1.19.6-363c879d4f-33041e88ea.zip/node_modules/@types/body-parser/",\
+          "packageDependencies": [\
+            ["@types/body-parser", "npm:1.19.6"],\
             ["@types/connect", "npm:3.4.38"],\
             ["@types/node", "npm:22.15.29"]\
           ],\
@@ -17916,7 +17925,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@hmcts/properties-volume", "npm:1.2.0"],\
             ["@jest/globals", "npm:29.7.0"],\
             ["@mediakind/mkplayer", "npm:1.22.0"],\
-            ["@types/body-parser", "npm:1.19.5"],\
+            ["@types/body-parser", "npm:1.19.6"],\
             ["@types/compression", "npm:1.8.1"],\
             ["@types/config", "npm:3.3.5"],\
             ["@types/cookie-parser", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.8"],\
