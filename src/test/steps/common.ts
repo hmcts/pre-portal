@@ -107,8 +107,8 @@ When('I click on play on a browse page', () => {
 
 When('I play the recording', () => {
   I.wait(5); //needed as it takes time to load recording on page.
-  I.waitForElement("//*[@aria-label='Play/Pause']");
-  I.click('Play/Pause');
+  I.waitForElement("//*[@aria-label='Play']");
+  I.click('Play');
 });
 
 Then('recording is played', async () => {
@@ -122,7 +122,7 @@ Then('recording is played', async () => {
   }
   const initialTime = await I.grabTextFrom('.bmpui-ui-playbacktimelabel:nth-of-type(1)');
   I.wait(5);
-  I.click('Play/Pause');
+  I.click('Play');
   const currentTime = await I.grabTextFrom('.bmpui-ui-playbacktimelabel:nth-of-type(2)');
   if (!currentTime.match(/^\d{2}:\d{2}$/)) {
     throw new Error(`Invalid playback time format: ${currentTime}`);
