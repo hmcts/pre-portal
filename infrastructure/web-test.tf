@@ -7,9 +7,10 @@ resource "azurerm_application_insights_standard_web_test" "b2c" {
   geo_locations           = ["emea-ru-msa-edge", "emea-se-sto-edge"]
   tags                    = var.common_tags
   enabled                 = true
+  retry_enabled           = true
 
 
-  request {
+request {
     url                      = var.web_test_url
     follow_redirects_enabled = true
   }
