@@ -43,7 +43,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/body-parser", "npm:1.19.6"],\
             ["@types/compression", "npm:1.8.1"],\
             ["@types/config", "npm:3.3.5"],\
-            ["@types/cookie-parser", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.8"],\
+            ["@types/cookie-parser", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.9"],\
             ["@types/es6-promisify", "npm:6.0.4"],\
             ["@types/express", "npm:5.0.1"],\
             ["@types/express-session", "npm:1.18.2"],\
@@ -6717,17 +6717,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/cookie-parser", [\
-        ["npm:1.4.8", {\
-          "packageLocation": "./.yarn/cache/@types-cookie-parser-npm-1.4.8-fa95028070-b26ace5560.zip/node_modules/@types/cookie-parser/",\
+        ["npm:1.4.9", {\
+          "packageLocation": "./.yarn/cache/@types-cookie-parser-npm-1.4.9-628dc5b6f4-6192a4899b.zip/node_modules/@types/cookie-parser/",\
           "packageDependencies": [\
-            ["@types/cookie-parser", "npm:1.4.8"]\
+            ["@types/cookie-parser", "npm:1.4.9"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.8", {\
-          "packageLocation": "./.yarn/__virtual__/@types-cookie-parser-virtual-8a714d6c96/0/cache/@types-cookie-parser-npm-1.4.8-fa95028070-b26ace5560.zip/node_modules/@types/cookie-parser/",\
+        ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.9", {\
+          "packageLocation": "./.yarn/__virtual__/@types-cookie-parser-virtual-96974eee4c/0/cache/@types-cookie-parser-npm-1.4.9-628dc5b6f4-6192a4899b.zip/node_modules/@types/cookie-parser/",\
           "packageDependencies": [\
-            ["@types/cookie-parser", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.8"],\
+            ["@types/cookie-parser", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.9"],\
             ["@types/express", "npm:5.0.1"]\
           ],\
           "packagePeers": [\
@@ -17936,7 +17936,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/body-parser", "npm:1.19.6"],\
             ["@types/compression", "npm:1.8.1"],\
             ["@types/config", "npm:3.3.5"],\
-            ["@types/cookie-parser", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.8"],\
+            ["@types/cookie-parser", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.9"],\
             ["@types/es6-promisify", "npm:6.0.4"],\
             ["@types/express", "npm:5.0.1"],\
             ["@types/express-session", "npm:1.18.2"],\
