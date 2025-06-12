@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "private": true,
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.0.0"
   },
   "scripts": {
     "start": "NODE_ENV=production ts-node -r tsconfig-paths/register src/main/server.ts",
@@ -43,7 +43,7 @@
     "@types/express-session": "1.18.2",
     "@types/glob": "8.1.0",
     "@types/lodash": "4.17.17",
-    "@types/node": "20.12.7",
+    "@types/node": "22.9.0",
     "@types/nunjucks": "3.2.6",
     "@types/require-directory": "2.1.6",
     "@types/serve-favicon": "2.5.7",

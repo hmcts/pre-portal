@@ -52,7 +52,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/lodash", "npm:4.17.17"],\
             ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
             ["@types/mocha", "npm:10.0.10"],\
-            ["@types/node", "npm:20.12.7"],\
+            ["@types/node", "npm:22.9.0"],\
             ["@types/nunjucks", "npm:3.2.6"],\
             ["@types/require-directory", "npm:2.1.6"],\
             ["@types/serve-favicon", "npm:2.5.7"],\
@@ -7039,19 +7039,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/node", [\
-        ["npm:20.12.7", {\
-          "packageLocation": "./.yarn/cache/@types-node-npm-20.12.7-3bb3d3303d-7cc979f7e2.zip/node_modules/@types/node/",\
-          "packageDependencies": [\
-            ["@types/node", "npm:20.12.7"],\
-            ["undici-types", "npm:5.26.5"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:22.15.29", {\
           "packageLocation": "./.yarn/cache/@types-node-npm-22.15.29-b40796f35f-201aabe361.zip/node_modules/@types/node/",\
           "packageDependencies": [\
             ["@types/node", "npm:22.15.29"],\
             ["undici-types", "npm:6.21.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:22.9.0", {\
+          "packageLocation": "./.yarn/cache/@types-node-npm-22.9.0-643fcf7450-c014eb3b8a.zip/node_modules/@types/node/",\
+          "packageDependencies": [\
+            ["@types/node", "npm:22.9.0"],\
+            ["undici-types", "npm:6.19.8"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -16797,7 +16797,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.16.2"],\
             ["@types/express", "npm:5.0.1"],\
-            ["@types/node", "npm:20.12.7"],\
+            ["@types/node", "npm:22.9.0"],\
             ["accepts", "npm:1.3.8"],\
             ["content-disposition", "npm:0.5.4"],\
             ["depd", "npm:1.1.2"],\
@@ -17938,7 +17938,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/lodash", "npm:4.17.17"],\
             ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
             ["@types/mocha", "npm:10.0.10"],\
-            ["@types/node", "npm:20.12.7"],\
+            ["@types/node", "npm:22.9.0"],\
             ["@types/nunjucks", "npm:3.2.6"],\
             ["@types/require-directory", "npm:2.1.6"],\
             ["@types/serve-favicon", "npm:2.5.7"],\
@@ -20536,7 +20536,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@tsconfig/node12", "npm:1.0.11"],\
             ["@tsconfig/node14", "npm:1.0.3"],\
             ["@tsconfig/node16", "npm:1.0.4"],\
-            ["@types/node", "npm:20.12.7"],\
+            ["@types/node", "npm:22.9.0"],\
             ["@types/swc__core", null],\
             ["@types/swc__wasm", null],\
             ["@types/typescript", null],\
@@ -20847,10 +20847,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["undici-types", [\
-        ["npm:5.26.5", {\
-          "packageLocation": "./.yarn/cache/undici-types-npm-5.26.5-de4f7c7bb9-3192ef6f3f.zip/node_modules/undici-types/",\
+        ["npm:6.19.8", {\
+          "packageLocation": "./.yarn/cache/undici-types-npm-6.19.8-9f12285b7a-de51f1b447.zip/node_modules/undici-types/",\
           "packageDependencies": [\
-            ["undici-types", "npm:5.26.5"]\
+            ["undici-types", "npm:6.19.8"]\
           ],\
           "linkType": "HARD"\
         }],\

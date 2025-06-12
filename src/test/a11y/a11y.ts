@@ -38,7 +38,7 @@ async function signIn(browser: Browser): Promise<Page> {
   return page;
 }
 
-jest.setTimeout(10000);
+jest.setTimeout(15000);
 const screenshotDir = `${__dirname}/../../../functional-output/pa11y`;
 describe('Accessibility', () => {
   let browser: Browser;
