@@ -4,8 +4,8 @@ Feature: Footers Present
     Then the page should include 'Sign in'
     Then I see the link 'Terms and conditions'
     Then I see the link 'Accessibility statement'
-    Then I sign in as the test user
-    Then I am on the '/browse' page
+    Then I sign in with valid credentials as the test user
+    When I am on the '/browse' page
     Then I see the link 'Terms and conditions'
     Then I see the link 'Accessibility statement'
     Then I see the link 'Cookies'

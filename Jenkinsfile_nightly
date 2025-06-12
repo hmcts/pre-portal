@@ -19,7 +19,9 @@ def secrets = [
 "pre-hmctskv-${params.ENVIRONMENT}":
     [
       secret('b2c-test-login-email', 'B2C_TEST_LOGIN_EMAIL'),
-      secret('b2c-test-login-password', 'B2C_TEST_LOGIN_PASSWORD')
+      secret('b2c-test-login-password', 'B2C_TEST_LOGIN_PASSWORD'),
+      secret('b2c-test-super-user-email', 'B2C_TEST_SUPER_USER_LOGIN_EMAIL'),
+      secret('b2c-test-super-user-password', 'B2C_TEST_SUPER_USER_LOGIN_PASSWORD')
     ]
 ]
 

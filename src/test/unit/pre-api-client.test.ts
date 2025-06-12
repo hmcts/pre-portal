@@ -3,7 +3,6 @@ import { PreClient } from '../../main/services/pre-api/pre-client';
 import { PutAuditRequest, SearchRecordingsRequest } from '../../main/services/pre-api/types';
 import { describe } from '@jest/globals';
 import axios from 'axios';
-import config from 'config';
 import { mockeduser } from './test-helper';
 import { AccessStatus } from '../../main/types/access-status';
 
@@ -161,15 +160,6 @@ describe('PreClient', () => {
     throw new Error('Invalid URL: ' + url);
   });
   mockedAxios.post.mockImplementation((url, data, _config) => {
-    if (url === (config.get('ams.flowUrl') as string)) {
-      return Promise.resolve({
-        status: 200,
-        data: {
-          manifestpath: 'something',
-          aestoken: 'something',
-        },
-      });
-    }
     if (url === '/accept-terms-and-conditions/12345678-1234-1234-1234-1234567890ab') {
       return Promise.resolve({
         status: 200,
@@ -227,11 +217,6 @@ describe('PreClient', () => {
       await preClient.getUserByClaimEmail('inactive@testy.com');
     };
     await expect(t).rejects.toThrow('User is not active: inactive@testy.com');
-  });
-  test('get recording playback data', async () => {
-    const recording = await preClient.getRecordingPlaybackData(otherXUserId, mockRecordingId);
-    expect(recording).toBeTruthy();
-    expect(recording?.src).toBe('something');
   });
   test("user doesn't have a portal_access object in their profile", async () => {
     try {

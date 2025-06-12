@@ -1,5 +1,6 @@
 import puppeteer, { Browser, Page } from 'puppeteer';
 import { config } from '../config';
+import { describe, test } from '@jest/globals';
 
 const pa11y = require('pa11y');
 
@@ -100,17 +101,14 @@ describe('Accessibility', () => {
       screenCapture: `${screenshotDir}/browse.png`,
       waitUntil: 'domcontentloaded',
     });
-    expect(result.issues.map(issue => issue.code)).toEqual(['WCAG2AA.Principle2.Guideline2_2.2_2_1.F41.2']);
+    expect(result.issues.map(issue => issue.code)).toEqual([]);
 
     const watchResult: Pa11yResult = await pa11y(watchUrl, {
       browser: browser,
       screenCapture: `${screenshotDir}/watch.png`,
     });
-    expect(watchResult.issues.map(issue => issue.code)).toEqual([
-      'WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Button.Name',
-      'WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Div.Name',
-      'WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.Div.Name',
-    ]);
+
+    expect(watchResult.issues.map(issue => issue.code)).toEqual([]);
 
     const termsResult: Pa11yResult = await pa11y(termsUrl, {
       browser: browser,

@@ -1,8 +1,16 @@
 {% from "govuk/components/pagination/macro.njk" import govukPagination %}
+{% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}
 
 {% extends "template.njk" %}
 
 {% block pageTitle %}{{ title }} - PRE Portal{% endblock %}
+
+{% set bannerHtml %}
+  <p class="govuk-notification-banner__heading">Recordings are accessed on the basis of a
+    legitimate need and having full authorisation.</p>
+  <p class="govuk-notification-banner__heading">Please note, playback is preferred
+    on Laptop and Desktop devices only.</p>
+{% endset %}
 
 {% block beforeContent %}
   {{
@@ -15,20 +23,14 @@
 
 {% block head %}
   {{ super() }}
-  <meta http-equiv="refresh" content="300">
 {% endblock %}
 
 {% block content %}
     <h1 class="govuk-heading-xl">Welcome back, {{ user.first_name }} {{ user.last_name }}</h1>
 
-    <div class="govuk-warning-text">
-      <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-      <strong class="govuk-warning-text__text">
-        <span class="govuk-warning-text__assistive">Please note</span>
-        playback is preferred on non-mobile devices. If possible, please use a
-        preferred device.
-      </strong>
-    </div>
+    {{ govukNotificationBanner({
+      html: bannerHtml
+    }) }}
 
     <h2 class="govuk-heading-m">
       {{ title }}
@@ -46,7 +48,7 @@
           {%  if enableCaseStateColumn == true %}
           <th scope="col" class="govuk-table__header">Status</th>
           {% endif %}
-          <th scope="col" class="govuk-table__header"></th>
+          <th scope="col" class="govuk-table__header">Action</th>
         </tr>
         </thead>
         {% if recordings.length === 0 %}
@@ -73,7 +75,7 @@
               <td class="govuk-table__cell">
                 {% for participant in recording.participants %}
                   {% if participant.participant_type == "WITNESS" %}
-                    {{ participant.first_name }} {{ participant.last_name }}<br />
+                    {{ participant.first_name }}{% if removeWitnessLastName == false %} {{ participant.last_name }}{% endif %}<br />
                   {% endif %}
                 {% endfor %}
               </td>
@@ -103,7 +105,10 @@
               </td>
               {% endif %}
               <td class="govuk-table__cell">
-                <a class="govuk-link" href="/watch/{{ recording.id }}">Play</a>
+                <a class="govuk-link" href="/watch/{{ recording.id }}">
+                Play
+                <span class="sr-only">video case ref {{ recording.case_reference}}</span>
+                </a>
               </td>
             </tr>
           {% endfor %}

@@ -1,24 +1,36 @@
+{% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}
+
 {% extends "template.njk" %}
 
 {% block pageTitle %}Recording {{ recording.id }} - PRE Portal{% endblock %}
 
 {% block head %}
   {% include "webpack/css.njk" %}
-  <link
-    href="//amp.azure.net/libs/amp/2.3.11/skins/amp-default/azuremediaplayer.min.css" rel="stylesheet"
-    crossorigin="anonymous" />
+  <script type="text/javascript" src="/assets/js/mkplayer.js"></script>
+  <link rel="stylesheet" href="/assets/css/mkplayer-ui.css">
 {% endblock %}
+
+{% set bannerHtml %}
+  <p class="govuk-notification-banner__heading">Recordings are accessed on the basis of a
+    legitimate need and having full authorisation.</p>
+  <p class="govuk-notification-banner__heading">Please note, playback is preferred
+    on Laptop and Desktop devices only.</p>
+{% endset %}
 
 {% block beforeContent %}
   {{
-    govukBackLink({
-      "href": "javascript:history.back()"
-    })
+  govukBackLink({
+    "href": "javascript:history.back()"
+  })
   }}
 {% endblock %}
 
 {% block content %}
   <h1 class="govuk-heading-xl">Case Ref: {{ recording.case_reference }}</h1>
+
+  {{ govukNotificationBanner({
+    html: bannerHtml
+  }) }}
 
   <div id="videoError" class="govuk-error-summary" data-module="govuk-error-summary" style="display: none;">
     <div role="alert">
@@ -35,28 +47,14 @@
     </div>
   </div>
 
-  <div id="videoWrapper" class="govuk-!-margin-bottom-2 video-wrapper">
-    <div id="loadingGif" class="loading-gif">
-      <img
-        src="https://amp.azure.net/libs/amp/2.3.11/skins/amp-default/assets/icons/buffering-rainbow.gif"
-        alt="Loading"
-      />
+  <div id="loading" class="govuk-!-margin-bottom-2 loading-box" style="display: block;">
+    <div class="loading-container">
+      <img src="/assets/images/loading-spinner.gif" alt="Loading" />
     </div>
-    <div id="hideVideo" style="visibility: hidden;">
-      <video
-        id="player"
-        data-testid="recording-video"
-        class="azuremediaplayer amp-default-skin amp-big-play-centered"
-        controls
-        width="100%"
-        height="auto"
-        data-setup='{"nativeControlsForTouch": false}'>
-        <p class="amp-no-js">
-          To view this video please enable JavaScript, and consider upgrading to
-          a web browser that supports HTML5 video
-        </p>
-      </video>
-    </div>
+  </div>
+
+  <div id="videoWrapper" class="govuk-!-margin-bottom-2 video-wrapper" style="display: none;">
+    <div id="video-container"></div>
   </div>
 
   <div class="govuk-warning-text">
@@ -117,15 +115,15 @@
         Witness
       </dt>
 
-        <dd
-          class="govuk-summary-list__value"
-          data-testid="summary-value-witness">
-          {% for participant in recording.participants %}
-            {% if participant.participant_type == "WITNESS" %}
-              {{ participant.first_name }} {{ participant.last_name }}<br />
-            {% endif %}
-          {% endfor %}
-        </dd>
+      <dd
+        class="govuk-summary-list__value"
+        data-testid="summary-value-witness">
+        {% for participant in recording.participants %}
+          {% if participant.participant_type == "WITNESS" %}
+            {{ participant.first_name }}{% if removeWitnessLastName == false %} {{ participant.last_name }}{% endif %}<br />
+          {% endif %}
+        {% endfor %}
+      </dd>
     </div>
     <div class="govuk-summary-list__row">
       <dt
@@ -133,65 +131,80 @@
         data-testid="summary-title-defendants">
         Defendants
       </dt>
-        <dd
-          class="govuk-summary-list__value"
-          data-testid="summary-value-defendants">
-          {% for participant in recording.participants %}
-            {% if participant.participant_type == "DEFENDANT" %}
-              {{ participant.first_name }} {{ participant.last_name }}<br />
-            {% endif %}
-          {% endfor %}
-        </dd>
+      <dd
+        class="govuk-summary-list__value"
+        data-testid="summary-value-defendants">
+        {% for participant in recording.participants %}
+          {% if participant.participant_type == "DEFENDANT" %}
+            {{ participant.first_name }} {{ participant.last_name }}<br />
+          {% endif %}
+        {% endfor %}
+      </dd>
     </div>
   </dl>
-
-  <script src="//amp.azure.net/libs/amp/2.3.11/azuremediaplayer.min.js" crossorigin="anonymous"></script>
   <script type="text/javascript" crossorigin="anonymous" data-testid="recording-video-script">
-  var player = amp("player", {
-    controls: true,
-    logo: {
-      enabled: false
-    },
-  });
-  var playButton = document.querySelector(".vjs-big-play-button");
-  var hideVideo = document.getElementById("hideVideo");
-  var loadingGif = document.getElementById("loadingGif");
-  var videoError = document.getElementById("videoError");
-  var videoWrapper = document.getElementById("videoWrapper");
-  playButton.style.visibility = "hidden";
+    const videoContainer = document.getElementById("video-container");
+    var videoError = document.getElementById("videoError");
 
-  fetch("{{ recordingPlaybackDataUrl }}", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then(function (response) {
-    if (!response.ok) {
-      throw new Error(response);
-    }
-
-    return response.json();
-  }).then(function (data) {
-    player.src([{
-      src: data.src,
-      type: data.type,
-      protectionInfo: [{
-        type: "AES",
-        authenticationToken: data.protectionInfo[0].authenticationToken,
-      }],
-    }]);
-    loadingGif.style.visibility = "hidden";
-    playButton.style.visibility = "visible";
-    hideVideo.style.visibility = "visible";
-    playButton.focus();
-    playButton.onclick = function () {
-      document.querySelector(".vjs-tech").focus();
+    const playerConfig = {
+      key: "{{ mediaKindPlayerKey }}",
+      ui: true,
+      playback: {
+        muted: false,
+        autoplay: false,
+        preferredTech: [{ player: 'html5', streaming: 'hls'}]
+      }
     };
-  }).catch(function (error) {
-    console.error("Error:", error);
-    loadingGif.style.visibility = "hidden";
-    videoWrapper.style.display = "none";
-    videoError.style.display = "block";
-  });
+
+    let player = new mkplayer.MKPlayer(videoContainer, playerConfig);
+
+    fetch("{{ recordingPlaybackDataUrl }}", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(function (response) {
+      if (!response.ok) {
+        throw new Error(response);
+      }
+
+      return response.json();
+    }).then(async function (data) {
+      // wait for the url to be available
+      let hlsAvailable = false;
+      let retries = 120;
+      let time = 3000;
+      do {
+        await new Promise(r => setTimeout(r, time)); // sleep for `time`ms
+        const headResult = await fetch(data.hls_url, {
+          method: "HEAD"
+        });
+        hlsAvailable = headResult.status === 200;
+        retries--;
+        time -= 1000;
+        if (time < 1000) {
+          time = 500;
+        }
+      } while (hlsAvailable === false && retries > 0);
+      const sourceConfig = {
+        hls: data.hls_url,
+        drm: {
+          clearkey: {
+            LA_URL: 'HLS_AES',
+            headers: {
+              Authorization: 'Bearer=' + data.token || '',
+            },
+          },
+        }
+      };
+
+      player.load(sourceConfig);
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("videoWrapper").style.display = "block";
+    }).catch(function (error) {
+      console.error("Error:", error);
+      videoError.style.display = "block";
+      document.getElementById("loading").style.display = "none";
+    });
   </script>
 {% endblock %}

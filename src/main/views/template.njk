@@ -4,20 +4,38 @@
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "govuk/components/cookie-banner/macro.njk" import govukCookieBanner %}
 {% from "govuk/components/skip-link/macro.njk" import govukSkipLink %}
+{% from "govuk/components/service-navigation/macro.njk" import govukServiceNavigation %}
 
 {% block pageTitle %}PRE Portal{% endblock %}
 
 {% block head %}
   {% include "webpack/css.njk" %}
+  {% if dynatrace_jstag !== "" %}
+    <script type="text/javascript" src="{{ dynatrace_jstag }}" crossorigin="anonymous"></script>
+  {% endif %}
 {% endblock %}
 
 {% block header %}
   {{ govukHeader({
+    classes: 'govuk-header--full-width-border',
     homepageUrl: "/",
     useTudorCrown: true,
     serviceName: "HMCTS Pre-Recorded Evidence Service",
     serviceUrl: "/"
   }) }}
+{% if isSuperUser %}
+   {{ govukServiceNavigation({
+     navigation:
+       [{
+         href: '/browse',
+         text: "Home"
+       },
+       {
+         href: '/admin',
+         text: "Admin"
+       }]
+  }) }}
+{% endif %}
 {% endblock %}
 
 {% block bodyStart %}
@@ -68,7 +86,7 @@
       actions: [
       {
         classes: 'cookie-banner-hide-button',
-        text: 'Hide this message'
+        text: 'Hide cookie message'
       }
     ]
     },
@@ -80,7 +98,7 @@
       actions: [
       {
         classes: 'cookie-banner-hide-button',
-        text: 'Hide this message'
+        text: 'Hide cookie message'
       }
     ]
     }
@@ -113,6 +131,13 @@
         {
           href: '/cookies',
           text: 'Cookies'
+        },
+        {
+          href: '/help',
+          text: 'Help',
+          attributes: {
+            target: '_blank'
+          }
         }
       ]
     }

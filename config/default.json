@@ -11,24 +11,17 @@
       "secondary": ""
     },
     "portalUrl": "https://localhost:4551",
-    "enableMkWatchPage": false,
-    "useMkOnWatchPage": false,
     "mediaKindPlayerKey": "",
     "tsAndCsRedirectEnabled": false,
-    "enableCaseStateColumn": false
-  },
-  "ams": {
-    "azureMediaServices": "",
-    "azureMediaServicesKeyDelivery": "",
-    "flowKey": "",
-    "flowUrl": ""
+    "enableCaseStateColumn": false,
+    "removeWitnessLastName": false
   },
   "session": {
     "redis": {
       "key": "",
       "host": ""
     },
-    "maxAge": 86400000,
+    "maxAge": 3600,
     "secret": "superlongrandomstringthatshouldbebetterinprod"
   },
   "b2c": {
@@ -37,6 +30,10 @@
     "baseUrl": "",
     "endSessionEndpoint": "",
     "testLogin": {
+      "email": "",
+      "password": ""
+    },
+    "testSuperUserLogin": {
       "email": "",
       "password": ""
     },

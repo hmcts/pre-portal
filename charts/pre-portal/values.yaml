@@ -11,12 +11,12 @@ nodejs:
         - app-insights-connection-string
         - apim-sub-portal-primary-key
         - apim-sub-portal-secondary-key
-        - pp-authorization
-        - ams-flow-url
         - pre-portal-sso
         - b2c-test-login-email
         - b2c-test-login-password
         - media-kind-player-key
+        - b2c-test-super-user-email
+        - b2c-test-super-user-password
   environment:
     REDIS_HOST: pre-portal-{{ .Values.global.environment }}.redis.cache.windows.net
     PRE_API_URL: https://sds-api-mgmt.staging.platform.hmcts.net/pre-api
@@ -26,3 +26,4 @@ nodejs:
     B2C_END_SESSION_ENDPOINT: https://hmcts{{ .Values.global.environment }}extid.b2clogin.com/hmcts{{ .Values.global.environment }}extid.onmicrosoft.com/b2c_1a_signup_signin/oauth2/v2.0/logout
     TS_AND_CS_REDIRECT_ENABLED: false
     ENABLE_CASE_STATE_COLUMN: false
+    REMOVE_WITNESS_LAST_NAME: false

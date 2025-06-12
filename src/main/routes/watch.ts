@@ -14,8 +14,6 @@ function validateId(id: string): boolean {
 export default function (app: Application): void {
   const logger = Logger.getLogger('watch');
 
-  const useMkOnWatchPage = config.get('pre.useMkOnWatchPage')?.toString().toLowerCase() === 'true';
-
   app.get('/watch/:id', requiresAuth(), async (req, res, next) => {
     if (!validateId(req.params.id)) {
       res.status(404);
@@ -54,12 +52,13 @@ export default function (app: Application): void {
       });
 
       const recordingPlaybackDataUrl = `/watch/${req.params.id}/playback`;
-      if (useMkOnWatchPage) {
-        const mediaKindPlayerKey = config.get('pre.mediaKindPlayerKey');
-        res.render('watch-mk', { recording, recordingPlaybackDataUrl, mediaKindPlayerKey });
-      } else {
-        res.render('watch', { recording, recordingPlaybackDataUrl });
-      }
+      const mediaKindPlayerKey = config.get('pre.mediaKindPlayerKey');
+      res.render('watch', {
+        recording,
+        recordingPlaybackDataUrl,
+        mediaKindPlayerKey,
+        removeWitnessLastName: config.get('pre.removeWitnessLastName') === 'true',
+      });
     } catch (e) {
       next(e);
     }
@@ -76,9 +75,7 @@ export default function (app: Application): void {
       const client = new PreClient();
       const userPortalId = await SessionUser.getLoggedInUserPortalId(req);
 
-      const recordingPlaybackData = useMkOnWatchPage
-        ? await client.getRecordingPlaybackDataMk(userPortalId, req.params.id)
-        : await client.getRecordingPlaybackData(userPortalId, req.params.id);
+      const recordingPlaybackData = await client.getRecordingPlaybackDataMk(userPortalId, req.params.id);
 
       if (recordingPlaybackData === null) {
         res.status(404);

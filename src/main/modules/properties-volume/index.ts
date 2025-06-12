@@ -24,20 +24,9 @@ export class PropertiesVolume {
       process.env.B2C_END_SESSION_ENDPOINT ??
         'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/b2c_1a_signup_signin/oauth2/v2.0/logout'
     );
-    set(
-      config,
-      'ams.azureMediaServices',
-      process.env.AMS_AZURE_MEDIA_SERVICES ?? 'https://preamsstg-ukso1.streaming.media.azure.net'
-    );
-    set(
-      config,
-      'ams.azureMediaServicesKeyDelivery',
-      process.env.AMS_AZURE_MEDIA_SERVICES_KEY_DELIVERY ?? 'https://preamsstg.keydelivery.uksouth.media.azure.net'
-    );
-    set(config, 'pre.enableMkWatchPage', process.env.ENABLE_MK_WATCH_PAGE ?? 'false');
-    set(config, 'pre.useMkOnWatchPage', process.env.USE_MK_ON_WATCH_PAGE ?? 'false');
     set(config, 'pre.tsAndCsRedirectEnabled', process.env.TS_AND_CS_REDIRECT_ENABLED ?? 'false');
     set(config, 'pre.enableCaseStateColumn', process.env.ENABLE_CASE_STATE_COLUMN ?? 'false');
+    set(config, 'pre.removeWitnessLastName', process.env.REMOVE_WITNESS_LAST_NAME ?? 'false');
 
     if (server.locals.ENV === 'production') {
       this.logger.info('Loading properties from mounted KV');
@@ -51,25 +40,27 @@ export class PropertiesVolume {
       this.setSecret('secrets.pre-hmctskv.apim-sub-portal-primary-key', 'pre.apiKey.primary');
       this.setSecret('secrets.pre-hmctskv.apim-sub-portal-primary-key', 'pre.primaryApiKey');
       this.setSecret('secrets.pre-hmctskv.apim-sub-portal-secondary-key', 'pre.apiKey.secondary');
-      this.setSecret('secrets.pre-hmctskv.pp-authorization', 'ams.flowKey');
-      this.setSecret('secrets.pre-hmctskv.ams-flow-url', 'ams.flowUrl');
       this.setSecret('secrets.pre-hmctskv.pre-portal-sso', 'b2c.appClientSecret');
       this.setSecret('secrets.pre-hmctskv.b2c-test-login-email', 'b2c.testLogin.email');
       this.setSecret('secrets.pre-hmctskv.b2c-test-login-password', 'b2c.testLogin.password');
+      this.setSecret('secrets.pre-hmctskv.b2c-test-super-user-email', 'b2c.testSuperUserLogin.email');
+      this.setSecret('secrets.pre-hmctskv.b2c-test-super-user-password', 'b2c.testSuperUserLogin.password');
       this.setSecret('secrets.pre-hmctskv.media-kind-player-key', 'pre.mediaKindPlayerKey');
     } else {
       this.logger.info('Loading properties from .env file');
       require('dotenv').config();
       set(config, 'pre.apiKey.primary', process.env.APIM_SUB_PORTAL_PRIMARY_KEY ?? 'pre.apiKey.primary');
       set(config, 'pre.apiKey.secondary', process.env.APIM_SUB_PORTAL_SECONDARY_KEY ?? 'pre.apiKey.secondary');
-      set(config, 'ams.flowKey', process.env.PP_AUTHORIZATION);
-      set(config, 'ams.flowUrl', process.env.AMS_FLOW_URL);
       set(config, 'b2c.appClientSecret', process.env.B2C_APP_CLIENT_SECRET ?? 'b2c.appClientSecret');
       set(config, 'b2c.testLogin.email', process.env.B2C_TEST_LOGIN_EMAIL);
       set(config, 'b2c.testLogin.password', process.env.B2C_TEST_LOGIN_PASSWORD);
+      set(config, 'b2c.testSuperUserLogin.email', process.env.B2C_TEST_SUPER_USER_LOGIN_EMAIL);
+      set(config, 'b2c.testSuperUserLogin.password', process.env.B2C_TEST_SUPER_USER_LOGIN_PASSWORD);
       set(config, 'session.secret', process.env.SESSION_SECRET ?? 'superlongrandomstringthatshouldbebetterinprod');
       set(config, 'pre.mediaKindPlayerKey', process.env.MEDIA_KIND_PLAYER_KEY ?? 'mediaKindPlayerKey');
     }
+    // set the dynatrace tag to be available in templates if set
+    server.locals.dynatrace_jstag = process.env.DYNATRACE_JSTAG ?? '';
 
     this.logger.info('Redis host: {}', process.env.REDIS_HOST);
   }
