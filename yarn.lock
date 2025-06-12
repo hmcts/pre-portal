@@ -4002,12 +4002,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/cookie-parser@npm:1.4.8":
-  version: 1.4.8
-  resolution: "@types/cookie-parser@npm:1.4.8"
+"@types/cookie-parser@npm:1.4.9":
+  version: 1.4.9
+  resolution: "@types/cookie-parser@npm:1.4.9"
   peerDependencies:
     "@types/express": "*"
-  checksum: b26ace5560adce1a746c059a75f18227ee3e3614a49c70dd29b8af204696079ced22eaa9d6cb084e3433ec433bff845cb47ffb890ae9af96a4aab2ff85e40da7
+  checksum: 6192a4899b5412a4c3be0f47158321aef73a4cd7e7a4f7b2a37e2e1045f11a21209681cb1bc5335f250ee2a6ce64d8a3fefb851181a98e6415d3716ef9ed1f62
   languageName: node
   linkType: hard
 
@@ -4073,12 +4073,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express-session@npm:*, @types/express-session@npm:1.18.1":
+"@types/express-session@npm:*":
   version: 1.18.1
   resolution: "@types/express-session@npm:1.18.1"
   dependencies:
     "@types/express": "*"
   checksum: 380ddcbbc6a64686deafd4e2831c636d11a3252f051ebb4c49649abfab5ddf69c2b31e4ff97a2961cb02ef8c616feaa7ecaa4ad7b7f028c25d88fbfa437fb455
+  languageName: node
+  linkType: hard
+
+"@types/express-session@npm:1.18.2":
+  version: 1.18.2
+  resolution: "@types/express-session@npm:1.18.2"
+  dependencies:
+    "@types/express": "*"
+  checksum: 317b749c2179f8d6b5b961e9da3deb8c730c06586cfbf92391c9f74c7981825bfa1b37942e7fe85e51a85c678809b614b2405c722c3474d4afd98686ee04d0ad
   languageName: node
   linkType: hard
 
@@ -7900,9 +7909,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jest@npm:28.12.0":
-  version: 28.12.0
-  resolution: "eslint-plugin-jest@npm:28.12.0"
+"eslint-plugin-jest@npm:28.13.3":
+  version: 28.13.3
+  resolution: "eslint-plugin-jest@npm:28.13.3"
   dependencies:
     "@typescript-eslint/utils": ^6.0.0 || ^7.0.0 || ^8.0.0
   peerDependencies:
@@ -7914,7 +7923,7 @@ __metadata:
       optional: true
     jest:
       optional: true
-  checksum: 8d0bcb213372f2fc0f8a9cfb3bb93d9e649733be51c989835bd7b0e229eca64ba6d9cb4741f46c3546f8adfad0bac56ba8555fe636015f2de9758c3c1a02c759
+  checksum: 31447259238c7bb6bc033c001a5e1fbfef15cb44cd0abcbc990832e83dbd4223e63ec4d64ec682bfee95e1471b09c5112a1fa266f919d48a751dcc7cc82bdb3f
   languageName: node
   linkType: hard
 
@@ -8666,7 +8675,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fresh@npm:0.5.2, fresh@npm:^0.5.2":
+"fresh@npm:0.5.2, fresh@npm:^0.5.2, fresh@npm:~0.5.2":
   version: 0.5.2
   resolution: "fresh@npm:0.5.2"
   checksum: 13ea8b08f91e669a64e3ba3a20eb79d7ca5379a81f1ff7f4310d54e2320645503cc0c78daedc93dfb6191287295f6479544a649c64d8e41a1c0fb0c221552346
@@ -12235,13 +12244,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ms@npm:2.1.1":
-  version: 2.1.1
-  resolution: "ms@npm:2.1.1"
-  checksum: 0078a23cd916a9a7435c413caa14c57d4b4f6e2470e0ab554b6964163c8a4436448ac7ae020e883685475da6b6796cc396b670f579cb275db288a21e3e57721e
-  languageName: node
-  linkType: hard
-
 "ms@npm:2.1.2":
   version: 2.1.2
   resolution: "ms@npm:2.1.2"
@@ -12249,7 +12251,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ms@npm:2.1.3, ms@npm:^2.1.1, ms@npm:^2.1.3":
+"ms@npm:2.1.3, ms@npm:^2.1.1, ms@npm:^2.1.3, ms@npm:~2.1.3":
   version: 2.1.3
   resolution: "ms@npm:2.1.3"
   checksum: aa92de608021b242401676e35cfa5aa42dd70cbdc082b916da7fb925c542173e36bce97ea3e804923fe92c0ad991434e4a38327e15a1b5b5f945d66df615ae6d
@@ -13434,10 +13436,10 @@ __metadata:
     "@types/body-parser": 1.19.6
     "@types/compression": 1.8.1
     "@types/config": 3.3.5
-    "@types/cookie-parser": 1.4.8
+    "@types/cookie-parser": 1.4.9
     "@types/es6-promisify": 6.0.4
     "@types/express": 5.0.1
-    "@types/express-session": 1.18.1
+    "@types/express-session": 1.18.2
     "@types/glob": 8.1.0
     "@types/jest": 29.5.14
     "@types/lodash": 4.17.17
@@ -13470,7 +13472,7 @@ __metadata:
     eslint: 9.28.0
     eslint-config-prettier: 10.1.5
     eslint-plugin-import: 2.31.0
-    eslint-plugin-jest: 28.12.0
+    eslint-plugin-jest: 28.13.3
     eslint-plugin-prettier: 5.4.1
     express: 5.0.1
     express-nunjucks: 3.1.2
@@ -13509,7 +13511,7 @@ __metadata:
     require-directory: 2.1.1
     sass: 1.86.1
     sass-loader: 16.0.5
-    serve-favicon: 2.5.0
+    serve-favicon: 2.5.1
     session-file-store: ^1.5.0
     style-loader: 4.0.0
     supertest: 7.1.1
@@ -14416,14 +14418,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"safe-buffer@npm:5.1.1":
-  version: 5.1.1
-  resolution: "safe-buffer@npm:5.1.1"
-  checksum: 7f117b604554c9daca713be76cecc6c52932ed1dd6303638274f21319038bfd760fbfd353e526cc83f11894935bc4beb71f5b7b9478c11bf9718c0e0d94c51cb
-  languageName: node
-  linkType: hard
-
-"safe-buffer@npm:5.2.1, safe-buffer@npm:^5.0.1, safe-buffer@npm:^5.1.0, safe-buffer@npm:~5.2.0":
+"safe-buffer@npm:5.2.1, safe-buffer@npm:^5.0.1, safe-buffer@npm:^5.1.0, safe-buffer@npm:~5.2.0, safe-buffer@npm:~5.2.1":
   version: 5.2.1
   resolution: "safe-buffer@npm:5.2.1"
   checksum: b99c4b41fdd67a6aaf280fcd05e9ffb0813654894223afb78a31f14a19ad220bba8aba1cb14eddce1fcfb037155fe6de4e861784eb434f7d11ed58d1e70dd491
@@ -14634,16 +14629,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serve-favicon@npm:2.5.0":
-  version: 2.5.0
-  resolution: "serve-favicon@npm:2.5.0"
+"serve-favicon@npm:2.5.1":
+  version: 2.5.1
+  resolution: "serve-favicon@npm:2.5.1"
   dependencies:
     etag: ~1.8.1
-    fresh: 0.5.2
-    ms: 2.1.1
+    fresh: ~0.5.2
+    ms: ~2.1.3
     parseurl: ~1.3.2
-    safe-buffer: 5.1.1
-  checksum: f4dd0fbee3b7e18d0a27ba6ba01d2f585f23f533010c9e8c74aad74615b19b12d8fbe714f14cb3579803f0bacecd67cdc858714cb56c6e28f8dd07ccc997aea4
+    safe-buffer: ~5.2.1
+  checksum: 8b52657f8f3ce7f381a79ca796a95060a382304aa8f1fb8d4a18339ae111242eb4f43205bf9bdfeac31b315cdcb18eea239c3526f735d1b97a3e21ca6110eb82
   languageName: node
   linkType: hard
 
