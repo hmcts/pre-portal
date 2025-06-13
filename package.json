@@ -63,7 +63,7 @@
     "glob": "11.0.3",
     "govuk-frontend": "5.9.0",
     "helmet": "8.1.0",
-    "jose": "^5.2.2",
+    "jose": "^6.0.0",
     "jquery": "3.7.1",
     "lodash": "4.17.21",
     "marked": "^15.0.0",
