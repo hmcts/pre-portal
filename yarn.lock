@@ -12429,9 +12429,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-mocks-http@npm:1.16.2":
-  version: 1.16.2
-  resolution: "node-mocks-http@npm:1.16.2"
+"node-mocks-http@npm:1.17.2":
+  version: 1.17.2
+  resolution: "node-mocks-http@npm:1.17.2"
   dependencies:
     accepts: ^1.3.7
     content-disposition: ^0.5.3
@@ -12451,7 +12451,7 @@ __metadata:
       optional: true
     "@types/node":
       optional: true
-  checksum: 9d148c49947e2161dbfd55204f07352f3fd976a41dfe355a97bd932cb8d4dbf584be4058fc78b121a9d83f0b86397e00a591e87afa9a1ecfb0335608ef1ace96
+  checksum: e8b9524c1cdf324f5e11e3a25daf238dc193e6149ffde8edb5307edbe6d722bdab6f946a281b406efaa568e5fb976a10f145bb5430724b302a734bac58914f8a
   languageName: node
   linkType: hard
 
@@ -13481,7 +13481,7 @@ __metadata:
     mochawesome-merge: ^5.0.0
     mochawesome-report-generator: ^6.2.0
     nock: 14.0.5
-    node-mocks-http: 1.16.2
+    node-mocks-http: 1.17.2
     nodemon: 3.1.10
     nunjucks: 3.2.4
     pa11y: 8.0.0
