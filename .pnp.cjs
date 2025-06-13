@@ -84,7 +84,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["express-nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.1.2"],\
             ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.18.1"],\
             ["express-session", "npm:1.18.1"],\
-            ["glob", "npm:11.0.2"],\
+            ["glob", "npm:11.0.3"],\
             ["govuk-frontend", "npm:5.9.0"],\
             ["helmet", "npm:8.1.0"],\
             ["html-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.6.3"],\
@@ -3919,6 +3919,25 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@humanwhocodes-retry-npm-0.4.3-a8d7ca1663-d423455b9d.zip/node_modules/@humanwhocodes/retry/",\
           "packageDependencies": [\
             ["@humanwhocodes/retry", "npm:0.4.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@isaacs/balanced-match", [\
+        ["npm:4.0.1", {\
+          "packageLocation": "./.yarn/cache/@isaacs-balanced-match-npm-4.0.1-8965afafe6-102fbc6d2c.zip/node_modules/@isaacs/balanced-match/",\
+          "packageDependencies": [\
+            ["@isaacs/balanced-match", "npm:4.0.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@isaacs/brace-expansion", [\
+        ["npm:5.0.0", {\
+          "packageLocation": "./.yarn/cache/@isaacs-brace-expansion-npm-5.0.0-754d3cb3f5-d7a3b8b0dd.zip/node_modules/@isaacs/brace-expansion/",\
+          "packageDependencies": [\
+            ["@isaacs/brace-expansion", "npm:5.0.0"],\
+            ["@isaacs/balanced-match", "npm:4.0.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -12801,6 +12820,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
+        ["npm:11.0.3", {\
+          "packageLocation": "./.yarn/cache/glob-npm-11.0.3-f68382b3cc-65ddc1e3c9.zip/node_modules/glob/",\
+          "packageDependencies": [\
+            ["glob", "npm:11.0.3"],\
+            ["foreground-child", "npm:3.3.1"],\
+            ["jackspeak", "npm:4.1.1"],\
+            ["minimatch", "npm:10.0.3"],\
+            ["minipass", "npm:7.1.2"],\
+            ["package-json-from-dist", "npm:1.0.1"],\
+            ["path-scurry", "npm:2.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["npm:6.0.4", {\
           "packageLocation": "./.yarn/cache/glob-npm-6.0.4-dbb227ba4a-c4946c3d01.zip/node_modules/glob/",\
           "packageDependencies": [\
@@ -16135,6 +16167,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
+        ["npm:10.0.3", {\
+          "packageLocation": "./.yarn/cache/minimatch-npm-10.0.3-23e96438f0-20bfb70809.zip/node_modules/minimatch/",\
+          "packageDependencies": [\
+            ["minimatch", "npm:10.0.3"],\
+            ["@isaacs/brace-expansion", "npm:5.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["npm:3.1.2", {\
           "packageLocation": "./.yarn/cache/minimatch-npm-3.1.2-9405269906-c154e56640.zip/node_modules/minimatch/",\
           "packageDependencies": [\
@@ -17777,7 +17817,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["express-nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.1.2"],\
             ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.18.1"],\
             ["express-session", "npm:1.18.1"],\
-            ["glob", "npm:11.0.2"],\
+            ["glob", "npm:11.0.3"],\
             ["govuk-frontend", "npm:5.9.0"],\
             ["helmet", "npm:8.1.0"],\
             ["html-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.6.3"],\
