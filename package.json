@@ -138,7 +138,7 @@
     "semver": "^7.5.2",
     "express": "5.0.1",
     "cookie": "0.7.2",
-    "axios": "1.9.0",
+    "axios": "1.10.0",
     "brace-expansion": "^2.0.2"
   },
   "husky": {
