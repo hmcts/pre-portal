@@ -25,7 +25,7 @@
     "test:crossbrowser:e2e": "NODE_TLS_REJECT_UNAUTHORIZED=0 codeceptjs run-multiple --all --config src/test/crossbrowser/saucelabs.conf.js --grep @CrossBrowser ",
     "test:crossbrowser:report": "allure generate functional-output/cross-browser/reports/* -c -o functional-output/cross-browser/allure ",
     "test:crossbrowser": "yarn playwright install && (yarn test:crossbrowser:e2e && yarn test:crossbrowser:report) || yarn test:crossbrowser:report",
-    "test:fullfunctional": "yarn test:functional && allure generate functional-output/full-functional/reports/* -c -o functional-output/full-functional/allure ",
+    "test:fullfunctional": "yarn test:functional && allure generate functional-output/functional/reports/* -c -o functional-output/functional/allure ",
     "cichecks": "yarn build && yarn rebuild puppeteer && yarn lint && yarn test && yarn test:routes && yarn test:a11y",
     "prepare": "husky",
     "prettier": "prettier --write ."
