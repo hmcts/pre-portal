@@ -50,6 +50,10 @@ withNightlyPipeline(type, product, component) {
 
       steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/cross-browser/reports/**/*'
      }
+      before('fullFunctionalTest') {
+        env.TEST_URL = "https://portal.pre-recorded-evidence.justice.gov.uk/"
+        }
+
       enableFullFunctionalTest(200)
       afterAlways('fullFunctionalTest') {
         publishHTML target: [
