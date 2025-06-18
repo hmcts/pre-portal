@@ -49,7 +49,7 @@ const RAW_RUNTIME_STATE =
           ["@types/express-session", "npm:1.18.2"],\
           ["@types/glob", "npm:8.1.0"],\
           ["@types/jest", "npm:29.5.14"],\
-          ["@types/lodash", "npm:4.17.17"],\
+          ["@types/lodash", "npm:4.17.18"],\
           ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
           ["@types/node", "npm:22.9.0"],\
           ["@types/nunjucks", "npm:3.2.6"],\
@@ -7242,10 +7242,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/lodash", [\
-      ["npm:4.17.17", {\
-        "packageLocation": "./.yarn/cache/@types-lodash-npm-4.17.17-f9393376c2-496459a3cb.zip/node_modules/@types/lodash/",\
+      ["npm:4.17.18", {\
+        "packageLocation": "./.yarn/cache/@types-lodash-npm-4.17.18-c86daebac1-54ebb15b29.zip/node_modules/@types/lodash/",\
         "packageDependencies": [\
-          ["@types/lodash", "npm:4.17.17"]\
+          ["@types/lodash", "npm:4.17.18"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -18043,7 +18043,7 @@ const RAW_RUNTIME_STATE =
           ["@types/express-session", "npm:1.18.2"],\
           ["@types/glob", "npm:8.1.0"],\
           ["@types/jest", "npm:29.5.14"],\
-          ["@types/lodash", "npm:4.17.17"],\
+          ["@types/lodash", "npm:4.17.18"],\
           ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
           ["@types/node", "npm:22.9.0"],\
           ["@types/nunjucks", "npm:3.2.6"],\
