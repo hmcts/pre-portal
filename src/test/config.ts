@@ -56,6 +56,6 @@ config.helpers = {
     ignoreHTTPSErrors: true,
     video: true,
     trace: true,
-    keepVideoForPassedTests: true
+    keepVideoForPassedTests: true,
   },
 };
