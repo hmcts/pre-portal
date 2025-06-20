@@ -11,22 +11,23 @@
     </h1>
     <div>
   <form method="GET" action="" class="govuk-grid-row govuk-!-margin-bottom-6">
+    <div class="govuk-grid-column-one-quarter">
+              <div class="govuk-form-group">
+                  <label class="govuk-label" for="case-reference">Case Reference</label>
+                  <input class="govuk-input" id="case-reference" name="case-reference" type="text"
+                         value="{{ request.query.name | default('') }}"
+                         placeholder="Enter Case Reference">
+              </div>
+          </div>
    <div class="govuk-grid-column-one-quarter">
             <div class="govuk-form-group">
-                <label class="govuk-label" for="id">ID</label>
+                <label class="govuk-label" for="id">Live Event ID</label>
                 <input class="govuk-input" id="id" name="id" type="text"
                        value="{{ request.query.name | default('') }}"
                        placeholder="Enter ID">
             </div>
         </div>
-      <div class="govuk-grid-column-one-quarter">
-          <div class="govuk-form-group">
-              <label class="govuk-label" for="name">Name</label>
-              <input class="govuk-input" id="name" name="name" type="text"
-                     value="{{ request.query.name | default('') }}"
-                     placeholder="Enter name">
-          </div>
-      </div>
+
 
       <div class="govuk-grid-column-one-quarter">
           <div class="govuk-form-group">
@@ -63,8 +64,8 @@
         <caption class="govuk-table__caption govuk-table__caption--m"  tabindex="0">Live events</caption>
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header resizable"tabindex="0">Case Reference<div class="resizer"></div></th>
             <th scope="col" class="govuk-table__header resizable"tabindex="0">ID <div class="resizer"></div></th>
-            <th scope="col" class="govuk-table__header resizable"tabindex="0">Name<div class="resizer"></div></th>
             <th scope="col" class="govuk-table__header resizable"tabindex="0">Description<div class="resizer"></div></th>
             <th scope="col" class="govuk-table__header resizable"tabindex="0">Resource State<div class="resizer"></div></th>
           </tr>
@@ -79,8 +80,8 @@
           <tbody class="govuk-table__body" id="live-events-body">
             {% for liveEvent in liveEvents %}
               <tr class="govuk-table__row">
+                <td class="govuk-table__cell" tabindex="0">{{ liveEvent.caseReference }}</td>
                 <td class="govuk-table__cell "scope="row" tabindex="0">{{ liveEvent.id }} </td>
-                <td class="govuk-table__cell" tabindex="0">{{ liveEvent.name }}</td>
                 <td class="govuk-table__cell" tabindex="0">{{ liveEvent.description }}</td>
                 <td class="govuk-table__cell" tabindex="0">{{ liveEvent.status }}</td>
               </tr>
@@ -103,8 +104,8 @@
 
 <script>
 function filterTable() {
+    const caseReferenceFilter = document.getElementById("case-reference").value.toLowerCase();
     const idFilter = document.getElementById("id").value.toLowerCase();
-    const nameFilter = document.getElementById("name").value.toLowerCase();
     const descriptionFilter = document.getElementById("description").value.toLowerCase();
     const resourceStateFilter = document.getElementById("resource-state").value.toLowerCase();
 
@@ -112,14 +113,15 @@ function filterTable() {
     let visibleRowCount = 0;
 
     rows.forEach(row => {
-        const id = row.children[0].textContent.toLowerCase();
-        const name = row.children[1].textContent.toLowerCase();
+        const caseReference = row.children[0].textContent.toLowerCase();
+        const id = row.children[1].textContent.toLowerCase();
+
         const description = row.children[2].textContent.toLowerCase();
         const resourceState = row.children[3].textContent.toLowerCase();
 
         if (
+            (caseReference.includes(caseReferenceFilter) || caseReferenceFilter === '') &&
             (id.includes(idFilter) || idFilter === '') &&
-            (name.includes(nameFilter) || nameFilter === '') &&
             (description.includes(descriptionFilter) || descriptionFilter === '') &&
             (resourceState.includes(resourceStateFilter) || resourceStateFilter === '')
         ) {
@@ -138,14 +140,14 @@ function filterTable() {
     }
 }
 
+document.getElementById("case-reference").addEventListener("input", filterTable);
 document.getElementById("id").addEventListener("input", filterTable);
-document.getElementById("name").addEventListener("input", filterTable);
 document.getElementById("description").addEventListener("input", filterTable);
 document.getElementById("resource-state").addEventListener("change", filterTable);
 
 document.getElementById("resetButton").addEventListener("click", function () {
-    document.getElementById("id").value = "";
-      document.getElementById("name").value = "";
+      document.getElementById("case-reference").value = "";
+      document.getElementById("id").value = "";
       document.getElementById("description").value = "";
       document.getElementById("resource-state").value = "";
 

@@ -11,7 +11,7 @@ Feature: View Admin Page
       Then I click the link 'Admin'
       Then the page URL should be '/admin/status'
       When I am on the '/admin/status' page
-
+      Then I see the text 'Status'
 
 
     Scenario: The live events page should display for Super Users
