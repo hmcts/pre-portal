@@ -6,6 +6,8 @@ resource "azurerm_application_insights_standard_web_test" "b2c" {
   application_insights_id = data.azurerm_application_insights.app_insights.id
   geo_locations           = ["emea-ru-msa-edge", "emea-se-sto-edge"]
   tags                    = var.common_tags
+  enabled                 = true
+  retry_enabled           = true
 
 
   request {
@@ -15,7 +17,8 @@ resource "azurerm_application_insights_standard_web_test" "b2c" {
 
   validation_rules {
     content {
-      content_match = "Sign in"
+      content_match      = "Sign in"
+      pass_if_text_found = true
     }
   }
 }
