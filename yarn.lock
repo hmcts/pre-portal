@@ -4524,6 +4524,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/multer@npm:^1.4.12":
+  version: 1.4.13
+  resolution: "@types/multer@npm:1.4.13"
+  dependencies:
+    "@types/express": "npm:*"
+  checksum: 10/f650a9f431007f05a5c51d6359140bea5f77d1299668d45a0791ddbf7789f1c220a3e038039c5e0de6608e273d5ee8001e9649c606d7e0e847e8774ccc5d1d68
+  languageName: node
+  linkType: hard
+
 "@types/mysql@npm:2.15.26":
   version: 2.15.26
   resolution: "@types/mysql@npm:2.15.26"
@@ -5422,6 +5431,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"append-field@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "append-field@npm:1.0.0"
+  checksum: 10/afb50f5ff668af1cb66bc5cfebb55ed9a1d99e24901782ee83d00aed1a499835f9375a149cf27b17f79595ecfcc3d1de0cd5b020b210a5359c43eaf607c217de
+  languageName: node
+  linkType: hard
+
 "applicationinsights@npm:3.7.0":
   version: 3.7.0
   resolution: "applicationinsights@npm:3.7.0"
@@ -6199,6 +6215,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"busboy@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "busboy@npm:1.6.0"
+  dependencies:
+    streamsearch: "npm:^1.1.0"
+  checksum: 10/bee10fa10ea58e7e3e7489ffe4bda6eacd540a17de9f9cd21cc37e297b2dd9fe52b2715a5841afaec82900750d810d01d7edb4b2d456427f449b92b417579763
+  languageName: node
+  linkType: hard
+
 "bytes@npm:3.1.2, bytes@npm:^3.1.2":
   version: 3.1.2
   resolution: "bytes@npm:3.1.2"
@@ -6840,6 +6865,18 @@ __metadata:
     safe-buffer: "npm:5.2.1"
     vary: "npm:~1.1.2"
   checksum: 10/ca213b9bd03e56c7c3596399d846237b5f0b31ca4cdeaa76a9547cd3c1465fbcfcb0fe93a5d7ff64eff28383fc65b53f1ef8bb2720d11bb48ad8c0836c502506
+  languageName: node
+  linkType: hard
+
+"concat-stream@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "concat-stream@npm:2.0.0"
+  dependencies:
+    buffer-from: "npm:^1.0.0"
+    inherits: "npm:^2.0.3"
+    readable-stream: "npm:^3.0.2"
+    typedarray: "npm:^0.0.6"
+  checksum: 10/250e576d0617e7c58e1c4b2dd6fe69560f316d2c962a409f9f3aac794018499ddb31948b1e4296f217008e124cd5d526432097745157fe504b5d9f3dc469eadb
   languageName: node
   linkType: hard
 
@@ -8889,7 +8926,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-data@npm:^4.0.0":
+"form-data@npm:^4.0.0, form-data@npm:^4.0.2":
   version: 4.0.3
   resolution: "form-data@npm:4.0.3"
   dependencies:
@@ -12518,16 +12555,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mkdirp@npm:^1.0.3, mkdirp@npm:^1.0.4":
-  version: 1.0.4
-  resolution: "mkdirp@npm:1.0.4"
-  bin:
-    mkdirp: bin/cmd.js
-  checksum: 10/d71b8dcd4b5af2fe13ecf3bd24070263489404fe216488c5ba7e38ece1f54daf219e72a833a3a2dc404331e870e9f44963a33399589490956bff003a3404d3b2
-  languageName: node
-  linkType: hard
-
-"mkdirp@npm:~0.5.1":
+"mkdirp@npm:^0.5.6, mkdirp@npm:~0.5.1":
   version: 0.5.6
   resolution: "mkdirp@npm:0.5.6"
   dependencies:
@@ -12535,6 +12563,15 @@ __metadata:
   bin:
     mkdirp: bin/cmd.js
   checksum: 10/0c91b721bb12c3f9af4b77ebf73604baf350e64d80df91754dc509491ae93bf238581e59c7188360cec7cb62fc4100959245a42cfe01834efedc5e9d068376c2
+  languageName: node
+  linkType: hard
+
+"mkdirp@npm:^1.0.3, mkdirp@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "mkdirp@npm:1.0.4"
+  bin:
+    mkdirp: bin/cmd.js
+  checksum: 10/d71b8dcd4b5af2fe13ecf3bd24070263489404fe216488c5ba7e38ece1f54daf219e72a833a3a2dc404331e870e9f44963a33399589490956bff003a3404d3b2
   languageName: node
   linkType: hard
 
@@ -12630,6 +12667,21 @@ __metadata:
   version: 2.1.3
   resolution: "ms@npm:2.1.3"
   checksum: 10/aa92de608021b242401676e35cfa5aa42dd70cbdc082b916da7fb925c542173e36bce97ea3e804923fe92c0ad991434e4a38327e15a1b5b5f945d66df615ae6d
+  languageName: node
+  linkType: hard
+
+"multer@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "multer@npm:2.0.1"
+  dependencies:
+    append-field: "npm:^1.0.0"
+    busboy: "npm:^1.6.0"
+    concat-stream: "npm:^2.0.0"
+    mkdirp: "npm:^0.5.6"
+    object-assign: "npm:^4.1.1"
+    type-is: "npm:^1.6.18"
+    xtend: "npm:^4.0.2"
+  checksum: 10/cb0dda65ae37be40968fc1f9ea492bdb4c20bd189ce427e11e95d333837193544606b82ef6431f2acd3cd11156164f215bdeb46f47847d29b6bf3a36ac736a8f
   languageName: node
   linkType: hard
 
@@ -13819,6 +13871,7 @@ __metadata:
     "@types/jest": "npm:29.5.14"
     "@types/lodash": "npm:4.17.18"
     "@types/mini-css-extract-plugin": "npm:2.5.1"
+    "@types/multer": "npm:^1.4.12"
     "@types/node": "npm:22.9.0"
     "@types/nunjucks": "npm:3.2.6"
     "@types/require-directory": "npm:2.1.6"
@@ -13852,6 +13905,7 @@ __metadata:
     express-nunjucks: "npm:3.1.2"
     express-openid-connect: "npm:2.18.1"
     express-session: "npm:1.18.1"
+    form-data: "npm:^4.0.2"
     glob: "npm:11.0.3"
     govuk-frontend: "npm:5.9.0"
     helmet: "npm:8.1.0"
@@ -13867,6 +13921,7 @@ __metadata:
     lodash: "npm:4.17.21"
     marked: "npm:^15.0.0"
     mini-css-extract-plugin: "npm:2.9.2"
+    multer: "npm:^2.0.1"
     nock: "npm:14.0.5"
     node-mocks-http: "npm:1.17.2"
     nodemon: "npm:3.1.10"
@@ -14380,7 +14435,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"readable-stream@npm:^3.4.0, readable-stream@npm:^3.6.2":
+"readable-stream@npm:^3.0.2, readable-stream@npm:^3.4.0, readable-stream@npm:^3.6.2":
   version: 3.6.2
   resolution: "readable-stream@npm:3.6.2"
   dependencies:
@@ -15458,6 +15513,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"streamsearch@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "streamsearch@npm:1.1.0"
+  checksum: 10/612c2b2a7dbcc859f74597112f80a42cbe4d448d03da790d5b7b39673c1197dd3789e91cd67210353e58857395d32c1e955a9041c4e6d5bae723436b3ed9ed14
+  languageName: node
+  linkType: hard
+
 "streamx@npm:^2.15.0, streamx@npm:^2.21.0":
   version: 2.22.1
   resolution: "streamx@npm:2.22.1"
@@ -16281,6 +16343,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typedarray@npm:^0.0.6":
+  version: 0.0.6
+  resolution: "typedarray@npm:0.0.6"
+  checksum: 10/2cc1bcf7d8c1237f6a16c04efc06637b2c5f2d74e58e84665445cf87668b85a21ab18dd751fa49eee6ae024b70326635d7b79ad37b1c370ed2fec6aeeeb52714
+  languageName: node
+  linkType: hard
+
 "typescript@npm:5.8.3, typescript@npm:^5.1.3":
   version: 5.8.3
   resolution: "typescript@npm:5.8.3"
@@ -17029,7 +17098,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"xtend@npm:^4.0.0":
+"xtend@npm:^4.0.0, xtend@npm:^4.0.2":
   version: 4.0.2
   resolution: "xtend@npm:4.0.2"
   checksum: 10/ac5dfa738b21f6e7f0dd6e65e1b3155036d68104e67e5d5d1bde74892e327d7e5636a076f625599dc394330a731861e87343ff184b0047fef1360a7ec0a5a36a
