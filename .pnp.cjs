@@ -60,7 +60,7 @@ const RAW_RUNTIME_STATE =
           ["@types/uuid", "npm:10.0.0"],\
           ["@typescript-eslint/eslint-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:8.28.0"],\
           ["@typescript-eslint/parser", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:8.28.0"],\
-          ["allure-commandline", "npm:2.34.0"],\
+          ["allure-commandline", "npm:2.34.1"],\
           ["applicationinsights", "npm:3.7.0"],\
           ["axios", "npm:1.10.0"],\
           ["axios-debug-log", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.0"],\
@@ -8488,10 +8488,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["allure-commandline", [\
-      ["npm:2.34.0", {\
-        "packageLocation": "./.yarn/unplugged/allure-commandline-npm-2.34.0-dc70b5042f/node_modules/allure-commandline/",\
+      ["npm:2.34.1", {\
+        "packageLocation": "./.yarn/unplugged/allure-commandline-npm-2.34.1-22ab74ee1d/node_modules/allure-commandline/",\
         "packageDependencies": [\
-          ["allure-commandline", "npm:2.34.0"]\
+          ["allure-commandline", "npm:2.34.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -18408,7 +18408,7 @@ const RAW_RUNTIME_STATE =
           ["@types/uuid", "npm:10.0.0"],\
           ["@typescript-eslint/eslint-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:8.28.0"],\
           ["@typescript-eslint/parser", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:8.28.0"],\
-          ["allure-commandline", "npm:2.34.0"],\
+          ["allure-commandline", "npm:2.34.1"],\
           ["applicationinsights", "npm:3.7.0"],\
           ["axios", "npm:1.10.0"],\
           ["axios-debug-log", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.0"],\
