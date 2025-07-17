@@ -26,3 +26,4 @@ nodejs:
     TS_AND_CS_REDIRECT_ENABLED: false
     ENABLE_CASE_STATE_COLUMN: false
     REMOVE_WITNESS_LAST_NAME: false
+    USE_DEV_B2C: false
