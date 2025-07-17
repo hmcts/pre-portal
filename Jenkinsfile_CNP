@@ -28,6 +28,7 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 }
 
 def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
+def githubApi = new GithubAPI(this)
 
 withPipeline(type, product, component) {
   disableLegacyDeployment()
@@ -35,8 +36,8 @@ withPipeline(type, product, component) {
   enableSlackNotifications('#pre-builds')
   loadVaultSecrets(secrets)
 
-  def githubApi = new GithubAPI(this)
   onPR() {
+    echo "Checking if use_dev_b2c is set..."
     if (githubApi.getLabelsbyPattern(env.BRANCH_NAME, "use_dev_b2c").size() > 0) {
       env.USE_DEV_B2C = "true"
       echo "Switching to use DEV B2C..."
