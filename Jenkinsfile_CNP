@@ -2,8 +2,6 @@
 
 @Library("Infrastructure")
 
-import uk.gov.hmcts.contino.GithubAPI
-
 def type = "nodejs"
 def product = "pre"
 def component = "portal"
@@ -28,20 +26,12 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 }
 
 def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
-def githubApi = new GithubAPI(this)
 
 withPipeline(type, product, component) {
   disableLegacyDeployment()
   syncBranchesWithMaster(['perftest', 'demo'])
   enableSlackNotifications('#pre-builds')
   loadVaultSecrets(secrets)
-
-  onPR() {
-    if (githubApi.checkForLabel(env.BRANCH_NAME, "use_dev_b2c")) {
-      env.USE_DEV_B2C = "true"
-      echo "Switching to use DEV B2C..."
-    }
-  }
 
   before('functionalTest:dev') {
     env.TEST_URL = "https://pre-portal-pr-${CHANGE_ID}.dev.platform.hmcts.net/"
