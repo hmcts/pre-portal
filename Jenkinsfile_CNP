@@ -38,9 +38,12 @@ withPipeline(type, product, component) {
 
   onPR() {
     echo "Checking if use_dev_b2c is set..."
-    if (githubApi.getLabelsbyPattern(env.BRANCH_NAME, "use_dev_b2c").size() > 0) {
+    if (githubApi.checkForLabel(env.BRANCH_NAME, "use_dev_b2c")) {
       env.USE_DEV_B2C = "true"
       echo "Switching to use DEV B2C..."
+    }
+    if (!githubApi.checkForLabel(env.BRANCH_NAME, "randomstring")) {
+      echo "Negative check"
     }
   }
 
