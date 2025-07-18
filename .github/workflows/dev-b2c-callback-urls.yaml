@@ -1,0 +1,49 @@
+name: Update B2C Callback URLs
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Daily at 6PM Mon-Fri UTC
+    - cron: '0 18 * * 1-5'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  update_urls:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.B2C_DEV_CREDENTIALS }}
+          allow-no-subscriptions: true
+
+      - run: |
+          tenant_id=${{ secrets.B2C_TENANT_ID }}
+          app_id=${{ secrets.B2C_CLIENT_ID }}
+          pr_ids=($(gh pr list --json number | jq -r '.[].number'))
+
+          redirect_uri=("https://localhost:4551/callback")
+
+          for pr_number in "${pr_ids[@]}"
+          do
+          redirect_uri+=("https://pre-portal-pr-${pr_number}.dev.platform.hmcts.net/callback")
+          done
+
+          # Extra padding for new PRs created in the next 24 hours
+          start=$((pr_ids[0] + 1))
+          end=$((start + 50))
+          for pr_number in $(seq $start $end)
+          do
+          redirect_uri+=("https://pre-portal-pr-${pr_number}.dev.platform.hmcts.net/callback")
+          done
+
+          az ad app update --id $app_id --web-redirect-uris "${redirect_uri[@]}"
+
+        env:
+          REPO: ${{ github.event.repository.name }}
+          GH_TOKEN: ${{ github.token }}

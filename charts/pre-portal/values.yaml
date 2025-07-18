@@ -16,6 +16,7 @@ nodejs:
         - media-kind-player-key
         - b2c-test-super-user-email
         - b2c-test-super-user-password
+        - dev-pre-portal-sso
   environment:
     REDIS_HOST: pre-portal-{{ .Values.global.environment }}.redis.cache.windows.net
     PRE_API_URL: https://sds-api-mgmt.staging.platform.hmcts.net/pre-api
@@ -26,3 +27,4 @@ nodejs:
     TS_AND_CS_REDIRECT_ENABLED: false
     ENABLE_CASE_STATE_COLUMN: false
     REMOVE_WITNESS_LAST_NAME: false
+    USE_DEV_B2C: false
