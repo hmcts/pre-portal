@@ -53,7 +53,6 @@ export class PropertiesVolume {
       this.setSecret('secrets.pre-hmctskv.b2c-test-login-password', 'b2c.testLogin.password');
       this.setSecret('secrets.pre-hmctskv.b2c-test-super-user-email', 'b2c.testSuperUserLogin.email');
       this.setSecret('secrets.pre-hmctskv.b2c-test-super-user-password', 'b2c.testSuperUserLogin.password');
-
     } else {
       this.logger.info('Loading properties from .env file');
       require('dotenv').config();
