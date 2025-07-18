@@ -23,8 +23,8 @@ jobs:
           allow-no-subscriptions: true
 
       - run: |
-          tenant_id=${{ secrets.B2C_DEV_TENANT_ID }}
-          app_id=${{ secrets.B2C_DEV_CLIENT_ID }}
+          tenant_id=${{ secrets.B2C_TENANT_ID }}
+          app_id=${{ secrets.B2C_CLIENT_ID }}
           pr_ids=($(gh pr list --json number | jq -r '.[].number'))
 
           redirect_uri=("https://localhost:4551/callback")
