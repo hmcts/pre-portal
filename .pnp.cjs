@@ -35,7 +35,7 @@ const RAW_RUNTIME_STATE =
           ["@eslint/compat", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.3.1"],\
           ["@hmcts/cookie-manager", "npm:1.0.0"],\
           ["@hmcts/info-provider", "npm:1.2.3"],\
-          ["@hmcts/nodejs-healthcheck", "npm:1.8.5"],\
+          ["@hmcts/nodejs-healthcheck", "npm:1.8.6"],\
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.2.0"],\
           ["@jest/globals", "npm:29.7.0"],\
@@ -4156,13 +4156,13 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@hmcts/nodejs-healthcheck", [\
-      ["npm:1.8.5", {\
-        "packageLocation": "./.yarn/cache/@hmcts-nodejs-healthcheck-npm-1.8.5-fa7409827a-c847735784.zip/node_modules/@hmcts/nodejs-healthcheck/",\
+      ["npm:1.8.6", {\
+        "packageLocation": "./.yarn/cache/@hmcts-nodejs-healthcheck-npm-1.8.6-da4b651ec1-baa0fcb688.zip/node_modules/@hmcts/nodejs-healthcheck/",\
         "packageDependencies": [\
-          ["@hmcts/nodejs-healthcheck", "npm:1.8.5"],\
+          ["@hmcts/nodejs-healthcheck", "npm:1.8.6"],\
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["js-yaml", "npm:4.1.0"],\
-          ["superagent", "npm:9.0.2"]\
+          ["superagent", "npm:10.2.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -18803,7 +18803,7 @@ const RAW_RUNTIME_STATE =
           ["@eslint/compat", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.3.1"],\
           ["@hmcts/cookie-manager", "npm:1.0.0"],\
           ["@hmcts/info-provider", "npm:1.2.3"],\
-          ["@hmcts/nodejs-healthcheck", "npm:1.8.5"],\
+          ["@hmcts/nodejs-healthcheck", "npm:1.8.6"],\
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.2.0"],\
           ["@jest/globals", "npm:29.7.0"],\
@@ -20881,8 +20881,8 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:9.0.2", {\
-        "packageLocation": "./.yarn/cache/superagent-npm-9.0.2-9e8cceb765-d3c0c9051c.zip/node_modules/superagent/",\
+      ["npm:10.2.2", {\
+        "packageLocation": "./.yarn/cache/superagent-npm-10.2.2-e8b673973b-e89ae49163.zip/node_modules/superagent/",\
         "packageDependencies": [\
           ["component-emitter", "npm:1.3.1"],\
           ["cookiejar", "npm:2.1.4"],\
@@ -20893,7 +20893,7 @@ const RAW_RUNTIME_STATE =
           ["methods", "npm:1.1.2"],\
           ["mime", "npm:2.6.0"],\
           ["qs", "npm:6.14.0"],\
-          ["superagent", "npm:9.0.2"]\
+          ["superagent", "npm:10.2.2"]\
         ],\
         "linkType": "HARD"\
       }]\
