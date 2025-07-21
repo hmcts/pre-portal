@@ -83,7 +83,7 @@ const RAW_RUNTIME_STATE =
           ["express", "npm:5.0.1"],\
           ["express-nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.1.2"],\
           ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.18.1"],\
-          ["express-session", "npm:1.18.1"],\
+          ["express-session", "npm:1.18.2"],\
           ["glob", "npm:11.0.3"],\
           ["govuk-frontend", "npm:5.11.0"],\
           ["helmet", "npm:8.1.0"],\
@@ -10828,7 +10828,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/express-session", "npm:1.18.2"],\
           ["connect-redis", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.1.1"],\
-          ["express-session", "npm:1.18.1"]\
+          ["express-session", "npm:1.18.2"]\
         ],\
         "packagePeers": [\
           "@types/express-session",\
@@ -12877,15 +12877,15 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["express-session", [\
-      ["npm:1.18.1", {\
-        "packageLocation": "./.yarn/cache/express-session-npm-1.18.1-b1aa040a8f-fec407d20e.zip/node_modules/express-session/",\
+      ["npm:1.18.2", {\
+        "packageLocation": "./.yarn/cache/express-session-npm-1.18.2-1fdf1a09db-1a89a4d3e5.zip/node_modules/express-session/",\
         "packageDependencies": [\
           ["cookie", "npm:0.7.2"],\
           ["cookie-signature", "npm:1.0.7"],\
           ["debug", "virtual:04e17282184d1dd8ebe9be1cf43aab3ec3497566ee201258c65471258a0598bf13554ebaee2c4f89425bfcd02b07008290d1416ead8ec323401963827fce05d6#npm:2.6.9"],\
           ["depd", "npm:2.0.0"],\
-          ["express-session", "npm:1.18.1"],\
-          ["on-headers", "npm:1.0.2"],\
+          ["express-session", "npm:1.18.2"],\
+          ["on-headers", "npm:1.1.0"],\
           ["parseurl", "npm:1.3.3"],\
           ["safe-buffer", "npm:5.2.1"],\
           ["uid-safe", "npm:2.1.5"]\
@@ -18001,6 +18001,13 @@ const RAW_RUNTIME_STATE =
           ["on-headers", "npm:1.0.2"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:1.1.0", {\
+        "packageLocation": "./.yarn/cache/on-headers-npm-1.1.0-7d18779060-98aa64629f.zip/node_modules/on-headers/",\
+        "packageDependencies": [\
+          ["on-headers", "npm:1.1.0"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["once", [\
@@ -18851,7 +18858,7 @@ const RAW_RUNTIME_STATE =
           ["express", "npm:5.0.1"],\
           ["express-nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.1.2"],\
           ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.18.1"],\
-          ["express-session", "npm:1.18.1"],\
+          ["express-session", "npm:1.18.2"],\
           ["glob", "npm:11.0.3"],\
           ["govuk-frontend", "npm:5.11.0"],\
           ["helmet", "npm:8.1.0"],\
