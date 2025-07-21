@@ -3,6 +3,7 @@ import * as propertiesVolume from '@hmcts/properties-volume';
 import config from 'config';
 import { Application } from 'express';
 import { get, set } from 'lodash';
+import * as process from 'node:process';
 
 export class PropertiesVolume {
   private logger = Logger.getLogger('properties-volume');
@@ -40,12 +41,18 @@ export class PropertiesVolume {
       this.setSecret('secrets.pre-hmctskv.apim-sub-portal-primary-key', 'pre.apiKey.primary');
       this.setSecret('secrets.pre-hmctskv.apim-sub-portal-primary-key', 'pre.primaryApiKey');
       this.setSecret('secrets.pre-hmctskv.apim-sub-portal-secondary-key', 'pre.apiKey.secondary');
-      this.setSecret('secrets.pre-hmctskv.pre-portal-sso', 'b2c.appClientSecret');
+      this.setSecret('secrets.pre-hmctskv.media-kind-player-key', 'pre.mediaKindPlayerKey');
+
+      if (process.env.USE_DEV_B2C === 'true') {
+        this.logger.info('Using dev B2C configuration');
+        this.setSecret('secrets.pre-hmctskv.dev-pre-portal-sso', 'b2c.appClientSecret');
+      } else {
+        this.setSecret('secrets.pre-hmctskv.pre-portal-sso', 'b2c.appClientSecret');
+      }
       this.setSecret('secrets.pre-hmctskv.b2c-test-login-email', 'b2c.testLogin.email');
       this.setSecret('secrets.pre-hmctskv.b2c-test-login-password', 'b2c.testLogin.password');
       this.setSecret('secrets.pre-hmctskv.b2c-test-super-user-email', 'b2c.testSuperUserLogin.email');
       this.setSecret('secrets.pre-hmctskv.b2c-test-super-user-password', 'b2c.testSuperUserLogin.password');
-      this.setSecret('secrets.pre-hmctskv.media-kind-player-key', 'pre.mediaKindPlayerKey');
     } else {
       this.logger.info('Loading properties from .env file');
       require('dotenv').config();
