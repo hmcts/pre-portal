@@ -99,7 +99,7 @@ const RAW_RUNTIME_STATE =
           ["lodash", "npm:4.17.21"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.2"],\
-          ["nock", "npm:14.0.5"],\
+          ["nock", "npm:14.0.7"],\
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
           ["nodemon", "npm:3.1.10"],\
           ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
@@ -4780,10 +4780,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@mswjs/interceptors", [\
-      ["npm:0.38.7", {\
-        "packageLocation": "./.yarn/cache/@mswjs-interceptors-npm-0.38.7-28675b078a-5563cf6af4.zip/node_modules/@mswjs/interceptors/",\
+      ["npm:0.39.5", {\
+        "packageLocation": "./.yarn/cache/@mswjs-interceptors-npm-0.39.5-ff54b73872-d921e6d85d.zip/node_modules/@mswjs/interceptors/",\
         "packageDependencies": [\
-          ["@mswjs/interceptors", "npm:0.38.7"],\
+          ["@mswjs/interceptors", "npm:0.39.5"],\
           ["@open-draft/deferred-promise", "npm:2.2.0"],\
           ["@open-draft/logger", "npm:0.3.0"],\
           ["@open-draft/until", "npm:2.1.0"],\
@@ -17590,12 +17590,12 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["nock", [\
-      ["npm:14.0.5", {\
-        "packageLocation": "./.yarn/cache/nock-npm-14.0.5-8f2d8ae8b4-811e09b530.zip/node_modules/nock/",\
+      ["npm:14.0.7", {\
+        "packageLocation": "./.yarn/cache/nock-npm-14.0.7-921593b50a-b7d52d539e.zip/node_modules/nock/",\
         "packageDependencies": [\
-          ["@mswjs/interceptors", "npm:0.38.7"],\
+          ["@mswjs/interceptors", "npm:0.39.5"],\
           ["json-stringify-safe", "npm:5.0.1"],\
-          ["nock", "npm:14.0.5"],\
+          ["nock", "npm:14.0.7"],\
           ["propagate", "npm:2.0.1"]\
         ],\
         "linkType": "HARD"\
@@ -18866,7 +18866,7 @@ const RAW_RUNTIME_STATE =
           ["lodash", "npm:4.17.21"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.2"],\
-          ["nock", "npm:14.0.5"],\
+          ["nock", "npm:14.0.7"],\
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
           ["nodemon", "npm:3.1.10"],\
           ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
