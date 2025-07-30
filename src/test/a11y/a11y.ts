@@ -52,7 +52,7 @@ describe('Accessibility', () => {
       await browser.close();
     }
     browser = await puppeteer.launch({
-      ignoreHTTPSErrors: true,
+      acceptInsecureCerts: true,
       headless: true,
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
