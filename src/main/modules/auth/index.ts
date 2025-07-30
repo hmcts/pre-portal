@@ -3,7 +3,6 @@ import { PreClient } from '../../services/pre-api/pre-client';
 
 import { Logger } from '@hmcts/nodejs-logging';
 import config from 'config';
-import RedisStore from 'connect-redis';
 import { Application } from 'express';
 import { ConfigParams, auth } from 'express-openid-connect';
 import session from 'express-session';
@@ -11,6 +10,7 @@ import * as jose from 'jose';
 import FileStoreFactory from 'session-file-store';
 
 const FileStore = FileStoreFactory(session);
+import {RedisStore} from 'connect-redis';
 
 export class Auth {
   public enableFor(app: Application): void {
