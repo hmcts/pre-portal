@@ -19,6 +19,11 @@ export class Nunjucks {
       .addGlobal('govukRebrand', true)
       .addFilter('formatDate', (date: string) => {
         return new Date(date).toLocaleDateString('en-GB');
+      })
+      .addFilter('formatDateTime', (date: string) => {
+        return !!date
+          ? new Date(date).toLocaleString('en-GB').replace(',', '')
+          : '';
       });
 
     app.use((req, res, next) => {

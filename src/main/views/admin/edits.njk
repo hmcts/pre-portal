@@ -34,7 +34,7 @@
       <select required class="govuk-select" style="width: 50%" id="source_recording" name="source_recording" aria-describedby="source-recording-hint">
         <option value="" selected>Choose source recording id</option>
         {% for recording in recordings %}
-          <option value="{{ recording.id }}">{{ recording.id }}({{ recording.created_at }})</option>
+          <option value="{{ recording.id }}">{{ recording.id }}({{ recording.created_at | formatDateTime}})</option>
         {% endfor %}
       </select>
     </div>
@@ -88,10 +88,10 @@
               {{ edit.source_recording.id }}
             </td>
             <td class="govuk-table__cell">
-              {{ edit.started_at }}
+              {{ edit.started_at | formatDateTime }}
             </td>
             <td class="govuk-table__cell">
-              {{ edit.finished_at }}
+              {{ edit.finished_at | formatDateTime }}
             </td>
             <td class="govuk-table__cell">
               {% if edit.status == "PENDING" %}
