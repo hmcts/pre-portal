@@ -108,7 +108,7 @@ const RAW_RUNTIME_STATE =
           ["pre-portal", "workspace:."],\
           ["prettier", "npm:3.5.3"],\
           ["puppeteer", "npm:22.15.0"],\
-          ["react", "npm:19.1.0"],\
+          ["react", "npm:19.1.1"],\
           ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.80.1"],\
           ["redis", "npm:4.7.1"],\
           ["require-directory", "npm:2.1.1"],\
@@ -7040,7 +7040,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-native", null],\
           ["invariant", "npm:2.2.4"],\
           ["nullthrows", "npm:1.1.1"],\
-          ["react", "npm:19.1.0"],\
+          ["react", "npm:19.1.1"],\
           ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.80.1"]\
         ],\
         "packagePeers": [\
@@ -18875,7 +18875,7 @@ const RAW_RUNTIME_STATE =
           ["pre-portal", "workspace:."],\
           ["prettier", "npm:3.5.3"],\
           ["puppeteer", "npm:22.15.0"],\
-          ["react", "npm:19.1.0"],\
+          ["react", "npm:19.1.1"],\
           ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.80.1"],\
           ["redis", "npm:4.7.1"],\
           ["require-directory", "npm:2.1.1"],\
@@ -19302,10 +19302,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["react", [\
-      ["npm:19.1.0", {\
-        "packageLocation": "./.yarn/cache/react-npm-19.1.0-9804a7da5b-d018068982.zip/node_modules/react/",\
+      ["npm:19.1.1", {\
+        "packageLocation": "./.yarn/cache/react-npm-19.1.1-41e9f353ff-9801530fdc.zip/node_modules/react/",\
         "packageDependencies": [\
-          ["react", "npm:19.1.0"]\
+          ["react", "npm:19.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -19375,7 +19375,7 @@ const RAW_RUNTIME_STATE =
           ["nullthrows", "npm:1.1.1"],\
           ["pretty-format", "npm:29.7.0"],\
           ["promise", "npm:8.3.0"],\
-          ["react", "npm:19.1.0"],\
+          ["react", "npm:19.1.1"],\
           ["react-devtools-core", "npm:6.1.2"],\
           ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.80.1"],\
           ["react-refresh", "npm:0.14.2"],\
