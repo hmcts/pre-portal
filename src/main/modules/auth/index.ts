@@ -10,7 +10,7 @@ import * as jose from 'jose';
 import FileStoreFactory from 'session-file-store';
 
 const FileStore = FileStoreFactory(session);
-import {RedisStore} from 'connect-redis';
+import { RedisStore } from 'connect-redis';
 
 export class Auth {
   public enableFor(app: Application): void {
