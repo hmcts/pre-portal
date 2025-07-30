@@ -45,12 +45,9 @@ const RAW_RUNTIME_STATE =
           ["@types/session-file-store", "npm:1.2.5"],\
           ["@typescript-eslint/eslint-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:8.28.0"],\
           ["@typescript-eslint/parser", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:8.28.0"],\
-          ["allure-commandline", "npm:2.34.1"],\
           ["applicationinsights", "npm:3.8.0"],\
           ["axios", "npm:1.11.0"],\
-          ["axios-debug-log", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.0"],\
           ["body-parser", "npm:2.2.0"],\
-          ["chokidar", "npm:4.0.3"],\
           ["codeceptjs", "npm:3.7.3"],\
           ["compression", "npm:1.8.1"],\
           ["config", "npm:4.1.0"],\
@@ -7201,16 +7198,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["@types/debug", [\
-      ["npm:4.1.12", {\
-        "packageLocation": "./.yarn/cache/@types-debug-npm-4.1.12-82a3fc4905-47876a852d.zip/node_modules/@types/debug/",\
-        "packageDependencies": [\
-          ["@types/debug", "npm:4.1.12"],\
-          ["@types/ms", "npm:2.1.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["@types/eslint", [\
       ["npm:9.6.1", {\
         "packageLocation": "./.yarn/cache/@types-eslint-npm-9.6.1-31a8cf74e4-719fcd2557.zip/node_modules/@types/eslint/",\
@@ -7387,15 +7374,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@types-mime-npm-1.3.5-48d28990db-e29a5f9c47.zip/node_modules/@types/mime/",\
         "packageDependencies": [\
           ["@types/mime", "npm:1.3.5"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@types/ms", [\
-      ["npm:2.1.0", {\
-        "packageLocation": "./.yarn/cache/@types-ms-npm-2.1.0-529ef799cc-532d2ebb91.zip/node_modules/@types/ms/",\
-        "packageDependencies": [\
-          ["@types/ms", "npm:2.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8425,15 +8403,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["allure-commandline", [\
-      ["npm:2.34.1", {\
-        "packageLocation": "./.yarn/unplugged/allure-commandline-npm-2.34.1-22ab74ee1d/node_modules/allure-commandline/",\
-        "packageDependencies": [\
-          ["allure-commandline", "npm:2.34.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["allure-js-commons", [\
       ["npm:1.3.2", {\
         "packageLocation": "./.yarn/cache/allure-js-commons-npm-1.3.2-0f1f7412a0-e997b056c3.zip/node_modules/allure-js-commons/",\
@@ -8811,30 +8780,6 @@ const RAW_RUNTIME_STATE =
           ["follow-redirects", "virtual:64966324acb1c9e829d59ac6bca19b45b43dc1234d7283c5d2bb20566c18be5fa16a88d38b39ab3c3bd238b9a4c2a56d68914ca1163a12899a78f10804e91e91#npm:1.15.9"],\
           ["form-data", "npm:4.0.4"],\
           ["proxy-from-env", "npm:1.1.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["axios-debug-log", [\
-      ["npm:1.0.0", {\
-        "packageLocation": "./.yarn/cache/axios-debug-log-npm-1.0.0-b3208ab9aa-86d932dfc6.zip/node_modules/axios-debug-log/",\
-        "packageDependencies": [\
-          ["axios-debug-log", "npm:1.0.0"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.0", {\
-        "packageLocation": "./.yarn/__virtual__/axios-debug-log-virtual-7246624ab1/0/cache/axios-debug-log-npm-1.0.0-b3208ab9aa-86d932dfc6.zip/node_modules/axios-debug-log/",\
-        "packageDependencies": [\
-          ["@types/axios", null],\
-          ["@types/debug", "npm:4.1.12"],\
-          ["axios", "npm:1.11.0"],\
-          ["axios-debug-log", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.0"],\
-          ["debug", "virtual:66b3390b4eccbfa0e7f88b649ba0bbc12a2944432838d6fddbf862e3ce97448fd27286b33697fdcd278339dcbac4ff595eb84b91eeb93160166752a0fcae7007#npm:4.4.1"]\
-        ],\
-        "packagePeers": [\
-          "@types/axios",\
-          "axios"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17441,7 +17386,7 @@ const RAW_RUNTIME_STATE =
           ["@types/chokidar", null],\
           ["a-sync-waterfall", "npm:1.0.1"],\
           ["asap", "npm:2.0.6"],\
-          ["chokidar", "npm:4.0.3"],\
+          ["chokidar", null],\
           ["commander", "npm:5.1.0"],\
           ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"]\
         ],\
@@ -18428,12 +18373,9 @@ const RAW_RUNTIME_STATE =
           ["@types/session-file-store", "npm:1.2.5"],\
           ["@typescript-eslint/eslint-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:8.28.0"],\
           ["@typescript-eslint/parser", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:8.28.0"],\
-          ["allure-commandline", "npm:2.34.1"],\
           ["applicationinsights", "npm:3.8.0"],\
           ["axios", "npm:1.11.0"],\
-          ["axios-debug-log", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.0"],\
           ["body-parser", "npm:2.2.0"],\
-          ["chokidar", "npm:4.0.3"],\
           ["codeceptjs", "npm:3.7.3"],\
           ["compression", "npm:1.8.1"],\
           ["config", "npm:4.1.0"],\
