@@ -267,6 +267,14 @@ in [health.ts](src/main/routes/health.ts) file. Make sure you adjust it correctl
 In particular, remember to replace the sample check with checks specific to your frontend app,
 e.g. the ones verifying the state of each service it depends on.
 
+### Testing with the DEV instance of B2C
+
+Sometimes you'll be making changes to B2C and you'll want a frontend available which points to it.
+
+To point the pre-portal at the dev B2C instance you simply need to add the tag `pr-values: devb2c`
+to the GitHub PR you are working on. Instructions on how this works can be found
+[here](https://hmcts.github.io/cloud-native-platform/new-component/helm-chart.html#what-are-values-template-yaml-for).
+
 ## Troubleshooting
 
 ### Common issues
