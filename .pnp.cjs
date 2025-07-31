@@ -117,7 +117,7 @@ const RAW_RUNTIME_STATE =
           ["serve-favicon", "npm:2.5.1"],\
           ["session-file-store", "npm:1.5.0"],\
           ["style-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.0.0"],\
-          ["supertest", "npm:7.1.3"],\
+          ["supertest", "npm:7.1.4"],\
           ["ts-jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:29.3.4"],\
           ["ts-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:9.5.2"],\
           ["ts-node", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:10.9.2"],\
@@ -18875,7 +18875,7 @@ const RAW_RUNTIME_STATE =
           ["serve-favicon", "npm:2.5.1"],\
           ["session-file-store", "npm:1.5.0"],\
           ["style-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.0.0"],\
-          ["supertest", "npm:7.1.3"],\
+          ["supertest", "npm:7.1.4"],\
           ["ts-jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:29.3.4"],\
           ["ts-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:9.5.2"],\
           ["ts-node", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:10.9.2"],\
@@ -20873,15 +20873,31 @@ const RAW_RUNTIME_STATE =
           ["superagent", "npm:10.2.2"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:10.2.3", {\
+        "packageLocation": "./.yarn/cache/superagent-npm-10.2.3-792c09e71d-377bf938e6.zip/node_modules/superagent/",\
+        "packageDependencies": [\
+          ["component-emitter", "npm:1.3.1"],\
+          ["cookiejar", "npm:2.1.4"],\
+          ["debug", "virtual:66b3390b4eccbfa0e7f88b649ba0bbc12a2944432838d6fddbf862e3ce97448fd27286b33697fdcd278339dcbac4ff595eb84b91eeb93160166752a0fcae7007#npm:4.4.1"],\
+          ["fast-safe-stringify", "npm:2.1.1"],\
+          ["form-data", "npm:4.0.4"],\
+          ["formidable", "npm:3.5.4"],\
+          ["methods", "npm:1.1.2"],\
+          ["mime", "npm:2.6.0"],\
+          ["qs", "npm:6.14.0"],\
+          ["superagent", "npm:10.2.3"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["supertest", [\
-      ["npm:7.1.3", {\
-        "packageLocation": "./.yarn/cache/supertest-npm-7.1.3-2a4d23f313-d148d05ed5.zip/node_modules/supertest/",\
+      ["npm:7.1.4", {\
+        "packageLocation": "./.yarn/cache/supertest-npm-7.1.4-7caf1d38d9-ecb5d41f2b.zip/node_modules/supertest/",\
         "packageDependencies": [\
           ["methods", "npm:1.1.2"],\
-          ["superagent", "npm:10.2.2"],\
-          ["supertest", "npm:7.1.3"]\
+          ["superagent", "npm:10.2.3"],\
+          ["supertest", "npm:7.1.4"]\
         ],\
         "linkType": "HARD"\
       }]\
