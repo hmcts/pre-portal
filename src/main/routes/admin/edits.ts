@@ -46,16 +46,19 @@ export default function (app: Application): void {
 
     const client = new PreClient();
 
-    const { edits } = await client.getEditRequests(superUserId, {
+    const { edits, pagination } = await client.getEditRequests(superUserId, {
       lastModifiedAfter: getDateOneWeekAgo(),
-      // todo more reasonable number here?
-      size: 50,
+      page: req.query.page as unknown as number || 0,
     });
+
+    const paginationLinks = generatePaginationLinks(pagination, "/admin/edit-request");
 
     res.render('admin/edits', {
       title: 'Edit Upload',
+      tableTitle: generatePaginatedTitle(pagination, "Edit requests in the last week:"),
       isSuperUser: true,
       edits,
+      paginationLinks,
     });
   });
 
