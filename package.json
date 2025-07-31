@@ -60,7 +60,7 @@
     "express-nunjucks": "3.1.2",
     "express-openid-connect": "2.18.1",
     "express-session": "1.18.2",
-    "form-data": "4.0.2",
+    "form-data": "4.0.4",
     "glob": "11.0.3",
     "govuk-frontend": "5.11.1",
     "helmet": "8.1.0",
