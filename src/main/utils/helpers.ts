@@ -1,7 +1,7 @@
 import { Pagination } from '../services/pre-api/types';
 
 interface PaginationLinks {
-  next: { href?: string; };
+  next: { href?: string };
   previous: { href?: string };
   items: ({ href: string; number: number; current: boolean } | { ellipsis: boolean })[];
 }
@@ -67,11 +67,11 @@ export const generatePaginationLinks = (pagination: Pagination, route: string) =
   }
 
   return paginationLinks;
-}
+};
 
 export const generatePaginatedTitle = (pagination: Pagination, title: string) => {
   return `${title} ${pagination.currentPage * pagination.size + 1} to ${Math.min(
     (pagination.currentPage + 1) * pagination.size,
     pagination.totalElements
   )} of ${pagination.totalElements}`;
-}
+};

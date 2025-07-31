@@ -53,7 +53,7 @@ describe('Admin Edits Page', () => {
 
       mockGetEditRequests.mockResolvedValueOnce({
         edits: [{ id: 1, text: 'Edit A' }],
-        pagination: { currentPage: 0, totalPages: 1, totalElements: 1, size: 1 }
+        pagination: { currentPage: 0, totalPages: 1, totalElements: 1, size: 1 },
       });
 
       const res = await request(app).get('/admin/edit-request');
