@@ -1,5 +1,4 @@
 {% from "govuk/components/pagination/macro.njk" import govukPagination %}
-
 {% extends "template.njk" %}
 
 {% block pageTitle %}{{ title }} - PRE Portal{% endblock %}
@@ -158,6 +157,44 @@
         });
       } catch (err) {
         console.error(err);
+      }
+    });
+
+    document.querySelector('form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      try {
+        const formData = new FormData(e.target);
+        const response = await fetch('/admin/edit-request/upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.status === 400) {
+          const data = await response.json();
+          throw new Error(data.message || 'Upload failed');
+        }
+
+        window.location.reload();
+      } catch (error) {
+        const existingError = document.querySelector('.govuk-error-summary');
+        if (existingError) {
+          existingError.remove();
+        }
+
+        const errorHtml = `
+          <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+              <h2 class="govuk-error-summary__title">There is a problem</h2>
+              <div class="govuk-error-summary__body">
+                <ul class="govuk-list govuk-error-summary__list">
+                  <li><a href="#">${error.message}</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        `;
+        document.querySelector('h1').insertAdjacentHTML('beforebegin', errorHtml);
       }
     });
   </script>

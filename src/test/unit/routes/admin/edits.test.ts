@@ -53,6 +53,7 @@ describe('Admin Edits Page', () => {
 
       mockGetEditRequests.mockResolvedValueOnce({
         edits: [{ id: 1, text: 'Edit A' }],
+        pagination: { currentPage: 0, totalPages: 1, totalElements: 1, size: 1 }
       });
 
       const res = await request(app).get('/admin/edit-request');
@@ -151,7 +152,7 @@ describe('Admin Edits Page', () => {
       expect(res.status).toBe(500);
     });
 
-    test('should return 500 if CSV processing fails', async () => {
+    test('should return 400 if CSV processing fails', async () => {
       if (mockeduser.app_access?.[0]?.role) {
         mockeduser.app_access[0].role.name = UserLevel.SUPER_USER;
       }
@@ -163,8 +164,8 @@ describe('Admin Edits Page', () => {
         .field('source_recording', 'e2ca657c-8f4f-4d41-b545-c434bb779f20')
         .attach('file-upload', Buffer.from('invalid'), 'test.csv');
 
-      expect(res.status).toBe(500);
-      expect(res.text).toContain('Error: An error occurred during file upload: Processing failed');
+      expect(res.status).toBe(400);
+      expect(res.body.message).toContain('Processing failed');
     });
 
     test('should render not-found for non-super user', async () => {

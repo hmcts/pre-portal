@@ -5,6 +5,7 @@ import { requiresAuth } from 'express-openid-connect';
 import path from 'path';
 import multer from 'multer';
 import { PreClient } from '../../services/pre-api/pre-client';
+import { generatePaginatedTitle, generatePaginationLinks } from '../../utils/helpers';
 
 const storage = multer.memoryStorage();
 
@@ -107,7 +108,7 @@ export default function (app: Application): void {
       await new PreClient().postEditsFromCsv(superUserId, sourceRecordingId, file.buffer);
       res.redirect('/admin/edit-request');
     } catch (error) {
-      throw new Error('An error occurred during file upload: ' + error.message);
+      res.status(400).json({ message: error.message });
     }
   });
 }
