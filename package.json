@@ -6,6 +6,7 @@
     "node": ">=22.0.0"
   },
   "scripts": {
+    "audit:suppress": "yarn npm audit --recursive --environment production --json > yarn-audit-known-issues",
     "start": "NODE_ENV=production ts-node -r tsconfig-paths/register src/main/server.ts",
     "start:dev": "nodemon --config nodemon.json",
     "lint": "eslint . && prettier --check .",
