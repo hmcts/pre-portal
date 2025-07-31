@@ -1,0 +1,23 @@
+p1ec2d → ✘ @codeceptjs/detox-helper@npm:1.1.7 doesn't provide react to react-native@npm:0.78.3 [9b6fb] and 1 other dependency
+p41728 → ✘ @react-native/babel-plugin-codegen@npm:0.78.3 doesn't provide @babel/preset-env to @react-native/codegen@npm:0.78.3 [360ef] and 1 other dependency
+p19191 → ✘ babel-plugin-transform-flow-enums@npm:0.0.2 doesn't provide @babel/core to @babel/plugin-syntax-flow@npm:7.27.1 [dbfa5]
+p32345 → ✘ eslint-plugin-jest@npm:28.14.0 [16701] doesn't provide typescript to @typescript-eslint/utils@npm:8.34.0 [9582d] and 4 other dependencies
+
+p73767 → ✘ pre-portal@workspace:. provides express@npm:5.0.1 to express-nunjucks@npm:3.1.2 [16701] and 1 other dependency
+
+p85a1b → ✘ react-native@npm:0.80.2 [16701] doesn't provide @babel/core to @react-native/codegen@npm:0.80.2 [5ea87] and 18 other dependencies
+
+p9cb29 → ✘ react-native@npm:0.78.3 [9b6fb] doesn't provide @babel/core to babel-jest@npm:29.7.0 [360ef] and 17 other dependencies
+
+p5c664 → ✘ react-native@npm:0.78.3 [9b6fb] doesn't provide @babel/preset-env to @react-native/codegen@npm:0.78.3 [360ef] and 1 other dependency
+
+
+ react to react-native
+ @babel/preset-env to @react-native
+ @babel/preset-env to @react-native
+
+ typescript to @typescript-eslint
+
+ @babel/core to @babel/plugin-syntax-flow
+ @babel/core to @react-native/codegen
+ @babel/core to babel-jest
