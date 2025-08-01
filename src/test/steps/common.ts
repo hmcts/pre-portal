@@ -111,7 +111,7 @@ When('I click on play on a browse page', () => {
 });
 
 When('I play the recording', () => {
-  I.wait(5); //needed as it takes time to load recording on page.
+  I.wait(10); //needed as it takes time to load recording on page.
   I.waitForElement("//*[@aria-label='Play']");
   I.click('Play');
 });
