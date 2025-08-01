@@ -99,7 +99,7 @@ const RAW_RUNTIME_STATE =
           ["lodash", "npm:4.17.21"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.2"],\
-          ["nock", "npm:14.0.7"],\
+          ["nock", "npm:14.0.8"],\
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
           ["nodemon", "npm:3.1.10"],\
           ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
@@ -17809,12 +17809,12 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["nock", [\
-      ["npm:14.0.7", {\
-        "packageLocation": "./.yarn/cache/nock-npm-14.0.7-921593b50a-b7d52d539e.zip/node_modules/nock/",\
+      ["npm:14.0.8", {\
+        "packageLocation": "./.yarn/cache/nock-npm-14.0.8-66c639861f-47d6e3b13a.zip/node_modules/nock/",\
         "packageDependencies": [\
           ["@mswjs/interceptors", "npm:0.39.5"],\
           ["json-stringify-safe", "npm:5.0.1"],\
-          ["nock", "npm:14.0.7"],\
+          ["nock", "npm:14.0.8"],\
           ["propagate", "npm:2.0.1"]\
         ],\
         "linkType": "HARD"\
@@ -19085,7 +19085,7 @@ const RAW_RUNTIME_STATE =
           ["lodash", "npm:4.17.21"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.2"],\
-          ["nock", "npm:14.0.7"],\
+          ["nock", "npm:14.0.8"],\
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
           ["nodemon", "npm:3.1.10"],\
           ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
