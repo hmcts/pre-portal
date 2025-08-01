@@ -38,7 +38,7 @@ async function signIn(browser: Browser): Promise<Page> {
   return page;
 }
 
-jest.setTimeout(15000);
+jest.setTimeout(25000);
 const screenshotDir = `${__dirname}/../../../functional-output/pa11y`;
 describe('Accessibility', () => {
   let browser: Browser;
@@ -119,5 +119,5 @@ describe('Accessibility', () => {
       ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
     });
     expect(termsResult.issues.map(issue => issue.code)).toEqual([]);
-  }, 65000);
+  }, 25000);
 });
