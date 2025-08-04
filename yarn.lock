@@ -11328,7 +11328,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-util@npm:30.0.5":
+"jest-util@npm:30.0.5, jest-util@npm:^30.0.5":
   version: 30.0.5
   resolution: "jest-util@npm:30.0.5"
   dependencies:
@@ -14369,6 +14369,7 @@ __metadata:
     jest-html-reporter: "npm:4.3.0"
     jest-junit: "npm:16.0.0"
     jest-mock: "npm:29.7.0"
+    jest-util: "npm:^30.0.5"
     jose: "npm:^5.2.2"
     jquery: "npm:3.7.1"
     lint-staged: "npm:15.5.2"

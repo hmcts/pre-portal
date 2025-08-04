@@ -93,6 +93,7 @@ const RAW_RUNTIME_STATE =
           ["jest-html-reporter", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.3.0"],\
           ["jest-junit", "npm:16.0.0"],\
           ["jest-mock", "npm:29.7.0"],\
+          ["jest-util", "npm:30.0.5"],\
           ["jose", "npm:5.10.0"],\
           ["jquery", "npm:3.7.1"],\
           ["lint-staged", "npm:15.5.2"],\
@@ -19053,6 +19054,7 @@ const RAW_RUNTIME_STATE =
           ["jest-html-reporter", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.3.0"],\
           ["jest-junit", "npm:16.0.0"],\
           ["jest-mock", "npm:29.7.0"],\
+          ["jest-util", "npm:30.0.5"],\
           ["jose", "npm:5.10.0"],\
           ["jquery", "npm:3.7.1"],\
           ["lint-staged", "npm:15.5.2"],\
@@ -21559,7 +21561,7 @@ const RAW_RUNTIME_STATE =
           ["fast-json-stable-stringify", "npm:2.1.0"],\
           ["handlebars", "npm:4.7.8"],\
           ["jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:29.7.0"],\
-          ["jest-util", null],\
+          ["jest-util", "npm:30.0.5"],\
           ["json5", "npm:2.2.3"],\
           ["lodash.memoize", "npm:4.1.2"],\
           ["make-error", "npm:1.3.6"],\
