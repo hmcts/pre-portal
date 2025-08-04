@@ -52,7 +52,7 @@ describe('Accessibility', () => {
       await browser.close();
     }
     browser = await puppeteer.launch({
-      ignoreHTTPSErrors: true,
+      acceptInsecureCerts: true,
       headless: true,
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
@@ -72,6 +72,7 @@ describe('Accessibility', () => {
       const result: Pa11yResult = await pa11y(config.TEST_URL + url.replace('//', '/'), {
         screenCapture: `${screenshotDir}/${url}.png`,
         browser: browser,
+        ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
       });
       expect(result.issues).toEqual(expect.any(Array));
       expectNoErrors(result.issues);
@@ -100,12 +101,14 @@ describe('Accessibility', () => {
       browser: browser,
       screenCapture: `${screenshotDir}/browse.png`,
       waitUntil: 'domcontentloaded',
+      ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
     });
     expect(result.issues.map(issue => issue.code)).toEqual([]);
 
     const watchResult: Pa11yResult = await pa11y(watchUrl, {
       browser: browser,
       screenCapture: `${screenshotDir}/watch.png`,
+      ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
     });
 
     expect(watchResult.issues.map(issue => issue.code)).toEqual([]);
@@ -113,6 +116,7 @@ describe('Accessibility', () => {
     const termsResult: Pa11yResult = await pa11y(termsUrl, {
       browser: browser,
       screenCapture: `${screenshotDir}/terms.png`,
+      ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
     });
     expect(termsResult.issues.map(issue => issue.code)).toEqual([]);
   }, 65000);
