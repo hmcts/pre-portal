@@ -39,7 +39,7 @@ const RAW_RUNTIME_STATE =
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.2.0"],\
           ["@jest/globals", "npm:29.7.0"],\
-          ["@mediakind/mkplayer", "npm:1.22.0"],\
+          ["@mediakind/mkplayer", "npm:1.24.0"],\
           ["@types/jest", "npm:29.5.14"],\
           ["@types/node", "npm:24.1.0"],\
           ["@types/session-file-store", "npm:1.2.5"],\
@@ -4873,11 +4873,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@mediakind/mkplayer", [\
-      ["npm:1.22.0", {\
-        "packageLocation": "./.yarn/cache/@mediakind-mkplayer-npm-1.22.0-dfff0894b3-104252bb10.zip/node_modules/@mediakind/mkplayer/",\
+      ["npm:1.24.0", {\
+        "packageLocation": "./.yarn/cache/@mediakind-mkplayer-npm-1.24.0-de69136a74-468c3a1dca.zip/node_modules/@mediakind/mkplayer/",\
         "packageDependencies": [\
-          ["@mediakind/mkplayer", "npm:1.22.0"],\
-          ["bitmovin-player", "npm:8.193.0"],\
+          ["@mediakind/mkplayer", "npm:1.24.0"],\
+          ["bitmovin-player", "npm:8.208.0"],\
           ["bitmovin-player-ui", "npm:3.98.0"]\
         ],\
         "linkType": "HARD"\
@@ -9439,10 +9439,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["bitmovin-player", [\
-      ["npm:8.193.0", {\
-        "packageLocation": "./.yarn/cache/bitmovin-player-npm-8.193.0-bce9704e4e-e3b93d19ed.zip/node_modules/bitmovin-player/",\
+      ["npm:8.208.0", {\
+        "packageLocation": "./.yarn/cache/bitmovin-player-npm-8.208.0-323ad5bec9-72d99a1063.zip/node_modules/bitmovin-player/",\
         "packageDependencies": [\
-          ["bitmovin-player", "npm:8.193.0"]\
+          ["bitmovin-player", "npm:8.208.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -18563,7 +18563,7 @@ const RAW_RUNTIME_STATE =
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.2.0"],\
           ["@jest/globals", "npm:29.7.0"],\
-          ["@mediakind/mkplayer", "npm:1.22.0"],\
+          ["@mediakind/mkplayer", "npm:1.24.0"],\
           ["@types/jest", "npm:29.5.14"],\
           ["@types/node", "npm:24.1.0"],\
           ["@types/session-file-store", "npm:1.2.5"],\
