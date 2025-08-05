@@ -2843,12 +2843,12 @@ __metadata:
   linkType: hard
 
 "@mediakind/mkplayer@npm:^1.10.1":
-  version: 1.22.0
-  resolution: "@mediakind/mkplayer@npm:1.22.0"
+  version: 1.24.0
+  resolution: "@mediakind/mkplayer@npm:1.24.0"
   dependencies:
-    bitmovin-player: "npm:8.193.0"
+    bitmovin-player: "npm:8.208.0"
     bitmovin-player-ui: "npm:^3.52.0"
-  checksum: 10/104252bb106bb17df6ebd45d907c1b232df1da062197701922630779874abb9dbcbf664c311c01b031b1cf8eddc7ce48164eb483b68a3b5f9d3784111bb18fe7
+  checksum: 10/468c3a1dca44822f35b09ae15b84dcf0b3253eb2a624460b89572fd762930d2c290742dd9fbfc55e47fd3f0409663a34668f6ec400fd51dde2df966e3b4fefb3
   languageName: node
   linkType: hard
 
@@ -6371,10 +6371,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bitmovin-player@npm:8.193.0":
-  version: 8.193.0
-  resolution: "bitmovin-player@npm:8.193.0"
-  checksum: 10/e3b93d19ed23b8038d574e275309a301a25e7da0c55ae396e6f3428a3e7d4e6312a4221f2417fdb26bad8fd21b0c13a9531b5337202e7378fd2335b30a9380fe
+"bitmovin-player@npm:8.208.0":
+  version: 8.208.0
+  resolution: "bitmovin-player@npm:8.208.0"
+  checksum: 10/72d99a1063a742eabe9f3b17693f907eaa5a1098892952dc124c0e2e5e70a43decfed438faab48832220296672620cf78bc172e9203c3227840ba36acf30e144
   languageName: node
   linkType: hard
 
