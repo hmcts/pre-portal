@@ -82,7 +82,7 @@
     "uuid": "^11.0.0"
   },
   "peerDependencies": {
-    "chokidar": "3.3.0",
+    "chokidar": "3.6.0",
     "react": "^19.0.0"
   },
   "devDependencies": {

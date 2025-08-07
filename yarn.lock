@@ -14470,7 +14470,7 @@ __metadata:
     webpack-dev-middleware: "npm:7.4.2"
     webpack-node-externals: "npm:3.0.0"
   peerDependencies:
-    chokidar: 3.3.0
+    chokidar: 3.6.0
     react: ^19.0.0
   languageName: unknown
   linkType: soft
