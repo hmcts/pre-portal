@@ -94,7 +94,7 @@
     "@types/uuid": "10.0.0",
     "@typescript-eslint/eslint-plugin": "8.39.0",
     "@typescript-eslint/parser": "8.39.0",
-    "allure-commandline": "^2.27.0",
+    "allure-commandline": "^2.34.1",
     "axios-debug-log": "1.0.0",
     "chokidar": "4.0.3",
     "codeceptjs": "3.7.3",

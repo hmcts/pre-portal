@@ -5622,7 +5622,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"allure-commandline@npm:^2.27.0":
+"allure-commandline@npm:^2.34.1":
   version: 2.34.1
   resolution: "allure-commandline@npm:2.34.1"
   bin:
@@ -14303,7 +14303,7 @@ __metadata:
     "@types/uuid": "npm:10.0.0"
     "@typescript-eslint/eslint-plugin": "npm:8.39.0"
     "@typescript-eslint/parser": "npm:8.39.0"
-    allure-commandline: "npm:^2.27.0"
+    allure-commandline: "npm:^2.34.1"
     applicationinsights: "npm:3.7.0"
     axios: "npm:^1.11.0"
     axios-debug-log: "npm:1.0.0"
