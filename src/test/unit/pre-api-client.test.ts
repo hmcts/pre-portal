@@ -1,6 +1,6 @@
-import { mockedPaginatedRecordings, mockRecordings, mockXUserId } from '../mock-api';
+import { mockedPaginatedAuditLogs, mockedPaginatedRecordings, mockRecordings, mockXUserId } from '../mock-api';
 import { PreClient } from '../../main/services/pre-api/pre-client';
-import { PutAuditRequest, SearchRecordingsRequest } from '../../main/services/pre-api/types';
+import { PutAuditRequest, SearchAuditLogsRequest, SearchRecordingsRequest } from '../../main/services/pre-api/types';
 import { describe } from '@jest/globals';
 import axios from 'axios';
 import { mockeduser } from './test-helper';
@@ -27,6 +27,27 @@ describe('PreClient', () => {
 
   // @ts-ignore
   mockedAxios.get.mockImplementation((url: string, config: object) => {
+    if (url === '/audit') {
+      if (config['headers']['X-User-Id'] === mockXUserId) {
+        return Promise.resolve({
+          status: 200,
+          data: mockedPaginatedAuditLogs,
+        });
+      } else if (config['params']['caseReference'] == 'uhoh') {
+        return Promise.reject('Network Error');
+      }
+      return Promise.resolve({
+        status: 200,
+        data: {
+          page: {
+            size: 20,
+            totalElements: 0,
+            totalPages: 1,
+            number: 0,
+          },
+        },
+      });
+    }
     // @ts-ignore
     if (url === '/users/by-email/' + encodeURIComponent('test@testy.com')) {
       return Promise.resolve({
@@ -287,6 +308,30 @@ describe('PreClient', () => {
     }
     expect(error).toBeTruthy();
     expect(error?.message).toEqual('Axios Put Error');
+  });
+
+  test('get audit logs', async () => {
+    const request = {} as SearchAuditLogsRequest;
+    const { auditLogs, pagination } = await preClient.getAuditLogs(mockXUserId, request);
+    expect(auditLogs).toBeTruthy();
+    expect(auditLogs.length).toBe(2);
+    expect(pagination).toBeTruthy();
+  });
+  test('get audit logs no results', async () => {
+    const request = {} as SearchAuditLogsRequest;
+    const { auditLogs, pagination } = await preClient.getAuditLogs(otherXUserId, request);
+    expect(auditLogs).toBeTruthy();
+    expect(auditLogs.length).toBe(0);
+    expect(pagination).toBeTruthy();
+  });
+
+  test('network error', async () => {
+    try {
+      await preClient.getAuditLogs(otherXUserId, { caseReference: 'uhoh' } as SearchAuditLogsRequest);
+      expect(true).toBe(false); // shouldn't get here...
+    } catch (e) {
+      expect(e).toBe('Network Error');
+    }
   });
 
   test('getRecordingPlaybackDataMk success', async () => {
