@@ -33,7 +33,7 @@
       <select required class="govuk-select" style="width: 50%" id="source_recording" name="source_recording" aria-describedby="source-recording-hint">
         <option value="" selected>Choose source recording id</option>
         {% for recording in recordings %}
-          <option value="{{ recording.id }}">{{ recording.id }}({{ recording.created_at | formatDateTime}})</option>
+          <option value="{{ recording.id }}">{{ recording.id }}({{ recording.created_at | formatDateTime}} Version {{ recording.version }})</option>
         {% endfor %}
       </select>
     </div>
@@ -152,7 +152,7 @@
         recordings.forEach(rec => {
           const opt = document.createElement('option');
           opt.value = rec.id;
-          opt.textContent = `${rec.id} (${new Date(rec.created_at).toLocaleString()})`;
+          opt.textContent = `${rec.id} (${new Date(rec.created_at).toLocaleString()}, Version: ${rec.version})`;
           select.appendChild(opt);
         });
       } catch (err) {
