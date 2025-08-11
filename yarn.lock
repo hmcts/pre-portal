@@ -4885,12 +4885,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:22.17.0":
-  version: 22.17.0
-  resolution: "@types/node@npm:22.17.0"
+"@types/node@npm:22.17.1":
+  version: 22.17.1
+  resolution: "@types/node@npm:22.17.1"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10/f77b0e1c3c00e438b56c726d6b1170d4969c600cc8d4ecf2c2aa7692243a8ff455a3d530760da95e0b6aab059c4605a384b43d18f96646c745ff133c00b84875
+  checksum: 10/775d3996693ce2e717267c810669a8122308676487130c91590022ded38a999fef63fd63b4631fdbbceeea9470f0ecf6a2333a3abbc4f917f40b404bbb57e9bc
   languageName: node
   linkType: hard
 
@@ -5611,7 +5611,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"allure-commandline@npm:^2.27.0":
+"allure-commandline@npm:^2.34.1":
   version: 2.34.1
   resolution: "allure-commandline@npm:2.34.1"
   bin:
@@ -8551,9 +8551,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-prettier@npm:5.5.3":
-  version: 5.5.3
-  resolution: "eslint-plugin-prettier@npm:5.5.3"
+"eslint-plugin-prettier@npm:5.5.4":
+  version: 5.5.4
+  resolution: "eslint-plugin-prettier@npm:5.5.4"
   dependencies:
     prettier-linter-helpers: "npm:^1.0.0"
     synckit: "npm:^0.11.7"
@@ -8567,7 +8567,7 @@ __metadata:
       optional: true
     eslint-config-prettier:
       optional: true
-  checksum: 10/0cdb838997440284145ed1e3cfa1502adffa0e92f893c4100cf2af32dff85fa8f1e86c1547c5462ad8126ee89906a9cb6180b87c4f1ad6000e4b04542938eb3c
+  checksum: 10/5e39e3b7046d4ba0e1111cc2048630ee9d0aa5d5bb00d6230bef56893fdae37cbe2261babfb26db350cc2ad517c81d283b3f8b04cfee4e5aef7cd4bee72f90de
   languageName: node
   linkType: hard
 
@@ -14203,7 +14203,7 @@ __metadata:
     "@types/jest": "npm:29.5.14"
     "@types/lodash": "npm:4.17.20"
     "@types/mini-css-extract-plugin": "npm:2.5.1"
-    "@types/node": "npm:22.17.0"
+    "@types/node": "npm:22.17.1"
     "@types/nunjucks": "npm:3.2.6"
     "@types/require-directory": "npm:2.1.6"
     "@types/serve-favicon": "npm:2.5.7"
@@ -14212,7 +14212,7 @@ __metadata:
     "@types/uuid": "npm:10.0.0"
     "@typescript-eslint/eslint-plugin": "npm:8.39.0"
     "@typescript-eslint/parser": "npm:8.39.0"
-    allure-commandline: "npm:^2.27.0"
+    allure-commandline: "npm:^2.34.1"
     applicationinsights: "npm:3.7.0"
     axios: "npm:^1.11.0"
     axios-debug-log: "npm:1.0.0"
@@ -14231,7 +14231,7 @@ __metadata:
     eslint-config-prettier: "npm:10.1.8"
     eslint-plugin-import: "npm:2.32.0"
     eslint-plugin-jest: "npm:28.14.0"
-    eslint-plugin-prettier: "npm:5.5.3"
+    eslint-plugin-prettier: "npm:5.5.4"
     express: "npm:5.1.0"
     express-nunjucks: "npm:3.1.2"
     express-openid-connect: "npm:2.19.2"
@@ -14262,7 +14262,7 @@ __metadata:
     puppeteer: "npm:^24.0.0"
     react: "npm:^19.0.0"
     react-native: "npm:^0.80.0"
-    redis: "npm:^5.6.1"
+    redis: "npm:^5.8.0"
     require-directory: "npm:2.1.1"
     sass: "npm:1.90.0"
     sass-loader: "npm:16.0.5"
@@ -14856,7 +14856,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"redis@npm:^5.6.1":
+"redis@npm:^5.8.0":
   version: 5.8.0
   resolution: "redis@npm:5.8.0"
   dependencies:
