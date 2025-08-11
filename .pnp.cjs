@@ -32,7 +32,7 @@ const RAW_RUNTIME_STATE =
           ["@babel/preset-env", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.28.0"],\
           ["@codeceptjs/allure-legacy", "npm:1.0.2"],\
           ["@codeceptjs/configure", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.6"],\
-          ["@eslint/compat", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.3.1"],\
+          ["@eslint/compat", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.3.2"],\
           ["@hmcts/cookie-manager", "npm:1.0.0"],\
           ["@hmcts/info-provider", "npm:1.2.3"],\
           ["@hmcts/nodejs-healthcheck", "npm:1.8.6"],\
@@ -3977,17 +3977,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@eslint/compat", [\
-      ["npm:1.3.1", {\
-        "packageLocation": "./.yarn/cache/@eslint-compat-npm-1.3.1-41a44c7960-688231f00b.zip/node_modules/@eslint/compat/",\
+      ["npm:1.3.2", {\
+        "packageLocation": "./.yarn/cache/@eslint-compat-npm-1.3.2-b403da4a15-e710ec5ed8.zip/node_modules/@eslint/compat/",\
         "packageDependencies": [\
-          ["@eslint/compat", "npm:1.3.1"]\
+          ["@eslint/compat", "npm:1.3.2"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.3.1", {\
-        "packageLocation": "./.yarn/__virtual__/@eslint-compat-virtual-ab8a16cdf5/0/cache/@eslint-compat-npm-1.3.1-41a44c7960-688231f00b.zip/node_modules/@eslint/compat/",\
+      ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.3.2", {\
+        "packageLocation": "./.yarn/__virtual__/@eslint-compat-virtual-66912013d8/0/cache/@eslint-compat-npm-1.3.2-b403da4a15-e710ec5ed8.zip/node_modules/@eslint/compat/",\
         "packageDependencies": [\
-          ["@eslint/compat", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.3.1"],\
+          ["@eslint/compat", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.3.2"],\
           ["@types/eslint", null],\
           ["eslint", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:9.32.0"]\
         ],\
@@ -18981,7 +18981,7 @@ const RAW_RUNTIME_STATE =
           ["@babel/preset-env", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.28.0"],\
           ["@codeceptjs/allure-legacy", "npm:1.0.2"],\
           ["@codeceptjs/configure", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.6"],\
-          ["@eslint/compat", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.3.1"],\
+          ["@eslint/compat", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.3.2"],\
           ["@hmcts/cookie-manager", "npm:1.0.0"],\
           ["@hmcts/info-provider", "npm:1.2.3"],\
           ["@hmcts/nodejs-healthcheck", "npm:1.8.6"],\
