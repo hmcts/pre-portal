@@ -80,7 +80,6 @@ export default function (app: Application): void {
     const client = new PreClient();
     const { recordings } = await client.getRecordings(superUserId, {
       caseReference: req.query.case_reference as string,
-      version: 1,
       // todo more reasonable number here?
       size: 50,
     });
