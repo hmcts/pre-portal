@@ -96,7 +96,7 @@ const RAW_RUNTIME_STATE =
           ["jest-util", "npm:30.0.5"],\
           ["jose", "npm:5.10.0"],\
           ["jquery", "npm:3.7.1"],\
-          ["lint-staged", "npm:16.1.4"],\
+          ["lint-staged", "npm:16.1.5"],\
           ["lodash", "npm:4.17.21"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.3"],\
@@ -10172,10 +10172,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:5.4.1", {\
-        "packageLocation": "./.yarn/cache/chalk-npm-5.4.1-2f3fe4660a-29df3ffcdf.zip/node_modules/chalk/",\
+      ["npm:5.5.0", {\
+        "packageLocation": "./.yarn/cache/chalk-npm-5.5.0-cb75d7771a-19f6905b47.zip/node_modules/chalk/",\
         "packageDependencies": [\
-          ["chalk", "npm:5.4.1"]\
+          ["chalk", "npm:5.5.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16069,14 +16069,14 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["lint-staged", [\
-      ["npm:16.1.4", {\
-        "packageLocation": "./.yarn/cache/lint-staged-npm-16.1.4-fbe673094c-71330be72e.zip/node_modules/lint-staged/",\
+      ["npm:16.1.5", {\
+        "packageLocation": "./.yarn/cache/lint-staged-npm-16.1.5-8b8b80d7ec-02b284f89d.zip/node_modules/lint-staged/",\
         "packageDependencies": [\
-          ["chalk", "npm:5.4.1"],\
+          ["chalk", "npm:5.5.0"],\
           ["commander", "npm:14.0.0"],\
           ["debug", "virtual:66b3390b4eccbfa0e7f88b649ba0bbc12a2944432838d6fddbf862e3ce97448fd27286b33697fdcd278339dcbac4ff595eb84b91eeb93160166752a0fcae7007#npm:4.4.1"],\
           ["lilconfig", "npm:3.1.3"],\
-          ["lint-staged", "npm:16.1.4"],\
+          ["lint-staged", "npm:16.1.5"],\
           ["listr2", "npm:9.0.1"],\
           ["micromatch", "npm:4.0.8"],\
           ["nano-spawn", "npm:1.0.2"],\
@@ -18811,7 +18811,7 @@ const RAW_RUNTIME_STATE =
           ["jest-util", "npm:30.0.5"],\
           ["jose", "npm:5.10.0"],\
           ["jquery", "npm:3.7.1"],\
-          ["lint-staged", "npm:16.1.4"],\
+          ["lint-staged", "npm:16.1.5"],\
           ["lodash", "npm:4.17.21"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.3"],\
