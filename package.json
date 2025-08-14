@@ -99,7 +99,7 @@
     "axios-debug-log": "1.0.0",
     "chokidar": "4.0.3",
     "codeceptjs": "3.7.3",
-    "copy-webpack-plugin": "13.0.0",
+    "copy-webpack-plugin": "13.0.1",
     "css-loader": "7.1.2",
     "debug": "4.4.1",
     "eslint": "9.32.0",
