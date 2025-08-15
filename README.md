@@ -271,7 +271,6 @@ e.g. the ones verifying the state of each service it depends on.
 
 The sign in page is provided by Azure B2C. The code for it is in https://github.com/hmcts/pre-shared-infrastructure/tree/master/b2c. Make sure you read the [README](https://github.com/hmcts/pre-shared-infrastructure/blob/master/b2c/README.md) first.
 
-
 ### Testing with the DEV instance of B2C
 
 Sometimes you'll be making changes to B2C and you'll want a frontend available which points to it.
