@@ -81,8 +81,9 @@
     "uuid": "^11.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.2",
-    "@babel/preset-env": "^7.25.4",
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "@babel/preset-typescript": "^7.27.1",
     "@codeceptjs/allure-legacy": "^1.0.2",
     "@codeceptjs/configure": "1.0.6",
     "@eslint/compat": "^1.1.1",
@@ -96,6 +97,7 @@
     "@typescript-eslint/parser": "8.28.0",
     "allure-commandline": "^2.27.0",
     "axios-debug-log": "1.0.0",
+    "babel-jest": "^30.0.5",
     "chokidar": "4.0.3",
     "codeceptjs": "3.7.3",
     "copy-webpack-plugin": "13.0.0",

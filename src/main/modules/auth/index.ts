@@ -7,7 +7,6 @@ import RedisStore from 'connect-redis';
 import { Application } from 'express';
 import { ConfigParams, auth } from 'express-openid-connect';
 import session from 'express-session';
-import * as jose from 'jose';
 import FileStoreFactory from 'session-file-store';
 
 const FileStore = FileStoreFactory(session);
@@ -42,10 +41,10 @@ export class Auth {
           config.get('pre.portalUrl')) as string,
       },
       afterCallback: async (req, res, s) => {
+        const jose = await import('jose');
         const claims = jose.decodeJwt(s.id_token);
         // @todo add jwt validation here
 
-        // check if the user is a new user
         const client = new PreClient();
         return {
           ...s,
