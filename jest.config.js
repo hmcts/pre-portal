@@ -11,5 +11,5 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   coveragePathIgnorePatterns: ['<rootDir>/src/main/modules/properties-volume/', '<rootDir>/src/main/assets/js/'],
   // If you only want to skip helper test files
-  testPathIgnorePatterns: ['\\.helper\\.ts$'],
+  testPathIgnorePatterns: ['(\\.|-)helper\\.ts$'],
 };
