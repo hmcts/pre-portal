@@ -47,10 +47,8 @@ const RAW_RUNTIME_STATE =
           ["@types/es6-promisify", "npm:6.0.4"],\
           ["@types/express", "npm:5.0.3"],\
           ["@types/express-session", "npm:1.18.2"],\
-          ["@types/glob", "npm:8.1.0"],\
           ["@types/jest", "npm:29.5.14"],\
           ["@types/lodash", "npm:4.17.20"],\
-          ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
           ["@types/node", "npm:22.17.2"],\
           ["@types/nunjucks", "npm:3.2.6"],\
           ["@types/require-directory", "npm:2.1.6"],\
@@ -7552,17 +7550,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["@types/glob", [\
-      ["npm:8.1.0", {\
-        "packageLocation": "./.yarn/cache/@types-glob-npm-8.1.0-bdb9d0520c-9101f3a906.zip/node_modules/@types/glob/",\
-        "packageDependencies": [\
-          ["@types/glob", "npm:8.1.0"],\
-          ["@types/minimatch", "npm:5.1.2"],\
-          ["@types/node", "npm:24.0.3"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["@types/graceful-fs", [\
       ["npm:4.1.9", {\
         "packageLocation": "./.yarn/cache/@types-graceful-fs-npm-4.1.9-ebd697fe83-79d746a8f0.zip/node_modules/@types/graceful-fs/",\
@@ -7691,25 +7678,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@types-mime-npm-1.3.5-48d28990db-e29a5f9c47.zip/node_modules/@types/mime/",\
         "packageDependencies": [\
           ["@types/mime", "npm:1.3.5"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@types/mini-css-extract-plugin", [\
-      ["npm:2.5.1", {\
-        "packageLocation": "./.yarn/cache/@types-mini-css-extract-plugin-npm-2.5.1-36ad456a43-047a8600d4.zip/node_modules/@types/mini-css-extract-plugin/",\
-        "packageDependencies": [\
-          ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
-          ["mini-css-extract-plugin", "virtual:36ad456a430c7ce214b5b6dc53855a991370ff5c273e9bb94e009010d87b9053f266726cb96e11bd6682fd3ac25a3e86cfab9c95d223de555ebbba2b02024629#npm:2.9.3"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@types/minimatch", [\
-      ["npm:5.1.2", {\
-        "packageLocation": "./.yarn/cache/@types-minimatch-npm-5.1.2-aab9c394d3-94db5060d2.zip/node_modules/@types/minimatch/",\
-        "packageDependencies": [\
-          ["@types/minimatch", "npm:5.1.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17256,13 +17224,6 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["mini-css-extract-plugin", [\
-      ["npm:2.9.3", {\
-        "packageLocation": "./.yarn/cache/mini-css-extract-plugin-npm-2.9.3-4966d0d1ff-55bcc341af.zip/node_modules/mini-css-extract-plugin/",\
-        "packageDependencies": [\
-          ["mini-css-extract-plugin", "npm:2.9.3"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
       ["npm:2.9.4", {\
         "packageLocation": "./.yarn/cache/mini-css-extract-plugin-npm-2.9.4-9bd74fa138-24a0418dc4.zip/node_modules/mini-css-extract-plugin/",\
         "packageDependencies": [\
@@ -17278,21 +17239,6 @@ const RAW_RUNTIME_STATE =
           ["schema-utils", "npm:4.3.2"],\
           ["tapable", "npm:2.2.2"],\
           ["webpack", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.101.3"]\
-        ],\
-        "packagePeers": [\
-          "@types/webpack",\
-          "webpack"\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["virtual:36ad456a430c7ce214b5b6dc53855a991370ff5c273e9bb94e009010d87b9053f266726cb96e11bd6682fd3ac25a3e86cfab9c95d223de555ebbba2b02024629#npm:2.9.3", {\
-        "packageLocation": "./.yarn/__virtual__/mini-css-extract-plugin-virtual-89bb3d2fd1/0/cache/mini-css-extract-plugin-npm-2.9.3-4966d0d1ff-55bcc341af.zip/node_modules/mini-css-extract-plugin/",\
-        "packageDependencies": [\
-          ["@types/webpack", null],\
-          ["mini-css-extract-plugin", "virtual:36ad456a430c7ce214b5b6dc53855a991370ff5c273e9bb94e009010d87b9053f266726cb96e11bd6682fd3ac25a3e86cfab9c95d223de555ebbba2b02024629#npm:2.9.3"],\
-          ["schema-utils", "npm:4.3.2"],\
-          ["tapable", "npm:2.2.2"],\
-          ["webpack", null]\
         ],\
         "packagePeers": [\
           "@types/webpack",\
@@ -18910,10 +18856,8 @@ const RAW_RUNTIME_STATE =
           ["@types/es6-promisify", "npm:6.0.4"],\
           ["@types/express", "npm:5.0.3"],\
           ["@types/express-session", "npm:1.18.2"],\
-          ["@types/glob", "npm:8.1.0"],\
           ["@types/jest", "npm:29.5.14"],\
           ["@types/lodash", "npm:4.17.20"],\
-          ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
           ["@types/node", "npm:22.17.2"],\
           ["@types/nunjucks", "npm:3.2.6"],\
           ["@types/require-directory", "npm:2.1.6"],\
