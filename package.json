@@ -141,7 +141,7 @@
     "express": "5.1.0",
     "cookie": "0.7.2",
     "axios": "1.11.0",
-    "brace-expansion": "^2.0.2"
+    "brace-expansion": "^4.0.0"
   },
   "husky": {
     "hooks": {
