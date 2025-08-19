@@ -79,6 +79,11 @@ Then('I enter a valid email address', () => {
   I.click('Send verification code');
 });
 
+Then('I enter a bogus email address', () => {
+  I.fillField('Email Address', 'thisisnotlikeltoexistinour@db.com');
+  I.click('Send verification code');
+});
+
 Then('I sign in with an unknown user', () => {
   I.fillField('Email Address', 'email@hmcts.net');
   I.fillField('Password', 'this is a password');
@@ -106,7 +111,7 @@ When('I click on play on a browse page', () => {
 });
 
 When('I play the recording', () => {
-  I.wait(5); //needed as it takes time to load recording on page.
+  I.wait(10); //needed as it takes time to load recording on page.
   I.waitForElement("//*[@aria-label='Play']");
   I.click('Play');
 });
