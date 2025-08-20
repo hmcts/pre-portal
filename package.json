@@ -100,7 +100,7 @@
     "axios-debug-log": "1.0.0",
     "babel-jest": "^30.0.5",
     "chokidar": "4.0.3",
-    "codeceptjs": "3.7.3",
+    "codeceptjs": "3.7.4",
     "copy-webpack-plugin": "13.0.1",
     "css-loader": "7.1.2",
     "debug": "4.4.1",
