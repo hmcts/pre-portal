@@ -33,7 +33,7 @@ const RAW_RUNTIME_STATE =
           ["@codeceptjs/allure-legacy", "npm:1.0.2"],\
           ["@codeceptjs/configure", "virtual:d5a2c22947a81b5901b038429ffbd1409a6d694ce565634dad60e7ed3db9a53a9cae7f975db5a321911ef17b33d7b2727e0cdc63cda4663600d95e3cd1455513#npm:1.0.6"],\
           ["@eslint/compat", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.3.2"],\
-          ["@hmcts/cookie-manager", "npm:1.0.0"],\
+          ["@hmcts/cookie-manager", "npm:1.1.0"],\
           ["@hmcts/info-provider", "npm:1.2.3"],\
           ["@hmcts/nodejs-healthcheck", "npm:1.8.6"],\
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
@@ -4212,10 +4212,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@hmcts/cookie-manager", [\
-      ["npm:1.0.0", {\
-        "packageLocation": "./.yarn/cache/@hmcts-cookie-manager-npm-1.0.0-f7ac279484-8ea2c9e9f8.zip/node_modules/@hmcts/cookie-manager/",\
+      ["npm:1.1.0", {\
+        "packageLocation": "./.yarn/cache/@hmcts-cookie-manager-npm-1.1.0-b7df48a726-f480f04fc9.zip/node_modules/@hmcts/cookie-manager/",\
         "packageDependencies": [\
-          ["@hmcts/cookie-manager", "npm:1.0.0"]\
+          ["@hmcts/cookie-manager", "npm:1.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -19034,7 +19034,7 @@ const RAW_RUNTIME_STATE =
           ["@codeceptjs/allure-legacy", "npm:1.0.2"],\
           ["@codeceptjs/configure", "virtual:d5a2c22947a81b5901b038429ffbd1409a6d694ce565634dad60e7ed3db9a53a9cae7f975db5a321911ef17b33d7b2727e0cdc63cda4663600d95e3cd1455513#npm:1.0.6"],\
           ["@eslint/compat", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.3.2"],\
-          ["@hmcts/cookie-manager", "npm:1.0.0"],\
+          ["@hmcts/cookie-manager", "npm:1.1.0"],\
           ["@hmcts/info-provider", "npm:1.2.3"],\
           ["@hmcts/nodejs-healthcheck", "npm:1.8.6"],\
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
