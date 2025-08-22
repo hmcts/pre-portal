@@ -2190,10 +2190,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hmcts/cookie-manager@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@hmcts/cookie-manager@npm:1.0.0"
-  checksum: 10/8ea2c9e9f84bdf72a12467623f1d0e156803521c8098e82f02c308a6474c2f81514555170329005f23767f51ffd706df693c847389298f67533f62a51d2cdcb7
+"@hmcts/cookie-manager@npm:1.1.0":
+  version: 1.1.0
+  resolution: "@hmcts/cookie-manager@npm:1.1.0"
+  checksum: 10/f480f04fc96925058f74b6c3e47c84a7412ee87783df415e7c4df3c483948b85d71dd959ac9533da505d75621c952b5c288f356d000a6d45b014c83e4dee5794
   languageName: node
   linkType: hard
 
@@ -14326,7 +14326,7 @@ __metadata:
     "@codeceptjs/allure-legacy": "npm:^1.0.2"
     "@codeceptjs/configure": "npm:1.0.6"
     "@eslint/compat": "npm:^1.1.1"
-    "@hmcts/cookie-manager": "npm:1.0.0"
+    "@hmcts/cookie-manager": "npm:1.1.0"
     "@hmcts/info-provider": "npm:1.2.3"
     "@hmcts/nodejs-healthcheck": "npm:1.8.6"
     "@hmcts/nodejs-logging": "npm:4.0.4"
