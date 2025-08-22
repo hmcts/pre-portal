@@ -15,7 +15,6 @@ import {
 import { Logger } from '@hmcts/nodejs-logging';
 import axios, { AxiosResponse } from 'axios';
 import FormData from 'form-data';
-import config from 'config';
 
 export class PreClient {
   logger = Logger.getLogger('pre-client');
