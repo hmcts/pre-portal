@@ -47,7 +47,7 @@ const RAW_RUNTIME_STATE =
           ["@types/es6-promisify", "npm:6.0.4"],\
           ["@types/express", "npm:5.0.3"],\
           ["@types/express-session", "npm:1.18.2"],\
-          ["@types/glob", "npm:8.1.0"],\
+          ["@types/glob", "npm:9.0.0"],\
           ["@types/jest", "npm:29.5.14"],\
           ["@types/lodash", "npm:4.17.20"],\
           ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
@@ -7543,12 +7543,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/glob", [\
-      ["npm:8.1.0", {\
-        "packageLocation": "./.yarn/cache/@types-glob-npm-8.1.0-bdb9d0520c-9101f3a906.zip/node_modules/@types/glob/",\
+      ["npm:9.0.0", {\
+        "packageLocation": "./.yarn/cache/@types-glob-npm-9.0.0-8534eee0f9-a9ea3afe1e.zip/node_modules/@types/glob/",\
         "packageDependencies": [\
-          ["@types/glob", "npm:8.1.0"],\
-          ["@types/minimatch", "npm:5.1.2"],\
-          ["@types/node", "npm:24.0.3"]\
+          ["@types/glob", "npm:9.0.0"],\
+          ["glob", "npm:11.0.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7691,15 +7690,6 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
           ["mini-css-extract-plugin", "virtual:36ad456a430c7ce214b5b6dc53855a991370ff5c273e9bb94e009010d87b9053f266726cb96e11bd6682fd3ac25a3e86cfab9c95d223de555ebbba2b02024629#npm:2.9.3"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@types/minimatch", [\
-      ["npm:5.1.2", {\
-        "packageLocation": "./.yarn/cache/@types-minimatch-npm-5.1.2-aab9c394d3-94db5060d2.zip/node_modules/@types/minimatch/",\
-        "packageDependencies": [\
-          ["@types/minimatch", "npm:5.1.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -19048,7 +19038,7 @@ const RAW_RUNTIME_STATE =
           ["@types/es6-promisify", "npm:6.0.4"],\
           ["@types/express", "npm:5.0.3"],\
           ["@types/express-session", "npm:1.18.2"],\
-          ["@types/glob", "npm:8.1.0"],\
+          ["@types/glob", "npm:9.0.0"],\
           ["@types/jest", "npm:29.5.14"],\
           ["@types/lodash", "npm:4.17.20"],\
           ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
