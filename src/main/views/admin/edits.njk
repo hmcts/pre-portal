@@ -152,7 +152,7 @@
         recordings.forEach(rec => {
           const opt = document.createElement('option');
           opt.value = rec.id;
-          opt.textContent = `${rec.id} (${new Date(rec.created_at).toLocaleString()}, Version: ${rec.version})`;
+          opt.textContent = `${rec.id} (${new Date(rec.capture_session.started_at).toLocaleString()}, Version: ${rec.version})`;
           select.appendChild(opt);
         });
       } catch (err) {
