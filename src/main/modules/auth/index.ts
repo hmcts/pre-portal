@@ -11,13 +11,51 @@ import FileStoreFactory from 'session-file-store';
 
 const FileStore = FileStoreFactory(session);
 import { RedisStore } from 'connect-redis';
+import * as querystring from 'node:querystring';
 
 export class Auth {
   public enableFor(app: Application): void {
     const logger = Logger.getLogger('auth-module');
+    const authConf = this.getConfigParams(app, logger);
+
+    // handle auth callbacks before enabling auth route handling
+    app.get('/callback', async (req, res, next) => {
+      const { error, error_description } = req.query;
+
+      logger.info("Handling callback with error: {}, description: {}", error, error_description);
+
+      if (error && /AADB2C90118/i.test(error_description as string)) {
+        try {
+          // 1. Fetch the OIDC metadata for Password Reset policy
+          const resp = await fetch(`${config.get('config.b2c.baseUrl')}?p=B2C_1A_PasswordReset`);
+          if (!resp.ok) {
+            throw new Error(`Failed to fetch password reset metadata: ${resp.status}`);
+          }
+          const metadata = await resp.json();
+
+          // 2. Use your existing OIDC config to build params
+          const params = {
+            client_id: config.get('b2c.appClientId') as string,
+            redirect_uri: `${config.get('pre.portalUrl')}/callback`,
+            response_type: 'code',
+            scope: authConf.authorizationParams?.scope,
+            state: req.query.state as string || 'password-reset',
+          };
+
+          // 3. Redirect to Password Reset policy
+          const authUrl = `${metadata.authorization_endpoint}?${querystring.stringify(params)}`;
+          res.redirect(authUrl);
+        } catch (err) {
+          console.error(err);
+          res.status(500).send('Error starting password reset flow');
+        }
+      }
+
+      return next();
+    });
 
     // https://auth0.github.io/express-openid-connect/interfaces/ConfigParams.html
-    app.use(auth(this.getConfigParams(app, logger)));
+    app.use(auth(authConf));
   }
 
   private getConfigParams(app: Application, logger: Logger): ConfigParams {
@@ -28,7 +66,7 @@ export class Auth {
       secret: config.get('session.secret') as string,
       baseURL: config.get('pre.portalUrl') as string,
       clientID: config.get('b2c.appClientId') as string,
-      issuerBaseURL: config.get('b2c.baseUrl') as string,
+      issuerBaseURL: config.get('b2c.baseUrl') as string + '?p=B2C_1A_SignUpOrSignin',
       clientAuthMethod: 'client_secret_post',
       clientSecret: config.get('b2c.appClientSecret') as string,
       authorizationParams: {
