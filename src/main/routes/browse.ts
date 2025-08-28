@@ -130,7 +130,8 @@ export default function (app: Application): void {
       paginationLinks,
       title,
       user: SessionUser.getLoggedInUserProfile(req).user,
-      isSuperUser,
+      isSuperUser: isSuperUser,
+      pageUrl: req.url,
     });
   });
 }
