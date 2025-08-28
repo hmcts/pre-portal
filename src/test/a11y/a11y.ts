@@ -59,7 +59,7 @@ describe('Accessibility', () => {
 
     beforeEach(async () => {
       browser = await puppeteer.launch({
-        ignoreHTTPSErrors: true,
+        acceptInsecureCerts: true,
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
       });
@@ -83,7 +83,7 @@ describe('Accessibility', () => {
 
     test('admin/status page should have no accessibility errors', async () => {
       const browser = await puppeteer.launch({
-        ignoreHTTPSErrors: true,
+        acceptInsecureCerts: true,
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
       });
@@ -105,7 +105,7 @@ describe('Accessibility', () => {
 
     test('admin/MK-live-events page should have no accessibility errors', async () => {
       const browser = await puppeteer.launch({
-        ignoreHTTPSErrors: true,
+        acceptInsecureCerts: true,
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
       });
@@ -127,7 +127,7 @@ describe('Accessibility', () => {
 
     test('/browse, watch, and terms pages', async () => {
       const browser = await puppeteer.launch({
-        ignoreHTTPSErrors: true,
+        acceptInsecureCerts: true,
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
       });
