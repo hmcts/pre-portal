@@ -60,7 +60,7 @@
   <div>
 
     <div style="overflow-x: auto; width: 100%;">
-      <table class="govuk-table" id="live-events-table">
+      <table class="govuk-table" id="resizable-table">
         <caption class="govuk-table__caption govuk-table__caption--m"  tabindex="0">Live events</caption>
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
@@ -77,7 +77,7 @@
               <td>No live events found.</td>
             </tbody>
         {% else %}
-          <tbody class="govuk-table__body" id="live-events-body">
+          <tbody class="govuk-table__body" id="resizable-body">
             {% for liveEvent in liveEvents %}
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell" tabindex="0">{{ liveEvent.caseReference }}</td>
@@ -109,7 +109,7 @@ function filterTable() {
     const descriptionFilter = document.getElementById("description").value.toLowerCase();
     const resourceStateFilter = document.getElementById("resource-state").value.toLowerCase();
 
-    const rows = document.querySelectorAll("#live-events-body .govuk-table__row");
+    const rows = document.querySelectorAll("#resizable-body .govuk-table__row");
     let visibleRowCount = 0;
 
     rows.forEach(row => {
@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
       column.style.width = newWidth + "px";
       const columnIndex = Array.from(column.parentElement.children).indexOf(column);
 
-      document.querySelectorAll(`#live-events-table tr td:nth-child(${columnIndex + 1})`).forEach(td => {
+      document.querySelectorAll(`#resizable-table tr td:nth-child(${columnIndex + 1})`).forEach(td => {
         td.style.width = newWidth + "px";
       });
     }

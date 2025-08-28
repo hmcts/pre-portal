@@ -13,6 +13,9 @@ import { Logger } from '@hmcts/nodejs-logging';
 import axios, { AxiosResponse } from 'axios';
 import config from 'config';
 import { HealthResponse } from '../../types/health';
+//import { VfMigrationRecord } from '../../types/vf-migration-record'
+import { Court } from '../../types/court';
+import qs from 'qs';
 
 export class PreClient {
   logger = Logger.getLogger('pre-client');
@@ -159,11 +162,9 @@ export class PreClient {
 
       return { recordings, pagination };
     } catch (e) {
-      // log the error
       this.logger.info('path', e.response?.request.path);
       this.logger.info('res headers', e.response?.headers);
       this.logger.info('data', e.response?.data);
-      // rethrow the error for the UI
       throw e;
     }
   }
@@ -284,5 +285,143 @@ export class PreClient {
       this.logger.error(e.message);
       throw e;
     }
+  }
+
+  public async getMigrationRecords(
+    xUserId: string,
+    caseReference?: string,
+    witnessName?: string,
+    defendantName?: string,
+    courtReference?: string,
+    status?: string,
+    createDateFrom?: string,
+    createDateTo?: string,
+    reasonIn?: string[],
+    page?: number,
+    size?: number,
+    sort?: string
+  ): Promise<{ records: any[]; pagination: Pagination }> {
+    try {
+      const queryParams: Record<string, any> = {};
+
+      if (caseReference) queryParams.caseReference = caseReference;
+      if (witnessName) queryParams.witnessName = witnessName;
+      if (defendantName) queryParams.defendantName = defendantName;
+      if (courtReference) queryParams.courtReference = courtReference;
+      const statusMap: Record<string, string> = {
+        Unresolved: 'FAILED',
+        Resolved: 'RESOLVED',
+        Pending: 'PENDING',
+      };
+      if (status) queryParams.status = statusMap[status] || status.toUpperCase();
+      function formatDate(dateString?: string): string | undefined {
+        if (!dateString) return undefined;
+
+        const [day, month, year] = dateString.split('/');
+        if (!day || !month || !year) return undefined;
+
+        return `${year}-${month}-${day}`;
+      }
+
+      if (createDateFrom) queryParams.createDateFrom = formatDate(createDateFrom);
+      if (createDateTo) queryParams.createDateTo = formatDate(createDateTo);
+
+      if (reasonIn) queryParams.reasonIn = reasonIn;
+      if (page !== undefined) queryParams.page = page;
+      if (size !== undefined) queryParams.size = size;
+
+      if (sort) queryParams.sort = sort;
+
+      console.log('Calling Migration API with params:', queryParams);
+
+      const VfFailureReasonMap: Record<string, string> = {
+        Incomplete_Data: 'INCOMPLETE_DATA',
+        Invalid_Format: 'INVALID_FORMAT',
+        Not_Most_Recent: 'NOT_MOST_RECENT',
+        Pre_Go_Live: 'PRE_GO_LIVE',
+        Pre_Existing: 'PRE_EXISTING',
+        Validation_Failed: 'VALIDATION_FAILED',
+        Alternative_Available: 'ALTERNATIVE_AVAILABLE',
+        General_Error: 'GENERAL_ERROR',
+        Test: 'TEST',
+      };
+
+      function mapReasonsToEnum(reasons?: string[]): string[] | undefined {
+        if (!reasons || reasons.length === 0) return undefined;
+        return reasons.map(r => VfFailureReasonMap[r] || r);
+      }
+
+      if (reasonIn && reasonIn.length > 0) {
+        queryParams.reasonIn = mapReasonsToEnum(reasonIn);
+      }
+
+      console.log('Final queryParams.reasonIn:', queryParams.reasonIn);
+
+      const response = await axios.get('https://pre-api.staging.platform.hmcts.net/vf-migration-records', {
+        headers: { 'X-User-Id': xUserId },
+        params: queryParams,
+        paramsSerializer: params => qs.stringify(params, { arrayFormat: 'repeat' }), // 👈 key line
+      });
+
+      const pagination = {
+        currentPage: response.data['page']['number'],
+        totalPages: response.data['page']['totalPages'],
+        totalElements: response.data['page']['totalElements'],
+        size: response.data['page']['size'],
+      } as Pagination;
+      const records =
+        pagination.totalElements === 0 ? [] : (response.data['_embedded']?.['vfMigrationRecordDTOList'] as any[]);
+
+      return { records, pagination };
+      console.log('records', records);
+
+      //return response.data._embedded?.vfMigrationRecordDTOList || [];
+    } catch (e: any) {
+      console.error('Error fetching migration records', {
+        path: e.response?.request?.path,
+        status: e.response?.status,
+        data: e.response?.data,
+      });
+      throw e;
+    }
+  }
+  public async submitMigrationRecords(xUserId: string): Promise<void> {
+    try {
+      await axios.post('https://pre-api.staging.platform.hmcts.net/vf-migration-records/submit', null, {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+      });
+    } catch (e: any) {
+      this.logger.info('submitMigrationRecords error path:', e.response?.request?.path);
+      this.logger.info('res headers:', e.response?.headers);
+      this.logger.info('data:', e.response?.data);
+      throw e;
+    }
+  }
+
+  public async updateMigrationRecord(xUserId: string, recordId: string, dto: any): Promise<void> {
+    console.log('dto', dto);
+    try {
+      await axios.put(`https://pre-api.staging.platform.hmcts.net/vf-migration-records/${recordId}`, dto, {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+      });
+    } catch (e: any) {
+      this.logger.info('updateMigrationRecord error path:', e.response?.request?.path);
+      this.logger.info('res headers:', e.response?.headers);
+      this.logger.info('data:', e.response?.data);
+      throw e;
+    }
+  }
+
+  public async getCourts(xUserId: string, page: number = 0, size: number = 50): Promise<any> {
+    const response = await axios.get(`/courts`, {
+      headers: { 'X-User-Id': xUserId },
+      params: { page, size },
+    });
+
+    return response.data as Court[];
   }
 }

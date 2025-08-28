@@ -59,19 +59,19 @@
   border: 0;
 }
 
-#live-events-table {
+#resizable-table {
   width: 100%;
   table-layout: fixed;
   border-collapse: collapse;
 }
-#live-events-table .govuk-table__header {
+#resizable-table .govuk-table__header {
   position: relative;
   white-space: nowrap;
   border-right: 2px solid #ccc;
   padding: 8px;
 }
 
-#live-events-table .govuk-table__header:last-child {
+#resizable-table .govuk-table__header:last-child {
   border-right: none;
 }
 
@@ -94,8 +94,8 @@
   background-color: #ccc;
 }
 
-#live-events-table .govuk-table__header,
-#live-events-table .govuk-table__cell {
+#resizable-table .govuk-table__header,
+#resizable-table .govuk-table__cell {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -105,7 +105,7 @@
 .fixed-column {
   width: 25%;
 }
-#live-events-table .govuk-table {
+#resizable-table .govuk-table {
   font-family: 'GDS Transport', arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -119,23 +119,23 @@
   border-collapse: collapse;
 }
 
-#live-events-table .govuk-table__header:nth-child(1),
-#live-events-table .govuk-table__cell:nth-child(1) {
+#resizable-table .govuk-table__header:nth-child(1),
+#resizable-table .govuk-table__cell:nth-child(1) {
   width: 200px;
 }
 
-#live-events-table .govuk-table__header:nth-child(2),
-#live-events-table .govuk-table__cell:nth-child(2) {
+#resizable-table .govuk-table__header:nth-child(2),
+#resizable-table .govuk-table__cell:nth-child(2) {
   width: 200px;
 }
 
-#live-events-table .govuk-table__header:nth-child(3),
-#live-events-table .govuk-table__cell:nth-child(3) {
+#resizable-table .govuk-table__header:nth-child(3),
+#resizable-table .govuk-table__cell:nth-child(3) {
   width: 200px;
 }
 
-#live-events-table .govuk-table__header:nth-child(4),
-#live-events-table .govuk-table__cell:nth-child(4) {
+#resizable-table .govuk-table__header:nth-child(4),
+#resizable-table .govuk-table__cell:nth-child(4) {
   width: 100px;
 }
 
@@ -162,6 +162,56 @@
   padding-bottom: 4px;
   font-weight: bold;
 }
+
+.sticky-header-container {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: white;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.sticky-col {
+  position: sticky;
+  left: 0;
+  background-color: #fff;
+  border-right: 2px solid #b1b4b6;
+  z-index: 1;
+  box-shadow: 2px 0 5px -2px rgba(0, 0, 0, 0.1);
+}
+.govuk-table__header.sticky-col {
+  z-index: 3;
+}
+
+.govuk-table thead th.sticky-header {
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+  z-index: 3;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+thead th.sticky-col {
+  position: sticky;
+  left: 0;
+  background-color: #fff;
+  z-index: 1;
+  box-shadow: 2px 0 5px -2px rgba(0, 0, 0, 0.1);
+}
+
+thead .sticky-col {
+  z-index: 3;
+}
+
+.table-scroll-container th {
+  position: sticky;
+  top: 0;
+  background: white; /* Ensure it's visible when sticky */
+  z-index: 2;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
 .govuk-link {
   text-decoration: none;
   color: #1d70b8;
@@ -210,4 +260,91 @@
   border: 0;
   clip: rect(0, 0, 0, 0);
   overflow: hidden;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.overlay {
+  position: fixed;
+  top: 0px;
+  left: 0;
+  height: 100%;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+}
+
+.error-message-cell .cell-content {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.error-message-cell .icon {
+  display: block;
+  text-align: right;
+  font-size: 14px;
+  color: #505a5f;
+}
+
+.button-cell {
+  min-width: 1060px;
+}
+#resizable-table td:last-child {
+  min-width: 180px;
+}
+
+#resizable-table {
+  min-width: 1400px;
+  table-layout: fixed;
+}
+.table-scroll-container {
+  overflow-x: auto;
+  width: 100%;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+.side-nav-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 280px;
+  background-color: #f3f2f1;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+}
+
+#navToggle {
+  margin-top: 3.7rem;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1002;
+}
+
+#navToggle.fixed {
+  position: fixed;
+  margin-top: 0rem;
+}
+
+.nav-content {
+  margin-top: 4rem;
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 2rem;
+  padding-left: 2rem;
+  box-sizing: border-box;
+}
+
+.side-nav {
+  width: 100%;
 }

@@ -54,6 +54,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/mocha", "npm:10.0.10"],\
             ["@types/node", "npm:20.12.7"],\
             ["@types/nunjucks", "npm:3.2.6"],\
+            ["@types/qs", "npm:6.14.0"],\
             ["@types/require-directory", "npm:2.1.6"],\
             ["@types/serve-favicon", "npm:2.5.7"],\
             ["@types/session-file-store", "npm:1.2.5"],\
@@ -112,6 +113,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["playwright", "npm:1.51.1"],\
             ["prettier", "npm:3.5.3"],\
             ["puppeteer", "npm:22.15.0"],\
+            ["qs", "npm:6.14.0"],\
             ["react", "npm:19.1.0"],\
             ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.78.1"],\
             ["redis", "npm:4.7.0"],\
@@ -7773,6 +7775,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/qs", [\
+        ["npm:6.14.0", {\
+          "packageLocation": "./.yarn/cache/@types-qs-npm-6.14.0-e27d9ca044-1909205514.zip/node_modules/@types/qs/",\
+          "packageDependencies": [\
+            ["@types/qs", "npm:6.14.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["npm:6.9.18", {\
           "packageLocation": "./.yarn/cache/@types-qs-npm-6.9.18-125db28c30-152fab96ef.zip/node_modules/@types/qs/",\
           "packageDependencies": [\
@@ -19590,6 +19599,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/mocha", "npm:10.0.10"],\
             ["@types/node", "npm:20.12.7"],\
             ["@types/nunjucks", "npm:3.2.6"],\
+            ["@types/qs", "npm:6.14.0"],\
             ["@types/require-directory", "npm:2.1.6"],\
             ["@types/serve-favicon", "npm:2.5.7"],\
             ["@types/session-file-store", "npm:1.2.5"],\
@@ -19648,6 +19658,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["playwright", "npm:1.51.1"],\
             ["prettier", "npm:3.5.3"],\
             ["puppeteer", "npm:22.15.0"],\
+            ["qs", "npm:6.14.0"],\
             ["react", "npm:19.1.0"],\
             ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.78.1"],\
             ["redis", "npm:4.7.0"],\

@@ -40,13 +40,43 @@ describe('LiveEventStatusService', () => {
       { id: 'event1', name: 'Live Event 1', description: 'Test Event 1', resource_state: 'Running' },
       { id: 'event2', name: 'Live Event 2', description: 'Test Event 2', resource_state: 'Stopped' },
     ]);
+    mockClient.getCaptureSession.mockImplementation(async (id: string, userId: string) => {
+      return {
+        id: 'capture1',
+        booking_id: 'booking1',
+        origin: 'origin',
+        ingest_address: 'ingest-url',
+        start_time: new Date().toISOString(),
+        stop_time: new Date().toISOString(),
+        case_reference: id === 'event1' ? 'abcd' : 'dfed',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+        source_type: 'source-type',
+        resource_state: 'Running',
+        hearing_id: 'hearing1',
+        live_output_url: 'rtmp://example.com/live',
+        started_at: new Date().toISOString(),
+        started_by_user_id: 'user1',
+        finished_at: new Date().toISOString(),
+        finished_by_user_id: 'user2',
+        retry_count: 0,
+        metadata: {},
+        status: 'active',
+
+        // 🔧 Fixed field
+        deleted_at: '', // or new Date().toISOString()
+
+        court_name: 'Test Court',
+        case_state: 'Open',
+      };
+    });
 
     service = new LiveEventStatusService(mockRequest as Request, mockClient);
     const result = await service.getMediaKindLiveEventStatuses();
 
     expect(result).toEqual([
-      { id: 'event1', name: 'Live Event 1', description: 'Test Event 1', status: 'Running' },
-      { id: 'event2', name: 'Live Event 2', description: 'Test Event 2', status: 'Stopped' },
+      { id: 'event1', name: 'Live Event 1', description: 'Test Event 1', status: 'Running', caseReference: 'abcd' },
+      { id: 'event2', name: 'Live Event 2', description: 'Test Event 2', status: 'Stopped', caseReference: 'dfed' },
     ]);
     expect(mockClient.getLiveEvents).toHaveBeenCalledWith('test-user');
   });
