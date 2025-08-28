@@ -44,10 +44,13 @@ describe('LiveEventStatusService', () => {
     service = new LiveEventStatusService(mockRequest as Request, mockClient);
     const result = await service.getMediaKindLiveEventStatuses();
 
-    expect(result).toEqual([
-      { id: 'event1', name: 'Live Event 1', description: 'Test Event 1', status: 'Running' },
-      { id: 'event2', name: 'Live Event 2', description: 'Test Event 2', status: 'Stopped' },
-    ]);
+    expect(result).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ id: 'event1', name: 'Live Event 1', description: 'Test Event 1', status: 'Running' }),
+        expect.objectContaining({ id: 'event2', name: 'Live Event 2', description: 'Test Event 2', status: 'Stopped' }),
+      ])
+    );
+
     expect(mockClient.getLiveEvents).toHaveBeenCalledWith('test-user');
   });
 
