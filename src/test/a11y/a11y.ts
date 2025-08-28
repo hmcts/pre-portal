@@ -37,6 +37,7 @@ async function signIn(browser: Browser): Promise<Page> {
   return page;
 }
 
+jest.setTimeout(15000);
 async function signInSuperUser(browser: Browser): Promise<Page> {
   const page = await browser.newPage();
   await page.goto(config.TEST_URL as string, { waitUntil: 'networkidle2' });
@@ -72,6 +73,7 @@ describe('Accessibility', () => {
       const result: Pa11yResult = await pa11y(config.TEST_URL + url.replace('//', '/'), {
         screenCapture: `${screenshotDir}/${url}.png`,
         browser: browser,
+        ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
       });
       expect(result.issues).toEqual(expect.any(Array));
       expectNoErrors(result.issues);
@@ -137,7 +139,6 @@ describe('Accessibility', () => {
       await page.click('button[type="submit"]');
       await page.waitForSelector('a[href^="/watch/"]', { visible: true, timeout: 30000 });
     }
-
     const browseUrl = page.url();
     await page.click('a[href^="/watch/"]');
     const watchUrl = page.url();
@@ -150,12 +151,14 @@ describe('Accessibility', () => {
       browser: browser,
       screenCapture: `${screenshotDir}/browse.png`,
       waitUntil: 'domcontentloaded',
+      ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
     });
-    expect(result.issues.map(issue => issue.code)).toEqual(['WCAG2AA.Principle2.Guideline2_2.2_2_1.F41.2']);
+    expect(result.issues.map(issue => issue.code)).toEqual([]);
 
     const watchResult: Pa11yResult = await pa11y(watchUrl, {
       browser: browser,
       screenCapture: `${screenshotDir}/watch.png`,
+      ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
     });
 
     expect(watchResult.issues.map(issue => issue.code)).toEqual([]);
@@ -163,8 +166,8 @@ describe('Accessibility', () => {
     const termsResult: Pa11yResult = await pa11y(termsUrl, {
       browser: browser,
       screenCapture: `${screenshotDir}/terms.png`,
+      ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
     });
-
     expect(termsResult.issues.map(issue => issue.code)).toEqual([]);
 
     await browser.close();

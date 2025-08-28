@@ -1,3 +1,5 @@
+{% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}
+
 {% extends "template.njk" %}
 
 {% block pageTitle %}Recording {{ recording.id }} - PRE Portal{% endblock %}
@@ -8,6 +10,13 @@
   <link rel="stylesheet" href="/assets/css/mkplayer-ui.css">
 {% endblock %}
 
+{% set bannerHtml %}
+  <p class="govuk-notification-banner__heading">Recordings are accessed on the basis of a
+    legitimate need and having full authorisation.</p>
+  <p class="govuk-notification-banner__heading">Please note, playback is preferred
+    on Laptop and Desktop devices only.</p>
+{% endset %}
+
 {% block beforeContent %}
   {{
   govukBackLink({
@@ -17,8 +26,11 @@
 {% endblock %}
 
 {% block content %}
-
   <h1 class="govuk-heading-xl">Case Ref: {{ recording.case_reference }}</h1>
+
+  {{ govukNotificationBanner({
+    html: bannerHtml
+  }) }}
 
   <div id="videoError" class="govuk-error-summary" data-module="govuk-error-summary" style="display: none;">
     <div role="alert">
@@ -108,7 +120,7 @@
         data-testid="summary-value-witness">
         {% for participant in recording.participants %}
           {% if participant.participant_type == "WITNESS" %}
-            {{ participant.first_name }}{% if removeWitnessLastName == false %} {{ participant.last_name }}{% endif %}<br />
+            {{ participant.first_name }}<br />
           {% endif %}
         {% endfor %}
       </dd>

@@ -53,12 +53,9 @@ export class PreClient {
 
   public async getUserByClaimEmail(email: string): Promise<UserProfile> {
     let userProfile: UserProfile;
-
     try {
       userProfile = await this.getUserByEmail(email);
-      console.log(userProfile);
     } catch (e) {
-      console.log(email);
       this.logger.error(e.message);
       throw new Error('User has not been invited to the portal');
     }
@@ -125,9 +122,7 @@ export class PreClient {
     } else if (userProfile.portal_access[0].status === AccessStatus.INACTIVE) {
       throw new Error('User is not active: ' + email);
     } else if (!userProfile.terms_accepted || !userProfile.terms_accepted['PORTAL']) {
-      if (config.get('pre.tsAndCsRedirectEnabled') === 'true') {
-        throw new TermsNotAcceptedError(email);
-      }
+      throw new TermsNotAcceptedError(email);
     }
     return userProfile;
   }
