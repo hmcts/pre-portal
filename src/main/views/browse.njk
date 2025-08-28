@@ -73,7 +73,7 @@
               <td class="govuk-table__cell">
                 {% for participant in recording.participants %}
                   {% if participant.participant_type == "WITNESS" %}
-                    {{ participant.first_name }}{% if removeWitnessLastName == false %} {{ participant.last_name }}{% endif %}<br />
+                    {{ participant.first_name }}<br />
                   {% endif %}
                 {% endfor %}
               </td>
