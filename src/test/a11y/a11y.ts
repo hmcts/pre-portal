@@ -69,107 +69,109 @@ describe('Accessibility', () => {
       await browser.close();
     });
 
-    test('should have no accessibility errors', async () => {
-      const result: Pa11yResult = await pa11y(config.TEST_URL + url.replace('//', '/'), {
-        screenCapture: `${screenshotDir}/${url}.png`,
-        browser: browser,
-        ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
+    describe.each(signedOutUrls)('Signed out page %s', url => {
+      test('should have no accessibility errors', async () => {
+        const result: Pa11yResult = await pa11y(config.TEST_URL + url.replace('//', '/'), {
+          screenCapture: `${screenshotDir}/${url}.png`,
+          browser: browser,
+          ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
+        });
+        expect(result.issues).toEqual(expect.any(Array));
+        expectNoErrors(result.issues);
       });
+    });
+
+    test('admin/status page should have no accessibility errors', async () => {
+      const browser = await puppeteer.launch({
+        ignoreHTTPSErrors: true,
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      });
+
+      const page = await signInSuperUser(browser);
+      await page.waitForSelector('a[href^="/admin/status"]', { visible: true, timeout: 30000 });
+      //await page.click('a[href^="/admin/status"]');
+      await page.goto(config.TEST_URL + '/admin/status');
+
+      const result: Pa11yResult = await pa11y(page.url(), {
+        browser: browser,
+        screenCapture: `${screenshotDir}/admin-status.png`,
+      });
+
       expect(result.issues).toEqual(expect.any(Array));
       expectNoErrors(result.issues);
-    });
+      await browser.close();
+    }, 65000);
+
+    test('admin/MK-live-events page should have no accessibility errors', async () => {
+      const browser = await puppeteer.launch({
+        ignoreHTTPSErrors: true,
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      });
+
+      const page = await signInSuperUser(browser);
+      await page.waitForSelector('a[href^="/admin/status"]', { visible: true, timeout: 30000 });
+      await page.click('a[href^="/admin/status"]');
+      await page.goto(config.TEST_URL + '/admin/MK-live-events');
+      const liveEventsUrl = page.url();
+      const liveEventsResult: Pa11yResult = await pa11y(liveEventsUrl, {
+        browser: browser,
+        screenCapture: `${screenshotDir}/admin-live-events.png`,
+      });
+
+      expect(liveEventsResult.issues).toEqual(expect.any(Array));
+      expectNoErrors(liveEventsResult.issues);
+      await browser.close();
+    }, 65000);
+
+    test('/browse, watch, and terms pages', async () => {
+      const browser = await puppeteer.launch({
+        ignoreHTTPSErrors: true,
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      });
+
+      const page = await signIn(browser);
+      await page.waitForSelector('a[href^="/watch/"],input#terms', { visible: true, timeout: 30000 });
+
+      if (page.url().includes('/accept-terms-and-conditions')) {
+        await page.click('input#terms');
+        await page.click('button[type="submit"]');
+        await page.waitForSelector('a[href^="/watch/"]', { visible: true, timeout: 30000 });
+      }
+      const browseUrl = page.url();
+      await page.click('a[href^="/watch/"]');
+      const watchUrl = page.url();
+
+      await page.goto(config.TEST_URL + '/terms-and-conditions');
+      const termsUrl = page.url();
+      await page.close();
+
+      const result: Pa11yResult = await pa11y(browseUrl, {
+        browser: browser,
+        screenCapture: `${screenshotDir}/browse.png`,
+        waitUntil: 'domcontentloaded',
+        ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
+      });
+      expect(result.issues.map(issue => issue.code)).toEqual([]);
+
+      const watchResult: Pa11yResult = await pa11y(watchUrl, {
+        browser: browser,
+        screenCapture: `${screenshotDir}/watch.png`,
+        ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
+      });
+
+      expect(watchResult.issues.map(issue => issue.code)).toEqual([]);
+
+      const termsResult: Pa11yResult = await pa11y(termsUrl, {
+        browser: browser,
+        screenCapture: `${screenshotDir}/terms.png`,
+        ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
+      });
+      expect(termsResult.issues.map(issue => issue.code)).toEqual([]);
+
+      await browser.close();
+    }, 65000);
   });
-
-  test('admin/status page should have no accessibility errors', async () => {
-    const browser = await puppeteer.launch({
-      ignoreHTTPSErrors: true,
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
-
-    const page = await signInSuperUser(browser);
-    await page.waitForSelector('a[href^="/admin/status"]', { visible: true, timeout: 30000 });
-    //await page.click('a[href^="/admin/status"]');
-    await page.goto(config.TEST_URL + '/admin/status');
-
-    const result: Pa11yResult = await pa11y(page.url(), {
-      browser: browser,
-      screenCapture: `${screenshotDir}/admin-status.png`,
-    });
-
-    expect(result.issues).toEqual(expect.any(Array));
-    expectNoErrors(result.issues);
-    await browser.close();
-  }, 65000);
-
-  test('admin/MK-live-events page should have no accessibility errors', async () => {
-    const browser = await puppeteer.launch({
-      ignoreHTTPSErrors: true,
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
-
-    const page = await signInSuperUser(browser);
-    await page.waitForSelector('a[href^="/admin/status"]', { visible: true, timeout: 30000 });
-    await page.click('a[href^="/admin/status"]');
-    await page.goto(config.TEST_URL + '/admin/MK-live-events');
-    const liveEventsUrl = page.url();
-    const liveEventsResult: Pa11yResult = await pa11y(liveEventsUrl, {
-      browser: browser,
-      screenCapture: `${screenshotDir}/admin-live-events.png`,
-    });
-
-    expect(liveEventsResult.issues).toEqual(expect.any(Array));
-    expectNoErrors(liveEventsResult.issues);
-    await browser.close();
-  }, 65000);
-
-  test('/browse, watch, and terms pages', async () => {
-    const browser = await puppeteer.launch({
-      ignoreHTTPSErrors: true,
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
-
-    const page = await signIn(browser);
-    await page.waitForSelector('a[href^="/watch/"],input#terms', { visible: true, timeout: 30000 });
-
-    if (page.url().includes('/accept-terms-and-conditions')) {
-      await page.click('input#terms');
-      await page.click('button[type="submit"]');
-      await page.waitForSelector('a[href^="/watch/"]', { visible: true, timeout: 30000 });
-    }
-    const browseUrl = page.url();
-    await page.click('a[href^="/watch/"]');
-    const watchUrl = page.url();
-
-    await page.goto(config.TEST_URL + '/terms-and-conditions');
-    const termsUrl = page.url();
-    await page.close();
-
-    const result: Pa11yResult = await pa11y(browseUrl, {
-      browser: browser,
-      screenCapture: `${screenshotDir}/browse.png`,
-      waitUntil: 'domcontentloaded',
-      ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
-    });
-    expect(result.issues.map(issue => issue.code)).toEqual([]);
-
-    const watchResult: Pa11yResult = await pa11y(watchUrl, {
-      browser: browser,
-      screenCapture: `${screenshotDir}/watch.png`,
-      ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
-    });
-
-    expect(watchResult.issues.map(issue => issue.code)).toEqual([]);
-
-    const termsResult: Pa11yResult = await pa11y(termsUrl, {
-      browser: browser,
-      screenCapture: `${screenshotDir}/terms.png`,
-      ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
-    });
-    expect(termsResult.issues.map(issue => issue.code)).toEqual([]);
-
-    await browser.close();
-  }, 65000);
 });
