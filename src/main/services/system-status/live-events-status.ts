@@ -6,8 +6,8 @@ import { UserLevel } from '../../types/user-level';
 import { Request } from 'express';
 
 export class LiveEventStatusService {
-  private client: PreClient;
-  private user: string | undefined;
+  private readonly client: PreClient;
+  private readonly user: string | undefined;
 
   constructor(req: Request, client: PreClient) {
     this.client = client;
@@ -19,11 +19,10 @@ export class LiveEventStatusService {
   public async getMediaKindLiveEventStatuses(): Promise<
     { id: string; name: string; description: string; status: string; caseReference: string }[]
   > {
+    if (!this.user) {
+      throw new Error('User not authorized to access live events.');
+    }
     try {
-      if (!this.user) {
-        throw new Error('User not authorized to access live events.');
-      }
-
       const liveEvents: LiveEvent[] = await this.client.getLiveEvents(this.user);
 
       if (liveEvents.length === 0) {
