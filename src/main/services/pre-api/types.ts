@@ -36,6 +36,7 @@ export interface CaptureSession {
   court_name: string;
   case_state: string;
   case_closed_at?: string;
+  case_reference?: string;
 }
 
 export interface Recording {
