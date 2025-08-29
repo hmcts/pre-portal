@@ -106,7 +106,9 @@ describe('LiveEventStatusService', () => {
 
     service = new LiveEventStatusService(mockRequest as Request, mockClient);
 
-    await expect(service.getMediaKindLiveEventStatuses()).rejects.toThrow('Failed to retrieve live event statuses.');
+    await expect(service.getMediaKindLiveEventStatuses()).rejects.toThrow(
+      'Failed to retrieve live event statuses: Error: API error'
+    );
   });
 
   test('should throw error if user not authorized', async () => {

@@ -3,11 +3,10 @@ import { TermsNotAcceptedError } from '../../types/errors';
 import { Terms } from '../../types/terms';
 import { UserProfile } from '../../types/user-profile';
 
-import { Pagination, PutAuditRequest, Recording, SearchRecordingsRequest } from './types';
+import { Pagination, PutAuditRequest, Recording, SearchRecordingsRequest, CaptureSession } from './types';
 import { RedisService } from '../../app/redis/RedisService';
 
 import { LiveEvent } from '../../types/live-event';
-import { CaptureSession } from './types';
 
 import { Logger } from '@hmcts/nodejs-logging';
 import axios, { AxiosResponse } from 'axios';
@@ -16,16 +15,18 @@ import { HealthResponse } from '../../types/health';
 
 export class PreClient {
   logger = Logger.getLogger('pre-client');
-  private redisService = new RedisService();
+  private readonly redisService = new RedisService();
   private redisClient: any;
 
-  constructor() {
-    const redisHost = config.get('session.redis.host') as string;
-    const redisKey = config.get('session.redis.key') as string;
-
-    this.initializeRedisClient(redisHost, redisKey);
+  public setRedisClientForTest(mockClient: any) {
+    this.redisClient = mockClient;
   }
 
+  public async init() {
+    const redisHost = config.get('session.redis.host') as string;
+    const redisKey = config.get('session.redis.key') as string;
+    await this.initializeRedisClient(redisHost, redisKey);
+  }
   private async initializeRedisClient(redisHost: string, redisKey: string) {
     try {
       this.redisClient = await this.redisService.getClient(redisHost, redisKey, this.logger);

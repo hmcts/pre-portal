@@ -348,4 +348,48 @@ describe('PreClient', () => {
     };
     await expect(t).rejects.toThrow('Failed to accept terms and conditions');
   });
+
+  describe('PreClient', () => {
+    let client: PreClient;
+    const mockRedisClient = { get: jest.fn(), setEx: jest.fn() };
+
+    beforeEach(() => {
+      client = new PreClient();
+      // inject mock Redis to avoid calling init()
+      client.setRedisClientForTest(mockRedisClient);
+    });
+
+    test('getLiveEvents returns cached events', async () => {
+      mockRedisClient.get.mockResolvedValue(
+        JSON.stringify([{ id: 'event1', name: 'Test Event', resource_state: 'Running' }])
+      );
+
+      const events = await client.getLiveEvents('user1');
+      expect(events).toHaveLength(1);
+      expect(mockRedisClient.get).toHaveBeenCalledWith('live-events-user1');
+    });
+
+    test('getLiveEvents fetches from API if no cache', async () => {
+      mockRedisClient.get.mockResolvedValue(null);
+      const mockAxios = axios as jest.Mocked<typeof axios>;
+      mockAxios.get.mockResolvedValue({ data: [{ id: 'event2', name: 'API Event', resource_state: 'Stopped' }] });
+
+      const events = await client.getLiveEvents('user2');
+      expect(events).toHaveLength(1);
+      expect(events[0].name).toBe('API Event');
+    });
+
+    test('getCaptureSession formats UUID and fetches', async () => {
+      const liveEventId = '123456781234123412341234567890ab';
+      const mockAxios = axios as jest.Mocked<typeof axios>;
+      mockAxios.get.mockResolvedValue({ data: { case_reference: 'CASE123' } });
+
+      const session = await client.getCaptureSession(liveEventId, 'user1');
+      expect(session.case_reference).toBe('CASE123');
+    });
+
+    test('getCaptureSession invalid UUID throws', async () => {
+      await expect(client.getCaptureSession('badid', 'user1')).rejects.toThrow('Invalid liveEventId length');
+    });
+  });
 });

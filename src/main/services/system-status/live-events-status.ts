@@ -56,7 +56,7 @@ export class LiveEventStatusService {
 
       return eventsWithCaseReferences;
     } catch (error) {
-      throw new Error('Failed to retrieve live event statuses.');
+      throw new Error(`Failed to retrieve live event statuses: ${error}`);
     }
   }
 }
