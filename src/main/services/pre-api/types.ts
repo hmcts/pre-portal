@@ -8,6 +8,15 @@ export interface SearchRecordingsRequest {
   scheduledFor?: string;
   courtId?: string;
   includeDeleted?: boolean;
+  version?: number;
+  page?: number;
+  size?: number;
+}
+
+export interface SearchEditsRequest {
+  sourceRecordingId?: string;
+  lastModifiedAfter?: string;
+  lastModifiedBefore?: string;
   page?: number;
   size?: number;
 }
@@ -78,4 +87,16 @@ export interface PutAuditRequest {
   table_name?: string;
   table_record_id?: string;
   audit_details: { [key: string]: string };
+}
+
+export interface EditRequest {
+  id: string;
+  source_recording: Recording;
+  edit_instructions: string;
+  status: string;
+  started_at?: string;
+  started_by_user_id?: string;
+  finished_at?: string;
+  created_at?: string;
+  modified_at?: string;
 }

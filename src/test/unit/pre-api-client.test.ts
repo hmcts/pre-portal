@@ -5,6 +5,7 @@ import { describe } from '@jest/globals';
 import axios from 'axios';
 import { mockeduser } from './test-helper';
 import { AccessStatus } from '../../main/types/access-status';
+import FormData from 'form-data';
 
 const preClient = new PreClient();
 const mockRecordingId = '12345678-1234-1234-1234-1234567890ab';
@@ -347,6 +348,90 @@ describe('PreClient', () => {
       await preClient.acceptTermsAndConditions('456', '12345678-1234-1234-1234-1234567890ab');
     };
     await expect(t).rejects.toThrow('Failed to accept terms and conditions');
+  });
+
+  test('getEditRequests success', async () => {
+    const mockResponse = {
+      page: {
+        number: 0,
+        totalPages: 1,
+        totalElements: 2,
+        size: 10,
+      },
+      _embedded: {
+        editRequestDTOList: [
+          { id: 'edit-1', status: 'PENDING' },
+          { id: 'edit-2', status: 'APPROVED' },
+        ],
+      },
+    };
+
+    mockedAxios.get.mockResolvedValueOnce({ status: 200, data: mockResponse });
+
+    const request = { page: 0, size: 10 } as any;
+    const result = await preClient.getEditRequests(mockXUserId, request);
+
+    expect(result.edits.length).toBe(2);
+    expect(result.pagination.totalElements).toBe(2);
+  });
+
+  test('getEditRequests no results', async () => {
+    const mockResponse = {
+      page: {
+        number: 0,
+        totalPages: 1,
+        totalElements: 0,
+        size: 10,
+      },
+      _embedded: {
+        editRequestDTOList: [],
+      },
+    };
+
+    mockedAxios.get.mockResolvedValueOnce({ status: 200, data: mockResponse });
+
+    const request = { page: 0, size: 10 } as any;
+    const result = await preClient.getEditRequests(mockXUserId, request);
+
+    expect(result.edits).toEqual([]);
+    expect(result.pagination.totalElements).toBe(0);
+  });
+
+  test('postEditsFromCsv success', async () => {
+    const mockResponse = { status: 200, data: { message: 'Uploaded successfully' } };
+    const mockBuffer = Buffer.from('start,end\n00:01,00:02');
+
+    mockedAxios.post.mockResolvedValueOnce(mockResponse);
+
+    const result = await preClient.postEditsFromCsv(mockXUserId, 'source-id-123', mockBuffer);
+
+    expect(result).toEqual(mockResponse);
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      '/edits/from-csv/source-id-123',
+      expect.any(FormData),
+      expect.objectContaining({
+        headers: expect.objectContaining({
+          'X-User-Id': mockXUserId,
+        }),
+      })
+    );
+  });
+
+  test('postEditsFromCsv handles known error response', async () => {
+    const mockError = {
+      response: {
+        status: 400,
+        data: { message: 'Invalid CSV format' },
+      },
+    };
+
+    mockedAxios.post.mockRejectedValueOnce(mockError);
+
+    const mockBuffer = Buffer.from('bad,data');
+
+    await expect(preClient.postEditsFromCsv(mockXUserId, 'source-id-123', mockBuffer)).rejects.toThrow(
+      'Invalid CSV format'
+    );
   });
 
   describe('PreClient', () => {
