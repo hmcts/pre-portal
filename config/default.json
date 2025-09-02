@@ -10,11 +10,7 @@
       "primary": "",
       "secondary": ""
     },
-    "portalUrl": "https://localhost:4551",
-    "mediaKindPlayerKey": "",
-    "tsAndCsRedirectEnabled": false,
-    "enableCaseStateColumn": false,
-    "removeWitnessLastName": false
+    "portalUrl": "https://localhost:4551"
   },
   "session": {
     "redis": {
