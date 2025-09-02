@@ -5,6 +5,7 @@ import { UserLevel } from '../types/user-level';
 
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
+import { Logger } from '@hmcts/nodejs-logging';
 
 export const convertIsoToDate = (isoString?: string): string | undefined => {
   if (!isoString) {
@@ -57,7 +58,8 @@ export default function (app: Application): void {
         case_closed_at: convertIsoToDate(recording.capture_session.case_closed_at),
       },
     }));
-
+    let logger = Logger.getLogger('browse');
+    logger.debug('Updated recordings: ', JSON.stringify(updatedRecordings, null, 2));
     const paginationLinks = {
       previous: {},
       next: {},
