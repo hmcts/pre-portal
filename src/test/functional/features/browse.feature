@@ -10,9 +10,8 @@ Feature: View Browse and play Page
       When I am on the '/browse' page
       Then the page should include 'Welcome back,'
       Then the page should include 'Recordings'
-     
+
     Scenario: Play recording from watch page
       When I click on play on a browse page
       When  I play the recording
       Then recording is played
-

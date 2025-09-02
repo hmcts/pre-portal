@@ -40,45 +40,61 @@ describe('LiveEventStatusService', () => {
       { id: 'event1', name: 'Live Event 1', description: 'Test Event 1', resource_state: 'Running' },
       { id: 'event2', name: 'Live Event 2', description: 'Test Event 2', resource_state: 'Stopped' },
     ]);
-    mockClient.getCaptureSession.mockImplementation(async (id: string, userId: string) => {
-      return {
-        id: 'capture1',
-        booking_id: 'booking1',
-        origin: 'origin',
-        ingest_address: 'ingest-url',
-        start_time: new Date().toISOString(),
-        stop_time: new Date().toISOString(),
-        case_reference: id === 'event1' ? 'abcd' : 'dfed',
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-        source_type: 'source-type',
-        resource_state: 'Running',
-        hearing_id: 'hearing1',
-        live_output_url: 'rtmp://example.com/live',
-        started_at: new Date().toISOString(),
-        started_by_user_id: 'user1',
-        finished_at: new Date().toISOString(),
-        finished_by_user_id: 'user2',
-        retry_count: 0,
-        metadata: {},
-        status: 'active',
 
-        // 🔧 Fixed field
-        deleted_at: '', // or new Date().toISOString()
+    service = new LiveEventStatusService(mockRequest as Request, mockClient);
+    const result = await service.getMediaKindLiveEventStatuses();
 
-        court_name: 'Test Court',
-        case_state: 'Open',
-      };
+    expect(result).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ id: 'event1', name: 'Live Event 1', description: 'Test Event 1', status: 'Running' }),
+        expect.objectContaining({ id: 'event2', name: 'Live Event 2', description: 'Test Event 2', status: 'Stopped' }),
+      ])
+    );
+
+    expect(mockClient.getLiveEvents).toHaveBeenCalledWith('test-user');
+  });
+
+  test('should include caseReference when capture session is found', async () => {
+    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+      app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
+
+    mockClient.getLiveEvents.mockResolvedValue([
+      { id: 'event1', name: 'Live Event 1', description: 'Test Event 1', resource_state: 'Running' },
+    ]);
+
+    mockClient.getCaptureSession.mockResolvedValue({ case_reference: 'CASE123' } as any);
+
+    service = new LiveEventStatusService(mockRequest as Request, mockClient);
+    const result = await service.getMediaKindLiveEventStatuses();
+
+    expect(result[0].caseReference).toBe('CASE123');
+    expect(mockClient.getCaptureSession).toHaveBeenCalledWith('event1', 'test-user');
+  });
+
+  test('should return formatted live event statuses with Unknown Case Reference when no capture session', async () => {
+    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+      app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
+    });
+
+    mockClient.getLiveEvents.mockResolvedValue([
+      { id: 'event1', name: 'Live Event 1', description: 'Test Event 1', resource_state: 'Running' },
+    ]);
+
+    mockClient.getCaptureSession.mockRejectedValue(new Error('Not found'));
 
     service = new LiveEventStatusService(mockRequest as Request, mockClient);
     const result = await service.getMediaKindLiveEventStatuses();
 
     expect(result).toEqual([
-      { id: 'event1', name: 'Live Event 1', description: 'Test Event 1', status: 'Running', caseReference: 'abcd' },
-      { id: 'event2', name: 'Live Event 2', description: 'Test Event 2', status: 'Stopped', caseReference: 'dfed' },
+      expect.objectContaining({
+        id: 'event1',
+        name: 'Live Event 1',
+        description: 'Test Event 1',
+        status: 'Running',
+        caseReference: 'Unknown Case Reference',
+      }),
     ]);
-    expect(mockClient.getLiveEvents).toHaveBeenCalledWith('test-user');
   });
 
   test('should handle errors when fetching live events', async () => {
@@ -90,6 +106,18 @@ describe('LiveEventStatusService', () => {
 
     service = new LiveEventStatusService(mockRequest as Request, mockClient);
 
-    await expect(service.getMediaKindLiveEventStatuses()).rejects.toThrow('Failed to retrieve live event statuses.');
+    await expect(service.getMediaKindLiveEventStatuses()).rejects.toThrow(
+      'Failed to retrieve live event statuses: Error: API error'
+    );
+  });
+
+  test('should throw error if user not authorized', async () => {
+    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+      app_access: [{ role: { name: UserLevel.ADMIN }, id: 'test-user' }],
+    });
+
+    service = new LiveEventStatusService(mockRequest as Request, mockClient);
+
+    await expect(service.getMediaKindLiveEventStatuses()).rejects.toThrow('User not authorized to access live events.');
   });
 });

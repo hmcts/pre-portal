@@ -11,12 +11,14 @@ export class RedisService {
         host,
         port: 6379,
         connectTimeout: 15000,
-        tls: false,
+        tls: true,
       },
       password: key,
+      pingInterval: 5000,
     });
 
     client.connect().catch(this.logger.error);
+
     return client;
   }
 }

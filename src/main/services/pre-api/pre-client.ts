@@ -3,14 +3,22 @@ import { TermsNotAcceptedError } from '../../types/errors';
 import { Terms } from '../../types/terms';
 import { UserProfile } from '../../types/user-profile';
 
-import { Pagination, PutAuditRequest, Recording, SearchRecordingsRequest } from './types';
 import { RedisService } from '../../app/redis/RedisService';
 
 import { LiveEvent } from '../../types/live-event';
-import { CaptureSession } from './types';
+import {
+  EditRequest,
+  Pagination,
+  PutAuditRequest,
+  Recording,
+  SearchEditsRequest,
+  SearchRecordingsRequest,
+  CaptureSession,
+} from './types';
 
 import { Logger } from '@hmcts/nodejs-logging';
 import axios, { AxiosResponse } from 'axios';
+import FormData from 'form-data';
 import config from 'config';
 import { HealthResponse } from '../../types/health';
 //import { VfMigrationRecord } from '../../types/vf-migration-record'
@@ -19,16 +27,18 @@ import qs from 'qs';
 
 export class PreClient {
   logger = Logger.getLogger('pre-client');
-  private redisService = new RedisService();
+  private readonly redisService = new RedisService();
   private redisClient: any;
 
-  constructor() {
-    const redisHost = config.get('session.redis.host') as string;
-    const redisKey = config.get('session.redis.key') as string;
-
-    this.initializeRedisClient(redisHost, redisKey);
+  public setRedisClientForTest(mockClient: any) {
+    this.redisClient = mockClient;
   }
 
+  public async init() {
+    const redisHost = config.get('session.redis.host') as string;
+    const redisKey = config.get('session.redis.key') as string;
+    await this.initializeRedisClient(redisHost, redisKey);
+  }
   private async initializeRedisClient(redisHost: string, redisKey: string) {
     try {
       this.redisClient = await this.redisService.getClient(redisHost, redisKey, this.logger);
@@ -37,8 +47,27 @@ export class PreClient {
       this.logger.error('Failed to initialize Redis client:', error);
     }
   }
-  public healthCheck() {
-    return axios.get<HealthResponse>('/health');
+
+  private extractPaginationAndData<T>(response: any, embeddedKey: string): { data: T[]; pagination: Pagination } {
+    const pagination: Pagination = {
+      currentPage: response.data.page.number,
+      totalPages: response.data.page.totalPages,
+      totalElements: response.data.page.totalElements,
+      size: response.data.page.size,
+    };
+
+    const data: T[] = response.data.page.totalElements === 0 ? [] : (response.data._embedded[embeddedKey] as T[]);
+
+    return { data, pagination };
+  }
+
+  public async healthCheck(): Promise<AxiosResponse<HealthResponse>> {
+    try {
+      return await axios.get<HealthResponse>('/health');
+    } catch (error) {
+      this.logger.error('Health check failed:', error);
+      throw error;
+    }
   }
 
   public async putAudit(xUserId: string, request: PutAuditRequest): Promise<AxiosResponse> {
@@ -56,12 +85,9 @@ export class PreClient {
 
   public async getUserByClaimEmail(email: string): Promise<UserProfile> {
     let userProfile: UserProfile;
-
     try {
       userProfile = await this.getUserByEmail(email);
-      console.log(userProfile);
     } catch (e) {
-      console.log(email);
       this.logger.error(e.message);
       throw new Error('User has not been invited to the portal');
     }
@@ -128,9 +154,7 @@ export class PreClient {
     } else if (userProfile.portal_access[0].status === AccessStatus.INACTIVE) {
       throw new Error('User is not active: ' + email);
     } else if (!userProfile.terms_accepted || !userProfile.terms_accepted['PORTAL']) {
-      if (config.get('pre.tsAndCsRedirectEnabled') === 'true') {
-        throw new TermsNotAcceptedError(email);
-      }
+      throw new TermsNotAcceptedError(email);
     }
     return userProfile;
   }
@@ -149,22 +173,39 @@ export class PreClient {
         params: request,
       });
 
-      const pagination = {
-        currentPage: response.data['page']['number'],
-        totalPages: response.data['page']['totalPages'],
-        totalElements: response.data['page']['totalElements'],
-        size: response.data['page']['size'],
-      } as Pagination;
-      const recordings =
-        response.data['page']['totalElements'] === 0
-          ? []
-          : (response.data['_embedded']['recordingDTOList'] as Recording[]);
+      const { data, pagination } = this.extractPaginationAndData<Recording>(response, 'recordingDTOList');
+      return { recordings: data, pagination };
+    } catch (e) {
+      // log the error
+      this.logger.info('path', e.response?.request.path);
+      this.logger.info('res headers', e.response?.headers);
+      this.logger.info('data', e.response?.data);
+      // rethrow the error for the UI
+      throw e;
+    }
+  }
 
-      return { recordings, pagination };
+  public async getEditRequests(
+    xUserId: string,
+    request: SearchEditsRequest
+  ): Promise<{ edits: EditRequest[]; pagination: Pagination }> {
+    this.logger.debug('Getting edit requests with request: ' + JSON.stringify(request));
+
+    try {
+      const response = await axios.get('/edits', {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+        params: request,
+      });
+
+      const { data, pagination } = this.extractPaginationAndData<EditRequest>(response, 'editRequestDTOList');
+      return { edits: data, pagination };
     } catch (e) {
       this.logger.info('path', e.response?.request.path);
       this.logger.info('res headers', e.response?.headers);
       this.logger.info('data', e.response?.data);
+      // rethrow the error for the UI
       throw e;
     }
   }
@@ -283,6 +324,29 @@ export class PreClient {
       return response.data as CaptureSession;
     } catch (e) {
       this.logger.error(e.message);
+      throw e;
+    }
+  }
+
+  public async postEditsFromCsv(xUserId: string, sourceRecordingId: string, csvFile: Buffer): Promise<AxiosResponse> {
+    try {
+      const formData = new FormData();
+      formData.append('file', csvFile, {
+        filename: 'upload.csv',
+        contentType: 'text/csv',
+      });
+
+      return await axios.post(`/edits/from-csv/${sourceRecordingId}`, formData, {
+        headers: {
+          'X-User-Id': xUserId,
+          ...formData.getHeaders(),
+        },
+        maxBodyLength: 2 * 1024 * 1024, // 2 MB,
+      });
+    } catch (e) {
+      if (e.response?.status === 400 || e.response?.status === 404) {
+        throw new Error(e.response?.data?.message);
+      }
       throw e;
     }
   }

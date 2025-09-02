@@ -16,4 +16,16 @@ describe('Smoke Test', () => {
       }
     });
   });
+
+  describe('B2C sign in page loads', () => {
+    test('with correct content', async () => {
+      try {
+        const response: AxiosResponse = await axios.get(testUrl);
+        expect(response.status).toBe(200);
+        expect(response.data).toContain('Sign in');
+      } catch {
+        fail('B2C Heading not present and/or correct');
+      }
+    });
+  });
 });
