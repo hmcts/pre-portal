@@ -138,7 +138,8 @@ export class PreClient {
         },
         params: request,
       });
-
+      this.logger.debug("Response" + response);
+      this.logger.debug("X-User-ID" + response);
       const { data, pagination } = this.extractPaginationAndData<Recording>(response, 'recordingDTOList');
       return { recordings: data, pagination };
     } catch (e) {
