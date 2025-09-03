@@ -51,7 +51,6 @@ const RAW_RUNTIME_STATE =
           ["@types/jest", "npm:29.5.14"],\
           ["@types/lodash", "npm:4.17.20"],\
           ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
-          ["@types/mocha", "npm:10.0.10"],\
           ["@types/multer", "npm:1.4.13"],\
           ["@types/node", "npm:22.18.0"],\
           ["@types/nunjucks", "npm:3.2.6"],\
@@ -7706,15 +7705,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@types-minimatch-npm-5.1.2-aab9c394d3-94db5060d2.zip/node_modules/@types/minimatch/",\
         "packageDependencies": [\
           ["@types/minimatch", "npm:5.1.2"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@types/mocha", [\
-      ["npm:10.0.10", {\
-        "packageLocation": "./.yarn/cache/@types-mocha-npm-10.0.10-1e025e7c6e-4e3b61ed51.zip/node_modules/@types/mocha/",\
-        "packageDependencies": [\
-          ["@types/mocha", "npm:10.0.10"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -19125,7 +19115,6 @@ const RAW_RUNTIME_STATE =
           ["@types/jest", "npm:29.5.14"],\
           ["@types/lodash", "npm:4.17.20"],\
           ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
-          ["@types/mocha", "npm:10.0.10"],\
           ["@types/multer", "npm:1.4.13"],\
           ["@types/node", "npm:22.18.0"],\
           ["@types/nunjucks", "npm:3.2.6"],\
