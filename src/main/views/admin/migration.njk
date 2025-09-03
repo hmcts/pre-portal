@@ -101,7 +101,7 @@
           class="govuk-select"
           id="status"
           name="resource_state"
-          style="width: 100%;
+          style="width: 100%;"
         >
          <option value="" {% if request.query.resource_state == ''%}selected{% endif %}>All</option>
            <option value="Unresolved"
@@ -220,20 +220,26 @@
 
                 <td class="govuk-table__cell" tabindex="0">
                   {% set court_found = false %}
+
+                    {% for court in courts %}
+                      {% if court.name == migrationRecord.court %}
+                        {% set court_found = true %}
+                      {% endif %}
+                    {% endfor %}
+                    {% set invalid_court = migrationRecord.court and not court_found %}
+
                     <select
                       class="govuk-select court-select"
                       name="courtField"
                       aria-label="Select court"
                       style="width: 100%; box-sizing: border-box; min-width: 0; overflow: visible;
-                      {% if not migrationRecord.court or not court_found %}background-color: #f8d7da;{% endif %}"
-                      {% if migrationRecord.status == 'READY' %}disabled{% endif %}
+                      {% if invalid_court %}background-color: #ffcccc;!important;{% endif %}"
+                      {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
                     >
                       <option value="" {% if not migrationRecord.court %}selected{% endif %}>Select a court</option>
 
                       {% for court in courts %}
-                        {% if court.name == migrationRecord.court %}
-                          {% set court_found = true %}
-                        {% endif %}
+
                         <option value="{{ court.id }}"
                           {% if court.name == migrationRecord.court %}selected{% endif %}>
                           {{ court.name }}
@@ -241,7 +247,7 @@
                       {% endfor %}
 
                       {% if migrationRecord.court and not court_found %}
-                        <option value="{{ migrationRecord.court }}" selected class="govuk-input--error">
+                        <option value="{{ migrationRecord.court }}" selected>
                           {{ migrationRecord.court }} (invalid)
                         </option>
                       {% endif %}
@@ -259,7 +265,7 @@
                       style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                       oninput="validateLength(this)"
                       aria-label="must be between 9 -13 alphanumeric characters"
-                      {% if migrationRecord.status == 'READY' %}disabled{% endif %}
+                      {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
                     >
                 </td>
                 <td class="govuk-table__cell "scope="row" tabindex="0" title="must be between 9 -13 alphanumeric characters">
@@ -272,7 +278,8 @@
                       style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                       oninput="validateLength(this)"
                       aria-label="must be between 9 -13 alphanumeric characters"
-                      {% if migrationRecord.status == 'READY' %}disabled{% endif %}
+                      {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+
                     >
                  </td>
                   <td class="govuk-table__cell" title="no digits, 1 to 25 characters." >
@@ -284,7 +291,7 @@
                       style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                       oninput="validateNoDigitsMax100(this)"
                       aria-label="Defendant name, no digits, 1 to 25 characters"
-                      {% if migrationRecord.status == 'READY' %}disabled{% endif %}
+                      {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
                     >
                   </td>
 
@@ -297,7 +304,7 @@
                         style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                         oninput="validateNoDigitsMax100(this)"
                         aria-label="Defendant name, no digits, 1 to 25 characters"
-                        {% if migrationRecord.status == 'READY' %}disabled{% endif %}
+                        {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
                       >
                 </td>
                 <td class="govuk-table__cell" tabindex="0" title="Valid date DD/MM/YYYY">
@@ -309,13 +316,14 @@
                     style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                     oninput="validateRecordingDate(this)"
                     aria-label="Defendant name, no digits, 1 to 25 characters"
-                    {% if migrationRecord.status == 'READY' %}disabled{% endif %}
+                    {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
                   >
         </td>
             <td class="govuk-table__cell" tabindex="0">
               <select class="govuk-select" name="recordingVersion" aria-label="Select recording version"
                       style="width: 100%; box-sizing: border-box; min-width: 0; overflow: visible;"
-                      {% if migrationRecord.status == 'READY' %}disabled{% endif %} >
+                      {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+              >
                 <option value="" {% if migrationRecord.recordingVersion == '' %}selected{% endif %}></option>
                 <option value="ORIG" {% if migrationRecord.recordingVersion == 'ORIG' %}selected{% endif %}>ORIG</option>
                 <option value="COPY" {% if migrationRecord.recordingVersion == 'COPY' %}selected{% endif %}>COPY</option>
@@ -334,8 +342,8 @@
 
                       oninput="validateIsNumber(this)"
                       aria-label="must be a number"
-                      {% if migrationRecord.status == 'READY' %}disabled{% endif %}
-                    >
+                      {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                 >
                 </td>
 
                 <td class="govuk-table__cell duration-cell" tabindex="0" contenteditable="false">{{ migrationRecord.duration }}</td>
@@ -558,6 +566,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (select.value === '') {
             select.style.backgroundColor = '#ffcccc';
             select.title = 'Please select a valid court';
+        }  else if (select.value.text.includes('(invalid)')) {
+            select.style.backgroundColor = '#ffcccc';
         } else {
             select.style.backgroundColor = '';
             select.title = '';
