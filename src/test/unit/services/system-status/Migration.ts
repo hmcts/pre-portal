@@ -1,0 +1,187 @@
+import { MigrationRecordService } from '../../../../main/services/system-status/migration-status';
+import { PreClient } from '../../../../main/services/pre-api/pre-client';
+import { Request } from 'express';
+import { SessionUser } from '../../../../main/services/session-user/session-user';
+import { UserLevel } from '../../../../main/types/user-level';
+
+jest.mock('../../../../main/services/pre-api/pre-client');
+jest.mock('../../../../main/services/session-user/session-user');
+
+describe('MigrationRecordService', () => {
+  let mockRequest: Partial<Request>;
+  let mockClient: jest.Mocked<PreClient>;
+  let service: MigrationRecordService;
+
+  beforeEach(() => {
+    mockClient = {
+      getMigrationRecords: jest.fn(),
+      updateMigrationRecord: jest.fn(),
+      submitMigrationRecords: jest.fn(),
+      putAudit: jest.fn(),
+    } as unknown as jest.Mocked<PreClient>;
+
+    mockRequest = {} as Partial<Request>;
+
+    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+      app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
+    });
+
+    service = new MigrationRecordService(mockRequest as Request, mockClient);
+  });
+
+  test('should return an empty array if no migration records are found', async () => {
+    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+      app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
+    });
+
+    mockClient.getMigrationRecords = jest.fn().mockResolvedValue({ records: [], pagination: {} });
+
+    service = new MigrationRecordService(mockRequest as Request, mockClient);
+    const result = await service.getMigrationRecords();
+
+    expect(result.migrationRecords).toEqual([]);
+    expect(mockClient.getMigrationRecords).toHaveBeenCalledWith(
+      'test-user',
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined
+    );
+  });
+
+  test('should return formatted migration records', async () => {
+    mockClient.getMigrationRecords = jest.fn().mockResolvedValue({
+      records: [
+        {
+          id: 'rec-001',
+          archive_id: 'ARCH-002',
+          urn: 'URN654321',
+          court_reference: 'Birmingham Youth',
+          court_id: 'C-001',
+          exhibit_reference: 'EX456',
+          witness_name: 'Zaheera',
+          defendant_name: 'Brown',
+          recording_version: 'ORIG',
+          recording_version_number: '1',
+          duration: '01:23:45',
+          error_message: 'Unknown reason',
+          status: 'Unresolved',
+          create_time: '10/12/2023',
+        },
+      ],
+      pagination: {
+        currentPage: 1,
+        totalPages: 1,
+        totalElements: 1,
+        size: 10,
+      },
+    });
+
+    service = new MigrationRecordService(mockRequest as Request, mockClient);
+    const result = await service.getMigrationRecords();
+
+    expect(result.migrationRecords).toEqual([
+      {
+        recordId: 'rec-001',
+        archiveId: 'ARCH-002',
+        urn: 'URN654321',
+        court: 'Birmingham Youth',
+        courtId: 'C-001',
+        exhibitReference: 'EX456',
+        witnessName: 'Zaheera',
+        defendantName: 'Brown',
+        recordingVersion: 'ORIG',
+        recordingVersionNumber: '1',
+        duration: '01:23:45',
+        reason: 'Unknown reason',
+        status: 'Unresolved',
+        createDate: '10/12/2023',
+      },
+    ]);
+  });
+
+  test('should handle errors when fetching migration records', async () => {
+    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+      app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
+    });
+
+    mockClient.getMigrationRecords = jest.fn().mockRejectedValue(new Error('API error'));
+
+    service = new MigrationRecordService(mockRequest as Request, mockClient);
+
+    await expect(service.getMigrationRecords()).rejects.toThrow('Failed to retrieve migration statuses.');
+  });
+
+  describe('updateMigrationRecord', () => {
+    it('should call client.updateMigrationRecord with correct params', async () => {
+      mockClient.updateMigrationRecord.mockResolvedValue(undefined);
+
+      const dto = { status: 'Resolved' };
+      await service.updateMigrationRecord('rec-123', dto);
+
+      expect(mockClient.updateMigrationRecord).toHaveBeenCalledWith('test-user', 'rec-123', dto);
+    });
+
+    it('should throw if user not authorized', async () => {
+      (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue(undefined);
+      const unauthorizedService = new MigrationRecordService({} as Request, mockClient);
+
+      await expect(unauthorizedService.updateMigrationRecord('rec-123', { status: 'X' })).rejects.toThrow(
+        'User not authorized to update migration records.'
+      );
+    });
+
+    it('should rethrow client errors', async () => {
+      mockClient.updateMigrationRecord.mockRejectedValue(new Error('Update failed'));
+
+      await expect(service.updateMigrationRecord('rec-123', { status: 'Resolved' })).rejects.toThrow('Update failed');
+    });
+  });
+
+  describe('submitMigrationRecords', () => {
+    it('should call submitMigrationRecords and putAudit with correct params', async () => {
+      mockClient.submitMigrationRecords.mockResolvedValue(undefined);
+      mockClient.putAudit.mockResolvedValue({} as any);
+
+      await service.submitMigrationRecords();
+
+      expect(mockClient.submitMigrationRecords).toHaveBeenCalledWith('test-user');
+      expect(mockClient.putAudit).toHaveBeenCalledWith(
+        'test-user',
+        expect.objectContaining({
+          functional_area: 'Admin Migration',
+          category: 'Migration',
+          activity: 'Submit Ready Records',
+          source: 'PORTAL',
+          table_name: 'vf_migration_records',
+          audit_details: expect.objectContaining({
+            description: expect.stringContaining('Migration records submitted by User test-user'),
+            email: 'test-user',
+          }),
+        })
+      );
+    });
+
+    it('should throw if user not authorized', async () => {
+      (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue(undefined);
+      const unauthorizedService = new MigrationRecordService({} as Request, mockClient);
+
+      await expect(unauthorizedService.submitMigrationRecords()).rejects.toThrow(
+        'User not authorized to update migration records.'
+      );
+    });
+
+    it('should rethrow client errors', async () => {
+      mockClient.submitMigrationRecords.mockRejectedValue(new Error('Submit failed'));
+
+      await expect(service.submitMigrationRecords()).rejects.toThrow('Submit failed');
+    });
+  });
+});

@@ -6,7 +6,7 @@ import { UserLevel } from '../../../main/types/user-level';
 jest.mock('express-openid-connect', () => {
   return {
     requiresAuth: jest.fn().mockImplementation(() => {
-      return (req, res, next) => {
+      return (req: any, res: any, next: any) => {
         next();
       };
     }),
@@ -23,18 +23,17 @@ jest.mock('../../../main/services/session-user/session-user', () => {
 });
 
 describe('Admin Page Access', () => {
-  let app;
-  let request;
-
   beforeAll(() => {
-    app = require('express')();
-    new Nunjucks(false).enableFor(app);
-    request = require('supertest');
-    const adminRoute = require('../../../main/routes/admin').default;
-    adminRoute(app);
+    jest.resetAllMocks();
   });
 
   test('should display admin page for super user', async () => {
+    const app = require('express')();
+    new Nunjucks(false).enableFor(app);
+    const request = require('supertest');
+    const adminRoute = require('../../../main/routes/admin/admin').default;
+    adminRoute(app);
+
     if (mockeduser.app_access?.[0]?.role) {
       mockeduser.app_access[0].role.name = UserLevel.SUPER_USER;
     }
@@ -42,9 +41,17 @@ describe('Admin Page Access', () => {
     const response = await request(app).get('/admin');
     expect(response.status).toEqual(200);
     expect(response.text).toContain('Admin');
+    expect(response.text).toContain('Status');
+    expect(response.text).toContain('Audit');
   });
 
-  test('should display "Page is not available" for non-super user', async () => {
+  test('should display "Page Not Found" for non-super user', async () => {
+    const app = require('express')();
+    new Nunjucks(false).enableFor(app);
+    const request = require('supertest');
+    const adminRoute = require('../../../main/routes/admin/admin').default;
+    adminRoute(app);
+
     if (mockeduser.app_access?.[0]?.role) {
       mockeduser.app_access[0].role.name = UserLevel.ADMIN;
     }
