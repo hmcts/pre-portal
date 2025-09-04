@@ -45,21 +45,30 @@ describe('Migration route', () => {
     const migration = require('../../../main/routes/admin/migration').default;
     migration(app);
 
-    MigrationRecordService.prototype.getMigrationRecords = jest.fn().mockResolvedValue([
-      {
-        archiveId: 'ARCH-002',
-        urn: 'URN654321',
-        court: 'Birmingham Youth',
-        exhibitReference: 'EX456',
-        witnessName: 'Zaheera',
-        defendantName: 'Brown',
-        recordingVersion: 'ORIG',
-        reasonIn: 'Not_Most_Recent',
-        reason: '',
-        status: 'Unresolved',
-        createDate: '10/12/2023',
+    MigrationRecordService.prototype.getMigrationRecords = jest.fn().mockResolvedValue({
+      migrationRecords: [
+        {
+          archiveId: 'ARCH-002',
+          urn: 'URN654321',
+          court: 'Birmingham Youth',
+          exhibitReference: 'EX456',
+          witnessName: 'Zaheera',
+          defendantName: 'Brown',
+          recordingVersion: 'ORIG',
+          reasonIn: 'Not_Most_Recent',
+          reason: '',
+          status: 'Unresolved',
+          createDate: '10/12/2023',
+        },
+      ],
+      pagination: {
+        currentPage: 0,
+        totalPages: 1,
+        totalElements: 1,
+        size: 20,
       },
-    ]);
+    });
+
     if (mockeduser.app_access?.[0]?.role) {
       mockeduser.app_access[0].role.name = UserLevel.SUPER_USER;
     }
