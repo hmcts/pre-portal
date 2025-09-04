@@ -7,20 +7,6 @@ import { MigrationFilters } from '../../types/migration-filters';
 //import { PutAuditRequest } from '../pre-api/types';
 import { v4 as uuid } from 'uuid';
 
-// interface MigrationFilters {
-//   caseReference?: string;
-//   witness?: string;
-//   defendant?: string;
-//   court?: string;
-//   resource_state?: string;
-//   reasonIn?: string[];
-//   startDate?: string;
-//   endDate?: string;
-//     page?: number;
-//     size?: number;
-//     sort?: string;
-// }
-
 export interface MigrationRecordsResponse {
   migrationRecords: any[];
   pagination: {
@@ -59,7 +45,6 @@ export class MigrationRecordService {
         filters.size,
         filters.sort
       );
-      console.log('records', records);
       let migrationRecords = records.map((record: any) => ({
         recordId: record.id,
         archiveId: record.archive_id || '',
@@ -76,14 +61,7 @@ export class MigrationRecordService {
         status: record.status || '',
         createDate: record.create_time || '',
       }));
-      console.log('migrationRecords', migrationRecords);
-      //   if (filters.court) {
-      //     const search = filters.court.toLowerCase();
-      //     migrationRecords = migrationRecords.filter(r =>
-      //       r.court.toLowerCase().includes(search)
-      //     );
-      //   }
-      // console.log('migrationRecords2', migrationRecords)
+
       return {
         migrationRecords: migrationRecords,
         pagination: {
