@@ -477,4 +477,128 @@ describe('PreClient', () => {
       await expect(client.getCaptureSession('badid', 'user1')).rejects.toThrow('Invalid liveEventId length');
     });
   });
+
+  test('getMigrationRecords builds query params and returns data', async () => {
+    const mockResponse = {
+      data: {
+        page: {
+          number: 0,
+          totalPages: 1,
+          totalElements: 2,
+          size: 10,
+        },
+        _embedded: {
+          vfMigrationRecordDTOList: [{ id: 'rec1' }, { id: 'rec2' }],
+        },
+      },
+    };
+
+    mockedAxios.get.mockResolvedValueOnce(mockResponse);
+
+    const result = await preClient.getMigrationRecords(
+      mockXUserId,
+      'CASE123',
+      'John Doe',
+      'Jane Doe',
+      'COURT1',
+      'Resolved',
+      '01/01/2024',
+      '31/01/2024',
+      ['Incomplete_Data'],
+      0,
+      10,
+      'createDateFrom,desc'
+    );
+
+    expect(mockedAxios.get).toHaveBeenCalledWith(
+      'https://pre-api.staging.platform.hmcts.net/vf-migration-records',
+      expect.objectContaining({
+        headers: { 'X-User-Id': mockXUserId },
+        params: expect.objectContaining({
+          caseReference: 'CASE123',
+          witnessName: 'John Doe',
+          defendantName: 'Jane Doe',
+          courtReference: 'COURT1',
+          status: 'RESOLVED',
+          createDateFrom: '2024-01-01',
+          createDateTo: '2024-01-31',
+          reasonIn: ['INCOMPLETE_DATA'],
+          page: 0,
+          size: 10,
+          sort: 'createDateFrom,desc',
+        }),
+        paramsSerializer: expect.any(Function),
+      })
+    );
+
+    expect(result.records.length).toBe(2);
+    expect(result.pagination.totalElements).toBe(2);
+  });
+
+  test('getMigrationRecords handles empty results', async () => {
+    mockedAxios.get.mockResolvedValueOnce({
+      data: {
+        page: { number: 0, totalPages: 1, totalElements: 0, size: 10 },
+      },
+    });
+
+    const result = await preClient.getMigrationRecords(mockXUserId);
+    expect(result.records).toEqual([]);
+    expect(result.pagination.totalElements).toBe(0);
+  });
+
+  test('getMigrationRecords throws on API error', async () => {
+    mockedAxios.get.mockRejectedValueOnce({ response: { status: 500, data: 'Server error' } });
+
+    await expect(preClient.getMigrationRecords(mockXUserId)).rejects.toMatchObject({
+      response: { status: 500, data: 'Server error' },
+    });
+  });
+
+  test('submitMigrationRecords calls POST endpoint', async () => {
+    mockedAxios.post.mockResolvedValueOnce({ status: 200 });
+
+    await preClient.submitMigrationRecords(mockXUserId);
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      'https://pre-api.staging.platform.hmcts.net/vf-migration-records/submit',
+      null,
+      expect.objectContaining({
+        headers: { 'X-User-Id': mockXUserId },
+      })
+    );
+  });
+
+  test('submitMigrationRecords throws on error', async () => {
+    mockedAxios.post.mockRejectedValueOnce({ response: { status: 500 } });
+
+    await expect(preClient.submitMigrationRecords(mockXUserId)).rejects.toMatchObject({
+      response: { status: 500 },
+    });
+  });
+
+  test('updateMigrationRecord calls PUT endpoint', async () => {
+    const mockDto = { status: 'RESOLVED' };
+    mockedAxios.put.mockResolvedValueOnce({ status: 200 });
+
+    await preClient.updateMigrationRecord(mockXUserId, 'record-123', mockDto);
+    expect(mockedAxios.put).toHaveBeenCalledWith(
+      'https://pre-api.staging.platform.hmcts.net/vf-migration-records/record-123',
+      mockDto,
+      expect.objectContaining({
+        headers: { 'X-User-Id': mockXUserId },
+      })
+    );
+  });
+
+  test('getCourts calls endpoint and returns data', async () => {
+    const mockCourts = [{ id: 'COURT1', name: 'Test Court' }];
+    mockedAxios.get.mockResolvedValueOnce({ data: mockCourts });
+
+    const result = await preClient.getCourts(mockXUserId, 1, 25);
+    expect(mockedAxios.get).toHaveBeenCalledWith('/courts', {
+      headers: { 'X-User-Id': mockXUserId },
+      params: { page: 1, size: 25 },
+    });
+    expect(result).toEqual(mockCourts);
+  });
 });

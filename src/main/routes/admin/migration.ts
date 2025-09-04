@@ -21,6 +21,11 @@ export default function (app: Application): void {
     } else {
       resourceState = req.query.resource_state as string;
     }
+    let reasonIn: string[] = [];
+
+    if (req.query.reasonIn) {
+      reasonIn = Array.isArray(req.query.reasonIn) ? (req.query.reasonIn as string[]) : [req.query.reasonIn as string];
+    }
 
     const filters = {
       caseReference: req.query['case-reference'] as string,
@@ -31,14 +36,14 @@ export default function (app: Application): void {
 
       startDate: isValidDateString(req.query['start-date'] as string) ? (req.query['start-date'] as string) : '',
       endDate: isValidDateString(req.query['end-date'] as string) ? (req.query['end-date'] as string) : '',
-      reasonIn: req.query.reasonIn
-        ? Array.isArray(req.query.reasonIn)
-          ? (req.query.reasonIn as string[])
-          : [req.query.reasonIn as string]
-        : [],
+      reasonIn,
       page: req.query.page as unknown as number,
       size: 10,
     };
+
+    //   if (['ready', 'submitted', 'success'].includes(resourceState.toLowerCase())) {
+    //     filters.reasonIn = [''];
+    //     }
 
     const courtService = new CourtService(req, client);
     const migrationRecordService = new MigrationRecordService(req, client);
@@ -59,6 +64,7 @@ export default function (app: Application): void {
       page,
       size,
     });
+
     function buildPageUrl(page: number, filters: any) {
       const params = new URLSearchParams();
 
@@ -134,8 +140,23 @@ export default function (app: Application): void {
     }
 
     migrationRecords?.sort((a, b) => new Date(b.createDate).getTime() - new Date(a.createDate).getTime());
-    const hasReadyRecords = migrationRecords.some(r => r.status === 'READY');
-    const hasSubmittedRecords = migrationRecords.some(r => r.status === 'SUBMITTED');
+
+    const allRecordsResponse = await migrationRecordService.getMigrationRecords({
+      caseReference: '',
+      witness: '',
+      defendant: '',
+      court: '',
+      resource_state: '',
+      startDate: '',
+      endDate: '',
+      reasonIn: [],
+      page: 0,
+      size: 10000,
+    });
+
+    const allMigrationRecords = allRecordsResponse.migrationRecords || [];
+    const hasReadyRecords = allMigrationRecords.some(r => r.status === 'READY');
+    const hasSubmittedRecords = allMigrationRecords.some(r => r.status === 'SUBMITTED');
 
     res.render('admin/migration', {
       isSuperUser: true,

@@ -4,7 +4,6 @@ import { SessionUser } from '../session-user/session-user';
 import { UserLevel } from '../../types/user-level';
 import { Request } from 'express';
 import { MigrationFilters } from '../../types/migration-filters';
-//import { PutAuditRequest } from '../pre-api/types';
 import { v4 as uuid } from 'uuid';
 
 export interface MigrationRecordsResponse {
@@ -17,8 +16,8 @@ export interface MigrationRecordsResponse {
   };
 }
 export class MigrationRecordService {
-  private client: PreClient;
-  private user: string | undefined;
+  private readonly client: PreClient;
+  private readonly user: string | undefined;
 
   constructor(req: Request, client: PreClient) {
     this.client = client;
@@ -72,7 +71,7 @@ export class MigrationRecordService {
         },
       };
     } catch (e) {
-      throw new Error('Failed to retrieve migration statuses.');
+      throw new Error(`Failed to retrieve migration statuses. ${e}`);
     }
   }
 
@@ -97,20 +96,6 @@ export class MigrationRecordService {
     try {
       await this.client.submitMigrationRecords(this.user);
       console.log('migration records submitted');
-      //         const auditRequest: PutAuditRequest = {
-      //            id: crypto.randomUUID(),
-      //            category: "Migration",
-      //            activity: "Submit Ready Records",
-      //            functional_area: "Admin",
-      //            source: "Pre Portal",           // e.g., frontend or service name
-      //            table_name: "vf_migration_records",  // optional: which table affected
-      //            table_record_id: "ALL_READY",     // optional: could be 'ALL_READY' or blank
-      //            audit_details: {
-      //              user: this.user,
-      //              action: "Submitted all READY migration records",
-      //              timestamp: new Date().toISOString(),
-      //            }
-      //          };
 
       await this.client.putAudit(this.user, {
         id: uuid(),

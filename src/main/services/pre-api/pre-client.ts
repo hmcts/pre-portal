@@ -424,7 +424,7 @@ export class PreClient {
       const response = await axios.get('https://pre-api.staging.platform.hmcts.net/vf-migration-records', {
         headers: { 'X-User-Id': xUserId },
         params: queryParams,
-        paramsSerializer: params => qs.stringify(params, { arrayFormat: 'repeat' }), // 👈 key line
+        paramsSerializer: params => qs.stringify(params, { arrayFormat: 'repeat' }),
       });
 
       const pagination = {
@@ -437,9 +437,6 @@ export class PreClient {
         pagination.totalElements === 0 ? [] : (response.data['_embedded']?.['vfMigrationRecordDTOList'] as any[]);
 
       return { records, pagination };
-      console.log('records', records);
-
-      //return response.data._embedded?.vfMigrationRecordDTOList || [];
     } catch (e: any) {
       console.error('Error fetching migration records', {
         path: e.response?.request?.path,

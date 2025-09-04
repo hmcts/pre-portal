@@ -5,8 +5,8 @@ import { SessionUser } from '../session-user/session-user';
 import { UserLevel } from '../../types/user-level';
 
 export class CourtService {
-  private client: PreClient;
-  private user: string | undefined;
+  private readonly client: PreClient;
+  private readonly user: string | undefined;
 
   constructor(req: Request, client: PreClient) {
     this.client = client;
