@@ -131,7 +131,7 @@ const RAW_RUNTIME_STATE =
           ["uuid", "npm:11.1.0"],\
           ["webpack", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.101.3"],\
           ["webpack-cli", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:6.0.1"],\
-          ["webpack-dev-middleware", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.2"],\
+          ["webpack-dev-middleware", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.3"],\
           ["webpack-node-externals", "npm:3.0.0"]\
         ],\
         "linkType": "SOFT"\
@@ -19181,7 +19181,7 @@ const RAW_RUNTIME_STATE =
           ["uuid", "npm:11.1.0"],\
           ["webpack", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.101.3"],\
           ["webpack-cli", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:6.0.1"],\
-          ["webpack-dev-middleware", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.2"],\
+          ["webpack-dev-middleware", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.3"],\
           ["webpack-node-externals", "npm:3.0.0"]\
         ],\
         "linkType": "SOFT"\
@@ -22428,25 +22428,25 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["webpack-dev-middleware", [\
-      ["npm:7.4.2", {\
-        "packageLocation": "./.yarn/cache/webpack-dev-middleware-npm-7.4.2-4c13142935-608d101b82.zip/node_modules/webpack-dev-middleware/",\
+      ["npm:7.4.3", {\
+        "packageLocation": "./.yarn/cache/webpack-dev-middleware-npm-7.4.3-75c4065d08-e04fdac620.zip/node_modules/webpack-dev-middleware/",\
         "packageDependencies": [\
-          ["webpack-dev-middleware", "npm:7.4.2"]\
+          ["webpack-dev-middleware", "npm:7.4.3"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.2", {\
-        "packageLocation": "./.yarn/__virtual__/webpack-dev-middleware-virtual-38e20f7497/0/cache/webpack-dev-middleware-npm-7.4.2-4c13142935-608d101b82.zip/node_modules/webpack-dev-middleware/",\
+      ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.3", {\
+        "packageLocation": "./.yarn/__virtual__/webpack-dev-middleware-virtual-2a101143be/0/cache/webpack-dev-middleware-npm-7.4.3-75c4065d08-e04fdac620.zip/node_modules/webpack-dev-middleware/",\
         "packageDependencies": [\
           ["@types/webpack", null],\
           ["colorette", "npm:2.0.20"],\
           ["memfs", "npm:4.17.2"],\
-          ["mime-types", "npm:2.1.35"],\
+          ["mime-types", "npm:3.0.1"],\
           ["on-finished", "npm:2.4.1"],\
           ["range-parser", "npm:1.2.1"],\
           ["schema-utils", "npm:4.3.2"],\
           ["webpack", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.101.3"],\
-          ["webpack-dev-middleware", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.2"]\
+          ["webpack-dev-middleware", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.3"]\
         ],\
         "packagePeers": [\
           "@types/webpack",\
