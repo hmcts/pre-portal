@@ -116,7 +116,7 @@ const RAW_RUNTIME_STATE =
           ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.81.1"],\
           ["redis", "npm:5.8.2"],\
           ["require-directory", "npm:2.1.1"],\
-          ["sass", "npm:1.92.0"],\
+          ["sass", "npm:1.92.1"],\
           ["sass-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:16.0.5"],\
           ["serve-favicon", "npm:2.5.1"],\
           ["session-file-store", "npm:1.5.0"],\
@@ -19166,7 +19166,7 @@ const RAW_RUNTIME_STATE =
           ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.81.1"],\
           ["redis", "npm:5.8.2"],\
           ["require-directory", "npm:2.1.1"],\
-          ["sass", "npm:1.92.0"],\
+          ["sass", "npm:1.92.1"],\
           ["sass-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:16.0.5"],\
           ["serve-favicon", "npm:2.5.1"],\
           ["session-file-store", "npm:1.5.0"],\
@@ -20289,13 +20289,13 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["sass", [\
-      ["npm:1.92.0", {\
-        "packageLocation": "./.yarn/cache/sass-npm-1.92.0-9336e50cb9-dedc6e7a59.zip/node_modules/sass/",\
+      ["npm:1.92.1", {\
+        "packageLocation": "./.yarn/cache/sass-npm-1.92.1-a62a885e34-ded47fd238.zip/node_modules/sass/",\
         "packageDependencies": [\
           ["@parcel/watcher", "npm:2.5.1"],\
           ["chokidar", "npm:4.0.3"],\
           ["immutable", "npm:5.1.3"],\
-          ["sass", "npm:1.92.0"],\
+          ["sass", "npm:1.92.1"],\
           ["source-map-js", "npm:1.2.1"]\
         ],\
         "linkType": "HARD"\
@@ -20320,7 +20320,7 @@ const RAW_RUNTIME_STATE =
           ["@types/webpack", null],\
           ["neo-async", "npm:2.6.2"],\
           ["node-sass", null],\
-          ["sass", "npm:1.92.0"],\
+          ["sass", "npm:1.92.1"],\
           ["sass-embedded", null],\
           ["sass-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:16.0.5"],\
           ["webpack", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.101.3"]\
