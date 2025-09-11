@@ -51,7 +51,13 @@ export default function (app: Application): void {
         },
       });
 
+      // Calls `/media-service/vod?recordingId=${id}` creates Content Key Policy with userId + symmetric key; creates or refreshes streaming locator; generates JWT token
+      // POST http://${mediakind.api}/streamingLocators/{{locatorName}}/listPaths
+      // ^^ hls, dash, drm object with clear key licence acquisition url
+      /// creates JWS with issuer; userId; symmetric key
+
       const recordingPlaybackDataUrl = `/watch/${req.params.id}/playback`;
+      // secrets.pre-hmctskv.media-kind-player-key
       const mediaKindPlayerKey = config.get('pre.mediaKindPlayerKey');
       res.render('watch', {
         recording,

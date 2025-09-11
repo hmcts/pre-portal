@@ -1,8 +1,18 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["local>hmcts/.github:renovate-config", "local>hmcts/.github//renovate/automerge-minor"],
   "vulnerabilityAlerts": {
     "labels": ["security"]
   },
-  "rebaseWhen": "behind-base-branch"
+  "rebaseWhen": "behind-base-branch",
+  "packageRules": [
+    {
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "automerge": false,
+      "automergeType": "pr"
+    }
+  ],
+  "platformAutomerge": false
 }

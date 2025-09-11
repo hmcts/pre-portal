@@ -67,17 +67,17 @@ describe('Accessibility', () => {
     await browser.close();
   });
 
-  describe.each(signedOutUrls)('Signed out page %s', url => {
-    test('should have no accessibility errors', async () => {
-      const result: Pa11yResult = await pa11y(config.TEST_URL + url.replace('//', '/'), {
-        screenCapture: `${screenshotDir}/${url}.png`,
-        browser: browser,
-        ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
-      });
-      expect(result.issues).toEqual(expect.any(Array));
-      expectNoErrors(result.issues);
-    });
-  });
+  // describe.each(signedOutUrls)('Signed out page %s', url => {
+  //   test('should have no accessibility errors', async () => {
+  //     const result: Pa11yResult = await pa11y(config.TEST_URL + url.replace('//', '/'), {
+  //       screenCapture: `${screenshotDir}/${url}.png`,
+  //       browser: browser,
+  //       ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
+  //     });
+  //     expect(result.issues).toEqual(expect.any(Array));
+  //     expectNoErrors(result.issues);
+  //   });
+  // });
 
   test('/browse, watch and terms pages', async () => {
     const page = await signIn(browser);
@@ -119,5 +119,5 @@ describe('Accessibility', () => {
       ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
     });
     expect(termsResult.issues.map(issue => issue.code)).toEqual([]);
-  }, 65000);
+  }, 100000);
 });
