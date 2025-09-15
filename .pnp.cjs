@@ -113,7 +113,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.6.2"],\
           ["puppeteer", "npm:24.19.0"],\
           ["react", "npm:19.1.1"],\
-          ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.81.1"],\
+          ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.81.4"],\
           ["redis", "npm:5.8.2"],\
           ["require-directory", "npm:2.1.1"],\
           ["sass", "npm:1.92.1"],\
@@ -6868,10 +6868,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:0.81.1", {\
-        "packageLocation": "./.yarn/cache/@react-native-assets-registry-npm-0.81.1-6a2df529dc-eb9a69695f.zip/node_modules/@react-native/assets-registry/",\
+      ["npm:0.81.4", {\
+        "packageLocation": "./.yarn/cache/@react-native-assets-registry-npm-0.81.4-b878b04fda-d9e786df3e.zip/node_modules/@react-native/assets-registry/",\
         "packageDependencies": [\
-          ["@react-native/assets-registry", "npm:0.81.1"]\
+          ["@react-native/assets-registry", "npm:0.81.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6961,10 +6961,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["npm:0.81.1", {\
-        "packageLocation": "./.yarn/cache/@react-native-codegen-npm-0.81.1-dbd5511995-9097dbcf90.zip/node_modules/@react-native/codegen/",\
+      ["npm:0.81.4", {\
+        "packageLocation": "./.yarn/cache/@react-native-codegen-npm-0.81.4-624248cc8b-a278aed7bc.zip/node_modules/@react-native/codegen/",\
         "packageDependencies": [\
-          ["@react-native/codegen", "npm:0.81.1"]\
+          ["@react-native/codegen", "npm:0.81.4"]\
         ],\
         "linkType": "SOFT"\
       }],\
@@ -6988,12 +6988,12 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["virtual:fc0ef91fc8d625c3b77a973bb356a06d5729bf7dc03b737eceb31a2481dc9a56c0c058fcd2a9d53de680c2ca3f22baedb5711aef4e71434f36361e6188f0a98f#npm:0.81.1", {\
-        "packageLocation": "./.yarn/__virtual__/@react-native-codegen-virtual-2f2293c817/0/cache/@react-native-codegen-npm-0.81.1-dbd5511995-9097dbcf90.zip/node_modules/@react-native/codegen/",\
+      ["virtual:678231331d7b02bb6c33dfc3b1b38202029ad74d937c6a03753c4091f9f913a73987431b29f305ddd070f95f5a45255d4f3f7c847ffca94b3a7fb624aa531415#npm:0.81.4", {\
+        "packageLocation": "./.yarn/__virtual__/@react-native-codegen-virtual-047a252154/0/cache/@react-native-codegen-npm-0.81.4-624248cc8b-a278aed7bc.zip/node_modules/@react-native/codegen/",\
         "packageDependencies": [\
           ["@babel/core", "npm:7.28.4"],\
           ["@babel/parser", "npm:7.27.5"],\
-          ["@react-native/codegen", "virtual:fc0ef91fc8d625c3b77a973bb356a06d5729bf7dc03b737eceb31a2481dc9a56c0c058fcd2a9d53de680c2ca3f22baedb5711aef4e71434f36361e6188f0a98f#npm:0.81.1"],\
+          ["@react-native/codegen", "virtual:678231331d7b02bb6c33dfc3b1b38202029ad74d937c6a03753c4091f9f913a73987431b29f305ddd070f95f5a45255d4f3f7c847ffca94b3a7fb624aa531415#npm:0.81.4"],\
           ["@types/babel__core", null],\
           ["glob", "npm:7.2.3"],\
           ["hermes-parser", "npm:0.29.1"],\
@@ -7015,10 +7015,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["npm:0.81.1", {\
-        "packageLocation": "./.yarn/cache/@react-native-community-cli-plugin-npm-0.81.1-2db1349b2e-d6dd960010.zip/node_modules/@react-native/community-cli-plugin/",\
+      ["npm:0.81.4", {\
+        "packageLocation": "./.yarn/cache/@react-native-community-cli-plugin-npm-0.81.4-7dcf104217-0f7ab58002.zip/node_modules/@react-native/community-cli-plugin/",\
         "packageDependencies": [\
-          ["@react-native/community-cli-plugin", "npm:0.81.1"]\
+          ["@react-native/community-cli-plugin", "npm:0.81.4"]\
         ],\
         "linkType": "SOFT"\
       }],\
@@ -7045,12 +7045,12 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["virtual:fc0ef91fc8d625c3b77a973bb356a06d5729bf7dc03b737eceb31a2481dc9a56c0c058fcd2a9d53de680c2ca3f22baedb5711aef4e71434f36361e6188f0a98f#npm:0.81.1", {\
-        "packageLocation": "./.yarn/__virtual__/@react-native-community-cli-plugin-virtual-cc01227a63/0/cache/@react-native-community-cli-plugin-npm-0.81.1-2db1349b2e-d6dd960010.zip/node_modules/@react-native/community-cli-plugin/",\
+      ["virtual:678231331d7b02bb6c33dfc3b1b38202029ad74d937c6a03753c4091f9f913a73987431b29f305ddd070f95f5a45255d4f3f7c847ffca94b3a7fb624aa531415#npm:0.81.4", {\
+        "packageLocation": "./.yarn/__virtual__/@react-native-community-cli-plugin-virtual-807be89440/0/cache/@react-native-community-cli-plugin-npm-0.81.4-7dcf104217-0f7ab58002.zip/node_modules/@react-native/community-cli-plugin/",\
         "packageDependencies": [\
           ["@react-native-community/cli", null],\
-          ["@react-native/community-cli-plugin", "virtual:fc0ef91fc8d625c3b77a973bb356a06d5729bf7dc03b737eceb31a2481dc9a56c0c058fcd2a9d53de680c2ca3f22baedb5711aef4e71434f36361e6188f0a98f#npm:0.81.1"],\
-          ["@react-native/dev-middleware", "npm:0.81.1"],\
+          ["@react-native/community-cli-plugin", "virtual:678231331d7b02bb6c33dfc3b1b38202029ad74d937c6a03753c4091f9f913a73987431b29f305ddd070f95f5a45255d4f3f7c847ffca94b3a7fb624aa531415#npm:0.81.4"],\
+          ["@react-native/dev-middleware", "npm:0.81.4"],\
           ["@react-native/metro-config", null],\
           ["@types/react-native-community__cli", null],\
           ["@types/react-native__metro-config", null],\
@@ -7078,10 +7078,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:0.81.1", {\
-        "packageLocation": "./.yarn/cache/@react-native-debugger-frontend-npm-0.81.1-05bdfad478-ce772bf326.zip/node_modules/@react-native/debugger-frontend/",\
+      ["npm:0.81.4", {\
+        "packageLocation": "./.yarn/cache/@react-native-debugger-frontend-npm-0.81.4-5f719c2500-07a1c8250d.zip/node_modules/@react-native/debugger-frontend/",\
         "packageDependencies": [\
-          ["@react-native/debugger-frontend", "npm:0.81.1"]\
+          ["@react-native/debugger-frontend", "npm:0.81.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7106,12 +7106,12 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:0.81.1", {\
-        "packageLocation": "./.yarn/cache/@react-native-dev-middleware-npm-0.81.1-7d99e4e185-99b06f02d8.zip/node_modules/@react-native/dev-middleware/",\
+      ["npm:0.81.4", {\
+        "packageLocation": "./.yarn/cache/@react-native-dev-middleware-npm-0.81.4-265c52132a-255f87d75f.zip/node_modules/@react-native/dev-middleware/",\
         "packageDependencies": [\
           ["@isaacs/ttlcache", "npm:1.4.1"],\
-          ["@react-native/debugger-frontend", "npm:0.81.1"],\
-          ["@react-native/dev-middleware", "npm:0.81.1"],\
+          ["@react-native/debugger-frontend", "npm:0.81.4"],\
+          ["@react-native/dev-middleware", "npm:0.81.4"],\
           ["chrome-launcher", "npm:0.15.2"],\
           ["chromium-edge-launcher", "npm:0.2.0"],\
           ["connect", "npm:3.7.0"],\
@@ -7133,10 +7133,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:0.81.1", {\
-        "packageLocation": "./.yarn/unplugged/@react-native-gradle-plugin-npm-0.81.1-c18cfa2560/node_modules/@react-native/gradle-plugin/",\
+      ["npm:0.81.4", {\
+        "packageLocation": "./.yarn/unplugged/@react-native-gradle-plugin-npm-0.81.4-964849f6eb/node_modules/@react-native/gradle-plugin/",\
         "packageDependencies": [\
-          ["@react-native/gradle-plugin", "npm:0.81.1"]\
+          ["@react-native/gradle-plugin", "npm:0.81.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7149,10 +7149,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:0.81.1", {\
-        "packageLocation": "./.yarn/cache/@react-native-js-polyfills-npm-0.81.1-c4ce9be729-2cd9ccb46b.zip/node_modules/@react-native/js-polyfills/",\
+      ["npm:0.81.4", {\
+        "packageLocation": "./.yarn/cache/@react-native-js-polyfills-npm-0.81.4-d4d3779ae7-32d98478a6.zip/node_modules/@react-native/js-polyfills/",\
         "packageDependencies": [\
-          ["@react-native/js-polyfills", "npm:0.81.1"]\
+          ["@react-native/js-polyfills", "npm:0.81.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7189,10 +7189,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:0.81.1", {\
-        "packageLocation": "./.yarn/cache/@react-native-normalize-colors-npm-0.81.1-d4f247ae81-c1dae5e649.zip/node_modules/@react-native/normalize-colors/",\
+      ["npm:0.81.4", {\
+        "packageLocation": "./.yarn/cache/@react-native-normalize-colors-npm-0.81.4-d31428f52d-0c6255e094.zip/node_modules/@react-native/normalize-colors/",\
         "packageDependencies": [\
-          ["@react-native/normalize-colors", "npm:0.81.1"]\
+          ["@react-native/normalize-colors", "npm:0.81.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7205,10 +7205,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["npm:0.81.1", {\
-        "packageLocation": "./.yarn/cache/@react-native-virtualized-lists-npm-0.81.1-135a3ccfa5-3baea44be6.zip/node_modules/@react-native/virtualized-lists/",\
+      ["npm:0.81.4", {\
+        "packageLocation": "./.yarn/cache/@react-native-virtualized-lists-npm-0.81.4-52afef8dd7-c28764433b.zip/node_modules/@react-native/virtualized-lists/",\
         "packageDependencies": [\
-          ["@react-native/virtualized-lists", "npm:0.81.1"]\
+          ["@react-native/virtualized-lists", "npm:0.81.4"]\
         ],\
         "linkType": "SOFT"\
       }],\
@@ -7231,16 +7231,16 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["virtual:fc0ef91fc8d625c3b77a973bb356a06d5729bf7dc03b737eceb31a2481dc9a56c0c058fcd2a9d53de680c2ca3f22baedb5711aef4e71434f36361e6188f0a98f#npm:0.81.1", {\
-        "packageLocation": "./.yarn/__virtual__/@react-native-virtualized-lists-virtual-e76c72ef2a/0/cache/@react-native-virtualized-lists-npm-0.81.1-135a3ccfa5-3baea44be6.zip/node_modules/@react-native/virtualized-lists/",\
+      ["virtual:678231331d7b02bb6c33dfc3b1b38202029ad74d937c6a03753c4091f9f913a73987431b29f305ddd070f95f5a45255d4f3f7c847ffca94b3a7fb624aa531415#npm:0.81.4", {\
+        "packageLocation": "./.yarn/__virtual__/@react-native-virtualized-lists-virtual-1ff90beff4/0/cache/@react-native-virtualized-lists-npm-0.81.4-52afef8dd7-c28764433b.zip/node_modules/@react-native/virtualized-lists/",\
         "packageDependencies": [\
-          ["@react-native/virtualized-lists", "virtual:fc0ef91fc8d625c3b77a973bb356a06d5729bf7dc03b737eceb31a2481dc9a56c0c058fcd2a9d53de680c2ca3f22baedb5711aef4e71434f36361e6188f0a98f#npm:0.81.1"],\
+          ["@react-native/virtualized-lists", "virtual:678231331d7b02bb6c33dfc3b1b38202029ad74d937c6a03753c4091f9f913a73987431b29f305ddd070f95f5a45255d4f3f7c847ffca94b3a7fb624aa531415#npm:0.81.4"],\
           ["@types/react", null],\
           ["@types/react-native", null],\
           ["invariant", "npm:2.2.4"],\
           ["nullthrows", "npm:1.1.1"],\
           ["react", "npm:19.1.1"],\
-          ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.81.1"]\
+          ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.81.4"]\
         ],\
         "packagePeers": [\
           "@types/react-native",\
@@ -19592,7 +19592,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.6.2"],\
           ["puppeteer", "npm:24.19.0"],\
           ["react", "npm:19.1.1"],\
-          ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.81.1"],\
+          ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.81.4"],\
           ["redis", "npm:5.8.2"],\
           ["require-directory", "npm:2.1.1"],\
           ["sass", "npm:1.92.1"],\
@@ -20031,24 +20031,24 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["npm:0.81.1", {\
-        "packageLocation": "./.yarn/unplugged/react-native-virtual-fc0ef91fc8/node_modules/react-native/",\
+      ["npm:0.81.4", {\
+        "packageLocation": "./.yarn/unplugged/react-native-virtual-678231331d/node_modules/react-native/",\
         "packageDependencies": [\
-          ["react-native", "npm:0.81.1"]\
+          ["react-native", "npm:0.81.4"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.81.1", {\
-        "packageLocation": "./.yarn/unplugged/react-native-virtual-fc0ef91fc8/node_modules/react-native/",\
+      ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.81.4", {\
+        "packageLocation": "./.yarn/unplugged/react-native-virtual-678231331d/node_modules/react-native/",\
         "packageDependencies": [\
           ["@jest/create-cache-key-function", "npm:29.7.0"],\
-          ["@react-native/assets-registry", "npm:0.81.1"],\
-          ["@react-native/codegen", "virtual:fc0ef91fc8d625c3b77a973bb356a06d5729bf7dc03b737eceb31a2481dc9a56c0c058fcd2a9d53de680c2ca3f22baedb5711aef4e71434f36361e6188f0a98f#npm:0.81.1"],\
-          ["@react-native/community-cli-plugin", "virtual:fc0ef91fc8d625c3b77a973bb356a06d5729bf7dc03b737eceb31a2481dc9a56c0c058fcd2a9d53de680c2ca3f22baedb5711aef4e71434f36361e6188f0a98f#npm:0.81.1"],\
-          ["@react-native/gradle-plugin", "npm:0.81.1"],\
-          ["@react-native/js-polyfills", "npm:0.81.1"],\
-          ["@react-native/normalize-colors", "npm:0.81.1"],\
-          ["@react-native/virtualized-lists", "virtual:fc0ef91fc8d625c3b77a973bb356a06d5729bf7dc03b737eceb31a2481dc9a56c0c058fcd2a9d53de680c2ca3f22baedb5711aef4e71434f36361e6188f0a98f#npm:0.81.1"],\
+          ["@react-native/assets-registry", "npm:0.81.4"],\
+          ["@react-native/codegen", "virtual:678231331d7b02bb6c33dfc3b1b38202029ad74d937c6a03753c4091f9f913a73987431b29f305ddd070f95f5a45255d4f3f7c847ffca94b3a7fb624aa531415#npm:0.81.4"],\
+          ["@react-native/community-cli-plugin", "virtual:678231331d7b02bb6c33dfc3b1b38202029ad74d937c6a03753c4091f9f913a73987431b29f305ddd070f95f5a45255d4f3f7c847ffca94b3a7fb624aa531415#npm:0.81.4"],\
+          ["@react-native/gradle-plugin", "npm:0.81.4"],\
+          ["@react-native/js-polyfills", "npm:0.81.4"],\
+          ["@react-native/normalize-colors", "npm:0.81.4"],\
+          ["@react-native/virtualized-lists", "virtual:678231331d7b02bb6c33dfc3b1b38202029ad74d937c6a03753c4091f9f913a73987431b29f305ddd070f95f5a45255d4f3f7c847ffca94b3a7fb624aa531415#npm:0.81.4"],\
           ["@types/react", null],\
           ["abort-controller", "npm:3.0.0"],\
           ["anser", "npm:1.4.10"],\
@@ -20069,7 +20069,7 @@ const RAW_RUNTIME_STATE =
           ["promise", "npm:8.3.0"],\
           ["react", "npm:19.1.1"],\
           ["react-devtools-core", "npm:6.1.5"],\
-          ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.81.1"],\
+          ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.81.4"],\
           ["react-refresh", "npm:0.14.2"],\
           ["regenerator-runtime", "npm:0.13.11"],\
           ["scheduler", "npm:0.26.0"],\
