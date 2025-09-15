@@ -39,7 +39,7 @@ const RAW_RUNTIME_STATE =
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.2.0"],\
           ["@jest/globals", "npm:30.1.2"],\
-          ["@mediakind/mkplayer", "npm:1.26.0"],\
+          ["@mediakind/mkplayer", "npm:1.27.0"],\
           ["@types/body-parser", "npm:1.19.6"],\
           ["@types/compression", "npm:1.8.1"],\
           ["@types/config", "npm:3.3.5"],\
@@ -5128,11 +5128,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@mediakind/mkplayer", [\
-      ["npm:1.26.0", {\
-        "packageLocation": "./.yarn/cache/@mediakind-mkplayer-npm-1.26.0-fb8798eb7d-7f804b96b0.zip/node_modules/@mediakind/mkplayer/",\
+      ["npm:1.27.0", {\
+        "packageLocation": "./.yarn/cache/@mediakind-mkplayer-npm-1.27.0-ee41034098-90fd32be3c.zip/node_modules/@mediakind/mkplayer/",\
         "packageDependencies": [\
-          ["@mediakind/mkplayer", "npm:1.26.0"],\
-          ["bitmovin-player", "npm:8.208.0"],\
+          ["@mediakind/mkplayer", "npm:1.27.0"],\
+          ["bitmovin-player", "npm:8.225.0"],\
           ["bitmovin-player-ui", "npm:3.98.0"]\
         ],\
         "linkType": "HARD"\
@@ -10274,10 +10274,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["bitmovin-player", [\
-      ["npm:8.208.0", {\
-        "packageLocation": "./.yarn/cache/bitmovin-player-npm-8.208.0-323ad5bec9-72d99a1063.zip/node_modules/bitmovin-player/",\
+      ["npm:8.225.0", {\
+        "packageLocation": "./.yarn/cache/bitmovin-player-npm-8.225.0-bc1dc5c398-896ad81f39.zip/node_modules/bitmovin-player/",\
         "packageDependencies": [\
-          ["bitmovin-player", "npm:8.208.0"]\
+          ["bitmovin-player", "npm:8.225.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -19539,7 +19539,7 @@ const RAW_RUNTIME_STATE =
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.2.0"],\
           ["@jest/globals", "npm:30.1.2"],\
-          ["@mediakind/mkplayer", "npm:1.26.0"],\
+          ["@mediakind/mkplayer", "npm:1.27.0"],\
           ["@types/body-parser", "npm:1.19.6"],\
           ["@types/compression", "npm:1.8.1"],\
           ["@types/config", "npm:3.3.5"],\
