@@ -22,7 +22,7 @@ export class Auth {
     app.get('/callback', async (req, res, next) => {
       const { error, error_description } = req.query;
 
-      logger.info("Handling callback with error: {}, description: {}", error, error_description);
+      logger.info('Handling callback with error: {}, description: {}', error, error_description);
 
       if (error && /AADB2C90118/i.test(error_description as string)) {
         try {
@@ -39,7 +39,7 @@ export class Auth {
             redirect_uri: `${config.get('pre.portalUrl')}/callback`,
             response_type: 'code',
             scope: authConf.authorizationParams?.scope,
-            state: req.query.state as string || 'password-reset',
+            state: (req.query.state as string) || 'password-reset',
           };
 
           // 3. Redirect to Password Reset policy
@@ -66,7 +66,7 @@ export class Auth {
       secret: config.get('session.secret') as string,
       baseURL: config.get('pre.portalUrl') as string,
       clientID: config.get('b2c.appClientId') as string,
-      issuerBaseURL: config.get('b2c.baseUrl') as string + '?p=B2C_1A_SignUpOrSignin',
+      issuerBaseURL: (config.get('b2c.baseUrl') as string) + '?p=B2C_1A_SignUpOrSignin',
       clientAuthMethod: 'client_secret_post',
       clientSecret: config.get('b2c.appClientSecret') as string,
       authorizationParams: {

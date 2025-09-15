@@ -17,7 +17,7 @@ export class PropertiesVolume {
       config,
       'b2c.baseUrl',
       process.env.B2C_BASE_URL ??
-      'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/v2.0/.well-known/openid-configuration'
+        'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/v2.0/.well-known/openid-configuration'
     );
 
     set(
