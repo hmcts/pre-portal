@@ -16,12 +16,6 @@ export class PropertiesVolume {
     set(config, 'b2c.appClientId', process.env.B2C_APP_CLIENT_ID ?? 'd20a7462-f222-46b8-a363-d2e30eb274eb');
     set(
       config,
-      'b2c.baseUrl',
-      process.env.B2C_BASE_URL ??
-        'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_SignUpOrSignin'
-    );
-    set(
-      config,
       'b2c.endSessionEndpoint',
       process.env.B2C_END_SESSION_ENDPOINT ??
         'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/b2c_1a_signup_signin/oauth2/v2.0/logout'
@@ -44,9 +38,22 @@ export class PropertiesVolume {
       if (process.env.USE_DEV_B2C === 'true') {
         this.logger.info('Using dev B2C configuration');
         this.setSecret('secrets.pre-hmctskv.dev-pre-portal-sso', 'b2c.appClientSecret');
+        set(
+          config,
+          'b2c.baseUrl',
+          process.env.B2C_BASE_URL ??
+          'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_SignUpOrSignin'
+        );
       } else {
         this.setSecret('secrets.pre-hmctskv.pre-portal-sso', 'b2c.appClientSecret');
+        set(
+          config,
+          'b2c.baseUrl',
+          process.env.B2C_BASE_URL ??
+          'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_SIGNUP_SIGNIN'
+        );
       }
+
       this.setSecret('secrets.pre-hmctskv.b2c-test-login-email', 'b2c.testLogin.email');
       this.setSecret('secrets.pre-hmctskv.b2c-test-login-password', 'b2c.testLogin.password');
       this.setSecret('secrets.pre-hmctskv.b2c-test-super-user-email', 'b2c.testSuperUserLogin.email');
