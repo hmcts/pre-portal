@@ -9,6 +9,7 @@ export class PropertiesVolume {
   private logger = Logger.getLogger('properties-volume');
 
   enableFor(server: Application): void {
+    console.log(process.env);
     set(config, 'pre.portalUrl', process.env.PORTAL_URL ?? 'https://localhost:4551');
     set(config, 'pre.apiUrl', process.env.PRE_API_URL ?? 'https://localhost:4550');
     set(config, 'session.redis.host', process.env.REDIS_HOST ?? '');
@@ -17,7 +18,7 @@ export class PropertiesVolume {
       config,
       'b2c.baseUrl',
       process.env.B2C_BASE_URL ??
-        'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_SIGNUP_SIGNIN'
+        'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_SignUpOrSignin'
     );
     set(
       config,
