@@ -9,6 +9,7 @@ describe('Watch page success', () => {
       await request(app)
         .get('/watch/something')
         .expect(res => {
+          console.log(JSON.stringify(res));
           expect(res.status).toBe(302);
           expect(res.header.location).toContain('.b2clogin.com');
         });
