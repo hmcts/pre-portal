@@ -19,7 +19,7 @@
     "test:coverage": "jest --coverage",
     "test:routes": "jest -c jest.routes.config.js",
     "test:a11y": "echo 'Use test:pa11y instead' && exit 0",
-    "test:pa11y": "PORTAL_AUTH_DISABLED=1 NODE_TLS_REJECT_UNAUTHORIZED=0 jest -c jest.a11y.config.js --maxWorkers 15 --detectOpenHandles",
+    "test:pa11y": "USE_DEV_B2C=true PORTAL_AUTH_DISABLED=1 NODE_TLS_REJECT_UNAUTHORIZED=0 jest -c jest.a11y.config.js --maxWorkers 15 --detectOpenHandles",
     "test:smoke": "NODE_TLS_REJECT_UNAUTHORIZED=0 jest -c jest.smoke.config.js",
     "test:functional": "yarn playwright install && ALLOW_CONFIG_MUTATIONS=true NODE_TLS_REJECT_UNAUTHORIZED=0 codeceptjs run --config ./codecept.conf.js --steps --grep \"@flaky\" --invert",
     "test:crossbrowser:e2e": "NODE_TLS_REJECT_UNAUTHORIZED=0 codeceptjs run-multiple --all --config src/test/crossbrowser/saucelabs.conf.js --grep @CrossBrowser ",
