@@ -21,13 +21,13 @@ export class PropertiesVolume {
         config,
         'b2c.baseUrl',
         process.env.B2C_BASE_URL ??
-        'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_SignUpOrSignin'
+          'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_SignUpOrSignin'
       );
       set(
         config,
         'b2c.endSessionEndpoint',
         process.env.B2C_END_SESSION_ENDPOINT ??
-        'https://hmctsdevextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/b2c_1a_signup_signin/oauth2/v2.0/logout'
+          'https://hmctsdevextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/b2c_1a_signup_signin/oauth2/v2.0/logout'
       );
     } else {
       this.setSecret('secrets.pre-hmctskv.pre-portal-sso', 'b2c.appClientSecret');
@@ -35,13 +35,13 @@ export class PropertiesVolume {
         config,
         'b2c.baseUrl',
         process.env.B2C_BASE_URL ??
-        'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_SIGNUP_SIGNIN'
+          'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_SIGNUP_SIGNIN'
       );
       set(
         config,
         'b2c.endSessionEndpoint',
         process.env.B2C_END_SESSION_ENDPOINT ??
-        'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/b2c_1a_signup_signin/oauth2/v2.0/logout'
+          'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/b2c_1a_signup_signin/oauth2/v2.0/logout'
       );
     }
 
