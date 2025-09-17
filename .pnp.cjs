@@ -100,7 +100,7 @@ const RAW_RUNTIME_STATE =
           ["jquery", "npm:3.7.1"],\
           ["lint-staged", "npm:16.1.6"],\
           ["lodash", "npm:4.17.21"],\
-          ["marked", "npm:15.0.12"],\
+          ["marked", "npm:16.3.0"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.4"],\
           ["multer", "npm:2.0.2"],\
           ["nock", "npm:14.0.10"],\
@@ -17207,10 +17207,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["marked", [\
-      ["npm:15.0.12", {\
-        "packageLocation": "./.yarn/cache/marked-npm-15.0.12-878d4bfa62-deeb619405.zip/node_modules/marked/",\
+      ["npm:16.3.0", {\
+        "packageLocation": "./.yarn/cache/marked-npm-16.3.0-ee4fb80a67-60497834b9.zip/node_modules/marked/",\
         "packageDependencies": [\
-          ["marked", "npm:15.0.12"]\
+          ["marked", "npm:16.3.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -19600,7 +19600,7 @@ const RAW_RUNTIME_STATE =
           ["jquery", "npm:3.7.1"],\
           ["lint-staged", "npm:16.1.6"],\
           ["lodash", "npm:4.17.21"],\
-          ["marked", "npm:15.0.12"],\
+          ["marked", "npm:16.3.0"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.4"],\
           ["multer", "npm:2.0.2"],\
           ["nock", "npm:14.0.10"],\
