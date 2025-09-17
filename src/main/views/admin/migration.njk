@@ -14,11 +14,9 @@
 
   <div style="text-align: right;">
     <p class="govuk-body govuk-!-margin-bottom-1">Submit all entries marked as ready</p>
-    <form method="POST" action="/admin/migration/submit">
       <button
         id="submitMigrationBtn"
         class="govuk-button govuk-button"
-        type="submit"
         {% if not hasReadyRecords %}disabled aria-disabled="true"{% endif %}
       >
         {% if hasSubmittedRecords %}
@@ -27,7 +25,6 @@
           Submit Amendments
         {% endif %}
       </button>
-    </form>
   </div>
 </div>
 
@@ -115,24 +112,46 @@
         </select>
       </div>
     </div>
+{% set selectedReasons = request.query.reasonIn %}
+{% if selectedReasons %}
+  {% if selectedReasons is string %}
+    {% set selectedReasons = [selectedReasons] %}
+  {% endif %}
+{% else %}
+  {% set selectedReasons = [] %}
+{% endif %}
+  <div class="govuk-grid-column-one-quarter">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="failure-reason-dropdown">Failure reason</label>
+      <div class="dropdown-multiselect">
+        <button type="button" class="govuk-button govuk-button--secondary" id="failure-reason-dropdown">
+          Select Failure Reasons
+        </button>
+        <div class="dropdown-options">
+          <button type="button" class="govuk-link clear-selection">Clear all</button>
+          {% set reasons = [
+            { value: "Incomplete_Data", label: "Incomplete Data" },
+            { value: "Invalid_Format", label: "Invalid Format" },
+            { value: "Not_Most_Recent", label: "Not Most Recent" },
+            { value: "Pre_Go_Live", label: "Pre Go Live" },
+            { value: "Pre_Existing", label: "Pre Existing" },
+            { value: "Validation_Failed", label: "Validation Failed" },
+            { value: "Alternative_Available", label: "Alternative Available" },
+            { value: "General_Error", label: "General Error" },
+            { value: "Test", label: "Test" }
+          ] %}
 
-    <div class="govuk-grid-column-one-quarter">
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="failure-reason">Failure reason</label>
-        <select class="govuk-select" id="failure-reason" name="reasonIn" style="width: 100%;">
-          <option value="" {% if not request.query.reasonIn %}selected{% endif %}></option>
-          <option value="Incomplete_Data" {% if request.query.reasonIn == 'Incomplete_Data' %}selected{% endif %}>Incomplete Data</option>
-          <option value="Invalid_Format" {% if request.query.reasonIn == 'Invalid_Format' %}selected{% endif %}>Invalid Format</option>
-          <option value="Not_Most_Recent" {% if request.query.reasonIn == 'Not_Most_Recent' %}selected{% endif %}>Not Most Recent</option>
-          <option value="Pre_Go_Live" {% if request.query.reasonIn == 'Pre_Go_Live' %}selected{% endif %}>Pre Go Live</option>
-          <option value="Pre_Existing" {% if request.query.reasonIn == 'Pre_Existing' %}selected{% endif %}>Pre Existing</option>
-          <option value="Validation_Failed" {% if request.query.reasonIn == 'Validation_Failed' %}selected{% endif %}>Validation Failed</option>
-          <option value="Alternative_Available" {% if request.query.reasonIn == 'Alternative_Available' %}selected{% endif %}>Alternative Available</option>
-          <option value="General_Error" {% if request.query.reasonIn == 'General_Error' %}selected{% endif %}>General Error</option>
-          <option value="Test" {% if request.query.reasonIn == 'Test' %}selected{% endif %}>Test</option>
-        </select>
+          {% for reason in reasons %}
+            <label class="dropdown-option">
+              <input type="checkbox" name="reasonIn" value="{{ reason.value }}"
+               {% if reason.value in selectedReasons %}checked{% endif %} >
+              {{ reason.label }}
+            </label>
+          {% endfor %}
+        </div>
       </div>
     </div>
+  </div>
 
     <div class="govuk-grid-column-one-quarter">
       <div class="govuk-form-group">
@@ -170,8 +189,7 @@
 </form>
 </div>
 
-
-    <div class="table-scroll-container" style="width: 100%; max-height: 80vh; overflow: auto;">
+    <div class="table-scroll-container" style="width: 100%;  overflow-x: auto; overflow-y: hidden;">
       <div class="govuk-heading-m" style="position: sticky; top: 0; left: 0; z-index: 5; background: white; padding: 8px 0; margin-bottom: 0;">
       Migration resolutions
       </div>
@@ -233,7 +251,7 @@
                       name="courtField"
                       aria-label="Select court"
                       style="width: 100%; box-sizing: border-box; min-width: 0; overflow: visible;
-                      {% if invalid_court %}background-color: #ffcccc;!important;{% endif %}"
+                      {% if invalid_court %}background-color: #ffcccc !important;{% endif %}"
                       {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
                     >
                       <option value="" {% if not migrationRecord.court %}selected{% endif %}>Select a court</option>
@@ -247,7 +265,7 @@
                       {% endfor %}
 
                       {% if migrationRecord.court and not court_found %}
-                        <option value="{{ migrationRecord.court }}" selected>
+                        <option value="{{ migrationRecord.court }}" data-invalid="true" selected>
                           {{ migrationRecord.court }} (invalid)
                         </option>
                       {% endif %}
@@ -311,7 +329,7 @@
                   <input
                     type="text"
                     name="createDate"
-                    value="{{migrationRecord.createDate}}"
+                    value="{{migrationRecord.displayCreateDate}}"
                     class="govuk-input"
                     style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                     oninput="validateRecordingDate(this)"
@@ -320,8 +338,11 @@
                   >
         </td>
             <td class="govuk-table__cell" tabindex="0">
-              <select class="govuk-select" name="recordingVersion" aria-label="Select recording version"
-                      style="width: 100%; box-sizing: border-box; min-width: 0; overflow: visible;"
+              <select class="govuk-select {% if not migrationRecord.recordingVersion %}govuk-input--error{% endif %}"
+                      name="recordingVersion"
+                      aria-label="Select recording version"
+                      style="width: 100%; box-sizing: border-box; min-width: 0; overflow: visible;
+                      {% if not migrationRecord.recordingVersion %} background-color: #ffcccc; {% endif %}"
                       {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
               >
                 <option value="" {% if migrationRecord.recordingVersion == '' %}selected{% endif %}></option>
@@ -339,14 +360,13 @@
                       value="{{ migrationRecord.recordingVersionNumber }}"
                       class="govuk-input"
                       style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
-
                       oninput="validateIsNumber(this)"
                       aria-label="must be a number"
                       {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
                  >
                 </td>
 
-                <td class="govuk-table__cell duration-cell" tabindex="0" contenteditable="false">{{ migrationRecord.duration }}</td>
+                <td class="govuk-table__cell duration-cell" tabindex="0" contenteditable="false">{{ migrationRecord.displayDuration }}</td>
 
                 <td class="govuk-table__cell status-cell" tabindex="0" contenteditable="false">
                   {% if migrationRecord.status == 'FAILED' %}
@@ -362,7 +382,9 @@
                 </td>
                 <td class="govuk-table__cell button-cell" tabindex="0" style="padding: 0.5rem 1rem;">
                   <button class="govuk-button govuk-button mark-ready-button govuk-!-margin-bottom-1 govuk-!-margin-top-1" type="button"
-                  style="min-width: 120px;" {% if migrationRecord.status == 'SUBMITTED' or migrationRecord.status == 'SUCCESS' %}disabled{% endif %}>
+                  style="min-width: 120px;"
+                  {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                  >
                   {% if migrationRecord.status == 'READY' %}
                        Edit
                      {% else %}
@@ -379,7 +401,7 @@
           </tbody>
         {% endif %}
       </table>
-
+</div>
                 <div style="display: flex; justify-content: center;">
                   {% if paginationLinks.items.length > 1 %}
                         <div style="display: flex; justify-content: center;">
@@ -388,7 +410,7 @@
                       {% endif %}
                 </div>
 
-    </div>
+
 
     <div class="govuk-modal" id="errorModal" style="display: none; position: fixed; top: 20%; left: 50%; transform: translateX(-50%);
       background: white; border: 1px solid #ccc; padding: 1.5rem; z-index: 9999; width: 400px;">
@@ -454,6 +476,72 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    const submitRecordsButton = document.getElementById('submitMigrationBtn');
+
+    if (submitRecordsButton) {
+      submitRecordsButton.addEventListener('click', async (event) => {
+        event.preventDefault();
+        submitRecordsButton.disabled = true;
+        submitRecordsButton.textContent = 'Submitting...';
+
+        try {
+          const res = await fetch('/admin/migration/submit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({})
+          });
+
+          console.log("Response status:", res.status);
+
+          if (res.ok) {
+            submitRecordsButton.textContent = 'Submitted';
+            submitRecordsButton.classList.add('govuk-button--disabled');
+          } else {
+            const errorData = await res.json();
+            submitRecordsButton.disabled = false;
+            submitRecordsButton.textContent = 'Submit Amendments';
+            alert(`Error: ${errorData.error?.message || 'Unknown error'}`);
+          }
+        } catch (err) {
+          submitRecordsButton.disabled = false;
+          submitRecordsButton.textContent = 'Submit Amendments';
+          alert(`Error: ${err.message}`);
+        }
+      });
+    }
+
+  const statusSelect = document.querySelector('select[name="resource_state"]')
+  const reasonCheckboxes = document.querySelectorAll('input[type="checkbox"][name="reasonIn"]');
+  const reasonDropdownButton = document.getElementById('failure-reason-dropdown');
+
+
+ if (statusSelect && reasonCheckboxes.length > 0) {
+   const toggleReasonFilter = () => {
+    if (statusSelect.value !== 'Unresolved' && statusSelect.value !== "") {
+      reasonCheckboxes.forEach(cb => {
+        cb.checked = false;
+        cb.disabled = true;
+        cb.setAttribute('aria-disabled', 'true');
+      });
+       reasonDropdownButton.disabled = true;
+       reasonDropdownButton.setAttribute('aria-disabled', 'true');
+    } else {
+      reasonCheckboxes.forEach(cb => {
+        cb.disabled = false;
+        cb.removeAttribute('aria-disabled');
+      });
+       reasonDropdownButton.disabled = false;
+       reasonDropdownButton.removeAttribute('aria-disabled');
+    }
+  };
+
+  toggleReasonFilter();
+  statusSelect.addEventListener('change', toggleReasonFilter);
+}
+
 
     window.validateLength = function(input) {
         const minLength = 9;
@@ -515,9 +603,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!isDateValid) {
             input.style.backgroundColor = "#ffcccc";
+            input.classList.add("govuk-input--error");
             input.title = "Invalid date. Please use DD/MM/YYYY";
         } else {
             input.style.backgroundColor = "";
+            input.classList.remove("govuk-input--error");
             input.title = "";
         }
         checkRowForInvalidCells(input.closest('tr'));
@@ -525,19 +615,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.validateIsNumber = function(input) {
         const value = input.value.trim();
-        const isNumber = /^\d+$/.test(value);
+        const isNumber = /^\d+(\.\d+)?$/.test(value);
 
         if (!isNumber) {
             input.style.backgroundColor = "#ffcccc";
-            input.title = "Recording version must be a number";
+            input.classList.add("govuk-input--error");
+            input.title = "Recording version must be a number or decimal";
         } else {
             input.style.backgroundColor = "";
+            input.classList.remove("govuk-input--error");
             input.title = "";
         }
         checkRowForInvalidCells(input.closest("tr"));
     };
-
-    function checkRowForInvalidCells(row) {
+       function checkRowForInvalidCells(row) {
         const button = row.querySelector('.mark-ready-button');
         const inputs = row.querySelectorAll('input');
         let hasInvalidCell = false;
@@ -562,93 +653,124 @@ document.addEventListener('DOMContentLoaded', function() {
         validateCourtSelect(select);
     });
 
-    function validateCourtSelect(select) {
-        if (select.value === '') {
-            select.style.backgroundColor = '#ffcccc';
-            select.title = 'Please select a valid court';
-        }  else if (select.value.text.includes('(invalid)')) {
-            select.style.backgroundColor = '#ffcccc';
-        } else {
-            select.style.backgroundColor = '';
-            select.title = '';
-        }
+function validateCourtSelect(select) {
+    const selectedOption = select.options[select.selectedIndex];
+    if (select.value === '' || selectedOption.dataset.invalid === 'true') {
+        select.style.backgroundColor = '#ffcccc';
+        select.title = 'Please select a valid court';
+    } else {
+        select.style.backgroundColor = '';
+        select.title = '';
     }
+}
+
+document.querySelectorAll('input[name="createDate"]').forEach(input => {
+    window.validateRecordingDate(input);
+});
+
+document.querySelectorAll('input[name="urn"], input[name="exhibitReference"]').forEach(input => {
+    window.validateLength(input);
+});
+
+document.querySelectorAll('input[name="witnessName"], input[name="defendantName"]').forEach(input => {
+    window.validateNoDigitsMax100(input);
+});
+document.querySelectorAll('input[name="recordingVersionNumber"]').forEach(input => {
+    window.validateIsNumber(input);
+});
 
 
-    document.querySelectorAll('.mark-ready-button').forEach(function(button) {
-        button.addEventListener('click', async function() {
-            const row = button.closest('tr');
-            if (!row) return;
+document.querySelectorAll('.mark-ready-button').forEach(function(button) {
+    button.addEventListener('click', async function() {
+        const row = button.closest('tr');
+        if (!row) return;
 
-            const statusCell = row.querySelector('.status-cell');
-            const recordId = row.dataset.recordId;
+        const statusCell = row.querySelector('.status-cell');
+        const recordId = row.dataset.recordId;
 
-            if (!recordId) return;
-            if (button.textContent.trim() === 'Edit') {
-                statusCell.textContent = 'UNRESOLVED';
-                button.textContent = 'Mark as Ready';
+        if (!recordId) return;
+        const submitButton = document.getElementById('submitMigrationBtn');
+        if (button.textContent.trim() === 'Mark as Ready') {
+            if (submitButton) {
+                submitButton.disabled = false;
+            }
+            }
+        if (button.textContent.trim() === 'Edit') {
+            statusCell.textContent = 'UNRESOLVED';
+            button.textContent = 'Mark as Ready';
+
+            row.querySelectorAll('input, select').forEach(cell => {
+                cell.removeAttribute('disabled');
+            });
+
+            return;
+        }
+
+        function mapDto(row) {
+            const dateInput = row.querySelector('input[name="createDate"]')?.value?.trim();
+            const recordingDate = dateInput ?
+                new Date(dateInput.split('/').reverse().join('-')).toISOString() :
+                new Date().toISOString();
+
+            return {
+                id: row.dataset.recordId,
+                court_id: row.querySelector('select[name="courtField"]')?.value || '',
+                urn: row.querySelector('input[name="urn"]')?.value || '',
+                exhibit_reference: (row.querySelector('input[name="exhibitReference"]')?.value || '').replace(/[^a-z0-9]/gi, ''), // strictly alphanumeric
+                witness_name: (row.querySelector('input[name="witnessName"]')?.value || '').trim(),
+                defendant_name: (row.querySelector('input[name="defendantName"]')?.value || '').trim(),
+                recording_date: recordingDate,
+                recording_version: row.querySelector('select[name="recordingVersion"]')?.value?.toUpperCase() || null,
+                recording_version_number: row.querySelector('input[name="recordingVersionNumber"]')?.value || null,
+                status: 'READY',
+            };
+        }
+
+        const serverDto = mapDto(row)
+
+        try {
+            const response = await fetch(`/admin/migration/${recordId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(serverDto),
+            });
+
+            if (!response.ok) {
+                throw new Error(`Server responded with ${response.status}`);
+            } else {
+                statusCell.textContent = 'READY';
+                button.textContent = 'Edit';
 
                 row.querySelectorAll('input, select').forEach(cell => {
-                    cell.removeAttribute('disabled');
-                    //cell.contentEditable = true;
+                    cell.setAttribute('disabled', 'true');
+                    //cell.contentEditable = false;
                 });
-
-                return;
             }
 
+            console.log(`Record ${recordId} updated successfully`);
+        } catch (error) {
+            console.error(`Failed to update record ${recordId}:`, error);
+            alert('Failed to update migration record. Please try again.');
 
-            function mapDto(row) {
-                const dateInput = row.querySelector('input[name="createDate"]')?.value;
-                const recordingDate = dateInput ?
-                    new Date(dateInput.split('/').reverse().join('-')).toISOString() :
-                    new Date().toISOString();
-
-                return {
-                    id: row.dataset.recordId,
-                    court_id: row.querySelector('select[name="courtField"]')?.value || '',
-                    urn: row.querySelector('input[name="urn"]')?.value || '',
-                    exhibit_reference: (row.querySelector('input[name="exhibitReference"]')?.value || '').replace(/[^a-z0-9]/gi, ''), // strictly alphanumeric
-                    witness_name: (row.querySelector('input[name="witnessName"]')?.value || '').trim(),
-                    defendant_name: (row.querySelector('input[name="defendantName"]')?.value || '').trim(),
-                    recording_date: recordingDate,
-                    recording_version: row.querySelector('select[name="recordingVersion"]')?.value?.toUpperCase() || null,
-                    recording_version_number: row.querySelector('input[name="recordingVersionNumber"]')?.value || null,
-                    status: 'READY',
-                };
-            }
-
-            const serverDto = mapDto(row)
-
-
-            try {
-                const response = await fetch(`/admin/migration/${recordId}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(serverDto),
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Server responded with ${response.status}`);
-                } else {
-                    statusCell.textContent = 'READY';
-                    button.textContent = 'Edit';
-
-                    row.querySelectorAll('input, select').forEach(cell => {
-                        cell.setAttribute('disabled', 'true');
-                        //cell.contentEditable = false;
-                    });
-                }
-
-                console.log(`Record ${recordId} updated successfully`);
-            } catch (error) {
-                console.error(`Failed to update record ${recordId}:`, error);
-                alert('Failed to update migration record. Please try again.');
-
-            }
-        });
+        }
     });
+});
+
+   const dropdownButton = document.getElementById("failure-reason-dropdown");
+   const dropdownOptions = document.querySelector(".dropdown-options");
+
+   dropdownButton.addEventListener("click", () => {
+     dropdownOptions.classList.toggle("open");
+   });
+
+   document.addEventListener("click", function (event) {
+     if (!dropdownButton.contains(event.target) && !dropdownOptions.contains(event.target)) {
+       dropdownOptions.classList.remove("open");
+     }
+   });
+
 
     document.querySelectorAll('.error-message-cell').forEach(cell => {
         cell.addEventListener('click', () => {
@@ -682,6 +804,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    const clearBtn = document.querySelector(".clear-selection");
+    clearBtn?.addEventListener("click", function () {
+    const checkboxes = document.querySelectorAll(
+      '.dropdown-options input[type="checkbox"]'
+    );
+    checkboxes.forEach(cb => cb.checked = false);
+    });
 
     const resetButton = document.getElementById('resetButton');
     if (resetButton) {

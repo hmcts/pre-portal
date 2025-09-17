@@ -159,7 +159,7 @@
 }
 
 .sticky-header-container {
-  position: sticky;
+  //position: sticky;
   top: 0;
   z-index: 999;
   background: white;
@@ -342,4 +342,80 @@ body.no-scroll {
 
 .side-nav {
   width: 100%;
+}
+.govuk-pagination__item--current .govuk-pagination__link {
+  color: white !important;
+}
+.dropdown-multiselect {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 0;
+}
+.dropdown-multiselect .govuk-button {
+  margin-bottom: 0;
+  width: 100%;
+  background: white;
+}
+.dropdown-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #b1b4b6;
+  padding: 0.5rem;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+  //box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  font-family: 'GDS Transport', Arial, sans-serif;
+  font-size: 19px;
+  line-height: 1.5;
+  color: #0b0c0c;
+}
+
+.dropdown-option {
+  display: block;
+  padding: 0.2rem 0;
+  font-family: 'GDS Transport', Arial, sans-serif;
+  font-size: 19px;
+  line-height: 1.5;
+  color: #0b0c0c;
+}
+
+.dropdown-options.open {
+  display: block;
+}
+
+#failure-reason-dropdown {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  width: 100%;
+  padding: 5px 35px 5px 10px;
+  border: 2px solid #0b0c0c;
+  border-radius: 0;
+  background-color: #fff;
+  color: #0b0c0c;
+
+  font-family: 'GDS Transport', Arial, sans-serif;
+  font-size: 19px;
+  line-height: 1.25;
+  text-align: left !important;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8'%3E%3Cpath fill='%230b0c0c' d='M7 8L0 0h14z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 14px 8px;
+  cursor: pointer;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+#failure-reason-dropdown:focus {
+  outline: 3px solid #fd0;
+  outline-offset: 0;
 }

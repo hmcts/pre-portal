@@ -147,6 +147,33 @@ describe('MigrationRecordService', () => {
 
   describe('submitMigrationRecords', () => {
     it('should call submitMigrationRecords and putAudit with correct params', async () => {
+      mockClient.getMigrationRecords.mockResolvedValue({
+        records: [
+          {
+            id: 'rec-001',
+            archive_id: 'ARCH-002',
+            urn: 'URN654321',
+            court_reference: 'Birmingham Youth',
+            court_id: 'C-001',
+            exhibit_reference: 'EX456',
+            witness_name: 'Zaheera',
+            defendant_name: 'Brown',
+            recording_version: 'ORIG',
+            recording_version_number: '1',
+            duration: '01:23:45',
+            error_message: 'Unknown reason',
+            status: 'READY',
+            create_time: '10/12/2023',
+          },
+        ],
+        pagination: {
+          currentPage: 1,
+          totalPages: 1,
+          totalElements: 1,
+          size: 10,
+        },
+      });
+
       mockClient.submitMigrationRecords.mockResolvedValue(undefined);
       mockClient.putAudit.mockResolvedValue({} as any);
 
@@ -158,11 +185,11 @@ describe('MigrationRecordService', () => {
         expect.objectContaining({
           functional_area: 'Admin Migration',
           category: 'Migration',
-          activity: 'Submit Ready Records',
+          activity: 'Submit Ready Record',
           source: 'PORTAL',
           table_name: 'vf_migration_records',
           audit_details: expect.objectContaining({
-            description: expect.stringContaining('Migration records submitted by User test-user'),
+            description: expect.stringMatching(/Migration record .* submitted by user test-user/),
             email: 'test-user',
           }),
         })
@@ -179,9 +206,9 @@ describe('MigrationRecordService', () => {
     });
 
     it('should rethrow client errors', async () => {
-      mockClient.submitMigrationRecords.mockRejectedValue(new Error('Submit failed'));
+      mockClient.submitMigrationRecords.mockRejectedValue(new Error('No records to submit'));
 
-      await expect(service.submitMigrationRecords()).rejects.toThrow('Submit failed');
+      await expect(service.submitMigrationRecords()).rejects.toThrow('No records to submit');
     });
   });
 });

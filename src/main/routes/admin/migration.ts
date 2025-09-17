@@ -5,11 +5,36 @@ import { RequiresSuperUser } from '../../middleware/admin-middleware';
 
 import { MigrationRecordService } from '../../services/system-status/migration-status';
 import { CourtService } from '../../services/system-status/courts';
+import { formatDateToDDMMYYYY } from '../../utils/convert-date';
+import { COURT_ALIASES } from '../../utils/court-alias';
 
 function isValidDateString(s: string | undefined) {
   if (!s) return false;
   return /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(\.\d{3})?Z)?$/.test(s);
 }
+
+function normalize(str: string): string {
+  return str
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '')
+    .trim();
+}
+
+function formatDuration(seconds) {
+  if (seconds == null || isNaN(seconds)) return '';
+
+  const totalSeconds = Math.max(0, Number(seconds));
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const secs = totalSeconds % 60;
+
+  return [
+    hours.toString().padStart(2, '0'),
+    minutes.toString().padStart(2, '0'),
+    secs.toString().padStart(2, '0'),
+  ].join(':');
+}
+
 export default function (app: Application): void {
   app.get('/admin/migration', requiresAuth(), RequiresSuperUser, async (req, res) => {
     const client = new PreClient();
@@ -23,8 +48,10 @@ export default function (app: Application): void {
     }
     let reasonIn: string[] = [];
 
-    if (req.query.reasonIn) {
+    if (resourceState === 'Unresolved' && req.query.reasonIn) {
       reasonIn = Array.isArray(req.query.reasonIn) ? (req.query.reasonIn as string[]) : [req.query.reasonIn as string];
+    } else {
+      reasonIn = [];
     }
 
     const filters = {
@@ -41,10 +68,6 @@ export default function (app: Application): void {
       size: 10,
     };
 
-    //   if (['ready', 'submitted', 'success'].includes(resourceState.toLowerCase())) {
-    //     filters.reasonIn = [''];
-    //     }
-
     const courtService = new CourtService(req, client);
     const migrationRecordService = new MigrationRecordService(req, client);
 
@@ -52,11 +75,12 @@ export default function (app: Application): void {
 
     const page = req.query.page ? Number(req.query.page) : 0;
     const size = 20;
+
     const { migrationRecords, pagination } = await migrationRecordService.getMigrationRecords({
       caseReference: filters.caseReference,
       witness: filters.witness,
       defendant: filters.defendant,
-      court: filters.court,
+      court: '',
       resource_state: filters.resource_state,
       startDate: filters.startDate,
       endDate: filters.endDate,
@@ -64,6 +88,15 @@ export default function (app: Application): void {
       page,
       size,
     });
+
+    let filteredRecords = migrationRecords || [];
+    if (filters.court) {
+      const aliases = COURT_ALIASES[filters.court] || [normalize(filters.court)];
+      filteredRecords = filteredRecords.filter(record => {
+        const recordCourt = normalize(record.court) || '';
+        return aliases.includes(recordCourt);
+      });
+    }
 
     function buildPageUrl(page: number, filters: any) {
       const params = new URLSearchParams();
@@ -140,6 +173,11 @@ export default function (app: Application): void {
     }
 
     migrationRecords?.sort((a, b) => new Date(b.createDate).getTime() - new Date(a.createDate).getTime());
+    const formattedMigrationRecords = filteredRecords?.map(record => ({
+      ...record,
+      displayCreateDate: formatDateToDDMMYYYY(record.createDate),
+      displayDuration: formatDuration(record.duration),
+    }));
 
     const allRecordsResponse = await migrationRecordService.getMigrationRecords({
       caseReference: '',
@@ -151,7 +189,7 @@ export default function (app: Application): void {
       endDate: '',
       reasonIn: [],
       page: 0,
-      size: 10000,
+      size: 100000,
     });
 
     const allMigrationRecords = allRecordsResponse.migrationRecords || [];
@@ -160,7 +198,7 @@ export default function (app: Application): void {
 
     res.render('admin/migration', {
       isSuperUser: true,
-      migrationRecords: migrationRecords,
+      migrationRecords: formattedMigrationRecords,
       hasReadyRecords,
       hasSubmittedRecords,
       paginationLinks,

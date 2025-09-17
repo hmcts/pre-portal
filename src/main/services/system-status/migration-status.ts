@@ -92,28 +92,53 @@ export class MigrationRecordService {
     if (!this.user || !this.client) {
       throw new Error('User not authorized to update migration records.');
     }
+    const user = this.user;
 
     try {
-      await this.client.submitMigrationRecords(this.user);
       console.log('migration records submitted');
 
-      await this.client.putAudit(this.user, {
-        id: uuid(),
-        functional_area: 'Admin Migration',
-        category: 'Migration',
-        activity: 'Submit Ready Records',
-        source: 'PORTAL',
-        table_name: 'vf_migration_records',
-        audit_details: {
-          //                recordingId: recording.id,
-          //                caseReference: recording.case_reference,
-          //                caseId: recording.case_id,
-          //                courtName: recording.capture_session.court_name,
-          description: 'Migration records submitted by User ' + this.user,
-          email: this.user,
-        },
-      });
-      console.log('Put audit');
+      const response = await this.client.getMigrationRecords(user, '', '', '', '', 'READY', '', '', []);
+
+      const readyRecords = response?.records || [];
+
+      if (readyRecords.length === 0) {
+        throw new Error('No records to submit');
+      }
+
+      await this.client.submitMigrationRecords(this.user);
+
+      const auditPromises = readyRecords.map(record =>
+        this.client.putAudit(user, {
+          id: uuid(),
+          functional_area: 'Admin Migration',
+          category: 'Migration',
+          activity: 'Submit Ready Record',
+          source: 'PORTAL',
+          table_name: 'vf_migration_records',
+          audit_details: {
+            recordId: record.id,
+            archiveId: record.archive_id || '',
+            urn: record.urn || '',
+            court: record.court_reference || '',
+            courtId: record.court_id || '',
+            exhibitReference: record.exhibit_reference || '',
+            witnessName: record.witness_name || '',
+            defendantName: record.defendant_name || '',
+            recordingVersion: record.recording_version || '',
+            recordingVersionNumber: record.recording_version_number || '',
+            duration: record.duration || '',
+            reason: record.error_message || '',
+            status: record.status || '',
+            createDate: record.create_time || '',
+            description: `Migration record ${record.id} submitted by user ${user}`,
+            email: user,
+          },
+        })
+      );
+
+      await Promise.all(auditPromises);
+
+      console.log(`Audit complete for ${readyRecords.length} record(s)`);
     } catch (e: any) {
       console.error('MigrationRecordService.updateMigrationRecord error:', e.response?.data || e.message);
       throw e;
