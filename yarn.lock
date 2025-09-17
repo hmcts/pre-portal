@@ -12748,12 +12748,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:^15.0.0":
-  version: 15.0.12
-  resolution: "marked@npm:15.0.12"
+"marked@npm:^16.0.0":
+  version: 16.3.0
+  resolution: "marked@npm:16.3.0"
   bin:
     marked: bin/marked.js
-  checksum: 10/deeb619405c0c46af00c99b18b3365450abeb309104b24e3658f46142344f6b7c4117608c3b5834084d8738e92f81240c19f596e6ee369260f96e52b3457eaee
+  checksum: 10/60497834b9acfb3b3994222509d359ecb9a197c885dfeb77e2050a287cd2f4ab19f00d5597172b47f9e0c54d9e1e13d8b2dd73322b7838599e1f16d1d6283f5b
   languageName: node
   linkType: hard
 
@@ -14907,7 +14907,7 @@ __metadata:
     jquery: "npm:3.7.1"
     lint-staged: "npm:16.1.6"
     lodash: "npm:4.17.21"
-    marked: "npm:^15.0.0"
+    marked: "npm:^16.0.0"
     mini-css-extract-plugin: "npm:2.9.4"
     multer: "npm:^2.0.1"
     nock: "npm:14.0.10"
