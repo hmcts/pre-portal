@@ -47,6 +47,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 if (process.env.PORTAL_AUTH_DISABLED !== '1') {
   logger.info('Enabling Auth. Env: ' + env);
   new Auth().enableFor(app);
