@@ -45,6 +45,19 @@
     </div>
 
     <div class="govuk-grid-column-one-quarter">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="defendant">Defendant</label>
+            <input
+              class="govuk-input"
+              id="defendant"
+              name="defendant"
+              type="text"
+              value="{{ filters.defendant }}"
+              placeholder="Enter defendant">
+          </div>
+    </div>
+
+    <div class="govuk-grid-column-one-quarter">
       <div class="govuk-form-group">
         <label class="govuk-label" for="witness">Witness</label>
         <input
@@ -55,19 +68,6 @@
           value="{{ filters.witness }}"
           placeholder="Enter witness"
         >
-      </div>
-    </div>
-
-    <div class="govuk-grid-column-one-quarter">
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="defendant">Defendant</label>
-        <input
-          class="govuk-input"
-          id="defendant"
-          name="defendant"
-          type="text"
-          value="{{ filters.defendant }}"
-          placeholder="Enter defendant">
       </div>
     </div>
 

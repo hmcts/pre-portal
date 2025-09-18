@@ -5,35 +5,9 @@ import { RequiresSuperUser } from '../../middleware/admin-middleware';
 
 import { MigrationRecordService } from '../../services/system-status/migration-status';
 import { CourtService } from '../../services/system-status/courts';
-import { formatDateToDDMMYYYY } from '../../utils/convert-date';
+import { formatDateToDDMMYYYY, isValidDateString } from '../../utils/convert-date';
 import { COURT_ALIASES } from '../../utils/court-alias';
-
-function isValidDateString(s: string | undefined) {
-  if (!s) return false;
-  return /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(\.\d{3})?Z)?$/.test(s);
-}
-
-function normalize(str: string): string {
-  return str
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g, '')
-    .trim();
-}
-
-function formatDuration(seconds) {
-  if (seconds == null || isNaN(seconds)) return '';
-
-  const totalSeconds = Math.max(0, Number(seconds));
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const secs = totalSeconds % 60;
-
-  return [
-    hours.toString().padStart(2, '0'),
-    minutes.toString().padStart(2, '0'),
-    secs.toString().padStart(2, '0'),
-  ].join(':');
-}
+import { formatDuration } from '../../utils/format-duration';
 
 export default function (app: Application): void {
   app.get('/admin/migration', requiresAuth(), RequiresSuperUser, async (req, res) => {
@@ -91,9 +65,13 @@ export default function (app: Application): void {
 
     let filteredRecords = migrationRecords || [];
     if (filters.court) {
-      const aliases = COURT_ALIASES[filters.court] || [normalize(filters.court)];
+      const aliases = COURT_ALIASES[filters.court] || [filters.court];
       filteredRecords = filteredRecords.filter(record => {
-        const recordCourt = normalize(record.court) || '';
+        const recordCourt =
+          record.court
+            .toLowerCase()
+            .replace(/[^a-z0-9]/g, '')
+            .trim() || '';
         return aliases.includes(recordCourt);
       });
     }

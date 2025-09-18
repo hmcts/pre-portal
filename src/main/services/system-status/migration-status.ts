@@ -6,16 +6,8 @@ import { Request } from 'express';
 import { MigrationFilters } from '../../types/migration-filters';
 import { v4 as uuid } from 'uuid';
 import { mapMigrationRecord } from '../../utils/map-migration-record';
+import { MigrationRecordsResponse } from '../../types/migration-records-response';
 
-export interface MigrationRecordsResponse {
-  migrationRecords: any[];
-  pagination: {
-    currentPage: number;
-    totalPages: number;
-    totalElements: number;
-    size: number;
-  };
-}
 export class MigrationRecordService {
   private readonly client: PreClient;
   private readonly user: string | undefined;
@@ -102,20 +94,7 @@ export class MigrationRecordService {
           source: 'PORTAL',
           table_name: 'vf_migration_records',
           audit_details: {
-            recordId: record.id,
-            archiveId: record.archive_id || '',
-            urn: record.urn || '',
-            court: record.court_reference || '',
-            courtId: record.court_id || '',
-            exhibitReference: record.exhibit_reference || '',
-            witnessName: record.witness_name || '',
-            defendantName: record.defendant_name || '',
-            recordingVersion: record.recording_version || '',
-            recordingVersionNumber: record.recording_version_number || '',
-            duration: record.duration || '',
-            reason: record.error_message || '',
-            status: record.status || '',
-            createDate: record.create_time || '',
+            ...mapMigrationRecord(record),
             description: `Migration record ${record.id} submitted by user ${user}`,
             email: user,
           },
