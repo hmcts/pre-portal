@@ -18,7 +18,7 @@
       "key": "",
       "host": ""
     },
-    "maxAge": 3600,
+    "maxAge": 86400000,
     "secret": "superlongrandomstringthatshouldbebetterinprod"
   },
   "b2c": {
@@ -35,5 +35,9 @@
       "password": ""
     },
     "callbackHostname": "localhost:4551"
+  },
+  "health": {
+    "cvp": "https://status-kinly.pexip.com/api/v2/status.json",
+    "notify": "https://status.notifications.service.gov.uk/api/v2/status.json"
   }
 }

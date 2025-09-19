@@ -54,6 +54,7 @@ const RAW_RUNTIME_STATE =
           ["@types/multer", "npm:1.4.13"],\
           ["@types/node", "npm:22.18.5"],\
           ["@types/nunjucks", "npm:3.2.6"],\
+          ["@types/qs", "npm:6.14.0"],\
           ["@types/require-directory", "npm:2.1.6"],\
           ["@types/serve-favicon", "npm:2.5.7"],\
           ["@types/session-file-store", "npm:1.2.5"],\
@@ -112,6 +113,7 @@ const RAW_RUNTIME_STATE =
           ["pre-portal", "workspace:."],\
           ["prettier", "npm:3.6.2"],\
           ["puppeteer", "npm:24.20.0"],\
+          ["qs", "npm:6.14.0"],\
           ["react", "npm:19.1.1"],\
           ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.81.4"],\
           ["redis", "npm:5.8.2"],\
@@ -19554,6 +19556,7 @@ const RAW_RUNTIME_STATE =
           ["@types/multer", "npm:1.4.13"],\
           ["@types/node", "npm:22.18.5"],\
           ["@types/nunjucks", "npm:3.2.6"],\
+          ["@types/qs", "npm:6.14.0"],\
           ["@types/require-directory", "npm:2.1.6"],\
           ["@types/serve-favicon", "npm:2.5.7"],\
           ["@types/session-file-store", "npm:1.2.5"],\
@@ -19612,6 +19615,7 @@ const RAW_RUNTIME_STATE =
           ["pre-portal", "workspace:."],\
           ["prettier", "npm:3.6.2"],\
           ["puppeteer", "npm:24.20.0"],\
+          ["qs", "npm:6.14.0"],\
           ["react", "npm:19.1.1"],\
           ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.81.4"],\
           ["redis", "npm:5.8.2"],\
