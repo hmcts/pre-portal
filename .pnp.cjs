@@ -96,7 +96,7 @@ const RAW_RUNTIME_STATE =
           ["jest-junit", "npm:16.0.0"],\
           ["jest-mock", "npm:30.0.5"],\
           ["jest-util", "npm:30.0.5"],\
-          ["jose", "npm:5.10.0"],\
+          ["jose", "npm:6.0.11"],\
           ["jquery", "npm:3.7.1"],\
           ["lint-staged", "npm:16.1.6"],\
           ["lodash", "npm:4.17.21"],\
@@ -16356,10 +16356,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:5.10.0", {\
-        "packageLocation": "./.yarn/cache/jose-npm-5.10.0-4ce825ae05-03881d1dfb.zip/node_modules/jose/",\
+      ["npm:6.0.11", {\
+        "packageLocation": "./.yarn/cache/jose-npm-6.0.11-213415aaa7-f362a02bb8.zip/node_modules/jose/",\
         "packageDependencies": [\
-          ["jose", "npm:5.10.0"]\
+          ["jose", "npm:6.0.11"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -19596,7 +19596,7 @@ const RAW_RUNTIME_STATE =
           ["jest-junit", "npm:16.0.0"],\
           ["jest-mock", "npm:30.0.5"],\
           ["jest-util", "npm:30.0.5"],\
-          ["jose", "npm:5.10.0"],\
+          ["jose", "npm:6.0.11"],\
           ["jquery", "npm:3.7.1"],\
           ["lint-staged", "npm:16.1.6"],\
           ["lodash", "npm:4.17.21"],\
