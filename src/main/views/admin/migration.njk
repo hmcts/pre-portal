@@ -251,7 +251,7 @@
                       name="courtField"
                       aria-label="Select court"
                       style="width: 100%; box-sizing: border-box; min-width: 0; overflow: visible;
-                      {% if invalid_court %}background-color: #ffcccc !important;{% endif %}"
+                      {% if invalid_court %}background-color: #ffcccc !important; border: 2px solid #d4351c;{% endif %}"
                       {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
                     >
                       <option value="" {% if not migrationRecord.court %}selected{% endif %}>Select a court</option>
@@ -338,11 +338,11 @@
                   >
         </td>
             <td class="govuk-table__cell" tabindex="0">
-              <select class="govuk-select {% if not migrationRecord.recordingVersion %}govuk-input--error{% endif %}"
+              <select class="govuk-select"
                       name="recordingVersion"
                       aria-label="Select recording version"
                       style="width: 100%; box-sizing: border-box; min-width: 0; overflow: visible;
-                      {% if not migrationRecord.recordingVersion %} background-color: #ffcccc; {% endif %}"
+                      {% if not migrationRecord.recordingVersion %} background-color: #ffcccc; border: 2px solid #d4351c; {% endif %}"
                       {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
               >
                 <option value="" {% if migrationRecord.recordingVersion == '' %}selected{% endif %}></option>
@@ -380,9 +380,10 @@
                 </div>
                 <div class="icon">🔍</div>
                 </td>
-                <td class="govuk-table__cell button-cell" tabindex="0" style="padding: 0.5rem 1rem;">
+                <td class="govuk-table__cell button-cell" tabindex="0" style="padding: 0.5rem 1rem; min-width: 220px;">
+                <div class="button-wrapper">
                   <button class="govuk-button govuk-button mark-ready-button govuk-!-margin-bottom-1 govuk-!-margin-top-1" type="button"
-                  style="min-width: 120px;"
+
                   {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
                   >
                   {% if migrationRecord.status == 'READY' %}
@@ -391,6 +392,7 @@
                        Mark as Ready
                      {% endif %}
                  </button>
+                  <div>
                 </td>
               </tr>
             {% endfor %}
@@ -657,9 +659,11 @@ function validateCourtSelect(select) {
     const selectedOption = select.options[select.selectedIndex];
     if (select.value === '' || selectedOption.dataset.invalid === 'true') {
         select.style.backgroundColor = '#ffcccc';
+        select.style.border = '2px solid #d4351c';
         select.title = 'Please select a valid court';
     } else {
         select.style.backgroundColor = '';
+        select.style.border = '';
         select.title = '';
     }
 }
