@@ -501,13 +501,13 @@ describe('PreClient', () => {
       'John Doe',
       'Jane Doe',
       'COURT1',
-      'Resolved',
-      '01/01/2024',
-      '31/01/2024',
+      'RESOLVED',
+      '2024-01-01',
+      '2024-01-31',
       ['Incomplete_Data'],
       0,
       10,
-      'createDateFrom,desc'
+      'createTime,DESC'
     );
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
@@ -525,7 +525,7 @@ describe('PreClient', () => {
           reasonIn: ['INCOMPLETE_DATA'],
           page: 0,
           size: 10,
-          sort: 'createDateFrom,desc',
+          sort: 'createTime,DESC',
         }),
         paramsSerializer: expect.any(Function),
       })
