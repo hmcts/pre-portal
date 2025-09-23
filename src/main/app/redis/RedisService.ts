@@ -9,7 +9,7 @@ export class RedisService {
     const client = redis.createClient({
       socket: {
         host,
-        port: 6379,
+        port: 6380,
         connectTimeout: 15000,
         tls: true,
       },
