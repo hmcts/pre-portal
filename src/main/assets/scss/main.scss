@@ -159,7 +159,6 @@
 }
 
 .sticky-header-container {
-  //position: sticky;
   top: 0;
   z-index: 999;
   background: white;
@@ -369,7 +368,6 @@ body.no-scroll {
   max-height: 200px;
   overflow-y: auto;
   z-index: 10;
-  //box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   font-family: 'GDS Transport', Arial, sans-serif;
   font-size: 19px;
   line-height: 1.5;
@@ -418,4 +416,20 @@ body.no-scroll {
 #failure-reason-dropdown:focus {
   outline: 3px solid #fd0;
   outline-offset: 0;
+}
+
+.button-cell .button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem 1rem;
+}
+
+.button-cell .govuk-button {
+  white-space: normal;
+  word-wrap: break-word;
+  min-width: 320px;
+  text-align: center;
+  padding: 0.5rem 1rem;
 }

@@ -14,3 +14,19 @@ export function isValidDateString(s: string | undefined) {
   if (!s) return false;
   return /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(\.\d{3})?Z)?$/.test(s);
 }
+export function toIsoDateString(s: string | undefined): string {
+  if (!s) return '';
+
+  const ukMatch = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(s);
+  if (ukMatch) {
+    const [, day, month, year] = ukMatch;
+    return `${year}-${month}-${day}`;
+  }
+
+  const isoMatch = /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(\.\d{3})?Z)?$/;
+  if (isoMatch.test(s)) {
+    return s;
+  }
+
+  return '';
+}

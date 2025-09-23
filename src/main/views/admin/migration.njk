@@ -161,7 +161,7 @@
           id="start-date"
           name="start-date" type="text"
           placeholder="DD/MM/YYYY"
-          value="{{ request.query['start-date'] | default('') }}"
+          value="{{ filters.startDateInput | default('') }}"
         >
       </div>
     </div>
@@ -175,7 +175,7 @@
           name="end-date"
           type="text"
           placeholder="DD/MM/YYYY"
-          value="{{ request.query['end-date'] | default('') }}"
+          value="{{ filters.endDateInput | default('') }}"
         >
       </div>
     </div>
@@ -282,7 +282,7 @@
                       class="govuk-input"
                       style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                       oninput="validateLength(this)"
-                      aria-label="must be between 9 -13 alphanumeric characters"
+                      aria-label="must be between 9 -13 alphanumeric characters. Cannot be null if xhibit reference is null"
                       {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
                     >
                 </td>
@@ -295,7 +295,7 @@
                       class="govuk-input"
                       style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                       oninput="validateLength(this)"
-                      aria-label="must be between 9 -13 alphanumeric characters"
+                      aria-label="must be between 9 -13 alphanumeric characters. Cannot be null if URN is null"
                       {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
 
                     >
@@ -383,7 +383,7 @@
                 <td class="govuk-table__cell button-cell" tabindex="0" style="padding: 0.5rem 1rem; min-width: 220px;">
                 <div class="button-wrapper">
                   <button class="govuk-button govuk-button mark-ready-button govuk-!-margin-bottom-1 govuk-!-margin-top-1" type="button"
-
+                  data-status="{{ migrationRecord.status }}"
                   {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
                   >
                   {% if migrationRecord.status == 'READY' %}
@@ -544,22 +544,46 @@ document.addEventListener('DOMContentLoaded', function() {
   statusSelect.addEventListener('change', toggleReasonFilter);
 }
 
-
     window.validateLength = function(input) {
         const minLength = 9;
-        const maxLength = 13;
-        const value = input.value.trim();
+            const maxLength = 13;
 
-        if (value.length < minLength || value.length > maxLength) {
-            input.style.backgroundColor = "#ffcccc";
-            input.classList.add("govuk-input--error");
-            input.title = "Must be between 9 and 13 characters.";
-        } else {
-            input.style.backgroundColor = "";
-            input.classList.remove("govuk-input--error");
-            input.title = "";
-        }
-        checkRowForInvalidCells(input.closest('tr'));
+            const row = input.closest('tr');
+            const urnField = row.querySelector('input[name="urn"]');
+            const exhibitField = row.querySelector('input[name="exhibitReference"]');
+
+            const urnValue = urnField ? urnField.value.trim() : "";
+            const exhibitValue = exhibitField ? exhibitField.value.trim() : "";
+
+            function validateField(field, value) {
+                if (!field) return;
+
+                if ((urnValue && field === exhibitField) || (exhibitValue && field === urnField)) {
+                    field.style.backgroundColor = "";
+                    field.classList.remove("govuk-input--error");
+                    field.title = "";
+                    return;
+                }
+
+                if (value.length > 0 && (value.length < minLength || value.length > maxLength)) {
+                    field.style.backgroundColor = "#ffcccc";
+                    field.classList.add("govuk-input--error");
+                    field.title = "Must be between 9 and 13 characters.";
+                } else if (value.length === 0 && !urnValue && !exhibitValue) {
+                    field.style.backgroundColor = "#ffcccc";
+                    field.classList.add("govuk-input--error");
+                    field.title = "Either URN or Exhibit Reference must be provided.";
+                } else {
+                    field.style.backgroundColor = "";
+                    field.classList.remove("govuk-input--error");
+                    field.title = "";
+                }
+            }
+
+            validateField(urnField, urnValue);
+            validateField(exhibitField, exhibitValue);
+
+            checkRowForInvalidCells(row);
     };
 
     window.validateNoDigitsMax100 = function(input) {
@@ -630,22 +654,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         checkRowForInvalidCells(input.closest("tr"));
     };
-       function checkRowForInvalidCells(row) {
-        const button = row.querySelector('.mark-ready-button');
-        const inputs = row.querySelectorAll('input');
-        let hasInvalidCell = false;
+   function checkRowForInvalidCells(row) {
+       const button = row.querySelector('.mark-ready-button');
+       const statusCell = row.querySelector('.status-cell');
+       if (!button || !statusCell) return;
 
-        inputs.forEach(input => {
-            const bgColor = window.getComputedStyle(input).backgroundColor;
-            if (bgColor === 'rgb(255, 204, 204)') {
-                hasInvalidCell = true;
-            }
-        });
+       if (statusCell.textContent.trim().toUpperCase() !== 'UNRESOLVED') {
+           return;
+       }
 
-        if (button) {
-            button.disabled = hasInvalidCell;
-        }
-    }
+       const inputs = row.querySelectorAll('input, select');
+       let hasInvalidCell = false;
+
+       inputs.forEach(input => {
+           const bgColor = window.getComputedStyle(input).backgroundColor;
+           if (bgColor === 'rgb(255, 204, 204)') {
+               hasInvalidCell = true;
+           }
+       });
+
+       button.disabled = hasInvalidCell;
+   }
+
 
     document.querySelectorAll('select[name="courtField"]').forEach(function(select) {
         select.addEventListener('change', function() {
@@ -666,8 +696,20 @@ function validateCourtSelect(select) {
         select.style.border = '';
         select.title = '';
     }
+    checkRowForInvalidCells(select.closest("tr"));
 }
-
+document.querySelectorAll('select[name="recordingVersion"]').forEach(function(select) {
+    select.addEventListener('change', function() {
+        if (select.value.trim() !== '') {
+            select.style.backgroundColor = '';
+            select.style.border = '';
+        } else {
+            select.style.backgroundColor = '#ffcccc';
+            select.style.border = '2px solid #d4351c';
+        }
+        checkRowForInvalidCells(select.closest("tr"));
+    });
+});
 document.querySelectorAll('input[name="createDate"]').forEach(input => {
     window.validateRecordingDate(input);
 });
@@ -683,6 +725,14 @@ document.querySelectorAll('input[name="recordingVersionNumber"]').forEach(input 
     window.validateIsNumber(input);
 });
 
+document.querySelectorAll('tr').forEach(row => {
+    row.querySelectorAll('input, select').forEach(input => {
+        input.addEventListener('input', () => checkRowForInvalidCells(row));
+        input.addEventListener('change', () => checkRowForInvalidCells(row));
+    });
+
+    checkRowForInvalidCells(row);
+});
 
 document.querySelectorAll('.mark-ready-button').forEach(function(button) {
     button.addEventListener('click', async function() {
@@ -693,6 +743,7 @@ document.querySelectorAll('.mark-ready-button').forEach(function(button) {
         const recordId = row.dataset.recordId;
 
         if (!recordId) return;
+        const currentStatus = button.dataset.status;
         const submitButton = document.getElementById('submitMigrationBtn');
         if (button.textContent.trim() === 'Mark as Ready') {
             if (submitButton) {

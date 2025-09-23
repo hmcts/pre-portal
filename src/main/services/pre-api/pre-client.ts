@@ -378,25 +378,14 @@ export class PreClient {
         Pending: 'PENDING',
       };
       if (status) queryParams.status = statusMap[status] || status.toUpperCase();
-      function formatDate(dateString?: string): string | undefined {
-        if (!dateString) return undefined;
-
-        const [day, month, year] = dateString.split('/');
-        if (!day || !month || !year) return undefined;
-
-        return `${year}-${month}-${day}`;
-      }
-
-      if (createDateFrom) queryParams.createDateFrom = formatDate(createDateFrom);
-      if (createDateTo) queryParams.createDateTo = formatDate(createDateTo);
+      if (createDateFrom) queryParams.createDateFrom = createDateFrom;
+      if (createDateTo) queryParams.createDateTo = createDateTo;
 
       if (reasonIn) queryParams.reasonIn = reasonIn;
       if (page !== undefined) queryParams.page = page;
       if (size !== undefined) queryParams.size = size;
 
       if (sort) queryParams.sort = sort;
-
-      console.log('Calling Migration API with params:', queryParams);
 
       const VfFailureReasonMap: Record<string, string> = {
         Incomplete_Data: 'INCOMPLETE_DATA',

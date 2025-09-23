@@ -5,7 +5,7 @@ import { RequiresSuperUser } from '../../middleware/admin-middleware';
 
 import { MigrationRecordService } from '../../services/system-status/migration-status';
 import { CourtService } from '../../services/system-status/courts';
-import { formatDateToDDMMYYYY, isValidDateString } from '../../utils/convert-date';
+import { formatDateToDDMMYYYY, toIsoDateString } from '../../utils/convert-date';
 import { COURT_ALIASES } from '../../utils/court-alias';
 import { formatDuration } from '../../utils/format-duration';
 
@@ -27,16 +27,16 @@ export default function (app: Application): void {
     } else {
       reasonIn = [];
     }
-
+    const startDateInput = req.query['start-date'] as string;
+    const endDateInput = req.query['end-date'] as string;
     const filters = {
       caseReference: req.query['case-reference'] as string,
       witness: req.query.witness as string,
       defendant: req.query.defendant as string,
       court: req.query.court as string,
       resource_state: resourceState,
-
-      startDate: isValidDateString(req.query['start-date'] as string) ? (req.query['start-date'] as string) : '',
-      endDate: isValidDateString(req.query['end-date'] as string) ? (req.query['end-date'] as string) : '',
+      startDate: toIsoDateString(startDateInput),
+      endDate: toIsoDateString(endDateInput),
       reasonIn,
       page: req.query.page as unknown as number,
       size: 10,
@@ -49,7 +49,6 @@ export default function (app: Application): void {
 
     const page = req.query.page ? Number(req.query.page) : 0;
     const size = 20;
-
     const { migrationRecords, pagination } = await migrationRecordService.getMigrationRecords({
       caseReference: filters.caseReference,
       witness: filters.witness,
@@ -61,6 +60,7 @@ export default function (app: Application): void {
       reasonIn: filters.reasonIn,
       page,
       size,
+      sort: 'createTime,DESC',
     });
 
     let filteredRecords = migrationRecords || [];
@@ -150,7 +150,6 @@ export default function (app: Application): void {
       });
     }
 
-    migrationRecords?.sort((a, b) => new Date(b.createDate).getTime() - new Date(a.createDate).getTime());
     const formattedMigrationRecords = filteredRecords?.map(record => ({
       ...record,
       displayCreateDate: formatDateToDDMMYYYY(record.createDate),
@@ -180,7 +179,11 @@ export default function (app: Application): void {
       hasReadyRecords,
       hasSubmittedRecords,
       paginationLinks,
-      filters,
+      filters: {
+        ...filters,
+        startDateInput,
+        endDateInput,
+      },
       courts,
       selectedCourt: req.query.court || '',
       request: req,
