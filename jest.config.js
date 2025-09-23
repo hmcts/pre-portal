@@ -12,9 +12,6 @@ module.exports = {
     '^routes/(.*)$': '<rootDir>/src/main/routes/$1',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  coveragePathIgnorePatterns: [
-    '/src/main/modules/properties-volume/*',
-    '/src/main/assets/js/*',
-  ],
+  coveragePathIgnorePatterns: ['/src/main/modules/properties-volume/*', '/src/main/assets/js/*'],
   testPathIgnorePatterns: ['(^|/)[^/]*helper\\.ts$'],
 };
