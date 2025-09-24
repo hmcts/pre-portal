@@ -1,6 +1,6 @@
 nodejs:
-  devMemoryLimits: 1024Mi
-  devMemoryRequests: 128Mi
+  devmemoryLimits: 1024Mi
+  devmemoryRequests: 128Mi
   # Don't modify below here
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
