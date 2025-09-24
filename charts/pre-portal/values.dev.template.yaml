@@ -11,3 +11,5 @@ nodejs:
     B2C_END_SESSION_ENDPOINT: https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/b2c_1a_signup_signin/oauth2/v2.0/logout
     # Uncomment to enable dynatrace RUM in dev envs
     #DYNATRACE_JSTAG: https://js-cdn.dynatrace.com/jstag/17177a07246/bf24054dsx/636bef1033a59525_complete.js
+  devMemoryLimits: 1024Mi
+  devMemoryRequests: 128Mi
