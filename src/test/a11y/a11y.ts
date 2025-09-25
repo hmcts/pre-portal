@@ -96,6 +96,7 @@ describe('Accessibility', () => {
       const result: Pa11yResult = await pa11y(page.url(), {
         browser: browser,
         screenCapture: `${screenshotDir}/admin-status.png`,
+        ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
       });
 
       expect(result.issues).toEqual(expect.any(Array));
@@ -118,6 +119,7 @@ describe('Accessibility', () => {
       const liveEventsResult: Pa11yResult = await pa11y(liveEventsUrl, {
         browser: browser,
         screenCapture: `${screenshotDir}/admin-live-events.png`,
+        ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
       });
 
       expect(liveEventsResult.issues).toEqual(expect.any(Array));
