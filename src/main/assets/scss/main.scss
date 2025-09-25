@@ -423,13 +423,12 @@ body.no-scroll {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 0.5rem 1rem;
 }
 
 .button-cell .govuk-button {
   white-space: normal;
   word-wrap: break-word;
-  min-width: 320px;
+  max-width: 100%;
   text-align: center;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.5rem;
 }

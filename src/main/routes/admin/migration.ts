@@ -156,6 +156,8 @@ export default function (app: Application): void {
       displayDuration: formatDuration(record.duration),
     }));
 
+    const recordsCount = pagination?.totalElements || 0;
+
     const allRecordsResponse = await migrationRecordService.getMigrationRecords({
       caseReference: '',
       witness: '',
@@ -185,6 +187,7 @@ export default function (app: Application): void {
         endDateInput,
       },
       courts,
+      recordsCount,
       selectedCourt: req.query.court || '',
       request: req,
       pageUrl: req.url,

@@ -133,11 +133,13 @@
             { value: "Incomplete_Data", label: "Incomplete Data" },
             { value: "Invalid_Format", label: "Invalid Format" },
             { value: "Not_Most_Recent", label: "Not Most Recent" },
+            { value: "Raw_Files", label: "Raw Files" },
             { value: "Pre_Go_Live", label: "Pre Go Live" },
             { value: "Pre_Existing", label: "Pre Existing" },
             { value: "Validation_Failed", label: "Validation Failed" },
             { value: "Alternative_Available", label: "Alternative Available" },
             { value: "General_Error", label: "General Error" },
+            { value: "Case_Closed", label: "Case Closed" },
             { value: "Test", label: "Test" }
           ] %}
 
@@ -189,11 +191,11 @@
 </form>
 </div>
 
+ <p class="govuk-body govuk-!-margin-bottom-3" >Total search results: {{recordsCount}}</p>
     <div class="table-scroll-container" style="width: 100%;  overflow-x: auto; overflow-y: hidden;">
       <div class="govuk-heading-m" style="position: sticky; top: 0; left: 0; z-index: 5; background: white; padding: 8px 0; margin-bottom: 0;">
       Migration resolutions
       </div>
-
 
       <table class="govuk-table" id="resizable-table" style="min-width: 1400px;">
         <thead class="govuk-table__head">
@@ -234,7 +236,7 @@
 
               <tr class="govuk-table__row"  data-record-id="{{ migrationRecord.recordId }}">
 
-                <td class="govuk-table__cell sticky-col archive-id-cell" tabindex="0" name="archiveId" contenteditable="false" style="left: 0; z-index: 1; border-right: 2px solid #b1b4b6; background: #fff;">{{migrationRecord.archiveId}}</td>
+                <td class="govuk-table__cell sticky-col archive-id-cell" tabindex="0" name="archiveId" contenteditable="false" style="left: 0; z-index: 1; border-right: 2px solid #b1b4b6; background: #fff;">{{migrationRecord.archiveName}}</td>
 
                 <td class="govuk-table__cell" tabindex="0">
                   {% set court_found = false %}
@@ -767,11 +769,16 @@ document.querySelectorAll('.mark-ready-button').forEach(function(button) {
                 new Date(dateInput.split('/').reverse().join('-')).toISOString() :
                 new Date().toISOString();
 
+            function normalize(value) {
+                     const trimmed = value?.trim();
+                     return trimmed === "" ? null : trimmed;
+                 }
+
             return {
                 id: row.dataset.recordId,
                 court_id: row.querySelector('select[name="courtField"]')?.value || '',
-                urn: row.querySelector('input[name="urn"]')?.value || '',
-                exhibit_reference: (row.querySelector('input[name="exhibitReference"]')?.value || '').replace(/[^a-z0-9]/gi, ''), // strictly alphanumeric
+                urn: normalize(row.querySelector('input[name="urn"]')?.value || ''),
+                exhibit_reference: normalize(row.querySelector('input[name="exhibitReference"]')?.value?.replace(/[^a-z0-9]/gi, '')),
                 witness_name: (row.querySelector('input[name="witnessName"]')?.value || '').trim(),
                 defendant_name: (row.querySelector('input[name="defendantName"]')?.value || '').trim(),
                 recording_date: recordingDate,

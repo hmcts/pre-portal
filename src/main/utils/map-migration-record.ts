@@ -1,7 +1,7 @@
 export function mapMigrationRecord(record: any) {
   return {
     recordId: record.id,
-    archiveId: record.archive_id || '',
+    archiveName: record.archive_name || '',
     urn: record.urn || '',
     court: record.court_reference || '',
     courtId: record.court_id || '',

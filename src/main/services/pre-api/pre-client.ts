@@ -391,11 +391,13 @@ export class PreClient {
         Incomplete_Data: 'INCOMPLETE_DATA',
         Invalid_Format: 'INVALID_FORMAT',
         Not_Most_Recent: 'NOT_MOST_RECENT',
+        Raw_Files: 'RAW_FILES',
         Pre_Go_Live: 'PRE_GO_LIVE',
         Pre_Existing: 'PRE_EXISTING',
         Validation_Failed: 'VALIDATION_FAILED',
         Alternative_Available: 'ALTERNATIVE_AVAILABLE',
         General_Error: 'GENERAL_ERROR',
+        Case_Closed: 'CASE_CLOSED',
         Test: 'TEST',
       };
 
