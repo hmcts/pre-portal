@@ -48,7 +48,7 @@ describe('Migration route', () => {
     MigrationRecordService.prototype.getMigrationRecords = jest.fn().mockResolvedValue({
       records: [
         {
-          archiveId: 'ARCH-002',
+          archiveName: 'ARCH-002',
           urn: 'URN654321',
           court: 'Birmingham Youth',
           exhibitReference: 'EX456',
@@ -61,7 +61,7 @@ describe('Migration route', () => {
           createDate: '10/12/2023',
         },
         {
-          archiveId: 'ARCH-003',
+          archiveName: 'ARCH-003',
           urn: 'URN654123',
           court: 'York Crown Court',
           exhibitReference: 'EX457',

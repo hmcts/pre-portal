@@ -1,5 +1,6 @@
 export interface VfMigrationRecord {
   archiveId: string;
+  archiveName: string;
   court: string;
   urn: string;
   exhibitReference: string;

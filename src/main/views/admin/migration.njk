@@ -419,7 +419,7 @@
     <div class="govuk-modal" id="errorModal" style="display: none; position: fixed; top: 20%; left: 50%; transform: translateX(-50%);
       background: white; border: 1px solid #ccc; padding: 1.5rem; z-index: 9999; width: 400px;">
       <h2 class="govuk-heading-m">Error message</h2>
-      <p class="govuk-body" style="margin-bottom: 1rem;">{{migrationRecord.archiveId}}</p>
+      <p class="govuk-body" style="margin-bottom: 1rem;">{{migrationRecord.archiveName}}</p>
       <br>
       <p id="errorModalText" class="govuk-body" style="white-space: pre-wrap;">{{migrationRecord.reason}}</p>
       <button class="govuk-button" id="closeModal">Close</button>
@@ -837,7 +837,7 @@ document.querySelectorAll('.mark-ready-button').forEach(function(button) {
     document.querySelectorAll('.error-message-cell').forEach(cell => {
         cell.addEventListener('click', () => {
             const row = cell.closest('tr');
-            const archiveId = row?.querySelector('.archive-id-cell')?.textContent.trim() || '';
+            const archiveName = row?.querySelector('.archive-id-cell')?.textContent.trim() || '';
             const error = cell.querySelector('.cell-content')?.textContent.trim() || '';
 
 
@@ -846,7 +846,7 @@ document.querySelectorAll('.mark-ready-button').forEach(function(button) {
             const modalOverlay = document.getElementById('modalOverlay');
 
             if (errorModalText && errorModal && modalOverlay) {
-                errorModalText.textContent = `Archive ID: ${archiveId}\n\n${error}`;
+                errorModalText.textContent = `Archive Name: ${archiveName}\n\n${error}`;
                 errorModal.style.display = 'block';
                 modalOverlay.style.display = 'block';
             }

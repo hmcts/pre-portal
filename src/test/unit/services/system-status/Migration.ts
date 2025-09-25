@@ -61,7 +61,7 @@ describe('MigrationRecordService', () => {
       records: [
         {
           id: 'rec-001',
-          archive_id: 'ARCH-002',
+          archive_name: 'ARCH-002',
           urn: 'URN654321',
           court_reference: 'Birmingham Youth',
           court_id: 'C-001',
@@ -90,7 +90,7 @@ describe('MigrationRecordService', () => {
     expect(result.migrationRecords).toEqual([
       {
         recordId: 'rec-001',
-        archiveId: 'ARCH-002',
+        archiveName: 'ARCH-002',
         urn: 'URN654321',
         court: 'Birmingham Youth',
         courtId: 'C-001',
