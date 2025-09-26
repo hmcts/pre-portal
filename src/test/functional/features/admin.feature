@@ -24,6 +24,7 @@ Feature: View Admin Page
       Then I see the link 'Admin'
       Then I click the link 'Admin'
       Then I am on the '/admin/status' page
+      When I open the navigation menu
       Then I see the link 'MediaKind live events'
       Then I click the link 'MediaKind live events'
       Then I am on the '/admin/MK-live-events' page
@@ -39,6 +40,7 @@ Feature: View Admin Page
         Then I see the link 'Admin'
         Then I click the link 'Admin'
         Then I am on the '/admin/status' page
+        When I open the navigation menu
         Then I see the link 'Migration'
         Then I click the link 'Migration'
         Then I am on the '/admin/migration' page

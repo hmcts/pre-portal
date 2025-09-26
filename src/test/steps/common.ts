@@ -67,6 +67,10 @@ Then('I accept the terms and conditions if I need to', async () => {
   }
 });
 
+Then('I see the text {string}', (text: string) => {
+  I.see(text);
+});
+
 Then('I see the link {string}', (text: string) => {
   I.seeElement(locate('a').withText(text));
 });
@@ -77,6 +81,10 @@ Then('I do not see the link {string}', async (text: string) => {
 
 Then('I click the link {string}', (text: string) => {
   I.click(locate('a').withText(text));
+});
+
+When('I open the navigation menu', async () => {
+  I.click('#navToggle');
 });
 
 Then('I enter a valid email address', () => {
