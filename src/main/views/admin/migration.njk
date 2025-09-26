@@ -548,46 +548,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.validateLength = function(input) {
         const minLength = 9;
-            const maxLength = 13;
-
-            const row = input.closest('tr');
-            const urnField = row.querySelector('input[name="urn"]');
-            const exhibitField = row.querySelector('input[name="exhibitReference"]');
-
-            const urnValue = urnField ? urnField.value.trim() : "";
-            const exhibitValue = exhibitField ? exhibitField.value.trim() : "";
-
-            function validateField(field, value) {
-                if (!field) return;
-
-                if ((urnValue && field === exhibitField) || (exhibitValue && field === urnField)) {
-                    field.style.backgroundColor = "";
-                    field.classList.remove("govuk-input--error");
-                    field.title = "";
-                    return;
-                }
-
-                if (value.length > 0 && (value.length < minLength || value.length > maxLength)) {
-                    field.style.backgroundColor = "#ffcccc";
-                    field.classList.add("govuk-input--error");
-                    field.title = "Must be between 9 and 13 characters.";
-                } else if (value.length === 0 && !urnValue && !exhibitValue) {
-                    field.style.backgroundColor = "#ffcccc";
-                    field.classList.add("govuk-input--error");
-                    field.title = "Either URN or Exhibit Reference must be provided.";
-                } else {
-                    field.style.backgroundColor = "";
-                    field.classList.remove("govuk-input--error");
-                    field.title = "";
-                }
-            }
-
-            validateField(urnField, urnValue);
-            validateField(exhibitField, exhibitValue);
-
-            checkRowForInvalidCells(row);
-    };
-
+        const maxLength = 13;
+        const value = input.value.trim();
+        if (value.length < minLength || value.length > maxLength) {
+            input.style.backgroundColor = "#ffcccc";
+            input.classList.add("govuk-input--error");
+            input.title = "Must be between 9 and 13 characters.";
+        } else {
+            input.style.backgroundColor = "";
+            input.classList.remove("govuk-input--error");
+            input.title = "";
+        }
+        checkRowForInvalidCells(input.closest('tr'));
+    }
     window.validateNoDigitsMax100 = function(input) {
         const value = input.value.trim();
         const hasDigits = /\d/.test(value);

@@ -158,22 +158,35 @@ export default function (app: Application): void {
 
     const recordsCount = pagination?.totalElements || 0;
 
-    const allRecordsResponse = await migrationRecordService.getMigrationRecords({
-      caseReference: '',
-      witness: '',
-      defendant: '',
-      court: '',
-      resource_state: '',
-      startDate: '',
-      endDate: '',
-      reasonIn: [],
-      page: 0,
-      size: 100000,
-    });
+    const [readyResponse, submittedResponse] = await Promise.all([
+      migrationRecordService.getMigrationRecords({
+        caseReference: '',
+        witness: '',
+        defendant: '',
+        court: '',
+        resource_state: 'READY',
+        startDate: '',
+        endDate: '',
+        reasonIn: [],
+        page: 0,
+        size: 1,
+      }),
+      migrationRecordService.getMigrationRecords({
+        caseReference: '',
+        witness: '',
+        defendant: '',
+        court: '',
+        resource_state: 'SUBMITTED',
+        startDate: '',
+        endDate: '',
+        reasonIn: [],
+        page: 0,
+        size: 1,
+      }),
+    ]);
 
-    const allMigrationRecords = allRecordsResponse.migrationRecords || [];
-    const hasReadyRecords = allMigrationRecords.some(r => r.status === 'READY');
-    const hasSubmittedRecords = allMigrationRecords.some(r => r.status === 'SUBMITTED');
+    const hasReadyRecords = (readyResponse.migrationRecords || []).length > 0;
+    const hasSubmittedRecords = (submittedResponse.migrationRecords || []).length > 0;
 
     res.render('admin/migration', {
       isSuperUser: true,
