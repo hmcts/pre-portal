@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "private": true,
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=22.15.0"
   },
   "scripts": {
     "audit:suppress": "yarn npm audit --recursive --environment production --json > yarn-audit-known-issues",
@@ -65,7 +65,7 @@
     "glob": "11.0.3",
     "govuk-frontend": "5.11.2",
     "helmet": "8.1.0",
-    "jose": "^5.2.2",
+    "jose": "6.1.0",
     "jquery": "3.7.1",
     "lodash": "4.17.21",
     "marked": "^15.0.0",
@@ -84,12 +84,14 @@
     "uuid": "^11.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.2",
-    "@babel/preset-env": "^7.25.4",
+    "@babel/core": "^7.28.4",
+    "@babel/preset-env": "^7.28.3",
     "@codeceptjs/allure-legacy": "^1.0.2",
     "@codeceptjs/configure": "1.0.6",
     "@eslint/compat": "^1.1.1",
     "@jest/globals": "30.1.2",
+    "@types/babel__core": "^7",
+    "@types/babel__preset-env": "^7",
     "@types/compression": "1.8.1",
     "@types/jest": "30.0.0",
     "@types/mini-css-extract-plugin": "2.5.1",
@@ -100,6 +102,7 @@
     "@typescript-eslint/parser": "8.43.0",
     "allure-commandline": "^2.34.1",
     "axios-debug-log": "1.0.0",
+    "babel-jest": "^30.1.2",
     "chokidar": "4.0.3",
     "codeceptjs": "3.7.5",
     "copy-webpack-plugin": "13.0.1",
