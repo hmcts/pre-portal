@@ -23,6 +23,7 @@ describe('MigrationRecordService', () => {
     mockRequest = {} as Partial<Request>;
 
     (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+      user: { email: 'test-user@example.com' },
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
 
@@ -31,6 +32,7 @@ describe('MigrationRecordService', () => {
 
   test('should return an empty array if no migration records are found', async () => {
     (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+      user: { email: 'test-user@example.com' },
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
 
@@ -189,8 +191,7 @@ describe('MigrationRecordService', () => {
           source: 'PORTAL',
           table_name: 'vf_migration_records',
           audit_details: expect.objectContaining({
-            description: expect.stringMatching(/Migration record .* submitted by user test-user/),
-            email: 'test-user',
+            description: expect.stringMatching(/Migration record .* submitted by user test-user@example.com/),
           }),
         })
       );

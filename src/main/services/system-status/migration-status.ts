@@ -11,13 +11,12 @@ import { MigrationRecordsResponse } from '../../types/migration-records-response
 export class MigrationRecordService {
   private readonly client: PreClient;
   private readonly user: string | undefined;
-  private userEmail: string;
+  private userEmail: string | null;
 
   constructor(req: Request, client: PreClient) {
     this.client = client;
     const loggedInUser = SessionUser.getLoggedInUserProfile(req);
-    this.userEmail = loggedInUser.user.email;
-    console.log('loggedInUser', loggedInUser);
+    this.userEmail = loggedInUser?.user?.email ?? null;
     this.user = loggedInUser?.app_access?.find(role => role?.role?.name === UserLevel.SUPER_USER)?.id;
   }
 
