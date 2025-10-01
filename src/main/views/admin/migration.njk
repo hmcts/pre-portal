@@ -309,7 +309,7 @@
                       value="{{ migrationRecord.defendantName }}"
                       class="govuk-input"
                       style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
-                      oninput="validateNoDigitsMax100(this)"
+                      oninput="validateNoDigitsMax25(this)"
                       aria-label="Defendant name, no digits, 1 to 25 characters"
                       {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
                     >
@@ -322,7 +322,7 @@
                         value="{{ migrationRecord.witnessName }}"
                         class="govuk-input"
                         style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
-                        oninput="validateNoDigitsMax100(this)"
+                        oninput="validateNoDigitsMax25(this)"
                         aria-label="Defendant name, no digits, 1 to 25 characters"
                         {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
                       >
@@ -386,7 +386,7 @@
                 <div class="button-wrapper">
                   <button class="govuk-button govuk-button mark-ready-button govuk-!-margin-bottom-1 govuk-!-margin-top-1" type="button"
                   data-status="{{ migrationRecord.status }}"
-                  {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                  {% if migrationRecord.status in ['SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
                   >
                   {% if migrationRecord.status == 'READY' %}
                        Edit
@@ -561,15 +561,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         checkRowForInvalidCells(input.closest('tr'));
     }
-    window.validateNoDigitsMax100 = function(input) {
+    window.validateNoDigitsMax25 = function(input) {
         const value = input.value.trim();
         const hasDigits = /\d/.test(value);
-        const isTooLong = value.length < 1 || value.length > 100;
+        const isTooLong = value.length < 1 || value.length > 25;
 
         if (hasDigits || isTooLong) {
             input.style.backgroundColor = "#ffcccc";
             input.classList.add("govuk-input--error");
-            input.title = "Must not contain digits and must be 100 characters or fewer";
+            input.title = "Must be between 1 and 25 characters";
         } else {
             input.style.backgroundColor = "";
             input.classList.remove("govuk-input--error");
@@ -678,9 +678,11 @@ document.querySelectorAll('select[name="recordingVersion"]').forEach(function(se
         if (select.value.trim() !== '') {
             select.style.backgroundColor = '';
             select.style.border = '';
+            select.title = 'Please select a recording version';
         } else {
             select.style.backgroundColor = '#ffcccc';
             select.style.border = '2px solid #d4351c';
+            select.title = '';
         }
         checkRowForInvalidCells(select.closest("tr"));
     });
@@ -694,7 +696,7 @@ document.querySelectorAll('input[name="urn"], input[name="exhibitReference"]').f
 });
 
 document.querySelectorAll('input[name="witnessName"], input[name="defendantName"]').forEach(input => {
-    window.validateNoDigitsMax100(input);
+    window.validateNoDigitsMax25(input);
 });
 document.querySelectorAll('input[name="recordingVersionNumber"]').forEach(input => {
     window.validateIsNumber(input);
@@ -780,7 +782,6 @@ document.querySelectorAll('.mark-ready-button').forEach(function(button) {
 
                 row.querySelectorAll('input, select').forEach(cell => {
                     cell.setAttribute('disabled', 'true');
-                    //cell.contentEditable = false;
                 });
             }
 
