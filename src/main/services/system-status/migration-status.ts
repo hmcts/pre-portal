@@ -11,10 +11,13 @@ import { MigrationRecordsResponse } from '../../types/migration-records-response
 export class MigrationRecordService {
   private readonly client: PreClient;
   private readonly user: string | undefined;
+  private userEmail: string;
 
   constructor(req: Request, client: PreClient) {
     this.client = client;
     const loggedInUser = SessionUser.getLoggedInUserProfile(req);
+    this.userEmail = loggedInUser.user.email;
+    console.log('loggedInUser', loggedInUser);
     this.user = loggedInUser?.app_access?.find(role => role?.role?.name === UserLevel.SUPER_USER)?.id;
   }
 
@@ -85,8 +88,8 @@ export class MigrationRecordService {
 
       await this.client.submitMigrationRecords(this.user);
 
-      const auditPromises = readyRecords.map(record =>
-        this.client.putAudit(user, {
+      for (const record of readyRecords) {
+        await this.client.putAudit(user, {
           id: uuid(),
           functional_area: 'Admin Migration',
           category: 'Migration',
@@ -94,14 +97,11 @@ export class MigrationRecordService {
           source: 'PORTAL',
           table_name: 'vf_migration_records',
           audit_details: {
-            ...mapMigrationRecord(record),
-            description: `Migration record ${record.id} submitted by user ${user}`,
-            email: user,
+            record: JSON.stringify(mapMigrationRecord(record)),
+            description: `Migration record ${record.id} submitted by user ${this.userEmail}`,
           },
-        })
-      );
-
-      await Promise.all(auditPromises);
+        });
+      }
 
       console.log(`Audit complete for ${readyRecords.length} record(s)`);
     } catch (e: any) {
