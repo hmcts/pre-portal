@@ -115,7 +115,7 @@ This diagram gives an overview of the PRE system which the pre-portal connects t
 
 Running the application requires the following tools to be installed in your environment:
 
-- [Node.js](https://nodejs.org/) v12.0.0 or later
+- [Node.js](https://nodejs.org/) v22.15.0 or later (due to ESM and CJS compatibility)
 - [yarn](https://yarnpkg.com/)
 - [Docker](https://www.docker.com)
 
@@ -192,8 +192,11 @@ yarn lint --write
 
 ### Running the tests
 
-This template app uses [Jest](https://jestjs.io//) as the test engine. You can run unit tests by executing
-the following command:
+This template app uses [Jest](https://jestjs.io//) as the test engine.
+
+Important: Currently, Jest is incompatible with ESM modules. Babel has been implemented to transform ESM modules to enable compatibility.
+
+You can run unit tests by executing the following command:
 
 #### Unit Tests
 
