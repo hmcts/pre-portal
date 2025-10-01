@@ -2,9 +2,7 @@ import { AccessStatus } from '../../types/access-status';
 import { TermsNotAcceptedError } from '../../types/errors';
 import { Terms } from '../../types/terms';
 import { UserProfile } from '../../types/user-profile';
-
 import { RedisService } from '../../app/redis/RedisService';
-
 import { LiveEvent } from '../../types/live-event';
 import {
   EditRequest,
@@ -21,7 +19,6 @@ import axios, { AxiosResponse } from 'axios';
 import FormData from 'form-data';
 import config from 'config';
 import { HealthResponse } from '../../types/health';
-//import { VfMigrationRecord } from '../../types/vf-migration-record'
 import { Court } from '../../types/court';
 import qs from 'qs';
 
