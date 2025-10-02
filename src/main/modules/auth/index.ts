@@ -6,7 +6,9 @@ import config from 'config';
 import { Application } from 'express';
 import { ConfigParams, auth } from 'express-openid-connect';
 import session from 'express-session';
-import * as jose from 'jose';
+// jose v6 is ESM-only; lazy-load it from our CJS server
+let _jose: Promise<typeof import('jose')> | null = null;
+const getJose = () => (_jose ??= import('jose'));
 import FileStoreFactory from 'session-file-store';
 
 const FileStore = FileStoreFactory(session);
@@ -42,6 +44,7 @@ export class Auth {
           config.get('pre.portalUrl')) as string,
       },
       afterCallback: async (req, res, s) => {
+        const jose = await getJose();
         const claims = jose.decodeJwt(s.id_token);
         // @todo add jwt validation here
 
