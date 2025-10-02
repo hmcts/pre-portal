@@ -4624,7 +4624,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/qs@npm:*":
+"@types/qs@npm:*, @types/qs@npm:^6.14.0":
   version: 6.14.0
   resolution: "@types/qs@npm:6.14.0"
   checksum: 10/1909205514d22b3cbc7c2314e2bd8056d5f05dfb21cf4377f0730ee5e338ea19957c41735d5e4806c746176563f50005bbab602d8358432e25d900bdf4970826
@@ -11424,19 +11424,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jose@npm:6.1.0":
-  version: 6.1.0
-  resolution: "jose@npm:6.1.0"
-  checksum: 10/d111bc11fdb9566370992393615097d58618ba6ed29eee5d79b3bf4c460c93a6c0a9c5829d14b40342b376df16cde7d1bef79fda65c6bf09e1158875c17ae865
-  languageName: node
-  linkType: hard
-
 "jose@npm:^2.0.5, jose@npm:^2.0.7":
   version: 2.0.7
   resolution: "jose@npm:2.0.7"
   dependencies:
     "@panva/asn1.js": "npm:^1.0.0"
   checksum: 10/c28daeb534a3a335e7e5020da3911a85f0336ca28a3cf9832d1ff92234d36a3e58a72f4e30487aa9289e0f4e00dd551cf832ccd762474737d1ce00457f2f34bd
+  languageName: node
+  linkType: hard
+
+"jose@npm:^5.2.2":
+  version: 5.10.0
+  resolution: "jose@npm:5.10.0"
+  checksum: 10/03881d1dfb390dcf50926402edcfe233bf557b5a77321fcb1bdb53453bc1cdd26d2d0a9ab28c7445cbb826881f84fdf5074179700f10c2711ccb9880f51065d7
   languageName: node
   linkType: hard
 
@@ -13988,6 +13988,7 @@ __metadata:
     "@types/multer": "npm:^1.4.12"
     "@types/node": "npm:22.18.5"
     "@types/nunjucks": "npm:3.2.6"
+    "@types/qs": "npm:^6.14.0"
     "@types/require-directory": "npm:2.1.6"
     "@types/serve-favicon": "npm:2.5.7"
     "@types/session-file-store": "npm:1.2.5"
@@ -14031,7 +14032,7 @@ __metadata:
     jest-junit: "npm:16.0.0"
     jest-mock: "npm:30.0.5"
     jest-util: "npm:^30.0.5"
-    jose: "npm:6.1.0"
+    jose: "npm:^5.2.2"
     jquery: "npm:3.7.1"
     lint-staged: "npm:16.1.6"
     lodash: "npm:4.17.21"
@@ -14046,6 +14047,7 @@ __metadata:
     playwright: "npm:1.55"
     prettier: "npm:3.6.2"
     puppeteer: "npm:^24.0.0"
+    qs: "npm:^6.14.0"
     react: "npm:^19.0.0"
     react-native: "npm:^0.81.0"
     redis: "npm:^5.8.0"

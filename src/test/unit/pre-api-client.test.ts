@@ -172,10 +172,6 @@ describe('PreClient', () => {
 
   const otherXUserId = 'a114f40e-bdba-432d-b53f-37169ee5bf90';
 
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
   test('get recording missing', async () => {
     const recording = await preClient.getRecording(mockXUserId, mockRecordingMissingId);
     expect(recording).toBeNull();
@@ -436,5 +432,173 @@ describe('PreClient', () => {
     await expect(preClient.postEditsFromCsv(mockXUserId, 'source-id-123', mockBuffer)).rejects.toThrow(
       'Invalid CSV format'
     );
+  });
+
+  describe('PreClient', () => {
+    let client: PreClient;
+    const mockRedisClient = { get: jest.fn(), setEx: jest.fn() };
+
+    beforeEach(() => {
+      client = new PreClient();
+      // inject mock Redis to avoid calling init()
+      client.setRedisClientForTest(mockRedisClient);
+    });
+
+    test('getLiveEvents returns cached events', async () => {
+      mockRedisClient.get.mockResolvedValue(
+        JSON.stringify([{ id: 'event1', name: 'Test Event', resource_state: 'Running' }])
+      );
+
+      const events = await client.getLiveEvents('user1');
+      expect(events).toHaveLength(1);
+      expect(mockRedisClient.get).toHaveBeenCalledWith('live-events-user1');
+    });
+
+    test('getLiveEvents fetches from API if no cache', async () => {
+      mockRedisClient.get.mockResolvedValue(null);
+      const mockAxios = axios as jest.Mocked<typeof axios>;
+      mockAxios.get.mockResolvedValue({ data: [{ id: 'event2', name: 'API Event', resource_state: 'Stopped' }] });
+
+      const events = await client.getLiveEvents('user2');
+      expect(events).toHaveLength(1);
+      expect(events[0].name).toBe('API Event');
+    });
+
+    test('getCaptureSession formats UUID and fetches', async () => {
+      const liveEventId = '123456781234123412341234567890ab';
+      const mockAxios = axios as jest.Mocked<typeof axios>;
+      mockAxios.get.mockResolvedValue({ data: { case_reference: 'CASE123' } });
+
+      const session = await client.getCaptureSession(liveEventId, 'user1');
+      expect(session.case_reference).toBe('CASE123');
+    });
+
+    test('getCaptureSession invalid UUID throws', async () => {
+      await expect(client.getCaptureSession('badid', 'user1')).rejects.toThrow('Invalid liveEventId length');
+    });
+  });
+
+  test('getMigrationRecords builds query params and returns data', async () => {
+    const mockResponse = {
+      data: {
+        page: {
+          number: 0,
+          totalPages: 1,
+          totalElements: 2,
+          size: 10,
+        },
+        _embedded: {
+          vfMigrationRecordDTOList: [{ id: 'rec1' }, { id: 'rec2' }],
+        },
+      },
+    };
+
+    mockedAxios.get.mockResolvedValueOnce(mockResponse);
+
+    const result = await preClient.getMigrationRecords(
+      mockXUserId,
+      'CASE123',
+      'John Doe',
+      'Jane Doe',
+      'COURT1',
+      'RESOLVED',
+      '2024-01-01',
+      '2024-01-31',
+      ['Incomplete_Data'],
+      0,
+      10,
+      'createTime,DESC'
+    );
+
+    expect(mockedAxios.get).toHaveBeenCalledWith(
+      '/vf-migration-records',
+      expect.objectContaining({
+        headers: { 'X-User-Id': mockXUserId },
+        params: expect.objectContaining({
+          caseReference: 'CASE123',
+          witnessName: 'John Doe',
+          defendantName: 'Jane Doe',
+          courtReference: 'COURT1',
+          status: 'RESOLVED',
+          createDateFrom: '2024-01-01',
+          createDateTo: '2024-01-31',
+          reasonIn: ['INCOMPLETE_DATA'],
+          page: 0,
+          size: 10,
+          sort: 'createTime,DESC',
+        }),
+        paramsSerializer: expect.any(Function),
+      })
+    );
+
+    expect(result.records.length).toBe(2);
+    expect(result.pagination.totalElements).toBe(2);
+  });
+
+  test('getMigrationRecords handles empty results', async () => {
+    mockedAxios.get.mockResolvedValueOnce({
+      data: {
+        page: { number: 0, totalPages: 1, totalElements: 0, size: 10 },
+      },
+    });
+
+    const result = await preClient.getMigrationRecords(mockXUserId);
+    expect(result.records).toEqual([]);
+    expect(result.pagination.totalElements).toBe(0);
+  });
+
+  test('getMigrationRecords throws on API error', async () => {
+    mockedAxios.get.mockRejectedValueOnce({ response: { status: 500, data: 'Server error' } });
+
+    await expect(preClient.getMigrationRecords(mockXUserId)).rejects.toMatchObject({
+      response: { status: 500, data: 'Server error' },
+    });
+  });
+
+  test('submitMigrationRecords calls POST endpoint', async () => {
+    mockedAxios.post.mockResolvedValueOnce({ status: 200 });
+
+    await preClient.submitMigrationRecords(mockXUserId);
+    expect(mockedAxios.post).toHaveBeenCalledWith(
+      '/vf-migration-records/submit',
+      null,
+      expect.objectContaining({
+        headers: { 'X-User-Id': mockXUserId },
+      })
+    );
+  });
+
+  test('submitMigrationRecords throws on error', async () => {
+    mockedAxios.post.mockRejectedValueOnce({ response: { status: 500 } });
+
+    await expect(preClient.submitMigrationRecords(mockXUserId)).rejects.toMatchObject({
+      response: { status: 500 },
+    });
+  });
+
+  test('updateMigrationRecord calls PUT endpoint', async () => {
+    const mockDto = { status: 'RESOLVED' };
+    mockedAxios.put.mockResolvedValueOnce({ status: 200 });
+
+    await preClient.updateMigrationRecord(mockXUserId, 'record-123', mockDto);
+    expect(mockedAxios.put).toHaveBeenCalledWith(
+      '/vf-migration-records/record-123',
+      mockDto,
+      expect.objectContaining({
+        headers: { 'X-User-Id': mockXUserId },
+      })
+    );
+  });
+
+  test('getCourts calls endpoint and returns data', async () => {
+    const mockCourts = [{ id: 'COURT1', name: 'Test Court' }];
+    mockedAxios.get.mockResolvedValueOnce({ data: mockCourts });
+
+    const result = await preClient.getCourts(mockXUserId, 1, 25);
+    expect(mockedAxios.get).toHaveBeenCalledWith('/courts', {
+      headers: { 'X-User-Id': mockXUserId },
+      params: { page: 1, size: 25 },
+    });
+    expect(result).toEqual(mockCourts);
   });
 });
