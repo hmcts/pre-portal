@@ -1,5 +1,6 @@
 import { Nunjucks } from '../../../main/modules/nunjucks';
-import { beforeAll, describe, test, jest } from '@jest/globals';
+import { beforeAll, describe, test } from '@jest/globals';
+import { SystemStatus } from '../../../main/services/system-status/system-status';
 import { mockeduser } from '../test-helper';
 import { UserLevel } from '../../../main/types/user-level';
 
@@ -22,23 +23,27 @@ jest.mock('../../../main/services/session-user/session-user', () => {
   };
 });
 
-describe('Admin Page Access', () => {
+jest.mock('../../../main/services/system-status/system-status');
+
+describe('Admin Status route', () => {
   beforeAll(() => {
     jest.resetAllMocks();
   });
 
-  test('should display admin page for super user', async () => {
+  test('should display status page for super user', async () => {
     const app = require('express')();
     new Nunjucks(false).enableFor(app);
     const request = require('supertest');
-    const adminRoute = require('../../../main/routes/admin/admin').default;
-    adminRoute(app);
+    const adminStatus = require('../../../main/routes/admin/admin-status').default;
+    adminStatus(app);
+
+    (SystemStatus.prototype.getStatus as jest.Mock).mockResolvedValue({ status: 'ok' });
 
     if (mockeduser.app_access?.[0]?.role) {
       mockeduser.app_access[0].role.name = UserLevel.SUPER_USER;
     }
 
-    const response = await request(app).get('/admin');
+    const response = await request(app).get('/admin/status');
     expect(response.status).toEqual(200);
     expect(response.text).toContain('Admin');
     expect(response.text).toContain('Status');
@@ -49,14 +54,14 @@ describe('Admin Page Access', () => {
     const app = require('express')();
     new Nunjucks(false).enableFor(app);
     const request = require('supertest');
-    const adminRoute = require('../../../main/routes/admin/admin').default;
-    adminRoute(app);
+    const adminStatus = require('../../../main/routes/admin/admin-status').default;
+    adminStatus(app);
 
     if (mockeduser.app_access?.[0]?.role) {
       mockeduser.app_access[0].role.name = UserLevel.ADMIN;
     }
 
-    const response = await request(app).get('/admin');
+    const response = await request(app).get('/admin/status');
     expect(response.status).toEqual(404);
     expect(response.text).toContain('Page is not available');
   });
