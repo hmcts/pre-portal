@@ -511,7 +511,7 @@ describe('PreClient', () => {
     );
 
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      'https://pre-api.staging.platform.hmcts.net/vf-migration-records',
+      '/vf-migration-records',
       expect.objectContaining({
         headers: { 'X-User-Id': mockXUserId },
         params: expect.objectContaining({
@@ -560,7 +560,7 @@ describe('PreClient', () => {
 
     await preClient.submitMigrationRecords(mockXUserId);
     expect(mockedAxios.post).toHaveBeenCalledWith(
-      'https://pre-api.staging.platform.hmcts.net/vf-migration-records/submit',
+      '/vf-migration-records/submit',
       null,
       expect.objectContaining({
         headers: { 'X-User-Id': mockXUserId },
@@ -582,7 +582,7 @@ describe('PreClient', () => {
 
     await preClient.updateMigrationRecord(mockXUserId, 'record-123', mockDto);
     expect(mockedAxios.put).toHaveBeenCalledWith(
-      'https://pre-api.staging.platform.hmcts.net/vf-migration-records/record-123',
+      '/vf-migration-records/record-123',
       mockDto,
       expect.objectContaining({
         headers: { 'X-User-Id': mockXUserId },

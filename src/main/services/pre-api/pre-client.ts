@@ -409,7 +409,7 @@ export class PreClient {
 
       this.logger.info('Final queryParams.reasonIn:', queryParams.reasonIn);
 
-      const response = await axios.get('https://pre-api.staging.platform.hmcts.net/vf-migration-records', {
+      const response = await axios.get('/vf-migration-records', {
         headers: { 'X-User-Id': xUserId },
         params: queryParams,
         paramsSerializer: params => qs.stringify(params, { arrayFormat: 'repeat' }),
@@ -436,7 +436,7 @@ export class PreClient {
   }
   public async submitMigrationRecords(xUserId: string): Promise<void> {
     try {
-      await axios.post('https://pre-api.staging.platform.hmcts.net/vf-migration-records/submit', null, {
+      await axios.post('/vf-migration-records/submit', null, {
         headers: {
           'X-User-Id': xUserId,
         },
@@ -452,7 +452,7 @@ export class PreClient {
   public async updateMigrationRecord(xUserId: string, recordId: string, dto: any): Promise<void> {
     this.logger.debug('dto', JSON.stringify(dto));
     try {
-      await axios.put(`https://pre-api.staging.platform.hmcts.net/vf-migration-records/${recordId}`, dto, {
+      await axios.put(`/vf-migration-records/${recordId}`, dto, {
         headers: {
           'X-User-Id': xUserId,
         },
