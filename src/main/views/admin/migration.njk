@@ -678,11 +678,11 @@ document.querySelectorAll('select[name="recordingVersion"]').forEach(function(se
         if (select.value.trim() !== '') {
             select.style.backgroundColor = '';
             select.style.border = '';
-            select.title = 'Please select a recording version';
+            select.title = '';
         } else {
             select.style.backgroundColor = '#ffcccc';
             select.style.border = '2px solid #d4351c';
-            select.title = '';
+            select.title = 'Please select a recording version';
         }
         checkRowForInvalidCells(select.closest("tr"));
     });
@@ -701,6 +701,7 @@ document.querySelectorAll('input[name="witnessName"], input[name="defendantName"
 document.querySelectorAll('input[name="recordingVersionNumber"]').forEach(input => {
     window.validateIsNumber(input);
 });
+
 
 document.querySelectorAll('tr').forEach(row => {
     row.querySelectorAll('input, select').forEach(input => {
