@@ -11,7 +11,6 @@ export default function (app: Application): void {
       const systemStatus = new SystemStatus(client, app);
 
       const status = await systemStatus.getStatus();
-      console.log('Status:', status);
 
       res.render('admin/status', {
         isSuperUser: true,

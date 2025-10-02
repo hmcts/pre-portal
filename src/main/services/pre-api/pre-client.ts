@@ -407,7 +407,7 @@ export class PreClient {
         queryParams.reasonIn = mapReasonsToEnum(reasonIn);
       }
 
-      console.log('Final queryParams.reasonIn:', queryParams.reasonIn);
+      this.logger.info('Final queryParams.reasonIn:', queryParams.reasonIn);
 
       const response = await axios.get('https://pre-api.staging.platform.hmcts.net/vf-migration-records', {
         headers: { 'X-User-Id': xUserId },
@@ -450,7 +450,7 @@ export class PreClient {
   }
 
   public async updateMigrationRecord(xUserId: string, recordId: string, dto: any): Promise<void> {
-    console.log('dto', dto);
+    this.logger.debug('dto', JSON.stringify(dto));
     try {
       await axios.put(`https://pre-api.staging.platform.hmcts.net/vf-migration-records/${recordId}`, dto, {
         headers: {

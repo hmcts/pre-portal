@@ -6,8 +6,10 @@ import { MigrationFilters } from '../../types/migration-filters';
 import { v4 as uuid } from 'uuid';
 import { mapMigrationRecord } from '../../utils/map-migration-record';
 import { MigrationRecordsResponse } from '../../types/migration-records-response';
+import { Logger } from '@hmcts/nodejs-logging';
 
 export class MigrationRecordService {
+  logger = Logger.getLogger('migration-status');
   private readonly client: PreClient;
   private readonly user: string | undefined;
   private userEmail: string | null;
@@ -74,7 +76,7 @@ export class MigrationRecordService {
     const user = this.user;
 
     try {
-      console.log('migration records submitted');
+      this.logger.info('migration records submitted');
 
       const response = await this.client.getMigrationRecords(user, '', '', '', '', 'READY', '', '', []);
 
@@ -101,7 +103,7 @@ export class MigrationRecordService {
         });
       }
 
-      console.log(`Audit complete for ${readyRecords.length} record(s)`);
+      this.logger.info(`Audit complete for ${readyRecords.length} record(s)`);
     } catch (e: any) {
       console.error('MigrationRecordService.updateMigrationRecord error:', e.response?.data || e.message);
       throw e;
