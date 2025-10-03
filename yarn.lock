@@ -4577,12 +4577,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:22.18.5":
-  version: 22.18.5
-  resolution: "@types/node@npm:22.18.5"
+"@types/node@npm:22.18.8":
+  version: 22.18.8
+  resolution: "@types/node@npm:22.18.8"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10/5a721e6e25e4997ecde0333a72463cf625f6a7f7e17b84fd107d4646efd0735a7f4cf37908e2c20a0072eda9e9ddfe1ccacf75cdef7c0ada8f5650d1331a1af4
+  checksum: 10/dc8e883680993bebf45ac641af6648fd88a8d6ec0e375ff737221eef6c93b6a4d20311dfc070bb595095adbf9a2a411a9b3d9230a763eb744bb1d8ca831c331c
   languageName: node
   linkType: hard
 
@@ -13986,7 +13986,7 @@ __metadata:
     "@types/lodash": "npm:4.17.20"
     "@types/mini-css-extract-plugin": "npm:2.5.1"
     "@types/multer": "npm:^1.4.12"
-    "@types/node": "npm:22.18.5"
+    "@types/node": "npm:22.18.8"
     "@types/nunjucks": "npm:3.2.6"
     "@types/qs": "npm:^6.14.0"
     "@types/require-directory": "npm:2.1.6"
