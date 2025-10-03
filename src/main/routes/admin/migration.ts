@@ -6,7 +6,6 @@ import { RequiresSuperUser } from '../../middleware/admin-middleware';
 import { MigrationRecordService } from '../../services/system-status/migration-status';
 import { CourtService } from '../../services/system-status/courts';
 import { formatDateToDDMMYYYY, toIsoDateString } from '../../utils/convert-date';
-import { COURT_ALIASES } from '../../utils/court-alias';
 import { formatDuration } from '../../utils/format-duration';
 
 export default function (app: Application): void {
@@ -53,7 +52,7 @@ export default function (app: Application): void {
       caseReference: filters.caseReference,
       witness: filters.witness,
       defendant: filters.defendant,
-      court: '',
+      court: filters.court,
       resource_state: filters.resource_state,
       startDate: filters.startDate,
       endDate: filters.endDate,
@@ -64,17 +63,6 @@ export default function (app: Application): void {
     });
 
     let filteredRecords = migrationRecords || [];
-    if (filters.court) {
-      const aliases = COURT_ALIASES[filters.court] || [filters.court];
-      filteredRecords = filteredRecords.filter(record => {
-        const recordCourt =
-          record.court
-            .toLowerCase()
-            .replace(/[^a-z0-9]/g, '')
-            .trim() || '';
-        return aliases.includes(recordCourt);
-      });
-    }
 
     function buildPageUrl(page: number, filters: any) {
       const params = new URLSearchParams();

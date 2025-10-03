@@ -70,25 +70,18 @@
       </div>
     </div>
 
-    <div class="govuk-grid-column-one-quarter">
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="court">Court</label>
-        <select
-          class="govuk-select"
-          name="court"
-          id="court"
-        >
-        <option
-          value="" {% if selectedCourt == '' %}selected{% endif %}>All</option>
-          {% for court in courts %}
-            <option value="{{ court.name }}"
-              {% if court.name == selectedCourt %}selected{% endif %}>
-              {{ court.name }}
-            </option>
-          {% endfor %}
-        </select>
-      </div>
-    </div>
+      <div class="govuk-grid-column-one-quarter">
+             <div class="govuk-form-group">
+               <label class="govuk-label" for="court">Court</label>
+               <input
+                 class="govuk-input"
+                 id="court"
+                 name="court"
+                 type="text"
+                 value="{{ filters.court }}"
+                 placeholder="Enter court">
+             </div>
+       </div>
 
     <div class="govuk-grid-column-one-quarter">
       <div class="govuk-form-group">
