@@ -186,17 +186,22 @@
           time = 500;
         }
       } while (hlsAvailable === false && retries > 0);
+      const bearerToken = data.token || '';
       const sourceConfig = {
         hls: data.hls_url,
         drm: {
           clearkey: {
             LA_URL: 'HLS_AES',
             headers: {
-              Authorization: 'Bearer=' + data.token || '',
+              Authorization: 'Bearer=' + bearerToken,
             },
           },
         }
       };
+
+      if (!bearerToken) {
+        console.warn("Bearer token empty when loading player for recording id {{ recording.id }}");
+      }
 
       player.load(sourceConfig);
       document.getElementById("loading").style.display = "none";
