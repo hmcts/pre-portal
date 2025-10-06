@@ -10,16 +10,19 @@ parameters([
 ])
 
 @Library("Infrastructure")
+import uk.gov.hmcts.contino.AppPipelineConfig
+
 
 def type = "nodejs"
 def product = "pre"
 def component = "portal"
+def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
 
 def secrets = [
 "pre-hmctskv-${params.ENVIRONMENT}":
     [
-      secret('b2c-test-login-email', 'B2C_TEST_LOGIN_EMAIL'),
-      secret('b2c-test-login-password', 'B2C_TEST_LOGIN_PASSWORD'),
+      secret('preprodsmoketest-b2c-email', 'B2C_TEST_LOGIN_EMAIL'),
+      secret('preprodsmoketest-b2c-password', 'B2C_TEST_LOGIN_PASSWORD'),
       secret('b2c-test-super-user-email', 'B2C_TEST_SUPER_USER_LOGIN_EMAIL'),
       secret('b2c-test-super-user-password', 'B2C_TEST_SUPER_USER_LOGIN_PASSWORD'),
       secret('preprodsmoketest-b2c-email', 'B2C_TEST_LOGIN_EMAIL_PREPROD'),
@@ -51,13 +54,26 @@ withNightlyPipeline(type, product, component) {
       ]
 
       steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/cross-browser/reports/**/*'
-     }
-      before('fullFunctionalTest') {
-        env.TEST_URL = "https://portal.pre-recorded-evidence.justice.gov.uk/"
-        env.B2C_TEST_LOGIN_EMAIL = ${B2C_TEST_LOGIN_EMAIL_PREPROD}
-        env.B2C_TEST_LOGIN_PASSWORD = ${B2C_TEST_LOGIN_PASSWORD_PREPROD}
-      }
 
+      stage('SmokeTest - Prod') {
+        try {
+          env.TEST_URL = "https://portal.pre-recorded-evidence.justice.gov.uk/"
+          yarnBuilder.yarn('test:smoketest')
+        } catch (Error) {
+          unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+        } finally {
+          publishHTML([
+            allowMissing: true,
+            alwaysLinkToLastBuild: true,
+            keepAll: true,
+            reportDir: 'functional-output/smoketest',
+            reportFiles: 'index.html',
+            reportName: 'Smoke Test Report Prod'
+          ])
+          steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/smoketest/reports/**/*'
+        }
+      }
+     }
       enableFullFunctionalTest(200)
       afterAlways('fullFunctionalTest') {
         publishHTML target: [

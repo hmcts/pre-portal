@@ -6,7 +6,7 @@ setHeadlessWhen(testConfig.TestHeadlessBrowser);
 export const config: CodeceptJS.MainConfig = {
   name: 'functional',
   gherkin: testConfig.Gherkin,
-  output: './functional-output/functional/reports',
+  output: `./functional-output/${process.env.TEST_GROUP || 'functional'}/reports`,
   helpers: testConfig.helpers,
   tests: './*_test.{js,ts}',
   plugins: {
