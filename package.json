@@ -22,6 +22,7 @@
     "test:pa11y": "PORTAL_AUTH_DISABLED=1 NODE_TLS_REJECT_UNAUTHORIZED=0 jest -c jest.a11y.config.js --maxWorkers 15 --detectOpenHandles",
     "test:smoke": "NODE_TLS_REJECT_UNAUTHORIZED=0 jest -c jest.smoke.config.js",
     "test:functional": "yarn playwright install && ALLOW_CONFIG_MUTATIONS=true NODE_TLS_REJECT_UNAUTHORIZED=0 codeceptjs run --config ./codecept.conf.js --steps --grep \"@flaky\" --invert",
+    "test:smoketest":  "yarn playwright install && TEST_GROUP=smoke ALLOW_CONFIG_MUTATIONS=true NODE_TLS_REJECT_UNAUTHORIZED=0 codeceptjs run --config ./codecept.conf.js --steps --grep @s",
     "test:crossbrowser:e2e": "NODE_TLS_REJECT_UNAUTHORIZED=0 codeceptjs run-multiple --all --config src/test/crossbrowser/saucelabs.conf.js --grep @CrossBrowser ",
     "test:crossbrowser:report": "allure generate functional-output/cross-browser/reports/* -c -o functional-output/cross-browser/allure ",
     "test:crossbrowser": "yarn playwright install && (yarn test:crossbrowser:e2e && yarn test:crossbrowser:report) || yarn test:crossbrowser:report",

@@ -1,4 +1,5 @@
 @CrossBrowser
+@smoke
 Feature: View Browse and play Page
     Background: portal login
       Given I go to '/'
