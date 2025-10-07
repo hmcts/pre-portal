@@ -1,7 +1,7 @@
 import puppeteer, { Browser, Page } from 'puppeteer';
 import { config } from '../config';
 
-const pa11y = require('pa11y');
+import pa11y from 'pa11y';
 
 interface Pa11yResult {
   documentTitle: string;

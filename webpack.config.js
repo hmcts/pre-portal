@@ -1,29 +1,50 @@
-const path = require('path');
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { createRequire } from 'module';
 
-const sourcePath = path.resolve(__dirname, 'src/main/assets/js');
-const govukFrontend = require(path.resolve(__dirname, 'webpack/govukFrontend'));
-const mkWebpack = require(path.resolve(__dirname, 'webpack/mkWebpack'));
-const customAssets = require(path.resolve(__dirname, 'webpack/customAssets'));
-const scss = require(path.resolve(__dirname, 'webpack/scss'));
-const HtmlWebpack = require(path.resolve(__dirname, 'webpack/htmlWebpack'));
+import govukFrontend from './webpack/govukFrontend.js';
+import mkWebpack from './webpack/mkWebpack.js';
+import customAssets from './webpack/customAssets.js';
+import scss from './webpack/scss.js';
+import htmlWebpack from './webpack/htmlWebpack.js';
+
+const require = createRequire(import.meta.url);
+let CopyWebpackPlugin;
+try {
+  const mod = require('copy-webpack-plugin');
+  CopyWebpackPlugin = mod.default || mod;
+} catch (eRoot) {
+  const dist = require('copy-webpack-plugin/dist/index.js');
+  CopyWebpackPlugin = dist.default || dist;
+}
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const devMode = process.env.NODE_ENV !== 'production';
+const sourcePath = path.resolve(__dirname, 'src/main/assets/js');
 const fileNameSuffix = devMode ? '-dev' : '.[contenthash]';
 const filename = `[name]${fileNameSuffix}.js`;
 
-module.exports = {
-  plugins: [
-    ...govukFrontend.plugins,
-    ...mkWebpack.plugins,
-    ...scss.plugins,
-    ...HtmlWebpack.plugins,
-    ...customAssets.plugins,
-  ],
-  entry: path.resolve(sourcePath, 'index.ts'),
+const assetPatterns = [
+  ...(govukFrontend.patterns || []),
+  ...(mkWebpack.patterns || []),
+  ...(customAssets.patterns || []),
+];
+
+const copyAssetsPlugin = new CopyWebpackPlugin({ patterns: assetPatterns });
+
+export default {
   mode: devMode ? 'development' : 'production',
+  entry: path.resolve(sourcePath, 'index.ts'),
+  plugins: [
+    ...(scss.plugins || []),
+    ...(htmlWebpack.plugins || []),
+    copyAssetsPlugin,
+  ],
   module: {
     rules: [
-      ...scss.rules,
+      ...(scss.rules || []),
       {
         test: /\.ts$/,
         use: 'ts-loader',
@@ -38,5 +59,8 @@ module.exports = {
     path: path.resolve(__dirname, 'src/main/public/'),
     publicPath: '',
     filename,
+    clean: true,
   },
+  infrastructureLogging: { level: 'warn' },
+  stats: devMode ? 'minimal' : 'normal',
 };

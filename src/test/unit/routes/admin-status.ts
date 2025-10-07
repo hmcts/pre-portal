@@ -3,6 +3,8 @@ import { beforeAll, describe, test } from '@jest/globals';
 import { SystemStatus } from '../../../main/services/system-status/system-status';
 import { mockeduser } from '../test-helper';
 import { UserLevel } from '../../../main/types/user-level';
+import express from 'express';
+import request from 'supertest';
 
 jest.mock('express-openid-connect', () => {
   return {
@@ -31,11 +33,8 @@ describe('Admin Status route', () => {
   });
 
   test('should display status page for super user', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
-    const adminStatus = require('../../../main/routes/admin/admin-status').default;
-    adminStatus(app);
 
     (SystemStatus.prototype.getStatus as jest.Mock).mockResolvedValue({ status: 'ok' });
 
@@ -51,11 +50,8 @@ describe('Admin Status route', () => {
   });
 
   test('should display "Page Not Found" for non-super user', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
-    const adminStatus = require('../../../main/routes/admin/admin-status').default;
-    adminStatus(app);
 
     if (mockeduser.app_access?.[0]?.role) {
       mockeduser.app_access[0].role.name = UserLevel.ADMIN;

@@ -1,5 +1,8 @@
-const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const root = path.resolve(__dirname, '../src/main/assets');
 const images = path.resolve(root, 'images');
@@ -11,7 +14,8 @@ const processGuide = path.resolve(files, 'process-guide.pdf');
 const userGuide = path.resolve(files, 'user-guide.pdf');
 const editingRequestForm = path.resolve(files, 'pre-editing-request-form.xlsx');
 
-const copyCustomAssets = new CopyWebpackPlugin({
+export default {
+  paths: { template: root },
   patterns: [
     { from: loadingSpinner, to: 'assets/images' },
     { from: faqs, to: 'assets/files' },
@@ -19,9 +23,4 @@ const copyCustomAssets = new CopyWebpackPlugin({
     { from: userGuide, to: 'assets/files' },
     { from: editingRequestForm, to: 'assets/files' },
   ],
-});
-
-module.exports = {
-  paths: { template: root },
-  plugins: [copyCustomAssets],
 };
