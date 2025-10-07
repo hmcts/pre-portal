@@ -212,4 +212,56 @@ describe('MigrationRecordService', () => {
       await expect(service.submitMigrationRecords()).rejects.toThrow('No records to submit');
     });
   });
+
+  describe('logAudit', () => {
+    it('should call client.putAudit with enriched payload', async () => {
+      mockClient.putAudit.mockResolvedValue({} as any);
+
+      const auditPayload = {
+        id: 'audit-001',
+        functional_area: 'Admin Migration',
+        category: 'Migration',
+        activity: 'Update Migration Record',
+        audit_details: {
+          record: '{"field":"value"}',
+          description: 'Test description',
+        },
+      };
+
+      await service.logAudit(auditPayload);
+
+      expect(mockClient.putAudit).toHaveBeenCalledWith(
+        'test-user',
+        expect.objectContaining({
+          id: 'audit-001',
+          audit_details: expect.objectContaining({
+            description: expect.stringContaining('Test description by test-user@example.com'),
+          }),
+        })
+      );
+    });
+
+    it('should throw error if user is not authorized', async () => {
+      (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue(undefined);
+      const unauthorizedService = new MigrationRecordService({} as Request, mockClient);
+
+      await expect(
+        unauthorizedService.logAudit({
+          id: 'audit-002',
+          audit_details: { description: 'Unauthorized' },
+        })
+      ).rejects.toThrow('User not authorized to write audit logs.');
+    });
+
+    it('should rethrow client errors', async () => {
+      mockClient.putAudit.mockRejectedValue(new Error('Audit failed'));
+
+      const auditPayload = {
+        id: 'audit-003',
+        audit_details: { description: 'Something broke' },
+      };
+
+      await expect(service.logAudit(auditPayload)).rejects.toThrow('Audit failed');
+    });
+  });
 });

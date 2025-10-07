@@ -276,4 +276,96 @@ describe('Migration route', () => {
     expect(response.status).toEqual(500);
     expect(response.body.error).toEqual({ message: 'Server error' });
   });
+
+  test('PUT /admin/migration/:id/audit should log audit successfully', async () => {
+    const express = require('express');
+    const app = express();
+    app.use(express.json());
+
+    new Nunjucks(false).enableFor(app);
+    const migration = require('../../../main/routes/admin/migration').default;
+    migration(app);
+
+    mockeduser.app_access = [
+      {
+        active: true,
+        court: {
+          id: 'court-1',
+          name: 'Birmingham Youth Court',
+          court_type: 'Youth',
+          location_code: 'BYC',
+          regions: [{ name: 'West Midlands' }],
+          rooms: [],
+        },
+        id: 'access-1',
+        last_access: null,
+        role: {
+          id: 'role-123',
+          name: UserLevel.SUPER_USER,
+          description: 'Super user role',
+          permissions: [],
+        },
+      },
+    ];
+
+    const mockRecordId = 'record-999';
+    const mockAuditPayload = {
+      id: 'audit-1',
+      activity: 'Test Audit',
+      audit_details: { record: '{"field": "value"}', description: 'desc' },
+    };
+
+    MigrationRecordService.prototype.logAudit = jest.fn().mockResolvedValue(undefined);
+
+    const request = require('supertest');
+    const response = await request(app).put(`/admin/migration/${mockRecordId}/audit`).send(mockAuditPayload);
+
+    expect(response.status).toEqual(204);
+    expect(MigrationRecordService.prototype.logAudit).toHaveBeenCalledWith(mockAuditPayload);
+  });
+
+  test('PUT /admin/migration/:id/audit should return 500 when audit logging fails', async () => {
+    const express = require('express');
+    const app = express();
+    app.use(express.json());
+
+    new Nunjucks(false).enableFor(app);
+    const migration = require('../../../main/routes/admin/migration').default;
+    migration(app);
+
+    mockeduser.app_access = [
+      {
+        active: true,
+        court: {
+          id: 'court-1',
+          name: 'Birmingham Youth Court',
+          court_type: 'Youth',
+          location_code: 'BYC',
+          regions: [{ name: 'West Midlands' }],
+          rooms: [],
+        },
+        id: 'access-1',
+        last_access: null,
+        role: {
+          id: 'role-123',
+          name: UserLevel.SUPER_USER,
+          description: 'Super user role',
+          permissions: [],
+        },
+      },
+    ];
+
+    const mockRecordId = 'record-999';
+    const mockAuditPayload = { id: 'audit-2', activity: 'Broken Audit' };
+
+    MigrationRecordService.prototype.logAudit = jest.fn().mockRejectedValue({
+      response: { status: 500, data: { message: 'Audit failure' } },
+    });
+
+    const request = require('supertest');
+    const response = await request(app).put(`/admin/migration/${mockRecordId}/audit`).send(mockAuditPayload);
+
+    expect(response.status).toEqual(500);
+    expect(response.body.error).toEqual({ message: 'Audit failure' });
+  });
 });
