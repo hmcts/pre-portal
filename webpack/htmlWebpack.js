@@ -13,7 +13,9 @@ try {
     const mod2 = require(alt);
     HtmlWebpackPlugin = mod2.default || mod2;
   } catch (eDist) {
-    throw new Error(`Unable to resolve html-webpack-plugin: root error: ${eRoot.message}; index error: ${eDist.message}`);
+    throw new Error(
+      `Unable to resolve html-webpack-plugin: root error: ${eRoot.message}; index error: ${eDist.message}`
+    );
   }
 }
 

@@ -5,16 +5,19 @@ export default {
   testEnvironment: 'node',
   testRunner: 'jest-circus/runner',
   transform: {
-    '^.+\\.tsx?$': ['ts-jest', {
-      tsconfig: {
-        module: 'ESNext',
-        target: 'ES2020',
-        moduleResolution: 'node',
-        esModuleInterop: true,
-        allowSyntheticDefaultImports: true
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        tsconfig: {
+          module: 'ESNext',
+          target: 'ES2020',
+          moduleResolution: 'node',
+          esModuleInterop: true,
+          allowSyntheticDefaultImports: true,
+        },
+        useESM: true,
       },
-      useESM: true
-    }],
+    ],
     '^.+\\.[cm]?jsx?$': 'babel-jest',
   },
   extensionsToTreatAsEsm: ['.ts'],

@@ -37,11 +37,7 @@ const copyAssetsPlugin = new CopyWebpackPlugin({ patterns: assetPatterns });
 export default {
   mode: devMode ? 'development' : 'production',
   entry: path.resolve(sourcePath, 'index.ts'),
-  plugins: [
-    ...(scss.plugins || []),
-    ...(htmlWebpack.plugins || []),
-    copyAssetsPlugin,
-  ],
+  plugins: [...(scss.plugins || []), ...(htmlWebpack.plugins || []), copyAssetsPlugin],
   module: {
     rules: [
       ...(scss.rules || []),

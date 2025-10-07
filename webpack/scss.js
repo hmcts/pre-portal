@@ -17,7 +17,9 @@ try {
     const mod2 = require(altPath);
     MiniCssExtractPlugin = mod2.default || mod2;
   } catch (eDist) {
-    throw new Error(`Unable to resolve mini-css-extract-plugin: root error: ${eRoot.message}; dist error: ${eDist.message}`);
+    throw new Error(
+      `Unable to resolve mini-css-extract-plugin: root error: ${eRoot.message}; dist error: ${eDist.message}`
+    );
   }
 }
 

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   root: true,
   files: ['.js', '.jsx', '.ts', '.tsx'],
   ignorePatterns: [
@@ -12,7 +12,7 @@ module.exports = {
     '.eslintrc.js',
     'src/test/config.ts',
     '**/*.js',
-    'src/test/**/*.ts],',
+    'src/test/**/*.ts',
   ],
   env: { browser: true, es6: true, node: true },
   parser: '@typescript-eslint/parser',
