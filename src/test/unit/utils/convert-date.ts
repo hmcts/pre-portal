@@ -15,16 +15,18 @@ describe('Date Utils', () => {
       expect(formatDateToDDMMYYYY('2023-13-01')).toBe('');
     });
 
-    it('should format valid ISO date to DD/MM/YYYY', () => {
-      expect(formatDateToDDMMYYYY('2023-09-16')).toBe('16/09/2023');
+    it('should format valid ISO date to DD/MM/YYYY HH:mm:ss', () => {
+      // midnight UTC for a date-only string
+      expect(formatDateToDDMMYYYY('2023-09-16')).toBe('16/09/2023 00:00:00');
     });
 
     it('should handle datetime strings correctly', () => {
-      expect(formatDateToDDMMYYYY('2023-01-05T10:20:30Z')).toBe('05/01/2023');
+      // should preserve provided time in UTC
+      expect(formatDateToDDMMYYYY('2023-01-05T10:20:30Z')).toBe('05/01/2023 10:20:30');
     });
 
     it('should pad single digit day and month with leading zeros', () => {
-      expect(formatDateToDDMMYYYY('2023-02-03')).toBe('03/02/2023');
+      expect(formatDateToDDMMYYYY('2023-02-03')).toBe('03/02/2023 00:00:00');
     });
   });
 
