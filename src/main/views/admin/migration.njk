@@ -571,39 +571,44 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     window.validateRecordingDate = function(input) {
-        const value = input.value.trim();
-        const dateParts = value.split('/');
+      const value = input.value.trim();
+      if (!value) return;
 
-        const isValid =
-            dateParts.length === 3 &&
-            /^\d{2}$/.test(dateParts[0]) &&
-            /^\d{2}$/.test(dateParts[1]) &&
-            /^\d{4}$/.test(dateParts[2]);
+      const dateTimeRegex = /^(\d{2})\/(\d{2})\/(\d{4})(?:\s+(\d{2}):(\d{2})(?::(\d{2}))?)?$/;
+      const match = value.match(dateTimeRegex);
 
-        let isDateValid = false;
+      let isDateValid = false;
 
-        if (isValid) {
-            const day = parseInt(dateParts[0], 10);
-            const month = parseInt(dateParts[1], 10) - 1;
-            const year = parseInt(dateParts[2], 10);
+      if (match) {
+        const [, dayStr, monthStr, yearStr, hourStr, minuteStr, secondStr] = match;
+        const day = parseInt(dayStr, 10);
+        const month = parseInt(monthStr, 10) - 1;
+        const year = parseInt(yearStr, 10);
+        const hours = parseInt(hourStr || '0', 10);
+        const minutes = parseInt(minuteStr || '0', 10);
+        const seconds = parseInt(secondStr || '0', 10);
 
-            const date = new Date(year, month, day);
-            isDateValid =
-                date.getFullYear() === year &&
-                date.getMonth() === month &&
-                date.getDate() === day;
-        }
+        const date = new Date(year, month, day, hours, minutes, seconds);
 
-        if (!isDateValid) {
-            input.style.backgroundColor = "#ffcccc";
-            input.classList.add("govuk-input--error");
-            input.title = "Invalid date. Please use DD/MM/YYYY";
-        } else {
-            input.style.backgroundColor = "";
-            input.classList.remove("govuk-input--error");
-            input.title = "";
-        }
-        checkRowForInvalidCells(input.closest('tr'));
+        isDateValid =
+          date.getFullYear() === year &&
+          date.getMonth() === month &&
+          date.getDate() === day &&
+          date.getHours() === hours &&
+          date.getMinutes() === minutes &&
+          date.getSeconds() === seconds;
+      }
+
+      if (!isDateValid) {
+        input.style.backgroundColor = "#ffcccc";
+        input.classList.add("govuk-input--error");
+        input.title = "Invalid date. Please use DD/MM/YYYY or DD/MM/YYYY HH:MM[:SS]";
+      } else {
+        input.style.backgroundColor = "";
+        input.classList.remove("govuk-input--error");
+        input.title = "";
+      }
+      checkRowForInvalidCells(input.closest('tr'));
     };
 
     window.validateIsNumber = function(input) {
@@ -704,87 +709,134 @@ document.querySelectorAll('tr').forEach(row => {
     checkRowForInvalidCells(row);
 });
 
+document.querySelectorAll('tr[data-record-id]').forEach(row => {
+    row.dataset.originalState = JSON.stringify(getRowState(row));
+});
+
+function getRowState(row) {
+    return {
+        court_id: row.querySelector('select[name="courtField"]')?.value || '',
+        urn: row.querySelector('input[name="urn"]')?.value?.trim() || '',
+        exhibit_reference: row.querySelector('input[name="exhibitReference"]')?.value?.trim() || '',
+        witness_name: row.querySelector('input[name="witnessName"]')?.value?.trim() || '',
+        defendant_name: row.querySelector('input[name="defendantName"]')?.value?.trim() || '',
+        recording_date: row.querySelector('input[name="createDate"]')?.value?.trim() || '',
+        recording_version: row.querySelector('select[name="recordingVersion"]')?.value || '',
+        recording_version_number: row.querySelector('input[name="recordingVersionNumber"]')?.value || ''
+    };
+}
+
+
 document.querySelectorAll('.mark-ready-button').forEach(function(button) {
-    button.addEventListener('click', async function() {
-        const row = button.closest('tr');
-        if (!row) return;
+  button.addEventListener('click', async function() {
+    const row = button.closest('tr');
+    if (!row) return;
 
-        const statusCell = row.querySelector('.status-cell');
-        const recordId = row.dataset.recordId;
+    const statusCell = row.querySelector('.status-cell');
+    const recordId = row.dataset.recordId;
+    if (!recordId) return;
 
-        if (!recordId) return;
-        const currentStatus = button.dataset.status;
-        const submitButton = document.getElementById('submitMigrationBtn');
-        if (button.textContent.trim() === 'Mark as Ready') {
-            if (submitButton) {
-                submitButton.disabled = false;
-            }
-            }
-        if (button.textContent.trim() === 'Edit') {
-            statusCell.textContent = 'UNRESOLVED';
-            button.textContent = 'Mark as Ready';
+    if (button.textContent.trim() === 'Edit') {
+      statusCell.textContent = 'UNRESOLVED';
+      button.textContent = 'Mark as Ready';
+      row.querySelectorAll('input, select').forEach(cell => cell.removeAttribute('disabled'));
+      return;
+    }
 
-            row.querySelectorAll('input, select').forEach(cell => {
-                cell.removeAttribute('disabled');
-            });
+    function mapDto(row) {
+      const dateInput = row.querySelector('input[name="createDate"]')?.value?.trim();
 
-            return;
+      let recordingDate = null;
+
+      if (dateInput) {
+        const [datePart, timePart] = dateInput.split(' ');
+        if (datePart && timePart) {
+          const [day, month, year] = datePart.split('/');
+          recordingDate = `${year}-${month}-${day} ${timePart}+00`;
+
+
+        } else {
+          console.warn(`Invalid datetime format: "${dateInput}"`);
         }
-
-        function mapDto(row) {
-            const dateInput = row.querySelector('input[name="createDate"]')?.value?.trim();
-            const recordingDate = dateInput ?
-                new Date(dateInput.split('/').reverse().join('-')).toISOString() :
-                new Date().toISOString();
-
-            function normalize(value) {
-                     const trimmed = value?.trim();
-                     return trimmed === "" ? null : trimmed;
-                 }
-
-            return {
-                id: row.dataset.recordId,
-                court_id: row.querySelector('select[name="courtField"]')?.value || '',
-                urn: normalize(row.querySelector('input[name="urn"]')?.value || ''),
-                exhibit_reference: normalize(row.querySelector('input[name="exhibitReference"]')?.value?.replace(/[^a-z0-9]/gi, '')),
-                witness_name: (row.querySelector('input[name="witnessName"]')?.value || '').trim(),
-                defendant_name: (row.querySelector('input[name="defendantName"]')?.value || '').trim(),
-                recording_date: recordingDate,
-                recording_version: row.querySelector('select[name="recordingVersion"]')?.value?.toUpperCase() || null,
-                recording_version_number: row.querySelector('input[name="recordingVersionNumber"]')?.value || null,
-                status: 'READY',
-            };
         }
+      const normalize = value => (value?.trim() === "" ? null : value.trim());
 
-        const serverDto = mapDto(row)
+      return {
+        id: row.dataset.recordId,
+        court_id: row.querySelector('select[name="courtField"]')?.value || '',
+        urn: normalize(row.querySelector('input[name="urn"]')?.value)?.replace(/[^a-z0-9]/gi, '') || null,
+        exhibit_reference: normalize(row.querySelector('input[name="exhibitReference"]')?.value),
+        witness_name: normalize(row.querySelector('input[name="witnessName"]')?.value),
+        defendant_name: normalize(row.querySelector('input[name="defendantName"]')?.value),
+        recording_date: recordingDate,
+        recording_version: row.querySelector('select[name="recordingVersion"]')?.value?.toUpperCase() || null,
+        recording_version_number: row.querySelector('input[name="recordingVersionNumber"]')?.value || null,
+        status: 'READY',
+      };
+    }
 
-        try {
-            const response = await fetch(`/admin/migration/${recordId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(serverDto),
-            });
+    const updated = mapDto(row);
+    const original = JSON.parse(row.dataset.originalState || '{}');
 
-            if (!response.ok) {
-                throw new Error(`Server responded with ${response.status}`);
-            } else {
-                statusCell.textContent = 'READY';
-                button.textContent = 'Edit';
+    const changedFields = {};
+    for (const key of Object.keys(updated)) {
+      if (updated[key] !== original[key]) {
+        changedFields[key] = updated[key];
+      }
+    }
 
-                row.querySelectorAll('input, select').forEach(cell => {
-                    cell.setAttribute('disabled', 'true');
-                });
-            }
+    if (Object.keys(changedFields).length === 0) {
+      console.log(`No changes detected for record ${recordId}`);
+      return;
+    }
 
-            console.log(`Record ${recordId} updated successfully`);
-        } catch (error) {
-            console.error(`Failed to update record ${recordId}:`, error);
-            alert('Failed to update migration record. Please try again.');
+    try {
+      const response = await fetch(`/admin/migration/${recordId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updated),
+      });
 
-        }
-    });
+      if (!response.ok) throw new Error(`Server responded with ${response.status}`);
+
+      statusCell.textContent = 'READY';
+      button.textContent = 'Edit';
+      row.querySelectorAll('input, select').forEach(cell => cell.setAttribute('disabled', 'true'));
+
+      const auditPayload = {
+        id: crypto.randomUUID(),
+        functional_area: 'Admin Migration',
+        category: 'Migration',
+        activity: 'Update Migration Record',
+        source: 'PORTAL',
+        table_name: 'vf_migration_records',
+        audit_details: {
+          record: JSON.stringify(changedFields),
+          description: `Migration record ${recordId} updated`,
+        },
+      };
+
+      const auditResponse = await fetch(`/admin/migration/${recordId}/audit`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(auditPayload),
+      });
+
+      if (!auditResponse.ok) {
+        console.error('Audit request failed:', await auditResponse.text());
+        console.log('Audit unsuccessfully from view');
+      } else {
+        console.log('Audit logged successfully from view');
+      }
+
+      row.dataset.originalState = JSON.stringify(updated);
+      console.log(`Record ${recordId} updated successfully`);
+
+    } catch (error) {
+      console.error(`Failed to update record ${recordId}:`, error);
+      alert('Failed to update migration record. Please try again.');
+    }
+  });
 });
 
    const dropdownButton = document.getElementById("failure-reason-dropdown");

@@ -56,17 +56,43 @@ export class MigrationRecordService {
     }
   }
 
-  public async updateMigrationRecord(recordId: string, dto: any): Promise<void> {
+  public async updateMigrationRecord(recordId: string, dto: any, original?: any): Promise<void> {
     if (!this.user || !this.client) {
       throw new Error('User not authorized to update migration records.');
     }
 
     try {
       await this.client.updateMigrationRecord(this.user, recordId, dto);
+
+      let changedFields: any = dto;
+      if (original) {
+        changedFields = {};
+        for (const key of Object.keys(dto)) {
+          if (dto[key] !== original[key]) {
+            changedFields[key] = dto[key];
+          }
+        }
+      }
     } catch (e: any) {
       console.error('MigrationRecordService.updateMigrationRecord error:', e.response?.data || e.message);
       throw e;
     }
+  }
+
+  public async logAudit(auditPayload: any): Promise<void> {
+    if (!this.user || !this.client) {
+      throw new Error('User not authorized to write audit logs.');
+    }
+
+    const enrichedPayload = {
+      ...auditPayload,
+      audit_details: {
+        ...auditPayload.audit_details,
+        description: `${auditPayload.audit_details?.description} by ${this.userEmail}` || `Audit by ${this.userEmail}`,
+      },
+    };
+
+    await this.client.putAudit(this.user, enrichedPayload);
   }
 
   public async submitMigrationRecords(): Promise<void> {
@@ -88,7 +114,11 @@ export class MigrationRecordService {
 
       await this.client.submitMigrationRecords(this.user);
 
-      for (const record of readyRecords) {
+      const submittedResponse = await this.client.getMigrationRecords(user, '', '', '', '', 'SUBMITTED', '', '', []);
+
+      const submittedRecords = submittedResponse?.records || [];
+
+      for (const record of submittedRecords) {
         await this.client.putAudit(user, {
           id: uuid(),
           functional_area: 'Admin Migration',
