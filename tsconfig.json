@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./src/",
-    "module": "commonjs",
+    "module": "ESNext",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "target": "ES2020",

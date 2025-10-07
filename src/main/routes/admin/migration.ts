@@ -1,7 +1,7 @@
 import { Application } from 'express';
-import { PreClient } from '../../services/pre-api/pre-client';
-import { requiresAuth } from 'express-openid-connect';
+import openidConnect from 'express-openid-connect';
 import { RequiresSuperUser } from '../../middleware/admin-middleware';
+import { PreClient } from '../../services/pre-api/pre-client';
 
 import { MigrationRecordService } from '../../services/system-status/migration-status';
 import { CourtService } from '../../services/system-status/courts';
@@ -9,7 +9,7 @@ import { formatDateToDDMMYYYY, toIsoDateString } from '../../utils/convert-date'
 import { formatDuration } from '../../utils/format-duration';
 
 export default function (app: Application): void {
-  app.get('/admin/migration', requiresAuth(), RequiresSuperUser, async (req, res) => {
+  app.get('/admin/migration', openidConnect.requiresAuth(), RequiresSuperUser, async (req, res) => {
     const client = new PreClient();
 
     let resourceState: string | undefined;
@@ -195,7 +195,7 @@ export default function (app: Application): void {
     });
   });
 
-  app.put('/admin/migration/:id', requiresAuth(), RequiresSuperUser, async (req, res) => {
+  app.put('/admin/migration/:id', openidConnect.requiresAuth(), RequiresSuperUser, async (req, res) => {
     const client = new PreClient();
     const migrationRecordService = new MigrationRecordService(req, client);
     const recordId = req.params.id;
@@ -209,7 +209,7 @@ export default function (app: Application): void {
     }
   });
 
-  app.post('/admin/migration/submit', requiresAuth(), RequiresSuperUser, async (req, res) => {
+  app.post('/admin/migration/submit', openidConnect.requiresAuth(), RequiresSuperUser, async (req, res) => {
     const client = new PreClient();
     const migrationRecordService = new MigrationRecordService(req, client);
 

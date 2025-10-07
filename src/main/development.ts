@@ -1,17 +1,25 @@
 import * as express from 'express';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpack from 'webpack';
 
-const setupDev = (app: express.Express, developmentMode: boolean): void => {
-  if (developmentMode) {
-    const webpackDev = require('webpack-dev-middleware');
-    const webpack = require('webpack');
-    const webpackconfig = require('../../webpack.config');
-    const compiler = webpack(webpackconfig);
-    app.use(
-      webpackDev(compiler, {
-        publicPath: '/',
-      })
-    );
+let webpackConfigPromise: Promise<any> | null = null;
+async function getWebpackConfig() {
+  if (!webpackConfigPromise) {
+    webpackConfigPromise = import('../../webpack.config.js').then(m => m.default || m);
   }
-};
+  return webpackConfigPromise;
+}
 
-module.exports = { setupDev };
+export const setupDev = async (app: express.Express, developmentMode: boolean): Promise<void> => {
+  if (!developmentMode) return;
+  const webpackconfig = await getWebpackConfig();
+  const compiler = webpack(webpackconfig);
+  if (!compiler) {
+    throw new Error('Webpack compiler could not be created. Check your webpack configuration.');
+  }
+  app.use(
+    webpackDevMiddleware(compiler, {
+      publicPath: '/',
+    })
+  );
+};

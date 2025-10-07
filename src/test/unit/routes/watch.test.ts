@@ -5,6 +5,9 @@ import { beforeAll, describe } from '@jest/globals';
 
 import { PreClient } from '../../../main/services/pre-api/pre-client';
 import { mockUser } from '../test-helper';
+import express from 'express';
+import request from 'supertest';
+import watch from '../../../main/routes/watch';
 
 mockUser();
 
@@ -14,11 +17,9 @@ describe('Watch page failure', () => {
   });
 
   describe('on GET', () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
 
-    const watch = require('../../../main/routes/watch').default;
     watch(app);
 
     test('should return 404 when getRecording returns null', async () => {
@@ -74,7 +75,7 @@ describe('Watch page success', () => {
   });
 
   describe('on GET', () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
     const request = require('supertest');
 

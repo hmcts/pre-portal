@@ -1,10 +1,10 @@
-module.exports = {
+export default {
   presets: [
     [
       '@babel/preset-env',
       {
         targets: { node: 'current' },
-        modules: 'commonjs',
+        modules: false, // Changed to false for ESM
       },
     ],
   ],

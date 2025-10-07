@@ -4,7 +4,7 @@ import { SessionUser } from '../services/session-user/session-user';
 import { UserLevel } from '../types/user-level';
 
 import { Application } from 'express';
-import { requiresAuth } from 'express-openid-connect';
+import openidConnect from 'express-openid-connect';
 
 export const convertIsoToDate = (isoString?: string): string | undefined => {
   if (!isoString) {
@@ -19,7 +19,7 @@ export const convertIsoToDate = (isoString?: string): string | undefined => {
 };
 
 export default function (app: Application): void {
-  app.get('/browse', requiresAuth(), async (req, res) => {
+  app.get('/browse', openidConnect.requiresAuth(), async (req, res) => {
     const client = new PreClient();
 
     const request: SearchRecordingsRequest = {

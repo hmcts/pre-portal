@@ -2,24 +2,25 @@ import { Logger } from '@hmcts/nodejs-logging';
 import * as propertiesVolume from '@hmcts/properties-volume';
 import config from 'config';
 import { Application } from 'express';
-import { get, set } from 'lodash';
+import _ from 'lodash';
 import * as process from 'node:process';
+import 'dotenv/config';
 
 export class PropertiesVolume {
   private logger = Logger.getLogger('properties-volume');
 
   enableFor(server: Application): void {
-    set(config, 'pre.portalUrl', process.env.PORTAL_URL ?? 'https://localhost:4551');
-    set(config, 'pre.apiUrl', process.env.PRE_API_URL ?? 'https://localhost:4550');
-    set(config, 'session.redis.host', process.env.REDIS_HOST ?? '');
-    set(config, 'b2c.appClientId', process.env.B2C_APP_CLIENT_ID ?? 'd20a7462-f222-46b8-a363-d2e30eb274eb');
-    set(
+    _.set(config, 'pre.portalUrl', process.env.PORTAL_URL ?? 'https://localhost:4551');
+    _.set(config, 'pre.apiUrl', process.env.PRE_API_URL ?? 'https://localhost:4550');
+    _.set(config, 'session.redis.host', process.env.REDIS_HOST ?? '');
+    _.set(config, 'b2c.appClientId', process.env.B2C_APP_CLIENT_ID ?? 'd20a7462-f222-46b8-a363-d2e30eb274eb');
+    _.set(
       config,
       'b2c.baseUrl',
       process.env.B2C_BASE_URL ??
         'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_SIGNUP_SIGNIN'
     );
-    set(
+    _.set(
       config,
       'b2c.endSessionEndpoint',
       process.env.B2C_END_SESSION_ENDPOINT ??
@@ -52,16 +53,15 @@ export class PropertiesVolume {
       this.setSecret('secrets.pre-hmctskv.b2c-test-super-user-password', 'b2c.testSuperUserLogin.password');
     } else {
       this.logger.info('Loading properties from .env file');
-      require('dotenv').config();
-      set(config, 'pre.apiKey.primary', process.env.APIM_SUB_PORTAL_PRIMARY_KEY ?? 'pre.apiKey.primary');
-      set(config, 'pre.apiKey.secondary', process.env.APIM_SUB_PORTAL_SECONDARY_KEY ?? 'pre.apiKey.secondary');
-      set(config, 'b2c.appClientSecret', process.env.B2C_APP_CLIENT_SECRET ?? 'b2c.appClientSecret');
-      set(config, 'b2c.testLogin.email', process.env.B2C_TEST_LOGIN_EMAIL);
-      set(config, 'b2c.testLogin.password', process.env.B2C_TEST_LOGIN_PASSWORD);
-      set(config, 'b2c.testSuperUserLogin.email', process.env.B2C_TEST_SUPER_USER_LOGIN_EMAIL);
-      set(config, 'b2c.testSuperUserLogin.password', process.env.B2C_TEST_SUPER_USER_LOGIN_PASSWORD);
-      set(config, 'session.secret', process.env.SESSION_SECRET ?? 'superlongrandomstringthatshouldbebetterinprod');
-      set(config, 'pre.mediaKindPlayerKey', process.env.MEDIA_KIND_PLAYER_KEY ?? 'mediaKindPlayerKey');
+      _.set(config, 'pre.apiKey.primary', process.env.APIM_SUB_PORTAL_PRIMARY_KEY ?? 'pre.apiKey.primary');
+      _.set(config, 'pre.apiKey.secondary', process.env.APIM_SUB_PORTAL_SECONDARY_KEY ?? 'pre.apiKey.secondary');
+      _.set(config, 'b2c.appClientSecret', process.env.B2C_APP_CLIENT_SECRET ?? 'b2c.appClientSecret');
+      _.set(config, 'b2c.testLogin.email', process.env.B2C_TEST_LOGIN_EMAIL);
+      _.set(config, 'b2c.testLogin.password', process.env.B2C_TEST_LOGIN_PASSWORD);
+      _.set(config, 'b2c.testSuperUserLogin.email', process.env.B2C_TEST_SUPER_USER_LOGIN_EMAIL);
+      _.set(config, 'b2c.testSuperUserLogin.password', process.env.B2C_TEST_SUPER_USER_LOGIN_PASSWORD);
+      _.set(config, 'session.secret', process.env.SESSION_SECRET ?? 'superlongrandomstringthatshouldbebetterinprod');
+      _.set(config, 'pre.mediaKindPlayerKey', process.env.MEDIA_KIND_PLAYER_KEY ?? 'mediaKindPlayerKey');
     }
     // set the dynatrace tag to be available in templates if set
     server.locals.dynatrace_jstag = process.env.DYNATRACE_JSTAG ?? '';
@@ -71,7 +71,7 @@ export class PropertiesVolume {
 
   private setSecret(fromPath: string, toPath: string): void {
     if (config.has(fromPath)) {
-      set(config, toPath, get(config, fromPath));
+      _.set(config, toPath, _.get(config, fromPath));
     }
   }
 }

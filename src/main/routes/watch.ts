@@ -1,20 +1,20 @@
 import { PreClient } from '../services/pre-api/pre-client';
 import { SessionUser } from '../services/session-user/session-user';
 
-import { Logger } from '@hmcts/nodejs-logging';
-import config from 'config';
 import { Application } from 'express';
-import { requiresAuth } from 'express-openid-connect';
+import openidConnect from 'express-openid-connect';
+import config from 'config';
 import { v4 as uuid } from 'uuid';
+import { Logger } from '@hmcts/nodejs-logging';
+
+const logger = Logger.getLogger('watch');
 
 function validateId(id: string): boolean {
   return /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(id);
 }
 
 export default function (app: Application): void {
-  const logger = Logger.getLogger('watch');
-
-  app.get('/watch/:id', requiresAuth(), async (req, res, next) => {
+  app.get('/watch/:id', openidConnect.requiresAuth(), async (req, res, next) => {
     if (!validateId(req.params.id)) {
       res.status(404);
       res.render('not-found');
@@ -63,7 +63,7 @@ export default function (app: Application): void {
     }
   });
 
-  app.get('/watch/:id/playback', requiresAuth(), async (req, res) => {
+  app.get('/watch/:id/playback', openidConnect.requiresAuth(), async (req, res) => {
     if (!validateId(req.params.id)) {
       res.status(404);
       res.json({ message: 'Not found' });

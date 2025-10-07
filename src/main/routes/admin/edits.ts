@@ -1,10 +1,10 @@
+import { PreClient } from '../../services/pre-api/pre-client';
 import { SessionUser } from '../../services/session-user/session-user';
 import { UserLevel } from '../../types/user-level';
 import { Application } from 'express';
-import { requiresAuth } from 'express-openid-connect';
-import path from 'path';
+import openidConnect from 'express-openid-connect';
 import multer from 'multer';
-import { PreClient } from '../../services/pre-api/pre-client';
+import path from 'path';
 import { generatePaginatedTitle, generatePaginationLinks } from '../../utils/helpers';
 
 const storage = multer.memoryStorage();
@@ -37,7 +37,7 @@ const getDateOneWeekAgo = (): string => {
 };
 
 export default function (app: Application): void {
-  app.get('/admin/edit-request', requiresAuth(), async (req, res) => {
+  app.get('/admin/edit-request', openidConnect.requiresAuth(), async (req, res) => {
     const superUserId = getSuperUserId(req);
     if (!superUserId) {
       res.status(404);
@@ -64,7 +64,7 @@ export default function (app: Application): void {
     });
   });
 
-  app.get('/edits/recordings', requiresAuth(), async (req, res) => {
+  app.get('/edits/recordings', openidConnect.requiresAuth(), async (req, res) => {
     const superUserId = getSuperUserId(req);
     if (!superUserId) {
       res.status(404);
@@ -88,27 +88,32 @@ export default function (app: Application): void {
     res.json(recordings);
   });
 
-  app.post('/admin/edit-request/upload', requiresAuth(), upload.single('file-upload'), async (req, res) => {
-    const superUserId = getSuperUserId(req);
-    if (!superUserId) {
-      res.status(404);
-      res.render('not-found');
-      return;
-    }
-
-    try {
-      const file = req.file;
-      const sourceRecordingId = req.body.source_recording;
-
-      if (!file || !sourceRecordingId) {
-        res.status(400).json({ message: 'Missing file or source recording id' });
+  app.post(
+    '/admin/edit-request/upload',
+    openidConnect.requiresAuth(),
+    upload.single('file-upload'),
+    async (req, res) => {
+      const superUserId = getSuperUserId(req);
+      if (!superUserId) {
+        res.status(404);
+        res.render('not-found');
         return;
       }
 
-      await new PreClient().postEditsFromCsv(superUserId, sourceRecordingId, file.buffer);
-      res.redirect('/admin/edit-request');
-    } catch (error) {
-      res.status(400).json({ message: error.message });
+      try {
+        const file = req.file;
+        const sourceRecordingId = req.body.source_recording;
+
+        if (!file || !sourceRecordingId) {
+          res.status(400).json({ message: 'Missing file or source recording id' });
+          return;
+        }
+
+        await new PreClient().postEditsFromCsv(superUserId, sourceRecordingId, file.buffer);
+        res.redirect('/admin/edit-request');
+      } catch (error) {
+        res.status(400).json({ message: error.message });
+      }
     }
-  });
+  );
 }
