@@ -16,12 +16,10 @@ describe('Date Utils', () => {
     });
 
     it('should format valid ISO date to DD/MM/YYYY HH:mm:ss', () => {
-      // midnight UTC for a date-only string
       expect(formatDateToDDMMYYYY('2023-09-16')).toBe('16/09/2023 00:00:00');
     });
 
     it('should handle datetime strings correctly', () => {
-      // should preserve provided time in UTC
       expect(formatDateToDDMMYYYY('2023-01-05T10:20:30Z')).toBe('05/01/2023 10:20:30');
     });
 
