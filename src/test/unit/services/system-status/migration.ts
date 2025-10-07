@@ -145,6 +145,36 @@ describe('MigrationRecordService', () => {
 
       await expect(service.updateMigrationRecord('rec-123', { status: 'Resolved' })).rejects.toThrow('Update failed');
     });
+
+    it('should detect changed fields when original is provided', async () => {
+      mockClient.updateMigrationRecord.mockResolvedValue(undefined);
+
+      const dto = { status: 'Resolved', reason: 'Completed' };
+      const original = { status: 'Pending', reason: 'Completed' };
+
+      const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+      await service.updateMigrationRecord('rec-123', dto, original);
+
+      expect(mockClient.updateMigrationRecord).toHaveBeenCalledWith('test-user', 'rec-123', dto);
+
+      expect(consoleSpy).not.toHaveBeenCalled();
+
+      consoleSpy.mockRestore();
+    });
+
+    it('should log and rethrow errors from updateMigrationRecord', async () => {
+      const error = new Error('Network failure');
+      mockClient.updateMigrationRecord.mockRejectedValue(error);
+
+      const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+      await expect(service.updateMigrationRecord('rec-999', { status: 'Failed' })).rejects.toThrow('Network failure');
+
+      expect(consoleSpy).toHaveBeenCalledWith('MigrationRecordService.updateMigrationRecord error:', 'Network failure');
+
+      consoleSpy.mockRestore();
+    });
   });
 
   describe('submitMigrationRecords', () => {
