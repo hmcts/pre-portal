@@ -88,7 +88,7 @@ export class MigrationRecordService {
       ...auditPayload,
       audit_details: {
         ...auditPayload.audit_details,
-        description: `${auditPayload.audit_details?.description} by ${this.userEmail}` || `Audit by ${this.userEmail}`,
+        description: `${auditPayload.audit_details?.description} by ${this.userEmail}`,
       },
     };
 
