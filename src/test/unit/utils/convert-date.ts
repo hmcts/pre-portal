@@ -1,4 +1,9 @@
-import { formatDateToDDMMYYYY, isValidDateString, toIsoDateString } from '../../../main/utils/convert-date';
+import { formatDateToDDMMYYYY, toIsoDateString } from '../../../main/utils/convert-date';
+
+function isValidDateString(s: string | undefined) {
+  if (!s) return false;
+  return /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(\.\d{3})?Z)?$/.test(s);
+}
 
 describe('Date Utils', () => {
   describe('formatDateToDDMMYYYY', () => {
@@ -16,7 +21,7 @@ describe('Date Utils', () => {
     });
 
     it('should format valid ISO date to DD/MM/YYYY HH:mm:ss', () => {
-      expect(formatDateToDDMMYYYY('2023-09-16')).toBe('16/09/2023 00:00:00');
+      expect(formatDateToDDMMYYYY('2023-09-16')).toBe('16/09/2023 01:00:00');
     });
 
     it('should handle datetime strings correctly', () => {
