@@ -60,6 +60,7 @@ export default function (app: Application): void {
       isSuperUser: true,
       edits,
       paginationLinks,
+      pageUrl: req.url,
     });
   });
 
