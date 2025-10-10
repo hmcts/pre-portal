@@ -319,7 +319,7 @@
                         {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
                       >
                 </td>
-                <td class="govuk-table__cell" tabindex="0" title="Valid date DD/MM/YYYY">
+                <td class="govuk-table__cell" tabindex="0" title="Valid date DD/MM/YYYY HH:MM:SS">
                   <input
                     type="text"
                     name="createDate"
@@ -571,32 +571,32 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     window.validateRecordingDate = function(input) {
-      const value = input.value.trim();
-      if (!value) return;
-
-      const dateTimeRegex = /^(\d{2})\/(\d{2})\/(\d{4})(?:\s+(\d{2}):(\d{2})(?::(\d{2}))?)?$/;
-      const match = value.match(dateTimeRegex);
 
       let isDateValid = false;
+      const value = input.value.trim();
+      if (value) {
+        const dateTimeRegex = /^(\d{2})\/(\d{2})\/(\d{4})(?:\s+(\d{2}):(\d{2})(?::(\d{2}))?)?$/;
+        const match = value.match(dateTimeRegex);
 
-      if (match) {
-        const [, dayStr, monthStr, yearStr, hourStr, minuteStr, secondStr] = match;
-        const day = parseInt(dayStr, 10);
-        const month = parseInt(monthStr, 10) - 1;
-        const year = parseInt(yearStr, 10);
-        const hours = parseInt(hourStr || '0', 10);
-        const minutes = parseInt(minuteStr || '0', 10);
-        const seconds = parseInt(secondStr || '0', 10);
+        if (match) {
+          const [, dayStr, monthStr, yearStr, hourStr, minuteStr, secondStr] = match;
+          const day = parseInt(dayStr, 10);
+          const month = parseInt(monthStr, 10) - 1;
+          const year = parseInt(yearStr, 10);
+          const hours = parseInt(hourStr || '0', 10);
+          const minutes = parseInt(minuteStr || '0', 10);
+          const seconds = parseInt(secondStr || '0', 10);
 
-        const date = new Date(year, month, day, hours, minutes, seconds);
+          const date = new Date(year, month, day, hours, minutes, seconds);
 
-        isDateValid =
-          date.getFullYear() === year &&
-          date.getMonth() === month &&
-          date.getDate() === day &&
-          date.getHours() === hours &&
-          date.getMinutes() === minutes &&
-          date.getSeconds() === seconds;
+          isDateValid =
+            date.getFullYear() === year &&
+            date.getMonth() === month &&
+            date.getDate() === day &&
+            date.getHours() === hours &&
+            date.getMinutes() === minutes &&
+            date.getSeconds() === seconds;
+        }
       }
 
       if (!isDateValid) {
@@ -767,6 +767,7 @@ document.querySelectorAll('.mark-ready-button').forEach(function(button) {
           recordingDate = date.toISOString()
         } else {
           console.warn(`Invalid datetime format: "${dateInput}"`);
+          return null;
         }
       }
       const normalize = value => (value?.trim() === "" ? null : value.trim());
@@ -786,6 +787,10 @@ document.querySelectorAll('.mark-ready-button').forEach(function(button) {
     }
 
     const updated = mapDto(row);
+    if (updated === null) {
+      console.log('Failed to map row data. Aborting update.');
+      return;
+    }
     const original = JSON.parse(row.dataset.originalState || '{}');
 
     const changedFields = {};
@@ -797,6 +802,7 @@ document.querySelectorAll('.mark-ready-button').forEach(function(button) {
 
     if (Object.keys(changedFields).length === 0) {
       console.log(`No changes detected for record ${recordId}`);
+      statusCell.textContent = 'READY';
       return;
     }
 
