@@ -12,7 +12,7 @@ export function formatDateToDDMMYYYY(dateString?: string): string {
     minute: '2-digit',
     second: '2-digit',
     hour12: false,
-    timeZone: 'Europe/London'
+    timeZone: 'Europe/London',
   });
 
   return dateFormatter.format(date).replace(',', '');
