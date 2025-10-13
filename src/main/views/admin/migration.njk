@@ -6,13 +6,13 @@
 
 {% block mainContent %}
 
-<div class="gem-c-title govuk-!-margin-top-0 govuk-!-margin-bottom-8">
-  <h1 class="gem-c-title__text govuk-heading-xl">
-    Migration resolutions
-  </h1>
+  <div class="gem-c-title govuk-!-margin-top-0 govuk-!-margin-bottom-8">
+    <h1 class="gem-c-title__text govuk-heading-xl">
+      Migration resolutions
+    </h1>
 
-  <div style="text-align: right;">
-    <p class="govuk-body govuk-!-margin-bottom-1">Submit all entries marked as ready</p>
+    <div style="text-align: right;">
+      <p class="govuk-body govuk-!-margin-bottom-1">Submit all entries marked as ready</p>
       <button
         id="submitMigrationBtn"
         class="govuk-button govuk-button"
@@ -24,26 +24,26 @@
           Submit Amendments
         {% endif %}
       </button>
-  </div>
-</div>
-
-<div class="sticky-header-container">
-  <form method="GET" action="" class="govuk-grid-row govuk-!-margin-bottom-6">
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-quarter">
-        <div class="govuk-form-group">
-          <label class="govuk-label" for="case-reference">Case Reference</label>
-          <input
-            class="govuk-input"
-            id="case-reference"
-            name="case-reference"
-            type="text"
-            value="{{ filters.caseReference }}"
-            placeholder="Enter Case Reference">
-      </div>
     </div>
+  </div>
 
-    <div class="govuk-grid-column-one-quarter">
+  <div class="sticky-header-container">
+    <form method="GET" action="" class="govuk-grid-row govuk-!-margin-bottom-6">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-quarter">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="case-reference">Case Reference</label>
+            <input
+              class="govuk-input"
+              id="case-reference"
+              name="case-reference"
+              type="text"
+              value="{{ filters.caseReference }}"
+              placeholder="Enter Case Reference">
+          </div>
+        </div>
+
+        <div class="govuk-grid-column-one-quarter">
           <div class="govuk-form-group">
             <label class="govuk-label" for="defendant">Defendant</label>
             <input
@@ -54,283 +54,315 @@
               value="{{ filters.defendant }}"
               placeholder="Enter defendant">
           </div>
-    </div>
+        </div>
 
-    <div class="govuk-grid-column-one-quarter">
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="witness">Witness</label>
-        <input
-          class="govuk-input"
-          id="witness"
-          name="witness"
-          type="text"
-          value="{{ filters.witness }}"
-          placeholder="Enter witness"
-        >
-      </div>
-    </div>
+        <div class="govuk-grid-column-one-quarter">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="witness">Witness</label>
+            <input
+              class="govuk-input"
+              id="witness"
+              name="witness"
+              type="text"
+              value="{{ filters.witness }}"
+              placeholder="Enter witness"
+            >
+          </div>
+        </div>
 
-      <div class="govuk-grid-column-one-quarter">
-             <div class="govuk-form-group">
-               <label class="govuk-label" for="court">Court</label>
-               <input
-                 class="govuk-input"
-                 id="court"
-                 name="court"
-                 type="text"
-                 value="{{ filters.court }}"
-                 placeholder="Enter court">
-             </div>
-       </div>
+        <div class="govuk-grid-column-one-quarter">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="court">Court</label>
+            <input
+              class="govuk-input"
+              id="court"
+              name="court"
+              type="text"
+              value="{{ filters.court }}"
+              placeholder="Enter court">
+          </div>
+        </div>
 
-    <div class="govuk-grid-column-one-quarter">
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="status">Status</label>
-        <select
-          class="govuk-select"
-          id="status"
-          name="resource_state"
-          style="width: 100%;"
-        >
-         <option value="" {% if request.query.resource_state == ''%}selected{% endif %}>All</option>
-           <option value="Unresolved"
-              {% if request.query.resource_state == 'Unresolved'
-                    or request.query.resource_state is not defined %}selected{% endif %}>
-              Unresolved
-            </option>
-          <option value="ready" {% if request.query.resource_state == 'ready' %}selected{% endif %}>Ready</option>
-          <option value="submitted" {% if request.query.resource_state == 'submitted' %}selected{% endif %}>Submitted</option>
-          <option value="success" {% if request.query.resource_state == 'success' %}selected{% endif %}>Success</option>
-        </select>
-      </div>
-    </div>
-{% set selectedReasons = request.query.reasonIn %}
-{% if selectedReasons %}
-  {% if selectedReasons is string %}
-    {% set selectedReasons = [selectedReasons] %}
-  {% endif %}
-{% else %}
-  {% set selectedReasons = [] %}
-{% endif %}
-  <div class="govuk-grid-column-one-quarter">
-    <div class="govuk-form-group">
-      <label class="govuk-label" for="failure-reason-dropdown">Failure reason</label>
-      <div class="dropdown-multiselect">
-        <button type="button" class="govuk-button govuk-button--secondary" id="failure-reason-dropdown">
-          Select Failure Reasons
-        </button>
-        <div class="dropdown-options">
-          <button type="button" class="govuk-link clear-selection">Clear all</button>
-          {% set reasons = [
-            { value: "Incomplete_Data", label: "Incomplete Data" },
-            { value: "Invalid_Format", label: "Invalid Format" },
-            { value: "Not_Most_Recent", label: "Not Most Recent" },
-            { value: "Raw_Files", label: "Raw Files" },
-            { value: "Pre_Go_Live", label: "Pre Go Live" },
-            { value: "Pre_Existing", label: "Pre Existing" },
-            { value: "Validation_Failed", label: "Validation Failed" },
-            { value: "Alternative_Available", label: "Alternative Available" },
-            { value: "General_Error", label: "General Error" },
-            { value: "Case_Closed", label: "Case Closed" },
-            { value: "Test", label: "Test" }
-          ] %}
+        <div class="govuk-grid-column-one-quarter">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="status">Status</label>
+            <select
+              class="govuk-select"
+              id="status"
+              name="resource_state"
+              style="width: 100%;"
+            >
+              <option value="" {% if request.query.resource_state == '' %}selected{% endif %}>All</option>
+              <option value="Unresolved"
+                      {% if request.query.resource_state == 'Unresolved'
+                        or request.query.resource_state is not defined %}selected{% endif %}>
+                Unresolved
+              </option>
+              <option value="ready" {% if request.query.resource_state == 'ready' %}selected{% endif %}>Ready</option>
+              <option value="submitted" {% if request.query.resource_state == 'submitted' %}selected{% endif %}>
+                Submitted
+              </option>
+              <option value="success" {% if request.query.resource_state == 'success' %}selected{% endif %}>Success
+              </option>
+            </select>
+          </div>
+        </div>
+        {% set selectedReasons = request.query.reasonIn %}
+        {% if selectedReasons %}
+          {% if selectedReasons is string %}
+            {% set selectedReasons = [selectedReasons] %}
+          {% endif %}
+        {% else %}
+          {% set selectedReasons = [] %}
+        {% endif %}
+        <div class="govuk-grid-column-one-quarter">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="failure-reason-dropdown">Failure reason</label>
+            <div class="dropdown-multiselect">
+              <button type="button" class="govuk-button govuk-button--secondary" id="failure-reason-dropdown">
+                Select Failure Reasons
+              </button>
+              <div class="dropdown-options">
+                <button type="button" class="govuk-link clear-selection">Clear all</button>
+                {% set reasons = [
+                  { value: "Incomplete_Data", label: "Incomplete Data" },
+                  { value: "Invalid_Format", label: "Invalid Format" },
+                  { value: "Not_Most_Recent", label: "Not Most Recent" },
+                  { value: "Raw_Files", label: "Raw Files" },
+                  { value: "Pre_Go_Live", label: "Pre Go Live" },
+                  { value: "Pre_Existing", label: "Pre Existing" },
+                  { value: "Validation_Failed", label: "Validation Failed" },
+                  { value: "Alternative_Available", label: "Alternative Available" },
+                  { value: "General_Error", label: "General Error" },
+                  { value: "Case_Closed", label: "Case Closed" },
+                  { value: "Test", label: "Test" }
+                ] %}
 
-          {% for reason in reasons %}
-            <label class="dropdown-option">
-              <input type="checkbox" name="reasonIn" value="{{ reason.value }}"
-               {% if reason.value in selectedReasons %}checked{% endif %} >
-              {{ reason.label }}
-            </label>
-          {% endfor %}
+                {% for reason in reasons %}
+                  <label class="dropdown-option">
+                    <input type="checkbox" name="reasonIn" value="{{ reason.value }}"
+                           {% if reason.value in selectedReasons %}checked{% endif %} >
+                    {{ reason.label }}
+                  </label>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="govuk-grid-column-one-quarter">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="start-date">Start date</label>
+            <input
+              class="govuk-input"
+              id="start-date"
+              name="start-date" type="text"
+              placeholder="DD/MM/YYYY"
+              value="{{ filters.startDateInput | default('') }}"
+            >
+          </div>
+        </div>
+
+        <div class="govuk-grid-column-one-quarter">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="end-date">End date</label>
+            <input
+              class="govuk-input"
+              id="end-date"
+              name="end-date"
+              type="text"
+              placeholder="DD/MM/YYYY"
+              value="{{ filters.endDateInput | default('') }}"
+            >
+          </div>
+        </div>
+
+
+        <div class="govuk-grid-column-one-quarter govuk-!-margin-top-6">
+          <button class="govuk-button govuk-button govuk-!-margin-right-3" type="submit" id="searchButton">Apply
+            filter
+          </button>
+          <button class="govuk-button govuk-button" type="reset" id="resetButton">Reset</button>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 
-    <div class="govuk-grid-column-one-quarter">
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="start-date">Start date</label>
-        <input
-          class="govuk-input"
-          id="start-date"
-          name="start-date" type="text"
-          placeholder="DD/MM/YYYY"
-          value="{{ filters.startDateInput | default('') }}"
-        >
-      </div>
-    </div>
-
-    <div class="govuk-grid-column-one-quarter">
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="end-date">End date</label>
-        <input
-          class="govuk-input"
-          id="end-date"
-          name="end-date"
-          type="text"
-          placeholder="DD/MM/YYYY"
-          value="{{ filters.endDateInput | default('') }}"
-        >
-      </div>
-    </div>
-
-
-    <div class="govuk-grid-column-one-quarter govuk-!-margin-top-6">
-      <button class="govuk-button govuk-button govuk-!-margin-right-3" type="submit" id="searchButton">Apply filter</button>
-      <button class="govuk-button govuk-button" type="reset" id="resetButton">Reset</button>
-    </div>
-  </div>
-</form>
-</div>
-
- <p class="govuk-body govuk-!-margin-bottom-3" >Total search results: {{recordsCount}}</p>
-    <div class="table-scroll-container" style="width: 100%;  overflow-x: auto; overflow-y: hidden;">
-      <div class="govuk-heading-m" style="position: sticky; top: 0; left: 0; z-index: 5; background: white; padding: 8px 0; margin-bottom: 0;">
+  <p class="govuk-body govuk-!-margin-bottom-3">Total search results: {{ recordsCount }}</p>
+  <div class="table-scroll-container" style="width: 100%;  overflow-x: auto; overflow-y: hidden;">
+    <div class="govuk-heading-m"
+         style="position: sticky; top: 0; left: 0; z-index: 5; background: white; padding: 8px 0; margin-bottom: 0;">
       Migration resolutions
-      </div>
+    </div>
 
-      <table class="govuk-table" id="resizable-table" style="min-width: 1400px;">
-        <thead class="govuk-table__head">
-          <tr class="govuk-table__row">
-           <th scope="col"
-               class="govuk-table__header resizable"
-               style="position: sticky; top: 0; left: 0; background: white; z-index: 4;
+    <table class="govuk-table" id="resizable-table" style="min-width: 1400px;">
+      <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col"
+            class="govuk-table__header resizable"
+            style="position: sticky; top: 0; left: 0; background: white; z-index: 4;
                       border-right: 2px solid #b1b4b6;"
-               tabindex="0">
-             Archive Name
-             <div class="resizer"></div>
-           </th>
+            tabindex="0">
+          Archive Name
+          <div class="resizer"></div>
+        </th>
 
 
-            <th scope="col" class="govuk-table__header  resizable" tabindex="0">Court<div class="resizer"></div></th>
-            <th scope="col" class="govuk-table__header resizable" tabindex="0">URN<div class="resizer"></div></th>
-            <th scope="col" class="govuk-table__header  resizable" tabindex="0">Xhibit Reference<div class="resizer"></div></th>
-            <th scope="col" class="govuk-table__header resizable"  tabindex="0">Defendant last name<div class="resizer"></div></th>
-            <th scope="col" class="govuk-table__header resizable" tabindex="0">Witness first name<div class="resizer"></div></th>
-            <th scope="col" class="govuk-table__header resizable" tabindex="0">Recording date<div class="resizer"></div></th>
-            <th scope="col" class="govuk-table__header  resizable"  tabindex="0">Recording version<div class="resizer"></div></th>
-            <th scope="col" class="govuk-table__header  resizable"  tabindex="0">Version number<div class="resizer"></div></th>
-            <th scope="col" class="govuk-table__header  resizable"  tabindex="0">Duration<div class="resizer"></div></th>
-            <th scope="col" class="govuk-table__header  resizable" tabindex="0">Status<div class="resizer"></div></th>
-            <th scope="col" class="govuk-table__header  resizable"   tabindex="0">Error message<div class="resizer"></div></th>
-            <th scope="col" class="govuk-table__header  resizable" tabindex="0">Action<div class="resizer"></div></th>
-          </tr>
-        </thead>
-        {% if migrationRecords.length == 0 %}
-           <tbody
-              class="govuk-table__body"
-              data-testid="no-data-message">
-              <td>No migration errors found.</td>
-            </tbody>
-        {% else %}
-          <tbody class="govuk-table__body" id="resizable-body">
-            {% for migrationRecord in migrationRecords %}
+        <th scope="col" class="govuk-table__header  resizable" tabindex="0">Court
+          <div class="resizer"></div>
+        </th>
+        <th scope="col" class="govuk-table__header resizable" tabindex="0">URN
+          <div class="resizer"></div>
+        </th>
+        <th scope="col" class="govuk-table__header  resizable" tabindex="0">Xhibit Reference
+          <div class="resizer"></div>
+        </th>
+        <th scope="col" class="govuk-table__header resizable" tabindex="0">Defendant last name
+          <div class="resizer"></div>
+        </th>
+        <th scope="col" class="govuk-table__header resizable" tabindex="0">Witness first name
+          <div class="resizer"></div>
+        </th>
+        <th scope="col" class="govuk-table__header resizable" tabindex="0">Recording date
+          <div class="resizer"></div>
+        </th>
+        <th scope="col" class="govuk-table__header  resizable" tabindex="0">Recording version
+          <div class="resizer"></div>
+        </th>
+        <th scope="col" class="govuk-table__header  resizable" tabindex="0">Version number
+          <div class="resizer"></div>
+        </th>
+        <th scope="col" class="govuk-table__header  resizable" tabindex="0">Duration
+          <div class="resizer"></div>
+        </th>
+        <th scope="col" class="govuk-table__header  resizable" tabindex="0">Status
+          <div class="resizer"></div>
+        </th>
+        <th scope="col" class="govuk-table__header  resizable" tabindex="0">Error message
+          <div class="resizer"></div>
+        </th>
+        <th scope="col" class="govuk-table__header  resizable" tabindex="0">Action
+          <div class="resizer"></div>
+        </th>
+      </tr>
+      </thead>
+      {% if migrationRecords.length == 0 %}
+        <tbody
+          class="govuk-table__body"
+          data-testid="no-data-message">
+        <td>No migration errors found.</td>
+        </tbody>
+      {% else %}
+        <tbody class="govuk-table__body" id="resizable-body">
+        {% for migrationRecord in migrationRecords %}
 
-              <tr class="govuk-table__row"  data-record-id="{{ migrationRecord.recordId }}">
+          <tr class="govuk-table__row" data-record-id="{{ migrationRecord.recordId }}">
 
-                <td class="govuk-table__cell sticky-col archive-id-cell" tabindex="0" name="archiveId" contenteditable="false" style="left: 0; z-index: 1; border-right: 2px solid #b1b4b6; background: #fff;">{{migrationRecord.archiveName}}</td>
+            <td class="govuk-table__cell sticky-col archive-id-cell" tabindex="0" name="archiveId"
+                contenteditable="false"
+                style="left: 0; z-index: 1; border-right: 2px solid #b1b4b6; background: #fff;">{{ migrationRecord.archiveName }}</td>
 
-                <td class="govuk-table__cell" tabindex="0">
-                  {% set court_found = false %}
+            <td class="govuk-table__cell" tabindex="0">
+              {% set court_found = false %}
 
-                    {% for court in courts %}
-                      {% if court.name == migrationRecord.court %}
-                        {% set court_found = true %}
-                      {% endif %}
-                    {% endfor %}
-                    {% set invalid_court = migrationRecord.court and not court_found %}
+              {% for court in courts %}
+                {% if court.name == migrationRecord.court %}
+                  {% set court_found = true %}
+                {% endif %}
+              {% endfor %}
+              {% set invalid_court = migrationRecord.court and not court_found %}
 
-                    <select
-                      class="govuk-select court-select"
-                      name="courtField"
-                      aria-label="Select court"
-                      style="width: 100%; box-sizing: border-box; min-width: 0; overflow: visible;
-                      {% if invalid_court %}background-color: #ffcccc !important; border: 2px solid #d4351c;{% endif %}"
-                      {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
-                    >
-                      <option value="" {% if not migrationRecord.court %}selected{% endif %}>Select a court</option>
+              <select
+                class="govuk-select court-select"
+                name="courtField"
+                aria-label="Select court"
+                style="width: 100%; box-sizing: border-box; min-width: 0; overflow: visible;
+                  {% if invalid_court %}background-color: #ffcccc !important; border: 2px solid #d4351c;{% endif %}"
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+              >
+                <option value="" {% if not migrationRecord.court %}selected{% endif %}>Select a court</option>
 
-                      {% for court in courts %}
+                {% for court in courts %}
 
-                        <option value="{{ court.id }}"
+                  <option value="{{ court.id }}"
                           {% if court.name == migrationRecord.court %}selected{% endif %}>
-                          {{ court.name }}
-                        </option>
-                      {% endfor %}
+                    {{ court.name }}
+                  </option>
+                {% endfor %}
 
-                      {% if migrationRecord.court and not court_found %}
-                        <option value="{{ migrationRecord.court }}" data-invalid="true" selected>
-                          {{ migrationRecord.court }} (invalid)
-                        </option>
-                      {% endif %}
-                    </select>
-                  </td>
+                {% if migrationRecord.court and not court_found %}
+                  <option value="{{ migrationRecord.court }}" data-invalid="true" selected>
+                    {{ migrationRecord.court }} (invalid)
+                  </option>
+                {% endif %}
+              </select>
+            </td>
 
 
+            <td class="govuk-table__cell" tabindex="0" title="must be between 9 -13 alphanumeric characters">
+              <input
+                type="text"
+                name="urn"
+                value="{{ migrationRecord.urn }}"
+                class="govuk-input"
+                style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
+                oninput="validateLength(this)"
+                aria-label="must be between 9 -13 alphanumeric characters. Cannot be null if xhibit reference is null"
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+              >
+            </td>
+            <td class="govuk-table__cell " scope="row" tabindex="0"
+                title="must be between 9 -13 alphanumeric characters">
 
-                <td class="govuk-table__cell" tabindex="0" title="must be between 9 -13 alphanumeric characters">
-                 <input
-                      type="text"
-                      name="urn"
-                      value="{{ migrationRecord.urn }}"
-                      class="govuk-input"
-                      style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
-                      oninput="validateLength(this)"
-                      aria-label="must be between 9 -13 alphanumeric characters. Cannot be null if xhibit reference is null"
-                      {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
-                    >
-                </td>
-                <td class="govuk-table__cell "scope="row" tabindex="0" title="must be between 9 -13 alphanumeric characters">
+              <input
+                type="text"
+                name="exhibitReference"
+                value="{{ migrationRecord.exhibitReference }}"
+                class="govuk-input"
+                style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
+                oninput="validateLength(this)"
+                aria-label="must be between 9 -13 alphanumeric characters. Cannot be null if URN is null"
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
 
-                 <input
-                      type="text"
-                      name="exhibitReference"
-                      value="{{ migrationRecord.exhibitReference }}"
-                      class="govuk-input"
-                      style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
-                      oninput="validateLength(this)"
-                      aria-label="must be between 9 -13 alphanumeric characters. Cannot be null if URN is null"
-                      {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+              >
+            </td>
+            <td class="govuk-table__cell" title="no digits, 1 to 25 characters.">
+              <input
+                type="text"
+                name="defendantName"
+                value="{{ migrationRecord.defendantName }}"
+                class="govuk-input"
+                style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
+                oninput="validateNoDigitsMax25(this)"
+                aria-label="Defendant name, no digits, 1 to 25 characters"
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+              >
+            </td>
 
-                    >
-                 </td>
-                  <td class="govuk-table__cell" title="no digits, 1 to 25 characters." >
-                    <input
-                      type="text"
-                      name="defendantName"
-                      value="{{ migrationRecord.defendantName }}"
-                      class="govuk-input"
-                      style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
-                      oninput="validateNoDigitsMax25(this)"
-                      aria-label="Defendant name, no digits, 1 to 25 characters"
-                      {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
-                    >
-                  </td>
-
-                <td class="govuk-table__cell" tabindex="0" title="no digits. 1 to 25 characters.">
-                  <input
-                        type="text"
-                        name="witnessName"
-                        value="{{ migrationRecord.witnessName }}"
-                        class="govuk-input"
-                        style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
-                        oninput="validateNoDigitsMax25(this)"
-                        aria-label="Defendant name, no digits, 1 to 25 characters"
-                        {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
-                      >
-                </td>
-                <td class="govuk-table__cell" tabindex="0" title="Valid date DD/MM/YYYY HH:MM:SS">
-                  <input
-                    type="text"
-                    name="createDate"
-                    value="{{migrationRecord.displayCreateDate}}"
-                    class="govuk-input"
-                    style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
-                    oninput="validateRecordingDate(this)"
-                    aria-label="Defendant name, no digits, 1 to 25 characters"
-                    {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
-                  >
-        </td>
+            <td class="govuk-table__cell" tabindex="0" title="no digits. 1 to 25 characters.">
+              <input
+                type="text"
+                name="witnessName"
+                value="{{ migrationRecord.witnessName }}"
+                class="govuk-input"
+                style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
+                oninput="validateNoDigitsMax25(this)"
+                aria-label="Defendant name, no digits, 1 to 25 characters"
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+              >
+            </td>
+            <td class="govuk-table__cell" tabindex="0" title="Valid date DD/MM/YYYY HH:MM:SS">
+              <input
+                type="text"
+                name="createDate"
+                value="{{ migrationRecord.displayCreateDate }}"
+                class="govuk-input"
+                style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
+                oninput="validateRecordingDate(this)"
+                aria-label="Defendant name, no digits, 1 to 25 characters"
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+              >
+            </td>
             <td class="govuk-table__cell" tabindex="0">
               <select class="govuk-select"
                       name="recordingVersion"
@@ -340,596 +372,608 @@
                       {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
               >
                 <option value="" {% if migrationRecord.recordingVersion == '' %}selected{% endif %}></option>
-                <option value="ORIG" {% if migrationRecord.recordingVersion == 'ORIG' %}selected{% endif %}>ORIG</option>
-                <option value="COPY" {% if migrationRecord.recordingVersion == 'COPY' %}selected{% endif %}>COPY</option>
+                <option value="ORIG" {% if migrationRecord.recordingVersion == 'ORIG' %}selected{% endif %}>ORIG
+                </option>
+                <option value="COPY" {% if migrationRecord.recordingVersion == 'COPY' %}selected{% endif %}>COPY
+                </option>
               </select>
             </td>
 
-                <td class="govuk-table__cell version-number-cell" tabindex="0" >
+            <td class="govuk-table__cell version-number-cell" tabindex="0">
 
 
-                 <input
-                      type="text"
-                      name="recordingVersionNumber"
-                      value="{{ migrationRecord.recordingVersionNumber }}"
-                      class="govuk-input"
-                      style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
-                      oninput="validateIsNumber(this)"
-                      aria-label="must be a number"
-                      {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
-                 >
-                </td>
+              <input
+                type="text"
+                name="recordingVersionNumber"
+                value="{{ migrationRecord.recordingVersionNumber }}"
+                class="govuk-input"
+                style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
+                oninput="validateIsNumber(this)"
+                aria-label="must be a number"
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+              >
+            </td>
 
-                <td class="govuk-table__cell duration-cell" tabindex="0" contenteditable="false">{{ migrationRecord.displayDuration }}</td>
+            <td class="govuk-table__cell duration-cell" tabindex="0"
+                contenteditable="false">{{ migrationRecord.displayDuration }}</td>
 
-                <td class="govuk-table__cell status-cell" tabindex="0" contenteditable="false">
-                  {% if migrationRecord.status == 'FAILED' %}
-                     UNRESOLVED
-                  {% else %}
-                     {{ migrationRecord.status }}
-                  {% endif %}</td>
-                <td class="govuk-table__cell error-message-cell" tabindex="0" contenteditable="false">
-                <div class="cell-content">
-                  {{migrationRecord.reason}}
-                </div>
-                <div class="icon">🔍</div>
-                </td>
-                <td class="govuk-table__cell button-cell" tabindex="0" style="padding: 0.5rem 1rem; min-width: 220px;">
-                <div class="button-wrapper">
-                  <button class="govuk-button govuk-button mark-ready-button govuk-!-margin-bottom-1 govuk-!-margin-top-1" type="button"
-                  data-status="{{ migrationRecord.status }}"
-                  {% if migrationRecord.status in ['SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
-                  >
+            <td class="govuk-table__cell status-cell" tabindex="0" contenteditable="false">
+              {% if migrationRecord.status == 'FAILED' %}
+                UNRESOLVED
+              {% else %}
+                {{ migrationRecord.status }}
+              {% endif %}</td>
+            <td class="govuk-table__cell error-message-cell" tabindex="0" contenteditable="false">
+              <div class="cell-content">
+                {{ migrationRecord.reason }}
+              </div>
+              <div class="icon">🔍</div>
+            </td>
+            <td class="govuk-table__cell button-cell" tabindex="0" style="padding: 0.5rem 1rem; min-width: 220px;">
+              <div class="button-wrapper">
+                <button class="govuk-button govuk-button mark-ready-button govuk-!-margin-bottom-1 govuk-!-margin-top-1"
+                        type="button"
+                        data-status="{{ migrationRecord.status }}"
+                        {% if migrationRecord.status in ['SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                >
                   {% if migrationRecord.status == 'READY' %}
-                       Edit
-                     {% else %}
-                       Mark as Ready
-                     {% endif %}
-                 </button>
-                  <div>
-                </td>
-              </tr>
-            {% endfor %}
+                    Edit
+                  {% else %}
+                    Mark as Ready
+                  {% endif %}
+                </button>
+                <div>
+            </td>
+          </tr>
+        {% endfor %}
 
-                <tr id="no-data-message" style="display: none; border-bottom: none;">
-                   <td colspan="4" class="govuk-table__cell" style="border-bottom: none;">No migration records found matching search parameters</td>
-                 </tr>
-          </tbody>
-        {% endif %}
-      </table>
-</div>
-                <div style="display: flex; justify-content: center;">
-                  {% if paginationLinks.items.length > 1 %}
-                        <div style="display: flex; justify-content: center;">
-                          {{ govukPagination(paginationLinks) }}
-                        </div>
-                      {% endif %}
-                </div>
+        <tr id="no-data-message" style="display: none; border-bottom: none;">
+          <td colspan="4" class="govuk-table__cell" style="border-bottom: none;">No migration records found matching
+            search parameters
+          </td>
+        </tr>
+        </tbody>
+      {% endif %}
+    </table>
+  </div>
+  <div style="display: flex; justify-content: center;">
+    {% if paginationLinks.items.length > 1 %}
+      <div style="display: flex; justify-content: center;">
+        {{ govukPagination(paginationLinks) }}
+      </div>
+    {% endif %}
+  </div>
 
 
 
-    <div class="govuk-modal" id="errorModal" style="display: none; position: fixed; top: 20%; left: 50%; transform: translateX(-50%);
+  <div class="govuk-modal" id="errorModal" style="display: none; position: fixed; top: 20%; left: 50%; transform: translateX(-50%);
       background: white; border: 1px solid #ccc; padding: 1.5rem; z-index: 9999; width: 400px;">
-      <h2 class="govuk-heading-m">Error message</h2>
-      <p class="govuk-body" style="margin-bottom: 1rem;">{{migrationRecord.archiveName}}</p>
-      <br>
-      <p id="errorModalText" class="govuk-body" style="white-space: pre-wrap;">{{migrationRecord.reason}}</p>
-      <button class="govuk-button" id="closeModal">Close</button>
-    </div>
-    <div id="modalOverlay" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 9998;"></div>
+    <h2 class="govuk-heading-m">Error message</h2>
+    <p class="govuk-body" style="margin-bottom: 1rem;">{{ migrationRecord.archiveName }}</p>
+    <br>
+    <p id="errorModalText" class="govuk-body" style="white-space: pre-wrap;">{{ migrationRecord.reason }}</p>
+    <button class="govuk-button" id="closeModal">Close</button>
+  </div>
+  <div id="modalOverlay"
+       style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 9998;"></div>
 
-<script>
+  <script>
 
-  const migrationData = {{ migrationRecords | dump | safe }};
+    const migrationData = {{ migrationRecords | dump | safe }};
 
-</script>
-<script>
+  </script>
+  <script>
 
-document.addEventListener('DOMContentLoaded', function() {
-    const table = document.getElementById("resizable-table");
-    if (table) {
-        const headerCells = table.querySelectorAll("thead th");
+    document.addEventListener('DOMContentLoaded', function() {
+      const table = document.getElementById('resizable-table');
+      if (table) {
+        const headerCells = table.querySelectorAll('thead th');
 
         if (headerCells.length > 0) {
-            const tableWidth = table.offsetWidth;
-            const equalWidth = Math.floor(tableWidth / headerCells.length);
+          const tableWidth = table.offsetWidth;
+          const equalWidth = Math.floor(tableWidth / headerCells.length);
 
-            headerCells.forEach((th, index) => {
-                th.style.width = equalWidth + "px";
-                table.querySelectorAll(`tbody td:nth-child(${index + 1})`).forEach((td) => {
-                    td.style.width = equalWidth + "px";
-                });
+          headerCells.forEach((th, index) => {
+            th.style.width = equalWidth + 'px';
+            table.querySelectorAll(`tbody td:nth-child(${index + 1})`).forEach((td) => {
+              td.style.width = equalWidth + 'px';
             });
+          });
         }
 
 
-        const resizers = document.querySelectorAll(".resizer");
+        const resizers = document.querySelectorAll('.resizer');
         resizers.forEach((resizer) => {
-            let startX, startWidth, column;
+          let startX, startWidth, column;
 
-            resizer.addEventListener("mousedown", function(e) {
-                column = resizer.parentElement;
-                startX = e.pageX;
-                startWidth = column.offsetWidth;
+          resizer.addEventListener('mousedown', function(e) {
+            column = resizer.parentElement;
+            startX = e.pageX;
+            startWidth = column.offsetWidth;
 
-                document.addEventListener("mousemove", resizeColumn);
-                document.addEventListener("mouseup", stopResizing);
-            });
-
-            function resizeColumn(e) {
-                const newWidth = Math.max(50, startWidth + (e.pageX - startX));
-                column.style.width = newWidth + "px";
-                const columnIndex = Array.from(column.parentElement.children).indexOf(column);
-
-                document.querySelectorAll(`#resizable-table tr td:nth-child(${columnIndex + 1})`).forEach(td => {
-                    td.style.width = newWidth + "px";
-                });
-            }
-
-            function stopResizing() {
-                document.removeEventListener("mousemove", resizeColumn);
-                document.removeEventListener("mouseup", stopResizing);
-            }
-        });
-    }
-    const submitRecordsButton = document.getElementById('submitMigrationBtn');
-
-    if (submitRecordsButton) {
-      submitRecordsButton.addEventListener('click', async (event) => {
-        event.preventDefault();
-        submitRecordsButton.disabled = true;
-        submitRecordsButton.textContent = 'Submitting...';
-
-        try {
-          const res = await fetch('/admin/migration/submit', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify({})
+            document.addEventListener('mousemove', resizeColumn);
+            document.addEventListener('mouseup', stopResizing);
           });
 
-          console.log("Response status:", res.status);
+          function resizeColumn(e) {
+            const newWidth = Math.max(50, startWidth + (e.pageX - startX));
+            column.style.width = newWidth + 'px';
+            const columnIndex = Array.from(column.parentElement.children).indexOf(column);
 
-          if (res.ok) {
-            submitRecordsButton.textContent = 'Submitted';
-            submitRecordsButton.classList.add('govuk-button--disabled');
-          } else {
-            const errorData = await res.json();
+            document.querySelectorAll(`#resizable-table tr td:nth-child(${columnIndex + 1})`).forEach(td => {
+              td.style.width = newWidth + 'px';
+            });
+          }
+
+          function stopResizing() {
+            document.removeEventListener('mousemove', resizeColumn);
+            document.removeEventListener('mouseup', stopResizing);
+          }
+        });
+      }
+      const submitRecordsButton = document.getElementById('submitMigrationBtn');
+
+      if (submitRecordsButton) {
+        submitRecordsButton.addEventListener('click', async (event) => {
+          event.preventDefault();
+          console.log('Submit button clicked');
+          submitRecordsButton.disabled = true;
+          submitRecordsButton.textContent = 'Submitting...';
+
+          try {
+            const res = await fetch('/admin/migration/submit', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+              },
+              body: JSON.stringify({}),
+            });
+
+            console.log('Response status:', res.status);
+
+            if (res.ok) {
+              submitRecordsButton.textContent = 'Submitted';
+              submitRecordsButton.classList.add('govuk-button--disabled');
+            } else {
+              const errorData = await res.json();
+              submitRecordsButton.disabled = false;
+              submitRecordsButton.textContent = 'Submit Amendments';
+              alert(`Error: ${errorData.error?.message || 'Unknown error'}`);
+            }
+          } catch (err) {
             submitRecordsButton.disabled = false;
             submitRecordsButton.textContent = 'Submit Amendments';
-            alert(`Error: ${errorData.error?.message || 'Unknown error'}`);
+            alert(`Error: ${err.message}`);
           }
-        } catch (err) {
-          submitRecordsButton.disabled = false;
-          submitRecordsButton.textContent = 'Submit Amendments';
-          alert(`Error: ${err.message}`);
-        }
-      });
-    }
+        });
+      }
 
-  const statusSelect = document.querySelector('select[name="resource_state"]')
-  const reasonCheckboxes = document.querySelectorAll('input[type="checkbox"][name="reasonIn"]');
-  const reasonDropdownButton = document.getElementById('failure-reason-dropdown');
+      const statusSelect = document.querySelector('select[name="resource_state"]');
+      const reasonCheckboxes = document.querySelectorAll('input[type="checkbox"][name="reasonIn"]');
+      const reasonDropdownButton = document.getElementById('failure-reason-dropdown');
 
 
- if (statusSelect && reasonCheckboxes.length > 0) {
-   const toggleReasonFilter = () => {
-    if (statusSelect.value !== 'Unresolved' && statusSelect.value !== "") {
-      reasonCheckboxes.forEach(cb => {
-        cb.checked = false;
-        cb.disabled = true;
-        cb.setAttribute('aria-disabled', 'true');
-      });
-       reasonDropdownButton.disabled = true;
-       reasonDropdownButton.setAttribute('aria-disabled', 'true');
-    } else {
-      reasonCheckboxes.forEach(cb => {
-        cb.disabled = false;
-        cb.removeAttribute('aria-disabled');
-      });
-       reasonDropdownButton.disabled = false;
-       reasonDropdownButton.removeAttribute('aria-disabled');
-    }
-  };
+      if (statusSelect && reasonCheckboxes.length > 0) {
+        const toggleReasonFilter = () => {
+          if (statusSelect.value !== 'Unresolved' && statusSelect.value !== '') {
+            reasonCheckboxes.forEach(cb => {
+              cb.checked = false;
+              cb.disabled = true;
+              cb.setAttribute('aria-disabled', 'true');
+            });
+            reasonDropdownButton.disabled = true;
+            reasonDropdownButton.setAttribute('aria-disabled', 'true');
+          } else {
+            reasonCheckboxes.forEach(cb => {
+              cb.disabled = false;
+              cb.removeAttribute('aria-disabled');
+            });
+            reasonDropdownButton.disabled = false;
+            reasonDropdownButton.removeAttribute('aria-disabled');
+          }
+        };
 
-  toggleReasonFilter();
-  statusSelect.addEventListener('change', toggleReasonFilter);
-}
+        toggleReasonFilter();
+        statusSelect.addEventListener('change', toggleReasonFilter);
+      }
 
-    window.validateLength = function(input) {
+      window.validateLength = function(input) {
         const minLength = 9;
         const maxLength = 13;
         const value = input.value.trim();
         if (value.length < minLength || value.length > maxLength) {
-            input.style.backgroundColor = "#ffcccc";
-            input.classList.add("govuk-input--error");
-            input.title = "Must be between 9 and 13 characters.";
+          input.style.backgroundColor = '#ffcccc';
+          input.classList.add('govuk-input--error');
+          input.title = 'Must be between 9 and 13 characters.';
         } else {
-            input.style.backgroundColor = "";
-            input.classList.remove("govuk-input--error");
-            input.title = "";
+          input.style.backgroundColor = '';
+          input.classList.remove('govuk-input--error');
+          input.title = '';
         }
         checkRowForInvalidCells(input.closest('tr'));
-    }
-    window.validateNoDigitsMax25 = function(input) {
+      };
+      window.validateNoDigitsMax25 = function(input) {
         const value = input.value.trim();
         const hasDigits = /\d/.test(value);
         const isTooLong = value.length < 1 || value.length > 25;
 
         if (hasDigits || isTooLong) {
-            input.style.backgroundColor = "#ffcccc";
-            input.classList.add("govuk-input--error");
-            input.title = "Must be between 1 and 25 characters";
+          input.style.backgroundColor = '#ffcccc';
+          input.classList.add('govuk-input--error');
+          input.title = 'Must be between 1 and 25 characters';
         } else {
-            input.style.backgroundColor = "";
-            input.classList.remove("govuk-input--error");
-            input.title = "";
+          input.style.backgroundColor = '';
+          input.classList.remove('govuk-input--error');
+          input.title = '';
         }
         checkRowForInvalidCells(input.closest('tr'));
-    };
+      };
 
-    window.validateRecordingDate = function(input) {
+      window.validateRecordingDate = function(input) {
 
-      let isDateValid = false;
-      const value = input.value.trim();
-      if (value) {
-        const dateTimeRegex = /^(\d{2})\/(\d{2})\/(\d{4})(?:\s+(\d{2}):(\d{2})(?::(\d{2}))?)?$/;
-        const match = value.match(dateTimeRegex);
+        let isDateValid = false;
+        const value = input.value.trim();
+        if (value) {
+          const dateTimeRegex = /^(\d{2})\/(\d{2})\/(\d{4})(?:\s+(\d{2}):(\d{2})(?::(\d{2}))?)?$/;
+          const match = value.match(dateTimeRegex);
 
-        if (match) {
-          const [, dayStr, monthStr, yearStr, hourStr, minuteStr, secondStr] = match;
-          const day = parseInt(dayStr, 10);
-          const month = parseInt(monthStr, 10) - 1;
-          const year = parseInt(yearStr, 10);
-          const hours = parseInt(hourStr || '0', 10);
-          const minutes = parseInt(minuteStr || '0', 10);
-          const seconds = parseInt(secondStr || '0', 10);
+          if (match) {
+            const [, dayStr, monthStr, yearStr, hourStr, minuteStr, secondStr] = match;
+            const day = parseInt(dayStr, 10);
+            const month = parseInt(monthStr, 10) - 1;
+            const year = parseInt(yearStr, 10);
+            const hours = parseInt(hourStr || '0', 10);
+            const minutes = parseInt(minuteStr || '0', 10);
+            const seconds = parseInt(secondStr || '0', 10);
 
-          const date = new Date(year, month, day, hours, minutes, seconds);
+            const date = new Date(year, month, day, hours, minutes, seconds);
 
-          isDateValid =
-            date.getFullYear() === year &&
-            date.getMonth() === month &&
-            date.getDate() === day &&
-            date.getHours() === hours &&
-            date.getMinutes() === minutes &&
-            date.getSeconds() === seconds;
+            isDateValid =
+              date.getFullYear() === year &&
+              date.getMonth() === month &&
+              date.getDate() === day &&
+              date.getHours() === hours &&
+              date.getMinutes() === minutes &&
+              date.getSeconds() === seconds;
+          }
         }
-      }
 
-      if (!isDateValid) {
-        input.style.backgroundColor = "#ffcccc";
-        input.classList.add("govuk-input--error");
-        input.title = "Invalid date. Please use DD/MM/YYYY or DD/MM/YYYY HH:MM[:SS]";
-      } else {
-        input.style.backgroundColor = "";
-        input.classList.remove("govuk-input--error");
-        input.title = "";
-      }
-      checkRowForInvalidCells(input.closest('tr'));
-    };
+        if (!isDateValid) {
+          input.style.backgroundColor = '#ffcccc';
+          input.classList.add('govuk-input--error');
+          input.title = 'Invalid date. Please use DD/MM/YYYY or DD/MM/YYYY HH:MM[:SS]';
+        } else {
+          input.style.backgroundColor = '';
+          input.classList.remove('govuk-input--error');
+          input.title = '';
+        }
+        checkRowForInvalidCells(input.closest('tr'));
+      };
 
-    window.validateIsNumber = function(input) {
+      window.validateIsNumber = function(input) {
         const value = input.value.trim();
         const isNumber = /^\d+(\.\d+)?$/.test(value);
 
         if (!isNumber) {
-            input.style.backgroundColor = "#ffcccc";
-            input.classList.add("govuk-input--error");
-            input.title = "Recording version must be a number or decimal";
+          input.style.backgroundColor = '#ffcccc';
+          input.classList.add('govuk-input--error');
+          input.title = 'Recording version must be a number or decimal';
         } else {
-            input.style.backgroundColor = "";
-            input.classList.remove("govuk-input--error");
-            input.title = "";
+          input.style.backgroundColor = '';
+          input.classList.remove('govuk-input--error');
+          input.title = '';
         }
-        checkRowForInvalidCells(input.closest("tr"));
-    };
-   function checkRowForInvalidCells(row) {
-       const button = row.querySelector('.mark-ready-button');
-       const statusCell = row.querySelector('.status-cell');
-       if (!button || !statusCell) return;
+        checkRowForInvalidCells(input.closest('tr'));
+      };
 
-       if (statusCell.textContent.trim().toUpperCase() !== 'UNRESOLVED') {
-           return;
-       }
+      function checkRowForInvalidCells(row) {
+        const button = row.querySelector('.mark-ready-button');
+        const statusCell = row.querySelector('.status-cell');
+        if (!button || !statusCell) return;
 
-       const inputs = row.querySelectorAll('input, select');
-       let hasInvalidCell = false;
+        if (statusCell.textContent.trim().toUpperCase() !== 'UNRESOLVED') {
+          return;
+        }
 
-       inputs.forEach(input => {
-           const bgColor = window.getComputedStyle(input).backgroundColor;
-           if (bgColor === 'rgb(255, 204, 204)') {
-               hasInvalidCell = true;
-           }
-       });
+        const inputs = row.querySelectorAll('input, select');
+        let hasInvalidCell = false;
 
-       button.disabled = hasInvalidCell;
-   }
+        inputs.forEach(input => {
+          const bgColor = window.getComputedStyle(input).backgroundColor;
+          if (bgColor === 'rgb(255, 204, 204)') {
+            hasInvalidCell = true;
+          }
+        });
+
+        button.disabled = hasInvalidCell;
+      }
 
 
-    document.querySelectorAll('select[name="courtField"]').forEach(function(select) {
+      document.querySelectorAll('select[name="courtField"]').forEach(function(select) {
         select.addEventListener('change', function() {
-            validateCourtSelect(select);
+          validateCourtSelect(select);
         });
 
         validateCourtSelect(select);
-    });
+      });
 
-function validateCourtSelect(select) {
-    const selectedOption = select.options[select.selectedIndex];
-    if (select.value === '' || selectedOption.dataset.invalid === 'true') {
-        select.style.backgroundColor = '#ffcccc';
-        select.style.border = '2px solid #d4351c';
-        select.title = 'Please select a valid court';
-    } else {
-        select.style.backgroundColor = '';
-        select.style.border = '';
-        select.title = '';
-    }
-    checkRowForInvalidCells(select.closest("tr"));
-}
-document.querySelectorAll('select[name="recordingVersion"]').forEach(function(select) {
-    select.addEventListener('change', function() {
-        if (select.value.trim() !== '') {
+      function validateCourtSelect(select) {
+        const selectedOption = select.options[select.selectedIndex];
+        if (select.value === '' || selectedOption.dataset.invalid === 'true') {
+          select.style.backgroundColor = '#ffcccc';
+          select.style.border = '2px solid #d4351c';
+          select.title = 'Please select a valid court';
+        } else {
+          select.style.backgroundColor = '';
+          select.style.border = '';
+          select.title = '';
+        }
+        checkRowForInvalidCells(select.closest('tr'));
+      }
+
+      document.querySelectorAll('select[name="recordingVersion"]').forEach(function(select) {
+        select.addEventListener('change', function() {
+          if (select.value.trim() !== '') {
             select.style.backgroundColor = '';
             select.style.border = '';
             select.title = '';
-        } else {
+          } else {
             select.style.backgroundColor = '#ffcccc';
             select.style.border = '2px solid #d4351c';
             select.title = 'Please select a recording version';
-        }
-        checkRowForInvalidCells(select.closest("tr"));
-    });
-});
-document.querySelectorAll('input[name="createDate"]').forEach(input => {
-    window.validateRecordingDate(input);
-});
-
-document.querySelectorAll('input[name="urn"], input[name="exhibitReference"]').forEach(input => {
-    window.validateLength(input);
-});
-
-document.querySelectorAll('input[name="witnessName"], input[name="defendantName"]').forEach(input => {
-    window.validateNoDigitsMax25(input);
-});
-document.querySelectorAll('input[name="recordingVersionNumber"]').forEach(input => {
-    window.validateIsNumber(input);
-});
-
-
-document.querySelectorAll('tr').forEach(row => {
-    row.querySelectorAll('input, select').forEach(input => {
-        input.addEventListener('input', () => checkRowForInvalidCells(row));
-        input.addEventListener('change', () => checkRowForInvalidCells(row));
-    });
-
-    checkRowForInvalidCells(row);
-});
-
-document.querySelectorAll('tr[data-record-id]').forEach(row => {
-    row.dataset.originalState = JSON.stringify(getRowState(row));
-});
-
-function getRowState(row) {
-    return {
-        court_id: row.querySelector('select[name="courtField"]')?.value || '',
-        urn: row.querySelector('input[name="urn"]')?.value?.trim() || '',
-        exhibit_reference: row.querySelector('input[name="exhibitReference"]')?.value?.trim() || '',
-        witness_name: row.querySelector('input[name="witnessName"]')?.value?.trim() || '',
-        defendant_name: row.querySelector('input[name="defendantName"]')?.value?.trim() || '',
-        recording_date: row.querySelector('input[name="createDate"]')?.value?.trim() || '',
-        recording_version: row.querySelector('select[name="recordingVersion"]')?.value || '',
-        recording_version_number: row.querySelector('input[name="recordingVersionNumber"]')?.value || ''
-    };
-}
-
-
-document.querySelectorAll('.mark-ready-button').forEach(function(button) {
-  button.addEventListener('click', async function() {
-    const row = button.closest('tr');
-    if (!row) return;
-
-    const statusCell = row.querySelector('.status-cell');
-    const recordId = row.dataset.recordId;
-    if (!recordId) return;
-
-    if (button.textContent.trim() === 'Edit') {
-      statusCell.textContent = 'UNRESOLVED';
-      button.textContent = 'Mark as Ready';
-      row.querySelectorAll('input, select').forEach(cell => cell.removeAttribute('disabled'));
-      return;
-    }
-
-    function mapDto(row) {
-      const dateInput = row.querySelector('input[name="createDate"]')?.value?.trim();
-
-      let recordingDate = null;
-
-      if (dateInput) {
-        // Match formats: DD/MM/YYYY, DD/MM/YYYY HH:MM, DD/MM/YYYY HH:MM:SS
-        const dateTimeMatch = dateInput.match(/^(\d{2})\/(\d{2})\/(\d{4})(?:\s+(\d{2}):(\d{2})(?::(\d{2}))?)?$/);
-
-        if (dateTimeMatch) {
-          const [, day, month, year, hours, minutes, seconds] = dateTimeMatch;
-
-          // Default to 03:00:00 if no time provided, 00 seconds if not specified
-          const hour = hours || '03';
-          const minute = minutes || '00';
-          const second = seconds || '00';
-
-          // Create a date string and parse it
-          const dateStr = `${year}-${month}-${day}T${hour}:${minute}:${second}`;
-          const date = new Date(dateStr);
-
-          recordingDate = date.toISOString()
-        } else {
-          console.warn(`Invalid datetime format: "${dateInput}"`);
-          return null;
-        }
-      }
-      const normalize = value => (value?.trim() === "" ? null : value.trim());
-
-      return {
-        id: row.dataset.recordId,
-        court_id: row.querySelector('select[name="courtField"]')?.value || '',
-        urn: normalize(row.querySelector('input[name="urn"]')?.value)?.replace(/[^a-z0-9]/gi, '') || null,
-        exhibit_reference: normalize(row.querySelector('input[name="exhibitReference"]')?.value),
-        witness_name: normalize(row.querySelector('input[name="witnessName"]')?.value),
-        defendant_name: normalize(row.querySelector('input[name="defendantName"]')?.value),
-        recording_date: recordingDate,
-        recording_version: row.querySelector('select[name="recordingVersion"]')?.value?.toUpperCase() || null,
-        recording_version_number: row.querySelector('input[name="recordingVersionNumber"]')?.value || null,
-        status: 'READY',
-      };
-    }
-
-    const updated = mapDto(row);
-    if (updated === null) {
-      console.log('Failed to map row data. Aborting update.');
-      return;
-    }
-    const original = JSON.parse(row.dataset.originalState || '{}');
-
-    const changedFields = {};
-    for (const key of Object.keys(updated)) {
-      if (updated[key] !== original[key]) {
-        changedFields[key] = updated[key];
-      }
-    }
-
-    if (Object.keys(changedFields).length === 0) {
-      console.log(`No changes detected for record ${recordId}`);
-      statusCell.textContent = 'READY';
-      return;
-    }
-
-    try {
-      const response = await fetch(`/admin/migration/${recordId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updated),
+          }
+          checkRowForInvalidCells(select.closest('tr'));
+        });
+      });
+      document.querySelectorAll('input[name="createDate"]').forEach(input => {
+        window.validateRecordingDate(input);
       });
 
-      if (!response.ok) throw new Error(`Server responded with ${response.status}`);
-
-      statusCell.textContent = 'READY';
-      button.textContent = 'Edit';
-      row.querySelectorAll('input, select').forEach(cell => cell.setAttribute('disabled', 'true'));
-
-      const auditPayload = {
-        id: crypto.randomUUID(),
-        functional_area: 'Admin Migration',
-        category: 'Migration',
-        activity: 'Update Migration Record',
-        source: 'PORTAL',
-        table_name: 'vf_migration_records',
-        audit_details: {
-          record: JSON.stringify(changedFields),
-          description: `Migration record ${recordId} updated`,
-        },
-      };
-
-      const auditResponse = await fetch(`/admin/migration/${recordId}/audit`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(auditPayload),
+      document.querySelectorAll('input[name="urn"], input[name="exhibitReference"]').forEach(input => {
+        window.validateLength(input);
       });
 
-      if (!auditResponse.ok) {
-        console.error('Audit request failed:', await auditResponse.text());
-        console.log('Audit unsuccessfully from view');
-      } else {
-        console.log('Audit logged successfully from view');
+      document.querySelectorAll('input[name="witnessName"], input[name="defendantName"]').forEach(input => {
+        window.validateNoDigitsMax25(input);
+      });
+      document.querySelectorAll('input[name="recordingVersionNumber"]').forEach(input => {
+        window.validateIsNumber(input);
+      });
+
+
+      document.querySelectorAll('tr').forEach(row => {
+        row.querySelectorAll('input, select').forEach(input => {
+          input.addEventListener('input', () => checkRowForInvalidCells(row));
+          input.addEventListener('change', () => checkRowForInvalidCells(row));
+        });
+
+        checkRowForInvalidCells(row);
+      });
+
+      document.querySelectorAll('tr[data-record-id]').forEach(row => {
+        row.dataset.originalState = JSON.stringify(getRowState(row));
+      });
+
+      function getRowState(row) {
+        return {
+          court_id: row.querySelector('select[name="courtField"]')?.value || '',
+          urn: row.querySelector('input[name="urn"]')?.value?.trim() || '',
+          exhibit_reference: row.querySelector('input[name="exhibitReference"]')?.value?.trim() || '',
+          witness_name: row.querySelector('input[name="witnessName"]')?.value?.trim() || '',
+          defendant_name: row.querySelector('input[name="defendantName"]')?.value?.trim() || '',
+          recording_date: row.querySelector('input[name="createDate"]')?.value?.trim() || '',
+          recording_version: row.querySelector('select[name="recordingVersion"]')?.value || '',
+          recording_version_number: row.querySelector('input[name="recordingVersionNumber"]')?.value || '',
+        };
       }
 
-      row.dataset.originalState = JSON.stringify(updated);
-      console.log(`Record ${recordId} updated successfully`);
 
-    } catch (error) {
-      console.error(`Failed to update record ${recordId}:`, error);
-      alert('Failed to update migration record. Please try again.');
-    }
-  });
-});
+      document.querySelectorAll('.mark-ready-button').forEach(function(button) {
+        button.addEventListener('click', async function() {
+          const row = button.closest('tr');
+          if (!row) return;
 
-   const dropdownButton = document.getElementById("failure-reason-dropdown");
-   const dropdownOptions = document.querySelector(".dropdown-options");
+          const statusCell = row.querySelector('.status-cell');
+          const recordId = row.dataset.recordId;
+          if (!recordId) return;
 
-   dropdownButton.addEventListener("click", () => {
-     dropdownOptions.classList.toggle("open");
-   });
+          if (button.textContent.trim() === 'Edit') {
+            statusCell.textContent = 'UNRESOLVED';
+            button.textContent = 'Mark as Ready';
+            row.querySelectorAll('input, select').forEach(cell => cell.removeAttribute('disabled'));
+            return;
+          }
 
-   document.addEventListener("click", function (event) {
-     if (!dropdownButton.contains(event.target) && !dropdownOptions.contains(event.target)) {
-       dropdownOptions.classList.remove("open");
-     }
-   });
+          function mapDto(row) {
+            const dateInput = row.querySelector('input[name="createDate"]')?.value?.trim();
 
+            let recordingDate = null;
 
-    document.querySelectorAll('.error-message-cell').forEach(cell => {
-        cell.addEventListener('click', () => {
-            const row = cell.closest('tr');
-            const archiveName = row?.querySelector('.archive-id-cell')?.textContent.trim() || '';
-            const error = cell.querySelector('.cell-content')?.textContent.trim() || '';
+            if (dateInput) {
+              // Match formats: DD/MM/YYYY, DD/MM/YYYY HH:MM, DD/MM/YYYY HH:MM:SS
+              const dateTimeMatch = dateInput.match(/^(\d{2})\/(\d{2})\/(\d{4})(?:\s+(\d{2}):(\d{2})(?::(\d{2}))?)?$/);
 
+              if (dateTimeMatch) {
+                const [, day, month, year, hours, minutes, seconds] = dateTimeMatch;
 
-            const errorModalText = document.getElementById('errorModalText');
-            const errorModal = document.getElementById('errorModal');
-            const modalOverlay = document.getElementById('modalOverlay');
+                // Default to 03:00:00 if no time provided, 00 seconds if not specified
+                const hour = hours || '03';
+                const minute = minutes || '00';
+                const second = seconds || '00';
 
-            if (errorModalText && errorModal && modalOverlay) {
-                errorModalText.textContent = `Archive Name: ${archiveName}\n\n${error}`;
-                errorModal.style.display = 'block';
-                modalOverlay.style.display = 'block';
+                // Create a date string and parse it
+                const dateStr = `${year}-${month}-${day}T${hour}:${minute}:${second}`;
+                const date = new Date(dateStr);
+
+                recordingDate = date.toISOString();
+              } else {
+                console.warn(`Invalid datetime format: "${dateInput}"`);
+                return null;
+              }
             }
-        });
-    });
+            const normalize = value => (value?.trim() === '' ? null : value.trim());
 
+            return {
+              id: row.dataset.recordId,
+              court_id: row.querySelector('select[name="courtField"]')?.value || '',
+              urn: normalize(row.querySelector('input[name="urn"]')?.value)?.replace(/[^a-z0-9]/gi, '') || null,
+              exhibit_reference: normalize(row.querySelector('input[name="exhibitReference"]')?.value),
+              witness_name: normalize(row.querySelector('input[name="witnessName"]')?.value),
+              defendant_name: normalize(row.querySelector('input[name="defendantName"]')?.value),
+              recording_date: recordingDate,
+              recording_version: row.querySelector('select[name="recordingVersion"]')?.value?.toUpperCase() || null,
+              recording_version_number: row.querySelector('input[name="recordingVersionNumber"]')?.value || null,
+              status: 'READY',
+            };
+          }
 
-    const closeModalBtn = document.getElementById('closeModal');
-    if (closeModalBtn) {
-        closeModalBtn.addEventListener('click', () => {
-            const errorModal = document.getElementById('errorModal');
-            const modalOverlay = document.getElementById('modalOverlay');
-            if (errorModal && modalOverlay) {
-                errorModal.style.display = 'none';
-                modalOverlay.style.display = 'none';
+          const updated = mapDto(row);
+          if (updated === null) {
+            console.log('Failed to map row data. Aborting update.');
+            return;
+          }
+          const original = JSON.parse(row.dataset.originalState || '{}');
+
+          const changedFields = {};
+          for (const key of Object.keys(updated)) {
+            if (updated[key] !== original[key]) {
+              changedFields[key] = updated[key];
             }
-        });
-    }
+          }
 
-    const clearBtn = document.querySelector(".clear-selection");
-    clearBtn?.addEventListener("click", function () {
-    const checkboxes = document.querySelectorAll(
-      '.dropdown-options input[type="checkbox"]'
-    );
-    checkboxes.forEach(cb => cb.checked = false);
-    });
+          if (Object.keys(changedFields).length === 0) {
+            console.log(`No changes detected for record ${recordId}`);
+            statusCell.textContent = 'READY';
+            return;
+          }
 
-    const resetButton = document.getElementById('resetButton');
-    if (resetButton) {
-        const form = resetButton.closest('form');
-        resetButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            if (!form) return;
-
-            form.querySelectorAll('input, select').forEach(input => {
-                if (input.type === 'checkbox' || input.type === 'radio') {
-                    input.checked = false;
-                } else {
-                    input.value = '';
-                }
+          try {
+            const response = await fetch(`/admin/migration/${recordId}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(updated),
             });
 
-            window.location.href = window.location.pathname;
+            if (!response.ok) throw new Error(`Server responded with ${response.status}`);
+
+            statusCell.textContent = 'READY';
+            button.textContent = 'Edit';
+            row.querySelectorAll('input, select').forEach(cell => cell.setAttribute('disabled', 'true'));
+            submitRecordsButton.disabled = false;
+            submitRecordsButton.textContent = 'Submit Amendments';
+
+            const auditPayload = {
+              id: crypto.randomUUID(),
+              functional_area: 'Admin Migration',
+              category: 'Migration',
+              activity: 'Update Migration Record',
+              source: 'PORTAL',
+              table_name: 'vf_migration_records',
+              audit_details: {
+                record: JSON.stringify(changedFields),
+                description: `Migration record ${recordId} updated`,
+              },
+            };
+
+            const auditResponse = await fetch(`/admin/migration/${recordId}/audit`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(auditPayload),
+            });
+
+            if (!auditResponse.ok) {
+              console.error('Audit request failed:', await auditResponse.text());
+              console.log('Audit unsuccessfully from view');
+            } else {
+              console.log('Audit logged successfully from view');
+            }
+
+            row.dataset.originalState = JSON.stringify(updated);
+            console.log(`Record ${recordId} updated successfully`);
+
+          } catch (error) {
+            console.error(`Failed to update record ${recordId}:`, error);
+            alert('Failed to update migration record. Please try again.');
+          }
         });
-    }
+      });
 
-});
+      const dropdownButton = document.getElementById('failure-reason-dropdown');
+      const dropdownOptions = document.querySelector('.dropdown-options');
 
-</script>
+      dropdownButton.addEventListener('click', () => {
+        dropdownOptions.classList.toggle('open');
+      });
+
+      document.addEventListener('click', function(event) {
+        if (!dropdownButton.contains(event.target) && !dropdownOptions.contains(event.target)) {
+          dropdownOptions.classList.remove('open');
+        }
+      });
+
+
+      document.querySelectorAll('.error-message-cell').forEach(cell => {
+        cell.addEventListener('click', () => {
+          const row = cell.closest('tr');
+          const archiveName = row?.querySelector('.archive-id-cell')?.textContent.trim() || '';
+          const error = cell.querySelector('.cell-content')?.textContent.trim() || '';
+
+
+          const errorModalText = document.getElementById('errorModalText');
+          const errorModal = document.getElementById('errorModal');
+          const modalOverlay = document.getElementById('modalOverlay');
+
+          if (errorModalText && errorModal && modalOverlay) {
+            errorModalText.textContent = `Archive Name: ${archiveName}\n\n${error}`;
+            errorModal.style.display = 'block';
+            modalOverlay.style.display = 'block';
+          }
+        });
+      });
+
+
+      const closeModalBtn = document.getElementById('closeModal');
+      if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', () => {
+          const errorModal = document.getElementById('errorModal');
+          const modalOverlay = document.getElementById('modalOverlay');
+          if (errorModal && modalOverlay) {
+            errorModal.style.display = 'none';
+            modalOverlay.style.display = 'none';
+          }
+        });
+      }
+
+      const clearBtn = document.querySelector('.clear-selection');
+      clearBtn?.addEventListener('click', function() {
+        const checkboxes = document.querySelectorAll(
+          '.dropdown-options input[type="checkbox"]',
+        );
+        checkboxes.forEach(cb => cb.checked = false);
+      });
+
+      const resetButton = document.getElementById('resetButton');
+      if (resetButton) {
+        const form = resetButton.closest('form');
+        resetButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          if (!form) return;
+
+          form.querySelectorAll('input, select').forEach(input => {
+            if (input.type === 'checkbox' || input.type === 'radio') {
+              input.checked = false;
+            } else {
+              input.value = '';
+            }
+          });
+
+          window.location.href = window.location.pathname;
+        });
+      }
+
+    });
+
+  </script>
 
 {% endblock %}
