@@ -779,10 +779,20 @@
           if (!recordId) return;
 
           if (button.textContent.trim() === 'Edit') {
-            statusCell.textContent = 'UNRESOLVED';
-            button.textContent = 'Mark as Ready';
-            row.querySelectorAll('input, select').forEach(cell => cell.removeAttribute('disabled'));
-            return;
+            try {
+              const response = await fetch(`/admin/migration/${recordId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: 'FAILED' }), 
+              });
+
+              if (!response.ok) throw new Error(`Server responded with ${response.status}`);
+              statusCell.textContent = 'UNRESOLVED';
+              button.textContent = 'Mark as Ready';
+              row.querySelectorAll('input, select').forEach(cell => cell.removeAttribute('disabled'));
+            } catch (error) {
+              alert(`Error: ${errorData.error?.message || 'Unknown error'}`);
+            }
           }
 
           function mapDto(row) {
