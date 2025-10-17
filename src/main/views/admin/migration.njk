@@ -787,12 +787,15 @@
               });
 
               if (!response.ok) throw new Error(`Server responded with ${response.status}`);
+
               statusCell.textContent = 'UNRESOLVED';
               button.textContent = 'Mark as Ready';
               row.querySelectorAll('input, select').forEach(cell => cell.removeAttribute('disabled'));
             } catch (error) {
               alert(`Error: ${errorData.error?.message || 'Unknown error'}`);
             }
+
+            return;
           }
 
           function mapDto(row) {
