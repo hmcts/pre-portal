@@ -792,9 +792,9 @@
               button.textContent = 'Mark as Ready';
               row.querySelectorAll('input, select').forEach(cell => cell.removeAttribute('disabled'));
             } catch (error) {
-              alert(`Error: ${errorData.error?.message || 'Unknown error'}`);
+              console.error(`Failed to update record ${recordId} status:`, error);
+              alert(`Error: ${error.message || 'Unknown error'}`);
             }
-
             return;
           }
 
