@@ -779,9 +779,29 @@
           if (!recordId) return;
 
           if (button.textContent.trim() === 'Edit') {
-            statusCell.textContent = 'UNRESOLVED';
-            button.textContent = 'Mark as Ready';
-            row.querySelectorAll('input, select').forEach(cell => cell.removeAttribute('disabled'));
+            try {
+              const updated = mapDto(row);
+              if (updated === null) {
+                console.log('Failed to map row data.');
+                return;
+              }
+              updated.status = 'FAILED';
+              
+              const response = await fetch(`/admin/migration/${recordId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updated), 
+              });
+
+              if (!response.ok) throw new Error(`Server responded with ${response.status}`);
+
+              statusCell.textContent = 'UNRESOLVED';
+              button.textContent = 'Mark as Ready';
+              row.querySelectorAll('input, select').forEach(cell => cell.removeAttribute('disabled'));
+            } catch (error) {
+              console.error(`Failed to update record ${recordId} status:`, error);
+              alert(`Error: ${error.message || 'Unknown error'}`);
+            }
             return;
           }
 
@@ -845,7 +865,6 @@
           if (Object.keys(changedFields).length === 0) {
             console.log(`No changes detected for record ${recordId}`);
             statusCell.textContent = 'READY';
-            return;
           }
 
           try {
