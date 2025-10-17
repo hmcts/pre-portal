@@ -9,11 +9,16 @@ export const iAmOnPage = (text: string): void => {
 Given('I go to {string}', iAmOnPage);
 
 Then('the page URL should be {string}', (url: string) => {
-  I.retry({ retries: 3, maxTimeout: 5000 }).waitInUrl(url);
+  const expectedUrl = `${config.TEST_URL}${url}`;
+  I.retry({ retries: 3, maxTimeout: 5000 }).waitInUrl(expectedUrl);
 });
 
 Then('the page should include {string}', (text: string) => {
-  I.waitForText(text);
+  I.waitForFunction(
+    text => document.body?.textContent?.includes(text) || false,
+    [text], // Wrap text in an array
+    10000 // Timeout in milliseconds
+  );
 });
 
 Then('the page title should include {string}', (text: string) => {
@@ -62,6 +67,10 @@ Then('I accept the terms and conditions if I need to', async () => {
   }
 });
 
+Then('I see the text {string}', (text: string) => {
+  I.see(text);
+});
+
 Then('I see the link {string}', (text: string) => {
   I.seeElement(locate('a').withText(text));
 });
@@ -74,13 +83,12 @@ Then('I click the link {string}', (text: string) => {
   I.click(locate('a').withText(text));
 });
 
-Then('I enter a valid email address', () => {
-  I.fillField('Email Address', config.b2c.testLogin.email as string);
-  I.click('Send verification code');
+When('I open the navigation menu', async () => {
+  I.click('#navToggle');
 });
 
-Then('I enter a bogus email address', () => {
-  I.fillField('Email Address', 'thisisnotlikeltoexistinour@db.com');
+Then('I enter a valid email address', () => {
+  I.fillField('Email Address', config.b2c.testLogin.email as string);
   I.click('Send verification code');
 });
 
@@ -127,7 +135,7 @@ Then('recording is played', async () => {
   }
   const initialTime = await I.grabTextFrom('.bmpui-ui-playbacktimelabel:nth-of-type(1)');
   I.wait(5);
-  I.click('Play');
+  I.click('Play/Pause');
   const currentTime = await I.grabTextFrom('.bmpui-ui-playbacktimelabel:nth-of-type(2)');
   if (!currentTime.match(/^\d{2}:\d{2}$/)) {
     throw new Error(`Invalid playback time format: ${currentTime}`);
