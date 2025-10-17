@@ -780,10 +780,13 @@
 
           if (button.textContent.trim() === 'Edit') {
             try {
+              const currentData = JSON.parse(row.dataset.originalState || '{}');
+              const updatedData = { ...currentData, status: 'FAILED' };
+              
               const response = await fetch(`/admin/migration/${recordId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ status: 'FAILED' }), 
+                body: JSON.stringify(updatedData), 
               });
 
               if (!response.ok) throw new Error(`Server responded with ${response.status}`);
