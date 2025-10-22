@@ -1,3 +1,5 @@
+// This file remains on Puppeteer because Pa11y cannot run on Playwright or convert to pa11y actions
+
 import puppeteer, { Browser, Page } from 'puppeteer';
 import { config } from '../config';
 

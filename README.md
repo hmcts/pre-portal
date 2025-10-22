@@ -220,6 +220,15 @@ yarn test:pa11y
 
 Make sure all the paths in your application are covered by accessibility tests (see [a11y.ts](src/test/a11y/a11y.ts)).
 
+##### Puppeteer Usage Over Playwright
+
+The accessibility tests use [Puppeteer](https://pptr.dev/) to run a headless browser. This is because pa11y does [not
+seem currently compatible](https://github.com/pa11y/pa11y/issues/656#issuecomment-1262418060) with Playwright browser
+contexts and the current tests have complexities (conditional logic, dynamic IDs, etc) that make them difficult to convert to Pa11y
+[actions](https://github.com/pa11y/pa11y?tab=readme-ov-file#actions).
+
+These will be converted to Playwright in upcoming work.
+
 ### Security
 
 #### CSRF prevention
