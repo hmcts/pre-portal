@@ -218,7 +218,7 @@ Running accessibility tests:
 yarn test:pa11y
 ```
 
-Make sure all the paths in your application are covered by accessibility tests (see [a11y.ts](src/test/a11y/a11y.ts)).
+Accessibility tests (see [a11y.ts](src/test/a11y/a11y.ts)) make use of the accessibility library Pa11y.
 
 **Puppeteer Usage Over Playwright**
 
