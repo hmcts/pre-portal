@@ -219,6 +219,7 @@ yarn test:pa11y
 ```
 
 Accessibility tests (see [a11y.ts](src/test/a11y/a11y.ts)) make use of the accessibility library Pa11y.
+All paths in PRE Portal should be tested for accessibility issues.
 
 **Puppeteer Usage Over Playwright**
 
