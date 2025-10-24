@@ -9,26 +9,24 @@ Feature: View Admin Page
       Then the page should include 'Welcome back,'
       Then I see the link 'Admin'
       Then I click the link 'Admin'
-      Then the page URL should be '/admin/status'
-      When I am on the '/admin/status' page
-      Then I see the text 'Status'
-
-
-    Scenario: The live events page should display for Super Users
-      When I go to '/'
-      Then the page should include 'Sign in'
-      Then I sign in with valid credentials as a super user
-      Then I accept the terms and conditions if I need to
-      Then I am on the '/browse' page
-      Then the page should include 'Welcome back,'
-      Then I see the link 'Admin'
-      Then I click the link 'Admin'
       Then I am on the '/admin/status' page
-      When I open the navigation menu
-      Then I see the link 'MediaKind live events'
-      Then I click the link 'MediaKind live events'
-      Then I am on the '/admin/MK-live-events' page
-      Then the page should include 'MediaKind Live Events'
+      Then the page should include 'System Status'
+
+   Scenario: The live events page should display for Super Users
+        When I go to '/'
+        Then the page should include 'Sign in'
+        Then I sign in with valid credentials as a super user
+        Then I accept the terms and conditions if I need to
+        Then I am on the '/browse' page
+        Then the page should include 'Welcome back,'
+        Then I see the link 'Admin'
+        Then I click the link 'Admin'
+        Then I am on the '/admin/status' page
+        When I open the navigation menu
+        Then I see the link 'MediaKind live events'
+        Then I click the link 'MediaKind live events'
+        Then I am on the '/admin/MK-live-events' page
+        Then the page should include 'MediaKind Live Events'
 
    Scenario: The migration page should display for Super Users
         When I go to '/'
