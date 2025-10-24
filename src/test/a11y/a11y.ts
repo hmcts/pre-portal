@@ -1,3 +1,8 @@
+/*
+This file remains on Puppeteer because Pa11y is not compatible with Playwright and one test is too complex
+to convert whole file to Pa11y actions.
+ */
+
 import puppeteer, { Browser, Page } from 'puppeteer';
 import { config } from '../config';
 
