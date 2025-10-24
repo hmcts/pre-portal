@@ -209,6 +209,20 @@ export default function (app: Application): void {
     }
   });
 
+  app.put('/admin/migration/:id/audit', requiresAuth(), RequiresSuperUser, async (req, res) => {
+    const client = new PreClient();
+    const migrationRecordService = new MigrationRecordService(req, client);
+
+    const auditPayload = req.body;
+
+    try {
+      await migrationRecordService.logAudit(auditPayload);
+      res.status(204).send();
+    } catch (e: any) {
+      console.error('Audit request failed:', e.response?.data || e.message);
+      res.status(e.response?.status || 500).json({ error: e.response?.data || e.message });
+    }
+  });
   app.post('/admin/migration/submit', requiresAuth(), RequiresSuperUser, async (req, res) => {
     const client = new PreClient();
     const migrationRecordService = new MigrationRecordService(req, client);
