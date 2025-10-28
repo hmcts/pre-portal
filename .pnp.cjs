@@ -59,7 +59,7 @@ const RAW_RUNTIME_STATE =
           ["@types/qs", "npm:6.14.0"],\
           ["@types/require-directory", "npm:2.1.6"],\
           ["@types/serve-favicon", "npm:2.5.7"],\
-          ["@types/session-file-store", "npm:1.2.5"],\
+          ["@types/session-file-store", "npm:1.2.6"],\
           ["@types/supertest", "npm:6.0.3"],\
           ["@types/uuid", "npm:10.0.0"],\
           ["@typescript-eslint/eslint-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:8.43.0"],\
@@ -7533,12 +7533,12 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/session-file-store", [\
-      ["npm:1.2.5", {\
-        "packageLocation": "./.yarn/cache/@types-session-file-store-npm-1.2.5-7bfc6d2116-77205f8388.zip/node_modules/@types/session-file-store/",\
+      ["npm:1.2.6", {\
+        "packageLocation": "./.yarn/cache/@types-session-file-store-npm-1.2.6-032cf1f5b0-f5271f021e.zip/node_modules/@types/session-file-store/",\
         "packageDependencies": [\
           ["@types/express", "npm:5.0.3"],\
           ["@types/express-session", "npm:1.18.2"],\
-          ["@types/session-file-store", "npm:1.2.5"]\
+          ["@types/session-file-store", "npm:1.2.6"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -18599,7 +18599,7 @@ const RAW_RUNTIME_STATE =
           ["@types/qs", "npm:6.14.0"],\
           ["@types/require-directory", "npm:2.1.6"],\
           ["@types/serve-favicon", "npm:2.5.7"],\
-          ["@types/session-file-store", "npm:1.2.5"],\
+          ["@types/session-file-store", "npm:1.2.6"],\
           ["@types/supertest", "npm:6.0.3"],\
           ["@types/uuid", "npm:10.0.0"],\
           ["@typescript-eslint/eslint-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:8.43.0"],\
