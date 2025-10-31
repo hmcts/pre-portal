@@ -39,7 +39,7 @@ const RAW_RUNTIME_STATE =
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.2.0"],\
           ["@jest/globals", "npm:30.1.2"],\
-          ["@mediakind/mkplayer", "npm:1.27.0"],\
+          ["@mediakind/mkplayer", "npm:1.29.0"],\
           ["@types/babel__core", "npm:7.20.5"],\
           ["@types/babel__preset-env", "npm:7.10.0"],\
           ["@types/body-parser", "npm:1.19.6"],\
@@ -4813,10 +4813,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@mediakind/mkplayer", [\
-      ["npm:1.27.0", {\
-        "packageLocation": "./.yarn/cache/@mediakind-mkplayer-npm-1.27.0-ee41034098-90fd32be3c.zip/node_modules/@mediakind/mkplayer/",\
+      ["npm:1.29.0", {\
+        "packageLocation": "./.yarn/cache/@mediakind-mkplayer-npm-1.29.0-6554b9bbc4-242e6495a4.zip/node_modules/@mediakind/mkplayer/",\
         "packageDependencies": [\
-          ["@mediakind/mkplayer", "npm:1.27.0"],\
+          ["@mediakind/mkplayer", "npm:1.29.0"],\
           ["bitmovin-player", "npm:8.225.0"],\
           ["bitmovin-player-ui", "npm:3.98.0"]\
         ],\
@@ -18608,7 +18608,7 @@ const RAW_RUNTIME_STATE =
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.2.0"],\
           ["@jest/globals", "npm:30.1.2"],\
-          ["@mediakind/mkplayer", "npm:1.27.0"],\
+          ["@mediakind/mkplayer", "npm:1.29.0"],\
           ["@types/babel__core", "npm:7.20.5"],\
           ["@types/babel__preset-env", "npm:7.10.0"],\
           ["@types/body-parser", "npm:1.19.6"],\
