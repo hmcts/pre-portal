@@ -593,6 +593,25 @@
         }
         checkRowForInvalidCells(input.closest('tr'));
       };
+      window.validateExhibitReference = function(input) {
+        const minLength = 9;
+        const maxLength = 13;
+        const value = input.value.trim();
+        if (value.length === 0) {
+          input.style.backgroundColor = '';
+          input.classList.remove('govuk-input--error');
+          input.title = '';
+        } else if (value.length < minLength || value.length > maxLength) {
+          input.style.backgroundColor = '#ffcccc';
+          input.classList.add('govuk-input--error');
+          input.title = 'Must be between 9 and 13 characters, or can be empty.';
+        } else {
+          input.style.backgroundColor = '';
+          input.classList.remove('govuk-input--error');
+          input.title = '';
+        }
+        checkRowForInvalidCells(input.closest('tr'));
+      };
       window.validateNoDigitsMax25 = function(input) {
         const value = input.value.trim();
         const hasDigits = /\d/.test(value);
@@ -730,8 +749,12 @@
         window.validateRecordingDate(input);
       });
 
-      document.querySelectorAll('input[name="urn"], input[name="exhibitReference"]').forEach(input => {
+      document.querySelectorAll('input[name="urn"]').forEach(input => {
         window.validateLength(input);
+      });
+
+      document.querySelectorAll('input[name="exhibitReference"]').forEach(input => {
+        window.validateExhibitReference(input);
       });
 
       document.querySelectorAll('input[name="witnessName"], input[name="defendantName"]').forEach(input => {
