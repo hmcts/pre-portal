@@ -412,11 +412,12 @@
               <div class="icon">🔍</div>
             </td>
             <td class="govuk-table__cell button-cell" tabindex="0" style="padding: 0.5rem 1rem; min-width: 220px;">
-              <div class="button-wrapper">
-                <button class="govuk-button govuk-button mark-ready-button govuk-!-margin-bottom-1 govuk-!-margin-top-1"
+              <div class="button-wrapper" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <button class="govuk-button govuk-button mark-ready-button"
                         type="button"
                         data-status="{{ migrationRecord.status }}"
                         {% if migrationRecord.status in ['SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                        style="width: 100%;"
                 >
                   {% if migrationRecord.status == 'READY' %}
                     Edit
@@ -425,10 +426,11 @@
                   {% endif %}
                 </button>
                 {% if migrationRecord.status == 'FAILED' or migrationRecord.status == 'IGNORED' %}
-                <button class="govuk-button govuk-button--secondary mark-ignored-button govuk-!-margin-bottom-1 govuk-!-margin-top-1"
+                <button class="govuk-button govuk-button--secondary mark-ignored-button"
                         type="button"
                         data-status="{{ migrationRecord.status }}"
                         {% if migrationRecord.status in ['SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                        style="width: 100%;"
                 >
                   {% if migrationRecord.status == 'IGNORED' %}
                     Unignore
