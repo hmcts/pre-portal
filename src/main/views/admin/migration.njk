@@ -400,6 +400,8 @@
             <td class="govuk-table__cell status-cell" tabindex="0" contenteditable="false">
               {% if migrationRecord.status == 'FAILED' %}
                 UNRESOLVED
+              {% elif migrationRecord.status == 'IGNORED' %}
+                IGNORED
               {% else %}
                 {{ migrationRecord.status }}
               {% endif %}</td>
@@ -422,6 +424,19 @@
                     Mark as Ready
                   {% endif %}
                 </button>
+                {% if migrationRecord.status == 'FAILED' or migrationRecord.status == 'IGNORED' %}
+                <button class="govuk-button govuk-button--secondary mark-ignored-button govuk-!-margin-bottom-1 govuk-!-margin-top-1"
+                        type="button"
+                        data-status="{{ migrationRecord.status }}"
+                        {% if migrationRecord.status in ['SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                >
+                  {% if migrationRecord.status == 'IGNORED' %}
+                    Unignore
+                  {% else %}
+                    Mark as Ignored
+                  {% endif %}
+                </button>
+                {% endif %}
                 <div>
             </td>
           </tr>
@@ -938,6 +953,44 @@
             console.error(`Failed to update record ${recordId}:`, error);
             alert('Failed to update migration record. Please try again.');
           }
+        });
+      });
+
+      document.querySelectorAll('.mark-ignored-button').forEach(function(button) {
+        button.addEventListener('click', async function() {
+          const row = button.closest('tr');
+          if (!row) return;
+
+          const statusCell = row.querySelector('.status-cell');
+          const recordId = row.dataset.recordId;
+          if (!recordId) return;
+
+          const currentStatus = statusCell.textContent.trim().toUpperCase();
+          const isIgnored = currentStatus === 'IGNORED';
+          const newStatus = isIgnored ? 'FAILED' : 'IGNORED';
+
+          const payload = {
+            id: recordId,
+            status: newStatus,
+          };
+
+          console.log('Ignore/Unignore payload:', payload);
+          console.log(`Action: ${isIgnored ? 'Unignore' : 'Ignore'} record ${recordId}, setting status to ${newStatus}`);
+
+          if (isIgnored) {
+            // Unignore: revert to FAILED (which displays as UNRESOLVED)
+            statusCell.textContent = 'UNRESOLVED';
+            button.textContent = 'Mark as Ignored';
+          } else {
+            // Ignore: set to IGNORED
+            statusCell.textContent = 'IGNORED';
+            button.textContent = 'Unignore';
+          }
+
+          // Update original state
+          const currentState = JSON.parse(row.dataset.originalState || '{}');
+          currentState.status = newStatus;
+          row.dataset.originalState = JSON.stringify(currentState);
         });
       });
 
