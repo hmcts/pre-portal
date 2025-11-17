@@ -981,24 +981,34 @@
             status: newStatus,
           };
 
-          console.log('Ignore/Unignore payload:', payload);
-          console.log(`Action: ${isIgnored ? 'Unignore' : 'Ignore'} record ${recordId}, setting status to ${newStatus}`);
+          try{
+            const response = await fetch(`/admin/migration/${recordId}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            });
 
-          if (isIgnored) {
-            // Unignore: revert to FAILED (which displays as UNRESOLVED)
-            statusCell.textContent = 'UNRESOLVED';
-            button.textContent = 'Mark as Ignored';
-          } else {
-            // Ignore: set to IGNORED
-            statusCell.textContent = 'IGNORED';
-            button.textContent = 'Unignore';
-            
+            if (!response.ok) throw new Error(`Server responded with ${response.status}`);
+
+            if (isIgnored) {
+              // Unignore: revert to FAILED (which displays as UNRESOLVED)
+              statusCell.textContent = 'UNRESOLVED';
+              button.textContent = 'Mark as Ignored';
+            } else {
+              // Ignore: set to IGNORED
+              statusCell.textContent = 'IGNORED';
+              button.textContent = 'Unignore';
+              
+            }
+
+            const currentState = JSON.parse(row.dataset.originalState || '{}');
+            currentState.status = newStatus;
+            row.dataset.originalState = JSON.stringify(currentState);
+          } catch (error) {
+            console.error(`Failed to ${isIgnored ? 'unignore' : 'ignore'} record ${recordId}:`, error);
+            alert(`Failed to ${isIgnored ? 'unignore' : 'ignore'} migration record. Please try again.`);
           }
-
-          // Update original state
-          const currentState = JSON.parse(row.dataset.originalState || '{}');
-          currentState.status = newStatus;
-          row.dataset.originalState = JSON.stringify(currentState);
+          
         });
       });
 
