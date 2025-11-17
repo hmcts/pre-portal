@@ -278,7 +278,7 @@
                 aria-label="Select court"
                 style="width: 100%; box-sizing: border-box; min-width: 0; overflow: visible;
                   {% if invalid_court %}background-color: #ffcccc !important; border: 2px solid #d4351c;{% endif %}"
-                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED','IGNORED'] %}disabled{% endif %}
               >
                 <option value="" {% if not migrationRecord.court %}selected{% endif %}>Select a court</option>
 
@@ -308,7 +308,7 @@
                 style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                 oninput="validateLength(this)"
                 aria-label="must be between 9 -13 alphanumeric characters."
-                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED','IGNORED'] %}disabled{% endif %}
               >
             </td>
             <td class="govuk-table__cell " scope="row" tabindex="0"
@@ -322,7 +322,7 @@
                 style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                 oninput="validateExhibitReference(this)"
                 aria-label="must be between 9 -13 alphanumeric characters. Cannot be null if URN is null"
-                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED','IGNORED'] %}disabled{% endif %}
 
               >
             </td>
@@ -335,7 +335,7 @@
                 style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                 oninput="validateNoDigitsMax25(this)"
                 aria-label="Defendant name, no digits, 1 to 25 characters"
-                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED','IGNORED'] %}disabled{% endif %}
               >
             </td>
 
@@ -348,7 +348,7 @@
                 style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                 oninput="validateNoDigitsMax25(this)"
                 aria-label="Defendant name, no digits, 1 to 25 characters"
-                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED','IGNORED'] %}disabled{% endif %}
               >
             </td>
             <td class="govuk-table__cell" tabindex="0" title="Valid date DD/MM/YYYY HH:MM:SS">
@@ -360,7 +360,7 @@
                 style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                 oninput="validateRecordingDate(this)"
                 aria-label="Defendant name, no digits, 1 to 25 characters"
-                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED','IGNORED'] %}disabled{% endif %}
               >
             </td>
             <td class="govuk-table__cell" tabindex="0">
@@ -369,7 +369,7 @@
                       aria-label="Select recording version"
                       style="width: 100%; box-sizing: border-box; min-width: 0; overflow: visible;
                       {% if not migrationRecord.recordingVersion %} background-color: #ffcccc; border: 2px solid #d4351c; {% endif %}"
-                      {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                      {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED','IGNORED'] %}disabled{% endif %}
               >
                 <option value="" {% if migrationRecord.recordingVersion == '' %}selected{% endif %}></option>
                 <option value="ORIG" {% if migrationRecord.recordingVersion == 'ORIG' %}selected{% endif %}>ORIG
@@ -390,7 +390,7 @@
                 style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                 oninput="validateIsNumber(this)"
                 aria-label="must be a number"
-                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED','IGNORED'] %}disabled{% endif %}
               >
             </td>
 
@@ -708,6 +708,11 @@
         const statusCell = row.querySelector('.status-cell');
         if (!button || !statusCell) return;
 
+        if (status === 'IGNORED') {
+          button.disabled = true;
+          return;
+        }
+
         if (statusCell.textContent.trim().toUpperCase() !== 'UNRESOLVED') {
           return;
         }
@@ -987,6 +992,7 @@
             // Ignore: set to IGNORED
             statusCell.textContent = 'IGNORED';
             button.textContent = 'Unignore';
+            
           }
 
           // Update original state
