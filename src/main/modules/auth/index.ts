@@ -6,7 +6,7 @@ import config from 'config';
 import { Application } from 'express';
 import { ConfigParams, auth } from 'express-openid-connect';
 import session from 'express-session';
-import * as jose from 'jose/node/cjs';
+import * as jose from 'jose';
 import FileStoreFactory from 'session-file-store';
 
 const FileStore = FileStoreFactory(session);
