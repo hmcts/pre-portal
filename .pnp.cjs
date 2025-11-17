@@ -34,7 +34,7 @@ const RAW_RUNTIME_STATE =
           ["@codeceptjs/configure", "virtual:8072991c211a1e492261317f3d771e2e21e91a4a163cc060bdb758791a3fe433633f98ddd97ff7dad2e6c10b733788759576209393aa63669a6ac7f28b54093b#npm:1.0.6"],\
           ["@eslint/compat", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.1"],\
           ["@hmcts/cookie-manager", "npm:1.1.0"],\
-          ["@hmcts/info-provider", "npm:1.2.3"],\
+          ["@hmcts/info-provider", "npm:1.2.5"],\
           ["@hmcts/nodejs-healthcheck", "npm:1.8.6"],\
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.2.0"],\
@@ -3885,10 +3885,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@hmcts/info-provider", [\
-      ["npm:1.2.3", {\
-        "packageLocation": "./.yarn/cache/@hmcts-info-provider-npm-1.2.3-ca9aa43193-cc712b89bb.zip/node_modules/@hmcts/info-provider/",\
+      ["npm:1.2.5", {\
+        "packageLocation": "./.yarn/cache/@hmcts-info-provider-npm-1.2.5-117b7439f7-9088659bce.zip/node_modules/@hmcts/info-provider/",\
         "packageDependencies": [\
-          ["@hmcts/info-provider", "npm:1.2.3"],\
+          ["@hmcts/info-provider", "npm:1.2.5"],\
           ["express", "npm:5.1.0"],\
           ["js-yaml", "npm:4.1.0"]\
         ],\
@@ -18918,7 +18918,7 @@ const RAW_RUNTIME_STATE =
           ["@codeceptjs/configure", "virtual:8072991c211a1e492261317f3d771e2e21e91a4a163cc060bdb758791a3fe433633f98ddd97ff7dad2e6c10b733788759576209393aa63669a6ac7f28b54093b#npm:1.0.6"],\
           ["@eslint/compat", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.1"],\
           ["@hmcts/cookie-manager", "npm:1.1.0"],\
-          ["@hmcts/info-provider", "npm:1.2.3"],\
+          ["@hmcts/info-provider", "npm:1.2.5"],\
           ["@hmcts/nodejs-healthcheck", "npm:1.8.6"],\
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.2.0"],\
