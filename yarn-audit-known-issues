@@ -1,1 +1,2 @@
 {"value":"@azure/functions","children":{"ID":"@azure/functions (deprecation)","Issue":"Incompatible with Node 18","Severity":"moderate","Vulnerable Versions":"4.7.3","Tree Versions":["4.7.3"],"Dependents":["applicationinsights@npm:3.9.0"]}}
+{"value":"js-yaml","children":{"ID":1109754,"Issue":"js-yaml has prototype pollution in merge (<<)","URL":"https://github.com/advisories/GHSA-mh29-5h37-fv8m","Severity":"moderate","Vulnerable Versions":"<4.1.1","Tree Versions":["4.1.0"],"Dependents":["@hmcts/info-provider@npm:1.2.3"]}}
