@@ -982,10 +982,12 @@
             let recordingDate = null;
 
             if (dateInput) {
+              // Match formats: DD/MM/YYYY, DD/MM/YYYY HH:MM, DD/MM/YYYY HH:MM:SS
               const dateTimeMatch = dateInput.match(/^(\d{2})\/(\d{2})\/(\d{4})(?:\s+(\d{2}):(\d{2})(?::(\d{2}))?)?$/);
 
               if (dateTimeMatch) {
                 const [, day, month, year, hours, minutes, seconds] = dateTimeMatch;
+                // Default to 03:00:00 if no time provided, 00 seconds if not specified
                 const hour = hours || '03';
                 const minute = minutes || '00';
                 const second = seconds || '00';
@@ -993,6 +995,7 @@
                 const date = new Date(dateStr);
                 recordingDate = date.toISOString();
               }
+              // Note: For ignore, we don't return null if date is invalid - we just set it to null
             }
             const normalize = value => (value?.trim() === '' ? null : value.trim());
 
@@ -1006,25 +1009,28 @@
               recording_date: recordingDate,
               recording_version: row.querySelector('select[name="recordingVersion"]')?.value?.toUpperCase() || null,
               recording_version_number: row.querySelector('input[name="recordingVersionNumber"]')?.value || null,
-              status: newStatus,  
+              status: newStatus,
             };
           }
 
-
           const payload = mapDto(row);
-          if (payload === null) {
-            console.log('Failed to map row data.');
-            return;
-          }
+          
+          // Log the payload to see what's being sent
+          console.log('Ignore payload:', payload);
 
-          try{
+          try {
             const response = await fetch(`/admin/migration/${recordId}`, {
               method: 'PUT',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(payload),
             });
 
-            if (!response.ok) throw new Error(`Server responded with ${response.status}`);
+            if (!response.ok) {
+              // Get the error response body to see what the API is complaining about
+              const errorText = await response.text();
+              console.error('API Error Response:', errorText);
+              throw new Error(`Server responded with ${response.status}: ${errorText}`);
+            }
 
             if (isIgnored) {
               statusCell.textContent = 'UNRESOLVED';
@@ -1032,15 +1038,14 @@
             } else {
               statusCell.textContent = 'IGNORED';
               button.textContent = 'Unignore';
-              
             }
 
             const currentState = JSON.parse(row.dataset.originalState || '{}');
             currentState.status = newStatus;
-            row.dataset.originalState = JSON.stringify(currentState);
+            row.dataset.originalState = JSON.stringify(payload);
           } catch (error) {
             console.error(`Failed to ${isIgnored ? 'unignore' : 'ignore'} record ${recordId}:`, error);
-            alert(`Failed to ${isIgnored ? 'unignore' : 'ignore'} migration record. Please try again.`);
+            alert(`Error: ${error.message || 'Unknown error'}`);
           }
           
         });
