@@ -976,10 +976,46 @@
           const isIgnored = currentStatus === 'IGNORED';
           const newStatus = isIgnored ? 'FAILED' : 'IGNORED';
 
-          const payload = {
-            id: recordId,
-            status: newStatus,
-          };
+          function mapDto(row) {
+            const dateInput = row.querySelector('input[name="createDate"]')?.value?.trim();
+
+            let recordingDate = null;
+
+            if (dateInput) {
+              const dateTimeMatch = dateInput.match(/^(\d{2})\/(\d{2})\/(\d{4})(?:\s+(\d{2}):(\d{2})(?::(\d{2}))?)?$/);
+
+              if (dateTimeMatch) {
+                const [, day, month, year, hours, minutes, seconds] = dateTimeMatch;
+                const hour = hours || '03';
+                const minute = minutes || '00';
+                const second = seconds || '00';
+                const dateStr = `${year}-${month}-${day}T${hour}:${minute}:${second}`;
+                const date = new Date(dateStr);
+                recordingDate = date.toISOString();
+              }
+            }
+            const normalize = value => (value?.trim() === '' ? null : value.trim());
+
+            return {
+              id: row.dataset.recordId,
+              court_id: row.querySelector('select[name="courtField"]')?.value || '',
+              urn: normalize(row.querySelector('input[name="urn"]')?.value)?.replace(/[^a-z0-9]/gi, '') || null,
+              exhibit_reference: normalize(row.querySelector('input[name="exhibitReference"]')?.value),
+              witness_name: normalize(row.querySelector('input[name="witnessName"]')?.value),
+              defendant_name: normalize(row.querySelector('input[name="defendantName"]')?.value),
+              recording_date: recordingDate,
+              recording_version: row.querySelector('select[name="recordingVersion"]')?.value?.toUpperCase() || null,
+              recording_version_number: row.querySelector('input[name="recordingVersionNumber"]')?.value || null,
+              status: newStatus,  
+            };
+          }
+
+
+          const payload = mapDto(row);
+          if (payload === null) {
+            console.log('Failed to map row data.');
+            return;
+          }
 
           try{
             const response = await fetch(`/admin/migration/${recordId}`, {
@@ -991,11 +1027,9 @@
             if (!response.ok) throw new Error(`Server responded with ${response.status}`);
 
             if (isIgnored) {
-              // Unignore: revert to FAILED (which displays as UNRESOLVED)
               statusCell.textContent = 'UNRESOLVED';
               button.textContent = 'Mark as Ignored';
             } else {
-              // Ignore: set to IGNORED
               statusCell.textContent = 'IGNORED';
               button.textContent = 'Unignore';
               
