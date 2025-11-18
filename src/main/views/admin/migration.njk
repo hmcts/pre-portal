@@ -995,7 +995,6 @@
                 const date = new Date(dateStr);
                 recordingDate = date.toISOString();
               }
-              // Note: For ignore, we don't return null if date is invalid - we just set it to null
             }
             const normalize = value => (value?.trim() === '' ? null : value.trim());
 
@@ -1015,7 +1014,6 @@
 
           const payload = mapDto(row);
           
-          // Log the payload to see what's being sent
           console.log('Ignore payload:', payload);
 
           try {
@@ -1026,7 +1024,6 @@
             });
 
             if (!response.ok) {
-              // Get the error response body to see what the API is complaining about
               const errorText = await response.text();
               console.error('API Error Response:', errorText);
               throw new Error(`Server responded with ${response.status}: ${errorText}`);
