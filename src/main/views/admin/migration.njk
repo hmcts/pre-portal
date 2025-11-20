@@ -104,6 +104,8 @@
               </option>
               <option value="success" {% if request.query.resource_state == 'success' %}selected{% endif %}>Success
               </option>
+               <option value="ignored" {% if request.query.resource_state == 'ignored' %}selected{% endif %}>Ignored
+              </option>
             </select>
           </div>
         </div>
