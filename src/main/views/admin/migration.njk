@@ -710,6 +710,7 @@
         const statusCell = row.querySelector('.status-cell');
         if (!button || !statusCell) return;
 
+        const status = statusCell.textContent.trim().toUpperCase();
         if (status === 'IGNORED') {
           button.disabled = true;
           return;
@@ -978,8 +979,10 @@
           const isIgnored = currentStatus === 'IGNORED';
           const newStatus = isIgnored ? 'FAILED' : 'IGNORED';
 
+          const originalRecord = migrationData.find(r => r.recordId === recordId);
+
           function mapDto(row) {
-            const dateInput = row.querySelector('input[name="createDate"]')?.value?.trim();
+            const dateInput = row.querySelector('input[name="createDate"]')?.value?.trim() || originalRecord?.displayCreateDate;
 
             let recordingDate = null;
 
@@ -996,28 +999,51 @@
                 const dateStr = `${year}-${month}-${day}T${hour}:${minute}:${second}`;
                 const date = new Date(dateStr);
                 recordingDate = date.toISOString();
+              } else if (originalRecord?.createDate) {
+                  recordingDate = originalRecord.createDate;
               }
+            } else if (originalRecord?.createDate) {
+              recordingDate = originalRecord.createDate;
             }
             const normalize = value => (value?.trim() === '' ? null : value.trim());
 
+            const courtSelect = row.querySelector('select[name="courtField"]');
+            const courtId = courtSelect?.value || originalRecord?.courtId || '';
+            
+            const urnInput = row.querySelector('input[name="urn"]');
+            const urn = normalize(urnInput?.value)?.replace(/[^a-z0-9]/gi, '') || (originalRecord?.urn?.trim()?.replace(/[^a-z0-9]/gi, '') || null);
+
+            const exhibitRefInput = row.querySelector('input[name="exhibitReference"]');
+            const exhibitRef = normalize(exhibitRefInput?.value) || originalRecord?.exhibitReference;
+            
+            const witnessInput = row.querySelector('input[name="witnessName"]');
+            const witnessName = (normalize(witnessInput?.value) || originalRecord?.witnessName?.trim() || '').trim();
+            const defendantInput = row.querySelector('input[name="defendantName"]');
+            const defendantName = (normalize(defendantInput?.value) || originalRecord?.defendantName?.trim() || '').trim();            
+            
+            const recordingVersionSelect = row.querySelector('select[name="recordingVersion"]');
+            const recordingVersion = recordingVersionSelect?.value?.toUpperCase() || originalRecord?.recordingVersion || null;
+            
+            const versionNumberInput = row.querySelector('input[name="recordingVersionNumber"]');
+            const versionNumber = versionNumberInput?.value || originalRecord?.recordingVersionNumber || null;
+
+
             return {
               id: row.dataset.recordId,
-              court_id: row.querySelector('select[name="courtField"]')?.value || '',
-              urn: normalize(row.querySelector('input[name="urn"]')?.value)?.replace(/[^a-z0-9]/gi, '') || null,
-              exhibit_reference: normalize(row.querySelector('input[name="exhibitReference"]')?.value),
-              witness_name: normalize(row.querySelector('input[name="witnessName"]')?.value),
-              defendant_name: normalize(row.querySelector('input[name="defendantName"]')?.value),
+              court_id: courtId,
+              urn: urn,
+              exhibit_reference: exhibitRef,
+              witness_name: witnessName,
+              defendant_name: defendantName,
               recording_date: recordingDate,
-              recording_version: row.querySelector('select[name="recordingVersion"]')?.value?.toUpperCase() || null,
-              recording_version_number: row.querySelector('input[name="recordingVersionNumber"]')?.value || null,
+              recording_version: recordingVersion,
+              recording_version_number: versionNumber,
               status: newStatus,
             };
           }
 
           const payload = mapDto(row);
           
-          console.log('Ignore payload:', payload);
-
           try {
             const response = await fetch(`/admin/migration/${recordId}`, {
               method: 'PUT',
