@@ -9,6 +9,9 @@ describe('MK live events page success', () => {
       await request(app)
         .get('/admin/MK-live-events')
         .expect(res => {
+          console.log(JSON.stringify(res.headers));
+          console.log('Location: ' + res.header.location);
+          console.log('Http status: ' + res.status);
           expect(res.status).toBe(302);
           expect(res.header.location).toContain('.b2clogin.com');
         });
