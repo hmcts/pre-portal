@@ -1060,9 +1060,11 @@
             if (isIgnored) {
               statusCell.textContent = 'UNRESOLVED';
               button.textContent = 'Mark as Ignored';
+              row.querySelectorAll('input, select').forEach(cell => cell.removeAttribute('disabled'));
             } else {
               statusCell.textContent = 'IGNORED';
               button.textContent = 'Unignore';
+              row.querySelectorAll('input, select').forEach(cell => cell.setAttribute('disabled', 'true'));
             }
 
             const currentState = JSON.parse(row.dataset.originalState || '{}');
