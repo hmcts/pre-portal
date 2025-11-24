@@ -102,7 +102,7 @@ const RAW_RUNTIME_STATE =
           ["jest-util", "npm:30.2.0"],\
           ["jose", "npm:5.10.0"],\
           ["jquery", "npm:3.7.1"],\
-          ["lint-staged", "npm:16.2.6"],\
+          ["lint-staged", "npm:16.2.7"],\
           ["lodash", "npm:4.17.21"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.4"],\
@@ -10906,10 +10906,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:14.0.1", {\
-        "packageLocation": "./.yarn/cache/commander-npm-14.0.1-2b32a92fa0-783115e940.zip/node_modules/commander/",\
+      ["npm:14.0.2", {\
+        "packageLocation": "./.yarn/cache/commander-npm-14.0.2-538b84c387-2d202db5e5.zip/node_modules/commander/",\
         "packageDependencies": [\
-          ["commander", "npm:14.0.1"]\
+          ["commander", "npm:14.0.2"]\
         ],\
         "linkType": "HARD"\
       }],\
@@ -16441,11 +16441,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["lint-staged", [\
-      ["npm:16.2.6", {\
-        "packageLocation": "./.yarn/cache/lint-staged-npm-16.2.6-0ee184c358-c419f13471.zip/node_modules/lint-staged/",\
+      ["npm:16.2.7", {\
+        "packageLocation": "./.yarn/cache/lint-staged-npm-16.2.7-9ab2185fb2-c1fd768530.zip/node_modules/lint-staged/",\
         "packageDependencies": [\
-          ["commander", "npm:14.0.1"],\
-          ["lint-staged", "npm:16.2.6"],\
+          ["commander", "npm:14.0.2"],\
+          ["lint-staged", "npm:16.2.7"],\
           ["listr2", "npm:9.0.5"],\
           ["micromatch", "npm:4.0.8"],\
           ["nano-spawn", "npm:2.0.0"],\
@@ -18969,7 +18969,7 @@ const RAW_RUNTIME_STATE =
           ["jest-util", "npm:30.2.0"],\
           ["jose", "npm:5.10.0"],\
           ["jquery", "npm:3.7.1"],\
-          ["lint-staged", "npm:16.2.6"],\
+          ["lint-staged", "npm:16.2.7"],\
           ["lodash", "npm:4.17.21"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.4"],\
