@@ -104,6 +104,8 @@
               </option>
               <option value="success" {% if request.query.resource_state == 'success' %}selected{% endif %}>Success
               </option>
+               <option value="ignored" {% if request.query.resource_state == 'ignored' %}selected{% endif %}>Ignored
+              </option>
             </select>
           </div>
         </div>
@@ -278,7 +280,7 @@
                 aria-label="Select court"
                 style="width: 100%; box-sizing: border-box; min-width: 0; overflow: visible;
                   {% if invalid_court %}background-color: #ffcccc !important; border: 2px solid #d4351c;{% endif %}"
-                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED','IGNORED'] %}disabled{% endif %}
               >
                 <option value="" {% if not migrationRecord.court %}selected{% endif %}>Select a court</option>
 
@@ -308,7 +310,7 @@
                 style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                 oninput="validateLength(this)"
                 aria-label="must be between 9 -13 alphanumeric characters."
-                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED','IGNORED'] %}disabled{% endif %}
               >
             </td>
             <td class="govuk-table__cell " scope="row" tabindex="0"
@@ -322,7 +324,7 @@
                 style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                 oninput="validateExhibitReference(this)"
                 aria-label="must be between 9 -13 alphanumeric characters. Cannot be null if URN is null"
-                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED','IGNORED'] %}disabled{% endif %}
 
               >
             </td>
@@ -335,7 +337,7 @@
                 style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                 oninput="validateNoDigitsMax25(this)"
                 aria-label="Defendant name, no digits, 1 to 25 characters"
-                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED','IGNORED'] %}disabled{% endif %}
               >
             </td>
 
@@ -348,7 +350,7 @@
                 style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                 oninput="validateNoDigitsMax25(this)"
                 aria-label="Defendant name, no digits, 1 to 25 characters"
-                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED','IGNORED'] %}disabled{% endif %}
               >
             </td>
             <td class="govuk-table__cell" tabindex="0" title="Valid date DD/MM/YYYY HH:MM:SS">
@@ -360,7 +362,7 @@
                 style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                 oninput="validateRecordingDate(this)"
                 aria-label="Defendant name, no digits, 1 to 25 characters"
-                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED','IGNORED'] %}disabled{% endif %}
               >
             </td>
             <td class="govuk-table__cell" tabindex="0">
@@ -369,7 +371,7 @@
                       aria-label="Select recording version"
                       style="width: 100%; box-sizing: border-box; min-width: 0; overflow: visible;
                       {% if not migrationRecord.recordingVersion %} background-color: #ffcccc; border: 2px solid #d4351c; {% endif %}"
-                      {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                      {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED','IGNORED'] %}disabled{% endif %}
               >
                 <option value="" {% if migrationRecord.recordingVersion == '' %}selected{% endif %}></option>
                 <option value="ORIG" {% if migrationRecord.recordingVersion == 'ORIG' %}selected{% endif %}>ORIG
@@ -390,7 +392,7 @@
                 style="width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 8px;"
                 oninput="validateIsNumber(this)"
                 aria-label="must be a number"
-                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                {% if migrationRecord.status in ['READY', 'SUCCESS', 'SUBMITTED','IGNORED'] %}disabled{% endif %}
               >
             </td>
 
@@ -400,6 +402,8 @@
             <td class="govuk-table__cell status-cell" tabindex="0" contenteditable="false">
               {% if migrationRecord.status == 'FAILED' %}
                 UNRESOLVED
+              {% elif migrationRecord.status == 'IGNORED' %}
+                IGNORED
               {% else %}
                 {{ migrationRecord.status }}
               {% endif %}</td>
@@ -409,9 +413,9 @@
               </div>
               <div class="icon">🔍</div>
             </td>
-            <td class="govuk-table__cell button-cell" tabindex="0" style="padding: 0.5rem 1rem; min-width: 220px;">
+            <td class="govuk-table__cell button-cell" tabindex="0">
               <div class="button-wrapper">
-                <button class="govuk-button govuk-button mark-ready-button govuk-!-margin-bottom-1 govuk-!-margin-top-1"
+                <button class="govuk-button govuk-button mark-ready-button"
                         type="button"
                         data-status="{{ migrationRecord.status }}"
                         {% if migrationRecord.status in ['SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
@@ -422,6 +426,19 @@
                     Mark as Ready
                   {% endif %}
                 </button>
+                {% if migrationRecord.status == 'FAILED' or migrationRecord.status == 'IGNORED' %}
+                <button class="govuk-button govuk-button--secondary mark-ignored-button"
+                        type="button"
+                        data-status="{{ migrationRecord.status }}"
+                        {% if migrationRecord.status in ['SUCCESS', 'SUBMITTED'] %}disabled{% endif %}
+                >
+                  {% if migrationRecord.status == 'IGNORED' %}
+                    Unignore
+                  {% else %}
+                    Mark as Ignored
+                  {% endif %}
+                </button>
+                {% endif %}
                 <div>
             </td>
           </tr>
@@ -691,6 +708,12 @@
         const statusCell = row.querySelector('.status-cell');
         if (!button || !statusCell) return;
 
+        const status = statusCell.textContent.trim().toUpperCase();
+        if (status === 'IGNORED') {
+          button.disabled = true;
+          return;
+        }
+
         if (statusCell.textContent.trim().toUpperCase() !== 'UNRESOLVED') {
           return;
         }
@@ -938,6 +961,118 @@
             console.error(`Failed to update record ${recordId}:`, error);
             alert('Failed to update migration record. Please try again.');
           }
+        });
+      });
+
+      document.querySelectorAll('.mark-ignored-button').forEach(function(button) {
+        button.addEventListener('click', async function() {
+          const row = button.closest('tr');
+          if (!row) return;
+
+          const statusCell = row.querySelector('.status-cell');
+          const recordId = row.dataset.recordId;
+          if (!recordId) return;
+
+          const currentStatus = statusCell.textContent.trim().toUpperCase();
+          const isIgnored = currentStatus === 'IGNORED';
+          const newStatus = isIgnored ? 'FAILED' : 'IGNORED';
+
+          const originalRecord = migrationData.find(r => r.recordId === recordId);
+
+          function mapDto(row) {
+            const dateInput = row.querySelector('input[name="createDate"]')?.value?.trim() || originalRecord?.displayCreateDate;
+
+            let recordingDate = null;
+
+            if (dateInput) {
+              // Match formats: DD/MM/YYYY, DD/MM/YYYY HH:MM, DD/MM/YYYY HH:MM:SS
+              const dateTimeMatch = dateInput.match(/^(\d{2})\/(\d{2})\/(\d{4})(?:\s+(\d{2}):(\d{2})(?::(\d{2}))?)?$/);
+
+              if (dateTimeMatch) {
+                const [, day, month, year, hours, minutes, seconds] = dateTimeMatch;
+                // Default to 03:00:00 if no time provided, 00 seconds if not specified
+                const hour = hours || '03';
+                const minute = minutes || '00';
+                const second = seconds || '00';
+                const dateStr = `${year}-${month}-${day}T${hour}:${minute}:${second}`;
+                const date = new Date(dateStr);
+                recordingDate = date.toISOString();
+              } else if (originalRecord?.createDate) {
+                  recordingDate = originalRecord.createDate;
+              }
+            } else if (originalRecord?.createDate) {
+              recordingDate = originalRecord.createDate;
+            }
+            const normalize = value => (value?.trim() === '' ? null : value.trim());
+
+            const courtSelect = row.querySelector('select[name="courtField"]');
+            const courtId = courtSelect?.value || originalRecord?.courtId || '';
+            
+            const urnInput = row.querySelector('input[name="urn"]');
+            const urn = normalize(urnInput?.value)?.replace(/[^a-z0-9]/gi, '') || (originalRecord?.urn?.trim()?.replace(/[^a-z0-9]/gi, '') || null);
+
+            const exhibitRefInput = row.querySelector('input[name="exhibitReference"]');
+            const exhibitRef = normalize(exhibitRefInput?.value) || originalRecord?.exhibitReference;
+            
+            const witnessInput = row.querySelector('input[name="witnessName"]');
+            const witnessName = (normalize(witnessInput?.value) || originalRecord?.witnessName?.trim() || '').trim();
+            const defendantInput = row.querySelector('input[name="defendantName"]');
+            const defendantName = (normalize(defendantInput?.value) || originalRecord?.defendantName?.trim() || '').trim();            
+            
+            const recordingVersionSelect = row.querySelector('select[name="recordingVersion"]');
+            const recordingVersion = recordingVersionSelect?.value?.toUpperCase() || originalRecord?.recordingVersion || null;
+            
+            const versionNumberInput = row.querySelector('input[name="recordingVersionNumber"]');
+            const versionNumber = versionNumberInput?.value || originalRecord?.recordingVersionNumber || null;
+
+
+            return {
+              id: row.dataset.recordId,
+              court_id: courtId,
+              urn: urn,
+              exhibit_reference: exhibitRef,
+              witness_name: witnessName,
+              defendant_name: defendantName,
+              recording_date: recordingDate,
+              recording_version: recordingVersion,
+              recording_version_number: versionNumber,
+              status: newStatus,
+            };
+          }
+
+          const payload = mapDto(row);
+          
+          try {
+            const response = await fetch(`/admin/migration/${recordId}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+              const errorText = await response.text();
+              console.error('API Error Response:', errorText);
+              throw new Error(`Server responded with ${response.status}: ${errorText}`);
+            }
+
+            if (isIgnored) {
+              statusCell.textContent = 'UNRESOLVED';
+              button.textContent = 'Mark as Ignored';
+              row.querySelectorAll('input, select').forEach(cell => cell.removeAttribute('disabled'));
+            } else {
+              statusCell.textContent = 'IGNORED';
+              button.textContent = 'Unignore';
+              row.querySelectorAll('input, select').forEach(cell => cell.setAttribute('disabled', 'true'));
+            }
+
+            const currentState = JSON.parse(row.dataset.originalState || '{}');
+            currentState.status = newStatus;
+            row.dataset.originalState = JSON.stringify(payload);
+          } catch (error) {
+            console.error(`Failed to ${isIgnored ? 'unignore' : 'ignore'} record ${recordId}:`, error);
+            alert(`Error: ${error.message || 'Unknown error'}`);
+          }
+          
         });
       });
 

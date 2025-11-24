@@ -285,7 +285,8 @@ thead .sticky-col {
 }
 
 .button-cell {
-  min-width: 1060px;
+  padding: 0.5rem 1rem;
+  min-width: 220px;
 }
 #resizable-table td:last-child {
   min-width: 180px;
@@ -420,15 +421,15 @@ body.no-scroll {
 
 .button-cell .button-wrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .button-cell .govuk-button {
   white-space: normal;
   word-wrap: break-word;
   max-width: 100%;
+  width: 100%;
   text-align: center;
   padding: 0.5rem 0.5rem;
 }
