@@ -37,7 +37,16 @@ export class Helmet {
       helmet({
         contentSecurityPolicy: {
           directives: {
-            connectSrc: [self, dynatraceDomain, mkPlayer, bitmovinLicensing, mkStreaming, mkStreamingUKS4, mkLicense, 'data:'],
+            connectSrc: [
+              self,
+              dynatraceDomain,
+              mkPlayer,
+              bitmovinLicensing,
+              mkStreaming,
+              mkStreamingUKS4,
+              mkLicense,
+              'data:',
+            ],
             defaultSrc: ["'none'"],
             fontSrc: [self, 'data:'],
             imgSrc: [self, googleAnalyticsDomain, dynatraceDomain, 'data:'],
