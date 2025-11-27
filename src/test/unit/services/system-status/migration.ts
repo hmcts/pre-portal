@@ -1,24 +1,25 @@
+import { describe, expect, test, vi, beforeEach } from 'vitest';
 import { MigrationRecordService } from '../../../../main/services/system-status/migration-status';
 import { PreClient } from '../../../../main/services/pre-api/pre-client';
 import { Request } from 'express';
 import { SessionUser } from '../../../../main/services/session-user/session-user';
 import { UserLevel } from '../../../../main/types/user-level';
 
-jest.mock('../../../../main/services/pre-api/pre-client');
-jest.mock('../../../../main/services/session-user/session-user');
+vi.mock('../../../../main/services/pre-api/pre-client');
+vi.mock('../../../../main/services/session-user/session-user');
 
 describe('MigrationRecordService', () => {
   let mockRequest: Partial<Request>;
-  let mockClient: jest.Mocked<PreClient>;
+  let mockClient: any;
   let service: MigrationRecordService;
 
   beforeEach(() => {
     mockClient = {
-      getMigrationRecords: jest.fn(),
-      updateMigrationRecord: jest.fn(),
-      submitMigrationRecords: jest.fn(),
-      putAudit: jest.fn(),
-    } as unknown as jest.Mocked<PreClient>;
+      getMigrationRecords: vi.fn(),
+      updateMigrationRecord: vi.fn(),
+      submitMigrationRecords: vi.fn(),
+      putAudit: vi.fn(),
+    } as unknown as any;
 
     mockRequest = {} as Partial<Request>;
 

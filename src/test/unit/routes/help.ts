@@ -1,6 +1,6 @@
 import { Nunjucks } from '../../../main/modules/nunjucks';
 
-/* eslint-disable jest/expect-expect */
+/* eslint-disable vitest/expect-expect */
 describe('Help page', () => {
   test('should return 200', async () => {
     const app = require('express')();

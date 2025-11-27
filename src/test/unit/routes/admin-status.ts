@@ -1,12 +1,12 @@
+import { describe, expect, test, vi, beforeAll } from 'vitest';
 import { Nunjucks } from '../../../main/modules/nunjucks';
-import { beforeAll, describe, test } from '@jest/globals';
 import { SystemStatus } from '../../../main/services/system-status/system-status';
 import { mockeduser } from '../test-helper';
 import { UserLevel } from '../../../main/types/user-level';
 
-jest.mock('express-openid-connect', () => {
+vi.mock('express-openid-connect', () => {
   return {
-    requiresAuth: jest.fn().mockImplementation(() => {
+    requiresAuth: vi.fn().mockImplementation(() => {
       return (req: any, res: any, next: any) => {
         next();
       };
@@ -14,20 +14,20 @@ jest.mock('express-openid-connect', () => {
   };
 });
 
-jest.mock('../../../main/services/session-user/session-user', () => {
+vi.mock('../../../main/services/session-user/session-user', () => {
   return {
     SessionUser: {
-      getLoggedInUserPortalId: jest.fn().mockImplementation(() => '123'),
-      getLoggedInUserProfile: jest.fn().mockImplementation(() => mockeduser),
+      getLoggedInUserPortalId: vi.fn().mockImplementation(() => '123'),
+      getLoggedInUserProfile: vi.fn().mockImplementation(() => mockeduser),
     },
   };
 });
 
-jest.mock('../../../main/services/system-status/system-status');
+vi.mock('../../../main/services/system-status/system-status');
 
 describe('Admin Status route', () => {
   beforeAll(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   test('should display status page for super user', async () => {
@@ -54,7 +54,7 @@ describe('Admin Status route', () => {
     const app = require('express')();
     new Nunjucks(false).enableFor(app);
     const request = require('supertest');
-    const adminStatus = require('../../../main/routes/admin/admin-status').default;
+    const adminStatus = require('../../../main/routes/admin/admin-status.ts').default;
     adminStatus(app);
 
     if (mockeduser.app_access?.[0]?.role) {

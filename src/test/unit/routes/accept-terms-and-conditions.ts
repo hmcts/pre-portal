@@ -1,33 +1,33 @@
+import { describe, expect, test, vi } from 'vitest';
 import { mockGetLatestTermsAndConditions, mockAcceptTermsAndConditions } from '../../mock-api';
 import { Terms } from '../../../main/types/terms';
 import { Nunjucks } from '../../../main/modules/nunjucks';
-import { describe } from '@jest/globals';
 import { mockeduser } from '../test-helper';
 import { UserProfile } from '../../../main/types/user-profile';
 
-jest.mock('express-openid-connect', () => {
+vi.mock('express-openid-connect', () => {
   return {
-    requiresAuth: jest.fn().mockImplementation(() => {
+    requiresAuth: vi.fn().mockImplementation(() => {
       return (req: any, res: any, next: any) => {
         next();
       };
     }),
   };
 });
-jest.mock('../../../main/services/session-user/session-user', () => {
+vi.mock('../../../main/services/session-user/session-user', () => {
   return {
     SessionUser: {
-      getLoggedInUserPortalId: jest.fn().mockImplementation((req: Express.Request) => {
+      getLoggedInUserPortalId: vi.fn().mockImplementation((req: Express.Request) => {
         return '123';
       }),
-      getLoggedInUserProfile: jest.fn().mockImplementation((req: Express.Request) => {
+      getLoggedInUserProfile: vi.fn().mockImplementation((req: Express.Request) => {
         return mockeduser as UserProfile;
       }),
     },
   };
 });
 
-/* eslint-disable jest/expect-expect */
+/* eslint-disable vitest/expect-expect */
 describe('Accept Terms and Conditions page', () => {
   test('should return 200 when viewing page', async () => {
     const app = require('express')();

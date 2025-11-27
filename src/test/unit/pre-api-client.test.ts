@@ -1,7 +1,7 @@
+import { describe, expect, test, vi } from 'vitest';
 import { mockedPaginatedRecordings, mockRecordings, mockXUserId } from '../mock-api';
 import { PreClient } from '../../main/services/pre-api/pre-client';
 import { PutAuditRequest, SearchRecordingsRequest } from '../../main/services/pre-api/types';
-import { describe } from '@jest/globals';
 import axios from 'axios';
 import { mockeduser } from './test-helper';
 import { AccessStatus } from '../../main/types/access-status';
@@ -11,11 +11,11 @@ const preClient = new PreClient();
 const mockRecordingId = '12345678-1234-1234-1234-1234567890ab';
 const mockRecordingMissingId = '4f37c46f-142d-42df-953f-0b7ca3f87995';
 const mockRecordingNoPermsId = '4f37c46f-142d-42df-953f-0b7ca3f87996';
-jest.mock('axios');
+vi.mock('axios');
 
-/* eslint-disable jest/expect-expect */
+/* eslint-disable vitest/expect-expect */
 describe('PreClient', () => {
-  const mockedAxios = axios as jest.Mocked<typeof axios>;
+  const mockedAxios = axios as any;
 
   // @ts-ignore
   mockedAxios.put.mockImplementation((url: string, data: object, config: object) => {
@@ -436,7 +436,7 @@ describe('PreClient', () => {
 
   describe('PreClient', () => {
     let client: PreClient;
-    const mockRedisClient = { get: jest.fn(), setEx: jest.fn() };
+    const mockRedisClient = { get: vi.fn(), setEx: vi.fn() };
 
     beforeEach(() => {
       client = new PreClient();

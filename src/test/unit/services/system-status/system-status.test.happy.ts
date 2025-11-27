@@ -1,14 +1,15 @@
+import { describe, expect, test, vi } from 'vitest';
 import axios from 'axios';
 import { SystemStatus } from '../../../../main/services/system-status/system-status';
 import { PreClient } from '../../../../main/services/pre-api/pre-client';
 import { Application } from 'express';
 
 const preClient = new PreClient();
-jest.mock('axios');
+vi.mock('axios');
 
-/* eslint-disable jest/expect-expect */
+/* eslint-disable vitest/expect-expect */
 describe('SystemStatus GOOD', () => {
-  const mockedAxios = axios as jest.Mocked<typeof axios>;
+  const mockedAxios = axios as any;
 
   // @ts-ignore
   mockedAxios.get.mockImplementation((url: string, data: object, config: object) => {

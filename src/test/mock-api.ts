@@ -100,13 +100,13 @@ export function mock() {
 
 export function mockGetRecording(recording?: Recording | null) {
   if (recording !== undefined) {
-    jest.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (xUserId: string, id: string) => {
+    vi.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (xUserId: string, id: string) => {
       return Promise.resolve(recording);
     });
     return;
   }
 
-  jest.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (xUserId: string, id: string) => {
+  vi.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (xUserId: string, id: string) => {
     return Promise.resolve(mockRecordings.find(r => r.id === id) || null);
   });
 }
@@ -121,7 +121,7 @@ export function mockGetRecordings(recordings?: Recording[], page: number = 0) {
     } as Pagination;
     const recordingSubset = recordings.slice(page * 10, (page + 1) * 10);
 
-    jest
+    vi
       .spyOn(PreClient.prototype, 'getRecordings')
       .mockImplementation(async (xUserId: string, request: SearchRecordingsRequest) => {
         return Promise.resolve({ recordings: recordingSubset, pagination });
@@ -129,7 +129,7 @@ export function mockGetRecordings(recordings?: Recording[], page: number = 0) {
     return;
   }
 
-  jest
+  vi
     .spyOn(PreClient.prototype, 'getRecordings')
     .mockImplementation(async (xUserId: string, req: SearchRecordingsRequest) => {
       return Promise.resolve({ recordings: mockRecordings, pagination: mockPagination });
@@ -137,7 +137,7 @@ export function mockGetRecordings(recordings?: Recording[], page: number = 0) {
 }
 
 export const mockPutAudit = () => {
-  jest.spyOn(PreClient.prototype, 'putAudit').mockImplementation(async (xUserId: string, request: PutAuditRequest) => {
+  vi.spyOn(PreClient.prototype, 'putAudit').mockImplementation(async (xUserId: string, request: PutAuditRequest) => {
     return Promise.resolve({
       status: 201,
       statusText: 'CREATED',
@@ -165,7 +165,7 @@ export function mockAcceptTermsAndConditions() {
 
 export function mockGetRecordingPlaybackData(data?: RecordingPlaybackData | null) {
   if (data !== undefined) {
-    jest
+    vi
       .spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
       .mockImplementation(async (xUserId: string, id: string) => {
         return Promise.resolve(data);
@@ -173,7 +173,7 @@ export function mockGetRecordingPlaybackData(data?: RecordingPlaybackData | null
     return;
   }
 
-  jest
+  vi
     .spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
     .mockImplementation(async (xUserId: string, id: string) => {
       return Promise.resolve({
@@ -185,7 +185,7 @@ export function mockGetRecordingPlaybackData(data?: RecordingPlaybackData | null
 }
 
 export function reset() {
-  jest.spyOn(PreClient.prototype, 'getRecording').mockRestore();
-  jest.spyOn(PreClient.prototype, 'getRecordings').mockRestore();
-  jest.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockRestore();
+  vi.spyOn(PreClient.prototype, 'getRecording').mockRestore();
+  vi.spyOn(PreClient.prototype, 'getRecordings').mockRestore();
+  vi.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockRestore();
 }

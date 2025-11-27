@@ -12,9 +12,9 @@ import { MigrationRecordService } from '../../../main/services/system-status/mig
 import { mockeduser } from '../test-helper';
 import { UserLevel } from '../../../main/types/user-level';
 
-jest.mock('express-openid-connect', () => {
+vi.mock('express-openid-connect', () => {
   return {
-    requiresAuth: jest.fn().mockImplementation(() => {
+    requiresAuth: vi.fn().mockImplementation(() => {
       return (req: any, res: any, next: any) => {
         next();
       };
@@ -22,20 +22,20 @@ jest.mock('express-openid-connect', () => {
   };
 });
 
-jest.mock('../../../main/services/session-user/session-user', () => {
+vi.mock('../../../main/services/session-user/session-user', () => {
   return {
     SessionUser: {
-      getLoggedInUserPortalId: jest.fn().mockImplementation(() => '123'),
-      getLoggedInUserProfile: jest.fn().mockImplementation(() => mockeduser),
+      getLoggedInUserPortalId: vi.fn().mockImplementation(() => '123'),
+      getLoggedInUserProfile: vi.fn().mockImplementation(() => mockeduser),
     },
   };
 });
 
-jest.mock('../../../main/services/system-status/migration-status');
+vi.mock('../../../main/services/system-status/migration-status');
 
 describe('Migration route', () => {
   beforeAll(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   test('should display migration page for super user', async () => {
@@ -315,7 +315,7 @@ describe('Migration route', () => {
       audit_details: { record: '{"field": "value"}', description: 'desc' },
     };
 
-    MigrationRecordService.prototype.logAudit = jest.fn().mockResolvedValue(undefined);
+    MigrationRecordService.prototype.logAudit = vi.fn().mockResolvedValue(undefined);
 
     const request = require('supertest');
     const response = await request(app).put(`/admin/migration/${mockRecordId}/audit`).send(mockAuditPayload);
@@ -358,7 +358,7 @@ describe('Migration route', () => {
     const mockRecordId = 'record-999';
     const mockAuditPayload = { id: 'audit-2', activity: 'Broken Audit' };
 
-    MigrationRecordService.prototype.logAudit = jest.fn().mockRejectedValue({
+    MigrationRecordService.prototype.logAudit = vi.fn().mockRejectedValue({
       response: { status: 500, data: { message: 'Audit failure' } },
     });
 

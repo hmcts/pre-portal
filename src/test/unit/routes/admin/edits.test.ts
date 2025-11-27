@@ -1,10 +1,14 @@
+import { describe, expect, test, vi, beforeAll } from 'vitest';
+import express from 'express';
+import request from 'supertest';
 import { mockeduser } from '../../test-helper';
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { UserLevel } from '../../../../main/types/user-level';
+import editRoute from '../../../../main/routes/admin/edits';
 
-jest.mock('express-openid-connect', () => {
+vi.mock('express-openid-connect', () => {
   return {
-    requiresAuth: jest.fn().mockImplementation(() => {
+    requiresAuth: vi.fn().mockImplementation(() => {
       return (req, res, next) => {
         next();
       };
@@ -12,36 +16,33 @@ jest.mock('express-openid-connect', () => {
   };
 });
 
-jest.mock('../../../../main/services/session-user/session-user', () => {
+vi.mock('../../../../main/services/session-user/session-user', () => {
   return {
     SessionUser: {
-      getLoggedInUserPortalId: jest.fn().mockImplementation(() => '123'),
-      getLoggedInUserProfile: jest.fn().mockImplementation(() => mockeduser),
+      getLoggedInUserPortalId: vi.fn().mockImplementation(() => '123'),
+      getLoggedInUserProfile: vi.fn().mockImplementation(() => mockeduser),
     },
   };
 });
 
-const mockGetEditRequests = jest.fn();
-const mockGetRecordings = jest.fn();
-const mockPostEditsFromCsv = jest.fn();
+const mockGetEditRequests = vi.fn();
+const mockGetRecordings = vi.fn();
+const mockPostEditsFromCsv = vi.fn();
 
-jest.mock('../../../../main/services/pre-api/pre-client', () => ({
-  PreClient: jest.fn().mockImplementation(() => ({
-    getEditRequests: mockGetEditRequests,
-    getRecordings: mockGetRecordings,
-    postEditsFromCsv: mockPostEditsFromCsv,
-  })),
+vi.mock('../../../../main/services/pre-api/pre-client', () => ({
+  PreClient: vi.fn(function(this: any) {
+    this.getEditRequests = mockGetEditRequests;
+    this.getRecordings = mockGetRecordings;
+    this.postEditsFromCsv = mockPostEditsFromCsv;
+  }),
 }));
 
 describe('Admin Edits Page', () => {
   let app;
-  let request;
 
   beforeAll(() => {
-    app = require('express')();
+    app = express();
     new Nunjucks(false).enableFor(app);
-    request = require('supertest');
-    const editRoute = require('../../../../main/routes/admin/edits').default;
     editRoute(app);
   });
 

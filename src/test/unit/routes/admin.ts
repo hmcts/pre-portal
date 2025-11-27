@@ -1,11 +1,11 @@
+import { describe, expect, test, vi, beforeAll } from 'vitest';
 import { Nunjucks } from '../../../main/modules/nunjucks';
-import { beforeAll, describe, test, jest } from '@jest/globals';
 import { mockeduser } from '../test-helper';
 import { UserLevel } from '../../../main/types/user-level';
 
-jest.mock('express-openid-connect', () => {
+vi.mock('express-openid-connect', () => {
   return {
-    requiresAuth: jest.fn().mockImplementation(() => {
+    requiresAuth: vi.fn().mockImplementation(() => {
       return (req: any, res: any, next: any) => {
         next();
       };
@@ -13,18 +13,18 @@ jest.mock('express-openid-connect', () => {
   };
 });
 
-jest.mock('../../../main/services/session-user/session-user', () => {
+vi.mock('../../../main/services/session-user/session-user', () => {
   return {
     SessionUser: {
-      getLoggedInUserPortalId: jest.fn().mockImplementation(() => '123'),
-      getLoggedInUserProfile: jest.fn().mockImplementation(() => mockeduser),
+      getLoggedInUserPortalId: vi.fn().mockImplementation(() => '123'),
+      getLoggedInUserProfile: vi.fn().mockImplementation(() => mockeduser),
     },
   };
 });
 
 describe('Admin Page Access', () => {
   beforeAll(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   test('should display admin page for super user', async () => {
