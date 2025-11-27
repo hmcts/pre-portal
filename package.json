@@ -43,7 +43,7 @@
     "@types/express": "5.0.5",
     "@types/express-session": "1.18.2",
     "@types/glob": "8.1.0",
-    "@types/lodash": "4.17.20",
+    "@types/lodash": "4.17.21",
     "@types/node": "22.19.1",
     "@types/nunjucks": "3.2.6",
     "@types/require-directory": "2.1.6",
