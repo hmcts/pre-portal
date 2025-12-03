@@ -5,8 +5,8 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
-    include: ['src/test/unit/**/*.{test,spec}.{ts,js}'],
-    exclude: ['**/node_modules/**', '**/dist/**', '**/*helper.ts'],
+    include: ['src/test/unit/**/*.ts'],
+    exclude: ['**/node_modules/**', '**/dist/**', '**/*helper.ts', '**/test-helper.ts'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html', 'lcov', 'clover'],

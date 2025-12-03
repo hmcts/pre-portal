@@ -22,10 +22,10 @@ vi.mock('express-openid-connect', () => {
 vi.mock('../../../main/services/session-user/session-user', () => {
   return {
     SessionUser: {
-      getLoggedInUserPortalId: vi.fn().mockImplementation((req: Express.Request) => {
+      getLoggedInUserPortalId: vi.fn().mockImplementation((_req: Express.Request) => {
         return '123';
       }),
-      getLoggedInUserProfile: vi.fn().mockImplementation((req: Express.Request) => {
+      getLoggedInUserProfile: vi.fn().mockImplementation((_req: Express.Request) => {
         return mockeduser;
       }),
     },
@@ -70,7 +70,7 @@ describe('Watch page failure', () => {
     });
 
     test('should return 500 when getRecording fails', async () => {
-      vi.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (xUserId: string, id: string) => {
+      vi.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (_xUserId: string, _id: string) => {
         throw new Error('Error');
       });
       await request(app)
@@ -80,7 +80,7 @@ describe('Watch page failure', () => {
     test('should return 500 when getRecordingPlaybackDataMk fails', async () => {
       vi
         .spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
-        .mockImplementation(async (xUserId: string, id: string) => {
+        .mockImplementation(async (_xUserId: string, _id: string) => {
           throw new Error('Error');
         });
       await request(app)

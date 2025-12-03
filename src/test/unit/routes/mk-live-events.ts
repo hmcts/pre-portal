@@ -1,43 +1,45 @@
-import { describe, expect, test, vi, beforeAll } from 'vitest';
+import express from 'express';
+import request from 'supertest';
+import { describe, expect, test, vi, beforeEach, afterEach } from 'vitest';
 import { Nunjucks } from '../../../main/modules/nunjucks';
 import { LiveEventStatusService } from '../../../main/services/system-status/live-events-status';
 import { mockeduser } from '../test-helper';
 import { UserLevel } from '../../../main/types/user-level';
+import { UserProfile } from '../../../main/types/user-profile';
 
-vi.mock('express-openid-connect', () => {
-  return {
-    requiresAuth: vi.fn().mockImplementation(() => {
-      return (req: any, res: any, next: any) => {
-        next();
-      };
-    }),
-  };
-});
+let userProfile: UserProfile | undefined = mockeduser as UserProfile;
 
-vi.mock('../../../main/services/session-user/session-user', () => {
-  return {
-    SessionUser: {
-      getLoggedInUserPortalId: vi.fn().mockImplementation(() => '123'),
-      getLoggedInUserProfile: vi.fn().mockImplementation(() => mockeduser),
-    },
-  };
-});
+vi.mock('express-openid-connect', () => ({
+  requiresAuth: vi.fn(() => (_req: express.Request, _res: express.Response, next: express.NextFunction) => next()),
+}));
 
-vi.mock('../../../main/services/system-status/live-events-status');
+vi.mock('../../../main/services/session-user/session-user', () => ({
+  SessionUser: {
+    getLoggedInUserPortalId: vi.fn().mockReturnValue('123'),
+    getLoggedInUserProfile: vi.fn(() => userProfile),
+  },
+}));
+
+const registerRoute = async (app: express.Express) => {
+  const { default: mkLiveEvents } = await import('../../../main/routes/admin/mk-live-events');
+  mkLiveEvents(app);
+};
 
 describe('MK Live Events route', () => {
-  beforeAll(() => {
-    vi.resetAllMocks();
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   test('should display live events page for super user', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
-    const mkLiveEvents = require('../../../main/routes/admin/mk-live-events').default;
-    mkLiveEvents(app);
+    await registerRoute(app);
 
-    LiveEventStatusService.prototype.getMediaKindLiveEventStatuses = jest.fn().mockResolvedValue([
+    vi.spyOn(LiveEventStatusService.prototype, 'getMediaKindLiveEventStatuses').mockResolvedValue([
       {
         id: '123',
         name: 'MK',
@@ -45,6 +47,7 @@ describe('MK Live Events route', () => {
         status: 'Live',
       },
     ]);
+
     if (mockeduser.app_access?.[0]?.role) {
       mockeduser.app_access[0].role.name = UserLevel.SUPER_USER;
     }
@@ -56,11 +59,9 @@ describe('MK Live Events route', () => {
   });
 
   test('should display "Page Not Found" for non-super user', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
-    const mkLiveEvents = require('../../../main/routes/admin/mk-live-events').default;
-    mkLiveEvents(app);
+    await registerRoute(app);
 
     if (mockeduser.app_access?.[0]?.role) {
       mockeduser.app_access[0].role.name = UserLevel.ADMIN;

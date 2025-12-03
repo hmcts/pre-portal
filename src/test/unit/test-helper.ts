@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import { AccessStatus } from '../../main/types/access-status';
 import { UserProfile } from '../../main/types/user-profile';
 

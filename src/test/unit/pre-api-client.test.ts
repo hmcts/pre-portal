@@ -18,7 +18,7 @@ describe('PreClient', () => {
   const mockedAxios = axios as any;
 
   // @ts-ignore
-  mockedAxios.put.mockImplementation((url: string, data: object, config: object) => {
+  mockedAxios.put.mockImplementation((url: string, _data: object, _config: object) => {
     if (url.startsWith('/audit/')) {
       return Promise.resolve({
         status: 201,
@@ -456,7 +456,7 @@ describe('PreClient', () => {
 
     test('getLiveEvents fetches from API if no cache', async () => {
       mockRedisClient.get.mockResolvedValue(null);
-      const mockAxios = axios as jest.Mocked<typeof axios>;
+      const mockAxios = axios as vi.Mocked<typeof axios>;
       mockAxios.get.mockResolvedValue({ data: [{ id: 'event2', name: 'API Event', resource_state: 'Stopped' }] });
 
       const events = await client.getLiveEvents('user2');
@@ -466,7 +466,7 @@ describe('PreClient', () => {
 
     test('getCaptureSession formats UUID and fetches', async () => {
       const liveEventId = '123456781234123412341234567890ab';
-      const mockAxios = axios as jest.Mocked<typeof axios>;
+      const mockAxios = axios as vi.Mocked<typeof axios>;
       mockAxios.get.mockResolvedValue({ data: { case_reference: 'CASE123' } });
 
       const session = await client.getCaptureSession(liveEventId, 'user1');

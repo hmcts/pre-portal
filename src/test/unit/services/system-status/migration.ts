@@ -23,7 +23,7 @@ describe('MigrationRecordService', () => {
 
     mockRequest = {} as Partial<Request>;
 
-    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue({
       user: { email: 'test-user@example.com' },
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
@@ -32,12 +32,12 @@ describe('MigrationRecordService', () => {
   });
 
   test('should return an empty array if no migration records are found', async () => {
-    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue({
       user: { email: 'test-user@example.com' },
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
 
-    mockClient.getMigrationRecords = jest.fn().mockResolvedValue({ records: [], pagination: {} });
+    mockClient.getMigrationRecords = vi.fn().mockResolvedValue({ records: [], pagination: {} });
 
     service = new MigrationRecordService(mockRequest as Request, mockClient);
     const result = await service.getMigrationRecords();
@@ -60,7 +60,7 @@ describe('MigrationRecordService', () => {
   });
 
   test('should return formatted migration records', async () => {
-    mockClient.getMigrationRecords = jest.fn().mockResolvedValue({
+    mockClient.getMigrationRecords = vi.fn().mockResolvedValue({
       records: [
         {
           id: 'rec-001',
@@ -111,11 +111,11 @@ describe('MigrationRecordService', () => {
   });
 
   test('should handle errors when fetching migration records', async () => {
-    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue({
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
 
-    mockClient.getMigrationRecords = jest.fn().mockRejectedValue(new Error('API error'));
+    mockClient.getMigrationRecords = vi.fn().mockRejectedValue(new Error('API error'));
 
     service = new MigrationRecordService(mockRequest as Request, mockClient);
 
@@ -133,7 +133,7 @@ describe('MigrationRecordService', () => {
     });
 
     it('should throw if user not authorized', async () => {
-      (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue(undefined);
+      (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue(undefined);
       const unauthorizedService = new MigrationRecordService({} as Request, mockClient);
 
       await expect(unauthorizedService.updateMigrationRecord('rec-123', { status: 'X' })).rejects.toThrow(
@@ -153,7 +153,7 @@ describe('MigrationRecordService', () => {
       const dto = { status: 'Resolved', reason: 'Completed' };
       const original = { status: 'Pending', reason: 'Completed' };
 
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+      const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
       await service.updateMigrationRecord('rec-123', dto, original);
 
@@ -168,7 +168,7 @@ describe('MigrationRecordService', () => {
       const error = new Error('Network failure');
       mockClient.updateMigrationRecord.mockRejectedValue(error);
 
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+      const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
       await expect(service.updateMigrationRecord('rec-999', { status: 'Failed' })).rejects.toThrow('Network failure');
 
@@ -229,7 +229,7 @@ describe('MigrationRecordService', () => {
     });
 
     it('should throw if user not authorized', async () => {
-      (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue(undefined);
+      (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue(undefined);
       const unauthorizedService = new MigrationRecordService({} as Request, mockClient);
 
       await expect(unauthorizedService.submitMigrationRecords()).rejects.toThrow(
@@ -273,7 +273,7 @@ describe('MigrationRecordService', () => {
     });
 
     it('should throw error if user is not authorized', async () => {
-      (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue(undefined);
+      (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue(undefined);
       const unauthorizedService = new MigrationRecordService({} as Request, mockClient);
 
       await expect(

@@ -22,10 +22,10 @@ vi.mock('express-openid-connect', () => {
 vi.mock('../../../main/services/session-user/session-user', () => {
   return {
     SessionUser: {
-      getLoggedInUserPortalId: vi.fn().mockImplementation((req: Express.Request) => {
+      getLoggedInUserPortalId: vi.fn().mockImplementation((_req: Express.Request) => {
         return '123';
       }),
-      getLoggedInUserProfile: vi.fn().mockImplementation((req: Express.Request) => {
+      getLoggedInUserProfile: vi.fn().mockImplementation((_req: Express.Request) => {
         return mockeduser as UserProfile;
       }),
     },

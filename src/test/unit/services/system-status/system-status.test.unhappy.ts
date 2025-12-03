@@ -12,7 +12,7 @@ describe('SystemStatus BAD', () => {
   const mockedAxios = axios as any;
 
   // @ts-ignore
-  mockedAxios.get.mockImplementation((url: string, data: object, config: object) => {
+  mockedAxios.get.mockImplementation((url: string, _data: object, _config: object) => {
     // API
     if (url === '/health') {
       return Promise.resolve({

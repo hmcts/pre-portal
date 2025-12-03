@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import {
   Pagination,
   PutAuditRequest,
@@ -147,18 +148,18 @@ export const mockPutAudit = () => {
 
 export function mockGetLatestTermsAndConditions(data?: Terms | null) {
   if (data !== undefined) {
-    jest
+    vi
       .spyOn(PreClient.prototype, 'getLatestTermsAndConditions')
-      .mockImplementation(async (xUserId: string, id: string) => {
+      .mockImplementation(async (_xUserId: string, _id: string) => {
         return Promise.resolve(data);
       });
   }
 }
 
 export function mockAcceptTermsAndConditions() {
-  jest
+  vi
     .spyOn(PreClient.prototype, 'acceptTermsAndConditions')
-    .mockImplementation(async (xUserId: string, termsId: string) => {
+    .mockImplementation(async (_xUserId: string, _termsId: string) => {
       return Promise.resolve();
     });
 }

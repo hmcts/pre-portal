@@ -12,7 +12,7 @@ import { AccessStatus } from '../../../../main/types/access-status';
 vi.mock('axios');
 vi.mock('jose', () => {
   return {
-    decodeJwt: vi.fn().mockImplementation((s: string) => {
+    decodeJwt: vi.fn().mockImplementation((_s: string) => {
       return { email: 'test@testy.com' };
     }),
   };
@@ -102,7 +102,7 @@ describe('Auth Module', () => {
       }
     });
     // @ts-ignore
-    mockedAxios.post.mockImplementation((url: string, config: object) => {
+    mockedAxios.post.mockImplementation((url: string, _config: object) => {
       if (url === '/invites/redeem/test@testy.com') {
         return Promise.resolve({
           status: 200,

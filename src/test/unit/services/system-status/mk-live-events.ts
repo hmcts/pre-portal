@@ -23,7 +23,7 @@ describe('LiveEventStatusService', () => {
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
 
-    mockClient.getLiveEvents = jest.fn().mockResolvedValue([]);
+    mockClient.getLiveEvents = vi.fn().mockResolvedValue([]);
 
     service = new LiveEventStatusService(mockRequest as Request, mockClient);
     const result = await service.getMediaKindLiveEventStatuses();
@@ -33,11 +33,11 @@ describe('LiveEventStatusService', () => {
   });
 
   test('should return formatted live event statuses', async () => {
-    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue({
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
 
-    mockClient.getLiveEvents = jest.fn().mockResolvedValue([
+    mockClient.getLiveEvents = vi.fn().mockResolvedValue([
       { id: 'event1', name: 'Live Event 1', description: 'Test Event 1', resource_state: 'Running' },
       { id: 'event2', name: 'Live Event 2', description: 'Test Event 2', resource_state: 'Stopped' },
     ]);
@@ -56,7 +56,7 @@ describe('LiveEventStatusService', () => {
   });
 
   test('should include caseReference when capture session is found', async () => {
-    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue({
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
 
@@ -74,7 +74,7 @@ describe('LiveEventStatusService', () => {
   });
 
   test('should return formatted live event statuses with Unknown Case Reference when no capture session', async () => {
-    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue({
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
 
@@ -99,11 +99,11 @@ describe('LiveEventStatusService', () => {
   });
 
   test('should handle errors when fetching live events', async () => {
-    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue({
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
 
-    mockClient.getLiveEvents = jest.fn().mockRejectedValue(new Error('API error'));
+    mockClient.getLiveEvents = vi.fn().mockRejectedValue(new Error('API error'));
 
     service = new LiveEventStatusService(mockRequest as Request, mockClient);
 
@@ -113,7 +113,7 @@ describe('LiveEventStatusService', () => {
   });
 
   test('should throw error if user not authorized', async () => {
-    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue({
       app_access: [{ role: { name: UserLevel.ADMIN }, id: 'test-user' }],
     });
 
