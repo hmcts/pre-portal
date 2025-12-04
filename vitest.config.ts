@@ -25,9 +25,8 @@ export default defineConfig({
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     alias: {
-      'router': path.resolve(__dirname, './src/main/router'),
-      'routes': path.resolve(__dirname, './src/main/routes'),
+      router: path.resolve(__dirname, './src/main/router'),
+      routes: path.resolve(__dirname, './src/main/routes'),
     },
   },
 });
-

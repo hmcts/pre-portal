@@ -7,7 +7,7 @@ import { mockeduser } from '../test-helper';
 
 vi.mock('../../../main/services/pre-api/pre-client', () => {
   return {
-    PreClient: vi.fn(function(this: any) {
+    PreClient: vi.fn(function (this: any) {
       this.getActiveUserByEmail = vi.fn().mockImplementation((email: string) => {
         if (email === 'inactive@user.com') {
           return Promise.reject(new Error('User is not active: ' + email));

@@ -37,7 +37,6 @@ describe('Browse route', () => {
   });
 
   test('browse renders the browse template', async () => {
-
     const app = express();
     new Nunjucks(false).enableFor(app);
     mockGetRecordings([]);

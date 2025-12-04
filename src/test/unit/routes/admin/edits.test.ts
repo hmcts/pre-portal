@@ -30,7 +30,7 @@ const mockGetRecordings = vi.fn();
 const mockPostEditsFromCsv = vi.fn();
 
 vi.mock('../../../../main/services/pre-api/pre-client', () => ({
-  PreClient: vi.fn(function(this: any) {
+  PreClient: vi.fn(function (this: any) {
     this.getEditRequests = mockGetEditRequests;
     this.getRecordings = mockGetRecordings;
     this.postEditsFromCsv = mockPostEditsFromCsv;

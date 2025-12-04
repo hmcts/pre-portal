@@ -1,10 +1,5 @@
 import { vi } from 'vitest';
-import {
-  Pagination,
-  PutAuditRequest,
-  Recording,
-  SearchRecordingsRequest,
-} from '../main/services/pre-api/types';
+import { Pagination, PutAuditRequest, Recording, SearchRecordingsRequest } from '../main/services/pre-api/types';
 import { PreClient } from '../main/services/pre-api/pre-client';
 import { AxiosResponse } from 'axios';
 import { Terms } from '../main/types/terms';
@@ -121,19 +116,19 @@ export function mockGetRecordings(recordings?: Recording[], page: number = 0) {
     } as Pagination;
     const recordingSubset = recordings.slice(page * 10, (page + 1) * 10);
 
-    vi
-      .spyOn(PreClient.prototype, 'getRecordings')
-      .mockImplementation(async (xUserId: string, request: SearchRecordingsRequest) => {
+    vi.spyOn(PreClient.prototype, 'getRecordings').mockImplementation(
+      async (xUserId: string, request: SearchRecordingsRequest) => {
         return Promise.resolve({ recordings: recordingSubset, pagination });
-      });
+      }
+    );
     return;
   }
 
-  vi
-    .spyOn(PreClient.prototype, 'getRecordings')
-    .mockImplementation(async (xUserId: string, req: SearchRecordingsRequest) => {
+  vi.spyOn(PreClient.prototype, 'getRecordings').mockImplementation(
+    async (xUserId: string, req: SearchRecordingsRequest) => {
       return Promise.resolve({ recordings: mockRecordings, pagination: mockPagination });
-    });
+    }
+  );
 }
 
 export const mockPutAudit = () => {
@@ -147,38 +142,36 @@ export const mockPutAudit = () => {
 
 export function mockGetLatestTermsAndConditions(data?: Terms) {
   if (data !== undefined) {
-    vi
-      .spyOn(PreClient.prototype, 'getLatestTermsAndConditions')
-      .mockImplementation(async () => {
-        return Promise.resolve(data);
-      });
+    vi.spyOn(PreClient.prototype, 'getLatestTermsAndConditions').mockImplementation(async () => {
+      return Promise.resolve(data);
+    });
   }
 }
 
 export function mockAcceptTermsAndConditions() {
-  vi
-    .spyOn(PreClient.prototype, 'acceptTermsAndConditions')
-    .mockImplementation(async (xUserId: string, termsId: string) => {
+  vi.spyOn(PreClient.prototype, 'acceptTermsAndConditions').mockImplementation(
+    async (xUserId: string, termsId: string) => {
       return Promise.resolve();
-    });
+    }
+  );
 }
 
 export function mockGetRecordingPlaybackData(recording?: Recording | null) {
   if (recording !== undefined) {
-    vi
-      .spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
-      .mockImplementation(async (xUserId: string, id: string) => {
+    vi.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockImplementation(
+      async (xUserId: string, id: string) => {
         return Promise.resolve(recording);
-      });
+      }
+    );
     return;
   }
 
-  vi
-    .spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
-    .mockImplementation(async (xUserId: string, id: string) => {
+  vi.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockImplementation(
+    async (xUserId: string, id: string) => {
       // default mock returns a Recording-like object to match the actual method signature
       return Promise.resolve(mockRecordings[0]);
-    });
+    }
+  );
 }
 
 export function reset() {

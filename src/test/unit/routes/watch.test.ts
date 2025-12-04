@@ -78,11 +78,11 @@ describe('Watch page failure', () => {
         .expect(res => expect(res.status).toBe(500));
     });
     test('should return 500 when getRecordingPlaybackDataMk fails', async () => {
-      vi
-        .spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
-        .mockImplementation(async (_xUserId: string, _id: string) => {
+      vi.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockImplementation(
+        async (_xUserId: string, _id: string) => {
           throw new Error('Error');
-        });
+        }
+      );
       await request(app)
         .get('/watch/12345678-1234-1234-1234-1234567890ab/playback')
         .expect(res => expect(res.status).toBe(500));
