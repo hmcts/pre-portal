@@ -3,7 +3,6 @@ import {
   Pagination,
   PutAuditRequest,
   Recording,
-  RecordingPlaybackData,
   SearchRecordingsRequest,
 } from '../main/services/pre-api/types';
 import { PreClient } from '../main/services/pre-api/pre-client';
@@ -146,11 +145,11 @@ export const mockPutAudit = () => {
   });
 };
 
-export function mockGetLatestTermsAndConditions(data?: Terms | null) {
+export function mockGetLatestTermsAndConditions(data?: Terms) {
   if (data !== undefined) {
     vi
       .spyOn(PreClient.prototype, 'getLatestTermsAndConditions')
-      .mockImplementation(async (_xUserId: string, _id: string) => {
+      .mockImplementation(async () => {
         return Promise.resolve(data);
       });
   }
@@ -159,17 +158,17 @@ export function mockGetLatestTermsAndConditions(data?: Terms | null) {
 export function mockAcceptTermsAndConditions() {
   vi
     .spyOn(PreClient.prototype, 'acceptTermsAndConditions')
-    .mockImplementation(async (_xUserId: string, _termsId: string) => {
+    .mockImplementation(async (xUserId: string, termsId: string) => {
       return Promise.resolve();
     });
 }
 
-export function mockGetRecordingPlaybackData(data?: RecordingPlaybackData | null) {
-  if (data !== undefined) {
+export function mockGetRecordingPlaybackData(recording?: Recording | null) {
+  if (recording !== undefined) {
     vi
       .spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
       .mockImplementation(async (xUserId: string, id: string) => {
-        return Promise.resolve(data);
+        return Promise.resolve(recording);
       });
     return;
   }
@@ -177,11 +176,8 @@ export function mockGetRecordingPlaybackData(data?: RecordingPlaybackData | null
   vi
     .spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
     .mockImplementation(async (xUserId: string, id: string) => {
-      return Promise.resolve({
-        src: 'src',
-        type: 'type',
-        protectionInfo: [],
-      } as RecordingPlaybackData);
+      // default mock returns a Recording-like object to match the actual method signature
+      return Promise.resolve(mockRecordings[0]);
     });
 }
 

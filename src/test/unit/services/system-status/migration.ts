@@ -1,7 +1,6 @@
 import { describe, expect, test, vi, beforeEach } from 'vitest';
 import type { Mock } from 'vitest';
 import { MigrationRecordService } from '../../../../main/services/system-status/migration-status';
-import { PreClient } from '../../../../main/services/pre-api/pre-client';
 import { Request } from 'express';
 import { SessionUser } from '../../../../main/services/session-user/session-user';
 import { UserLevel } from '../../../../main/types/user-level';

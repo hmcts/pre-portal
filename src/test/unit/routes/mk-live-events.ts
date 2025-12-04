@@ -45,6 +45,7 @@ describe('MK Live Events route', () => {
         name: 'MK',
         description: 'MK Live Event',
         status: 'Live',
+        caseReference: 'ABC123',
       },
     ]);
 
