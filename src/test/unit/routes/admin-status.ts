@@ -1,6 +1,7 @@
 import express from 'express';
 import request from 'supertest';
 import { describe, expect, test, vi, beforeAll } from 'vitest';
+import type { Mock } from 'vitest';
 import { Nunjucks } from '../../../main/modules/nunjucks';
 import { SystemStatus } from '../../../main/services/system-status/system-status';
 import { mockeduser } from '../test-helper';
@@ -34,7 +35,7 @@ describe('Admin Status route', () => {
     new Nunjucks(false).enableFor(app);
     await registerRoute(app);
 
-    (SystemStatus.prototype.getStatus as vi.Mock).mockResolvedValue({ status: 'ok' });
+    (SystemStatus.prototype.getStatus as Mock).mockResolvedValue({ status: 'ok' });
 
     if (mockeduser.app_access?.[0]?.role) {
       mockeduser.app_access[0].role.name = UserLevel.SUPER_USER;

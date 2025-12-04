@@ -1,4 +1,5 @@
 import { describe, expect, test, vi, beforeEach } from 'vitest';
+import type { Mock } from 'vitest';
 import { MigrationRecordService } from '../../../../main/services/system-status/migration-status';
 import { PreClient } from '../../../../main/services/pre-api/pre-client';
 import { Request } from 'express';
@@ -23,7 +24,7 @@ describe('MigrationRecordService', () => {
 
     mockRequest = {} as Partial<Request>;
 
-    (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as Mock).mockReturnValue({
       user: { email: 'test-user@example.com' },
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
@@ -32,7 +33,7 @@ describe('MigrationRecordService', () => {
   });
 
   test('should return an empty array if no migration records are found', async () => {
-    (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as Mock).mockReturnValue({
       user: { email: 'test-user@example.com' },
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
@@ -111,7 +112,7 @@ describe('MigrationRecordService', () => {
   });
 
   test('should handle errors when fetching migration records', async () => {
-    (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as Mock).mockReturnValue({
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
 
@@ -133,7 +134,7 @@ describe('MigrationRecordService', () => {
     });
 
     it('should throw if user not authorized', async () => {
-      (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue(undefined);
+      (SessionUser.getLoggedInUserProfile as Mock).mockReturnValue(undefined);
       const unauthorizedService = new MigrationRecordService({} as Request, mockClient);
 
       await expect(unauthorizedService.updateMigrationRecord('rec-123', { status: 'X' })).rejects.toThrow(
@@ -229,7 +230,7 @@ describe('MigrationRecordService', () => {
     });
 
     it('should throw if user not authorized', async () => {
-      (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue(undefined);
+      (SessionUser.getLoggedInUserProfile as Mock).mockReturnValue(undefined);
       const unauthorizedService = new MigrationRecordService({} as Request, mockClient);
 
       await expect(unauthorizedService.submitMigrationRecords()).rejects.toThrow(
@@ -273,7 +274,7 @@ describe('MigrationRecordService', () => {
     });
 
     it('should throw error if user is not authorized', async () => {
-      (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue(undefined);
+      (SessionUser.getLoggedInUserProfile as Mock).mockReturnValue(undefined);
       const unauthorizedService = new MigrationRecordService({} as Request, mockClient);
 
       await expect(

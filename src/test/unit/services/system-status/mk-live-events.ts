@@ -1,4 +1,5 @@
 import { describe, expect, test, vi, beforeEach } from 'vitest';
+import type { Mock } from 'vitest';
 import { LiveEventStatusService } from '../../../../main/services/system-status/live-events-status';
 import { PreClient } from '../../../../main/services/pre-api/pre-client';
 import { Request } from 'express';
@@ -33,7 +34,7 @@ describe('LiveEventStatusService', () => {
   });
 
   test('should return formatted live event statuses', async () => {
-    (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as Mock).mockReturnValue({
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
 
@@ -56,7 +57,7 @@ describe('LiveEventStatusService', () => {
   });
 
   test('should include caseReference when capture session is found', async () => {
-    (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as Mock).mockReturnValue({
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
 
@@ -74,7 +75,7 @@ describe('LiveEventStatusService', () => {
   });
 
   test('should return formatted live event statuses with Unknown Case Reference when no capture session', async () => {
-    (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as Mock).mockReturnValue({
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
 
@@ -99,7 +100,7 @@ describe('LiveEventStatusService', () => {
   });
 
   test('should handle errors when fetching live events', async () => {
-    (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as Mock).mockReturnValue({
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
 
@@ -113,7 +114,7 @@ describe('LiveEventStatusService', () => {
   });
 
   test('should throw error if user not authorized', async () => {
-    (SessionUser.getLoggedInUserProfile as vi.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as Mock).mockReturnValue({
       app_access: [{ role: { name: UserLevel.ADMIN }, id: 'test-user' }],
     });
 
