@@ -16335,7 +16335,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/jsonwebtoken-npm-9.0.2-42c6b14d02-6e9b6d879c.zip/node_modules/jsonwebtoken/",\
         "packageDependencies": [\
           ["jsonwebtoken", "npm:9.0.2"],\
-          ["jws", "npm:3.2.2"],\
+          ["jws", "npm:3.2.3"],\
           ["lodash.includes", "npm:4.3.0"],\
           ["lodash.isboolean", "npm:3.0.3"],\
           ["lodash.isinteger", "npm:4.0.4"],\
@@ -16362,11 +16362,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["jws", [\
-      ["npm:3.2.2", {\
-        "packageLocation": "./.yarn/cache/jws-npm-3.2.2-c1ae59c7af-70b016974a.zip/node_modules/jws/",\
+      ["npm:3.2.3", {\
+        "packageLocation": "./.yarn/cache/jws-npm-3.2.3-b393e05a7c-707387dd1c.zip/node_modules/jws/",\
         "packageDependencies": [\
           ["jwa", "npm:1.4.2"],\
-          ["jws", "npm:3.2.2"],\
+          ["jws", "npm:3.2.3"],\
           ["safe-buffer", "npm:5.2.1"]\
         ],\
         "linkType": "HARD"\
