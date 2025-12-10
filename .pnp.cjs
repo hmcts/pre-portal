@@ -102,6 +102,7 @@ const RAW_RUNTIME_STATE =
           ["jest-util", "npm:30.2.0"],\
           ["jose", "npm:5.10.0"],\
           ["jquery", "npm:3.7.1"],\
+          ["jsonwebtoken", "npm:9.0.3"],\
           ["lint-staged", "npm:16.2.7"],\
           ["lodash", "npm:4.17.21"],\
           ["marked", "npm:15.0.12"],\
@@ -16347,6 +16348,23 @@ const RAW_RUNTIME_STATE =
           ["semver", "npm:7.7.3"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:9.0.3", {\
+        "packageLocation": "./.yarn/cache/jsonwebtoken-npm-9.0.3-c3c17849ba-a67a276db4.zip/node_modules/jsonwebtoken/",\
+        "packageDependencies": [\
+          ["jsonwebtoken", "npm:9.0.3"],\
+          ["jws", "npm:4.0.1"],\
+          ["lodash.includes", "npm:4.3.0"],\
+          ["lodash.isboolean", "npm:3.0.3"],\
+          ["lodash.isinteger", "npm:4.0.4"],\
+          ["lodash.isnumber", "npm:3.0.3"],\
+          ["lodash.isplainobject", "npm:4.0.6"],\
+          ["lodash.isstring", "npm:4.0.1"],\
+          ["lodash.once", "npm:4.1.1"],\
+          ["ms", "npm:2.1.3"],\
+          ["semver", "npm:7.7.3"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["jwa", [\
@@ -16359,6 +16377,16 @@ const RAW_RUNTIME_STATE =
           ["safe-buffer", "npm:5.2.1"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:2.0.1", {\
+        "packageLocation": "./.yarn/cache/jwa-npm-2.0.1-9ebe28a626-b04312a1de.zip/node_modules/jwa/",\
+        "packageDependencies": [\
+          ["buffer-equal-constant-time", "npm:1.0.1"],\
+          ["ecdsa-sig-formatter", "npm:1.0.11"],\
+          ["jwa", "npm:2.0.1"],\
+          ["safe-buffer", "npm:5.2.1"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["jws", [\
@@ -16367,6 +16395,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["jwa", "npm:1.4.2"],\
           ["jws", "npm:3.2.2"],\
+          ["safe-buffer", "npm:5.2.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:4.0.1", {\
+        "packageLocation": "./.yarn/cache/jws-npm-4.0.1-0d8c257cbe-75d7b15748.zip/node_modules/jws/",\
+        "packageDependencies": [\
+          ["jwa", "npm:2.0.1"],\
+          ["jws", "npm:4.0.1"],\
           ["safe-buffer", "npm:5.2.1"]\
         ],\
         "linkType": "HARD"\
@@ -18997,6 +19034,7 @@ const RAW_RUNTIME_STATE =
           ["jest-util", "npm:30.2.0"],\
           ["jose", "npm:5.10.0"],\
           ["jquery", "npm:3.7.1"],\
+          ["jsonwebtoken", "npm:9.0.3"],\
           ["lint-staged", "npm:16.2.7"],\
           ["lodash", "npm:4.17.21"],\
           ["marked", "npm:15.0.12"],\
