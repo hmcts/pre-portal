@@ -57,7 +57,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:22.19.1"],\
           ["@types/nunjucks", "npm:3.2.6"],\
           ["@types/qs", "npm:6.14.0"],\
-          ["@types/require-directory", "npm:2.1.6"],\
+          ["@types/require-directory", "npm:2.1.7"],\
           ["@types/serve-favicon", "npm:2.5.7"],\
           ["@types/session-file-store", "npm:1.2.6"],\
           ["@types/supertest", "npm:6.0.3"],\
@@ -7640,11 +7640,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/require-directory", [\
-      ["npm:2.1.6", {\
-        "packageLocation": "./.yarn/cache/@types-require-directory-npm-2.1.6-fdefe29c4e-7c4a9408e0.zip/node_modules/@types/require-directory/",\
+      ["npm:2.1.7", {\
+        "packageLocation": "./.yarn/cache/@types-require-directory-npm-2.1.7-a497531444-d4c651171b.zip/node_modules/@types/require-directory/",\
         "packageDependencies": [\
           ["@types/node", "npm:24.0.3"],\
-          ["@types/require-directory", "npm:2.1.6"]\
+          ["@types/require-directory", "npm:2.1.7"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -18927,7 +18927,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:22.19.1"],\
           ["@types/nunjucks", "npm:3.2.6"],\
           ["@types/qs", "npm:6.14.0"],\
-          ["@types/require-directory", "npm:2.1.6"],\
+          ["@types/require-directory", "npm:2.1.7"],\
           ["@types/serve-favicon", "npm:2.5.7"],\
           ["@types/session-file-store", "npm:1.2.6"],\
           ["@types/supertest", "npm:6.0.3"],\
