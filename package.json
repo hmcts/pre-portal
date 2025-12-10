@@ -46,7 +46,7 @@
     "@types/lodash": "4.17.21",
     "@types/node": "22.19.1",
     "@types/nunjucks": "3.2.6",
-    "@types/require-directory": "2.1.6",
+    "@types/require-directory": "2.1.7",
     "@types/serve-favicon": "2.5.7",
     "@types/session-file-store": "1.2.6",
     "applicationinsights": "3.9.0",
