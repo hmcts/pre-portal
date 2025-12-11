@@ -87,7 +87,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-prettier", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.5.4"],\
           ["express", "npm:5.2.1"],\
           ["express-nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.1.2"],\
-          ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.19.2"],\
+          ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.19.3"],\
           ["express-session", "npm:1.18.2"],\
           ["form-data", "npm:4.0.4"],\
           ["glob", "npm:11.1.0"],\
@@ -9161,6 +9161,23 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["array.prototype.reduce", [\
+      ["npm:1.0.8", {\
+        "packageLocation": "./.yarn/cache/array.prototype.reduce-npm-1.0.8-bb9aec5043-63f4af812f.zip/node_modules/array.prototype.reduce/",\
+        "packageDependencies": [\
+          ["array.prototype.reduce", "npm:1.0.8"],\
+          ["call-bind", "npm:1.0.8"],\
+          ["call-bound", "npm:1.0.4"],\
+          ["define-properties", "npm:1.2.1"],\
+          ["es-abstract", "npm:1.24.0"],\
+          ["es-array-method-boxes-properly", "npm:1.0.0"],\
+          ["es-errors", "npm:1.3.0"],\
+          ["es-object-atoms", "npm:1.1.1"],\
+          ["is-string", "npm:1.1.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["arraybuffer.prototype.slice", [\
       ["npm:1.0.4", {\
         "packageLocation": "./.yarn/cache/arraybuffer.prototype.slice-npm-1.0.4-01f62a9713-4821ebdfe7.zip/node_modules/arraybuffer.prototype.slice/",\
@@ -12333,6 +12350,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["es-array-method-boxes-properly", [\
+      ["npm:1.0.0", {\
+        "packageLocation": "./.yarn/cache/es-array-method-boxes-properly-npm-1.0.0-d4bc728109-27a8a21acf.zip/node_modules/es-array-method-boxes-properly/",\
+        "packageDependencies": [\
+          ["es-array-method-boxes-properly", "npm:1.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["es-define-property", [\
       ["npm:1.0.1", {\
         "packageLocation": "./.yarn/cache/es-define-property-npm-1.0.1-3fc6324f1c-f8dc9e660d.zip/node_modules/es-define-property/",\
@@ -13000,15 +13026,15 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["express-openid-connect", [\
-      ["npm:2.19.2", {\
-        "packageLocation": "./.yarn/cache/express-openid-connect-npm-2.19.2-002b8fb25f-0e21716796.zip/node_modules/express-openid-connect/",\
+      ["npm:2.19.3", {\
+        "packageLocation": "./.yarn/cache/express-openid-connect-npm-2.19.3-1d5c689a14-3fc2cf93f1.zip/node_modules/express-openid-connect/",\
         "packageDependencies": [\
-          ["express-openid-connect", "npm:2.19.2"]\
+          ["express-openid-connect", "npm:2.19.3"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.19.2", {\
-        "packageLocation": "./.yarn/__virtual__/express-openid-connect-virtual-3f5ede8bbb/0/cache/express-openid-connect-npm-2.19.2-002b8fb25f-0e21716796.zip/node_modules/express-openid-connect/",\
+      ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.19.3", {\
+        "packageLocation": "./.yarn/__virtual__/express-openid-connect-virtual-a83289baa4/0/cache/express-openid-connect-npm-2.19.3-1d5c689a14-3fc2cf93f1.zip/node_modules/express-openid-connect/",\
         "packageDependencies": [\
           ["@types/express", "npm:5.0.6"],\
           ["base64url", "npm:3.0.1"],\
@@ -13016,14 +13042,15 @@ const RAW_RUNTIME_STATE =
           ["cookie", "npm:0.7.2"],\
           ["debug", "virtual:2b51d83636a42cdc1434b9a574324a754fe902f0d8f47c84f37fc9dd9e42f0be9d5cd9599ca4ccf8c80b9be5756c7aea000403217e2fd7a585437af81d091cfd#npm:4.4.1"],\
           ["express", "npm:5.2.1"],\
-          ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.19.2"],\
+          ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.19.3"],\
           ["futoin-hkdf", "npm:1.5.3"],\
           ["http-errors", "npm:1.8.1"],\
           ["joi", "npm:17.13.3"],\
           ["jose", "npm:2.0.7"],\
           ["on-headers", "npm:1.1.0"],\
           ["openid-client", "npm:4.9.1"],\
-          ["url-join", "npm:4.0.1"]\
+          ["url-join", "npm:4.0.1"],\
+          ["util-promisify", "npm:3.0.0"]\
         ],\
         "packagePeers": [\
           "@types/express",\
@@ -18089,6 +18116,22 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["object.getownpropertydescriptors", [\
+      ["npm:2.1.9", {\
+        "packageLocation": "./.yarn/cache/object.getownpropertydescriptors-npm-2.1.9-ffe97417d7-e80dfbf8fc.zip/node_modules/object.getownpropertydescriptors/",\
+        "packageDependencies": [\
+          ["array.prototype.reduce", "npm:1.0.8"],\
+          ["call-bind", "npm:1.0.8"],\
+          ["define-properties", "npm:1.2.1"],\
+          ["es-abstract", "npm:1.24.0"],\
+          ["es-object-atoms", "npm:1.1.1"],\
+          ["gopd", "npm:1.2.0"],\
+          ["object.getownpropertydescriptors", "npm:2.1.9"],\
+          ["safe-array-concat", "npm:1.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["object.groupby", [\
       ["npm:1.0.3", {\
         "packageLocation": "./.yarn/cache/object.groupby-npm-1.0.3-d5feb41454-44cb86dd2c.zip/node_modules/object.groupby/",\
@@ -18957,7 +19000,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-prettier", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.5.4"],\
           ["express", "npm:5.2.1"],\
           ["express-nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.1.2"],\
-          ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.19.2"],\
+          ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.19.3"],\
           ["express-session", "npm:1.18.2"],\
           ["form-data", "npm:4.0.4"],\
           ["glob", "npm:11.1.0"],\
@@ -22003,6 +22046,16 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/util-deprecate-npm-1.0.2-e3fe1a219c-474acf1146.zip/node_modules/util-deprecate/",\
         "packageDependencies": [\
           ["util-deprecate", "npm:1.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["util-promisify", [\
+      ["npm:3.0.0", {\
+        "packageLocation": "./.yarn/cache/util-promisify-npm-3.0.0-fedb444266-dba01c7815.zip/node_modules/util-promisify/",\
+        "packageDependencies": [\
+          ["object.getownpropertydescriptors", "npm:2.1.9"],\
+          ["util-promisify", "npm:3.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
