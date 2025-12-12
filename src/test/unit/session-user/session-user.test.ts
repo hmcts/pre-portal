@@ -1,20 +1,22 @@
-/* eslint-disable jest/expect-expect */
+/* eslint-disable vitest/expect-expect */
+import { describe, expect, test, vi } from 'vitest';
 import { SessionUser } from '../../../main/services/session-user/session-user';
 import { createRequest } from 'node-mocks-http';
 import { UserProfile } from '../../../main/types/user-profile';
 import { mockeduser } from '../test-helper';
 
-jest.mock('../../../main/services/pre-api/pre-client', () => ({
-  PreClient: jest.fn().mockImplementation(() => ({
-    constructor: () => {},
-    getActiveUserByEmail: jest.fn().mockImplementation((email: string) => {
-      if (email === 'inactive@user.com') {
-        return Promise.reject(new Error('User is not active: ' + email));
-      }
-      return Promise.resolve(mockeduser as UserProfile);
+vi.mock('../../../main/services/pre-api/pre-client', () => {
+  return {
+    PreClient: vi.fn(function (this: any) {
+      this.getActiveUserByEmail = vi.fn().mockImplementation((email: string) => {
+        if (email === 'inactive@user.com') {
+          return Promise.reject(new Error('User is not active: ' + email));
+        }
+        return Promise.resolve(mockeduser as UserProfile);
+      });
     }),
-  })),
-}));
+  };
+});
 describe('Session Users', () => {
   test('getLoggedInUser no session', async () => {
     const t = async () => {

@@ -1,5 +1,6 @@
-/* eslint-disable jest/expect-expect */
+/* eslint-disable vitest/expect-expect */
 
+import { describe, expect, test, vi } from 'vitest';
 import { Auth } from '../../../../main/modules/auth';
 import config from 'config';
 import { set } from 'lodash';
@@ -8,10 +9,10 @@ import axios from 'axios';
 import { OpenidRequest, OpenidResponse, Session } from 'express-openid-connect';
 import { AccessStatus } from '../../../../main/types/access-status';
 
-jest.mock('axios');
-jest.mock('jose', () => {
+vi.mock('axios');
+vi.mock('jose', () => {
   return {
-    decodeJwt: jest.fn().mockImplementation((s: string) => {
+    decodeJwt: vi.fn().mockImplementation((_s: string) => {
       return { email: 'test@testy.com' };
     }),
   };
@@ -32,7 +33,7 @@ describe('Auth Module', () => {
   });
 
   test('Checks if a user is newly invited during callback', async () => {
-    const mockedAxios = axios as jest.Mocked<typeof axios>;
+    const mockedAxios = axios as any;
     // @ts-ignore
     mockedAxios.get.mockImplementation((url: string, config: object) => {
       if (url === '/invites' && config['params']['email'] === 'test@testy.com') {
@@ -101,7 +102,7 @@ describe('Auth Module', () => {
       }
     });
     // @ts-ignore
-    mockedAxios.post.mockImplementation((url: string, config: object) => {
+    mockedAxios.post.mockImplementation((url: string, _config: object) => {
       if (url === '/invites/redeem/test@testy.com') {
         return Promise.resolve({
           status: 200,

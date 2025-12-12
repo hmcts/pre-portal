@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import { AccessStatus } from '../../main/types/access-status';
 import { UserProfile } from '../../main/types/user-profile';
 
@@ -55,22 +56,22 @@ export const mockeduser: UserProfile = {
 };
 
 export function mockUser() {
-  jest.mock('express-openid-connect', () => {
+  vi.mock('express-openid-connect', () => {
     return {
-      requiresAuth: jest.fn().mockImplementation(() => {
+      requiresAuth: vi.fn().mockImplementation(() => {
         return (req: any, res: any, next: any) => {
           next();
         };
       }),
     };
   });
-  jest.mock('../../main/services/session-user/session-user', () => {
+  vi.mock('../../main/services/session-user/session-user', () => {
     return {
       SessionUser: {
-        getLoggedInUserPortalId: jest.fn().mockImplementation((req: Express.Request) => {
+        getLoggedInUserPortalId: vi.fn().mockImplementation((req: Express.Request) => {
           return '123';
         }),
-        getLoggedInUserProfile: jest.fn().mockImplementation((req: Express.Request) => {
+        getLoggedInUserProfile: vi.fn().mockImplementation((req: Express.Request) => {
           return mockeduser;
         }),
       },

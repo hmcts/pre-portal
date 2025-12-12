@@ -1,28 +1,30 @@
+import { describe, expect, test, vi, beforeEach } from 'vitest';
+import type { Mock } from 'vitest';
 import { LiveEventStatusService } from '../../../../main/services/system-status/live-events-status';
 import { PreClient } from '../../../../main/services/pre-api/pre-client';
 import { Request } from 'express';
 import { SessionUser } from '../../../../main/services/session-user/session-user';
 import { UserLevel } from '../../../../main/types/user-level';
 
-jest.mock('../../../../main/services/pre-api/pre-client');
-jest.mock('../../../../main/services/session-user/session-user');
+vi.mock('../../../../main/services/pre-api/pre-client');
+vi.mock('../../../../main/services/session-user/session-user');
 
 describe('LiveEventStatusService', () => {
   let mockRequest: Partial<Request>;
-  let mockClient: jest.Mocked<PreClient>;
+  let mockClient: any;
   let service: LiveEventStatusService;
 
   beforeEach(() => {
-    mockClient = new PreClient() as jest.Mocked<PreClient>;
+    mockClient = new PreClient() as any;
     mockRequest = {} as Partial<Request>;
   });
 
   test('should return an empty array if no live events are found', async () => {
-    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as any).mockReturnValue({
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
 
-    mockClient.getLiveEvents = jest.fn().mockResolvedValue([]);
+    mockClient.getLiveEvents = vi.fn().mockResolvedValue([]);
 
     service = new LiveEventStatusService(mockRequest as Request, mockClient);
     const result = await service.getMediaKindLiveEventStatuses();
@@ -32,11 +34,11 @@ describe('LiveEventStatusService', () => {
   });
 
   test('should return formatted live event statuses', async () => {
-    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as Mock).mockReturnValue({
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
 
-    mockClient.getLiveEvents = jest.fn().mockResolvedValue([
+    mockClient.getLiveEvents = vi.fn().mockResolvedValue([
       { id: 'event1', name: 'Live Event 1', description: 'Test Event 1', resource_state: 'Running' },
       { id: 'event2', name: 'Live Event 2', description: 'Test Event 2', resource_state: 'Stopped' },
     ]);
@@ -55,7 +57,7 @@ describe('LiveEventStatusService', () => {
   });
 
   test('should include caseReference when capture session is found', async () => {
-    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as Mock).mockReturnValue({
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
 
@@ -73,7 +75,7 @@ describe('LiveEventStatusService', () => {
   });
 
   test('should return formatted live event statuses with Unknown Case Reference when no capture session', async () => {
-    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as Mock).mockReturnValue({
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
 
@@ -98,11 +100,11 @@ describe('LiveEventStatusService', () => {
   });
 
   test('should handle errors when fetching live events', async () => {
-    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as Mock).mockReturnValue({
       app_access: [{ role: { name: UserLevel.SUPER_USER }, id: 'test-user' }],
     });
 
-    mockClient.getLiveEvents = jest.fn().mockRejectedValue(new Error('API error'));
+    mockClient.getLiveEvents = vi.fn().mockRejectedValue(new Error('API error'));
 
     service = new LiveEventStatusService(mockRequest as Request, mockClient);
 
@@ -112,7 +114,7 @@ describe('LiveEventStatusService', () => {
   });
 
   test('should throw error if user not authorized', async () => {
-    (SessionUser.getLoggedInUserProfile as jest.Mock).mockReturnValue({
+    (SessionUser.getLoggedInUserProfile as Mock).mockReturnValue({
       app_access: [{ role: { name: UserLevel.ADMIN }, id: 'test-user' }],
     });
 
