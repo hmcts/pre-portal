@@ -102,7 +102,6 @@ export default function (app: Application): void {
         recording,
         recordingPlaybackDataUrl,
         mediaKindPlayerKey,
-        removeWitnessLastName: config.get('pre.removeWitnessLastName') === 'true',
         appliedEdits: enableAutomatedEditing
           ? await parseAppliedEdits(recording.edit_instructions, client, userPortalId)
           : undefined,

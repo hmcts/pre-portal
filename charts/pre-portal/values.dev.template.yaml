@@ -1,4 +1,5 @@
 nodejs:
+  devmemoryLimits: 576Mi
   # Don't modify below here
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
@@ -7,11 +8,8 @@ nodejs:
     API_URL: https://pre-api-pr-836.dev.platform.hmcts.net/
     ALLOW_CONFIG_MUTATIONS: true
     B2C_APP_CLIENT_ID: d20a7462-f222-46b8-a363-d2e30eb274eb
-    B2C_BASE_URL: https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_SIGNUP_SIGNIN
+    B2C_BASE_URL: https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_SignUpOrSignin
     B2C_END_SESSION_ENDPOINT: https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/b2c_1a_signup_signin/oauth2/v2.0/logout
-    TS_AND_CS_REDIRECT_ENABLED: true
-    ENABLE_CASE_STATE_COLUMN: true
     ENABLE_AUTOMATED_EDITING: true
     # Uncomment to enable dynatrace RUM in dev envs
     #DYNATRACE_JSTAG: https://js-cdn.dynatrace.com/jstag/17177a07246/bf24054dsx/636bef1033a59525_complete.js
-    REMOVE_WITNESS_LAST_NAME: true

@@ -3,6 +3,7 @@ import * as propertiesVolume from '@hmcts/properties-volume';
 import config from 'config';
 import { Application } from 'express';
 import { get, set } from 'lodash';
+import * as process from 'node:process';
 
 export class PropertiesVolume {
   private logger = Logger.getLogger('properties-volume');
@@ -16,7 +17,7 @@ export class PropertiesVolume {
       config,
       'b2c.baseUrl',
       process.env.B2C_BASE_URL ??
-        'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_SIGNUP_SIGNIN'
+        'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_SignUpOrSignin'
     );
     set(
       config,
@@ -24,9 +25,6 @@ export class PropertiesVolume {
       process.env.B2C_END_SESSION_ENDPOINT ??
         'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/b2c_1a_signup_signin/oauth2/v2.0/logout'
     );
-    set(config, 'pre.tsAndCsRedirectEnabled', process.env.TS_AND_CS_REDIRECT_ENABLED ?? 'false');
-    set(config, 'pre.enableCaseStateColumn', process.env.ENABLE_CASE_STATE_COLUMN ?? 'false');
-    set(config, 'pre.removeWitnessLastName', process.env.REMOVE_WITNESS_LAST_NAME ?? 'false');
     set(config, 'pre.enableAutomatedEditing', process.env.ENABLE_AUTOMATED_EDITING ?? 'false');
 
     if (server.locals.ENV === 'production') {
@@ -41,10 +39,18 @@ export class PropertiesVolume {
       this.setSecret('secrets.pre-hmctskv.apim-sub-portal-primary-key', 'pre.apiKey.primary');
       this.setSecret('secrets.pre-hmctskv.apim-sub-portal-primary-key', 'pre.primaryApiKey');
       this.setSecret('secrets.pre-hmctskv.apim-sub-portal-secondary-key', 'pre.apiKey.secondary');
-      this.setSecret('secrets.pre-hmctskv.pre-portal-sso', 'b2c.appClientSecret');
+      this.setSecret('secrets.pre-hmctskv.media-kind-player-key', 'pre.mediaKindPlayerKey');
+
+      if (process.env.USE_DEV_B2C === 'true') {
+        this.logger.info('Using dev B2C configuration');
+        this.setSecret('secrets.pre-hmctskv.dev-pre-portal-sso', 'b2c.appClientSecret');
+      } else {
+        this.setSecret('secrets.pre-hmctskv.pre-portal-sso', 'b2c.appClientSecret');
+      }
       this.setSecret('secrets.pre-hmctskv.b2c-test-login-email', 'b2c.testLogin.email');
       this.setSecret('secrets.pre-hmctskv.b2c-test-login-password', 'b2c.testLogin.password');
-      this.setSecret('secrets.pre-hmctskv.media-kind-player-key', 'pre.mediaKindPlayerKey');
+      this.setSecret('secrets.pre-hmctskv.b2c-test-super-user-email', 'b2c.testSuperUserLogin.email');
+      this.setSecret('secrets.pre-hmctskv.b2c-test-super-user-password', 'b2c.testSuperUserLogin.password');
     } else {
       this.logger.info('Loading properties from .env file');
       require('dotenv').config();
@@ -53,6 +59,8 @@ export class PropertiesVolume {
       set(config, 'b2c.appClientSecret', process.env.B2C_APP_CLIENT_SECRET ?? 'b2c.appClientSecret');
       set(config, 'b2c.testLogin.email', process.env.B2C_TEST_LOGIN_EMAIL);
       set(config, 'b2c.testLogin.password', process.env.B2C_TEST_LOGIN_PASSWORD);
+      set(config, 'b2c.testSuperUserLogin.email', process.env.B2C_TEST_SUPER_USER_LOGIN_EMAIL);
+      set(config, 'b2c.testSuperUserLogin.password', process.env.B2C_TEST_SUPER_USER_LOGIN_PASSWORD);
       set(config, 'session.secret', process.env.SESSION_SECRET ?? 'superlongrandomstringthatshouldbebetterinprod');
       set(config, 'pre.mediaKindPlayerKey', process.env.MEDIA_KIND_PLAYER_KEY ?? 'mediaKindPlayerKey');
     }

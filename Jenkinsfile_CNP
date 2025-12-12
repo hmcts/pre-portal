@@ -10,7 +10,9 @@ def secrets = [
   'pre-hmctskv-${env}':
     [
       secret('b2c-test-login-email', 'B2C_TEST_LOGIN_EMAIL'),
-      secret('b2c-test-login-password', 'B2C_TEST_LOGIN_PASSWORD')
+      secret('b2c-test-login-password', 'B2C_TEST_LOGIN_PASSWORD'),
+      secret('b2c-test-super-user-email', 'B2C_TEST_SUPER_USER_LOGIN_EMAIL'),
+      secret('b2c-test-super-user-password', 'B2C_TEST_SUPER_USER_LOGIN_PASSWORD')
     ]
 ]
 
@@ -27,12 +29,12 @@ def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
 
 withPipeline(type, product, component) {
   disableLegacyDeployment()
-  syncBranchesWithMaster(['perftest', 'ithc', 'demo'])
+  syncBranchesWithMaster(['perftest', 'demo'])
   enableSlackNotifications('#pre-builds')
   loadVaultSecrets(secrets)
 
   before('functionalTest:dev') {
-    env.TEST_URL = "https:///pre-portal-pr-${CHANGE_ID}.dev.platform.hmcts.net/"
+    env.TEST_URL = "https://pre-portal-pr-${CHANGE_ID}.dev.platform.hmcts.net/"
     yarnBuilder.yarn('test:pa11y')
   }
 

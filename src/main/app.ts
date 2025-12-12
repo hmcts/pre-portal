@@ -87,5 +87,4 @@ app.use((err: HTTPError, req: express.Request, res: express.Response, next: expr
 
   res.status(err.status ?? 500);
   res.render('error', { status: err.status, message: err.message });
-  next();
 });

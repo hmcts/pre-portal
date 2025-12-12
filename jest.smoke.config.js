@@ -1,12 +1,18 @@
 module.exports = {
   roots: ['<rootDir>/src/test/smoke'],
-  testRegex: '(/src/test/.*|\\.test)\\.(ts|js)$',
+  testRegex: '(/src/test/.*|\\.(test|spec))\\.(ts|js)$',
   testEnvironment: 'node',
   testRunner: 'jest-circus/runner',
   transform: {
-    '^.+\\.ts$': 'ts-jest',
+    '^.+\\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.json' }],
+    '^.+\\.[cm]?jsx?$': 'babel-jest',
   },
-  moduleFileExtensions: ['ts', 'js', 'json'],
+  transformIgnorePatterns: ['/node_modules/(?!(jose)/)'],
+  moduleNameMapper: {
+    '^router/(.*)$': '<rootDir>/src/main/router/$1',
+    '^routes/(.*)$': '<rootDir>/src/main/routes/$1',
+  },
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   reporters: [
     'default',
     [

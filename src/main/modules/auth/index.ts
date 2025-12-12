@@ -3,7 +3,6 @@ import { PreClient } from '../../services/pre-api/pre-client';
 
 import { Logger } from '@hmcts/nodejs-logging';
 import config from 'config';
-import RedisStore from 'connect-redis';
 import { Application } from 'express';
 import { ConfigParams, auth } from 'express-openid-connect';
 import session from 'express-session';
@@ -11,6 +10,7 @@ import * as jose from 'jose';
 import FileStoreFactory from 'session-file-store';
 
 const FileStore = FileStoreFactory(session);
+import { RedisStore } from 'connect-redis';
 
 export class Auth {
   public enableFor(app: Application): void {
@@ -60,7 +60,7 @@ export class Auth {
           sameSite: 'Lax', // required for the oauth2 redirect
           secure: true,
         },
-        rolling: true, // Renew the cookie for another 20 minutes on each request\
+        rolling: true, // Renew the cookie for another `rollingDuration` minutes on each request
         /* eslint-disable  @typescript-eslint/no-explicit-any */
         store: this.getSessionStore(app, logger) as any, // https://github.com/auth0/express-openid-connect/issues/234
       },

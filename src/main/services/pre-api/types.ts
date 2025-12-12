@@ -8,6 +8,15 @@ export interface SearchRecordingsRequest {
   scheduledFor?: string;
   courtId?: string;
   includeDeleted?: boolean;
+  version?: number;
+  page?: number;
+  size?: number;
+}
+
+export interface SearchEditsRequest {
+  sourceRecordingId?: string;
+  lastModifiedAfter?: string;
+  lastModifiedBefore?: string;
   page?: number;
   size?: number;
 }
@@ -27,6 +36,7 @@ export interface CaptureSession {
   court_name: string;
   case_state: string;
   case_closed_at?: string;
+  case_reference?: string;
 }
 
 export interface Recording {
@@ -102,6 +112,9 @@ export interface EditRequest {
   id: string;
   source_recording?: Recording;
   status: string;
+  started_at?: string;
+  started_by_user_id?: string;
+  finished_at?: string;
   edit_instruction: EditInstruction;
   jointly_agreed?: boolean;
   rejection_reason?: string;

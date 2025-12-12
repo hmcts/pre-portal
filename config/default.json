@@ -12,9 +12,6 @@
     },
     "portalUrl": "https://localhost:4551",
     "mediaKindPlayerKey": "",
-    "tsAndCsRedirectEnabled": false,
-    "enableCaseStateColumn": false,
-    "removeWitnessLastName": false,
     "enableAutomatedEditing": false
   },
   "session": {
@@ -22,7 +19,7 @@
       "key": "",
       "host": ""
     },
-    "maxAge": 86400000,
+    "maxAge": 3600,
     "secret": "superlongrandomstringthatshouldbebetterinprod"
   },
   "b2c": {
@@ -34,6 +31,14 @@
       "email": "",
       "password": ""
     },
+    "testSuperUserLogin": {
+      "email": "",
+      "password": ""
+    },
     "callbackHostname": "localhost:4551"
+  },
+  "health": {
+    "cvp": "https://status-kinly.pexip.com/api/v2/status.json",
+    "notify": "https://status.notifications.service.gov.uk/api/v2/status.json"
   }
 }

@@ -49,7 +49,8 @@ describe('Browse route', () => {
     expect(response.status).toEqual(200);
     expect(response.text).toContain('Recordings');
     expect(response.text).toContain('Welcome back,');
-    expect(response.text).toContain('playback is preferred on non-mobile devices');
+    expect(response.text).toContain('legitimate need and having full authorisation.');
+    expect(response.text).toContain('Laptop and Desktop devices only.');
     expect(response.text).toContain('<a href="/logout" class="govuk-back-link">Sign out</a>');
   });
 
