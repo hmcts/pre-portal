@@ -5,5 +5,5 @@ nodejs:
   environment:
     B2C_APP_CLIENT_ID: c8deb898-d595-4fb2-8ba5-52fffa8db064
     B2C_BASE_URL: https://hmctsdevextid.b2clogin.com/hmctsdevextid.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_SignUpOrSignin
-    B2C_END_SESSION_ENDPOINT: https://hmctsdevextid.b2clogin.com/hmctsdevextid.onmicrosoft.com/b2c_1a_signup_signin/oauth2/v2.0/logout
+    B2C_END_SESSION_ENDPOINT: https://hmctsdevextid.b2clogin.com/hmctsdevextid.onmicrosoft.com/oauth2/v2.0/logout?p=b2c_1a_signuporsignin
     USE_DEV_B2C: true
