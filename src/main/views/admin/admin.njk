@@ -33,18 +33,13 @@
                  href: '/admin/migration',
                  text: "Data Migration",
                  active: '/admin/migration' in pageUrl
-                }
-                ]
+                },
+               {
+                text: "Sign out",
+                href: "/logout"
+                }]
            }) }}
          {% endif %}
-        <div class="govuk-grid-row admin-container">
-          {{
-            govukBackLink({
-              "text": "Sign out",
-              "href": "/logout"
-            })
-          }}
-        </div>
       {% endblock %}
 
       {% block content %}
