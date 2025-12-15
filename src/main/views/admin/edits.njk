@@ -1,17 +1,10 @@
 {% from "govuk/components/pagination/macro.njk" import govukPagination %}
-{% extends "template.njk" %}
+
+{% extends "admin/admin.njk" %}
 
 {% block pageTitle %}{{ title }} - PRE Portal{% endblock %}
 
-{% block beforeContent %}
-  {{
-  govukBackLink({
-    "text": "Sign out",
-    "href": "/logout"
-  })
-  }}
-{% endblock %}
-{% block content %}
+{% block mainContent %}
   <h1 class="govuk-heading-xl">Edit Request</h1>
 
   <form action="/admin/edit-request/upload" method="POST" enctype="multipart/form-data">

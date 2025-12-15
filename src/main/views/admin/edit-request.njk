@@ -1,4 +1,4 @@
-{% extends "template.njk" %}
+{% extends "admin/admin.njk" %}
 
 {% block pageTitle %}Edit Recording {{ recording.id }} - PRE Portal{% endblock %}
 
@@ -16,7 +16,7 @@
   }}
 {% endblock %}
 
-{% block content %}
+{% block mainContent %}
 
   <h1 class="govuk-heading-xl">Edits for case reference {{ recording.case_reference }}</h1>
 

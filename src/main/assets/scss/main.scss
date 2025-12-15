@@ -134,6 +134,7 @@
   width: 100px;
 }
 
+
 .govuk-navigation-list__link--active {
   font-weight: bold;
   color: yellow;
@@ -157,6 +158,16 @@
   padding-bottom: 4px;
   font-weight: bold;
 }
+
+
+.govuk-service-navigation.secondary-nav {
+  background-color: #6495ed21;
+}
+
+.govuk-service-navigation.secondary-nav > .govuk-navigation-list__item  {
+  font-size: small;
+}
+
 
 .sticky-header-container {
   top: 0;
@@ -316,19 +327,6 @@ body.no-scroll {
   z-index: 1001;
   display: flex;
   flex-direction: column;
-}
-
-#navToggle {
-  margin-top: 3.7rem;
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  z-index: 1002;
-}
-
-#navToggle.fixed {
-  position: fixed;
-  margin-top: 0rem;
 }
 
 .nav-content {

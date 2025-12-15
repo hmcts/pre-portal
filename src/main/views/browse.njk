@@ -46,7 +46,6 @@
           <th scope="col" class="govuk-table__header">Defendants</th>
           <th scope="col" class="govuk-table__header">Version</th>
           <th scope="col" class="govuk-table__header">Status</th>
-          {% endif %}
           {% if enableAutomatedEditing == true %}
           <th scope="col" class="govuk-table__header">Edit Status</th>
           <th scope="col" class="govuk-table__header">Action</th>
@@ -106,7 +105,6 @@
                   This will be unavailable from {{ recording.capture_session.case_closed_at }}
                 {% endif %}
               </td>
-              {% endif %}
               {% if enableAutomatedEditing == true %}
                 <td class="govuk-table__cell">
                   {% if recording.edit_status == "DRAFT" %}

@@ -1,4 +1,4 @@
-{% extends "template.njk" %}
+{% extends "admin/admin.njk" %}
 
 {% block pageTitle %}Edit Request - PRE Portal{% endblock %}
 
@@ -16,7 +16,7 @@
   }}
 {% endblock %}
 
-{% block content %}
+{% block mainContent %}
   {% if editRequest.status == "SUBMITTED" %}
     <h1 class="govuk-heading-xl">Submitted edits for case reference {{ recording.case_reference }}</h1>
   {% else %}
