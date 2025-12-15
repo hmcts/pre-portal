@@ -1,6 +1,6 @@
-import { Nunjucks } from '../../../main/modules/nunjucks';
+import { Nunjucks } from '../../../../main/modules/nunjucks';
 import config from 'config';
-import { mockUser } from '../test-helper';
+import { mockUser } from '../../test-helper';
 import { set } from 'lodash';
 import {
   mockedEditRequest,
@@ -8,9 +8,9 @@ import {
   mockGetRecording,
   mockGetRecordingPlaybackData,
   reset,
-} from '../../mock-api';
+} from '../../../mock-api';
 import { describe } from '@jest/globals';
-import { PreClient } from '../../../main/services/pre-api/pre-client';
+import { PreClient } from '../../../../main/services/pre-api/pre-client';
 
 mockUser();
 set(config, 'pre.enableAutomatedEditing', 'true');
@@ -25,7 +25,7 @@ describe('edit-request route', () => {
     new Nunjucks(false).enableFor(app);
     const request = require('supertest');
 
-    const watch = require('../../../main/routes/edit-request').default;
+    const watch = require('../../../../main/routes/admin/edit-request').default;
     watch(app);
 
     test('should return 500 when getCurrentEditRequest fails', async () => {
@@ -126,7 +126,7 @@ describe('edit-request route', () => {
     new Nunjucks(false).enableFor(app);
     const request = require('supertest');
 
-    const watch = require('../../../main/routes/edit-request').default;
+    const watch = require('../../../../main/routes/admin/edit-request').default;
     watch(app);
 
     test('should return 404 when id is invalid', async () => {
@@ -270,7 +270,7 @@ describe('edit-request route', () => {
   });
 
   describe('validation for put', () => {
-    const { validateRequest } = require('../../../main/routes/edit-request');
+    const { validateRequest } = require('../../../../main/routes/admin/edit-request');
 
     test('should return an error when start_of_cut is empty', () => {
       const duration = 'PT10S';

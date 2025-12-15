@@ -1,6 +1,6 @@
-import { SessionUser } from '../services/session-user/session-user';
-import { PreClient } from '../services/pre-api/pre-client';
-import { validateId, getCurrentEditRequest, isFlagEnabled } from '../utils/helpers';
+import { SessionUser } from '../../services/session-user/session-user';
+import { PreClient } from '../../services/pre-api/pre-client';
+import { validateId, getCurrentEditRequest, isFlagEnabled } from '../../utils/helpers';
 
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
