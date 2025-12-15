@@ -10,7 +10,7 @@ export default (app: Application): void => {
     return;
   }
 
-  app.get('/edit-request/:id/view', requiresAuth(), async (req, res, next) => {
+  app.get('/admin/edit-request/:id/view', requiresAuth(), async (req, res, next) => {
     if (!validateId(req.params.id)) {
       res.status(404);
       res.render('not-found');
@@ -35,17 +35,17 @@ export default (app: Application): void => {
         return;
       }
 
-      res.render('edit-request-view', {
+      res.render('admin/edit-request-view', {
         recording,
         editRequest,
-        postUrl: `/edit-request/${recording.id}/submit`,
+        postUrl: `/admin/edit-request/${recording.id}/submit`,
       });
     } catch (e) {
       next(e);
     }
   });
 
-  app.post('/edit-request/:id/submit', requiresAuth(), async (req, res, next) => {
+  app.post('/admin/edit-request/:id/submit', requiresAuth(), async (req, res, next) => {
     if (!validateId(req.params.id)) {
       res.status(404);
       res.render('not-found');

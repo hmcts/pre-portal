@@ -132,9 +132,9 @@
                   <div style="display: inline-flex; justify-content: end; width: 100%">
                     {% if recording.version == 1 %}
                       {% if recording.edit_status not in ['DRAFT', 'REJECTED', 'COMPLETE', undefined] %}
-                        <a class="govuk-link" style="margin-right: 0.5rem;" href="/edit-request/{{ recording.id }}/view">View</a>
+                        <a class="govuk-link" style="margin-right: 0.5rem;" href="/admin/edit-request/{{ recording.id }}/view">View</a>
                       {% else %}
-                        <a class="govuk-link" style="margin-right: 0.5rem;" href="/edit-request/{{ recording.id }}">Edit</a>
+                        <a class="govuk-link" style="margin-right: 0.5rem;" href="/admin/edit-request/{{ recording.id }}">Edit</a>
                       {% endif %}
                     {% endif %}
                     <a class="govuk-link" href="/watch/{{ recording.id }}">
