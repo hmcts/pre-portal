@@ -1,7 +1,7 @@
-import { PutEditInstruction, PutEditRequest } from '../../services/pre-api/types';
-import { PreClient } from '../../services/pre-api/pre-client';
-import { SessionUser } from '../../services/session-user/session-user';
-import { validateId, getCurrentEditRequest, isFlagEnabled, isStatusEditable } from '../../utils/helpers';
+import { PutEditInstruction, PutEditRequest } from '../services/pre-api/types';
+import { PreClient } from '../services/pre-api/pre-client';
+import { SessionUser } from '../services/session-user/session-user';
+import { validateId, getCurrentEditRequest, isFlagEnabled, isStatusEditable } from '../utils/helpers';
 
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
@@ -54,7 +54,10 @@ const validateInstruction = (instruction: PutEditInstruction, duration: string):
 
 export const validateRequest = (editRequest: PutEditRequest, duration: string): Object | undefined => {
   for (let instruction of editRequest.edit_instructions) {
-    const errors = validateInstruction(instruction, duration);
+    let trimmedInstruction: PutEditInstruction = instruction;
+    trimmedInstruction.start_of_cut = instruction.start_of_cut.trim()
+    trimmedInstruction.end_of_cut = instruction.end_of_cut.trim()
+    const errors = validateInstruction(trimmedInstruction, duration);
     if (Object.keys(errors).length > 0) {
       return errors;
     }
