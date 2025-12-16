@@ -39,10 +39,8 @@ describe('Admin Page Access', () => {
     }
 
     const response = await request(app).get('/admin');
-    expect(response.status).toEqual(200);
-    expect(response.text).toContain('Admin');
-    expect(response.text).toContain('Status');
-    expect(response.text).toContain('Audit');
+    expect(response.status).toEqual(302);
+    expect(response.text).toContain('Found. Redirecting to admin/edit-request');
   });
 
   test('should display "Page Not Found" for non-super user', async () => {
