@@ -1,4 +1,4 @@
-{% extends "admin/admin.njk" %}
+{% extends "template.njk" %}
 
 {% block pageTitle %}Edit Request - PRE Portal{% endblock %}
 
@@ -16,7 +16,7 @@
   }}
 {% endblock %}
 
-{% block mainContent %}
+{% block content %}
   {% if editRequest.status == "SUBMITTED" %}
     <h1 class="govuk-heading-xl">Submitted edits for case reference {{ recording.case_reference }}</h1>
   {% else %}
@@ -82,7 +82,7 @@
     </div>
 
     <div class="actions-bar govuk-body">
-      <a class="govuk-link cancel-link" href="/admin/edit-request/{{ recording.id }}"><span style="vertical-align: center">Cancel</span><span class="govuk-visually-hidden"> submission</span></a>
+      <a class="govuk-link cancel-link" href="/edit-request/{{ recording.id }}"><span style="vertical-align: center">Cancel</span><span class="govuk-visually-hidden"> submission</span></a>
       <button class="govuk-button" type="submit">Confirm Submission</button>
     </div>
   </form>

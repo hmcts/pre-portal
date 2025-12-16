@@ -68,7 +68,7 @@ export default (app: Application): void => {
 
   const logger = Logger.getLogger('edit-request');
 
-  app.get('/admin/edit-request/:id', requiresAuth(), async (req, res, next) => {
+  app.get('/edit-request/:id', requiresAuth(), async (req, res, next) => {
     if (!validateId(req.params.id)) {
       res.status(404);
       res.render('not-found');
@@ -96,7 +96,7 @@ export default (app: Application): void => {
       }
 
       if (!isStatusEditable(editRequest.status)) {
-        res.redirect(`/admin/edit-request/${req.params.id}/view`);
+        res.redirect(`/edit-request/${req.params.id}/view`);
         return;
       }
 
@@ -119,9 +119,9 @@ export default (app: Application): void => {
       });
 
       const recordingPlaybackDataUrl = `/watch/${req.params.id}/playback`;
-      const editRequestPostUrl = `/admin/edit-request/${req.params.id}`;
+      const editRequestPostUrl = `/edit-request/${req.params.id}`;
       const mediaKindPlayerKey = config.get('pre.mediaKindPlayerKey');
-      res.render('admin/edit-request', {
+      res.render('edit-request', {
         recording,
         recordingPlaybackDataUrl,
         editRequestPostUrl,
@@ -133,7 +133,7 @@ export default (app: Application): void => {
     }
   });
 
-  app.post('/admin/edit-request/:id', requiresAuth(), async (req, res, next) => {
+  app.post('/edit-request/:id', requiresAuth(), async (req, res, next) => {
     if (!validateId(req.params.id)) {
       res.status(404);
       res.render('not-found');

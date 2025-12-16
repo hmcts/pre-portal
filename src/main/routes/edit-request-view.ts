@@ -1,6 +1,6 @@
-import { SessionUser } from '../../services/session-user/session-user';
-import { PreClient } from '../../services/pre-api/pre-client';
-import { validateId, getCurrentEditRequest, isFlagEnabled } from '../../utils/helpers';
+import { SessionUser } from '../services/session-user/session-user';
+import { PreClient } from '../services/pre-api/pre-client';
+import { validateId, getCurrentEditRequest, isFlagEnabled } from '../utils/helpers';
 
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
@@ -10,7 +10,7 @@ export default (app: Application): void => {
     return;
   }
 
-  app.get('/admin/edit-request/:id/view', requiresAuth(), async (req, res, next) => {
+  app.get('/edit-request/:id/view', requiresAuth(), async (req, res, next) => {
     if (!validateId(req.params.id)) {
       res.status(404);
       res.render('not-found');
@@ -35,17 +35,17 @@ export default (app: Application): void => {
         return;
       }
 
-      res.render('admin/edit-request-view', {
+      res.render('edit-request-view', {
         recording,
         editRequest,
-        postUrl: `/admin/edit-request/${recording.id}/submit`,
+        postUrl: `/edit-request/${recording.id}/submit`,
       });
     } catch (e) {
       next(e);
     }
   });
 
-  app.post('/admin/edit-request/:id/submit', requiresAuth(), async (req, res, next) => {
+  app.post('/edit-request/:id/submit', requiresAuth(), async (req, res, next) => {
     if (!validateId(req.params.id)) {
       res.status(404);
       res.render('not-found');

@@ -7,7 +7,7 @@
 {% block mainContent %}
   <h1 class="govuk-heading-xl">Edit Request</h1>
 
-  <form action="/admin/edit-request/upload" method="POST" enctype="multipart/form-data">
+  <form action="/edit-request/upload" method="POST" enctype="multipart/form-data">
     <div class="govuk-form-group">
       <label class="govuk-label" for="case-reference">
         Case reference
@@ -158,7 +158,7 @@
 
       try {
         const formData = new FormData(e.target);
-        const response = await fetch('/admin/edit-request/upload', {
+        const response = await fetch('/edit-request/upload', {
           method: 'POST',
           body: formData,
         });
