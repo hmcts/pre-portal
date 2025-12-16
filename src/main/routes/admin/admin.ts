@@ -7,4 +7,3 @@ export default function (app: Application): void {
     res.redirect('admin/edit-request');
   });
 }
-
