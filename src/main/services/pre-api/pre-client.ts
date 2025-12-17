@@ -141,7 +141,24 @@ export class PreClient {
 
   public async getUserByEmail(email: string): Promise<UserProfile> {
     const response = await axios.get('/users/by-email/' + encodeURIComponent(email));
-    return response.data as UserProfile;
+    // check if this is a cjsm email
+    const data = response.data as UserProfile;
+    if (email.toLowerCase().endsWith('.cjsm.net')
+      && data.user.alternative_email?.toLowerCase() == email.toLowerCase()) {
+      this.logger.info('CJSM email detected for user: ' + this.obfuscateEmail(email));
+      // update the user
+      data.user.alternative_email = data.user.email;
+      data.user.email = email.toLowerCase();
+      // PUT to API
+      await axios.put('/users/' + data.user.id, data);
+    }
+    return data;
+  }
+
+  private obfuscateEmail(email: string): string {
+    const [localPart, domain] = email.split('@');
+    const obfuscatedLocalPart = localPart.length <= 2 ? localPart[0] + '*' : localPart[0] + '*'.repeat(localPart.length - 2) + localPart.slice(-1);
+    return `${obfuscatedLocalPart}@${domain}`;
   }
 
   public async getActiveUserByEmail(email: string): Promise<UserProfile> {
