@@ -5,6 +5,7 @@
 {% from "govuk/components/cookie-banner/macro.njk" import govukCookieBanner %}
 {% from "govuk/components/skip-link/macro.njk" import govukSkipLink %}
 {% from "govuk/components/service-navigation/macro.njk" import govukServiceNavigation %}
+{% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}
 
 {% block pageTitle %}PRE Portal{% endblock %}
 
@@ -115,6 +116,19 @@
   text: "Skip to main content",
   href: "#main-content"
 }) }}
+
+{% if showCjsmBanner %}
+  {% set cjsmBannerHtml %}
+    <p class="govuk-notification-banner__heading">
+      CJSM email is the preferred email to log in with. If you have a CJSM email address, please use it to sign in.
+    </p>
+  {% endset %}
+  
+  {{ govukNotificationBanner({
+    type: "important",
+    html: cjsmBannerHtml
+  }) }}
+{% endif %}
 {% endblock %}
 
 {% block bodyEnd %}

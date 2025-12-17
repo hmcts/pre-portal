@@ -2,6 +2,7 @@ import * as path from 'path';
 
 import * as express from 'express';
 import * as nunjucks from 'nunjucks';
+import { SessionUser } from '../../services/session-user/session-user';
 
 export class Nunjucks {
   constructor(public developmentMode: boolean) {
@@ -26,6 +27,21 @@ export class Nunjucks {
 
     app.use((req, res, next) => {
       res.locals.pagePath = req.path;
+      
+      try {
+        if (req['__session'] && req['__session'].userProfile) {
+          const userProfile = SessionUser.getLoggedInUserProfile(req);
+          const currentEmail = userProfile.user.email.toLowerCase();
+          const isCjsmEmail = currentEmail.endsWith('@cjsm.net');
+          
+          res.locals.showCjsmBanner = !isCjsmEmail;
+        } else {
+          res.locals.showCjsmBanner = false;
+        }
+      } catch (error) {
+        res.locals.showCjsmBanner = false;
+      }
+      
       next();
     });
   }
