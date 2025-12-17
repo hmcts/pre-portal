@@ -20,6 +20,10 @@ export const convertIsoToDate = (isoString?: string): string | undefined => {
 
 export default function (app: Application): void {
   app.get('/browse', requiresAuth(), async (req, res) => {
+    const userProfileForCjsm = SessionUser.getLoggedInUserProfile(req);
+    const email = (userProfileForCjsm.user.email || '').toLowerCase();
+    const showCjsmBanner = !!email && !email.endsWith('@cjsm.net');
+
     const client = new PreClient();
 
     const request: SearchRecordingsRequest = {
@@ -132,6 +136,7 @@ export default function (app: Application): void {
       user: SessionUser.getLoggedInUserProfile(req).user,
       isSuperUser: isSuperUser,
       pageUrl: req.url,
+      showCjsmBanner,
     });
   });
 }
