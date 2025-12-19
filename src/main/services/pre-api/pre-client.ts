@@ -21,6 +21,7 @@ import config from 'config';
 import { HealthResponse } from '../../types/health';
 import { Court } from '../../types/court';
 import qs from 'qs';
+import { UpdateUser } from '../../types/update-user';
 
 export class PreClient {
   logger = Logger.getLogger('pre-client');
@@ -143,16 +144,29 @@ export class PreClient {
     const response = await axios.get('/users/by-email/' + encodeURIComponent(email));
     // check if this is a cjsm email
     const data = response.data as UserProfile;
+    this.logger.info('Fetched user by email: ' + email);
     if (email.toLowerCase().endsWith('.cjsm.net')
-      && data.user.alternative_email?.toLowerCase() == email.toLowerCase()) {
+      && data.user.alternative_email?.toLowerCase() == email.toLowerCase()
+      && data.portal_access.length > 0) {
       this.logger.info('CJSM email detected for user: ' + this.obfuscateEmail(email));
       // update the user
       data.user.alternative_email = data.user.email;
       data.user.email = email.toLowerCase();
-      // PUT to API
-      await axios.put('/users/' + data.user.id, data);
+      await this.updateUser(UpdateUser.fromUserProfile(data));
+      this.logger.info('Updated user email to CJSM email for user: ' + this.obfuscateEmail(email));
     }
     return data;
+  }
+
+  private async updateUser(user: UpdateUser) {
+    const portalXUserId = config.get('pre.portalXUserId') as string;
+    // PUT to API
+    await axios.put('/users/' + user.id, user, {
+        headers: {
+          'X-User-Id': portalXUserId,
+        }
+      },
+    );
   }
 
   private obfuscateEmail(email: string): string {

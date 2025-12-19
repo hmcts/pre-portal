@@ -11,7 +11,8 @@
       "secondary": ""
     },
     "portalUrl": "https://localhost:4551",
-    "mediaKindPlayerKey": ""
+    "mediaKindPlayerKey": "",
+    "portalXUserId": ""
   },
   "session": {
     "redis": {
