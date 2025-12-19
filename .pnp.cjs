@@ -39,7 +39,7 @@ const RAW_RUNTIME_STATE =
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.2.0"],\
           ["@jest/globals", "npm:30.2.0"],\
-          ["@mediakind/mkplayer", "npm:1.29.0"],\
+          ["@mediakind/mkplayer", "npm:1.32.0"],\
           ["@types/babel__core", "npm:7.20.5"],\
           ["@types/babel__preset-env", "npm:7.10.0"],\
           ["@types/body-parser", "npm:1.19.6"],\
@@ -4835,12 +4835,12 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@mediakind/mkplayer", [\
-      ["npm:1.29.0", {\
-        "packageLocation": "./.yarn/cache/@mediakind-mkplayer-npm-1.29.0-6554b9bbc4-242e6495a4.zip/node_modules/@mediakind/mkplayer/",\
+      ["npm:1.32.0", {\
+        "packageLocation": "./.yarn/cache/@mediakind-mkplayer-npm-1.32.0-eca338c562-ebde3e2280.zip/node_modules/@mediakind/mkplayer/",\
         "packageDependencies": [\
-          ["@mediakind/mkplayer", "npm:1.29.0"],\
-          ["bitmovin-player", "npm:8.225.0"],\
-          ["bitmovin-player-ui", "npm:3.98.0"]\
+          ["@mediakind/mkplayer", "npm:1.32.0"],\
+          ["bitmovin-player", "npm:8.235.0"],\
+          ["bitmovin-player-ui", "npm:3.105.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -9861,19 +9861,19 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["bitmovin-player", [\
-      ["npm:8.225.0", {\
-        "packageLocation": "./.yarn/cache/bitmovin-player-npm-8.225.0-bc1dc5c398-896ad81f39.zip/node_modules/bitmovin-player/",\
+      ["npm:8.235.0", {\
+        "packageLocation": "./.yarn/cache/bitmovin-player-npm-8.235.0-f81b0fa623-09520b7a76.zip/node_modules/bitmovin-player/",\
         "packageDependencies": [\
-          ["bitmovin-player", "npm:8.225.0"]\
+          ["bitmovin-player", "npm:8.235.0"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["bitmovin-player-ui", [\
-      ["npm:3.98.0", {\
-        "packageLocation": "./.yarn/cache/bitmovin-player-ui-npm-3.98.0-1aa9c24170-477cf68823.zip/node_modules/bitmovin-player-ui/",\
+      ["npm:3.105.0", {\
+        "packageLocation": "./.yarn/cache/bitmovin-player-ui-npm-3.105.0-97f62d495b-1ccc550448.zip/node_modules/bitmovin-player-ui/",\
         "packageDependencies": [\
-          ["bitmovin-player-ui", "npm:3.98.0"]\
+          ["bitmovin-player-ui", "npm:3.105.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -18952,7 +18952,7 @@ const RAW_RUNTIME_STATE =
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.2.0"],\
           ["@jest/globals", "npm:30.2.0"],\
-          ["@mediakind/mkplayer", "npm:1.29.0"],\
+          ["@mediakind/mkplayer", "npm:1.32.0"],\
           ["@types/babel__core", "npm:7.20.5"],\
           ["@types/babel__preset-env", "npm:7.10.0"],\
           ["@types/body-parser", "npm:1.19.6"],\
