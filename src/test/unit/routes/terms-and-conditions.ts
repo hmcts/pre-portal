@@ -1,21 +1,18 @@
 import express from 'express';
 import request from 'supertest';
 import { describe, expect, test } from 'vitest';
+import termsAndConditions from '../../../main/routes/terms-and-conditions';
 import { mockGetLatestTermsAndConditions } from '../../mock-api';
 import { Terms } from '../../../main/types/terms';
 import { Nunjucks } from '../../../main/modules/nunjucks';
 
-const registerRoute = async (app: express.Express) => {
-  const { default: termsAndConditions } = await import('../../../main/routes/terms-and-conditions');
-  termsAndConditions(app);
-};
 
 /* eslint-disable vitest/expect-expect */
 describe('Terms and Conditions page', () => {
   test('should return 200', async () => {
     const app = express();
     new Nunjucks(false).enableFor(app);
-    await registerRoute(app);
+    termsAndConditions(app);
 
     mockGetLatestTermsAndConditions({
       id: '1234',
