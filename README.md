@@ -192,19 +192,49 @@ yarn lint --write
 
 ### Running the tests
 
-This template app uses [Jest](https://jestjs.io//) as the test engine.
+This application uses [Vitest](https://vitest.dev/) for unit tests and [Jest](https://jestjs.io/) for route integration tests, accessibility tests, and smoke tests.
 
-Important: Currently, Jest is incompatible with ESM modules. Babel has been implemented to transform ESM modules to enable compatibility.
-
-You can run unit tests by executing the following command:
+Vitest provides native ESM support, improved performance, and modern testing features for unit testing.
 
 #### Unit Tests
+
+Unit tests are powered by Vitest, offering fast execution and a modern testing experience.
+
+Run unit tests:
 
 ```bash
 yarn test:unit
 ```
 
+Run unit tests in watch mode (automatically re-runs tests when files change):
+
+```bash
+yarn test:unit:watch
+```
+
+Run unit tests with UI (opens an interactive web interface):
+
+```bash
+yarn test:unit:ui
+```
+
+Run unit tests with coverage:
+
+```bash
+yarn test:coverage
+```
+
+#### Route Integration Tests
+
+Route integration tests use Jest to test route handlers with full request/response cycles:
+
+```bash
+yarn test:routes
+```
+
 #### Functional Tests
+
+Functional tests verify end-to-end user workflows:
 
 ```bash
 yarn test:functional

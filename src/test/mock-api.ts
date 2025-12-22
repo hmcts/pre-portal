@@ -1,9 +1,10 @@
+import { vi } from 'vitest';
 import {
   Pagination,
   PutAuditRequest,
   Recording,
-  RecordingPlaybackData,
   SearchRecordingsRequest,
+  RecordingPlaybackData,
 } from '../main/services/pre-api/types';
 import { PreClient } from '../main/services/pre-api/pre-client';
 import { AxiosResponse } from 'axios';
@@ -100,13 +101,13 @@ export function mock() {
 
 export function mockGetRecording(recording?: Recording | null) {
   if (recording !== undefined) {
-    jest.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (xUserId: string, id: string) => {
+    vi.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (xUserId: string, id: string) => {
       return Promise.resolve(recording);
     });
     return;
   }
 
-  jest.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (xUserId: string, id: string) => {
+  vi.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (xUserId: string, id: string) => {
     return Promise.resolve(mockRecordings.find(r => r.id === id) || null);
   });
 }
@@ -121,23 +122,23 @@ export function mockGetRecordings(recordings?: Recording[], page: number = 0) {
     } as Pagination;
     const recordingSubset = recordings.slice(page * 10, (page + 1) * 10);
 
-    jest
-      .spyOn(PreClient.prototype, 'getRecordings')
-      .mockImplementation(async (xUserId: string, request: SearchRecordingsRequest) => {
+    vi.spyOn(PreClient.prototype, 'getRecordings').mockImplementation(
+      async (xUserId: string, request: SearchRecordingsRequest) => {
         return Promise.resolve({ recordings: recordingSubset, pagination });
-      });
+      }
+    );
     return;
   }
 
-  jest
-    .spyOn(PreClient.prototype, 'getRecordings')
-    .mockImplementation(async (xUserId: string, req: SearchRecordingsRequest) => {
+  vi.spyOn(PreClient.prototype, 'getRecordings').mockImplementation(
+    async (xUserId: string, req: SearchRecordingsRequest) => {
       return Promise.resolve({ recordings: mockRecordings, pagination: mockPagination });
-    });
+    }
+  );
 }
 
 export const mockPutAudit = () => {
-  jest.spyOn(PreClient.prototype, 'putAudit').mockImplementation(async (xUserId: string, request: PutAuditRequest) => {
+  vi.spyOn(PreClient.prototype, 'putAudit').mockImplementation(async (xUserId: string, request: PutAuditRequest) => {
     return Promise.resolve({
       status: 201,
       statusText: 'CREATED',
@@ -145,47 +146,45 @@ export const mockPutAudit = () => {
   });
 };
 
-export function mockGetLatestTermsAndConditions(data?: Terms | null) {
+export function mockGetLatestTermsAndConditions(data?: Terms) {
   if (data !== undefined) {
-    jest
-      .spyOn(PreClient.prototype, 'getLatestTermsAndConditions')
-      .mockImplementation(async (xUserId: string, id: string) => {
-        return Promise.resolve(data);
-      });
+    vi.spyOn(PreClient.prototype, 'getLatestTermsAndConditions').mockImplementation(async () => {
+      return Promise.resolve(data);
+    });
   }
 }
 
 export function mockAcceptTermsAndConditions() {
-  jest
-    .spyOn(PreClient.prototype, 'acceptTermsAndConditions')
-    .mockImplementation(async (xUserId: string, termsId: string) => {
+  vi.spyOn(PreClient.prototype, 'acceptTermsAndConditions').mockImplementation(
+    async (xUserId: string, termsId: string) => {
       return Promise.resolve();
-    });
+    }
+  );
 }
 
 export function mockGetRecordingPlaybackData(data?: RecordingPlaybackData | null) {
   if (data !== undefined) {
-    jest
-      .spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
-      .mockImplementation(async (xUserId: string, id: string) => {
+    vi.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockImplementation(
+      async (xUserId: string, id: string) => {
         return Promise.resolve(data);
-      });
+      }
+    );
     return;
   }
 
-  jest
-    .spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
-    .mockImplementation(async (xUserId: string, id: string) => {
+  vi.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockImplementation(
+    async (xUserId: string, id: string) => {
       return Promise.resolve({
         src: 'src',
         type: 'type',
         protectionInfo: [],
       } as RecordingPlaybackData);
-    });
+    }
+  );
 }
 
 export function reset() {
-  jest.spyOn(PreClient.prototype, 'getRecording').mockRestore();
-  jest.spyOn(PreClient.prototype, 'getRecordings').mockRestore();
-  jest.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockRestore();
+  vi.spyOn(PreClient.prototype, 'getRecording').mockRestore();
+  vi.spyOn(PreClient.prototype, 'getRecordings').mockRestore();
+  vi.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockRestore();
 }
