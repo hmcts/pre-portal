@@ -1,5 +1,11 @@
 import { vi } from 'vitest';
-import { Pagination, PutAuditRequest, Recording, SearchRecordingsRequest, RecordingPlaybackData } from '../main/services/pre-api/types';
+import {
+  Pagination,
+  PutAuditRequest,
+  Recording,
+  SearchRecordingsRequest,
+  RecordingPlaybackData,
+} from '../main/services/pre-api/types';
 import { PreClient } from '../main/services/pre-api/pre-client';
 import { AxiosResponse } from 'axios';
 import { Terms } from '../main/types/terms';
@@ -158,21 +164,23 @@ export function mockAcceptTermsAndConditions() {
 
 export function mockGetRecordingPlaybackData(data?: RecordingPlaybackData | null) {
   if (data !== undefined) {
-    vi.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
-      .mockImplementation(async (xUserId: string, id: string) => {
+    vi.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockImplementation(
+      async (xUserId: string, id: string) => {
         return Promise.resolve(data);
-      });
+      }
+    );
     return;
   }
 
-  vi.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
-    .mockImplementation(async (xUserId: string, id: string) => {
+  vi.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockImplementation(
+    async (xUserId: string, id: string) => {
       return Promise.resolve({
         src: 'src',
         type: 'type',
         protectionInfo: [],
       } as RecordingPlaybackData);
-    });
+    }
+  );
 }
 
 export function reset() {

@@ -6,7 +6,6 @@ import { mockGetLatestTermsAndConditions } from '../../mock-api';
 import { Terms } from '../../../main/types/terms';
 import { Nunjucks } from '../../../main/modules/nunjucks';
 
-
 /* eslint-disable vitest/expect-expect */
 describe('Terms and Conditions page', () => {
   test('should return 200', async () => {
