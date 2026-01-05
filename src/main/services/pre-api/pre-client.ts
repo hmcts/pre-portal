@@ -145,9 +145,11 @@ export class PreClient {
     // check if this is a cjsm email
     const data = response.data as UserProfile;
     this.logger.info('Fetched user by email: ' + email);
-    if (email.toLowerCase().endsWith('.cjsm.net')
-      && data.user.alternative_email?.toLowerCase() == email.toLowerCase()
-      && data.portal_access.length > 0) {
+    if (
+      email.toLowerCase().endsWith('.cjsm.net') &&
+      data.user.alternative_email?.toLowerCase() == email.toLowerCase() &&
+      data.portal_access.length > 0
+    ) {
       this.logger.info('CJSM email detected for user: ' + this.obfuscateEmail(email));
       // update the user
       data.user.alternative_email = data.user.email;
@@ -162,16 +164,18 @@ export class PreClient {
     const portalXUserId = config.get('pre.portalXUserId') as string;
     // PUT to API
     await axios.put('/users/' + user.id, user, {
-        headers: {
-          'X-User-Id': portalXUserId,
-        }
+      headers: {
+        'X-User-Id': portalXUserId,
       },
-    );
+    });
   }
 
   private obfuscateEmail(email: string): string {
     const [localPart, domain] = email.split('@');
-    const obfuscatedLocalPart = localPart.length <= 2 ? localPart[0] + '*' : localPart[0] + '*'.repeat(localPart.length - 2) + localPart.slice(-1);
+    const obfuscatedLocalPart =
+      localPart.length <= 2
+        ? localPart[0] + '*'
+        : localPart[0] + '*'.repeat(localPart.length - 2) + localPart.slice(-1);
     return `${obfuscatedLocalPart}@${domain}`;
   }
 
