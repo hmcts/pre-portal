@@ -21,8 +21,12 @@ export const convertIsoToDate = (isoString?: string): string | undefined => {
 export default function (app: Application): void {
   app.get('/browse', requiresAuth(), async (req, res) => {
     const userProfileForCjsm = SessionUser.getLoggedInUserProfile(req);
-    const email = (userProfileForCjsm.user.email || '').toLowerCase();
-    const showCjsmBanner = !!email && !email.endsWith('cjsm.net');
+    const primaryEmail = (userProfileForCjsm.user.email || '').toLowerCase();
+    const alternativeEmail = (userProfileForCjsm.user.alternative_email || '').toLowerCase();
+    const hasCjsmInPrimary = primaryEmail.endsWith('cjsm.net');
+    const hasCjsmInAlt = alternativeEmail.endsWith('cjsm.net');
+    const showCjsmBanner = !hasCjsmInPrimary && !hasCjsmInAlt;
+
 
     const client = new PreClient();
 
