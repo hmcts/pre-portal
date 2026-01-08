@@ -23,7 +23,7 @@ export class PropertiesVolume {
       config,
       'b2c.endSessionEndpoint',
       process.env.B2C_END_SESSION_ENDPOINT ??
-        'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/b2c_1a_signup_signin/oauth2/v2.0/logout'
+        'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/oauth2/v2.0/logout?p=b2c_1a_signuporsignin'
     );
     set(config, 'pre.enableAutomatedEditing', process.env.ENABLE_AUTOMATED_EDITING ?? 'false');
 
