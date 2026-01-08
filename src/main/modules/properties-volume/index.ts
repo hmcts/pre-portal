@@ -28,7 +28,7 @@ export class PropertiesVolume {
 
     if (server.locals.ENV === 'production') {
       this.logger.info('Loading properties from mounted KV');
-      propertiesVolume.addTo(config, {failOnError: true});
+      propertiesVolume.addTo(config, { failOnError: true });
       this.setSecret(
         'secrets.pre-hmctskv.app-insights-connection-string',
         'appInsights.app-insights-connection-string'
