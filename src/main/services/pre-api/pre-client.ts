@@ -228,16 +228,23 @@ export class PreClient {
     }
   }
 
-  public async putEditRequest(xUserId: string, request: PutEditRequest): Promise<void> {
+  public async putEditRequest(xUserId: string, request: PutEditRequest): Promise<AxiosResponse> {
     try {
-      await axios.put(`/edits/${request.id}`, request, {
+      return await axios.put(`/edits/${request.id}`, request, {
         headers: {
           'X-User-Id': xUserId,
+          'Accept': 'application/json'
         },
       });
     } catch (e) {
-      this.logger.error(e.message);
+      console.log("Response: " + e.response)
+      // if validation error, return response for highlighting on edit request page
+      if (e.response?.status === 400) {
+        return e.response;
+      }
+
       throw e;
+
     }
   }
 
