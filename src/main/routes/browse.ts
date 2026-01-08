@@ -27,7 +27,6 @@ export default function (app: Application): void {
     const hasCjsmInAlt = alternativeEmail.endsWith('cjsm.net');
     const showCjsmBanner = !hasCjsmInPrimary && !hasCjsmInAlt;
 
-
     const client = new PreClient();
 
     const request: SearchRecordingsRequest = {
