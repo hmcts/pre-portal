@@ -17,7 +17,7 @@ import {
 import { Logger } from '@hmcts/nodejs-logging';
 import axios, { AxiosResponse } from 'axios';
 import FormData from 'form-data';
-import config from 'config';
+import config = require('config');
 import { HealthResponse } from '../../types/health';
 import { Court } from '../../types/court';
 import qs from 'qs';
@@ -40,7 +40,7 @@ export class PreClient {
   private async initializeRedisClient(redisHost: string, redisKey: string) {
     try {
       this.redisClient = await this.redisService.getClient(redisHost, redisKey, this.logger);
-      this.logger.info(' Redis client initialized successfully');
+      this.logger.info('Redis client initialized successfully');
     } catch (error) {
       this.logger.error('Failed to initialize Redis client:', error);
     }
