@@ -74,6 +74,9 @@ export class PropertiesVolume {
   }
 
   private setSecret(fromPath: string, toPath: string): void {
+    if (fromPath === 'secrets.pre-portal-x-user-id') {
+      this.logger.info('Checking config for secrets.pre-portal-x-user-id');
+    }
     if (config.has(fromPath)) {
       if (fromPath === 'secrets.pre-portal-x-user-id') {
         this.logger.info('Setting {} to {}', toPath, fromPath);
