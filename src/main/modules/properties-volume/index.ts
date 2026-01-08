@@ -25,6 +25,7 @@ export class PropertiesVolume {
       process.env.B2C_END_SESSION_ENDPOINT ??
         'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/oauth2/v2.0/logout?p=b2c_1a_signuporsignin'
     );
+    set(config, 'pre.enableAutomatedEditing', process.env.ENABLE_AUTOMATED_EDITING ?? 'false');
 
     if (server.locals.ENV === 'production') {
       this.logger.info('Loading properties from mounted KV');
