@@ -161,13 +161,10 @@ export class PreClient {
   }
 
   private async updateUser(user: UpdateUser) {
-    const portalXUserId = config.get('pre.portalXUserId') as string;
-    this.logger.info('Updating user: ' + this.obfuscateEmail(user.email));
-    this.logger.info('Authenticating as x-user-id: ' + portalXUserId);
     // PUT to API
     await axios.put('/users/' + user.id, user, {
       headers: {
-        'X-User-Id': portalXUserId,
+        'X-User-Id': config.get('pre.portalXUserId') as string,
       },
     });
   }

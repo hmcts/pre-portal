@@ -5,9 +5,6 @@ import { Application } from 'express';
 import { get, set } from 'lodash';
 import * as process from 'node:process';
 
-import fs from 'fs';
-import path from 'path';
-
 export class PropertiesVolume {
   private logger = Logger.getLogger('properties-volume');
 
@@ -31,8 +28,7 @@ export class PropertiesVolume {
 
     if (server.locals.ENV === 'production') {
       this.logger.info('Loading properties from mounted KV');
-      this.walk('/mnt/secrets');
-      propertiesVolume.addTo(config, { failOnError: true });
+      propertiesVolume.addTo(config);
       this.setSecret(
         'secrets.pre-hmctskv.app-insights-connection-string',
         'appInsights.app-insights-connection-string'
@@ -55,7 +51,7 @@ export class PropertiesVolume {
       this.setSecret('secrets.pre-hmctskv.b2c-test-super-user-email', 'b2c.testSuperUserLogin.email');
       this.setSecret('secrets.pre-hmctskv.b2c-test-super-user-password', 'b2c.testSuperUserLogin.password');
       this.logger.info('Setting pre-portal-x-user-id from secrets');
-      this.setSecret('secrets.pre-portal-x-user-id', 'pre.portalXUserId');
+      this.setSecret('secrets.pre-hmctskv.pre-portal-x-user-id', 'pre.portalXUserId');
       this.logger.info('Done setting pre-portal-x-user-id from secrets');
     } else {
       this.logger.info('Loading properties from .env file');
@@ -78,34 +74,8 @@ export class PropertiesVolume {
   }
 
   private setSecret(fromPath: string, toPath: string): void {
-    if (fromPath === 'secrets.pre-portal-x-user-id') {
-      this.logger.info('Checking config for secrets.pre-portal-x-user-id');
-      this.logger.info(JSON.stringify(config.util.toObject()));
-      this.logger.info(config.has(fromPath) ? 'Found it' : 'Did not find it');
-    }
-
     if (config.has(fromPath)) {
-      if (fromPath === 'secrets.pre-portal-x-user-id') {
-        this.logger.info('Setting {} to {}', toPath, fromPath);
-        this.logger.info('value = ', get(config, fromPath));
-      }
       set(config, toPath, get(config, fromPath));
-    }
-  }
-
-  private walk(dir: string) {
-    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-      const fullPath = path.join(dir, entry.name);
-      if (entry.isDirectory()) {
-        this.walk(fullPath);
-      } else if (entry.isFile()) {
-        console.log(`\n=== ${fullPath} ===`);
-        try {
-          console.log(fs.readFileSync(fullPath, 'utf8'));
-        } catch (e) {
-          console.error(`(failed to read: ${e.message})`);
-        }
-      }
     }
   }
 }
