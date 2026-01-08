@@ -28,7 +28,7 @@ export class PropertiesVolume {
 
     if (server.locals.ENV === 'production') {
       this.logger.info('Loading properties from mounted KV');
-      propertiesVolume.addTo(config);
+      propertiesVolume.addTo(config, {failOnError: true});
       this.setSecret(
         'secrets.pre-hmctskv.app-insights-connection-string',
         'appInsights.app-insights-connection-string'
@@ -77,8 +77,9 @@ export class PropertiesVolume {
     if (fromPath === 'secrets.pre-portal-x-user-id') {
       this.logger.info('Checking config for secrets.pre-portal-x-user-id');
     }
+
     if (config.has(fromPath)) {
-      if (fromPath === 'secrets.pre-portal-x-user-id') {
+      if (fromPath == 'secrets.pre-portal-x-user-id') {
         this.logger.info('Setting {} to {}', toPath, fromPath);
         this.logger.info('value = ', get(config, fromPath));
       }
