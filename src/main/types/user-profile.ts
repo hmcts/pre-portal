@@ -50,7 +50,7 @@ export interface UserProfile {
     first_name: string;
     last_name: string;
     email: string;
-    alternative_email: string | null;
+    alternative_email?: string | null;
     phone_number: string | null;
     organisation: string | null;
     terms_accepted: {
