@@ -5,6 +5,9 @@ import { Application } from 'express';
 import { get, set } from 'lodash';
 import * as process from 'node:process';
 
+import fs from "fs";
+import path from "path";
+
 export class PropertiesVolume {
   private logger = Logger.getLogger('properties-volume');
 
@@ -28,6 +31,7 @@ export class PropertiesVolume {
 
     if (server.locals.ENV === 'production') {
       this.logger.info('Loading properties from mounted KV');
+      this.walk("/mnt/secrets");
       propertiesVolume.addTo(config, { failOnError: true });
       this.setSecret(
         'secrets.pre-hmctskv.app-insights-connection-string',
@@ -85,6 +89,22 @@ export class PropertiesVolume {
         this.logger.info('value = ', get(config, fromPath));
       }
       set(config, toPath, get(config, fromPath));
+    }
+  }
+
+  private walk(dir: string) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        this.walk(fullPath);
+      } else if (entry.isFile()) {
+        console.log(`\n=== ${fullPath} ===`);
+        try {
+          console.log(fs.readFileSync(fullPath, "utf8"));
+        } catch (e) {
+          console.error(`(failed to read: ${e.message})`);
+        }
+      }
     }
   }
 }
