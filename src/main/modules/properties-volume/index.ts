@@ -81,10 +81,11 @@ export class PropertiesVolume {
     if (fromPath === 'secrets.pre-portal-x-user-id') {
       this.logger.info('Checking config for secrets.pre-portal-x-user-id');
       this.logger.info(JSON.stringify(config.util.toObject()));
+      this.logger.info(config.has(fromPath) ? 'Found it' : 'Did not find it');
     }
 
     if (config.has(fromPath)) {
-      if (fromPath == 'secrets.pre-portal-x-user-id') {
+      if (fromPath === 'secrets.pre-portal-x-user-id') {
         this.logger.info('Setting {} to {}', toPath, fromPath);
         this.logger.info('value = ', get(config, fromPath));
       }
