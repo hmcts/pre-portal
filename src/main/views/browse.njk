@@ -28,6 +28,19 @@
 {% block content %}
     <h1 class="govuk-heading-xl">Welcome back, {{ user.first_name }} {{ user.last_name }}</h1>
 
+    {% if showCjsmBanner %}
+      {% set cjsmBannerHtml %}
+        <p class="govuk-notification-banner__heading">
+          CJSM email is the preferred email to log in with. If you have a CJSM email address, please use it to sign in.
+        </p>
+      {% endset %}
+
+      {{ govukNotificationBanner({
+        type: "important",
+        html: cjsmBannerHtml
+      }) }}
+    {% endif %}
+
     {{ govukNotificationBanner({
       html: bannerHtml
     }) }}
