@@ -12,7 +12,7 @@ jest.mock('axios');
 jest.mock('jose', () => {
   return {
     decodeJwt: jest.fn().mockImplementation((s: string) => {
-      return { email: 'test@testy.com' };
+      return { loginEmail: 'test@testy.com' };
     }),
   };
 });
