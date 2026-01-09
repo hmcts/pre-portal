@@ -175,7 +175,11 @@ describe('edit-request route', () => {
     test('should return 200 when putEditRequest succeeds', async () => {
       mockGetRecording();
       jest.spyOn(PreClient.prototype, 'putEditRequest').mockImplementation(async (xUserId: string, body: any) => {
-        return;
+        return [
+          {
+            status: 201,
+          }
+        ]
       });
       jest
         .spyOn(PreClient.prototype, 'getMostRecentEditRequests')
