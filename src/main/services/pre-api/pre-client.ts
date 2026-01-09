@@ -233,18 +233,17 @@ export class PreClient {
       return await axios.put(`/edits/${request.id}`, request, {
         headers: {
           'X-User-Id': xUserId,
-          'Accept': 'application/json'
+          Accept: 'application/json',
         },
       });
     } catch (e) {
-      console.log("Response: " + e.response)
+      console.log('Response: ' + e.response);
       // if validation error, return response for highlighting on edit request page
       if (e.response?.status === 400) {
         return e.response;
       }
 
       throw e;
-
     }
   }
 

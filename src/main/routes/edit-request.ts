@@ -178,15 +178,14 @@ export default (app: Application): void => {
 
       const response = await client.putEditRequest(userPortalId, request);
       if (response.status == 400) {
-          const errors = {};
-          res.status(400);
-          errors['startTime'] = response.data.message;
-          res.json({errors});
-          return;
+        const errors = {};
+        res.status(400);
+        errors['startTime'] = response.data.message;
+        res.json({ errors });
+        return;
       }
 
       res.json(await getCurrentEditRequest(client, userPortalId, req.params.id));
-
     } catch (e) {
       console.log(e);
       next(e);
