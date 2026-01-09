@@ -3,6 +3,7 @@ import { SearchRecordingsRequest } from '../services/pre-api/types';
 import { SessionUser } from '../services/session-user/session-user';
 import { UserLevel } from '../types/user-level';
 
+import { Logger } from '@hmcts/nodejs-logging';
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
 
@@ -20,22 +21,22 @@ export const convertIsoToDate = (isoString?: string): string | undefined => {
 
 export default function (app: Application): void {
   app.get('/browse', requiresAuth(), async (req, res) => {
+    const logger = Logger.getLogger('browse-route');
     const userProfileForCjsm = SessionUser.getLoggedInUserProfile(req);
     const primaryEmail = (userProfileForCjsm.user.email || '').toLowerCase();
     const alternativeEmail = (userProfileForCjsm.user.alternative_email || '').toLowerCase();
 
-    console.log('Full userProfile.user:', JSON.stringify(userProfileForCjsm.user, null, 2));
-    console.log('alternative_email value:', userProfileForCjsm.user.alternative_email);
-    console.log('alternative_email type:', typeof userProfileForCjsm.user.alternative_email);
-
+    logger.info('Full userProfile.user:', JSON.stringify(userProfileForCjsm.user, null, 2));
+    logger.info('alternative_email value:', userProfileForCjsm.user.alternative_email);
+    logger.info('alternative_email type:', typeof userProfileForCjsm.user.alternative_email);
 
     const hasCjsmInPrimary = primaryEmail.endsWith('cjsm.net');
     const hasCjsmInAlt = alternativeEmail.endsWith('cjsm.net');
     const showCjsmBanner = !hasCjsmInPrimary && hasCjsmInAlt;
 
-    console.log('hasCjsmInPrimary:', hasCjsmInPrimary);
-    console.log('hasCjsmInAlt:', hasCjsmInAlt);
-    console.log('showCjsmBanner:', showCjsmBanner);
+    logger.info('hasCjsmInPrimary:', hasCjsmInPrimary);
+    logger.info('hasCjsmInAlt:', hasCjsmInAlt);
+    logger.info('showCjsmBanner:', showCjsmBanner);
 
     const client = new PreClient();
 
