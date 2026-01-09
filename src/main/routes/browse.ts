@@ -25,7 +25,7 @@ export default function (app: Application): void {
     const alternativeEmail = (userProfileForCjsm.user.alternative_email || '').toLowerCase();
     const hasCjsmInPrimary = primaryEmail.endsWith('cjsm.net');
     const hasCjsmInAlt = alternativeEmail.endsWith('cjsm.net');
-    const showCjsmBanner = !hasCjsmInPrimary && !hasCjsmInAlt;
+    const showCjsmBanner = !hasCjsmInPrimary && hasCjsmInAlt;
 
     const client = new PreClient();
 
