@@ -178,8 +178,8 @@ describe('edit-request route', () => {
         return [
           {
             status: 201,
-          }
-        ]
+          },
+        ];
       });
       jest
         .spyOn(PreClient.prototype, 'getMostRecentEditRequests')
