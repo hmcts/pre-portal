@@ -23,9 +23,19 @@ export default function (app: Application): void {
     const userProfileForCjsm = SessionUser.getLoggedInUserProfile(req);
     const primaryEmail = (userProfileForCjsm.user.email || '').toLowerCase();
     const alternativeEmail = (userProfileForCjsm.user.alternative_email || '').toLowerCase();
+
+    console.log('Full userProfile.user:', JSON.stringify(userProfileForCjsm.user, null, 2));
+    console.log('alternative_email value:', userProfileForCjsm.user.alternative_email);
+    console.log('alternative_email type:', typeof userProfileForCjsm.user.alternative_email);
+
+
     const hasCjsmInPrimary = primaryEmail.endsWith('cjsm.net');
     const hasCjsmInAlt = alternativeEmail.endsWith('cjsm.net');
     const showCjsmBanner = !hasCjsmInPrimary && hasCjsmInAlt;
+
+    console.log('hasCjsmInPrimary:', hasCjsmInPrimary);
+    console.log('hasCjsmInAlt:', hasCjsmInAlt);
+    console.log('showCjsmBanner:', showCjsmBanner);
 
     const client = new PreClient();
 
