@@ -46,7 +46,7 @@
     "@types/express-session": "1.18.2",
     "@types/glob": "8.1.0",
     "@types/lodash": "4.17.21",
-    "@types/node": "22.19.2",
+    "@types/node": "22.19.5",
     "@types/nunjucks": "3.2.6",
     "@types/require-directory": "2.1.7",
     "@types/serve-favicon": "2.5.7",

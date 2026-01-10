@@ -1,5 +1,5 @@
 #!/usr/bin/env node
- 
+/* eslint-disable */
 // @ts-nocheck
 "use strict";
 
@@ -56,7 +56,7 @@ const RAW_RUNTIME_STATE =
           ["@types/lodash", "npm:4.17.21"],\
           ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
           ["@types/multer", "npm:1.4.13"],\
-          ["@types/node", "npm:22.19.2"],\
+          ["@types/node", "npm:22.19.5"],\
           ["@types/nunjucks", "npm:3.2.6"],\
           ["@types/qs", "npm:6.14.0"],\
           ["@types/require-directory", "npm:2.1.7"],\
@@ -7225,10 +7225,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/node", [\
-      ["npm:22.19.2", {\
-        "packageLocation": "./.yarn/cache/@types-node-npm-22.19.2-803ba7727b-c7e72fde4a.zip/node_modules/@types/node/",\
+      ["npm:22.19.5", {\
+        "packageLocation": "./.yarn/cache/@types-node-npm-22.19.5-ff67e06a86-59662e5e1c.zip/node_modules/@types/node/",\
         "packageDependencies": [\
-          ["@types/node", "npm:22.19.2"],\
+          ["@types/node", "npm:22.19.5"],\
           ["undici-types", "npm:6.21.0"]\
         ],\
         "linkType": "HARD"\
@@ -17238,7 +17238,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/__virtual__/node-mocks-http-virtual-8a992b5ce8/0/cache/node-mocks-http-npm-1.17.2-442310fd85-3ab97b5a7b.zip/node_modules/node-mocks-http/",\
         "packageDependencies": [\
           ["@types/express", "npm:5.0.6"],\
-          ["@types/node", "npm:22.19.2"],\
+          ["@types/node", "npm:22.19.5"],\
           ["accepts", "npm:1.3.8"],\
           ["content-disposition", "npm:0.5.4"],\
           ["depd", "npm:1.1.2"],\
@@ -18328,7 +18328,7 @@ const RAW_RUNTIME_STATE =
           ["@types/lodash", "npm:4.17.21"],\
           ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
           ["@types/multer", "npm:1.4.13"],\
-          ["@types/node", "npm:22.19.2"],\
+          ["@types/node", "npm:22.19.5"],\
           ["@types/nunjucks", "npm:3.2.6"],\
           ["@types/qs", "npm:6.14.0"],\
           ["@types/require-directory", "npm:2.1.7"],\
@@ -20781,7 +20781,7 @@ const RAW_RUNTIME_STATE =
           ["@tsconfig/node12", "npm:1.0.11"],\
           ["@tsconfig/node14", "npm:1.0.3"],\
           ["@tsconfig/node16", "npm:1.0.4"],\
-          ["@types/node", "npm:22.19.2"],\
+          ["@types/node", "npm:22.19.5"],\
           ["@types/swc__core", null],\
           ["@types/swc__wasm", null],\
           ["@types/typescript", null],\
@@ -28760,7 +28760,7 @@ function arg(
 		}
 
 		if (wholeArg.length > 1 && wholeArg[0] === '-') {
-			 
+			/* eslint-disable operator-linebreak */
 			const separatedArguments =
 				wholeArg[1] === '-' || wholeArg.length === 2
 					? [wholeArg]
@@ -28768,7 +28768,7 @@ function arg(
 							.slice(1)
 							.split('')
 							.map((a) => `-${a}`);
-			 
+			/* eslint-enable operator-linebreak */
 
 			for (let j = 0; j < separatedArguments.length; j++) {
 				const arg = separatedArguments[j];
@@ -28811,7 +28811,7 @@ function arg(
 							!(
 								argv[i + 1].match(/^-?\d*(\.(?=\d))?\d*$/) &&
 								(type === Number ||
-									 
+									// eslint-disable-next-line no-undef
 									(typeof BigInt !== 'undefined' && type === BigInt))
 							))
 					) {
