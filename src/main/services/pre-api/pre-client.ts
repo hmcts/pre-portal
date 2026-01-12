@@ -19,10 +19,11 @@ import {
 import { Logger } from '@hmcts/nodejs-logging';
 import axios, { AxiosResponse } from 'axios';
 import FormData from 'form-data';
-import config from 'config';
+import config = require('config');
 import { HealthResponse } from '../../types/health';
 import { Court } from '../../types/court';
 import qs from 'qs';
+import { UpdateUser } from '../../types/update-user';
 
 export class PreClient {
   logger = Logger.getLogger('pre-client');
@@ -41,7 +42,7 @@ export class PreClient {
   private async initializeRedisClient(redisHost: string, redisKey: string) {
     try {
       this.redisClient = await this.redisService.getClient(redisHost, redisKey, this.logger);
-      this.logger.info(' Redis client initialized successfully');
+      this.logger.info('Redis client initialized successfully');
     } catch (error) {
       this.logger.error('Failed to initialize Redis client:', error);
     }
@@ -143,7 +144,40 @@ export class PreClient {
 
   public async getUserByEmail(email: string): Promise<UserProfile> {
     const response = await axios.get('/users/by-email/' + encodeURIComponent(email));
-    return response.data as UserProfile;
+    // check if this is a cjsm email
+    const data = response.data as UserProfile;
+    this.logger.info('Fetched user by email: ' + email);
+    if (
+      email.toLowerCase().endsWith('.cjsm.net') &&
+      data.user.alternative_email?.toLowerCase() == email.toLowerCase() &&
+      data.portal_access.length > 0
+    ) {
+      this.logger.info('CJSM email detected for user: ' + this.obfuscateEmail(email));
+      // update the user
+      data.user.alternative_email = data.user.email;
+      data.user.email = email.toLowerCase();
+      await this.updateUser(UpdateUser.fromUserProfile(data));
+      this.logger.info('Updated user email to CJSM email for user: ' + this.obfuscateEmail(email));
+    }
+    return data;
+  }
+
+  private async updateUser(user: UpdateUser) {
+    // PUT to API
+    await axios.put('/users/' + user.id, user, {
+      headers: {
+        'X-User-Id': config.get('pre.portalXUserId') as string,
+      },
+    });
+  }
+
+  private obfuscateEmail(email: string): string {
+    const [localPart, domain] = email.split('@');
+    const obfuscatedLocalPart =
+      localPart.length <= 2
+        ? localPart[0] + '*'
+        : localPart[0] + '*'.repeat(localPart.length - 2) + localPart.slice(-1);
+    return `${obfuscatedLocalPart}@${domain}`;
   }
 
   public async getActiveUserByEmail(email: string): Promise<UserProfile> {
