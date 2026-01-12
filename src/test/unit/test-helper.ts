@@ -46,6 +46,7 @@ export const mockeduser: UserProfile = {
     first_name: 'test',
     last_name: 'testy',
     email: 'test@testy.com',
+    alternative_email: null,
     phone_number: null,
     organisation: null,
     terms_accepted: {

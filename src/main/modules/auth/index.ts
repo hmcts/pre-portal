@@ -49,7 +49,7 @@ export class Auth {
         const client = new PreClient();
         return {
           ...s,
-          userProfile: await client.getUserByClaimEmail(claims.email as string),
+          userProfile: await client.getUserByClaimEmail(claims.loginEmail as string),
         };
       },
       session: {
