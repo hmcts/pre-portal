@@ -119,7 +119,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.6.2"],\
           ["puppeteer", "npm:24.34.0"],\
           ["qs", "npm:6.14.1"],\
-          ["react", "npm:19.2.1"],\
+          ["react", "npm:19.2.3"],\
           ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.82.1"],\
           ["redis", "npm:5.10.0"],\
           ["require-directory", "npm:2.1.1"],\
@@ -6208,7 +6208,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-native", null],\
           ["invariant", "npm:2.2.4"],\
           ["nullthrows", "npm:1.1.1"],\
-          ["react", "npm:19.2.1"],\
+          ["react", "npm:19.2.3"],\
           ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.82.1"]\
         ],\
         "packagePeers": [\
@@ -18073,7 +18073,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.6.2"],\
           ["puppeteer", "npm:24.34.0"],\
           ["qs", "npm:6.14.1"],\
-          ["react", "npm:19.2.1"],\
+          ["react", "npm:19.2.3"],\
           ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.82.1"],\
           ["redis", "npm:5.10.0"],\
           ["require-directory", "npm:2.1.1"],\
@@ -18469,10 +18469,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["react", [\
-      ["npm:19.2.1", {\
-        "packageLocation": "./.yarn/cache/react-npm-19.2.1-ee2feff9fc-7c7ab0f40b.zip/node_modules/react/",\
+      ["npm:19.2.3", {\
+        "packageLocation": "./.yarn/cache/react-npm-19.2.3-0ecd9e5a6e-d16b7f35c0.zip/node_modules/react/",\
         "packageDependencies": [\
-          ["react", "npm:19.2.1"]\
+          ["react", "npm:19.2.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -18542,7 +18542,7 @@ const RAW_RUNTIME_STATE =
           ["nullthrows", "npm:1.1.1"],\
           ["pretty-format", "npm:29.7.0"],\
           ["promise", "npm:8.3.0"],\
-          ["react", "npm:19.2.1"],\
+          ["react", "npm:19.2.3"],\
           ["react-devtools-core", "npm:6.1.5"],\
           ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.82.1"],\
           ["react-refresh", "npm:0.14.2"],\
