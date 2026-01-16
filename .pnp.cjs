@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* eslint-disable */
+ 
 // @ts-nocheck
 "use strict";
 
@@ -288,7 +288,7 @@ const RAW_RUNTIME_STATE =
           ["@azure/functions-extensions-base", "npm:0.2.0"],\
           ["cookie", "npm:0.7.2"],\
           ["long", "npm:4.0.0"],\
-          ["undici", "npm:5.29.0"]\
+          ["undici", "npm:7.18.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3525,15 +3525,6 @@ const RAW_RUNTIME_STATE =
           ["@eslint/core", "npm:0.17.0"],\
           ["@eslint/plugin-kit", "npm:0.4.1"],\
           ["levn", "npm:0.4.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@fastify/busboy", [\
-      ["npm:2.1.1", {\
-        "packageLocation": "./.yarn/cache/@fastify-busboy-npm-2.1.1-455d8b6bf5-2bb8a7eca8.zip/node_modules/@fastify/busboy/",\
-        "packageDependencies": [\
-          ["@fastify/busboy", "npm:2.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -9723,7 +9714,7 @@ const RAW_RUNTIME_STATE =
           ["parse5", "npm:7.3.0"],\
           ["parse5-htmlparser2-tree-adapter", "npm:7.1.0"],\
           ["parse5-parser-stream", "npm:7.1.2"],\
-          ["undici", "npm:7.16.0"],\
+          ["undici", "npm:7.18.2"],\
           ["whatwg-mimetype", "npm:4.0.0"]\
         ],\
         "linkType": "HARD"\
@@ -11101,17 +11092,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["diff", [\
-      ["npm:4.0.2", {\
-        "packageLocation": "./.yarn/cache/diff-npm-4.0.2-73133c7102-ec09ec2101.zip/node_modules/diff/",\
+      ["npm:8.0.3", {\
+        "packageLocation": "./.yarn/cache/diff-npm-8.0.3-6f5c127138-52f957e1fa.zip/node_modules/diff/",\
         "packageDependencies": [\
-          ["diff", "npm:4.0.2"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:7.0.0", {\
-        "packageLocation": "./.yarn/cache/diff-npm-7.0.0-dcfd888f89-e9b8e48d05.zip/node_modules/diff/",\
-        "packageDependencies": [\
-          ["diff", "npm:7.0.0"]\
+          ["diff", "npm:8.0.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16587,7 +16571,7 @@ const RAW_RUNTIME_STATE =
           ["browser-stdout", "npm:1.3.1"],\
           ["chokidar", "npm:4.0.3"],\
           ["debug", "virtual:488175d82091d4ca3a3bc6ffe48c48f684a1375da06eeaae9c1710766b61aa655712e77980f3337389da5a19e21912b4a57ffab0bd92cf7769b084c4efa68695#npm:4.4.3"],\
-          ["diff", "npm:7.0.0"],\
+          ["diff", "npm:8.0.3"],\
           ["escape-string-regexp", "npm:4.0.0"],\
           ["find-up", "npm:5.0.0"],\
           ["glob", "npm:10.5.0"],\
@@ -20471,7 +20455,7 @@ const RAW_RUNTIME_STATE =
           ["acorn-walk", "npm:8.3.4"],\
           ["arg", "npm:4.1.3"],\
           ["create-require", "npm:1.1.1"],\
-          ["diff", "npm:4.0.2"],\
+          ["diff", "npm:8.0.3"],\
           ["make-error", "npm:1.3.6"],\
           ["ts-node", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:10.9.2"],\
           ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"],\
@@ -20775,18 +20759,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["undici", [\
-      ["npm:5.29.0", {\
-        "packageLocation": "./.yarn/cache/undici-npm-5.29.0-caeb96c8ee-0ceca8924a.zip/node_modules/undici/",\
+      ["npm:7.18.2", {\
+        "packageLocation": "./.yarn/cache/undici-npm-7.18.2-c9dadc9f31-7d8b921717.zip/node_modules/undici/",\
         "packageDependencies": [\
-          ["@fastify/busboy", "npm:2.1.1"],\
-          ["undici", "npm:5.29.0"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:7.16.0", {\
-        "packageLocation": "./.yarn/cache/undici-npm-7.16.0-f6b1c9157f-2bb71672b2.zip/node_modules/undici/",\
-        "packageDependencies": [\
-          ["undici", "npm:7.16.0"]\
+          ["undici", "npm:7.18.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -28442,7 +28418,7 @@ function arg(
 		}
 
 		if (wholeArg.length > 1 && wholeArg[0] === '-') {
-			/* eslint-disable operator-linebreak */
+			 
 			const separatedArguments =
 				wholeArg[1] === '-' || wholeArg.length === 2
 					? [wholeArg]
@@ -28450,7 +28426,7 @@ function arg(
 							.slice(1)
 							.split('')
 							.map((a) => `-${a}`);
-			/* eslint-enable operator-linebreak */
+			 
 
 			for (let j = 0; j < separatedArguments.length; j++) {
 				const arg = separatedArguments[j];
@@ -28493,7 +28469,7 @@ function arg(
 							!(
 								argv[i + 1].match(/^-?\d*(\.(?=\d))?\d*$/) &&
 								(type === Number ||
-									// eslint-disable-next-line no-undef
+									 
 									(typeof BigInt !== 'undefined' && type === BigInt))
 							))
 					) {
