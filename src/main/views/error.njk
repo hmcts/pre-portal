@@ -36,7 +36,11 @@
         {% endif %}
       </p>
       <pre class="govuk-!-margin-top-8">
-        Error: {{ message }}
+        {% if "AADB2C90157" in message  %}
+          You've submitted the incorrect verification code too many times. Please waiting 10 minutes and try again.
+        {% else %}
+          Error: {{ message }}
+        {% endif %}
       </pre>
     </div>
   </div>
