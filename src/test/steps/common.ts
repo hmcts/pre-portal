@@ -78,10 +78,6 @@ Then('I click the link {string}', (text: string) => {
   I.click(locate('a').withText(text));
 });
 
-When('I open the navigation menu', async () => {
-  I.click('#navToggle');
-});
-
 Then('I enter a valid email address', () => {
   I.fillField('Email Address', config.b2c.testLogin.email as string);
   I.click('Send verification code');

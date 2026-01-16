@@ -12,6 +12,7 @@
     },
     "portalUrl": "https://localhost:4551",
     "mediaKindPlayerKey": "",
+    "enableAutomatedEditing": false,
     "portalXUserId": ""
   },
   "session": {
