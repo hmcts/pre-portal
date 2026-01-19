@@ -129,18 +129,18 @@
                   {% endif %}
                 </td>
                 <td class="govuk-table__cell">
-                  <div style="display: inline-flex; justify-content: end; width: 100%">
+                  <div style="display: inline-flex; flex-wrap: wrap;">
+                  <a class="govuk-link" href="/watch/{{ recording.id }}">
+                                        Play
+                                        <span class="sr-only" hidden>video case ref {{ recording.case_reference}}</span>
+                                      </a>
                     {% if recording.version == 1 %}
                       {% if recording.edit_status not in ['DRAFT', 'REJECTED', 'COMPLETE', undefined] %}
-                        <a class="govuk-link" style="margin-right: 0.5rem;" href="/edit-request/{{ recording.id }}/view">View</a>
+                        <a class="govuk-link" href="/edit-request/{{ recording.id }}/view">View</a>
                       {% else %}
-                        <a class="govuk-link" style="margin-right: 0.5rem;" href="/edit-request/{{ recording.id }}">Edit</a>
+                        <a class="govuk-link" href="/edit-request/{{ recording.id }}">Edit</a>
                       {% endif %}
                     {% endif %}
-                    <a class="govuk-link" href="/watch/{{ recording.id }}">
-                      Play
-                      <span class="sr-only" hidden>video case ref {{ recording.case_reference}}</span>
-                    </a>
                   </div>
                 </td>
               {% endif %}
