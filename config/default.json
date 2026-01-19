@@ -12,7 +12,8 @@
     },
     "portalUrl": "https://localhost:4551",
     "mediaKindPlayerKey": "",
-    "enableAutomatedEditing": false
+    "enableAutomatedEditing": false,
+    "portalXUserId": ""
   },
   "session": {
     "redis": {
