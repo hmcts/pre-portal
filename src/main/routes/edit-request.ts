@@ -34,15 +34,16 @@ const validateInstruction = (instruction: PutEditInstruction, duration: string):
 
   const durationInSeconds = parseIsoDuration(duration);
 
+  const hhmmssFormat = '^(([01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d)$';
   if (instruction.start_of_cut === '') {
     errors['startTime'] = 'Please enter a valid time reference';
-  } else if (!'^([01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d$'.match(instruction.start_of_cut)) {
+  } else if (!instruction.start_of_cut.match(hhmmssFormat)) {
     errors['startTime'] = 'The Start reference entered is not in the HH:MM:SS format';
   }
 
   if (instruction.end_of_cut === '') {
     errors['endTime'] = 'Please enter a valid time reference';
-  } else if (!'^([01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d$'.match(instruction.end_of_cut)) {
+  } else if (!instruction.end_of_cut.match(hhmmssFormat)) {
     errors['endTime'] = 'The End reference entered is not in the HH:MM:SS format';
   } else if (startTotalSeconds >= endTotalSeconds) {
     errors['endTime'] = 'End reference cannot be equal or less than the Start reference';
