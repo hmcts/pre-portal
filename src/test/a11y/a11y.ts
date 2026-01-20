@@ -3,11 +3,11 @@ This file remains on Puppeteer because Pa11y is not compatible with Playwright a
 to convert whole file to Pa11y actions.
  */
 
-import puppeteer, {Browser, Page} from 'puppeteer';
-import {config} from '../config';
+import puppeteer, { Browser, Page } from 'puppeteer';
+import { config } from '../config';
 
-import {isFlagEnabled} from '../../main/utils/helpers';
-import * as process from "node:process";
+import { isFlagEnabled } from '../../main/utils/helpers';
+import * as process from 'node:process';
 
 const pa11y = require('pa11y');
 
@@ -37,12 +37,12 @@ function expectNoErrors(messages: PallyIssue[]): void {
 
 async function signInAsNormalUser(browser: Browser): Promise<Page> {
   const page = await browser.newPage();
-  await page.goto(config.TEST_URL as string, {waitUntil: 'networkidle2'});
-  await page.waitForSelector('#signInName', {visible: true, timeout: 30000});
+  await page.goto(config.TEST_URL as string, { waitUntil: 'networkidle2' });
+  await page.waitForSelector('#signInName', { visible: true, timeout: 30000 });
   await page.type('#signInName', process.env.B2C_TEST_LOGIN_EMAIL as string);
   await page.type('#password', process.env.B2C_TEST_LOGIN_PASSWORD as string);
   await page.click('#next');
-  await page.waitForSelector('a[href^="/logout"]', {visible: true, timeout: 30000});
+  await page.waitForSelector('a[href^="/logout"]', { visible: true, timeout: 30000 });
 
   if (page.url().includes('/accept-terms-and-conditions')) {
     await page.click('input#terms');
@@ -56,16 +56,16 @@ jest.setTimeout(15000);
 
 async function signInSuperUserAndAcceptTCs(browser: Browser): Promise<Page> {
   const page = await browser.newPage();
-  await page.goto(config.TEST_URL as string, {waitUntil: 'networkidle2'});
-  await page.waitForSelector('#signInName', {visible: true, timeout: 30000});
+  await page.goto(config.TEST_URL as string, { waitUntil: 'networkidle2' });
+  await page.waitForSelector('#signInName', { visible: true, timeout: 30000 });
   await page.type('#signInName', process.env.B2C_TEST_SUPER_USER_LOGIN_EMAIL as string);
   await page.type('#password', process.env.B2C_TEST_SUPER_USER_LOGIN_PASSWORD as string);
   await page.click('#next');
-  await page.waitForSelector('a[href^="/admin/edit-request"]', {visible: true, timeout: 30000});
+  await page.waitForSelector('a[href^="/admin/edit-request"]', { visible: true, timeout: 30000 });
   if (page.url().includes('/accept-terms-and-conditions')) {
     await page.click('input#terms');
     await page.click('button[type="submit"]');
-    await page.waitForSelector('a[href^="/watch/"]', {visible: true, timeout: 0});
+    await page.waitForSelector('a[href^="/watch/"]', { visible: true, timeout: 0 });
   }
   return page;
 }
@@ -75,8 +75,13 @@ const screenshotDir = `${__dirname}/../../../functional-output/pa11y`;
 
 describe('Accessibility', () => {
   const signedOutUrls = ['/accessibility-statement', '/cookies', '/not-found', '/'];
-  const signedInAsAdminUrls = ['/admin/edit-request', '/admin/status', '/admin/MK-live-events',
-    '/admin/audit', '/admin/migration'];
+  const signedInAsAdminUrls = [
+    '/admin/edit-request',
+    '/admin/status',
+    '/admin/MK-live-events',
+    '/admin/audit',
+    '/admin/migration',
+  ];
   const signedInAsNormalUserUrls = ['/edit-request', '/watch', '/browse', '/terms-and-conditions'];
 
   let browser: Browser;
@@ -151,7 +156,7 @@ describe('Accessibility', () => {
     }
     const editUrl = page.url();
 
-    console.log("Testing landing edit request page")
+    console.log('Testing landing edit request page');
     const result: Pa11yResult = await pa11y(editUrl, {
       browser,
       screenCapture: `${screenshotDir}/edit-request.png`,
@@ -161,8 +166,8 @@ describe('Accessibility', () => {
     expect(result.issues).toEqual(expect.any(Array));
     expectNoErrors(result.issues);
 
-    console.log("Testing edit request submit page")
-    await page.waitForSelector('button[id^="submit-button"]', {visible: true, timeout: 0});
+    console.log('Testing edit request submit page');
+    await page.waitForSelector('button[id^="submit-button"]', { visible: true, timeout: 0 });
     await page.click('button[id^="submit-button"]');
     const submitViewUrl = page.url();
     const submitResult: Pa11yResult = await pa11y(submitViewUrl, {
@@ -175,10 +180,10 @@ describe('Accessibility', () => {
     expect(submitResult.issues).toEqual(expect.any(Array));
     expectNoErrors(submitResult.issues);
 
-    console.log("Testing landing edit request view page")
+    console.log('Testing landing edit request view page');
     try {
       // Go back to home page
-      await page.goto(config.TEST_URL as string, {waitUntil: 'networkidle2'});
+      await page.goto(config.TEST_URL as string, { waitUntil: 'networkidle2' });
       await page.waitForSelector('a[href^="/watch/"]', { visible: true, timeout: 0 });
 
       await page.click('a[href^="/edit-request/"][href$="/view"]');
@@ -195,7 +200,5 @@ describe('Accessibility', () => {
     });
     expect(viewResult.issues).toEqual(expect.any(Array));
     expectNoErrors(viewResult.issues);
-
   }, 65000);
-
 });
