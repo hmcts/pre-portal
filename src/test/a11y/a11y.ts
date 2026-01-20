@@ -73,6 +73,16 @@ async function signInSuperUserAndAcceptTCs(browser: Browser): Promise<Page> {
 jest.setTimeout(65000);
 const screenshotDir = `${__dirname}/../../../functional-output/pa11y`;
 
+async function verifyPa11yTests(url: string, browser: Browser) {
+  const result: Pa11yResult = await pa11y(config.TEST_URL + url.replace('//', '/'), {
+    screenCapture: `${screenshotDir}/${url}.png`,
+    browser: browser,
+    ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
+  });
+  expect(result.issues).toEqual(expect.any(Array));
+  expectNoErrors(result.issues);
+}
+
 describe('Accessibility', () => {
   const signedOutUrls = ['/accessibility-statement', '/cookies', '/not-found', '/'];
   const signedInAsAdminUrls = [
@@ -112,31 +122,16 @@ describe('Accessibility', () => {
 
   describe.each(signedInAsAdminUrls)('Signed in as super user: page %s', url => {
     test('should have no accessibility errors', async () => {
-      const page = await signInSuperUserAndAcceptTCs(browser);
-      await page.click('a[href^="/admin/edit-request');
-      const result: Pa11yResult = await pa11y(config.TEST_URL + url.replace('//', '/'), {
-        screenCapture: `${screenshotDir}/${url}.png`,
-        browser: browser,
-        ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
-      });
-      expect(result.issues).toEqual(expect.any(Array));
-      expectNoErrors(result.issues);
+      await signInSuperUserAndAcceptTCs(browser);
+      await verifyPa11yTests(url, browser);
       await browser.close();
     }, 65000);
   });
 
   describe.each(signedInAsNormalUserUrls)('Signed in as normal user: page %s', url => {
     test('should have no accessibility errors', async () => {
-      const page = await signInAsNormalUser(browser);
-
-      const result: Pa11yResult = await pa11y(config.TEST_URL + page.url().replace('//', '/'), {
-        screenCapture: `${screenshotDir}/${url}.png`,
-        browser: browser,
-        ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
-      });
-
-      expect(result.issues).toEqual(expect.any(Array));
-      expectNoErrors(result.issues);
+      await signInAsNormalUser(browser);
+      await verifyPa11yTests(url, browser);
       await browser.close();
     }, 65000);
   });
@@ -157,28 +152,13 @@ describe('Accessibility', () => {
     const editUrl = page.url();
 
     console.log('Testing landing edit request page');
-    const result: Pa11yResult = await pa11y(editUrl, {
-      browser,
-      screenCapture: `${screenshotDir}/edit-request.png`,
-      waitUntil: 'domcontentloaded',
-      ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
-    });
-    expect(result.issues).toEqual(expect.any(Array));
-    expectNoErrors(result.issues);
+    await verifyPa11yTests(editUrl, browser);
 
     console.log('Testing edit request submit page');
     await page.waitForSelector('button[id^="submit-button"]', { visible: true, timeout: 0 });
     await page.click('button[id^="submit-button"]');
-    const submitViewUrl = page.url();
-    const submitResult: Pa11yResult = await pa11y(submitViewUrl, {
-      browser,
-      screenCapture: `${screenshotDir}/edit-request-view-submit.png`,
-      waitUntil: 'domcontentloaded',
-      ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
-    });
 
-    expect(submitResult.issues).toEqual(expect.any(Array));
-    expectNoErrors(submitResult.issues);
+    await verifyPa11yTests(page.url(), browser);
 
     console.log('Testing landing edit request view page');
     try {
@@ -191,14 +171,6 @@ describe('Accessibility', () => {
       console.error('Error: No viewable edit requests found for user ' + process.env.B2C_TEST_LOGIN_EMAIL);
       throw e;
     }
-    const viewUrl = page.url();
-    const viewResult: Pa11yResult = await pa11y(viewUrl, {
-      browser,
-      screenCapture: `${screenshotDir}/edit-request-view.png`,
-      waitUntil: 'domcontentloaded',
-      ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
-    });
-    expect(viewResult.issues).toEqual(expect.any(Array));
-    expectNoErrors(viewResult.issues);
+    await verifyPa11yTests(page.url(), browser);
   }, 65000);
 });

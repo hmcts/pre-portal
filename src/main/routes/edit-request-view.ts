@@ -5,7 +5,9 @@ import { validateId, getCurrentEditRequest, isFlagEnabled } from '../utils/helpe
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
 
-export default (app: Application): void => {
+export default getEditRequestViewPage;
+
+function getEditRequestViewPage(app: Application): void {
   if (!isFlagEnabled('pre.enableAutomatedEditing')) {
     return;
   }
@@ -62,4 +64,4 @@ export default (app: Application): void => {
       next(e);
     }
   });
-};
+}
