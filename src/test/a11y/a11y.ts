@@ -7,6 +7,7 @@ import puppeteer, {Browser, Page} from 'puppeteer';
 import {config} from '../config';
 
 import {isFlagEnabled} from '../../main/utils/helpers';
+import * as process from "node:process";
 
 const pa11y = require('pa11y');
 
@@ -150,6 +151,7 @@ describe('Accessibility', () => {
     }
     const editUrl = page.url();
 
+    console.log("Testing landing edit request page")
     const result: Pa11yResult = await pa11y(editUrl, {
       browser,
       screenCapture: `${screenshotDir}/edit-request.png`,
@@ -159,6 +161,7 @@ describe('Accessibility', () => {
     expect(result.issues).toEqual(expect.any(Array));
     expectNoErrors(result.issues);
 
+    console.log("Testing edit request submit page")
     await page.waitForSelector('button[id^="submit-button"]', {visible: true, timeout: 0});
     await page.click('button[id^="submit-button"]');
     const submitViewUrl = page.url();
@@ -172,10 +175,15 @@ describe('Accessibility', () => {
     expect(submitResult.issues).toEqual(expect.any(Array));
     expectNoErrors(submitResult.issues);
 
+    console.log("Testing landing edit request view page")
     try {
+      // Go back to home page
+      await page.goto(config.TEST_URL as string, {waitUntil: 'networkidle2'});
+      await page.waitForSelector('a[href^="/watch/"]', { visible: true, timeout: 0 });
+
       await page.click('a[href^="/edit-request/"][href$="/view"]');
     } catch (e) {
-      console.error('Error: No viewable edit requests found');
+      console.error('Error: No viewable edit requests found for user ' + process.env.B2C_TEST_LOGIN_EMAIL);
       throw e;
     }
     const viewUrl = page.url();

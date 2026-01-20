@@ -81,10 +81,14 @@
           </div>
         </td>
         <td class="govuk-table__cell" style="text-align: right;">
-          <a class="govuk-link--no-visited-state" style="margin-right: 0.5rem" href="#new-edit-reference-row"  id="save-button" onclick="saveEditReference()">Save<span class="govuk-visually-hidden"> edit reference</span></a>
+        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-row"  id="save-button" onclick="saveEditReference()">
+            Save
+          </button>
         </td>
         <td class="govuk-table__cell">
-          <a class="govuk-link--no-visited-state" href="#new-edit-reference-row" onclick="cancelEditReference()">Cancel<span class="govuk-visually-hidden"> edit reference</span></a>
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-row"  id="cancel-button"  onclick="cancelEditReference()">
+            Cancel
+          </button>
         </td>
       </tr>
         {% for instruction in editRequest.edit_instructions %}
@@ -94,10 +98,14 @@
           <td class="govuk-table__cell"> {{ instruction.difference }}</td>
           <td class="govuk-table__cell"> {{ instruction.reason }}</td>
           <td class="govuk-table__cell" style="text-align: right;">
-            <a class="govuk-link" style="margin-right: 0.5rem"  href="#new-edit-reference-row" onclick="selectRow({{ loop.index0 }}, true)">Update<span class="govuk-visually-hidden"> edit reference</span></a>
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-row" onclick="selectRow({{ loop.index0 }}, true)">
+              Update
+            </button>
           </td>
           <td class="govuk-table__cell">
-            <a class="govuk-link" href="#delete-reference-row" onclick="selectRow({{ loop.index0 }}, false)">Delete<span class="govuk-visually-hidden"> edit reference</span></a>
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#delete-reference-row" onclick="selectRow({{ loop.index0 }}, false)">
+              Delete
+            </button>
           </td>
         </tr>
         {% endfor %}
@@ -326,10 +334,14 @@
             </div>
           </td>
           <td class="govuk-table__cell" style="text-align: right;">
-            <a class="govuk-link--no-visited-state" style="margin-right: 0.5rem"  href="#new-edit-reference-row" id="save-button" onclick="saveEditReference()">Save<span class="govuk-visually-hidden"> edit reference</span></a>
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-row" id="save-button" onclick="saveEditReference()">
+              Save
+            </button>
           </td>
           <td class="govuk-table__cell">
-            <a class="govuk-link--no-visited-state" href="#new-edit-reference-row" onclick="cancelEditReference()">Cancel<span class="govuk-visually-hidden"> edit reference</span></a>
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-row" onclick="cancelEditReference()">
+              Cancel
+            </button>
           </td>
         </tr>` + content.edit_instructions.map((instruction, index) => {
           if (index === selectedIndex) {
@@ -341,10 +353,14 @@
             <td class="govuk-table__cell">${ instruction.difference }</td>
             <td class="govuk-table__cell">${ instruction.reason }</td>
             <td class="govuk-table__cell" style="text-align: right;">
-              <a class="govuk-link" style="margin-right: 0.5rem" href="#new-edit-reference-row" onclick="selectRow(${ index }, true)">Update<span class="govuk-visually-hidden"> edit reference</span></a>
+              <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-row" onclick="selectRow(${ index }, true)">
+                Update
+              </button>
             </td>
             <td class="govuk-table__cell">
-              <a class="govuk-link" href="#delete-reference-row" onclick="selectRow(${ index }, false)">Delete<span class="govuk-visually-hidden"> edit reference</span></a>
+              <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#delete-reference-row" onclick="selectRow(${ index }, false)">
+                Delete
+              </button>
             </td>
           </tr>`;
         }).join('');
@@ -408,10 +424,14 @@
               </div>
             </td>
             <td class="govuk-table__cell" style="text-align: right;">
-              <a class="govuk-link--no-visited-state" style="margin-right: 0.5rem"  href="#new-edit-reference-form" onclick="deleteEditReference(${selectedIndex})">Confirm<span class="govuk-visually-hidden"> delete edit reference</span></a>
+              <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-form" onclick="deleteEditReference(${selectedIndex})">
+                Confirm
+              </button>
             </td>
             <td class="govuk-table__cell">
-              <a class="govuk-link--no-visited-state" href="#new-edit-reference-form" onclick="cancelEditReference()">Cancel<span class="govuk-visually-hidden"> edit reference</span></a>
+              <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-form" onclick="cancelEditReference()">
+                Cancel
+              </button>
             </td>
           </tr>`;
         currentInstructions.innerHTML = display + currentInstructions.innerHTML;
