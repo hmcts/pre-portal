@@ -31,14 +31,39 @@
          text: "Home",
          active: '/browse' in pageUrl
        },
-       {
-         href: '/admin/edit-request',
-         text: "Admin",
-         active: '/admin' in pageUrl
-       } ]
-    }) }}
-  {% endif %}
-{% endblock %}
+        {
+          href: '/admin/edit-request',
+          text: "Edit Requests",
+          active: '/admin/edit-request' in pageUrl
+        },
+        {
+          href: '/admin/status',
+          text: "System Status",
+          active: '/admin/status' in pageUrl
+        },
+        {
+          href: '/admin/MK-live-events',
+          text: "MediaKind",
+          active: '/admin/MK-live-events' in pageUrl
+        },
+        {
+           href: '/admin/audit',
+           text: "Audits",
+           active: '/admin/audit' in pageUrl
+        },
+        {
+           href: '/admin/migration',
+           text: "Data Migration",
+           active: '/admin/migration' in pageUrl
+        },
+        {
+          text: "Sign out",
+          href: "/logout"
+        }
+      ]
+      }) }}
+     {% endif %}
+  {% endblock %}
 
 {% block bodyStart %}
 {% set html %}
