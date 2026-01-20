@@ -11,15 +11,15 @@ import config from 'config';
 
 const parseIsoDuration = (duration: string): number => {
   const regex = /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?/;
-  const matches = duration.match(regex);
+  const matches = regex.exec(duration);
 
   if (!matches) {
     throw new Error('Invalid ISO 8601 duration format');
   }
 
-  const hours = parseInt(matches[1] ?? 0, 10);
-  const minutes = parseInt(matches[2] ?? 0, 10);
-  const seconds = parseInt(matches[3] ?? 0);
+  const hours = Number.parseInt(matches[1] ?? 0, 10);
+  const minutes = Number.parseInt(matches[2] ?? 0, 10);
+  const seconds = Number.parseInt(matches[3] ?? 0);
 
   return hours * 3600 + minutes * 60 + seconds;
 };
@@ -36,13 +36,13 @@ const validateInstruction = (instruction: PutEditInstruction, duration: string):
 
   if (instruction.start_of_cut === '') {
     errors['startTime'] = 'Please enter a valid time reference';
-  } else if (!instruction.start_of_cut.match('^([01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d$')) {
+  } else if (!'^([01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d$'.match(instruction.start_of_cut)) {
     errors['startTime'] = 'The Start reference entered is not in the HH:MM:SS format';
   }
 
   if (instruction.end_of_cut === '') {
     errors['endTime'] = 'Please enter a valid time reference';
-  } else if (!instruction.end_of_cut.match('^([01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d$')) {
+  } else if (!'^([01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d$'.match(instruction.end_of_cut)) {
     errors['endTime'] = 'The End reference entered is not in the HH:MM:SS format';
   } else if (startTotalSeconds >= endTotalSeconds) {
     errors['endTime'] = 'End reference cannot be equal or less than the Start reference';
@@ -64,7 +64,9 @@ export const validateRequest = (editRequest: PutEditRequest, duration: string): 
   }
 };
 
-export default (app: Application): void => {
+export default getEditRequestPage;
+
+function getEditRequestPage(app: Application): void {
   if (!isFlagEnabled('pre.enableAutomatedEditing')) {
     return;
   }
@@ -164,7 +166,7 @@ export default (app: Application): void => {
         return;
       }
 
-      if (req.body.status in ['REJECTED', 'COMPLETE']) {
+      if (['REJECTED', 'COMPLETE'].includes(req.body.status)) {
         request = {
           ...request,
           id: uuid(),
@@ -183,4 +185,4 @@ export default (app: Application): void => {
       next(e);
     }
   });
-};
+}
