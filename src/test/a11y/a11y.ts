@@ -131,7 +131,7 @@ describe('Accessibility', () => {
   describe.each(signedInAsNormalUserUrls)('Signed in as normal user: page %s', url => {
     test('should have no accessibility errors', async () => {
       await signInAsNormalUser(browser);
-      await verifyPa11yTests(url, browser)
+      await verifyPa11yTests(url, browser);
       await browser.close();
     }, 65000);
   });
@@ -152,13 +152,13 @@ describe('Accessibility', () => {
     const editUrl = page.url();
 
     console.log('Testing landing edit request page');
-    await verifyPa11yTests(editUrl, browser)
+    await verifyPa11yTests(editUrl, browser);
 
     console.log('Testing edit request submit page');
     await page.waitForSelector('button[id^="submit-button"]', { visible: true, timeout: 0 });
     await page.click('button[id^="submit-button"]');
 
-    await verifyPa11yTests(page.url(), browser)
+    await verifyPa11yTests(page.url(), browser);
 
     console.log('Testing landing edit request view page');
     try {
@@ -171,6 +171,6 @@ describe('Accessibility', () => {
       console.error('Error: No viewable edit requests found for user ' + process.env.B2C_TEST_LOGIN_EMAIL);
       throw e;
     }
-    await verifyPa11yTests(page.url(), browser)
+    await verifyPa11yTests(page.url(), browser);
   }, 65000);
 });
