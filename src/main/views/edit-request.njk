@@ -81,7 +81,7 @@
           </div>
         </td>
         <td class="govuk-table__cell" style="text-align: right;">
-          <a class="govuk-link--no-visited-state" style="margin-right: 0.5rem"  href="#new-edit-reference-row"  id="submit-button" onclick="submitEditReference()">Save<span class="govuk-visually-hidden"> edit reference</span></a>
+          <a class="govuk-link--no-visited-state" style="margin-right: 0.5rem" href="#new-edit-reference-row"  id="save-button" onclick="saveEditReference()">Save<span class="govuk-visually-hidden"> edit reference</span></a>
         </td>
         <td class="govuk-table__cell">
           <a class="govuk-link--no-visited-state" href="#new-edit-reference-row" onclick="cancelEditReference()">Cancel<span class="govuk-visually-hidden"> edit reference</span></a>
@@ -249,7 +249,7 @@
       window.location.href = "/edit-request/{{ recording.id }}/view";
     };
 
-    const submitEditReference = (newEditRequest) => {
+    const saveEditReference = (newEditRequest) => {
       const form = document.getElementById('new-edit-reference-form');
       const formData = new FormData(form);
       const startTime = formData.get('startTime');
@@ -326,7 +326,7 @@
             </div>
           </td>
           <td class="govuk-table__cell" style="text-align: right;">
-            <a class="govuk-link--no-visited-state" style="margin-right: 0.5rem"  href="#new-edit-reference-row" id="submit-button" onclick="submitEditReference()">Save<span class="govuk-visually-hidden"> edit reference</span></a>
+            <a class="govuk-link--no-visited-state" style="margin-right: 0.5rem"  href="#new-edit-reference-row" id="save-button" onclick="saveEditReference()">Save<span class="govuk-visually-hidden"> edit reference</span></a>
           </td>
           <td class="govuk-table__cell">
             <a class="govuk-link--no-visited-state" href="#new-edit-reference-row" onclick="cancelEditReference()">Cancel<span class="govuk-visually-hidden"> edit reference</span></a>
@@ -433,13 +433,13 @@
         })
       };
 
-      submitEditReference(newEditRequest);
+      saveEditReference(newEditRequest);
       selectedIndex = undefined;
     };
 
     const deleteEditReference = (id) => {
       editRequest.edit_instructions.splice(id, 1);
-      submitEditReference(editRequest);
+      saveEditReference(editRequest);
       selectedIndex = undefined;
     };
   </script>
