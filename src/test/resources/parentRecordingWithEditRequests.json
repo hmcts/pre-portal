@@ -1,0 +1,150 @@
+{
+  "id": "4edec90b-6b09-4d70-a87e-b54a6c50355b",
+  "version": 1,
+  "filename": "index_1280x720_4500k.mp4",
+  "duration": "PT2H4M27.5S",
+  "capture_session": {
+    "id": "141d20bb-ad7c-45bb-8596-a61a6435fb8e",
+    "booking_id": "109cf935-b4cf-446a-8fa4-4426b575298c",
+    "origin": "PRE",
+    "ingest_address": "rtmps://in-0af7c694-9c49-4fd9-bbc2-0344b5d5fec7.uksouth.streaming.mediakind.com:2935/a1f892c8-0416-4857-97fb-e9326bf43ee9",
+    "live_output_url": "https://ep-default-live-pre-mediakind-stg.uksouth.streaming.mediakind.com/141d20bbad7c45bb8596a61a6435fb8e/index.qfm/manifest(format=m3u8-cmaf)",
+    "started_at": "2025-07-03T14:39:53.277Z",
+    "started_by_user_id": "98dd94d3-9eb9-4b24-9afa-bb4365816e96",
+    "finished_at": "2025-07-03T16:51:04.236Z",
+    "finished_by_user_id": "98dd94d3-9eb9-4b24-9afa-bb4365816e96",
+    "status": "RECORDING_AVAILABLE",
+    "court_name": "Leeds Youth",
+    "case_state": "OPEN"
+  },
+  "created_at": "2025-07-03T17:01:47.664Z",
+  "case_id": "726614aa-a73b-4c4e-a223-18d8f89cec5c",
+  "case_reference": "DEV-LONGREC-1",
+  "is_test_case": false,
+  "participants": [
+    {
+      "id": "5243463c-84f4-4603-af6f-1375661504cd",
+      "participant_type": "WITNESS",
+      "first_name": "Test",
+      "last_name": "",
+      "created_at": "2025-07-03T14:31:37.925Z",
+      "modified_at": "2025-07-03T14:31:37.907Z"
+    },
+    {
+      "id": "4ec6a3ff-e874-41a5-8ffe-e6a1cd30c7be",
+      "participant_type": "DEFENDANT",
+      "first_name": "Test",
+      "last_name": "Test1",
+      "created_at": "2025-07-03T14:31:37.929Z",
+      "modified_at": "2025-07-03T14:31:37.910Z"
+    }
+  ],
+  "total_version_count": 4,
+  "edit_requests": [
+    {
+      "id": "9e31b312-fa6b-40f7-9d77-8712074fd5ce",
+      "edit_instruction": {
+        "requestedInstructions": [
+          {
+            "start_of_cut": "00:20:00",
+            "end_of_cut": "00:30:00",
+            "reason": "Removing 10 minutes from version 1",
+            "start": 1200,
+            "end": 1800
+          }
+        ],
+        "ffmpegInstructions": [
+          {
+            "start": 0,
+            "end": 1200
+          },
+          {
+            "start": 1800,
+            "end": 7467
+          }
+        ]
+      },
+      "status": "COMPLETE",
+      "started_at": "2025-08-22T12:40:40.196Z",
+      "finished_at": "2025-08-22T12:49:10.670Z",
+      "created_by_id": "7a36422a-6c2e-418d-87de-d914b9accf2a",
+      "created_by": "Cristiane Marsilio",
+      "created_at": "2025-08-22T12:37:06.570Z",
+      "modified_at": "2025-08-22T12:49:10.692Z"
+    },
+    {
+      "id": "0e81cfd0-9069-4267-a9bf-c1a4aacd4ca0",
+      "edit_instruction": {
+        "requestedInstructions": [
+          {
+            "start_of_cut": "00:02:00",
+            "end_of_cut": "00:05:00",
+            "reason": "Removing 3 minutes",
+            "start": 120,
+            "end": 300
+          },
+          {
+            "start_of_cut": "00:10:00",
+            "end_of_cut": "00:15:00",
+            "reason": "Removing 5 minutes",
+            "start": 600,
+            "end": 900
+          }
+        ],
+        "ffmpegInstructions": [
+          {
+            "start": 0,
+            "end": 120
+          },
+          {
+            "start": 300,
+            "end": 600
+          },
+          {
+            "start": 900,
+            "end": 7467
+          }
+        ]
+      },
+      "status": "COMPLETE",
+      "started_at": "2025-08-01T12:40:38.928Z",
+      "finished_at": "2025-08-01T12:49:27.489Z",
+      "created_by_id": "ce7a2af2-0759-ed11-9562-00224841bc3b",
+      "created_by": "satya chundur",
+      "created_at": "2025-08-01T12:39:06.716Z",
+      "modified_at": "2025-08-01T12:49:27.513Z"
+    },
+    {
+      "id": "cc68a87e-efcc-4969-ad00-300e48cefefc",
+      "edit_instruction": {
+        "requestedInstructions": [
+          {
+            "start_of_cut": "00:10:00",
+            "end_of_cut": "00:20:00",
+            "reason": "Removing 10 minutes",
+            "start": 600,
+            "end": 1200
+          }
+        ],
+        "ffmpegInstructions": [
+          {
+            "start": 0,
+            "end": 600
+          },
+          {
+            "start": 1200,
+            "end": 7467
+          }
+        ]
+      },
+      "status": "COMPLETE",
+      "started_at": "2025-07-21T12:10:43.449Z",
+      "finished_at": "2025-07-21T12:50:02.930Z",
+      "created_by_id": "7a36422a-6c2e-418d-87de-d914b9accf2a",
+      "created_by": "Cristiane Marsilio",
+      "created_at": "2025-07-21T12:09:48.421Z",
+      "modified_at": "2025-07-21T12:50:02.960Z"
+    }
+  ],
+  "edit_status": "COMPLETE"
+}
