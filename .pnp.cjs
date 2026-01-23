@@ -105,7 +105,7 @@ const RAW_RUNTIME_STATE =
           ["jose", "npm:5.10.0"],\
           ["jquery", "npm:3.7.1"],\
           ["lint-staged", "npm:16.2.7"],\
-          ["lodash", "npm:4.17.21"],\
+          ["lodash", "npm:4.17.23"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.4"],\
           ["multer", "npm:2.0.2"],\
@@ -15606,6 +15606,13 @@ const RAW_RUNTIME_STATE =
           ["lodash", "npm:4.17.21"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:4.17.23", {\
+        "packageLocation": "./.yarn/cache/lodash-npm-4.17.23-50bdb1c01a-82504c8825.zip/node_modules/lodash/",\
+        "packageDependencies": [\
+          ["lodash", "npm:4.17.23"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["lodash.camelcase", [\
@@ -18059,7 +18066,7 @@ const RAW_RUNTIME_STATE =
           ["jose", "npm:5.10.0"],\
           ["jquery", "npm:3.7.1"],\
           ["lint-staged", "npm:16.2.7"],\
-          ["lodash", "npm:4.17.21"],\
+          ["lodash", "npm:4.17.23"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.4"],\
           ["multer", "npm:2.0.2"],\
