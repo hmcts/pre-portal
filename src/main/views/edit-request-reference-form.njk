@@ -1,0 +1,67 @@
+{% block editRequestReferenceForm %}
+<form id="new-edit-reference-form">
+  <table class="govuk-table">
+    <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Start Time</th>
+      <th scope="col" class="govuk-table__header">End Time</th>
+      <th scope="col" class="govuk-table__header">Time Removed</th>
+      <th scope="col" class="govuk-table__header">Reason</th>
+      <th scope="col" class="govuk-table__header"></th>
+      <th scope="col" class="govuk-table__header"></th>
+    </tr>
+    </thead>
+    <tbody id="current-instructions" class="govuk-table__body">
+      <tr class="govuk-table__row" id="new-edit-reference-row" hidden>
+        <td class="govuk-table__cell" style="vertical-align: bottom;">
+          <label hidden for="start-time-input">Start Time</label>
+          <div id="start-form-group">
+            <input class="govuk-input govuk-input--width-10" id="start-time-input" name="startTime" type="text" placeholder="HH:MM:SS">
+          </div>
+        </td>
+        <td class="govuk-table__cell" style="vertical-align: bottom;">
+          <label hidden for="end-time-input">End Time</label>
+          <div id="end-form-group">
+            <input class="govuk-input govuk-input--width-10" id="end-time-input" name="endTime" type="text" placeholder="HH:MM:SS">
+          </div>
+        </td>
+        <td class="govuk-table__cell"></td>
+        <td class="govuk-table__cell" style="vertical-align: bottom;">
+          <label hidden for="reason-input">Reason</label>
+          <div id="reason-form-group">
+            <input class="govuk-input govuk-input--width-10" id="reason-input" name="reason" type="text" placeholder="Reason">
+          </div>
+        </td>
+        <td class="govuk-table__cell" style="text-align: right;">
+        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-row"  id="save-button" onclick="saveEditReference(this)">
+            Save
+          </button>
+        </td>
+        <td class="govuk-table__cell">
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-row"  id="cancel-button"  onclick="cancelEditReference()">
+            Cancel
+          </button>
+        </td>
+      </tr>
+        {% for instruction in editRequest.edit_instructions %}
+        <tr id="instruction-{{ loop.index0 }}" class="govuk-table__row">
+          <td class="govuk-table__cell"> {{ instruction.start_of_cut }}</td>
+          <td class="govuk-table__cell"> {{ instruction.end_of_cut }}</td>
+          <td class="govuk-table__cell"> {{ instruction.difference }}</td>
+          <td class="govuk-table__cell"> {{ instruction.reason }}</td>
+          <td class="govuk-table__cell" style="text-align: right;">
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-row" onclick="selectRow({{ loop.index0 }}, true, {{ instruction }})">
+              Update
+            </button>
+          </td>
+          <td class="govuk-table__cell">
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#delete-reference-row" onclick="delete({{ loop.index0 }}, false, {{ instruction }})">
+              Delete
+            </button>
+          </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+  </form>
+  {% endblock %}

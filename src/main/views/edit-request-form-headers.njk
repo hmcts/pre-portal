@@ -1,0 +1,31 @@
+<tr class="govuk-table__row" id="new-edit-reference-row" hidden>
+  <td class="govuk-table__cell" style="vertical-align: bottom;">
+    <label hidden for="start-time-input">Start Time</label>
+    <div id="start-form-group">
+      <input class="govuk-input govuk-input--width-10" id="start-time-input" name="startTime" type="text" placeholder="HH:MM:SS">
+    </div>
+  </td>
+  <td class="govuk-table__cell" style="vertical-align: bottom;">
+    <label hidden for="end-time-input">End Time</label>
+    <div id="end-form-group">
+      <input class="govuk-input govuk-input--width-10" id="end-time-input" name="endTime" type="text" placeholder="HH:MM:SS">
+    </div>
+  </td>
+  <td class="govuk-table__cell" style="vertical-align: bottom;"></td>
+  <td class="govuk-table__cell" style="vertical-align: bottom;">
+    <label hidden for="reason-input">Reason</label>
+    <div id="reason-form-group">
+      <input class="govuk-input govuk-input--width-10" id="reason-input" name="reason" type="text" placeholder="Reason">
+    </div>
+  </td>
+  <td class="govuk-table__cell" style="text-align: right;">
+    <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-row" id="save-button" onclick="saveEditReference()">
+      Save
+    </button>
+  </td>
+  <td class="govuk-table__cell">
+    <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-row" onclick="cancelEditReference()">
+      Cancel
+    </button>
+  </td>
+</tr>
