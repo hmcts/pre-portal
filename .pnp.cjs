@@ -113,7 +113,7 @@ const RAW_RUNTIME_STATE =
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
           ["nodemon", "npm:3.1.11"],\
           ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
-          ["pa11y", "npm:9.0.0"],\
+          ["pa11y", "npm:9.0.1"],\
           ["playwright", "npm:1.56.1"],\
           ["pre-portal", "workspace:."],\
           ["prettier", "npm:3.6.2"],\
@@ -17475,8 +17475,8 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["pa11y", [\
-      ["npm:9.0.0", {\
-        "packageLocation": "./.yarn/cache/pa11y-npm-9.0.0-b2b87b3f4c-177e58e8d2.zip/node_modules/pa11y/",\
+      ["npm:9.0.1", {\
+        "packageLocation": "./.yarn/cache/pa11y-npm-9.0.1-65a2fcb723-9df4ee7da9.zip/node_modules/pa11y/",\
         "packageDependencies": [\
           ["axe-core", "npm:4.10.3"],\
           ["bfj", "npm:9.1.2"],\
@@ -17486,7 +17486,7 @@ const RAW_RUNTIME_STATE =
           ["kleur", "npm:4.1.5"],\
           ["mustache", "npm:4.2.0"],\
           ["node.extend", "npm:2.0.3"],\
-          ["pa11y", "npm:9.0.0"],\
+          ["pa11y", "npm:9.0.1"],\
           ["puppeteer", "npm:24.34.0"],\
           ["semver", "npm:7.7.3"]\
         ],\
@@ -18074,7 +18074,7 @@ const RAW_RUNTIME_STATE =
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
           ["nodemon", "npm:3.1.11"],\
           ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
-          ["pa11y", "npm:9.0.0"],\
+          ["pa11y", "npm:9.0.1"],\
           ["playwright", "npm:1.56.1"],\
           ["pre-portal", "workspace:."],\
           ["prettier", "npm:3.6.2"],\
