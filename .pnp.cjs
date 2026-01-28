@@ -105,7 +105,7 @@ const RAW_RUNTIME_STATE =
           ["jose", "npm:5.10.0"],\
           ["jquery", "npm:3.7.1"],\
           ["lint-staged", "npm:16.2.7"],\
-          ["lodash", "npm:4.17.21"],\
+          ["lodash", "npm:4.17.23"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.4"],\
           ["multer", "npm:2.0.2"],\
@@ -119,7 +119,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.6.2"],\
           ["puppeteer", "npm:24.34.0"],\
           ["qs", "npm:6.14.1"],\
-          ["react", "npm:19.2.1"],\
+          ["react", "npm:19.2.3"],\
           ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.82.1"],\
           ["redis", "npm:5.10.0"],\
           ["require-directory", "npm:2.1.1"],\
@@ -288,7 +288,7 @@ const RAW_RUNTIME_STATE =
           ["@azure/functions-extensions-base", "npm:0.2.0"],\
           ["cookie", "npm:0.7.2"],\
           ["long", "npm:4.0.0"],\
-          ["undici", "npm:7.18.2"]\
+          ["undici", "npm:7.19.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6199,7 +6199,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-native", null],\
           ["invariant", "npm:2.2.4"],\
           ["nullthrows", "npm:1.1.1"],\
-          ["react", "npm:19.2.1"],\
+          ["react", "npm:19.2.3"],\
           ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.82.1"]\
         ],\
         "packagePeers": [\
@@ -9714,7 +9714,7 @@ const RAW_RUNTIME_STATE =
           ["parse5", "npm:7.3.0"],\
           ["parse5-htmlparser2-tree-adapter", "npm:7.1.0"],\
           ["parse5-parser-stream", "npm:7.1.2"],\
-          ["undici", "npm:7.18.2"],\
+          ["undici", "npm:7.19.2"],\
           ["whatwg-mimetype", "npm:4.0.0"]\
         ],\
         "linkType": "HARD"\
@@ -15590,6 +15590,13 @@ const RAW_RUNTIME_STATE =
           ["lodash", "npm:4.17.21"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:4.17.23", {\
+        "packageLocation": "./.yarn/cache/lodash-npm-4.17.23-50bdb1c01a-82504c8825.zip/node_modules/lodash/",\
+        "packageDependencies": [\
+          ["lodash", "npm:4.17.23"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["lodash.camelcase", [\
@@ -16864,7 +16871,7 @@ const RAW_RUNTIME_STATE =
           ["nopt", "npm:9.0.0"],\
           ["proc-log", "npm:6.1.0"],\
           ["semver", "npm:7.7.3"],\
-          ["tar", "npm:7.5.2"],\
+          ["tar", "npm:7.5.6"],\
           ["tinyglobby", "npm:0.2.15"],\
           ["which", "npm:6.0.0"]\
         ],\
@@ -18043,7 +18050,7 @@ const RAW_RUNTIME_STATE =
           ["jose", "npm:5.10.0"],\
           ["jquery", "npm:3.7.1"],\
           ["lint-staged", "npm:16.2.7"],\
-          ["lodash", "npm:4.17.21"],\
+          ["lodash", "npm:4.17.23"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.4"],\
           ["multer", "npm:2.0.2"],\
@@ -18057,7 +18064,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.6.2"],\
           ["puppeteer", "npm:24.34.0"],\
           ["qs", "npm:6.14.1"],\
-          ["react", "npm:19.2.1"],\
+          ["react", "npm:19.2.3"],\
           ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.82.1"],\
           ["redis", "npm:5.10.0"],\
           ["require-directory", "npm:2.1.1"],\
@@ -18453,10 +18460,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["react", [\
-      ["npm:19.2.1", {\
-        "packageLocation": "./.yarn/cache/react-npm-19.2.1-ee2feff9fc-7c7ab0f40b.zip/node_modules/react/",\
+      ["npm:19.2.3", {\
+        "packageLocation": "./.yarn/cache/react-npm-19.2.3-0ecd9e5a6e-d16b7f35c0.zip/node_modules/react/",\
         "packageDependencies": [\
-          ["react", "npm:19.2.1"]\
+          ["react", "npm:19.2.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -18526,7 +18533,7 @@ const RAW_RUNTIME_STATE =
           ["nullthrows", "npm:1.1.1"],\
           ["pretty-format", "npm:29.7.0"],\
           ["promise", "npm:8.3.0"],\
-          ["react", "npm:19.2.1"],\
+          ["react", "npm:19.2.3"],\
           ["react-devtools-core", "npm:6.1.5"],\
           ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.82.1"],\
           ["react-refresh", "npm:0.14.2"],\
@@ -20016,14 +20023,14 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["tar", [\
-      ["npm:7.5.2", {\
-        "packageLocation": "./.yarn/cache/tar-npm-7.5.2-6d8cfb7a13-dbad9c9a07.zip/node_modules/tar/",\
+      ["npm:7.5.6", {\
+        "packageLocation": "./.yarn/cache/tar-npm-7.5.6-955ec951c2-cf4a84d79b.zip/node_modules/tar/",\
         "packageDependencies": [\
           ["@isaacs/fs-minipass", "npm:4.0.1"],\
           ["chownr", "npm:3.0.0"],\
           ["minipass", "npm:7.1.2"],\
           ["minizlib", "npm:3.1.0"],\
-          ["tar", "npm:7.5.2"],\
+          ["tar", "npm:7.5.6"],\
           ["yallist", "npm:5.0.0"]\
         ],\
         "linkType": "HARD"\
@@ -20759,10 +20766,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["undici", [\
-      ["npm:7.18.2", {\
-        "packageLocation": "./.yarn/cache/undici-npm-7.18.2-c9dadc9f31-7d8b921717.zip/node_modules/undici/",\
+      ["npm:7.19.2", {\
+        "packageLocation": "./.yarn/cache/undici-npm-7.19.2-23f5b65d5e-26a0180440.zip/node_modules/undici/",\
         "packageDependencies": [\
-          ["undici", "npm:7.18.2"]\
+          ["undici", "npm:7.19.2"]\
         ],\
         "linkType": "HARD"\
       }]\
