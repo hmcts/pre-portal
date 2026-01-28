@@ -55,7 +55,7 @@ const RAW_RUNTIME_STATE =
           ["@types/jest", "npm:30.0.0"],\
           ["@types/lodash", "npm:4.17.21"],\
           ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
-          ["@types/multer", "npm:1.4.13"],\
+          ["@types/multer", "npm:2.0.0"],\
           ["@types/node", "npm:22.19.2"],\
           ["@types/nunjucks", "npm:3.2.6"],\
           ["@types/qs", "npm:6.14.0"],\
@@ -6888,11 +6888,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/multer", [\
-      ["npm:1.4.13", {\
-        "packageLocation": "./.yarn/cache/@types-multer-npm-1.4.13-ed04db7ef3-f650a9f431.zip/node_modules/@types/multer/",\
+      ["npm:2.0.0", {\
+        "packageLocation": "./.yarn/cache/@types-multer-npm-2.0.0-10a3c18289-87ddd5b39f.zip/node_modules/@types/multer/",\
         "packageDependencies": [\
           ["@types/express", "npm:5.0.6"],\
-          ["@types/multer", "npm:1.4.13"]\
+          ["@types/multer", "npm:2.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -18016,7 +18016,7 @@ const RAW_RUNTIME_STATE =
           ["@types/jest", "npm:30.0.0"],\
           ["@types/lodash", "npm:4.17.21"],\
           ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
-          ["@types/multer", "npm:1.4.13"],\
+          ["@types/multer", "npm:2.0.0"],\
           ["@types/node", "npm:22.19.2"],\
           ["@types/nunjucks", "npm:3.2.6"],\
           ["@types/qs", "npm:6.14.0"],\
