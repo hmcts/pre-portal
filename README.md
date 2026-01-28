@@ -230,6 +230,18 @@ contexts and the current tests have complexities (conditional logic, dynamic IDs
 
 These will be converted to Playwright in upcoming work.
 
+#### Help! my tests are not running
+
+If the `PRE_API_URL` value in your `.env` file is set with `PRE_API_URL=http://localhost:4550/`:
+1. Have you started your Docker engine?
+2. Are your Docker containers running? (from your local PRE API repository, run `docker-compose up -d`)
+3. Have you started up PRE API locally? (from your local PRE API repository, run `./gradlew bootRun`)
+
+Wherever your PRE_API_URL is pointing, you will need to:
+1. Connect to the [F5 VPN](https://portal.platform.hmcts.net/vdesk/webtop.eui?webtop=/Common/webtop_full&webtop_type=webtop_full) so that you can access staging resources e.g. B2C for logging in.
+2. Check you have put sensible variables into your `.env` file (ask another dev)
+3. Export these variables with `export $(grep -v '^#' .env | xargs -0)` whenever the env file has changed or whenever you open a new Terminal
+
 ### Security
 
 #### CSRF prevention
