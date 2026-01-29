@@ -46,7 +46,12 @@
           <th scope="col" class="govuk-table__header">Defendants</th>
           <th scope="col" class="govuk-table__header">Version</th>
           <th scope="col" class="govuk-table__header">Status</th>
+          {% if enableAutomatedEditing == true %}
+          <th scope="col" class="govuk-table__header">Edit Status</th>
           <th scope="col" class="govuk-table__header">Action</th>
+          {% else %}
+          <th scope="col" class="govuk-table__header">Action</th>
+          {% endif %}
         </tr>
         </thead>
         {% if recordings.length === 0 %}
@@ -100,12 +105,53 @@
                   This will be unavailable from {{ recording.capture_session.case_closed_at }}
                 {% endif %}
               </td>
-              <td class="govuk-table__cell">
-                <a class="govuk-link" href="/watch/{{ recording.id }}">
-                Play
-                <span class="sr-only">video case ref {{ recording.case_reference}}</span>
-                </a>
-              </td>
+              {% if enableAutomatedEditing == true %}
+                <td class="govuk-table__cell">
+                  {% if recording.edit_status == "DRAFT" %}
+                    <strong class="govuk-tag govuk-tag--grey">
+                      Draft
+                    </strong>
+                  {% endif %}
+                  {% if recording.edit_status == "SUBMITTED" %}
+                    <strong class="govuk-tag govuk-tag--blue">
+                      Submitted
+                    </strong>
+                  {% endif %}
+                  {% if recording.edit_status == "REJECTED" %}
+                    <strong class="govuk-tag govuk-tag--red">
+                      Rejected
+                    </strong>
+                  {% endif %}
+                  {% if recording.edit_status in ["APPROVED", "PENDING", "PROCESSING", "COMPLETE", "ERROR"] %}
+                    <strong class="govuk-tag govuk-tag--green">
+                      Approved
+                    </strong>
+                  {% endif %}
+                </td>
+                <td class="govuk-table__cell">
+                  <div style="display: inline-flex; flex-wrap: wrap;">
+                  <a class="govuk-link" href="/watch/{{ recording.id }}">
+                                        Play
+                                        <span class="sr-only" hidden>video case ref {{ recording.case_reference}}</span>
+                                      </a>
+                    {% if recording.version == 1 %}
+                      {% if recording.edit_status not in ['DRAFT', 'REJECTED', 'COMPLETE', undefined] %}
+                        <a class="govuk-link" href="/edit-request/{{ recording.id }}/view">View</a>
+                      {% else %}
+                        <a class="govuk-link" href="/edit-request/{{ recording.id }}">Edit</a>
+                      {% endif %}
+                    {% endif %}
+                  </div>
+                </td>
+              {% endif %}
+              {% if enableAutomatedEditing == false %}
+                <td class="govuk-table__cell">
+                  <a class="govuk-link" href="/watch/{{ recording.id }}">
+                    Play
+                    <span class="sr-only" hidden>video case ref {{ recording.case_reference}}</span>
+                  </a>
+                </td>
+              {% endif %}
             </tr>
           {% endfor %}
           </tbody>
@@ -117,5 +163,4 @@
         {{ govukPagination(paginationLinks) }}
       </div>
     {% endif %}
-
 {% endblock %}

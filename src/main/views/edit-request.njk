@@ -1,0 +1,467 @@
+{% extends "template.njk" %}
+
+{% block pageTitle %}Edit Recording {{ recording.id }} - PRE Portal{% endblock %}
+
+{% block head %}
+  {% include "webpack/css.njk" %}
+  <script type="text/javascript" src="/assets/js/mkplayer.js"></script>
+  <link rel="stylesheet" href="/assets/css/mkplayer-ui.css">
+{% endblock %}
+
+{% block beforeContent %}
+  {{
+    govukBackLink({
+      "href": "javascript:history.back()"
+    })
+  }}
+{% endblock %}
+
+{% block content %}
+
+  <h1 class="govuk-heading-xl">Edits for case reference {{ recording.case_reference }}</h1>
+
+  <div id="videoError" class="govuk-error-summary" data-module="govuk-error-summary" style="display: none;">
+    <div role="alert">
+      <h2 class="govuk-error-summary__title">
+        There is a problem
+      </h2>
+      <div class="govuk-error-summary__body">
+        <ul class="govuk-list govuk-error-summary__list">
+          <li class="govuk-error-message">
+            The recording is not currently available
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="loading" class="govuk-!-margin-bottom-2 loading-box" style="display: block;">
+    <div class="loading-container">
+      <img src="/assets/images/loading-spinner.gif" alt="Loading" />
+    </div>
+  </div>
+
+  <div id="videoWrapper" class="govuk-!-margin-bottom-2 video-wrapper" style="display: none;">
+    <div id="video-container"></div>
+  </div>
+  <div style="text-align: right;">
+    <button type="button" class="govuk-button" data-module="govuk-button" onclick="newEditReference()">Add Edit Reference</button>
+  </div>
+  <form id="new-edit-reference-form">
+  <table class="govuk-table" style="table-layout: fixed; width: 100%;">
+    <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Start Time</th>
+      <th scope="col" class="govuk-table__header">End Time</th>
+      <th scope="col" class="govuk-table__header">Time Removed</th>
+      <th scope="col" class="govuk-table__header">Reason</th>
+      <th scope="col" class="govuk-table__header"></th>
+      <th scope="col" class="govuk-table__header"></th>
+    </tr>
+    </thead>
+    <tbody id="current-instructions" class="govuk-table__body">
+      <tr class="govuk-table__row" id="new-edit-reference-row" hidden>
+        <td class="govuk-table__cell" style="vertical-align: bottom;">
+          <label hidden for="start-time-input">Start Time</label>
+          <div id="start-form-group">
+            <input class="govuk-input govuk-input--width-10" id="start-time-input" name="startTime" type="text" placeholder="HH:MM:SS">
+          </div>
+        </td>
+        <td class="govuk-table__cell" style="vertical-align: bottom;">
+          <label hidden for="end-time-input">End Time</label>
+          <div id="end-form-group">
+            <input class="govuk-input govuk-input--width-10" id="end-time-input" name="endTime" type="text" placeholder="HH:MM:SS">
+          </div>
+        </td>
+        <td class="govuk-table__cell"></td>
+        <td class="govuk-table__cell" style="vertical-align: bottom;">
+          <label hidden for="reason-input">Reason</label>
+          <div id="reason-form-group">
+            <input class="govuk-input govuk-input--width-10" id="reason-input" name="reason" type="text" placeholder="Reason">
+          </div>
+        </td>
+        <td class="govuk-table__cell" style="text-align: right;">
+        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-row"  id="save-button" onclick="saveEditReference()">
+            Save
+          </button>
+        </td>
+        <td class="govuk-table__cell">
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-row"  id="cancel-button"  onclick="cancelEditReference()">
+            Cancel
+          </button>
+        </td>
+      </tr>
+        {% for instruction in editRequest.edit_instructions %}
+        <tr id="instruction-{{ loop.index0 }}" class="govuk-table__row">
+          <td class="govuk-table__cell"> {{ instruction.start_of_cut }}</td>
+          <td class="govuk-table__cell"> {{ instruction.end_of_cut }}</td>
+          <td class="govuk-table__cell"> {{ instruction.difference }}</td>
+          <td class="govuk-table__cell" style="overflow-wrap: break-word;"> {{ instruction.reason }}</td>
+          <td class="govuk-table__cell" style="text-align: right;">
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-row" onclick="selectRow({{ loop.index0 }}, true)">
+              Update
+            </button>
+          </td>
+          <td class="govuk-table__cell">
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#delete-reference-row" onclick="selectRow({{ loop.index0 }}, false)">
+              Delete
+            </button>
+          </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+  </form>
+
+  <div style="text-align: right;">
+    <button id="submit-button" class="govuk-button" data-module="govuk-button" onclick="onSubmit()" data-testid="">Submit</button>
+  </div>
+
+  <style>
+    tr.delete-message-block {
+      & > td > div.delete-message-block {
+        border-left: 5px solid #d4351c;
+        padding-left: 15px;
+
+        & > p {
+          margin: 0;
+          color: #d4351c;
+        }
+      }
+
+      input:disabled {
+        border-color: #d4351c;
+        opacity: 1;
+        color: #00000080;
+      }
+    }
+  </style>
+
+  <script type="text/javascript" crossorigin="anonymous" data-testid="recording-video-script">
+    const videoContainer = document.getElementById("video-container");
+    var videoError = document.getElementById("videoError");
+
+    const playerConfig = {
+        key: "{{ mediaKindPlayerKey }}",
+        ui: true,
+        playback: {
+            muted: false,
+            autoplay: false,
+            preferredTech: [{ player: 'html5', streaming: 'hls'}]
+        }
+    };
+
+    let player = new mkplayer.MKPlayer(videoContainer, playerConfig);
+
+    fetch("{{ recordingPlaybackDataUrl }}", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    }).then(function (response) {
+      if (!response.ok) {
+        throw new Error(response);
+      }
+
+      return response.json();
+    }).then(async function (data) {
+      // wait for the url to be available
+      let hlsAvailable = false;
+      let retries = 120;
+      let time = 3000;
+      do {
+        await new Promise(r => setTimeout(r, time)); // sleep for `time`ms
+        const headResult = await fetch(data.hls_url, {
+          method: "HEAD"
+        });
+        hlsAvailable = headResult.status === 200;
+        retries--;
+        time -= 1000;
+        if (time < 1000) {
+          time = 500;
+        }
+      } while (hlsAvailable === false && retries > 0);
+      const sourceConfig = {
+        hls: data.hls_url,
+        drm: {
+          clearkey: {
+            LA_URL: 'HLS_AES',
+            headers: {
+              Authorization: 'Bearer=' + data.token || '',
+            },
+          },
+        }
+      };
+
+      player.load(sourceConfig);
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("videoWrapper").style.display = "block";
+    }).catch(function (error) {
+      console.error("Error:", error);
+      videoError.style.display = "block";
+      document.getElementById("loading").style.display = "none";
+    });
+  </script>
+  <script type="text/javascript" crossorigin="anonymous" data-testid="edit-reference">
+    let editRequest = JSON.parse("{{ editRequest | dump  }}".replace(/&quot;/g, '"'));
+    let errors = {};
+    let selectedIndex;
+
+    const newEditReference = () => {
+      const row = document.getElementById('new-edit-reference-row');
+      row.hidden = false;
+    }
+
+    const showErrors = () => {
+      if (Object.keys(errors).length === 0) {
+        return;
+      }
+
+      const startFormGroup = document.getElementById('start-form-group');
+      const el = startFormGroup.querySelector('.govuk-error-message');
+      if (el) {
+        el.remove();
+      }
+      const endFormGroup = document.getElementById('end-form-group');
+      const el2 = endFormGroup.querySelector('.govuk-error-message');
+      if (el2) {
+        el2.remove();
+      }
+
+      if (errors['startTime']) {
+        startFormGroup.classList.add('govuk-form-group--error');
+        const startTimeInput = document.getElementById('start-time-input');
+        startTimeInput.classList.add('govuk-input--error');
+        startTimeInput.insertAdjacentHTML('beforebegin', `<p class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> ${ errors['startTime']}`);
+      } else {
+        startFormGroup.classList.remove('govuk-form-group--error');
+        const startTimeInput = document.getElementById('start-time-input');
+        startTimeInput.classList.remove('govuk-input--error');
+      }
+
+      if (errors['endTime']) {
+        endFormGroup.classList.add('govuk-form-group--error');
+        const endTimeInput = document.getElementById('end-time-input');
+        endTimeInput.classList.add('govuk-input--error');
+        endTimeInput.insertAdjacentHTML('beforebegin', `<p class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> ${ errors['endTime']}`);
+      } else {
+        endFormGroup.classList.remove('govuk-form-group--error');
+        const endTimeInput = document.getElementById('end-time-input');
+        endTimeInput.classList.remove('govuk-input--error');
+      }
+    };
+
+    const onSubmit = () => {
+      window.location.href = "/edit-request/{{ recording.id }}/view";
+    };
+
+    const saveEditReference = (newEditRequest) => {
+      const form = document.getElementById('new-edit-reference-form');
+      const formData = new FormData(form);
+      const startTime = formData.get('startTime');
+      const endTime = formData.get('endTime');
+      const reason = formData.get('reason');
+
+      const row = document.getElementById('new-edit-reference-row');
+
+      errors = {};
+
+      fetch("{{ editRequestPostUrl }}", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(
+          newEditRequest
+            ? newEditRequest
+            : {
+              ...editRequest,
+              edit_instructions: [
+                ...editRequest.edit_instructions,
+                {
+                  start_of_cut: startTime,
+                  end_of_cut: endTime,
+                  reason,
+                }
+              ]
+            }),
+      }).then(async (response) => {
+        if (!response.ok) {
+          const e = (await response.json())['errors'];
+          if (e) {
+            errors = e;
+            return;
+          }
+          throw new Error(response);
+        }
+        refreshTable(await response.json());
+      }).catch(e => {
+        console.error("Error:", e);
+      }).then(() => {
+        if (Object.keys(errors).length > 0) {
+          showErrors();
+          return;
+        }
+        row.hidden = true;
+        form.reset();
+      });
+    };
+
+    const refreshTable = (content) => {
+      editRequest = content;
+      const currentInstructions = document.getElementById('current-instructions');
+      currentInstructions.innerHTML = `
+        <tr class="govuk-table__row" id="new-edit-reference-row" hidden>
+          <td class="govuk-table__cell" style="vertical-align: bottom;">
+            <label hidden for="start-time-input">Start Time</label>
+            <div id="start-form-group">
+              <input class="govuk-input govuk-input--width-10" id="start-time-input" name="startTime" type="text" placeholder="HH:MM:SS">
+            </div>
+          </td>
+          <td class="govuk-table__cell" style="vertical-align: bottom;">
+            <label hidden for="end-time-input">End Time</label>
+            <div id="end-form-group">
+              <input class="govuk-input govuk-input--width-10" id="end-time-input" name="endTime" type="text" placeholder="HH:MM:SS">
+            </div>
+          </td>
+          <td class="govuk-table__cell" style="vertical-align: bottom;"></td>
+          <td class="govuk-table__cell" style="vertical-align: bottom;">
+            <label hidden for="reason-input">Reason</label>
+            <div id="reason-form-group">
+              <input class="govuk-input govuk-input--width-10" id="reason-input" name="reason" type="text" placeholder="Reason">
+            </div>
+          </td>
+          <td class="govuk-table__cell" style="text-align: right;">
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-row" id="save-button" onclick="saveEditReference()">
+              Save
+            </button>
+          </td>
+          <td class="govuk-table__cell">
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-row" onclick="cancelEditReference()">
+              Cancel
+            </button>
+          </td>
+        </tr>` + content.edit_instructions.map((instruction, index) => {
+          if (index === selectedIndex) {
+            return '';
+          }
+          return `<tr id="instruction-${ index }" class="govuk-table__row">
+            <td class="govuk-table__cell">${ instruction.start_of_cut }</td>
+            <td class="govuk-table__cell">${ instruction.end_of_cut }</td>
+            <td class="govuk-table__cell">${ instruction.difference }</td>
+            <td class="govuk-table__cell" style="overflow-wrap: break-word;">${ instruction.reason }</td>
+            <td class="govuk-table__cell" style="text-align: right;">
+              <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-row" onclick="selectRow(${ index }, true)">
+                Update
+              </button>
+            </td>
+            <td class="govuk-table__cell">
+              <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#delete-reference-row" onclick="selectRow(${ index }, false)">
+                Delete
+              </button>
+            </td>
+          </tr>`;
+        }).join('');
+    };
+
+    const cancelEditReference = () => {
+      const row = document.getElementById('new-edit-reference-row');
+      const form = document.getElementById('new-edit-reference-form');
+      row.hidden = true;
+      form.reset();
+      errors = {};
+      selectedIndex = undefined;
+      refreshTable(editRequest);
+    };
+
+    const selectRow = (id, isUpdate) => {
+      selectedIndex = id;
+      refreshTable(editRequest);
+      const row = document.getElementById('new-edit-reference-row');
+      const currentInstructions = document.getElementById('current-instructions');
+      if (isUpdate) {
+        // is update
+        row.hidden = false;
+        const submitButton = document.getElementById('submit-button');
+        submitButton.removeAttribute('onclick');
+        submitButton.addEventListener('click', _ => {
+          updateEditReference(id);
+        });
+        const startInput = document.getElementById('start-time-input');
+        startInput.value = editRequest.edit_instructions[selectedIndex].start_of_cut;
+        const endInput = document.getElementById('end-time-input');
+        endInput.value = editRequest.edit_instructions[selectedIndex].end_of_cut;
+        const reasonInput = document.getElementById('reason-input');
+        reasonInput.value = editRequest.edit_instructions[selectedIndex].reason;
+      } else {
+        const row = document.getElementById('new-edit-reference-row');
+        row.hidden = true;
+        // is delete
+        const display = `
+          <tr class="govuk-table__row delete-message-block" id="delete-reference-row">
+            <td class="govuk-table__cell" style="vertical-align: bottom;">
+              <div class="delete-message-block">
+                <p class="govuk-error-message">Please confirm to delete this edit reference</p>
+                <label hidden for="start-time-input">Start Time</label>
+                <div id="start-form-group">
+                  <input class="govuk-input govuk-input--width-10" id="start-time-input" name="startTime" type="text" placeholder="HH:MM:SS" disabled value="${ editRequest.edit_instructions[selectedIndex].start_of_cut }">
+                </div>
+              </div>
+            </td>
+            <td class="govuk-table__cell" style="vertical-align: bottom;">
+              <label hidden for="end-time-input">End Time</label>
+              <div id="end-form-group">
+                <input class="govuk-input govuk-input--width-10" id="end-time-input" name="endTime" type="text" placeholder="HH:MM:SS" disabled value="${ editRequest.edit_instructions[selectedIndex].end_of_cut }">
+              </div>
+            </td>
+            <td class="govuk-table__cell" style="vertical-align: bottom; opacity: 0.5;">${ editRequest.edit_instructions[selectedIndex].difference }</td>
+            <td class="govuk-table__cell" style="vertical-align: bottom;">
+              <label hidden for="reason-input">Reason</label>
+              <div id="reason-form-group">
+                <input class="govuk-input govuk-input--width-10" id="reason-input" name="reason" type="text" placeholder="Reason" disabled value="${ editRequest.edit_instructions[selectedIndex].reason }">
+              </div>
+            </td>
+            <td class="govuk-table__cell" style="text-align: right;">
+              <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-form" onclick="deleteEditReference(${selectedIndex})">
+                Confirm
+              </button>
+            </td>
+            <td class="govuk-table__cell">
+              <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#new-edit-reference-form" onclick="cancelEditReference()">
+                Cancel
+              </button>
+            </td>
+          </tr>`;
+        currentInstructions.innerHTML = display + currentInstructions.innerHTML;
+      }
+    };
+
+    const updateEditReference = (id) => {
+      const newEditRequest = {
+        ...editRequest,
+        edit_instructions: editRequest.edit_instructions.map((instruction, index) => {
+          if (index === id) {
+            return {
+              start_of_cut: document.getElementById('start-time-input').value,
+              end_of_cut: document.getElementById('end-time-input').value,
+              reason: document.getElementById('reason-input').value
+            };
+          }
+          return instruction;
+        })
+      };
+
+      saveEditReference(newEditRequest);
+      selectedIndex = undefined;
+    };
+
+    const deleteEditReference = (id) => {
+      editRequest.edit_instructions.splice(id, 1);
+      saveEditReference(editRequest);
+      selectedIndex = undefined;
+    };
+  </script>
+{% endblock %}
