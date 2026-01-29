@@ -5,42 +5,6 @@
 {% block pageTitle %}{{ title }} - PRE Portal{% endblock %}
  {% block main %}
       <div class="full-width-container">
-      {% block beforeContent %}
-       {% if '/admin' in pageUrl %}
-            {{ govukServiceNavigation({
-              navigation:
-                [{
-                href: '/admin/edit-request',
-                text: "Edit Requests",
-                active: '/admin/edit-request' in pageUrl
-               },
-                {
-                  href: '/admin/status',
-                  text: "System Status",
-                  active: '/admin/status' in pageUrl
-                },
-                {
-                  href: '/admin/MK-live-events',
-                  text: "MediaKind",
-                  active: '/admin/MK-live-events' in pageUrl
-                },
-                {
-                 href: '/admin/audit',
-                 text: "Audits",
-                 active: '/admin/audit' in pageUrl
-                },
-                {
-                 href: '/admin/migration',
-                 text: "Data Migration",
-                 active: '/admin/migration' in pageUrl
-                },
-               {
-                text: "Sign out",
-                href: "/logout"
-                }]
-           }) }}
-         {% endif %}
-      {% endblock %}
 
       {% block content %}
          <div class="govuk-grid-row admin-container">
