@@ -271,7 +271,7 @@ export class PreClient {
         },
       });
     } catch (e) {
-      console.log('Response: ' + e.response);
+      this.logger.error(e.message);
       // if validation error, return response for highlighting on edit request page
       if (e.response?.status === 400) {
         return e.response;
