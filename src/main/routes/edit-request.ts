@@ -9,7 +9,7 @@ import { Logger } from '@hmcts/nodejs-logging';
 import { v4 as uuid } from 'uuid';
 import config from 'config';
 
-const parseIsoDuration = (duration: string): number => {
+export const parseIsoDuration = (duration: string): number => {
   const regex = /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?/;
   const matches = regex.exec(duration);
 
