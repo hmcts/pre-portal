@@ -143,9 +143,7 @@ describe('edit-request route', () => {
         return Promise.resolve();
       });
 
-      const res = await request(app)
-        .get('/edit-request/12345678-1234-1234-1234-1234567890ab')
-        .expect(200);
+      const res = await request(app).get('/edit-request/12345678-1234-1234-1234-1234567890ab').expect(200);
 
       expect(putAuditSpy).toHaveBeenCalled();
       expect(res.text).toContain('edit-request');
