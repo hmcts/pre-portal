@@ -34,6 +34,10 @@ describe('edit-request-view route', () => {
       expect(res.text).toContain('<h1 class="govuk-heading-xl">Submit edits');
     });
 
+    it('should return 404 when id is invalid', async () => {
+      await request(app).get('/edit-request/invalid-id/view').expect(404);
+    });
+
     it('should render edit-request-view for submitted request', async () => {
       mockGetRecording();
       mockGetCurrentEditRequest([
