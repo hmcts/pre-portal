@@ -51,7 +51,6 @@ const RAW_RUNTIME_STATE =
           ["@types/es6-promisify", "npm:6.0.4"],\
           ["@types/express", "npm:5.0.6"],\
           ["@types/express-session", "npm:1.18.2"],\
-          ["@types/glob", "npm:8.1.0"],\
           ["@types/jest", "npm:30.0.0"],\
           ["@types/lodash", "npm:4.17.21"],\
           ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
@@ -92,7 +91,7 @@ const RAW_RUNTIME_STATE =
           ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.19.3"],\
           ["express-session", "npm:1.18.2"],\
           ["form-data", "npm:4.0.4"],\
-          ["glob", "npm:11.1.0"],\
+          ["glob", "npm:13.0.1"],\
           ["govuk-frontend", "npm:5.11.2"],\
           ["helmet", "npm:8.1.0"],\
           ["html-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.6.5"],\
@@ -6912,17 +6911,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["@types/glob", [\
-      ["npm:8.1.0", {\
-        "packageLocation": "./.yarn/cache/@types-glob-npm-8.1.0-bdb9d0520c-9101f3a906.zip/node_modules/@types/glob/",\
-        "packageDependencies": [\
-          ["@types/glob", "npm:8.1.0"],\
-          ["@types/minimatch", "npm:5.1.2"],\
-          ["@types/node", "npm:25.0.3"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["@types/graceful-fs", [\
       ["npm:4.1.9", {\
         "packageLocation": "./.yarn/cache/@types-graceful-fs-npm-4.1.9-ebd697fe83-79d746a8f0.zip/node_modules/@types/graceful-fs/",\
@@ -7052,15 +7040,6 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
           ["mini-css-extract-plugin", "virtual:36ad456a430c7ce214b5b6dc53855a991370ff5c273e9bb94e009010d87b9053f266726cb96e11bd6682fd3ac25a3e86cfab9c95d223de555ebbba2b02024629#npm:2.9.4"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@types/minimatch", [\
-      ["npm:5.1.2", {\
-        "packageLocation": "./.yarn/cache/@types-minimatch-npm-5.1.2-aab9c394d3-94db5060d2.zip/node_modules/@types/minimatch/",\
-        "packageDependencies": [\
-          ["@types/minimatch", "npm:5.1.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -13232,6 +13211,16 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
+      ["npm:13.0.1", {\
+        "packageLocation": "./.yarn/cache/glob-npm-13.0.1-322004d656-465e8cc269.zip/node_modules/glob/",\
+        "packageDependencies": [\
+          ["glob", "npm:13.0.1"],\
+          ["minimatch", "npm:10.1.2"],\
+          ["minipass", "npm:7.1.2"],\
+          ["path-scurry", "npm:2.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:6.0.4", {\
         "packageLocation": "./.yarn/cache/glob-npm-6.0.4-dbb227ba4a-b8fec415f7.zip/node_modules/glob/",\
         "packageDependencies": [\
@@ -16619,6 +16608,14 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
+      ["npm:10.1.2", {\
+        "packageLocation": "./.yarn/cache/minimatch-npm-10.1.2-9295d0648a-6f0ef97546.zip/node_modules/minimatch/",\
+        "packageDependencies": [\
+          ["@isaacs/brace-expansion", "npm:5.0.1"],\
+          ["minimatch", "npm:10.1.2"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:3.1.2", {\
         "packageLocation": "./.yarn/cache/minimatch-npm-3.1.2-9405269906-e0b25b04cd.zip/node_modules/minimatch/",\
         "packageDependencies": [\
@@ -18199,7 +18196,6 @@ const RAW_RUNTIME_STATE =
           ["@types/es6-promisify", "npm:6.0.4"],\
           ["@types/express", "npm:5.0.6"],\
           ["@types/express-session", "npm:1.18.2"],\
-          ["@types/glob", "npm:8.1.0"],\
           ["@types/jest", "npm:30.0.0"],\
           ["@types/lodash", "npm:4.17.21"],\
           ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
@@ -18240,7 +18236,7 @@ const RAW_RUNTIME_STATE =
           ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.19.3"],\
           ["express-session", "npm:1.18.2"],\
           ["form-data", "npm:4.0.4"],\
-          ["glob", "npm:11.1.0"],\
+          ["glob", "npm:13.0.1"],\
           ["govuk-frontend", "npm:5.11.2"],\
           ["helmet", "npm:8.1.0"],\
           ["html-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.6.5"],\
