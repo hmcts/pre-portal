@@ -3963,14 +3963,6 @@ const RAW_RUNTIME_STATE =
           ["@isaacs/brace-expansion", "npm:5.0.1"]\
         ],\
         "linkType": "HARD"\
-      }],\
-      ["npm:5.0.1", {\
-        "packageLocation": "./.yarn/cache/@isaacs-brace-expansion-npm-5.0.1-79f48d6db7-aec226065b.zip/node_modules/@isaacs/brace-expansion/",\
-        "packageDependencies": [\
-          ["@isaacs/balanced-match", "npm:4.0.1"],\
-          ["@isaacs/brace-expansion", "npm:5.0.1"]\
-        ],\
-        "linkType": "HARD"\
       }]\
     ]],\
     ["@isaacs/cliui", [\
