@@ -18,6 +18,7 @@
 {% block header %}
   {{ govukHeader({
     classes: 'govuk-header--full-width-border',
+    rebrand: true,
     homepageUrl: "/",
     useTudorCrown: true,
     serviceName: "HMCTS Pre-Recorded Evidence Service",
@@ -124,6 +125,7 @@
 
 {% block footer %}
   {{ govukFooter({
+    rebrand: true,
     meta: {
       items: [
         {

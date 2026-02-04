@@ -16,7 +16,6 @@ export class Nunjucks {
         watch: this.developmentMode,
         express: app,
       })
-      .addGlobal('govukRebrand', true)
       .addFilter('formatDate', (date: string) => {
         return new Date(date).toLocaleDateString('en-GB');
       })
