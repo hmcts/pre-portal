@@ -43,13 +43,15 @@ export class Auth {
       },
       afterCallback: async (req, res, s) => {
         const claims = jose.decodeJwt(s.id_token);
+        // if loginEmail is set, use that, else use email
+        const loggedInEmail = claims.loginEmail || claims.email;
         // @todo add jwt validation here
 
         // check if the user is a new user
         const client = new PreClient();
         return {
           ...s,
-          userProfile: await client.getUserByClaimEmail(claims.email as string),
+          userProfile: await client.getUserByClaimEmail(loggedInEmail as string),
         };
       },
       session: {

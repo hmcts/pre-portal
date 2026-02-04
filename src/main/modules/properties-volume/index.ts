@@ -17,13 +17,13 @@ export class PropertiesVolume {
       config,
       'b2c.baseUrl',
       process.env.B2C_BASE_URL ??
-        'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_SIGNUP_SIGNIN'
+        'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_SignUpOrSignin'
     );
     set(
       config,
       'b2c.endSessionEndpoint',
       process.env.B2C_END_SESSION_ENDPOINT ??
-        'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/b2c_1a_signup_signin/oauth2/v2.0/logout'
+        'https://hmctsstgextid.b2clogin.com/hmctsstgextid.onmicrosoft.com/oauth2/v2.0/logout?p=b2c_1a_signuporsignin'
     );
 
     if (server.locals.ENV === 'production') {
@@ -50,6 +50,9 @@ export class PropertiesVolume {
       this.setSecret('secrets.pre-hmctskv.b2c-test-login-password', 'b2c.testLogin.password');
       this.setSecret('secrets.pre-hmctskv.b2c-test-super-user-email', 'b2c.testSuperUserLogin.email');
       this.setSecret('secrets.pre-hmctskv.b2c-test-super-user-password', 'b2c.testSuperUserLogin.password');
+      this.logger.info('Setting pre-portal-x-user-id from secrets');
+      this.setSecret('secrets.pre-hmctskv.pre-portal-x-user-id', 'pre.portalXUserId');
+      this.logger.info('Done setting pre-portal-x-user-id from secrets');
     } else {
       this.logger.info('Loading properties from .env file');
       require('dotenv').config();
@@ -62,6 +65,7 @@ export class PropertiesVolume {
       set(config, 'b2c.testSuperUserLogin.password', process.env.B2C_TEST_SUPER_USER_LOGIN_PASSWORD);
       set(config, 'session.secret', process.env.SESSION_SECRET ?? 'superlongrandomstringthatshouldbebetterinprod');
       set(config, 'pre.mediaKindPlayerKey', process.env.MEDIA_KIND_PLAYER_KEY ?? 'mediaKindPlayerKey');
+      set(config, 'pre.portalXUserId', process.env.PRE_PORTAL_X_USER_ID ?? 'pre-portal-x-user-id');
     }
     // set the dynatrace tag to be available in templates if set
     server.locals.dynatrace_jstag = process.env.DYNATRACE_JSTAG ?? '';
