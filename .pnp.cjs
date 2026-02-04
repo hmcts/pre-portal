@@ -53,7 +53,6 @@ const RAW_RUNTIME_STATE =
           ["@types/express-session", "npm:1.18.2"],\
           ["@types/jest", "npm:30.0.0"],\
           ["@types/lodash", "npm:4.17.21"],\
-          ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
           ["@types/multer", "npm:1.4.13"],\
           ["@types/node", "npm:22.19.2"],\
           ["@types/nunjucks", "npm:3.2.6"],\
@@ -106,7 +105,7 @@ const RAW_RUNTIME_STATE =
           ["lint-staged", "npm:16.2.7"],\
           ["lodash", "npm:4.17.23"],\
           ["marked", "npm:15.0.12"],\
-          ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.4"],\
+          ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.0"],\
           ["multer", "npm:2.0.2"],\
           ["nock", "npm:14.0.10"],\
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
@@ -7030,16 +7029,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@types-methods-npm-1.1.4-8565dc8af4-ad2a717848.zip/node_modules/@types/methods/",\
         "packageDependencies": [\
           ["@types/methods", "npm:1.1.4"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@types/mini-css-extract-plugin", [\
-      ["npm:2.5.1", {\
-        "packageLocation": "./.yarn/cache/@types-mini-css-extract-plugin-npm-2.5.1-36ad456a43-047a8600d4.zip/node_modules/@types/mini-css-extract-plugin/",\
-        "packageDependencies": [\
-          ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
-          ["mini-css-extract-plugin", "virtual:36ad456a430c7ce214b5b6dc53855a991370ff5c273e9bb94e009010d87b9053f266726cb96e11bd6682fd3ac25a3e86cfab9c95d223de555ebbba2b02024629#npm:2.9.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16552,36 +16541,21 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["mini-css-extract-plugin", [\
-      ["npm:2.9.4", {\
-        "packageLocation": "./.yarn/cache/mini-css-extract-plugin-npm-2.9.4-9bd74fa138-24a0418dc4.zip/node_modules/mini-css-extract-plugin/",\
+      ["npm:2.10.0", {\
+        "packageLocation": "./.yarn/cache/mini-css-extract-plugin-npm-2.10.0-17ef9eed6b-bae5350ab8.zip/node_modules/mini-css-extract-plugin/",\
         "packageDependencies": [\
-          ["mini-css-extract-plugin", "npm:2.9.4"]\
+          ["mini-css-extract-plugin", "npm:2.10.0"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.4", {\
-        "packageLocation": "./.yarn/__virtual__/mini-css-extract-plugin-virtual-61b11ed96a/0/cache/mini-css-extract-plugin-npm-2.9.4-9bd74fa138-24a0418dc4.zip/node_modules/mini-css-extract-plugin/",\
+      ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.0", {\
+        "packageLocation": "./.yarn/__virtual__/mini-css-extract-plugin-virtual-b5671e0c71/0/cache/mini-css-extract-plugin-npm-2.10.0-17ef9eed6b-bae5350ab8.zip/node_modules/mini-css-extract-plugin/",\
         "packageDependencies": [\
           ["@types/webpack", null],\
-          ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.4"],\
+          ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.0"],\
           ["schema-utils", "npm:4.3.3"],\
           ["tapable", "npm:2.3.0"],\
           ["webpack", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.104.1"]\
-        ],\
-        "packagePeers": [\
-          "@types/webpack",\
-          "webpack"\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["virtual:36ad456a430c7ce214b5b6dc53855a991370ff5c273e9bb94e009010d87b9053f266726cb96e11bd6682fd3ac25a3e86cfab9c95d223de555ebbba2b02024629#npm:2.9.4", {\
-        "packageLocation": "./.yarn/__virtual__/mini-css-extract-plugin-virtual-cdc82338a1/0/cache/mini-css-extract-plugin-npm-2.9.4-9bd74fa138-24a0418dc4.zip/node_modules/mini-css-extract-plugin/",\
-        "packageDependencies": [\
-          ["@types/webpack", null],\
-          ["mini-css-extract-plugin", "virtual:36ad456a430c7ce214b5b6dc53855a991370ff5c273e9bb94e009010d87b9053f266726cb96e11bd6682fd3ac25a3e86cfab9c95d223de555ebbba2b02024629#npm:2.9.4"],\
-          ["schema-utils", "npm:4.3.3"],\
-          ["tapable", "npm:2.3.0"],\
-          ["webpack", null]\
         ],\
         "packagePeers": [\
           "@types/webpack",\
@@ -18198,7 +18172,6 @@ const RAW_RUNTIME_STATE =
           ["@types/express-session", "npm:1.18.2"],\
           ["@types/jest", "npm:30.0.0"],\
           ["@types/lodash", "npm:4.17.21"],\
-          ["@types/mini-css-extract-plugin", "npm:2.5.1"],\
           ["@types/multer", "npm:1.4.13"],\
           ["@types/node", "npm:22.19.2"],\
           ["@types/nunjucks", "npm:3.2.6"],\
@@ -18251,7 +18224,7 @@ const RAW_RUNTIME_STATE =
           ["lint-staged", "npm:16.2.7"],\
           ["lodash", "npm:4.17.23"],\
           ["marked", "npm:15.0.12"],\
-          ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.4"],\
+          ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.0"],\
           ["multer", "npm:2.0.2"],\
           ["nock", "npm:14.0.10"],\
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
