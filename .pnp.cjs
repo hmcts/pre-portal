@@ -111,7 +111,7 @@ const RAW_RUNTIME_STATE =
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
           ["nodemon", "npm:3.1.11"],\
           ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
-          ["pa11y", "npm:9.0.0"],\
+          ["pa11y", "npm:9.1.0"],\
           ["playwright", "npm:1.56.1"],\
           ["pre-portal", "workspace:."],\
           ["prettier", "npm:3.6.2"],\
@@ -5816,6 +5816,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@pa11y/html_codesniffer", [\
+      ["npm:2.6.0", {\
+        "packageLocation": "./.yarn/cache/@pa11y-html_codesniffer-npm-2.6.0-602b7f5502-129123b3a2.zip/node_modules/@pa11y/html_codesniffer/",\
+        "packageDependencies": [\
+          ["@pa11y/html_codesniffer", "npm:2.6.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@panva/asn1.js", [\
       ["npm:1.0.0", {\
         "packageLocation": "./.yarn/cache/@panva-asn1.js-npm-1.0.0-2bf51df722-e62b1218a8.zip/node_modules/@panva/asn1.js/",\
@@ -8806,10 +8815,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["axe-core", [\
-      ["npm:4.10.3", {\
-        "packageLocation": "./.yarn/cache/axe-core-npm-4.10.3-3534c4324b-9ff51ad0fd.zip/node_modules/axe-core/",\
+      ["npm:4.11.1", {\
+        "packageLocation": "./.yarn/cache/axe-core-npm-4.11.1-87a6aa2514-bbc8e89592.zip/node_modules/axe-core/",\
         "packageDependencies": [\
-          ["axe-core", "npm:4.10.3"]\
+          ["axe-core", "npm:4.11.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -10343,17 +10352,17 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:13.1.0", {\
-        "packageLocation": "./.yarn/cache/commander-npm-13.1.0-bdbbfaaf9d-d3b4b79e6b.zip/node_modules/commander/",\
-        "packageDependencies": [\
-          ["commander", "npm:13.1.0"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
       ["npm:14.0.2", {\
         "packageLocation": "./.yarn/cache/commander-npm-14.0.2-538b84c387-2d202db5e5.zip/node_modules/commander/",\
         "packageDependencies": [\
           ["commander", "npm:14.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:14.0.3", {\
+        "packageLocation": "./.yarn/cache/commander-npm-14.0.3-93ab31471d-dfa9ebe2a4.zip/node_modules/commander/",\
+        "packageDependencies": [\
+          ["commander", "npm:14.0.3"]\
         ],\
         "linkType": "HARD"\
       }],\
@@ -13597,15 +13606,6 @@ const RAW_RUNTIME_STATE =
           "@types/rspack__core",\
           "@types/webpack",\
           "webpack"\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["html_codesniffer", [\
-      ["npm:2.5.1", {\
-        "packageLocation": "./.yarn/cache/html_codesniffer-npm-2.5.1-5621e5bca3-baeb07f54f.zip/node_modules/html_codesniffer/",\
-        "packageDependencies": [\
-          ["html_codesniffer", "npm:2.5.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17633,18 +17633,18 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["pa11y", [\
-      ["npm:9.0.0", {\
-        "packageLocation": "./.yarn/cache/pa11y-npm-9.0.0-b2b87b3f4c-177e58e8d2.zip/node_modules/pa11y/",\
+      ["npm:9.1.0", {\
+        "packageLocation": "./.yarn/cache/pa11y-npm-9.1.0-fc1d038381-f471f7d718.zip/node_modules/pa11y/",\
         "packageDependencies": [\
-          ["axe-core", "npm:4.10.3"],\
+          ["@pa11y/html_codesniffer", "npm:2.6.0"],\
+          ["axe-core", "npm:4.11.1"],\
           ["bfj", "npm:9.1.2"],\
-          ["commander", "npm:13.1.0"],\
-          ["envinfo", "npm:7.14.0"],\
-          ["html_codesniffer", "npm:2.5.1"],\
+          ["commander", "npm:14.0.3"],\
+          ["envinfo", "npm:7.21.0"],\
           ["kleur", "npm:4.1.5"],\
           ["mustache", "npm:4.2.0"],\
           ["node.extend", "npm:2.0.3"],\
-          ["pa11y", "npm:9.0.0"],\
+          ["pa11y", "npm:9.1.0"],\
           ["puppeteer", "npm:24.34.0"],\
           ["semver", "npm:7.7.3"]\
         ],\
@@ -18230,7 +18230,7 @@ const RAW_RUNTIME_STATE =
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
           ["nodemon", "npm:3.1.11"],\
           ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
-          ["pa11y", "npm:9.0.0"],\
+          ["pa11y", "npm:9.1.0"],\
           ["playwright", "npm:1.56.1"],\
           ["pre-portal", "workspace:."],\
           ["prettier", "npm:3.6.2"],\
