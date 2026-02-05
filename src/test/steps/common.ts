@@ -8,12 +8,12 @@ export const iAmOnPage = (text: string): void => {
 };
 Given('I go to {string}', iAmOnPage);
 
-Then('the page URL should be {string}', (url: string) => {
-  I.retry({ retries: 3, maxTimeout: 5000 }).waitInUrl(url);
-});
-
 Then('the page should include {string}', (text: string) => {
-  I.waitForText(text);
+  I.waitForFunction(
+    text => document.body?.textContent?.includes(text) || false,
+    [text], // Wrap text in an array
+    10000 // Timeout in milliseconds
+  );
 });
 
 Then('the page title should include {string}', (text: string) => {
@@ -62,6 +62,10 @@ Then('I accept the terms and conditions if I need to', async () => {
   }
 });
 
+Then('I see the text {string}', (text: string) => {
+  I.see(text);
+});
+
 Then('I see the link {string}', (text: string) => {
   I.seeElement(locate('a').withText(text));
 });
@@ -72,6 +76,10 @@ Then('I do not see the link {string}', async (text: string) => {
 
 Then('I click the link {string}', (text: string) => {
   I.click(locate('a').withText(text));
+});
+
+When('I open the navigation menu', async () => {
+  I.click('#navToggle');
 });
 
 Then('I enter a valid email address', () => {
@@ -106,9 +114,9 @@ When('I click on play on a browse page', () => {
 });
 
 When('I play the recording', () => {
-  I.wait(5); //needed as it takes time to load recording on page.
-  I.waitForElement("//*[@aria-label='Play/Pause']");
-  I.click('Play/Pause');
+  I.wait(10); //needed as it takes time to load recording on page.
+  I.waitForElement("//*[@aria-label='Play']");
+  I.click('Play');
 });
 
 Then('recording is played', async () => {
