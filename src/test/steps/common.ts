@@ -79,7 +79,8 @@ When('I open the navigation menu', async () => {
 });
 
 Then('I enter a valid email address', () => {
-  I.fillField('Email Address', config.b2c.testLogin.email as string);
+  const login = config.b2c.testLogin;
+  fillFieldWhenReady('Email Address', login.email as string);
   I.click('Send verification code');
 });
 
@@ -134,12 +135,13 @@ Then('recording is played', async () => {
 });
 
 function signIn(emailAddress: string, password: string) {
-  fillFieldWhenReady({ name: 'Email Address' }, emailAddress);
-  fillFieldWhenReady({ name: 'Password' }, password);
+  fillFieldWhenReady('Email Address', emailAddress);
+  fillFieldWhenReady('Password', password);
   I.click('Sign in');
 }
 
-function fillFieldWhenReady(locator: any, value: string, timeout = 5) {
+function fillFieldWhenReady(name: string, value: string, timeout = 5) {
+  const locator = { name: name };
   I.waitForElement(locator, timeout);
   I.fillField(locator, value);
 }
