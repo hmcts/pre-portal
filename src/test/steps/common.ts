@@ -134,7 +134,12 @@ Then('recording is played', async () => {
 });
 
 function signIn(emailAddress: string, password: string) {
-  I.fillField('Email Address', emailAddress);
-  I.fillField('Password', password);
+  fillFieldWhenReady({ name: 'Email Address' }, emailAddress);
+  fillFieldWhenReady({ name: 'Password' }, password);
   I.click('Sign in');
+}
+
+function fillFieldWhenReady(locator: any, value: string, timeout = 5) {
+  I.waitForElement(locator, timeout);
+  I.fillField(locator, value);
 }
