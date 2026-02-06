@@ -84,7 +84,7 @@ Then('I enter a valid email address', () => {
 });
 
 Then('I sign in with an unknown user', () => {
-  signIn('email@hmcts.net', 'this is a password')
+  signIn('email@hmcts.net', 'this is a password');
 });
 
 Then('I sign in with the wrong password', () => {
@@ -94,7 +94,7 @@ Then('I sign in with the wrong password', () => {
   // handle dodgy B2C login where bounces back to login form 1 time...sometimes.
   I.grabCurrentUrl().then(url => {
     if (url.includes('/authorize')) {
-        signIn(login.email as string, 'this is not the password');
+      signIn(login.email as string, 'this is not the password');
     }
   });
 });
