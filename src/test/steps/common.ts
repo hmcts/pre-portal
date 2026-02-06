@@ -26,30 +26,26 @@ When('I am on the {string} page', (path: string) => {
 });
 
 Then('I sign in with valid credentials as the test user', () => {
-  I.fillField('Email Address', config.b2c.testLogin.email as string);
-  I.fillField('Password', config.b2c.testLogin.password as string);
-  I.click('Sign in');
+  const login = config.b2c.testLogin;
+  signIn(login.email as string, login.password as string);
 
   // handle dodgy B2C login where bounces back to login form 1 time...sometimes.
   I.grabCurrentUrl().then(url => {
     if (url.includes('/authorize')) {
-      I.fillField('Email Address', config.b2c.testLogin.email as string);
-      I.fillField('Password', config.b2c.testLogin.password as string);
-      I.click('Sign in');
+      const login = config.b2c.testLogin;
+      signIn(login.email as string, login.password as string);
     }
   });
 });
 
 Then('I sign in with valid credentials as a super user', () => {
-  I.fillField('Email Address', config.b2c.testSuperUserLogin.email as string);
-  I.fillField('Password', config.b2c.testSuperUserLogin.password as string);
-  I.click('Sign in');
+  const login = config.b2c.testSuperUserLogin;
+  signIn(login.email as string, login.password as string);
 
   I.grabCurrentUrl().then(url => {
     if (url.includes('/authorize')) {
-      I.fillField('Email Address', config.b2c.testSuperUserLogin.email as string);
-      I.fillField('Password', config.b2c.testSuperUserLogin.password as string);
-      I.click('Sign in');
+      const login = config.b2c.testSuperUserLogin;
+      signIn(login.email as string, login.password as string);
     }
   });
 });
@@ -88,22 +84,17 @@ Then('I enter a valid email address', () => {
 });
 
 Then('I sign in with an unknown user', () => {
-  I.fillField('Email Address', 'email@hmcts.net');
-  I.fillField('Password', 'this is a password');
-  I.click('Sign in');
+  signIn('email@hmcts.net', 'this is a password')
 });
 
 Then('I sign in with the wrong password', () => {
-  I.fillField('Email Address', config.b2c.testLogin.email as string);
-  I.fillField('Password', 'this is not the password');
-  I.click('Sign in');
+  const login = config.b2c.testLogin;
+  signIn(login.email as string, 'this is not the password');
 
   // handle dodgy B2C login where bounces back to login form 1 time...sometimes.
   I.grabCurrentUrl().then(url => {
     if (url.includes('/authorize')) {
-      I.fillField('Email Address', config.b2c.testLogin.email as string);
-      I.fillField('Password', 'this is not the password');
-      I.click('Sign in');
+        signIn(login.email as string, 'this is not the password');
     }
   });
 });
@@ -141,3 +132,9 @@ Then('recording is played', async () => {
   }
   I.say('Video is playing successfully!');
 });
+
+function signIn(emailAddress: string, password: string) {
+  I.fillField('Email Address', emailAddress);
+  I.fillField('Password', password);
+  I.click('Sign in');
+}
