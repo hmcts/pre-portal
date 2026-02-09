@@ -80,8 +80,7 @@ When('I open the navigation menu', async () => {
 
 Then('I enter a valid email address', () => {
   const login = config.b2c.testLogin;
-  fillFieldWhenReady('Email Address', login.email as string);
-  I.click('Send verification code');
+  sendVerifictionCode(login.email as string);
 });
 
 Then('I sign in with an unknown user', () => {
@@ -135,13 +134,18 @@ Then('recording is played', async () => {
 });
 
 function signIn(emailAddress: string, password: string) {
-  fillFieldWhenReady('Email Address', emailAddress);
-  fillFieldWhenReady('Password', password);
+  fillFieldWhenReady('signInName', emailAddress);
+  fillFieldWhenReady('password', password);
   I.click('Sign in');
 }
 
-function fillFieldWhenReady(name: string, value: string, timeout = 5) {
-  const locator = { name: name };
+function sendVerifictionCode(emailAddress: string) {
+  fillFieldWhenReady('email', emailAddress);
+  I.click('Send verification code');
+}
+
+function fillFieldWhenReady(id: string, value: string, timeout = 5) {
+  const locator = { id: id };
   I.waitForElement(locator, timeout);
   I.fillField(locator, value);
 }
