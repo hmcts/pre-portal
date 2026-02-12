@@ -105,7 +105,6 @@ When('I click on play on a browse page', () => {
 });
 
 When('I play the recording', () => {
-  I.wait(10); //needed as it takes time to load recording on page.
   clickWhenReady(videoPlayButton());
 });
 
@@ -119,7 +118,6 @@ Then('recording is played', async () => {
     throw new Error('Playback time label does not exist or is not visible.');
   }
   const initialTime = await I.grabTextFrom('.bmpui-ui-playbacktimelabel:nth-of-type(1)');
-  I.wait(5);
   clickWhenReady(playPauseButton());
   const currentTime = await I.grabTextFrom('.bmpui-ui-playbacktimelabel:nth-of-type(2)');
   if (!currentTime.match(/^\d{2}:\d{2}$/)) {
