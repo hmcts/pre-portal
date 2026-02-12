@@ -71,11 +71,11 @@ Then('I do not see the link {string}', async (text: string) => {
 });
 
 Then('I click the link {string}', (text: string) => {
-  I.click(locate('a').withText(text));
+  clickWhenReady(link(text));
 });
 
 When('I open the navigation menu', async () => {
-  I.click('#navToggle');
+  clickWhenReady('#navToggle');
 });
 
 Then('I enter a valid email address', () => {
@@ -100,7 +100,7 @@ Then('I sign in with the wrong password', () => {
 });
 
 When('I click on play on a browse page', () => {
-  I.click('Play');
+  clickWhenReady(playLink());
   I.see('Please note playback is preferred on non-mobile devices. If possible, please use a preferred device');
 });
 
@@ -121,7 +121,7 @@ Then('recording is played', async () => {
   }
   const initialTime = await I.grabTextFrom('.bmpui-ui-playbacktimelabel:nth-of-type(1)');
   I.wait(5);
-  I.click('Play/Pause');
+  clickWhenReady(playPauseButton());
   const currentTime = await I.grabTextFrom('.bmpui-ui-playbacktimelabel:nth-of-type(2)');
   if (!currentTime.match(/^\d{2}:\d{2}$/)) {
     throw new Error(`Invalid playback time format: ${currentTime}`);
@@ -136,12 +136,12 @@ Then('recording is played', async () => {
 function signIn(emailAddress: string, password: string) {
   fillFieldWhenReady('signInName', emailAddress);
   fillFieldWhenReady('password', password);
-  I.click('Sign in');
+  clickWhenReady(signInButton());
 }
 
 function sendVerifictionCode(emailAddress: string) {
   fillFieldWhenReady('email', emailAddress);
-  I.click('Send verification code');
+  clickWhenReady(sendVerificationCodeButton());
 }
 
 function fillFieldWhenReady(id: string, value: string, timeout = 5) {
@@ -149,3 +149,34 @@ function fillFieldWhenReady(id: string, value: string, timeout = 5) {
   I.waitForElement(locator, timeout);
   I.fillField(locator, value);
 }
+
+function clickWhenReady(locator: any, timeout = 10) {
+  I.waitForElement(locator, timeout);
+  I.waitForVisible(locator, timeout);
+  I.click(locator);
+}
+
+function playButton() {
+  return locate('button').withText('Play');
+}
+
+function playPauseButton() {
+  return locate('button').withText('Play/Pause');
+}
+
+function playLink() {
+  return link('Play');
+}
+
+function signInButton() {
+  return locate('button').withText('Sign in');
+}
+
+function sendVerificationCodeButton() {
+  return locate('button').withText('Send verification code');
+}
+
+function link(text: string) {
+  return locate('a').withText(text);
+}
+ 
