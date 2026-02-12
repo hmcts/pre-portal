@@ -54,7 +54,7 @@ Then('I accept the terms and conditions if I need to', async () => {
   const url = await I.grabCurrentUrl();
   if (url.includes('/accept-terms-and-conditions')) {
     I.checkOption('#terms');
-    I.click('Continue');
+    clickWhenReady(acceptTermsContinueButton());
   }
 });
 
@@ -106,8 +106,7 @@ When('I click on play on a browse page', () => {
 
 When('I play the recording', () => {
   I.wait(10); //needed as it takes time to load recording on page.
-  I.waitForElement("//*[@aria-label='Play']");
-  I.click('Play');
+  clickWhenReady(videoPlayButton());
 });
 
 Then('recording is played', async () => {
@@ -156,8 +155,8 @@ function clickWhenReady(locator: any, timeout = 10) {
   I.click(locator);
 }
 
-function playButton() {
-  return locate('button').withText('Play');
+function videoPlayButton() {
+  return "//*[@aria-label='Play']";
 }
 
 function playPauseButton() {
@@ -174,6 +173,10 @@ function signInButton() {
 
 function sendVerificationCodeButton() {
   return locate('button').withText('Send verification code');
+}
+
+function acceptTermsContinueButton() {
+  return locate('button').withText('Continue');
 }
 
 function link(text: string) {
