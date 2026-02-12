@@ -75,7 +75,7 @@ const RAW_RUNTIME_STATE =
           ["express-session", "npm:1.19.0"],\
           ["form-data", "npm:4.0.5"],\
           ["glob", "npm:13.0.1"],\
-          ["govuk-frontend", "npm:6.0.0"],\
+          ["govuk-frontend", "npm:5.11.2"],\
           ["helmet", "npm:8.1.0"],\
           ["html-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.6.6"],\
           ["husky", "npm:9.1.7"],\
@@ -12565,10 +12565,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["govuk-frontend", [\
-      ["npm:6.0.0", {\
-        "packageLocation": "./.yarn/cache/govuk-frontend-npm-6.0.0-760d47ca23-0fd60531ac.zip/node_modules/govuk-frontend/",\
+      ["npm:5.11.2", {\
+        "packageLocation": "./.yarn/cache/govuk-frontend-npm-5.11.2-cc92be2c38-e376ab5754.zip/node_modules/govuk-frontend/",\
         "packageDependencies": [\
-          ["govuk-frontend", "npm:6.0.0"]\
+          ["govuk-frontend", "npm:5.11.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17192,7 +17192,7 @@ const RAW_RUNTIME_STATE =
           ["express-session", "npm:1.19.0"],\
           ["form-data", "npm:4.0.5"],\
           ["glob", "npm:13.0.1"],\
-          ["govuk-frontend", "npm:6.0.0"],\
+          ["govuk-frontend", "npm:5.11.2"],\
           ["helmet", "npm:8.1.0"],\
           ["html-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.6.6"],\
           ["husky", "npm:9.1.7"],\
