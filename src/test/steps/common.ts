@@ -180,4 +180,3 @@ function acceptTermsContinueButton() {
 function link(text: string) {
   return locate('a').withText(text);
 }
- 
