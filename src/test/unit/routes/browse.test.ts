@@ -118,7 +118,7 @@ describe('Browse route', () => {
     const response = await request(app).get('/browse?page=4');
     expect(response.status).toEqual(200);
     const text = response.text.replace(/\s+/g, ' ').trim();
-    expect(text).toContain('<li class="govuk-pagination__item govuk-pagination__item--ellipsis"> &ctdot; </li>');
+    expect(text).toContain('<li class="govuk-pagination__item govuk-pagination__item--ellipses"> &ctdot; </li>');
   });
 
   test('pagination should have a filler ellipsis when more than 2 pages from the end', async () => {
@@ -135,7 +135,7 @@ describe('Browse route', () => {
     const response = await request(app).get('/browse?page=0');
     expect(response.status).toEqual(200);
     const text = response.text.replace(/\s+/g, ' ').trim();
-    expect(text).toContain('<li class="govuk-pagination__item govuk-pagination__item--ellipsis"> &ctdot; </li>');
+    expect(text).toContain('<li class="govuk-pagination__item govuk-pagination__item--ellipses"> &ctdot; </li>');
   });
 
   test('pagination should show 2 pages either side of the current page', async () => {
@@ -153,7 +153,7 @@ describe('Browse route', () => {
     const text = response.text.replace(/\s+/g, ' ').trim();
     expect(response.status).toEqual(200);
     expect(text).toContain('> 1 <');
-    expect(text).toContain('<li class="govuk-pagination__item govuk-pagination__item--ellipsis"> &ctdot; </li>');
+    expect(text).toContain('<li class="govuk-pagination__item govuk-pagination__item--ellipses"> &ctdot; </li>');
     expect(text).toContain('> 3 <');
     expect(text).toContain('> 4 <');
     expect(text).toContain('> 5 <');
