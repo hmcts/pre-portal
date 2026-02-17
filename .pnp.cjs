@@ -108,7 +108,7 @@ const RAW_RUNTIME_STATE =
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.4"],\
           ["multer", "npm:2.0.2"],\
-          ["nock", "npm:14.0.10"],\
+          ["nock", "npm:14.0.11"],\
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
           ["nodemon", "npm:3.1.11"],\
           ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
@@ -4663,10 +4663,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@mswjs/interceptors", [\
-      ["npm:0.39.8", {\
-        "packageLocation": "./.yarn/cache/@mswjs-interceptors-npm-0.39.8-5f1da2aeb8-d92546cf9b.zip/node_modules/@mswjs/interceptors/",\
+      ["npm:0.41.3", {\
+        "packageLocation": "./.yarn/cache/@mswjs-interceptors-npm-0.41.3-d32c33dca5-96b6c535fd.zip/node_modules/@mswjs/interceptors/",\
         "packageDependencies": [\
-          ["@mswjs/interceptors", "npm:0.39.8"],\
+          ["@mswjs/interceptors", "npm:0.41.3"],\
           ["@open-draft/deferred-promise", "npm:2.2.0"],\
           ["@open-draft/logger", "npm:0.3.0"],\
           ["@open-draft/until", "npm:2.1.0"],\
@@ -17003,12 +17003,12 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["nock", [\
-      ["npm:14.0.10", {\
-        "packageLocation": "./.yarn/cache/nock-npm-14.0.10-e14e5b2d66-89195d7981.zip/node_modules/nock/",\
+      ["npm:14.0.11", {\
+        "packageLocation": "./.yarn/cache/nock-npm-14.0.11-4a1d2e2ff7-2fc579f3be.zip/node_modules/nock/",\
         "packageDependencies": [\
-          ["@mswjs/interceptors", "npm:0.39.8"],\
+          ["@mswjs/interceptors", "npm:0.41.3"],\
           ["json-stringify-safe", "npm:5.0.1"],\
-          ["nock", "npm:14.0.10"],\
+          ["nock", "npm:14.0.11"],\
           ["propagate", "npm:2.0.1"]\
         ],\
         "linkType": "HARD"\
@@ -18205,7 +18205,7 @@ const RAW_RUNTIME_STATE =
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.9.4"],\
           ["multer", "npm:2.0.2"],\
-          ["nock", "npm:14.0.10"],\
+          ["nock", "npm:14.0.11"],\
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
           ["nodemon", "npm:3.1.11"],\
           ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
