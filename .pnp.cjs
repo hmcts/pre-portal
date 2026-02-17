@@ -117,7 +117,7 @@ const RAW_RUNTIME_STATE =
           ["pre-portal", "workspace:."],\
           ["prettier", "npm:3.6.2"],\
           ["puppeteer", "npm:24.34.0"],\
-          ["qs", "npm:6.14.1"],\
+          ["qs", "npm:6.15.0"],\
           ["react", "npm:19.2.3"],\
           ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.82.1"],\
           ["redis", "npm:5.10.0"],\
@@ -18214,7 +18214,7 @@ const RAW_RUNTIME_STATE =
           ["pre-portal", "workspace:."],\
           ["prettier", "npm:3.6.2"],\
           ["puppeteer", "npm:24.34.0"],\
-          ["qs", "npm:6.14.1"],\
+          ["qs", "npm:6.15.0"],\
           ["react", "npm:19.2.3"],\
           ["react-native", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:0.82.1"],\
           ["redis", "npm:5.10.0"],\
@@ -18529,6 +18529,14 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/qs-npm-6.14.1-2af4c28250-34b5ab00a9.zip/node_modules/qs/",\
         "packageDependencies": [\
           ["qs", "npm:6.14.1"],\
+          ["side-channel", "npm:1.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:6.15.0", {\
+        "packageLocation": "./.yarn/cache/qs-npm-6.15.0-2165244317-a3458f2f38.zip/node_modules/qs/",\
+        "packageDependencies": [\
+          ["qs", "npm:6.15.0"],\
           ["side-channel", "npm:1.1.0"]\
         ],\
         "linkType": "HARD"\
