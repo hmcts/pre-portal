@@ -54,6 +54,10 @@ const validateInstruction = (instruction: PutEditInstruction, duration: string):
 };
 
 export const validateRequest = (editRequest: PutEditRequest, duration: string): Object | undefined => {
+  if (!editRequest.edit_instructions || editRequest.edit_instructions.length === 0) {
+    return { startTime: 'Please add at least one edit instruction' };
+  }
+
   for (let instruction of editRequest.edit_instructions) {
     let trimmedInstruction: PutEditInstruction = instruction;
     trimmedInstruction.start_of_cut = instruction.start_of_cut.trim();
