@@ -1,5 +1,8 @@
 class InstructionPayloadBuilder {
-  constructor(private editRequest: any, private form: HTMLFormElement) {}
+  constructor(
+    private editRequest: any,
+    private form: HTMLFormElement
+  ) {}
 
   buildAddPayload(): any {
     const { startTime, endTime, reason } = this.getFormValues();
@@ -54,7 +57,7 @@ class ApiService {
     try {
       const response = await fetch(this.postUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(payload),
       });
 
@@ -248,7 +251,7 @@ export class EditRequestManager {
     if (!form) {
       return;
     }
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', e => {
       if (this.isSubmitting) {
         e.preventDefault();
         return;
@@ -267,7 +270,7 @@ export class EditRequestManager {
   private bindAddButton(): void {
     const addBtn = document.querySelector('[data-edit-action="add"]');
     if (addBtn) {
-      addBtn.addEventListener('click', (e) => {
+      addBtn.addEventListener('click', e => {
         e.preventDefault();
         this.showForm();
       });
@@ -277,7 +280,7 @@ export class EditRequestManager {
   private bindSubmitButton(): void {
     const submitBtn = document.getElementById('submit-button');
     if (submitBtn) {
-      submitBtn.addEventListener('click', (e) => {
+      submitBtn.addEventListener('click', e => {
         if (!this.editRequest.edit_instructions || this.editRequest.edit_instructions.length === 0) {
           e.preventDefault();
           this.renderer.showSubmitError();
@@ -336,9 +339,10 @@ export class EditRequestManager {
   }
 
   private save(): void {
-    const payload = this.selectedIndex !== undefined
-      ? this.payloadBuilder.buildUpdatePayload(this.selectedIndex)
-      : this.payloadBuilder.buildAddPayload();
+    const payload =
+      this.selectedIndex !== undefined
+        ? this.payloadBuilder.buildUpdatePayload(this.selectedIndex)
+        : this.payloadBuilder.buildAddPayload();
     this.submitPayload(payload);
   }
 
@@ -447,7 +451,7 @@ export class EditRequestManager {
     const form = this.getForm();
     if (form) {
       form.setAttribute('aria-busy', isSubmitting ? 'true' : 'false');
-      form.querySelectorAll('input, button').forEach((el) => {
+      form.querySelectorAll('input, button').forEach(el => {
         const field = el as HTMLInputElement | HTMLButtonElement;
         field.disabled = isSubmitting;
       });

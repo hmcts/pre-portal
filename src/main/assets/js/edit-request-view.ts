@@ -14,7 +14,7 @@ export class EditRequestView {
 
     const form = document.querySelector('form[data-edit-submission]') as HTMLFormElement;
     if (form) {
-      form.addEventListener('submit', (e) => this.onSubmit(e));
+      form.addEventListener('submit', e => this.onSubmit(e));
     }
   }
 
@@ -53,13 +53,13 @@ export class EditRequestView {
         status: 'SUBMITTED',
       }),
     })
-      .then(async (response) => {
+      .then(async response => {
         if (!response.ok) {
           throw new Error(response as any);
         }
         window.location.href = '/browse';
       })
-      .catch((error) => {
+      .catch(error => {
         console.error(error);
       });
   };
