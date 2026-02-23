@@ -46,7 +46,6 @@ const RAW_RUNTIME_STATE =
           ["@types/express", "npm:5.0.6"],\
           ["@types/express-session", "npm:1.18.2"],\
           ["@types/jest", "npm:30.0.0"],\
-          ["@types/lodash", "npm:4.17.23"],\
           ["@types/multer", "npm:2.0.0"],\
           ["@types/node", "npm:25.2.2"],\
           ["@types/nunjucks", "npm:3.2.6"],\
@@ -7003,15 +7002,6 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/keyv", "npm:3.1.4"],\
           ["@types/node", "npm:25.0.3"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@types/lodash", [\
-      ["npm:4.17.23", {\
-        "packageLocation": "./.yarn/cache/@types-lodash-npm-4.17.23-cc83cf40c9-05935534a4.zip/node_modules/@types/lodash/",\
-        "packageDependencies": [\
-          ["@types/lodash", "npm:4.17.23"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17163,7 +17153,6 @@ const RAW_RUNTIME_STATE =
           ["@types/express", "npm:5.0.6"],\
           ["@types/express-session", "npm:1.18.2"],\
           ["@types/jest", "npm:30.0.0"],\
-          ["@types/lodash", "npm:4.17.23"],\
           ["@types/multer", "npm:2.0.0"],\
           ["@types/node", "npm:25.2.2"],\
           ["@types/nunjucks", "npm:3.2.6"],\
