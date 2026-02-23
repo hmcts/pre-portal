@@ -8899,13 +8899,12 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["bfj", [\
-      ["npm:9.1.2", {\
-        "packageLocation": "./.yarn/cache/bfj-npm-9.1.2-d563a81183-dd91fbd734.zip/node_modules/bfj/",\
+      ["npm:9.1.3", {\
+        "packageLocation": "./.yarn/cache/bfj-npm-9.1.3-92711cd618-33119ebc52.zip/node_modules/bfj/",\
         "packageDependencies": [\
-          ["bfj", "npm:9.1.2"],\
+          ["bfj", "npm:9.1.3"],\
           ["check-types", "npm:11.2.3"],\
           ["hoopy", "npm:0.1.4"],\
-          ["jsonpath", "npm:1.2.0"],\
           ["tryer", "npm:1.0.1"]\
         ],\
         "linkType": "HARD"\
@@ -11498,13 +11497,6 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["esprima", [\
-      ["npm:1.2.5", {\
-        "packageLocation": "./.yarn/cache/esprima-npm-1.2.5-eb75c3b366-839aad5916.zip/node_modules/esprima/",\
-        "packageDependencies": [\
-          ["esprima", "npm:1.2.5"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
       ["npm:4.0.1", {\
         "packageLocation": "./.yarn/cache/esprima-npm-4.0.1-1084e98778-f1d3c622ad.zip/node_modules/esprima/",\
         "packageDependencies": [\
@@ -14672,18 +14664,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["jsonpath", [\
-      ["npm:1.2.0", {\
-        "packageLocation": "./.yarn/cache/jsonpath-npm-1.2.0-b0701e41a7-ea784a40f0.zip/node_modules/jsonpath/",\
-        "packageDependencies": [\
-          ["esprima", "npm:1.2.5"],\
-          ["jsonpath", "npm:1.2.0"],\
-          ["static-eval", "npm:2.1.1"],\
-          ["underscore", "npm:1.13.6"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["jsonwebtoken", [\
       ["npm:9.0.3", {\
         "packageLocation": "./.yarn/cache/jsonwebtoken-npm-9.0.3-c3c17849ba-a67a276db4.zip/node_modules/jsonwebtoken/",\
@@ -16633,7 +16613,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@pa11y/html_codesniffer", "npm:2.6.0"],\
           ["axe-core", "npm:4.11.1"],\
-          ["bfj", "npm:9.1.2"],\
+          ["bfj", "npm:9.1.3"],\
           ["commander", "npm:14.0.3"],\
           ["envinfo", "npm:7.21.0"],\
           ["kleur", "npm:4.1.5"],\
@@ -18733,16 +18713,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["static-eval", [\
-      ["npm:2.1.1", {\
-        "packageLocation": "./.yarn/cache/static-eval-npm-2.1.1-a9c72bcfff-b47e823801.zip/node_modules/static-eval/",\
-        "packageDependencies": [\
-          ["escodegen", "npm:2.1.0"],\
-          ["static-eval", "npm:2.1.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["statuses", [\
       ["npm:1.5.0", {\
         "packageLocation": "./.yarn/cache/statuses-npm-1.5.0-f88f91b2e9-c469b9519d.zip/node_modules/statuses/",\
@@ -19750,15 +19720,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/undefsafe-npm-2.0.5-8c3bbf9354-f42ab3b577.zip/node_modules/undefsafe/",\
         "packageDependencies": [\
           ["undefsafe", "npm:2.0.5"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["underscore", [\
-      ["npm:1.13.6", {\
-        "packageLocation": "./.yarn/cache/underscore-npm-1.13.6-3ebe9d92fb-58cf5dc42c.zip/node_modules/underscore/",\
-        "packageDependencies": [\
-          ["underscore", "npm:1.13.6"]\
         ],\
         "linkType": "HARD"\
       }]\
