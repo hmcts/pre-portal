@@ -5,6 +5,7 @@ Feature: Footers Present
     Then I see the link 'Terms and conditions'
     Then I see the link 'Accessibility statement'
     Then I sign in with valid credentials as the test user
+    Then I accept the terms and conditions if I need to
     When I am on the '/browse' page
     Then I see the link 'Terms and conditions'
     Then I see the link 'Accessibility statement'
