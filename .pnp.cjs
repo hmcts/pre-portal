@@ -8254,7 +8254,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/asn1.js-npm-5.4.1-37c7edbcb0-63d57c766f.zip/node_modules/asn1.js/",\
         "packageDependencies": [\
           ["asn1.js", "npm:5.4.1"],\
-          ["bn.js", "npm:4.12.2"],\
+          ["bn.js", "npm:4.12.3"],\
           ["inherits", "npm:2.0.4"],\
           ["minimalistic-assert", "npm:1.0.1"],\
           ["safer-buffer", "npm:2.1.2"]\
@@ -8979,10 +8979,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["bn.js", [\
-      ["npm:4.12.2", {\
-        "packageLocation": "./.yarn/cache/bn.js-npm-4.12.2-c97b742b8d-5803983405.zip/node_modules/bn.js/",\
+      ["npm:4.12.3", {\
+        "packageLocation": "./.yarn/cache/bn.js-npm-4.12.3-60404d953d-57ed5a055f.zip/node_modules/bn.js/",\
         "packageDependencies": [\
-          ["bn.js", "npm:4.12.2"]\
+          ["bn.js", "npm:4.12.3"]\
         ],\
         "linkType": "HARD"\
       }]\
