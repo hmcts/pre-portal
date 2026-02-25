@@ -70,7 +70,7 @@ const RAW_RUNTIME_STATE =
           ["axios", "npm:1.13.5"],\
           ["axios-debug-log", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.0"],\
           ["babel-jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.2.0"],\
-          ["body-parser", "npm:2.2.1"],\
+          ["body-parser", "npm:2.2.2"],\
           ["chokidar", "npm:4.0.3"],\
           ["codeceptjs", "npm:3.7.6"],\
           ["compression", "npm:1.8.1"],\
@@ -9482,6 +9482,22 @@ const RAW_RUNTIME_STATE =
           ["type-is", "npm:2.0.1"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:2.2.2", {\
+        "packageLocation": "./.yarn/cache/body-parser-npm-2.2.2-2aa532c1f4-69671f67d4.zip/node_modules/body-parser/",\
+        "packageDependencies": [\
+          ["body-parser", "npm:2.2.2"],\
+          ["bytes", "npm:3.1.2"],\
+          ["content-type", "npm:1.0.5"],\
+          ["debug", "virtual:e426afeacf914b5bf58dae7cf7cd76bf78be254e03b94e4a92e9c2b0226626f65c7431ea500d2321d9c0a431f45ed64b60ab02116d77b5064e6e0918b0a30bca#npm:4.4.3"],\
+          ["http-errors", "npm:2.0.1"],\
+          ["iconv-lite", "npm:0.7.1"],\
+          ["on-finished", "npm:2.4.1"],\
+          ["qs", "npm:6.14.1"],\
+          ["raw-body", "npm:3.0.2"],\
+          ["type-is", "npm:2.0.1"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["boolbase", [\
@@ -18167,7 +18183,7 @@ const RAW_RUNTIME_STATE =
           ["axios", "npm:1.13.5"],\
           ["axios-debug-log", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.0.0"],\
           ["babel-jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.2.0"],\
-          ["body-parser", "npm:2.2.1"],\
+          ["body-parser", "npm:2.2.2"],\
           ["chokidar", "npm:4.0.3"],\
           ["codeceptjs", "npm:3.7.6"],\
           ["compression", "npm:1.8.1"],\
