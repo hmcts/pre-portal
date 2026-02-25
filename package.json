@@ -46,7 +46,7 @@
     "@types/es6-promisify": "6.0.4",
     "@types/express": "5.0.6",
     "@types/express-session": "1.18.2",
-    "@types/lodash": "4.17.21",
+    "@types/lodash": "4.17.24",
     "@types/node": "22.19.2",
     "@types/nunjucks": "3.2.6",
     "@types/require-directory": "2.1.7",
