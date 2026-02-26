@@ -1,13 +1,13 @@
-import {PreClient} from '../services/pre-api/pre-client';
-import {SessionUser} from '../services/session-user/session-user';
-import {isFlagEnabled, validateId} from '../utils/helpers';
+import { PreClient } from '../services/pre-api/pre-client';
+import { SessionUser } from '../services/session-user/session-user';
+import { isFlagEnabled, validateId } from '../utils/helpers';
 
-import {Logger} from '@hmcts/nodejs-logging';
+import { Logger } from '@hmcts/nodejs-logging';
 import config from 'config';
-import {Application} from 'express';
-import {requiresAuth} from 'express-openid-connect';
-import {v4 as uuid} from 'uuid';
-import {parseAppliedEdits} from "../utils/parseAppliedEdits";
+import { Application } from 'express';
+import { requiresAuth } from 'express-openid-connect';
+import { v4 as uuid } from 'uuid';
+import { parseAppliedEdits } from '../utils/parseAppliedEdits';
 
 export default function (app: Application): void {
   const logger = Logger.getLogger('watch');
@@ -53,15 +53,12 @@ export default function (app: Application): void {
       const mediaKindPlayerKey = config.get('pre.mediaKindPlayerKey');
       const enableAutomatedEditing = isFlagEnabled('pre.enableAutomatedEditing');
 
-      let parsedAppliedEdits =
-        await parseAppliedEdits(recording.edit_instructions, client, userPortalId);
+      let parsedAppliedEdits = await parseAppliedEdits(recording.edit_instructions, client, userPortalId);
       res.render('watch', {
         recording,
         recordingPlaybackDataUrl,
         mediaKindPlayerKey,
-        appliedEdits: enableAutomatedEditing
-          ? parsedAppliedEdits
-          : undefined,
+        appliedEdits: enableAutomatedEditing ? parsedAppliedEdits : undefined,
         enableAutomatedEditing,
       });
     } catch (e) {

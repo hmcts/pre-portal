@@ -1,6 +1,6 @@
-import {PreClient} from "../services/pre-api/pre-client";
-import {AppliedEditInstruction, PutEditInstruction, RecordingAppliedEdits} from "../services/pre-api/types";
-import {secondsToTimeString, timeStringToSeconds} from "./helpers";
+import { PreClient } from '../services/pre-api/pre-client';
+import { AppliedEditInstruction, PutEditInstruction, RecordingAppliedEdits } from '../services/pre-api/types';
+import { secondsToTimeString, timeStringToSeconds } from './helpers';
 
 export const parseAppliedEdits = async (
   edits: string,
@@ -8,10 +8,10 @@ export const parseAppliedEdits = async (
   xUserId: string
 ): Promise<
   | {
-  appliedEdits: AppliedEditInstruction[];
-  approvedBy: string;
-  approvedAt: string;
-}
+      appliedEdits: AppliedEditInstruction[];
+      approvedBy: string;
+      approvedAt: string;
+    }
   | undefined
 > => {
   if (!edits || edits == '') {
