@@ -154,6 +154,12 @@ class UIRenderer {
   }
 
   showErrors(errors: any): void {
+    this.clearAllErrors();
+    if (errors['overlap']) {
+      this.showErrorSummary(errors['overlap']);
+      return;
+    }
+
     const startFormGroup = document.getElementById('start-form-group') as HTMLElement;
     const startTimeInput = document.getElementById('start-time-input') as HTMLInputElement;
 
@@ -195,6 +201,62 @@ class UIRenderer {
         endTimeInput.insertAdjacentHTML('beforebegin', errorHTML);
       }
     }
+  }
+
+  showErrorSummary(message: string): void {
+    const errorSummary = document.getElementById('validation-error-summary');
+    const errorList = document.getElementById('validation-error-list');
+
+    if (!errorSummary || !errorList) {
+      return;
+    }
+
+    errorList.innerHTML = '';
+    const li = document.createElement('li');
+    li.textContent = message;
+    errorList.appendChild(li);
+
+    errorSummary.style.display = 'block';
+    errorSummary.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  hideErrorSummary(): void {
+    const errorSummary = document.getElementById('validation-error-summary');
+    if (errorSummary) {
+      errorSummary.style.display = 'none';
+    }
+  }
+
+  clearAllErrors(): void {
+    this.hideErrorSummary();
+
+    const startFormGroup = document.getElementById('start-form-group') as HTMLElement;
+    const startTimeInput = document.getElementById('start-time-input') as HTMLInputElement;
+
+    if (startFormGroup && startTimeInput) {
+      const existingError = startFormGroup.querySelector('.govuk-error-message');
+      if (existingError) {
+        existingError.remove();
+      }
+      startFormGroup.classList.remove('govuk-form-group--error');
+      startTimeInput.classList.remove('govuk-input--error');
+    }
+
+    const endFormGroup = document.getElementById('end-form-group') as HTMLElement;
+    const endTimeInput = document.getElementById('end-time-input') as HTMLInputElement;
+
+    if (endFormGroup && endTimeInput) {
+      const existingError = endFormGroup.querySelector('.govuk-error-message');
+      if (existingError) {
+        existingError.remove();
+      }
+      endFormGroup.classList.remove('govuk-form-group--error');
+      endTimeInput.classList.remove('govuk-input--error');
+    }
+  }
+
+  hideErrors(): void {
+    this.clearAllErrors();
   }
 
   showSubmitError(): void {
@@ -405,6 +467,7 @@ export class EditRequestManager {
 
     this.selectedIndex = undefined;
     this.refreshTable();
+    this.renderer.hideErrors();
   }
 
   private async submitPayload(payload: any): Promise<void> {
@@ -435,6 +498,7 @@ export class EditRequestManager {
       if (row) row.hidden = true;
       if (form) form.reset();
       this.updateSubmitButtonState();
+      this.renderer.hideErrors();
     }
 
     this.setSubmitting(false);

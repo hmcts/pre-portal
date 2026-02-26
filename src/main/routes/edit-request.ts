@@ -53,6 +53,37 @@ const validateInstruction = (instruction: PutEditInstruction, duration: string):
   return errors;
 };
 
+const checkOverlappingInstructions = (instructions: PutEditInstruction[]): Object | undefined => {
+  const instructionsWithSeconds = instructions.map((instruction, index) => {
+    const [h1, m1, s1] = instruction.start_of_cut.split(':').map(Number);
+    const [h2, m2, s2] = instruction.end_of_cut.split(':').map(Number);
+    return {
+      index,
+      start: h1 * 3600 + m1 * 60 + s1,
+      end: h2 * 3600 + m2 * 60 + s2,
+      startFormatted: instruction.start_of_cut,
+      endFormatted: instruction.end_of_cut,
+    };
+  });
+
+  for (let i = 0; i < instructionsWithSeconds.length; i++) {
+    for (let j = i + 1; j < instructionsWithSeconds.length; j++) {
+      const first = instructionsWithSeconds[i];
+      const second = instructionsWithSeconds[j];
+
+      const overlaps = first.start < second.end && second.start < first.end;
+
+      if (overlaps) {
+        return {
+          overlap: `Overlapping Instructions: (${first.startFormatted} - ${first.endFormatted}) and (${second.startFormatted} - ${second.endFormatted}) have overlapping time ranges.`,
+        };
+      }
+    }
+  }
+
+  return undefined;
+};
+
 export const validateRequest = (editRequest: PutEditRequest, duration: string): Object | undefined => {
   if (!editRequest.edit_instructions || editRequest.edit_instructions.length === 0) {
     return { startTime: 'Please add at least one edit instruction' };
@@ -66,6 +97,17 @@ export const validateRequest = (editRequest: PutEditRequest, duration: string): 
     if (Object.keys(errors).length > 0) {
       return errors;
     }
+  }
+
+  const trimmedInstructions = editRequest.edit_instructions.map(instruction => ({
+    ...instruction,
+    start_of_cut: instruction.start_of_cut.trim(),
+    end_of_cut: instruction.end_of_cut.trim(),
+  }));
+
+  let errors = checkOverlappingInstructions(trimmedInstructions);
+  if (errors) {
+    return errors;
   }
 };
 
