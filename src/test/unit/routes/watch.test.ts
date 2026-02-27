@@ -1,6 +1,13 @@
 /* eslint-disable jest/expect-expect */
 import { Nunjucks } from '../../../main/modules/nunjucks';
-import { mockGetRecording, mockGetRecordingPlaybackData, mockPutAudit, reset } from '../../mock-api';
+import {
+  mockedEditRequest,
+  mockGetEditRequest,
+  mockGetRecording,
+  mockGetRecordingPlaybackData,
+  mockPutAudit,
+  reset,
+} from '../../mock-api';
 import { beforeAll, describe } from '@jest/globals';
 
 import { PreClient } from '../../../main/services/pre-api/pre-client';
@@ -86,6 +93,14 @@ describe('Watch page success', () => {
       mockGetRecording();
       mockGetRecordingPlaybackData();
       mockPutAudit();
+      mockGetEditRequest({
+        ...mockedEditRequest,
+        status: 'SUBMITTED',
+        created_at: new Date().toISOString(),
+        created_by: 'Test User',
+        modified_at: new Date().toISOString(),
+      });
+
       await request(app)
         .get('/watch/12345678-1234-1234-1234-1234567890ab')
         .expect(res => expect(res.status).toBe(200))
