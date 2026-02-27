@@ -2,7 +2,12 @@ import { Nunjucks } from '../../../main/modules/nunjucks';
 import config from 'config';
 import { mockUser } from '../test-helper';
 import { set } from 'lodash';
-import { mockedEditRequest, mockGetCurrentEditRequest, mockGetRecording, reset } from '../../mock-api';
+import {
+  mockedEditRequest,
+  mockGetCurrentEditRequest,
+  mockGetRecording,
+  reset
+} from '../../mock-api';
 import { describe } from '@jest/globals';
 import { PreClient } from '../../../main/services/pre-api/pre-client';
 
@@ -24,7 +29,15 @@ describe('edit-request-view route', () => {
 
     it('should render edit-request-view', async () => {
       mockGetRecording();
-      mockGetCurrentEditRequest();
+      mockGetCurrentEditRequest([
+        {
+          ...mockedEditRequest,
+          status: 'SUBMITTED',
+          created_at: new Date().toISOString(),
+          created_by: 'Test User',
+          modified_at: new Date().toISOString(),
+        },
+      ]);
 
       const res = await request(app).get('/edit-request/12345678-1234-1234-1234-1234567890ab/view').expect(200);
 

@@ -170,7 +170,7 @@ describe('parseAppliedEdits', () => {
         },
       ],
       approvedBy: 'approver',
-      approvedAt: '01/01/2023',
+      approvedAt: '1/1/2023',
     });
   });
 });
