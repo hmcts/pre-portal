@@ -6,7 +6,7 @@ import {
   mockGetRecording,
   mockGetRecordingPlaybackData,
   mockPutAudit,
-  reset
+  reset,
 } from '../../mock-api';
 import { beforeAll, describe } from '@jest/globals';
 
@@ -93,15 +93,13 @@ describe('Watch page success', () => {
       mockGetRecording();
       mockGetRecordingPlaybackData();
       mockPutAudit();
-      mockGetEditRequest(
-        {
-          ...mockedEditRequest,
-          status: 'SUBMITTED',
-          created_at: new Date().toISOString(),
-          created_by: 'Test User',
-          modified_at: new Date().toISOString(),
-        },
-      );
+      mockGetEditRequest({
+        ...mockedEditRequest,
+        status: 'SUBMITTED',
+        created_at: new Date().toISOString(),
+        created_by: 'Test User',
+        modified_at: new Date().toISOString(),
+      });
 
       await request(app)
         .get('/watch/12345678-1234-1234-1234-1234567890ab')

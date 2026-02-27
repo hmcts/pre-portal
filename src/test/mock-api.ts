@@ -17,7 +17,8 @@ export const mockRecordings: Recording[] = [
     version: 1,
     filename: 'filename',
     duration: 'PT1H1M1S',
-    edit_instructions: "{\"editRequestId\": \"776d9353-d7fd-46b2-8b6b-314a8c90b141\", \"editInstructions\": {\"ffmpegInstructions\": [{\"end\": 10, \"start\": 0}, {\"end\": 22, \"start\": 30}], \"requestedInstructions\": [{\"end\": 300, \"start\": 180, \"reason\": \"Removing a few seconds\", \"end_of_cut\": \"00:00:10\", \"start_of_cut\": \"00:00:22\"}]}}",
+    edit_instructions:
+      '{"editRequestId": "776d9353-d7fd-46b2-8b6b-314a8c90b141", "editInstructions": {"ffmpegInstructions": [{"end": 10, "start": 0}, {"end": 22, "start": 30}], "requestedInstructions": [{"end": 300, "start": 180, "reason": "Removing a few seconds", "end_of_cut": "00:00:10", "start_of_cut": "00:00:22"}]}}',
     case_id: '12345678-1234-1234-1234-1234567890ab',
     capture_session: {
       id: '',
@@ -46,7 +47,8 @@ export const mockRecordings: Recording[] = [
     version: 1,
     filename: 'filename',
     duration: 'PT1H1M1S',
-    edit_instructions: "{\"editRequestId\": \"776d9353-d7fd-46b2-8b6b-314a8c90b141\", \"editInstructions\": {\"ffmpegInstructions\": [{\"end\": 10, \"start\": 0}, {\"end\": 22, \"start\": 30}], \"requestedInstructions\": [{\"end\": 300, \"start\": 180, \"reason\": \"Removing a few seconds\", \"end_of_cut\": \"00:00:10\", \"start_of_cut\": \"00:00:22\"}]}}",
+    edit_instructions:
+      '{"editRequestId": "776d9353-d7fd-46b2-8b6b-314a8c90b141", "editInstructions": {"ffmpegInstructions": [{"end": 10, "start": 0}, {"end": 22, "start": 30}], "requestedInstructions": [{"end": 300, "start": 180, "reason": "Removing a few seconds", "end_of_cut": "00:00:10", "start_of_cut": "00:00:22"}]}}',
     case_id: '12345678-1234-1234-1234-1234567890ac',
     capture_session: {
       id: '',

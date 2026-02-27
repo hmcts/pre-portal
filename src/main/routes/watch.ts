@@ -1,13 +1,13 @@
 import { PreClient } from '../services/pre-api/pre-client';
 import { SessionUser } from '../services/session-user/session-user';
-import {isFlagEnabled, secondsToTimeString, timeStringToSeconds, validateId} from '../utils/helpers';
+import { isFlagEnabled, secondsToTimeString, timeStringToSeconds, validateId } from '../utils/helpers';
 
 import { Logger } from '@hmcts/nodejs-logging';
 import config from 'config';
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
 import { v4 as uuid } from 'uuid';
-import {AppliedEditInstruction, PutEditInstruction, RecordingAppliedEdits} from "../services/pre-api/types";
+import { AppliedEditInstruction, PutEditInstruction, RecordingAppliedEdits } from '../services/pre-api/types';
 
 export const parseAppliedEdits = async (
   edits: string,
@@ -15,10 +15,10 @@ export const parseAppliedEdits = async (
   xUserId: string
 ): Promise<
   | {
-  appliedEdits: AppliedEditInstruction[];
-  approvedBy: string;
-  approvedAt: string;
-}
+      appliedEdits: AppliedEditInstruction[];
+      approvedBy: string;
+      approvedAt: string;
+    }
   | undefined
 > => {
   if (!edits || edits == '') {
@@ -53,7 +53,6 @@ export const parseAppliedEdits = async (
     approvedAt: editRequest?.approved_at ? new Date(editRequest.approved_at).toLocaleDateString() : '',
   };
 };
-
 
 export default function (app: Application): void {
   const logger = Logger.getLogger('watch');
