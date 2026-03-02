@@ -11771,6 +11771,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"multer@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "multer@npm:2.1.0"
+  dependencies:
+    append-field: "npm:^1.0.0"
+    busboy: "npm:^1.6.0"
+    concat-stream: "npm:^2.0.0"
+    type-is: "npm:^1.6.18"
+  checksum: 10/7677636ed84ebd12d67849887ab69c982a7043c1ed0d209e512500f8cff73474601fc0b6922ba07dfd872641822788d323ab795e53f6d0910a5f00b10e07b498
+  languageName: node
+  linkType: hard
+
 "multi-sort-stream@npm:^1.0.3, multi-sort-stream@npm:^1.0.4":
   version: 1.0.4
   resolution: "multi-sort-stream@npm:1.0.4"
@@ -12865,7 +12877,7 @@ __metadata:
     lodash: "npm:4.17.23"
     marked: "npm:^15.0.0"
     mini-css-extract-plugin: "npm:2.10.0"
-    multer: "npm:^2.0.2"
+    multer: "npm:^2.1.0"
     node-mocks-http: "npm:1.17.2"
     nodemon: "npm:3.1.14"
     nunjucks: "npm:3.2.4"
