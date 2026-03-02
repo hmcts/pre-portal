@@ -86,7 +86,7 @@ const checkOverlappingInstructions = (instructions: PutEditInstruction[]): Objec
 
 export const validateRequest = (editRequest: PutEditRequest, duration: string): Object | undefined => {
   if (!editRequest.edit_instructions || editRequest.edit_instructions.length === 0) {
-    return { startTime: 'Please add at least one edit instruction' };
+    return undefined;
   }
 
   for (let instruction of editRequest.edit_instructions) {

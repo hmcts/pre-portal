@@ -446,13 +446,6 @@ export class EditRequestManager {
   }
 
   private delete(index: number): void {
-    const remaining = this.editRequest.edit_instructions.length - 1;
-    if (remaining <= 0) {
-      this.editRequest.edit_instructions = [];
-      this.selectedIndex = undefined;
-      this.refreshTable();
-      return;
-    }
 
     const payload = this.payloadBuilder.buildDeletePayload(index);
     this.submitPayload(payload);
