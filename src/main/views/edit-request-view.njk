@@ -4,8 +4,6 @@
 
 {% block head %}
   {% include "webpack/css.njk" %}
-  <script type="text/javascript" src="/assets/js/mkplayer.js"></script>
-  <link rel="stylesheet" href="/assets/css/mkplayer-ui.css">
 {% endblock %}
 
 {% block beforeContent %}
@@ -57,7 +55,12 @@
       </p>
     </div>
   {% else %}
-  <form onsubmit="onSubmit(event)">
+  <div
+    data-module="edit-request-view"
+    data-config='{"editRequest": {{ editRequest | dump | safe }}, "postUrl": "{{ postUrl }}"}'
+    style="display: none;"
+  ></div>
+  <form data-edit-submission>
     <div id="form-group" class="govuk-form-group" style="margin-top: 45px;">
       <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend">
@@ -102,47 +105,5 @@
       margin-right: 0.5rem;
     }
   </style>
-  <script type="text/javascript" crossorigin="anonymous" data-testid="edit-request-submissions">
-    let editRequest = JSON.parse("{{ editRequest | dump  }}".replace(/&quot;/g, '"'));
-
-    const onError = () => {
-      const errorMessage = document.getElementById('error-message');
-      errorMessage.innerHTML = '<span class="govuk-visually-hidden">Error:</span> Select an option'
-
-      const formGroup = document.getElementById('form-group');
-      formGroup.classList.add('govuk-form-group--error');
-    };
-
-    const onSubmit = (e) => {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const jointlyAgreed = formData.get('jointlyAgreed');
-
-      if (!jointlyAgreed) {
-        onError();
-        return;
-      }
-
-      fetch("{{ postUrl }}", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "accept": "application/json",
-        },
-        body: JSON.stringify({
-          ...editRequest,
-          jointly_agreed: jointlyAgreed === 'yes',
-          status: 'SUBMITTED',
-        }),
-      }).then(async (response) => {
-        if(!response.ok) {
-          throw new Error(response);
-        }
-        window.location.href = '/browse';
-      }).catch((error) => {
-        console.error(error);
-      });
-    };
-  </script>
   {% endif %}
 {% endblock %}
