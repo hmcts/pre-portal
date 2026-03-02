@@ -12442,7 +12442,7 @@ const RAW_RUNTIME_STATE =
           ["glob", "npm:8.1.0"],\
           ["inflight", "npm:1.0.6"],\
           ["inherits", "npm:2.0.4"],\
-          ["minimatch", "npm:5.1.6"],\
+          ["minimatch", "npm:5.1.9"],\
           ["once", "npm:1.4.0"]\
         ],\
         "linkType": "HARD"\
@@ -15650,11 +15650,11 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:5.1.6", {\
-        "packageLocation": "./.yarn/cache/minimatch-npm-5.1.6-1e71429f4c-126b36485b.zip/node_modules/minimatch/",\
+      ["npm:5.1.9", {\
+        "packageLocation": "./.yarn/cache/minimatch-npm-5.1.9-fc73125478-23b4feb64d.zip/node_modules/minimatch/",\
         "packageDependencies": [\
           ["brace-expansion", "npm:2.0.2"],\
-          ["minimatch", "npm:5.1.6"]\
+          ["minimatch", "npm:5.1.9"]\
         ],\
         "linkType": "HARD"\
       }],\
