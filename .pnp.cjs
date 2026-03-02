@@ -10963,7 +10963,7 @@ const RAW_RUNTIME_STATE =
           ["@one-ini/wasm", "npm:0.1.1"],\
           ["commander", "npm:10.0.1"],\
           ["editorconfig", "npm:1.0.4"],\
-          ["minimatch", "npm:9.0.1"],\
+          ["minimatch", "npm:9.0.7"],\
           ["semver", "npm:7.7.3"]\
         ],\
         "linkType": "HARD"\
@@ -12370,7 +12370,7 @@ const RAW_RUNTIME_STATE =
           ["foreground-child", "npm:3.3.1"],\
           ["glob", "npm:10.5.0"],\
           ["jackspeak", "npm:3.4.3"],\
-          ["minimatch", "npm:9.0.5"],\
+          ["minimatch", "npm:9.0.7"],\
           ["minipass", "npm:7.1.2"],\
           ["package-json-from-dist", "npm:1.0.1"],\
           ["path-scurry", "npm:1.11.1"]\
@@ -15658,19 +15658,11 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:9.0.1", {\
-        "packageLocation": "./.yarn/cache/minimatch-npm-9.0.1-277fdc6fbd-b4e98f4dc7.zip/node_modules/minimatch/",\
+      ["npm:9.0.7", {\
+        "packageLocation": "./.yarn/cache/minimatch-npm-9.0.7-145dd43fbb-72b9ba4af3.zip/node_modules/minimatch/",\
         "packageDependencies": [\
-          ["brace-expansion", "npm:2.0.2"],\
-          ["minimatch", "npm:9.0.1"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:9.0.5", {\
-        "packageLocation": "./.yarn/cache/minimatch-npm-9.0.5-9aa93d97fa-dd6a8927b0.zip/node_modules/minimatch/",\
-        "packageDependencies": [\
-          ["brace-expansion", "npm:2.0.2"],\
-          ["minimatch", "npm:9.0.5"]\
+          ["brace-expansion", "npm:5.0.4"],\
+          ["minimatch", "npm:9.0.7"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -15819,7 +15811,7 @@ const RAW_RUNTIME_STATE =
           ["is-path-inside", "npm:3.0.3"],\
           ["js-yaml", "npm:4.1.1"],\
           ["log-symbols", "npm:4.1.0"],\
-          ["minimatch", "npm:9.0.5"],\
+          ["minimatch", "npm:9.0.7"],\
           ["mocha", "npm:11.7.5"],\
           ["ms", "npm:2.1.3"],\
           ["picocolors", "npm:1.1.1"],\
