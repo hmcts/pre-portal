@@ -74,10 +74,6 @@ Then('I click the link {string}', (text: string) => {
   I.click(locate('a').withText(text));
 });
 
-When('I open the navigation menu', async () => {
-  I.click('#navToggle');
-});
-
 Then('I enter a valid email address', () => {
   const login = config.b2c.testLogin;
   sendVerifictionCode(login.email as string);

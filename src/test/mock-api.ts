@@ -1,4 +1,5 @@
 import {
+  EditRequest,
   Pagination,
   PutAuditRequest,
   Recording,
@@ -15,8 +16,9 @@ export const mockRecordings: Recording[] = [
     parent_recording_id: 'parentId',
     version: 1,
     filename: 'filename',
-    duration: 'duration',
-    edit_instructions: 'editInstructions',
+    duration: 'PT1H1M1S',
+    edit_instructions:
+      '{"editRequestId": "776d9353-d7fd-46b2-8b6b-314a8c90b141", "editInstructions": {"ffmpegInstructions": [{"end": 10, "start": 0}, {"end": 22, "start": 30}], "requestedInstructions": [{"end": 300, "start": 180, "reason": "Removing a few seconds", "end_of_cut": "00:00:10", "start_of_cut": "00:00:22"}]}}',
     case_id: '12345678-1234-1234-1234-1234567890ab',
     capture_session: {
       id: '',
@@ -44,8 +46,9 @@ export const mockRecordings: Recording[] = [
     parent_recording_id: 'parentId',
     version: 1,
     filename: 'filename',
-    duration: 'duration',
-    edit_instructions: 'editInstructions',
+    duration: 'PT1H1M1S',
+    edit_instructions:
+      '{"editRequestId": "776d9353-d7fd-46b2-8b6b-314a8c90b141", "editInstructions": {"ffmpegInstructions": [{"end": 10, "start": 0}, {"end": 22, "start": 30}], "requestedInstructions": [{"end": 300, "start": 180, "reason": "Removing a few seconds", "end_of_cut": "00:00:10", "start_of_cut": "00:00:22"}]}}',
     case_id: '12345678-1234-1234-1234-1234567890ac',
     capture_session: {
       id: '',
@@ -90,6 +93,25 @@ export const mockedPaginatedRecordings = {
   },
 };
 
+export const mockedEditRequest = {
+  id: '12345678-1234-1234-1234-1234567890ac',
+  source_recording: mockRecordings[0],
+  status: 'DRAFT',
+  edit_instruction: {
+    requestedInstructions: [
+      {
+        start_of_cut: '00:00:00',
+        end_of_cut: '00:00:01',
+        reason: 'reason',
+      },
+      {
+        start_of_cut: '00:00:10',
+        end_of_cut: '00:00:11',
+      },
+    ],
+  },
+};
+
 export const mockXUserId = 'a114f40e-bdba-432d-b53f-37169ee5bf99';
 
 export function mock() {
@@ -109,6 +131,28 @@ export function mockGetRecording(recording?: Recording | null) {
   jest.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (xUserId: string, id: string) => {
     return Promise.resolve(mockRecordings.find(r => r.id === id) || null);
   });
+}
+
+export function mockGetCurrentEditRequest(editRequests?: EditRequest[] | null) {
+  if (editRequests !== undefined) {
+    jest
+      .spyOn(PreClient.prototype, 'getMostRecentEditRequests')
+      .mockImplementation(async (xUserId: string, sourceRecordingId: string) => {
+        return Promise.resolve(editRequests);
+      });
+    return;
+  }
+}
+
+export function mockGetEditRequest(editRequest?: EditRequest | null) {
+  if (editRequest !== undefined) {
+    jest
+      .spyOn(PreClient.prototype, 'getEditRequest')
+      .mockImplementation(async (xUserId: string, sourceRecordingId: string) => {
+        return Promise.resolve([mockedEditRequest]);
+      });
+  }
+  return;
 }
 
 export function mockGetRecordings(recordings?: Recording[], page: number = 0) {
@@ -188,4 +232,5 @@ export function reset() {
   jest.spyOn(PreClient.prototype, 'getRecording').mockRestore();
   jest.spyOn(PreClient.prototype, 'getRecordings').mockRestore();
   jest.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockRestore();
+  jest.spyOn(PreClient.prototype, 'getMostRecentEditRequests').mockRestore();
 }

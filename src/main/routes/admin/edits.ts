@@ -88,7 +88,7 @@ export default function (app: Application): void {
     res.json(recordings);
   });
 
-  app.post('/admin/edit-request/upload', requiresAuth(), upload.single('file-upload'), async (req, res) => {
+  app.post('/edit-request/upload', requiresAuth(), upload.single('file-upload'), async (req, res) => {
     const superUserId = getSuperUserId(req);
     if (!superUserId) {
       res.status(404);
