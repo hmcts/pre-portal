@@ -1,10 +1,18 @@
 /* eslint-disable jest/expect-expect */
 import { Nunjucks } from '../../../main/modules/nunjucks';
-import { mockGetRecording, mockGetRecordingPlaybackData, mockPutAudit, reset } from '../../mock-api';
+import {
+  mockedEditRequest,
+  mockGetEditRequest,
+  mockGetRecording,
+  mockGetRecordingPlaybackData,
+  mockPutAudit,
+  reset,
+} from '../../mock-api';
 import { beforeAll, describe } from '@jest/globals';
 
 import { PreClient } from '../../../main/services/pre-api/pre-client';
 import { mockUser } from '../test-helper';
+import { RecordingAppliedEdits } from '../../../main/services/pre-api/types';
 
 mockUser();
 
@@ -85,6 +93,14 @@ describe('Watch page success', () => {
       mockGetRecording();
       mockGetRecordingPlaybackData();
       mockPutAudit();
+      mockGetEditRequest({
+        ...mockedEditRequest,
+        status: 'SUBMITTED',
+        created_at: new Date().toISOString(),
+        created_by: 'Test User',
+        modified_at: new Date().toISOString(),
+      });
+
       await request(app)
         .get('/watch/12345678-1234-1234-1234-1234567890ab')
         .expect(res => expect(res.status).toBe(200))
@@ -93,6 +109,68 @@ describe('Watch page success', () => {
       await request(app)
         .get('/watch/12345678-1234-1234-1234-1234567890ab/playback')
         .expect(res => expect(res.status).toBe(200));
+    });
+  });
+});
+
+describe('parseAppliedEdits', () => {
+  beforeAll(() => {
+    reset();
+  });
+
+  const parseAppliedEdits = require('../../../main/routes/watch').parseAppliedEdits;
+
+  test('should return undefined if edits is empty', async () => {
+    const mockClient = PreClient.prototype;
+    const result = await parseAppliedEdits('', mockClient, 'user-id');
+    expect(result).toBeUndefined();
+  });
+
+  test('should return undefined if editInstructions or editRequestId is missing', async () => {
+    const mockClient = PreClient.prototype;
+    const result = await parseAppliedEdits('{"editInstructions": null, "editRequestId": null}', mockClient, 'user-id');
+    expect(result).toBeUndefined();
+  });
+
+  test('should parse and return applied edits correctly', async () => {
+    const mockClient = PreClient.prototype;
+    const mockEditInstructions: RecordingAppliedEdits = {
+      editInstructions: {
+        requestedInstructions: [{ start_of_cut: '00:00:10', end_of_cut: '00:00:20', reason: 'Test reason' }],
+      },
+      editRequestId: '12345678-1234-1234-1234-1234567890ab',
+    };
+
+    jest.spyOn(PreClient.prototype, 'getEditRequest').mockImplementation(async (xUserId: string, id: string) => {
+      return {
+        id: '12345678-1234-1234-1234-1234567890ab',
+        status: 'COMPLETE',
+        edit_instructions: {
+          requestedInstructions: [{ start_of_cut: '00:00:10', end_of_cut: '00:00:20', reason: 'Test reason' }],
+        },
+        approved_by: 'approver',
+        approved_at: '2023-01-01T00:00:00Z',
+        created_by: 'creator',
+        created_at: '2023-01-01T00:00:00Z',
+        modified_at: '2023-01-01T00:00:00Z',
+      };
+    });
+
+    const result = await parseAppliedEdits(JSON.stringify(mockEditInstructions), mockClient, 'user-id');
+
+    expect(result).toEqual({
+      appliedEdits: [
+        {
+          startOfCut: '00:00:10',
+          start: 10,
+          endOfCut: '00:00:20',
+          end: 20,
+          reason: 'Test reason',
+          runtimeReference: '00:00:10',
+        },
+      ],
+      approvedBy: 'approver',
+      approvedAt: '1/1/2023',
     });
   });
 });
