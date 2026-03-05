@@ -16,6 +16,15 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      #   B2C_STG_CREDENTIALS secret needs to be formatted like so:
+      #  {
+      #    "clientSecret":  "******",
+      #    "subscriptionId":  "******",
+      #    "tenantId":  "******",
+      #    "clientId":  "******"
+      #  }
+      #  The user used for this is pre-portal-sso in the hmcts-stg-external-id directory
+      #  Subscription can be left blank
       - name: Azure login
         uses: azure/login@v2
         with:
