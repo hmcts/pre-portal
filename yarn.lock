@@ -4324,10 +4324,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/qs@npm:*, @types/qs@npm:^6.14.0":
+"@types/qs@npm:*":
   version: 6.14.0
   resolution: "@types/qs@npm:6.14.0"
   checksum: 10/1909205514d22b3cbc7c2314e2bd8056d5f05dfb21cf4377f0730ee5e338ea19957c41735d5e4806c746176563f50005bbab602d8358432e25d900bdf4970826
+  languageName: node
+  linkType: hard
+
+"@types/qs@npm:^6.15.0":
+  version: 6.15.0
+  resolution: "@types/qs@npm:6.15.0"
+  checksum: 10/871162881f1c83e61d0c8c243c65549be5dddf33a6911f3324edeebd4087207b1174644da9a3afaa20cf494c5288d2a1ece09e10e4822f755339f14a05c339ea
   languageName: node
   linkType: hard
 
@@ -12809,7 +12816,7 @@ __metadata:
     "@types/multer": "npm:^2.0.0"
     "@types/node": "npm:25.3.0"
     "@types/nunjucks": "npm:3.2.6"
-    "@types/qs": "npm:^6.14.0"
+    "@types/qs": "npm:^6.15.0"
     "@types/serve-favicon": "npm:2.5.7"
     "@types/session-file-store": "npm:1.2.6"
     "@types/supertest": "npm:6.0.3"
@@ -13112,7 +13119,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:^6.14.2":
+"qs@npm:^6.11.2, qs@npm:^6.14.0, qs@npm:^6.14.1, qs@npm:^6.15.0":
   version: 6.15.0
   resolution: "qs@npm:6.15.0"
   dependencies:
