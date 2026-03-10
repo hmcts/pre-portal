@@ -86,7 +86,7 @@ const RAW_RUNTIME_STATE =
           ["lodash", "npm:4.17.23"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.0"],\
-          ["multer", "npm:2.1.0"],\
+          ["multer", "npm:2.1.1"],\
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
           ["nodemon", "npm:3.1.14"],\
           ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
@@ -9789,7 +9789,7 @@ const RAW_RUNTIME_STATE =
           ["mocha", "npm:11.7.5"],\
           ["monocart-coverage-reports", "npm:2.12.9"],\
           ["ms", "npm:2.1.3"],\
-          ["multer", "npm:2.1.0"],\
+          ["multer", "npm:2.1.1"],\
           ["ora-classic", "npm:5.4.2"],\
           ["parse-function", "npm:5.6.10"],\
           ["parse5", "npm:7.3.0"],\
@@ -15884,13 +15884,13 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["multer", [\
-      ["npm:2.1.0", {\
-        "packageLocation": "./.yarn/cache/multer-npm-2.1.0-fec24fead8-7677636ed8.zip/node_modules/multer/",\
+      ["npm:2.1.1", {\
+        "packageLocation": "./.yarn/cache/multer-npm-2.1.1-f8d312dc4a-fb22868caa.zip/node_modules/multer/",\
         "packageDependencies": [\
           ["append-field", "npm:1.0.0"],\
           ["busboy", "npm:1.6.0"],\
           ["concat-stream", "npm:2.0.0"],\
-          ["multer", "npm:2.1.0"],\
+          ["multer", "npm:2.1.1"],\
           ["type-is", "npm:1.6.18"]\
         ],\
         "linkType": "HARD"\
@@ -17154,7 +17154,7 @@ const RAW_RUNTIME_STATE =
           ["lodash", "npm:4.17.23"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.0"],\
-          ["multer", "npm:2.1.0"],\
+          ["multer", "npm:2.1.1"],\
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
           ["nodemon", "npm:3.1.14"],\
           ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
