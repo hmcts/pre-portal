@@ -6010,7 +6010,7 @@ const RAW_RUNTIME_STATE =
           ["is-glob", "npm:4.0.3"],\
           ["micromatch", "npm:4.0.8"],\
           ["node-addon-api", "npm:7.1.1"],\
-          ["node-gyp", "npm:12.1.0"]\
+          ["node-gyp", "npm:12.2.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -10901,7 +10901,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["dtrace-provider", "npm:0.8.8"],\
           ["nan", "npm:2.24.0"],\
-          ["node-gyp", "npm:12.1.0"]\
+          ["node-gyp", "npm:12.2.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -12171,7 +12171,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/fsevents-patch-19706e7e35/node_modules/fsevents/",\
         "packageDependencies": [\
           ["fsevents", "patch:fsevents@npm%3A2.3.2#optional!builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"],\
-          ["node-gyp", "npm:12.1.0"]\
+          ["node-gyp", "npm:12.2.0"]\
         ],\
         "linkType": "HARD"\
       }],\
@@ -12179,7 +12179,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/fsevents-patch-6b67494872/node_modules/fsevents/",\
         "packageDependencies": [\
           ["fsevents", "patch:fsevents@npm%3A2.3.3#optional!builtin<compat/fsevents>::version=2.3.3&hash=df0bf1"],\
-          ["node-gyp", "npm:12.1.0"]\
+          ["node-gyp", "npm:12.2.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -15951,7 +15951,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/nan-npm-2.24.0-1c44df59f9/node_modules/nan/",\
         "packageDependencies": [\
           ["nan", "npm:2.24.0"],\
-          ["node-gyp", "npm:12.1.0"]\
+          ["node-gyp", "npm:12.2.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16051,24 +16051,24 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/node-addon-api-npm-7.1.1-bfb302df19/node_modules/node-addon-api/",\
         "packageDependencies": [\
           ["node-addon-api", "npm:7.1.1"],\
-          ["node-gyp", "npm:12.1.0"]\
+          ["node-gyp", "npm:12.2.0"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["node-gyp", [\
-      ["npm:12.1.0", {\
-        "packageLocation": "./.yarn/unplugged/node-gyp-npm-12.1.0-0690767ce9/node_modules/node-gyp/",\
+      ["npm:12.2.0", {\
+        "packageLocation": "./.yarn/unplugged/node-gyp-npm-12.2.0-11f8fe84f1/node_modules/node-gyp/",\
         "packageDependencies": [\
           ["env-paths", "npm:2.2.1"],\
           ["exponential-backoff", "npm:3.1.3"],\
           ["graceful-fs", "npm:4.2.11"],\
           ["make-fetch-happen", "npm:15.0.3"],\
-          ["node-gyp", "npm:12.1.0"],\
+          ["node-gyp", "npm:12.2.0"],\
           ["nopt", "npm:9.0.0"],\
           ["proc-log", "npm:6.1.0"],\
           ["semver", "npm:7.7.3"],\
-          ["tar", "npm:7.5.9"],\
+          ["tar", "npm:7.5.11"],\
           ["tinyglobby", "npm:0.2.15"],\
           ["which", "npm:6.0.0"]\
         ],\
@@ -19002,14 +19002,14 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["tar", [\
-      ["npm:7.5.9", {\
-        "packageLocation": "./.yarn/cache/tar-npm-7.5.9-dd42dd386e-1213cdde9c.zip/node_modules/tar/",\
+      ["npm:7.5.11", {\
+        "packageLocation": "./.yarn/cache/tar-npm-7.5.11-c176cc1bb0-fb2e77ee85.zip/node_modules/tar/",\
         "packageDependencies": [\
           ["@isaacs/fs-minipass", "npm:4.0.1"],\
           ["chownr", "npm:3.0.0"],\
           ["minipass", "npm:7.1.2"],\
           ["minizlib", "npm:3.1.0"],\
-          ["tar", "npm:7.5.9"],\
+          ["tar", "npm:7.5.11"],\
           ["yallist", "npm:5.0.0"]\
         ],\
         "linkType": "HARD"\
