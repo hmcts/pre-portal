@@ -10150,7 +10150,7 @@ const RAW_RUNTIME_STATE =
           ["glob-parent", "npm:6.0.2"],\
           ["normalize-path", "npm:3.0.0"],\
           ["schema-utils", "npm:4.3.3"],\
-          ["serialize-javascript", "npm:7.0.3"],\
+          ["serialize-javascript", "npm:7.0.4"],\
           ["tinyglobby", "npm:0.2.15"],\
           ["webpack", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.105.3"]\
         ],\
@@ -15804,7 +15804,7 @@ const RAW_RUNTIME_STATE =
           ["mocha", "npm:11.7.5"],\
           ["ms", "npm:2.1.3"],\
           ["picocolors", "npm:1.1.1"],\
-          ["serialize-javascript", "npm:7.0.3"],\
+          ["serialize-javascript", "npm:7.0.4"],\
           ["strip-json-comments", "npm:3.1.1"],\
           ["supports-color", "npm:8.1.1"],\
           ["workerpool", "npm:9.3.4"],\
@@ -18241,10 +18241,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["serialize-javascript", [\
-      ["npm:7.0.3", {\
-        "packageLocation": "./.yarn/cache/serialize-javascript-npm-7.0.3-d003e68636-ce45e28663.zip/node_modules/serialize-javascript/",\
+      ["npm:7.0.4", {\
+        "packageLocation": "./.yarn/cache/serialize-javascript-npm-7.0.4-c70012ae10-f96d59d605.zip/node_modules/serialize-javascript/",\
         "packageDependencies": [\
-          ["serialize-javascript", "npm:7.0.3"]\
+          ["serialize-javascript", "npm:7.0.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -19071,7 +19071,7 @@ const RAW_RUNTIME_STATE =
           ["esbuild", null],\
           ["jest-worker", "npm:27.5.1"],\
           ["schema-utils", "npm:4.3.3"],\
-          ["serialize-javascript", "npm:7.0.3"],\
+          ["serialize-javascript", "npm:7.0.4"],\
           ["terser", "npm:5.44.1"],\
           ["terser-webpack-plugin", "virtual:6f0687f075f06ceb393fdbe724049351cb88c232c79b839634ed86a868065c7b069feb9ccd18c7063af30e321bdc86c3ad20237381d3a967317c0a2b3f9d6695#npm:5.3.16"],\
           ["uglify-js", null],\

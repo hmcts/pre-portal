@@ -131,7 +131,7 @@
     "node-gyp": "12.2.0",
     "node-gyp/tar": "^7.5.10",
     "semver": "^7.5.2",
-    "serialize-javascript": "7.0.3",
+    "serialize-javascript": "7.0.4",
     "editorconfig@npm:1.0.4/minimatch": "9.0.7",
     "@eslint/config-array@npm:0.23.2/minimatch": "10.2.4",
     "eslint@npm:10.0.1/minimatch": "10.2.4",
