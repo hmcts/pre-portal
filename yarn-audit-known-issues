@@ -1,1 +1,0 @@
-{"value":"undici","children":{"ID":1112496,"Issue":"Undici has an unbounded decompression chain in HTTP responses on Node.js Fetch API via Content-Encoding leads to resource exhaustion","URL":"https://github.com/advisories/GHSA-g9mf-h72j-4rw9","Severity":"moderate","Vulnerable Versions":"<6.23.0","Tree Versions":["5.29.0"],"Dependents":["@azure/functions@npm:4.10.0"]}}
