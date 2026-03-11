@@ -446,7 +446,6 @@ export class EditRequestManager {
   }
 
   private delete(index: number): void {
-
     const payload = this.payloadBuilder.buildDeletePayload(index);
     this.submitPayload(payload);
   }
