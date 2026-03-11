@@ -85,7 +85,7 @@ const RAW_RUNTIME_STATE =
           ["lint-staged", "npm:16.2.7"],\
           ["lodash", "npm:4.17.23"],\
           ["marked", "npm:15.0.12"],\
-          ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.0"],\
+          ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.1"],\
           ["multer", "npm:2.1.1"],\
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
           ["nodemon", "npm:3.1.14"],\
@@ -15590,18 +15590,18 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["mini-css-extract-plugin", [\
-      ["npm:2.10.0", {\
-        "packageLocation": "./.yarn/cache/mini-css-extract-plugin-npm-2.10.0-17ef9eed6b-bae5350ab8.zip/node_modules/mini-css-extract-plugin/",\
+      ["npm:2.10.1", {\
+        "packageLocation": "./.yarn/cache/mini-css-extract-plugin-npm-2.10.1-04f8c25f23-2d0cecc3be.zip/node_modules/mini-css-extract-plugin/",\
         "packageDependencies": [\
-          ["mini-css-extract-plugin", "npm:2.10.0"]\
+          ["mini-css-extract-plugin", "npm:2.10.1"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.0", {\
-        "packageLocation": "./.yarn/__virtual__/mini-css-extract-plugin-virtual-b5671e0c71/0/cache/mini-css-extract-plugin-npm-2.10.0-17ef9eed6b-bae5350ab8.zip/node_modules/mini-css-extract-plugin/",\
+      ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.1", {\
+        "packageLocation": "./.yarn/__virtual__/mini-css-extract-plugin-virtual-6daf0f8a20/0/cache/mini-css-extract-plugin-npm-2.10.1-04f8c25f23-2d0cecc3be.zip/node_modules/mini-css-extract-plugin/",\
         "packageDependencies": [\
           ["@types/webpack", null],\
-          ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.0"],\
+          ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.1"],\
           ["schema-utils", "npm:4.3.3"],\
           ["tapable", "npm:2.3.0"],\
           ["webpack", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.105.3"]\
@@ -17149,7 +17149,7 @@ const RAW_RUNTIME_STATE =
           ["lint-staged", "npm:16.2.7"],\
           ["lodash", "npm:4.17.23"],\
           ["marked", "npm:15.0.12"],\
-          ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.0"],\
+          ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.1"],\
           ["multer", "npm:2.1.1"],\
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
           ["nodemon", "npm:3.1.14"],\
