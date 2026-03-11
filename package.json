@@ -121,7 +121,7 @@
   },
   "resolutions": {
     "lodash": "4.17.23",
-    "@opentelemetry/instrumentation": "0.208.0",
+    "@opentelemetry/instrumentation": "0.213.0",
     "axios": "1.13.5",
     "bfj": "9.1.3",
     "cookie": "0.7.2",
