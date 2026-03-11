@@ -97,7 +97,7 @@ const RAW_RUNTIME_STATE =
           ["puppeteer", "npm:24.37.5"],\
           ["qs", "npm:6.15.0"],\
           ["redis", "npm:5.11.0"],\
-          ["sass", "npm:1.97.3"],\
+          ["sass", "npm:1.98.0"],\
           ["sass-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:16.0.7"],\
           ["serve-favicon", "npm:2.5.1"],\
           ["session-file-store", "npm:1.5.0"],\
@@ -12967,10 +12967,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["immutable", [\
-      ["npm:5.1.4", {\
-        "packageLocation": "./.yarn/cache/immutable-npm-5.1.4-cddca3d05c-0655b33af2.zip/node_modules/immutable/",\
+      ["npm:5.1.5", {\
+        "packageLocation": "./.yarn/cache/immutable-npm-5.1.5-65d37ab8d3-7aec274023.zip/node_modules/immutable/",\
         "packageDependencies": [\
-          ["immutable", "npm:5.1.4"]\
+          ["immutable", "npm:5.1.5"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17161,7 +17161,7 @@ const RAW_RUNTIME_STATE =
           ["puppeteer", "npm:24.37.5"],\
           ["qs", "npm:6.15.0"],\
           ["redis", "npm:5.11.0"],\
-          ["sass", "npm:1.97.3"],\
+          ["sass", "npm:1.98.0"],\
           ["sass-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:16.0.7"],\
           ["serve-favicon", "npm:2.5.1"],\
           ["session-file-store", "npm:1.5.0"],\
@@ -18101,13 +18101,13 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["sass", [\
-      ["npm:1.97.3", {\
-        "packageLocation": "./.yarn/cache/sass-npm-1.97.3-632c69cd32-707ef8e525.zip/node_modules/sass/",\
+      ["npm:1.98.0", {\
+        "packageLocation": "./.yarn/cache/sass-npm-1.98.0-408fe061b6-37d134d076.zip/node_modules/sass/",\
         "packageDependencies": [\
           ["@parcel/watcher", "npm:2.5.1"],\
           ["chokidar", "npm:4.0.3"],\
-          ["immutable", "npm:5.1.4"],\
-          ["sass", "npm:1.97.3"],\
+          ["immutable", "npm:5.1.5"],\
+          ["sass", "npm:1.98.0"],\
           ["source-map-js", "npm:1.2.1"]\
         ],\
         "linkType": "HARD"\
@@ -18132,7 +18132,7 @@ const RAW_RUNTIME_STATE =
           ["@types/webpack", null],\
           ["neo-async", "npm:2.6.2"],\
           ["node-sass", null],\
-          ["sass", "npm:1.97.3"],\
+          ["sass", "npm:1.98.0"],\
           ["sass-embedded", null],\
           ["sass-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:16.0.7"],\
           ["webpack", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.105.3"]\
