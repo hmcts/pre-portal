@@ -4268,12 +4268,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:25.3.0":
-  version: 25.3.0
-  resolution: "@types/node@npm:25.3.0"
+"@types/node@npm:25.5.0":
+  version: 25.5.0
+  resolution: "@types/node@npm:25.5.0"
   dependencies:
     undici-types: "npm:~7.18.0"
-  checksum: 10/061b00c8de070a606a052afaa4c45dca5f8d6a8e7e39c0c3e196bb650ee37e986bbb161991ea39076a05aada102f36b13c974528448a09efd8d36bdfee75de4b
+  checksum: 10/b1e8116bd8c9ff62e458b76d28a59cf7631537bb17e8961464bf754dd5b07b46f1620f568b2f89970505af9eef478dd74c614651b454c1ea95949ec472c64fcb
   languageName: node
   linkType: hard
 
@@ -12805,7 +12805,7 @@ __metadata:
     "@types/express-session": "npm:1.18.2"
     "@types/jest": "npm:30.0.0"
     "@types/multer": "npm:^2.0.0"
-    "@types/node": "npm:25.3.0"
+    "@types/node": "npm:25.5.0"
     "@types/nunjucks": "npm:3.2.6"
     "@types/qs": "npm:^6.15.0"
     "@types/serve-favicon": "npm:2.5.7"
