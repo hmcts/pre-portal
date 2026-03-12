@@ -1,12 +1,14 @@
 import config from 'config';
 import { mockUser } from '../test-helper';
 import { set } from 'lodash';
-import { reset } from '../../mock-api';
 import { describe } from '@jest/globals';
-import { parseIsoDuration, validateRequest } from '../../../main/routes/edit-request';
 import { PutEditRequest } from '../../../main/services/pre-api/types';
+import { Nunjucks } from '../../../main/modules/nunjucks';
+import { mockedEditRequest, mockGetCurrentEditRequest, mockGetRecording, reset } from '../../mock-api';
+import { PreClient } from '../../../main/services/pre-api/pre-client';
 
 mockUser();
+const { parseIsoDuration, validateRequest } = require('../../../main/routes/edit-request');
 set(config, 'pre.enableAutomatedEditing', 'true');
 
 describe('edit-request route', () => {
@@ -259,21 +261,90 @@ describe('edit-request route', () => {
   });
 
   describe('on GET /edit-request/:id', () => {
-    // Note: Full GET route tests would require mocking SessionUser and other Express middleware
-    // The core validation logic is tested above in parseIsoDuration and validateRequest
+    const app = require('express')();
+    new Nunjucks(false).enableFor(app);
+    const request = require('supertest');
 
-    it('should test that validateId would reject invalid IDs', () => {
-      // This is a placeholder for testing the validateId helper
-      // In a real scenario, you would test the route with proper middleware mocks
-      const validId = '12345678-1234-1234-1234-1234567890ab';
-      const invalidId = 'invalid-id';
+    const editRequestRoute = require('../../../main/routes/edit-request').default;
+    editRequestRoute(app);
 
-      // validateId returns true for UUIDs and false otherwise
-      const isValidUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(validId);
-      const isInvalidUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(invalidId);
+    beforeEach(() => {
+      reset();
+    });
 
-      expect(isValidUUID).toBe(true);
-      expect(isInvalidUUID).toBe(false);
+    test('should return 404 when id is invalid', async () => {
+      await request(app).get('/edit-request/invalid-id').expect(404);
+    });
+
+    test('should return 404 when recording is not found', async () => {
+      mockGetRecording(null);
+
+      await request(app).get('/edit-request/12345678-1234-1234-1234-1234567890ff').expect(404);
+    });
+
+    test('should return 404 when edit request is not found', async () => {
+      mockGetRecording();
+      mockGetCurrentEditRequest(null);
+
+      await request(app).get('/edit-request/12345678-1234-1234-1234-1234567890ab').expect(404);
+    });
+
+    test('should redirect to /edit-request/:id/view when status is not editable', async () => {
+      mockGetRecording();
+      mockGetCurrentEditRequest([
+        {
+          ...mockedEditRequest,
+          status: 'SUBMITTED',
+          created_at: new Date().toISOString(),
+          created_by: 'Test User',
+          modified_at: new Date().toISOString(),
+        },
+      ]);
+
+      await request(app)
+        .get('/edit-request/12345678-1234-1234-1234-1234567890ab')
+        .expect(302)
+        .expect('Location', '/edit-request/12345678-1234-1234-1234-1234567890ab/view');
+    });
+
+    test('should render edit-request page and write audit event when status is editable', async () => {
+      mockGetRecording();
+      mockGetCurrentEditRequest([
+        {
+          ...mockedEditRequest,
+          status: 'DRAFT',
+          created_at: new Date().toISOString(),
+          created_by: 'Test User',
+          modified_at: new Date().toISOString(),
+        },
+      ]);
+
+      const putAuditSpy = jest.spyOn(PreClient.prototype, 'putAudit').mockImplementation(async () => {
+        return Promise.resolve();
+      });
+
+      const res = await request(app).get('/edit-request/12345678-1234-1234-1234-1234567890ab').expect(200);
+
+      expect(putAuditSpy).toHaveBeenCalled();
+      expect(res.text).toContain('/watch/12345678-1234-1234-1234-1234567890ab/playback');
+      expect(res.text).toContain('/edit-request/12345678-1234-1234-1234-1234567890ab');
+    });
+
+    test('should return 500 when getRecording fails', async () => {
+      jest.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async () => {
+        throw new Error('Error');
+      });
+
+      await request(app).get('/edit-request/12345678-1234-1234-1234-1234567890ab').expect(500);
+    });
+
+    test('should return 500 when getCurrentEditRequest fails', async () => {
+      mockGetRecording();
+      jest.spyOn(PreClient.prototype, 'getMostRecentEditRequests').mockImplementation(async () => {
+        throw new Error('Error');
+      });
+
+      await request(app).get('/edit-request/12345678-1234-1234-1234-1234567890ab').expect(500);
     });
   });
 });
