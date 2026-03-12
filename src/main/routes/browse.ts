@@ -6,6 +6,7 @@ import { UserLevel } from '../types/user-level';
 import { Logger } from '@hmcts/nodejs-logging';
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
+import config from 'config';
 
 export const convertIsoToDate = (isoString?: string): string | undefined => {
   if (!isoString) {
@@ -147,6 +148,7 @@ export default function (app: Application): void {
       paginationLinks,
       title,
       user: SessionUser.getLoggedInUserProfile(req).user,
+      enableAutomatedEditing: config.get('pre.enableAutomatedEditing') === 'true',
       isSuperUser: isSuperUser,
       pageUrl: req.url,
       showCjsmBanner,

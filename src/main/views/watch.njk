@@ -142,6 +142,37 @@
       </dd>
     </div>
   </dl>
+
+  {% if enableAutomatedEditing %}
+    {% if appliedEdits %}
+      <h2 class="govuk-heading-m">Edit details</h2>
+      <p class="govuk-body" style="font-weight: bold; margin: 0;">Approved By: {{ appliedEdits.approvedBy }}</p>
+      <p class="govuk-body" style="font-weight: bold">Approved At: {{ appliedEdits.approvedAt }}</p>
+
+      <table class="govuk-table" style="table-layout: fixed; width: 100%;">
+        <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Start Time</th>
+          <th scope="col" class="govuk-table__header">End Time</th>
+          <th scope="col" class="govuk-table__header">Runtime Reference</th>
+          <th scope="col" class="govuk-table__header">Reason</th>
+        </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+        {% for instruction in appliedEdits.appliedEdits %}
+          <tr id="instruction-{{ loop.index0 }}" class="govuk-table__row">
+            <td class="govuk-table__cell">{{ instruction.startOfCut }}</td>
+            <td class="govuk-table__cell">{{ instruction.endOfCut }}</td>
+            <td class="govuk-table__cell">{{ instruction.runtimeReference }}</td>
+            <td class="govuk-table__cell" style="overflow-wrap: break-word;">{{ instruction.reason }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+    {% endif %}
+  {% endif %}
+
   <script type="text/javascript" crossorigin="anonymous" data-testid="recording-video-script">
     const videoContainer = document.getElementById("video-container");
     var videoError = document.getElementById("videoError");
