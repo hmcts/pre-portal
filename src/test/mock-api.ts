@@ -177,8 +177,10 @@ export function mockGetRecordingPlaybackData(data?: RecordingPlaybackData | null
     .spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
     .mockImplementation(async (xUserId: string, id: string) => {
       return Promise.resolve({
-        src: 'src',
-        type: 'type',
+        hls_url: 'https://streaming.example.test/playlist.m3u8',
+        token: 'mock-token',
+        src: 'https://streaming.example.test/playlist.m3u8',
+        type: 'application/vnd.apple.mpegurl',
         protectionInfo: [],
       } as RecordingPlaybackData);
     });
