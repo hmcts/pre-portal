@@ -33,6 +33,12 @@ describe('Watch page failure', () => {
         .get('/watch/12345678-1234-1234-1234-1234567890ff/playback')
         .expect(res => expect(res.status).toBe(404));
     });
+    test('should return 404 when getRecordingPlaybackDataMk returns null for videojs route', async () => {
+      mockGetRecordingPlaybackData(null);
+      await request(app)
+        .get('/watch-videojs/12345678-1234-1234-1234-1234567890ff/playback')
+        .expect(res => expect(res.status).toBe(404));
+    });
 
     test('should return 404 when getRecording id is invalid', async () => {
       mockGetRecording(null);
@@ -40,10 +46,22 @@ describe('Watch page failure', () => {
         .get('/watch/something')
         .expect(res => expect(res.status).toBe(404));
     });
+    test('should return 404 when getRecording id is invalid for videojs route', async () => {
+      mockGetRecording(null);
+      await request(app)
+        .get('/watch-videojs/something')
+        .expect(res => expect(res.status).toBe(404));
+    });
     test('should return 404 when getRecordingPlaybackDataMk id is invalid', async () => {
       mockGetRecordingPlaybackData(null);
       await request(app)
         .get('/watch/something/playback')
+        .expect(res => expect(res.status).toBe(404));
+    });
+    test('should return 404 when getRecordingPlaybackDataMk id is invalid for videojs route', async () => {
+      mockGetRecordingPlaybackData(null);
+      await request(app)
+        .get('/watch-videojs/something/playback')
         .expect(res => expect(res.status).toBe(404));
     });
 
@@ -55,6 +73,14 @@ describe('Watch page failure', () => {
         .get('/watch/12345678-1234-1234-1234-1234567890ab')
         .expect(res => expect(res.status).toBe(500));
     });
+    test('should return 500 when getRecording fails for videojs route', async () => {
+      jest.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (xUserId: string, id: string) => {
+        throw new Error('Error');
+      });
+      await request(app)
+        .get('/watch-videojs/12345678-1234-1234-1234-1234567890ab')
+        .expect(res => expect(res.status).toBe(500));
+    });
     test('should return 500 when getRecordingPlaybackDataMk fails', async () => {
       jest
         .spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
@@ -63,6 +89,16 @@ describe('Watch page failure', () => {
         });
       await request(app)
         .get('/watch/12345678-1234-1234-1234-1234567890ab/playback')
+        .expect(res => expect(res.status).toBe(500));
+    });
+    test('should return 500 when getRecordingPlaybackDataMk fails for videojs route', async () => {
+      jest
+        .spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
+        .mockImplementation(async (xUserId: string, id: string) => {
+          throw new Error('Error');
+        });
+      await request(app)
+        .get('/watch-videojs/12345678-1234-1234-1234-1234567890ab/playback')
         .expect(res => expect(res.status).toBe(500));
     });
   });
@@ -90,11 +126,29 @@ describe('Watch page success', () => {
         .expect(res => expect(res.status).toBe(200))
         .expect(res => expect(res.text).toContain('legitimate need and having full authorisation.'))
         .expect(res => expect(res.text).toContain('Laptop and Desktop devices only.'))
-        .expect(res => expect(res.text).toContain('/assets/js/video.min.js'))
-        .expect(res => expect(res.text).toContain('/assets/js/hls.min.js'))
-        .expect(res => expect(res.text).not.toContain('/assets/js/mkplayer.js'));
+        .expect(res => expect(res.text).toContain('/assets/js/mkplayer.js'))
+        .expect(res => expect(res.text).not.toContain('/assets/js/video.min.js'));
       await request(app)
         .get('/watch/12345678-1234-1234-1234-1234567890ab/playback')
+        .expect(res => expect(res.status).toBe(200));
+    });
+
+    test('should return 200 when getRecording and getRecordingPlaybackDataMk succeed for videojs route', async () => {
+      mockGetRecording();
+      mockGetRecordingPlaybackData();
+      mockPutAudit();
+      await request(app)
+        .get('/watch-videojs/12345678-1234-1234-1234-1234567890ab')
+        .expect(res => expect(res.status).toBe(200))
+        .expect(res => expect(res.text).toContain('legitimate need and having full authorisation.'))
+        .expect(res => expect(res.text).toContain('Laptop and Desktop devices only.'))
+        .expect(res => expect(res.text).toContain('/assets/js/video.min.js'))
+        .expect(res => expect(res.text).toContain('/assets/js/hls.min.js'))
+        .expect(res => expect(res.text).toContain('xhrSetup'))
+        .expect(res => expect(res.text).toContain('/drm/clear-key'))
+        .expect(res => expect(res.text).not.toContain('/assets/js/mkplayer.js'));
+      await request(app)
+        .get('/watch-videojs/12345678-1234-1234-1234-1234567890ab/playback')
         .expect(res => expect(res.status).toBe(200));
     });
   });

@@ -38,6 +38,7 @@ export class PropertiesVolume {
       this.setSecret('secrets.pre-hmctskv.apim-sub-portal-primary-key', 'pre.apiKey.primary');
       this.setSecret('secrets.pre-hmctskv.apim-sub-portal-primary-key', 'pre.primaryApiKey');
       this.setSecret('secrets.pre-hmctskv.apim-sub-portal-secondary-key', 'pre.apiKey.secondary');
+      this.setSecret('secrets.pre-hmctskv.media-kind-player-key', 'pre.mediaKindPlayerKey');
 
       if (process.env.USE_DEV_B2C === 'true') {
         this.logger.info('Using dev B2C configuration');
@@ -63,6 +64,7 @@ export class PropertiesVolume {
       set(config, 'b2c.testSuperUserLogin.email', process.env.B2C_TEST_SUPER_USER_LOGIN_EMAIL);
       set(config, 'b2c.testSuperUserLogin.password', process.env.B2C_TEST_SUPER_USER_LOGIN_PASSWORD);
       set(config, 'session.secret', process.env.SESSION_SECRET ?? 'superlongrandomstringthatshouldbebetterinprod');
+      set(config, 'pre.mediaKindPlayerKey', process.env.MEDIA_KIND_PLAYER_KEY ?? 'mediaKindPlayerKey');
       set(config, 'pre.portalXUserId', process.env.PRE_PORTAL_X_USER_ID ?? 'pre-portal-x-user-id');
     }
     // set the dynatrace tag to be available in templates if set

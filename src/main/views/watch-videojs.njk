@@ -6,8 +6,9 @@
 
 {% block head %}
   {% include "webpack/css.njk" %}
-  <script type="text/javascript" src="/assets/js/mkplayer.js"></script>
-  <link rel="stylesheet" href="/assets/css/mkplayer-ui.css">
+  <script type="text/javascript" src="/assets/js/video.min.js"></script>
+  <script type="text/javascript" src="/assets/js/hls.min.js"></script>
+  <link rel="stylesheet" href="/assets/css/video-js.min.css">
 {% endblock %}
 
 {% set bannerHtml %}
@@ -54,7 +55,14 @@
   </div>
 
   <div id="videoWrapper" class="govuk-!-margin-bottom-2 video-wrapper" style="display: none;">
-    <div id="video-container"></div>
+    <video
+      id="recording-video"
+      class="video-js vjs-default-skin vjs-big-play-centered"
+      controls
+      preload="auto"
+      playsinline
+      aria-label="Recording playback"
+    ></video>
   </div>
 
   <div class="govuk-warning-text">
@@ -143,20 +151,154 @@
     </div>
   </dl>
   <script type="text/javascript" crossorigin="anonymous" data-testid="recording-video-script">
-    const videoContainer = document.getElementById("video-container");
-    var videoError = document.getElementById("videoError");
+    const videoElement = document.getElementById("recording-video");
+    const videoError = document.getElementById("videoError");
+    const loading = document.getElementById("loading");
+    const videoWrapper = document.getElementById("videoWrapper");
+    let hlsPlayer;
+    let player;
 
-    const playerConfig = {
-      key: "{{ mediaKindPlayerKey }}",
-      ui: true,
-      playback: {
-        muted: false,
-        autoplay: false,
-        preferredTech: [{ player: 'html5', streaming: 'hls'}]
+    function hideLoading() {
+      loading.style.display = "none";
+    }
+
+    function showPlayer() {
+      hideLoading();
+      videoWrapper.style.display = "block";
+    }
+
+    function disposePlayers() {
+      if (hlsPlayer) {
+        hlsPlayer.destroy();
+        hlsPlayer = null;
       }
-    };
 
-    let player = new mkplayer.MKPlayer(videoContainer, playerConfig);
+      if (player) {
+        player.dispose();
+        player = null;
+      }
+    }
+
+    function showError(error) {
+      console.error("Error:", error);
+      disposePlayers();
+      videoError.style.display = "block";
+      videoWrapper.style.display = "none";
+      hideLoading();
+    }
+
+    function extractAuthorisationHeader(data) {
+      if (typeof data.authorization === "string" && data.authorization.length > 0) {
+        return data.authorization;
+      }
+
+      if (data.headers && typeof data.headers.Authorization === "string" && data.headers.Authorization.length > 0) {
+        return data.headers.Authorization;
+      }
+
+      if (typeof data.token === "string" && data.token.length > 0) {
+        return "Bearer=" + data.token;
+      }
+
+      if (!Array.isArray(data.protectionInfo)) {
+        return "";
+      }
+
+      for (const entry of data.protectionInfo) {
+        if (!entry || typeof entry !== "object") {
+          continue;
+        }
+
+        if (typeof entry.Authorization === "string" && entry.Authorization.length > 0) {
+          return entry.Authorization;
+        }
+
+        if (entry.headers && typeof entry.headers === "object") {
+          if (typeof entry.headers.Authorization === "string" && entry.headers.Authorization.length > 0) {
+            return entry.headers.Authorization;
+          }
+        }
+
+        if (typeof entry.token === "string" && entry.token.length > 0) {
+          return "Bearer=" + entry.token;
+        }
+      }
+
+      return "";
+    }
+
+    function normalisePlaybackData(data) {
+      return {
+        hlsUrl: data.hls_url || data.src || "",
+        authorization: extractAuthorisationHeader(data),
+      };
+    }
+
+    function isClearKeyRequestUrl(url) {
+      return typeof url === "string" && url.indexOf("/drm/clear-key") !== -1;
+    }
+
+    function createVideoPlayer(playbackData) {
+      player = window.videojs(videoElement, {
+        autoplay: false,
+        controls: true,
+        fluid: true,
+        muted: false,
+        preload: "auto",
+        responsive: true,
+        controlBar: {
+          pictureInPictureToggle: false,
+        },
+      });
+
+      if (window.Hls && window.Hls.isSupported()) {
+        hlsPlayer = new window.Hls({
+          enableWorker: true,
+          xhrSetup: function (xhr, url) {
+            if (playbackData.authorization && isClearKeyRequestUrl(url)) {
+              xhr.setRequestHeader("Authorization", playbackData.authorization);
+            }
+          },
+          fetchSetup: function (context, initParams) {
+            const headers = new Headers((initParams && initParams.headers) || {});
+
+            if (playbackData.authorization && context && isClearKeyRequestUrl(context.url)) {
+              headers.set("Authorization", playbackData.authorization);
+            }
+
+            return new Request(context.url, {
+              ...initParams,
+              credentials: "same-origin",
+              headers,
+            });
+          },
+        });
+
+        hlsPlayer.on(window.Hls.Events.MANIFEST_PARSED, function () {
+          showPlayer();
+        });
+        hlsPlayer.on(window.Hls.Events.ERROR, function (_event, data) {
+          if (data && data.fatal) {
+            showError(data);
+          }
+        });
+        hlsPlayer.loadSource(playbackData.hlsUrl);
+        hlsPlayer.attachMedia(videoElement);
+        return;
+      }
+
+      if (videoElement.canPlayType("application/vnd.apple.mpegurl")) {
+        if (playbackData.authorization) {
+          throw new Error("Protected HLS playback requires hls.js support in this browser.");
+        }
+
+        videoElement.src = playbackData.hlsUrl;
+        videoElement.addEventListener("loadedmetadata", showPlayer, { once: true });
+        return;
+      }
+
+      throw new Error("HLS playback is not supported in this browser.");
+    }
 
     fetch("{{ recordingPlaybackDataUrl }}", {
       method: "GET",
@@ -170,14 +312,20 @@
 
       return response.json();
     }).then(async function (data) {
+      const playbackData = normalisePlaybackData(data);
+
+      if (!playbackData.hlsUrl) {
+        throw new Error("Missing HLS playback URL.");
+      }
+
       // wait for the url to be available
       let hlsAvailable = false;
       let retries = 120;
       let time = 3000;
       do {
         await new Promise(r => setTimeout(r, time)); // sleep for `time`ms
-        const headResult = await fetch(data.hls_url, {
-          method: "HEAD"
+        const headResult = await fetch(playbackData.hlsUrl, {
+          method: "HEAD",
         });
         hlsAvailable = headResult.status === 200;
         retries--;
@@ -186,25 +334,16 @@
           time = 500;
         }
       } while (hlsAvailable === false && retries > 0);
-      const sourceConfig = {
-        hls: data.hls_url,
-        drm: {
-          clearkey: {
-            LA_URL: 'HLS_AES',
-            headers: {
-              Authorization: 'Bearer=' + data.token || '',
-            },
-          },
-        }
-      };
 
-      player.load(sourceConfig);
-      document.getElementById("loading").style.display = "none";
-      document.getElementById("videoWrapper").style.display = "block";
+      if (!hlsAvailable) {
+        throw new Error("The HLS stream did not become available in time.");
+      }
+
+      createVideoPlayer(playbackData);
     }).catch(function (error) {
-      console.error("Error:", error);
-      videoError.style.display = "block";
-      document.getElementById("loading").style.display = "none";
+      showError(error);
     });
+
+    window.addEventListener("beforeunload", disposePlayers);
   </script>
 {% endblock %}

@@ -37,6 +37,7 @@ const RAW_RUNTIME_STATE =
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.3.1"],\
           ["@jest/globals", "npm:30.2.0"],\
+          ["@mediakind/mkplayer", "npm:1.35.0"],\
           ["@opentelemetry/api", "npm:1.9.0"],\
           ["@opentelemetry/context-async-hooks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.5.1"],\
           ["@types/body-parser", "npm:1.19.6"],\
@@ -4829,6 +4830,17 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@mediakind/mkplayer", [\
+      ["npm:1.35.0", {\
+        "packageLocation": "./.yarn/cache/@mediakind-mkplayer-npm-1.35.0-54adee958e-da87d943da.zip/node_modules/@mediakind/mkplayer/",\
+        "packageDependencies": [\
+          ["@mediakind/mkplayer", "npm:1.35.0"],\
+          ["bitmovin-player", "npm:8.235.0"],\
+          ["bitmovin-player-ui", "npm:3.105.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@microsoft/applicationinsights-web-snippet", [\
       ["npm:1.2.3", {\
         "packageLocation": "./.yarn/cache/@microsoft-applicationinsights-web-snippet-npm-1.2.3-59c0e93b25-2dde4da4c2.zip/node_modules/@microsoft/applicationinsights-web-snippet/",\
@@ -8974,6 +8986,24 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/binary-extensions-npm-2.3.0-bd3f20d865-bcad01494e.zip/node_modules/binary-extensions/",\
         "packageDependencies": [\
           ["binary-extensions", "npm:2.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["bitmovin-player", [\
+      ["npm:8.235.0", {\
+        "packageLocation": "./.yarn/cache/bitmovin-player-npm-8.235.0-f81b0fa623-09520b7a76.zip/node_modules/bitmovin-player/",\
+        "packageDependencies": [\
+          ["bitmovin-player", "npm:8.235.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["bitmovin-player-ui", [\
+      ["npm:3.105.3", {\
+        "packageLocation": "./.yarn/cache/bitmovin-player-ui-npm-3.105.3-9ea32c3f02-0a0b358a00.zip/node_modules/bitmovin-player-ui/",\
+        "packageDependencies": [\
+          ["bitmovin-player-ui", "npm:3.105.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17238,6 +17268,7 @@ const RAW_RUNTIME_STATE =
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.3.1"],\
           ["@jest/globals", "npm:30.2.0"],\
+          ["@mediakind/mkplayer", "npm:1.35.0"],\
           ["@opentelemetry/api", "npm:1.9.0"],\
           ["@opentelemetry/context-async-hooks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.5.1"],\
           ["@types/body-parser", "npm:1.19.6"],\
