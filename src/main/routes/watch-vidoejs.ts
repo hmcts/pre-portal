@@ -11,9 +11,9 @@ function validateId(id: string): boolean {
 }
 
 export default function (app: Application): void {
-  const logger = Logger.getLogger('watch');
+  const logger = Logger.getLogger('watch-videojs');
 
-  app.get('/watch/:id', requiresAuth(), async (req, res, next) => {
+  app.get('/watch-videojs/:id', requiresAuth(), async (req, res, next) => {
     if (!validateId(req.params.id)) {
       res.status(404);
       res.render('not-found');
@@ -50,8 +50,8 @@ export default function (app: Application): void {
         },
       });
 
-      const recordingPlaybackDataUrl = `/watch/${req.params.id}/playback`;
-      res.render('watch', {
+      const recordingPlaybackDataUrl = `/watch-videojs/${req.params.id}/playback`;
+      res.render('watch-videojs', {
         recording,
         recordingPlaybackDataUrl,
       });
@@ -60,7 +60,7 @@ export default function (app: Application): void {
     }
   });
 
-  app.get('/watch/:id/playback', requiresAuth(), async (req, res) => {
+  app.get('/watch-videojs/:id/playback', requiresAuth(), async (req, res) => {
     if (!validateId(req.params.id)) {
       res.status(404);
       res.json({ message: 'Not found' });

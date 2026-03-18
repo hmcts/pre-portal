@@ -19,7 +19,9 @@ describe('Watch page failure', () => {
     const request = require('supertest');
 
     const watch = require('../../../main/routes/watch').default;
+    const watchVidoejs = require('../../../main/routes/watch-vidoejs').default;
     watch(app);
+    watchVidoejs(app);
 
     test('should return 404 when getRecording returns null', async () => {
       mockGetRecording(null);
@@ -115,7 +117,9 @@ describe('Watch page success', () => {
     const request = require('supertest');
 
     const watch = require('../../../main/routes/watch').default;
+    const watchVidoejs = require('../../../main/routes/watch-vidoejs').default;
     watch(app);
+    watchVidoejs(app);
 
     test('should return 200 when getRecording and getRecordingPlaybackDataMk succeed', async () => {
       mockGetRecording();
