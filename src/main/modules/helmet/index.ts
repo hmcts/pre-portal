@@ -15,8 +15,6 @@ export class Helmet {
 
   public enableFor(app: express.Express): void {
     const dynatraceDomain = 'https://*.dynatrace.com';
-    const mkPlayer = 'https://mkplayer.azureedge.net';
-    const bitmovinLicensing = 'https://licensing.bitmovin.com';
     const mkStreaming = '*.uksouth.streaming.mediakind.com';
     const mkStreamingUKS4 = '*.uksouth-4.streaming.mediakind.com';
     const mkLicense = 'ottapp-appgw-amp.prodc.mkio.tv3cloud.com';
@@ -37,21 +35,12 @@ export class Helmet {
       helmet({
         contentSecurityPolicy: {
           directives: {
-            connectSrc: [
-              self,
-              dynatraceDomain,
-              mkPlayer,
-              bitmovinLicensing,
-              mkStreaming,
-              mkStreamingUKS4,
-              mkLicense,
-              'data:',
-            ],
+            connectSrc: [self, dynatraceDomain, mkStreaming, mkStreamingUKS4, mkLicense, 'data:'],
             defaultSrc: ["'none'"],
             fontSrc: [self, 'data:'],
             imgSrc: [self, googleAnalyticsDomain, dynatraceDomain, 'data:'],
             manifestSrc: [self],
-            mediaSrc: [self, 'blob:', 'data:', mkLicense, mkStreaming],
+            mediaSrc: [self, 'blob:', 'data:', mkLicense, mkStreaming, mkStreamingUKS4],
             objectSrc: [self],
             scriptSrc,
             styleSrc: [self, "'unsafe-inline'"],

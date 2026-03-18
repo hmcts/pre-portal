@@ -2,7 +2,6 @@ import { PreClient } from '../services/pre-api/pre-client';
 import { SessionUser } from '../services/session-user/session-user';
 
 import { Logger } from '@hmcts/nodejs-logging';
-import config from 'config';
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
 import { v4 as uuid } from 'uuid';
@@ -52,11 +51,9 @@ export default function (app: Application): void {
       });
 
       const recordingPlaybackDataUrl = `/watch/${req.params.id}/playback`;
-      const mediaKindPlayerKey = config.get('pre.mediaKindPlayerKey');
       res.render('watch', {
         recording,
         recordingPlaybackDataUrl,
-        mediaKindPlayerKey,
       });
     } catch (e) {
       next(e);
