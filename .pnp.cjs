@@ -41,7 +41,7 @@ const RAW_RUNTIME_STATE =
           ["@opentelemetry/api", "npm:1.9.0"],\
           ["@opentelemetry/context-async-hooks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.5.1"],\
           ["@types/body-parser", "npm:1.19.6"],\
-          ["@types/config", "npm:3.3.5"],\
+          ["@types/config", "npm:4.4.0"],\
           ["@types/cookie-parser", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.10"],\
           ["@types/express", "npm:5.0.6"],\
           ["@types/express-session", "npm:1.18.2"],\
@@ -61,7 +61,7 @@ const RAW_RUNTIME_STATE =
           ["body-parser", "npm:2.2.2"],\
           ["chokidar", "npm:3.6.0"],\
           ["codeceptjs", "npm:3.7.6"],\
-          ["config", "npm:4.4.0"],\
+          ["config", "npm:4.4.1"],\
           ["connect-redis", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:9.0.0"],\
           ["cookie-parser", "npm:1.4.7"],\
           ["copy-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:13.0.1"],\
@@ -6766,10 +6766,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/config", [\
-      ["npm:3.3.5", {\
-        "packageLocation": "./.yarn/cache/@types-config-npm-3.3.5-fca7f803c9-6e8595d00e.zip/node_modules/@types/config/",\
+      ["npm:4.4.0", {\
+        "packageLocation": "./.yarn/cache/@types-config-npm-4.4.0-1274b7fc95-2b5aaf0684.zip/node_modules/@types/config/",\
         "packageDependencies": [\
-          ["@types/config", "npm:3.3.5"]\
+          ["@types/config", "npm:4.4.0"],\
+          ["config", "npm:4.4.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -10052,10 +10053,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["config", [\
-      ["npm:4.4.0", {\
-        "packageLocation": "./.yarn/cache/config-npm-4.4.0-d3c3ce1f31-5299649081.zip/node_modules/config/",\
+      ["npm:4.4.1", {\
+        "packageLocation": "./.yarn/cache/config-npm-4.4.1-be9ff513c5-b237298b10.zip/node_modules/config/",\
         "packageDependencies": [\
-          ["config", "npm:4.4.0"],\
+          ["config", "npm:4.4.1"],\
           ["json5", "npm:2.2.3"]\
         ],\
         "linkType": "HARD"\
@@ -17272,7 +17273,7 @@ const RAW_RUNTIME_STATE =
           ["@opentelemetry/api", "npm:1.9.0"],\
           ["@opentelemetry/context-async-hooks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.5.1"],\
           ["@types/body-parser", "npm:1.19.6"],\
-          ["@types/config", "npm:3.3.5"],\
+          ["@types/config", "npm:4.4.0"],\
           ["@types/cookie-parser", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.10"],\
           ["@types/express", "npm:5.0.6"],\
           ["@types/express-session", "npm:1.18.2"],\
@@ -17292,7 +17293,7 @@ const RAW_RUNTIME_STATE =
           ["body-parser", "npm:2.2.2"],\
           ["chokidar", "npm:3.6.0"],\
           ["codeceptjs", "npm:3.7.6"],\
-          ["config", "npm:4.4.0"],\
+          ["config", "npm:4.4.1"],\
           ["connect-redis", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:9.0.0"],\
           ["cookie-parser", "npm:1.4.7"],\
           ["copy-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:13.0.1"],\
