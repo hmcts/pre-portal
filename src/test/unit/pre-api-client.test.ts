@@ -1,6 +1,6 @@
 import { mockedPaginatedRecordings, mockRecordings, mockXUserId } from '../mock-api';
 import { PreClient } from '../../main/services/pre-api/pre-client';
-import { PutAuditRequest, SearchRecordingsRequest } from '../../main/services/pre-api/types';
+import { PutAuditRequest, RecordingPlaybackData, SearchRecordingsRequest } from '../../main/services/pre-api/types';
 import { describe } from '@jest/globals';
 import axios from 'axios';
 import { mockeduser } from './test-helper';
@@ -11,6 +11,13 @@ const preClient = new PreClient();
 const mockRecordingId = '12345678-1234-1234-1234-1234567890ab';
 const mockRecordingMissingId = '4f37c46f-142d-42df-953f-0b7ca3f87995';
 const mockRecordingNoPermsId = '4f37c46f-142d-42df-953f-0b7ca3f87996';
+const mockPlaybackData = {
+  hls_url: 'https://streaming.example.test/playlist.m3u8',
+  token: 'playback-token',
+  src: 'https://streaming.example.test/playlist.m3u8',
+  type: 'application/vnd.apple.mpegurl',
+  protectionInfo: [],
+} as RecordingPlaybackData;
 jest.mock('axios');
 
 /* eslint-disable jest/expect-expect */
@@ -134,7 +141,7 @@ describe('PreClient', () => {
     if (url === '/media-service/vod?recordingId=123') {
       return Promise.resolve({
         status: 200,
-        data: mockRecordings[0],
+        data: mockPlaybackData,
       });
     }
     if (url === '/media-service/vod?recordingId=101112') {
@@ -293,7 +300,7 @@ describe('PreClient', () => {
   test('getRecordingPlaybackDataMk success', async () => {
     var result = await preClient.getRecordingPlaybackDataMk('456', '123');
     expect(result).toBeTruthy();
-    expect(result?.id).toEqual(mockRecordings[0].id);
+    expect(result?.hls_url).toEqual(mockPlaybackData.hls_url);
   });
 
   test('getRecordingPlaybackDataMk 404', async () => {
@@ -600,5 +607,187 @@ describe('PreClient', () => {
       params: { page: 1, size: 25 },
     });
     expect(result).toEqual(mockCourts);
+  });
+
+  describe('getUserByEmail', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    test('returns user profile for regular email', async () => {
+      const mockUser = { ...mockeduser };
+      mockedAxios.get.mockResolvedValueOnce({ status: 200, data: mockUser });
+
+      const result = await preClient.getUserByEmail('regular@example.com');
+
+      expect(result).toBeTruthy();
+      expect(result.user.email).toBe('test@testy.com');
+      expect(mockedAxios.get).toHaveBeenCalledWith('/users/by-email/' + encodeURIComponent('regular@example.com'));
+    });
+
+    test('returns user profile for non-cjsm email without update', async () => {
+      const mockUser = { ...mockeduser };
+      mockedAxios.get.mockResolvedValueOnce({ status: 200, data: mockUser });
+
+      const result = await preClient.getUserByEmail('user@example.com');
+
+      expect(result).toBeTruthy();
+      expect(mockedAxios.put).not.toHaveBeenCalled();
+    });
+
+    test('detects CJSM email and updates user when alternative_email matches', async () => {
+      const mockUser = {
+        ...mockeduser,
+        user: {
+          ...mockeduser.user,
+          email: 'original@example.com',
+          alternative_email: 'user@test.cjsm.net',
+        },
+        portal_access: [
+          {
+            deleted_at: null,
+            id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+            invited_at: '2024-03-13T11:22:03.655Z',
+            last_access: null,
+            registered_at: null,
+            status: AccessStatus.ACTIVE,
+          },
+        ],
+      };
+
+      mockedAxios.get.mockResolvedValueOnce({ status: 200, data: mockUser });
+      mockedAxios.put.mockResolvedValueOnce({ status: 200 });
+
+      const result = await preClient.getUserByEmail('user@test.cjsm.net');
+
+      expect(result).toBeTruthy();
+      expect(result.user.email).toBe('user@test.cjsm.net');
+      expect(result.user.alternative_email).toBe('original@example.com');
+      expect(mockedAxios.put).toHaveBeenCalledWith(
+        '/users/' + mockUser.user.id,
+        expect.objectContaining({
+          id: mockUser.user.id,
+          email: 'user@test.cjsm.net',
+          alternative_email: 'original@example.com',
+        }),
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            'X-User-Id': expect.any(String),
+          }),
+        })
+      );
+    });
+
+    test('does not update user for CJSM email when alternative_email does not match', async () => {
+      const mockUser = {
+        ...mockeduser,
+        user: {
+          ...mockeduser.user,
+          email: 'original@example.com',
+          alternative_email: 'different@test.com',
+        },
+        portal_access: [
+          {
+            deleted_at: null,
+            id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+            invited_at: '2024-03-13T11:22:03.655Z',
+            last_access: null,
+            registered_at: null,
+            status: AccessStatus.ACTIVE,
+          },
+        ],
+      };
+
+      mockedAxios.get.mockResolvedValueOnce({ status: 200, data: mockUser });
+
+      const result = await preClient.getUserByEmail('user@test.cjsm.net');
+
+      expect(result).toBeTruthy();
+      expect(result.user.email).toBe('original@example.com');
+      expect(mockedAxios.put).not.toHaveBeenCalled();
+    });
+
+    test('does not update user for CJSM email when portal_access is empty', async () => {
+      const mockUser = {
+        ...mockeduser,
+        user: {
+          ...mockeduser.user,
+          email: 'original@example.com',
+          alternative_email: 'user@test.cjsm.net',
+        },
+        portal_access: [],
+      };
+
+      mockedAxios.get.mockResolvedValueOnce({ status: 200, data: mockUser });
+
+      const result = await preClient.getUserByEmail('user@test.cjsm.net');
+
+      expect(result).toBeTruthy();
+      expect(result.user.email).toBe('original@example.com');
+      expect(mockedAxios.put).not.toHaveBeenCalled();
+    });
+
+    test('handles CJSM email with case-insensitive matching', async () => {
+      const mockUser = {
+        ...mockeduser,
+        user: {
+          ...mockeduser.user,
+          email: 'original@example.com',
+          alternative_email: 'User@Test.CJSM.NET',
+        },
+        portal_access: [
+          {
+            deleted_at: null,
+            id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+            invited_at: '2024-03-13T11:22:03.655Z',
+            last_access: null,
+            registered_at: null,
+            status: AccessStatus.ACTIVE,
+          },
+        ],
+      };
+
+      mockedAxios.get.mockResolvedValueOnce({ status: 200, data: mockUser });
+      mockedAxios.put.mockResolvedValueOnce({ status: 200 });
+
+      const result = await preClient.getUserByEmail('User@Test.CJSM.NET');
+
+      expect(result).toBeTruthy();
+      expect(result.user.email).toBe('user@test.cjsm.net');
+      expect(mockedAxios.put).toHaveBeenCalled();
+    });
+
+    test('throws error when user API call fails', async () => {
+      mockedAxios.get.mockRejectedValueOnce({
+        response: {
+          status: 404,
+          data: { message: 'User not found' },
+        },
+      });
+
+      await expect(preClient.getUserByEmail('notfound@example.com')).rejects.toMatchObject({
+        response: {
+          status: 404,
+        },
+      });
+    });
+
+    test('handles null alternative_email gracefully', async () => {
+      const mockUser = {
+        ...mockeduser,
+        user: {
+          ...mockeduser.user,
+          email: 'user@example.com',
+          alternative_email: null,
+        },
+      };
+
+      mockedAxios.get.mockResolvedValueOnce({ status: 200, data: mockUser });
+
+      const result = await preClient.getUserByEmail('different@test.cjsm.net');
+
+      expect(result).toBeTruthy();
+      expect(mockedAxios.put).not.toHaveBeenCalled();
+    });
   });
 });

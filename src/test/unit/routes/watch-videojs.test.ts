@@ -1,0 +1,103 @@
+/* eslint-disable jest/expect-expect */
+import { Nunjucks } from '../../../main/modules/nunjucks';
+import { mockGetRecording, mockGetRecordingPlaybackData, mockPutAudit, reset } from '../../mock-api';
+import { beforeAll, describe } from '@jest/globals';
+
+import { PreClient } from '../../../main/services/pre-api/pre-client';
+import { mockUser } from '../test-helper';
+
+mockUser();
+
+describe('Watch videojs page failure', () => {
+  beforeAll(() => {
+    reset();
+  });
+
+  describe('on GET', () => {
+    const app = require('express')();
+    new Nunjucks(false).enableFor(app);
+    const request = require('supertest');
+
+    const watchVideojs = require('../../../main/routes/watch-vidoejs').default;
+    watchVideojs(app);
+
+    test('should return 404 when getRecording returns null', async () => {
+      mockGetRecording(null);
+      await request(app)
+        .get('/watch-videojs/12345678-1234-1234-1234-1234567890ff')
+        .expect(res => expect(res.status).toBe(404));
+    });
+    test('should return 404 when getRecordingPlaybackDataMk returns null', async () => {
+      mockGetRecordingPlaybackData(null);
+      await request(app)
+        .get('/watch-videojs/12345678-1234-1234-1234-1234567890ff/playback')
+        .expect(res => expect(res.status).toBe(404));
+    });
+
+    test('should return 404 when getRecording id is invalid', async () => {
+      mockGetRecording(null);
+      await request(app)
+        .get('/watch-videojs/something')
+        .expect(res => expect(res.status).toBe(404));
+    });
+    test('should return 404 when getRecordingPlaybackDataMk id is invalid', async () => {
+      mockGetRecordingPlaybackData(null);
+      await request(app)
+        .get('/watch-videojs/something/playback')
+        .expect(res => expect(res.status).toBe(404));
+    });
+
+    test('should return 500 when getRecording fails', async () => {
+      jest.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (xUserId: string, id: string) => {
+        throw new Error('Error');
+      });
+      await request(app)
+        .get('/watch-videojs/12345678-1234-1234-1234-1234567890ab')
+        .expect(res => expect(res.status).toBe(500));
+    });
+    test('should return 500 when getRecordingPlaybackDataMk fails', async () => {
+      jest
+        .spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
+        .mockImplementation(async (xUserId: string, id: string) => {
+          throw new Error('Error');
+        });
+      await request(app)
+        .get('/watch-videojs/12345678-1234-1234-1234-1234567890ab/playback')
+        .expect(res => expect(res.status).toBe(500));
+    });
+  });
+});
+
+describe('Watch videojs page success', () => {
+  beforeAll(() => {
+    reset();
+  });
+
+  describe('on GET', () => {
+    const app = require('express')();
+    new Nunjucks(false).enableFor(app);
+    const request = require('supertest');
+
+    const watchVideojs = require('../../../main/routes/watch-vidoejs').default;
+    watchVideojs(app);
+
+    test('should return 200 when getRecording and getRecordingPlaybackDataMk succeed', async () => {
+      mockGetRecording();
+      mockGetRecordingPlaybackData();
+      mockPutAudit();
+      await request(app)
+        .get('/watch-videojs/12345678-1234-1234-1234-1234567890ab')
+        .expect(res => expect(res.status).toBe(200))
+        .expect(res => expect(res.text).toContain('legitimate need and having full authorisation.'))
+        .expect(res => expect(res.text).toContain('Laptop and Desktop devices only.'))
+        .expect(res => expect(res.text).toContain('/assets/js/video.min.js'))
+        .expect(res => expect(res.text).toContain('/assets/js/hls.min.js'))
+        .expect(res => expect(res.text).toContain('xhrSetup'))
+        .expect(res => expect(res.text).toContain('/drm/clear-key'))
+        .expect(res => expect(res.text).not.toContain('/assets/js/mkplayer.js'));
+      await request(app)
+        .get('/watch-videojs/12345678-1234-1234-1234-1234567890ab/playback')
+        .expect(res => expect(res.status).toBe(200));
+    });
+  });
+});

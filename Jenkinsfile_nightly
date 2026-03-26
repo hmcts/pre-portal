@@ -11,6 +11,8 @@ parameters([
 
 @Library("Infrastructure")
 
+def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
+
 def type = "nodejs"
 def product = "pre"
 def component = "portal"
@@ -50,5 +52,16 @@ withNightlyPipeline(type, product, component) {
 
       steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/cross-browser/reports/**/*'
      }
-
+    enableFullFunctionalTest(200)
+      afterAlways('fullFunctionalTest') {
+        publishHTML target: [
+          allowMissing         : true,
+          alwaysLinkToLastBuild: true,
+          keepAll              : true,
+          reportDir            : "functional-output/functional/allure",
+          reportFiles          : "index.html",
+          reportName           : "full Functional Test Report PRE-Portal"
+      ]
+      steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/functional/reports/**/*'
+      }
 }

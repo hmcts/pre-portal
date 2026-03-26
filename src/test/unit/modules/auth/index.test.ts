@@ -9,13 +9,12 @@ import { OpenidRequest, OpenidResponse, Session } from 'express-openid-connect';
 import { AccessStatus } from '../../../../main/types/access-status';
 
 jest.mock('axios');
-jest.mock('jose', () => {
-  return {
-    decodeJwt: jest.fn().mockImplementation((s: string) => {
-      return { email: 'test@testy.com' };
-    }),
-  };
-});
+
+function buildIdToken(claims: Record<string, string>): string {
+  const encode = (value: object) => Buffer.from(JSON.stringify(value)).toString('base64url');
+
+  return `${encode({ alg: 'none', typ: 'JWT' })}.${encode(claims)}.signature`;
+}
 
 describe('Auth Module', () => {
   test('test redis config is loaded when there is a redisHost', async () => {
@@ -114,7 +113,98 @@ describe('Auth Module', () => {
     const logger = Logger.getLogger('auth-module-test');
     const configParams = auth['getConfigParams'](app, logger);
     // @ts-ignore
-    const result = await configParams['afterCallback']({} as OpenidRequest, {} as OpenidResponse, {} as Session, {});
+    const result = await configParams['afterCallback'](
+      {} as OpenidRequest,
+      {} as OpenidResponse,
+      { id_token: buildIdToken({ loginEmail: 'test@testy.com' }) } as Session,
+      {}
+    );
     expect(result.userProfile.user.email).toBe('test@testy.com');
+  });
+
+  test('Uses loginEmail when available during callback', async () => {
+    const mockedAxios = axios as jest.Mocked<typeof axios>;
+    // @ts-ignore
+    mockedAxios.get.mockImplementation((url: string, config: object) => {
+      if (url === '/invites' && config['params']['email'] === 'login@testy.com') {
+        return Promise.resolve({
+          status: 200,
+          data: { page: { size: 20, totalElements: 1, totalPages: 1, number: 0 } },
+        });
+      }
+      if (url === '/users/by-email/' + encodeURIComponent('login@testy.com')) {
+        return Promise.resolve({
+          status: 200,
+          data: {
+            app_access: [],
+            portal_access: [],
+            user: {
+              id: '9ffcc9fb-db21-4d77-a983-c39b01141c6a',
+              first_name: 'Jason',
+              last_name: 'Paige',
+              email: 'login@testy.com',
+              phone_number: null,
+              organisation: null,
+            },
+          },
+        });
+      }
+    });
+
+    const app = require('express')();
+    const auth = new Auth();
+    const logger = Logger.getLogger('auth-module-test');
+    const configParams = auth['getConfigParams'](app, logger);
+    // @ts-ignore
+    const result = await configParams['afterCallback'](
+      {} as OpenidRequest,
+      {} as OpenidResponse,
+      { id_token: buildIdToken({ loginEmail: 'login@testy.com', email: 'fallback@testy.com' }) } as Session,
+      {}
+    );
+    expect(result.userProfile.user.email).toBe('login@testy.com');
+  });
+
+  test('Falls back to email when loginEmail is not set during callback', async () => {
+    const mockedAxios = axios as jest.Mocked<typeof axios>;
+    // @ts-ignore
+    mockedAxios.get.mockImplementation((url: string, config: object) => {
+      if (url === '/invites' && config['params']['email'] === 'fallback@testy.com') {
+        return Promise.resolve({
+          status: 200,
+          data: { page: { size: 20, totalElements: 1, totalPages: 1, number: 0 } },
+        });
+      }
+      if (url === '/users/by-email/' + encodeURIComponent('fallback@testy.com')) {
+        return Promise.resolve({
+          status: 200,
+          data: {
+            app_access: [],
+            portal_access: [],
+            user: {
+              id: '9ffcc9fb-db21-4d77-a983-c39b01141c6a',
+              first_name: 'Jason',
+              last_name: 'Paige',
+              email: 'fallback@testy.com',
+              phone_number: null,
+              organisation: null,
+            },
+          },
+        });
+      }
+    });
+
+    const app = require('express')();
+    const auth = new Auth();
+    const logger = Logger.getLogger('auth-module-test');
+    const configParams = auth['getConfigParams'](app, logger);
+    // @ts-ignore
+    const result = await configParams['afterCallback'](
+      {} as OpenidRequest,
+      {} as OpenidResponse,
+      { id_token: buildIdToken({ email: 'fallback@testy.com' }) } as Session,
+      {}
+    );
+    expect(result.userProfile.user.email).toBe('fallback@testy.com');
   });
 });
