@@ -51,7 +51,7 @@ export class Helmet {
             fontSrc: [self, 'data:'],
             imgSrc: [self, googleAnalyticsDomain, dynatraceDomain, 'data:'],
             manifestSrc: [self],
-            mediaSrc: [self, 'blob:', 'data:', mkLicense, mkStreaming],
+            mediaSrc: [self, 'blob:', 'data:', mkLicense, mkStreaming, mkStreamingUKS4],
             objectSrc: [self],
             scriptSrc,
             styleSrc: [self, "'unsafe-inline'"],

@@ -89,7 +89,9 @@ describe('Watch page success', () => {
         .get('/watch/12345678-1234-1234-1234-1234567890ab')
         .expect(res => expect(res.status).toBe(200))
         .expect(res => expect(res.text).toContain('legitimate need and having full authorisation.'))
-        .expect(res => expect(res.text).toContain('Laptop and Desktop devices only.'));
+        .expect(res => expect(res.text).toContain('Laptop and Desktop devices only.'))
+        .expect(res => expect(res.text).toContain('/assets/js/mkplayer.js'))
+        .expect(res => expect(res.text).not.toContain('/assets/js/video.min.js'));
       await request(app)
         .get('/watch/12345678-1234-1234-1234-1234567890ab/playback')
         .expect(res => expect(res.status).toBe(200));
