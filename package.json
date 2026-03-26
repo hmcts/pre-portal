@@ -122,6 +122,14 @@
     "webpack-dev-middleware": "7.4.5"
   },
   "resolutions": {
+    "micromatch@npm:4.0.8/picomatch": "2.3.2",
+    "readdirp@npm:3.6.0/picomatch": "2.3.2",
+    "jest-util@npm:29.7.0/picomatch": "2.3.2",
+    "anymatch@npm/picomatch": "2.3.2",
+    "jest-util@npm:30.2.0/picomatch": "4.0.3",
+    "tinyglobby@npm:0.2.15/picomatch": "4.0.4",
+    "picomatch@npm:2.3.1": "2.3.2",
+    "picomatch@npm:4.0.3": "4.0.4",
     "lodash": "4.17.23",
     "@opentelemetry/instrumentation": "0.208.0",
     "axios": "1.13.5",
