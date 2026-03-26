@@ -140,7 +140,7 @@
     "node-gyp": "12.2.0",
     "node-gyp/tar": "^7.5.10",
     "semver": "^7.5.2",
-    "serialize-javascript": "7.0.4",
+    "serialize-javascript": "7.0.5",
     "editorconfig@npm:1.0.4/minimatch": "9.0.7",
     "glob@npm:6.0.4/minimatch": "3.1.5",
     "glob@npm:7.2.3/minimatch": "3.1.5",
