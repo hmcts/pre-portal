@@ -12645,10 +12645,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["handlebars", [\
-      ["npm:4.7.8", {\
-        "packageLocation": "./.yarn/cache/handlebars-npm-4.7.8-25244c2c82-bd528f4dd1.zip/node_modules/handlebars/",\
+      ["npm:4.7.9", {\
+        "packageLocation": "./.yarn/cache/handlebars-npm-4.7.9-46c3c68605-e755433d65.zip/node_modules/handlebars/",\
         "packageDependencies": [\
-          ["handlebars", "npm:4.7.8"],\
+          ["handlebars", "npm:4.7.9"],\
           ["minimist", "npm:1.2.8"],\
           ["neo-async", "npm:2.6.2"],\
           ["source-map", "npm:0.6.1"],\
@@ -19475,7 +19475,7 @@ const RAW_RUNTIME_STATE =
           ["bs-logger", "npm:0.2.6"],\
           ["esbuild", null],\
           ["fast-json-stable-stringify", "npm:2.1.0"],\
-          ["handlebars", "npm:4.7.8"],\
+          ["handlebars", "npm:4.7.9"],\
           ["jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.2.0"],\
           ["jest-util", "npm:30.2.0"],\
           ["json5", "npm:2.2.3"],\
