@@ -122,6 +122,7 @@
     "webpack-dev-middleware": "7.4.5"
   },
   "resolutions": {
+    "handlebars": "4.7.9",
     "micromatch@npm:4.0.8/picomatch": "2.3.2",
     "readdirp@npm:3.6.0/picomatch": "2.3.2",
     "anymatch@npm/picomatch": "2.3.2",
