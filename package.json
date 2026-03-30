@@ -142,6 +142,8 @@
     "node-gyp/tar": "^7.5.10",
     "semver": "^7.5.2",
     "brace-expansion@^2.0.2": "2.0.3",
+    "minimatch@npm:10.2.4/brace-expansion": "^5.0.5",
+    "minimatch@npm:9.0.7/brace-expansion": "^5.0.5",
     "editorconfig@npm:1.0.4/minimatch": "9.0.7",
     "glob@npm:6.0.4/minimatch": "3.1.5",
     "glob@npm:7.2.3/minimatch": "3.1.5",
