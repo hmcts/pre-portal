@@ -46,7 +46,7 @@ const RAW_RUNTIME_STATE =
           ["@types/express", "npm:5.0.6"],\
           ["@types/express-session", "npm:1.18.2"],\
           ["@types/jest", "npm:30.0.0"],\
-          ["@types/multer", "npm:2.0.0"],\
+          ["@types/multer", "npm:2.1.0"],\
           ["@types/node", "npm:25.3.0"],\
           ["@types/nunjucks", "npm:3.2.6"],\
           ["@types/qs", "npm:6.15.0"],\
@@ -6994,11 +6994,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/multer", [\
-      ["npm:2.0.0", {\
-        "packageLocation": "./.yarn/cache/@types-multer-npm-2.0.0-10a3c18289-87ddd5b39f.zip/node_modules/@types/multer/",\
+      ["npm:2.1.0", {\
+        "packageLocation": "./.yarn/cache/@types-multer-npm-2.1.0-1eaf9e22a4-405298b6b0.zip/node_modules/@types/multer/",\
         "packageDependencies": [\
           ["@types/express", "npm:5.0.6"],\
-          ["@types/multer", "npm:2.0.0"]\
+          ["@types/multer", "npm:2.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17280,7 +17280,7 @@ const RAW_RUNTIME_STATE =
           ["@types/express", "npm:5.0.6"],\
           ["@types/express-session", "npm:1.18.2"],\
           ["@types/jest", "npm:30.0.0"],\
-          ["@types/multer", "npm:2.0.0"],\
+          ["@types/multer", "npm:2.1.0"],\
           ["@types/node", "npm:25.3.0"],\
           ["@types/nunjucks", "npm:3.2.6"],\
           ["@types/qs", "npm:6.15.0"],\
