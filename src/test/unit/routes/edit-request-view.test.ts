@@ -22,12 +22,12 @@ describe('edit-request-view route', () => {
     const watch = require('../../../main/routes/edit-request-view').default;
     watch(app);
 
-    it('should render edit-request-view', async () => {
+    it('should render edit-request-view with submit button when status is DRAFT', async () => {
       mockGetRecording();
       mockGetCurrentEditRequest([
         {
           ...mockedEditRequest,
-          status: 'SUBMITTED',
+          status: 'DRAFT',
           created_at: new Date().toISOString(),
           created_by: 'Test User',
           modified_at: new Date().toISOString(),
@@ -69,7 +69,7 @@ describe('edit-request-view route', () => {
     test('should return 500 when getCurrentEditRequest fails', async () => {
       jest
         .spyOn(PreClient.prototype, 'getMostRecentEditRequests')
-        .mockImplementation(async (xUserId: string, sourceRecordingId: string) => {
+        .mockImplementation(async (_xUserId: string, _sourceRecordingId: string) => {
           throw new Error('Error');
         });
       await request(app)
@@ -78,7 +78,7 @@ describe('edit-request-view route', () => {
     });
 
     test('should return 500 when getRecording fails', async () => {
-      jest.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (xUserId: string, id: string) => {
+      jest.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (_xUserId: string, _id: string) => {
         throw new Error('Error');
       });
       await request(app)
@@ -155,7 +155,7 @@ describe('edit-request-view route', () => {
     test('should return 500 when putEditRequest fails', async () => {
       jest
         .spyOn(PreClient.prototype, 'putEditRequest')
-        .mockImplementation(async (xUserId: string, editRequest: any) => {
+        .mockImplementation(async (_xUserId: string, _editRequest: any) => {
           throw new Error('Error');
         });
       await request(app)
@@ -180,7 +180,7 @@ describe('edit-request-view route', () => {
     test('should return 200 when putEditRequest succeeds', async () => {
       jest
         .spyOn(PreClient.prototype, 'putEditRequest')
-        .mockImplementation(async (xUserId: string, editRequest: any) => {
+        .mockImplementation(async (_xUserId: string, _editRequest: any) => {
           return Promise.resolve();
         });
       await request(app)
