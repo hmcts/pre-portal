@@ -9,13 +9,12 @@ import { OpenidRequest, OpenidResponse, Session } from 'express-openid-connect';
 import { AccessStatus } from '../../../../main/types/access-status';
 
 jest.mock('axios');
-jest.mock('jose', () => {
-  return {
-    decodeJwt: jest.fn().mockImplementation((s: string) => {
-      return { loginEmail: 'test@testy.com' };
-    }),
-  };
-});
+
+function buildIdToken(claims: Record<string, string>): string {
+  const encode = (value: object) => Buffer.from(JSON.stringify(value)).toString('base64url');
+
+  return `${encode({ alg: 'none', typ: 'JWT' })}.${encode(claims)}.signature`;
+}
 
 describe('Auth Module', () => {
   test('test redis config is loaded when there is a redisHost', async () => {
@@ -114,14 +113,16 @@ describe('Auth Module', () => {
     const logger = Logger.getLogger('auth-module-test');
     const configParams = auth['getConfigParams'](app, logger);
     // @ts-ignore
-    const result = await configParams['afterCallback']({} as OpenidRequest, {} as OpenidResponse, {} as Session, {});
+    const result = await configParams['afterCallback'](
+      {} as OpenidRequest,
+      {} as OpenidResponse,
+      { id_token: buildIdToken({ loginEmail: 'test@testy.com' }) } as Session,
+      {}
+    );
     expect(result.userProfile.user.email).toBe('test@testy.com');
   });
 
   test('Uses loginEmail when available during callback', async () => {
-    const jose = require('jose');
-    jose.decodeJwt.mockImplementationOnce(() => ({ loginEmail: 'login@testy.com', email: 'fallback@testy.com' }));
-
     const mockedAxios = axios as jest.Mocked<typeof axios>;
     // @ts-ignore
     mockedAxios.get.mockImplementation((url: string, config: object) => {
@@ -155,14 +156,16 @@ describe('Auth Module', () => {
     const logger = Logger.getLogger('auth-module-test');
     const configParams = auth['getConfigParams'](app, logger);
     // @ts-ignore
-    const result = await configParams['afterCallback']({} as OpenidRequest, {} as OpenidResponse, {} as Session, {});
+    const result = await configParams['afterCallback'](
+      {} as OpenidRequest,
+      {} as OpenidResponse,
+      { id_token: buildIdToken({ loginEmail: 'login@testy.com', email: 'fallback@testy.com' }) } as Session,
+      {}
+    );
     expect(result.userProfile.user.email).toBe('login@testy.com');
   });
 
   test('Falls back to email when loginEmail is not set during callback', async () => {
-    const jose = require('jose');
-    jose.decodeJwt.mockImplementationOnce(() => ({ email: 'fallback@testy.com' }));
-
     const mockedAxios = axios as jest.Mocked<typeof axios>;
     // @ts-ignore
     mockedAxios.get.mockImplementation((url: string, config: object) => {
@@ -196,7 +199,12 @@ describe('Auth Module', () => {
     const logger = Logger.getLogger('auth-module-test');
     const configParams = auth['getConfigParams'](app, logger);
     // @ts-ignore
-    const result = await configParams['afterCallback']({} as OpenidRequest, {} as OpenidResponse, {} as Session, {});
+    const result = await configParams['afterCallback'](
+      {} as OpenidRequest,
+      {} as OpenidResponse,
+      { id_token: buildIdToken({ email: 'fallback@testy.com' }) } as Session,
+      {}
+    );
     expect(result.userProfile.user.email).toBe('fallback@testy.com');
   });
 });

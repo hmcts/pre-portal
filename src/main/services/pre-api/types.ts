@@ -67,9 +67,13 @@ export interface Participant {
 }
 
 export interface RecordingPlaybackData {
-  src: string;
-  type: string;
-  protectionInfo: { [key: string]: string }[];
+  hls_url?: string;
+  token?: string;
+  src?: string;
+  type?: string;
+  authorization?: string;
+  headers?: { [key: string]: string };
+  protectionInfo?: { [key: string]: unknown }[];
 }
 
 export interface Pagination {

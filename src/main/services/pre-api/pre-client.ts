@@ -2,7 +2,6 @@ import { AccessStatus } from '../../types/access-status';
 import { TermsNotAcceptedError } from '../../types/errors';
 import { Terms } from '../../types/terms';
 import { UserProfile } from '../../types/user-profile';
-
 import { RedisService } from '../../app/redis/RedisService';
 import { LiveEvent } from '../../types/live-event';
 import {
@@ -11,6 +10,7 @@ import {
   PutAuditRequest,
   PutEditRequest,
   Recording,
+  RecordingPlaybackData,
   SearchEditsRequest,
   SearchRecordingsRequest,
   CaptureSession,
@@ -324,7 +324,7 @@ export class PreClient {
     }
   }
 
-  public async getRecordingPlaybackDataMk(xUserId: string, id: string): Promise<Recording | null> {
+  public async getRecordingPlaybackDataMk(xUserId: string, id: string): Promise<RecordingPlaybackData | null> {
     try {
       const response = await axios.get(`/media-service/vod?recordingId=${id}`, {
         headers: {
@@ -332,7 +332,7 @@ export class PreClient {
         },
       });
 
-      return response.data as Recording;
+      return response.data as RecordingPlaybackData;
     } catch (e) {
       if (e.response?.status === 404) {
         return null;

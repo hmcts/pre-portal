@@ -1,0 +1,1 @@
+{"value":"@xmldom/xmldom","children":{"ID":"@xmldom/xmldom (deprecation)","Issue":"this version has critical issues, please update to the latest version","Severity":"moderate","Vulnerable Versions":"0.8.11","Tree Versions":["0.8.11"],"Dependents":["mpd-parser@npm:1.3.1"]}}
