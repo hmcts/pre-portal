@@ -1,9 +1,9 @@
 export class EditRequestView {
-  private editRequest: any;
-  private postUrl!: string;
+  private readonly editRequest: any;
+  private readonly postUrl!: string;
 
   constructor($module: HTMLElement) {
-    const configData = $module.getAttribute('data-config');
+    const configData = $module.dataset['config'];
     if (!configData) {
       return;
     }
@@ -18,7 +18,7 @@ export class EditRequestView {
     }
   }
 
-  private onError = () => {
+  private readonly onError = () => {
     const errorMessage = document.getElementById('error-message');
     if (errorMessage) {
       errorMessage.innerHTML = '<span class="govuk-visually-hidden">Error:</span> Select an option';
@@ -30,7 +30,7 @@ export class EditRequestView {
     }
   };
 
-  private onSubmit = (e: Event) => {
+  private readonly onSubmit = (e: Event) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
@@ -57,7 +57,7 @@ export class EditRequestView {
         if (!response.ok) {
           throw new Error(response as any);
         }
-        window.location.href = '/browse';
+        globalThis.location.href = '/browse';
       })
       .catch(error => {
         console.error(error);

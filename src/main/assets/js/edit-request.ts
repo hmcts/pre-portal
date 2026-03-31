@@ -1,7 +1,7 @@
 class InstructionPayloadBuilder {
   constructor(
-    private editRequest: any,
-    private form: HTMLFormElement
+    private readonly editRequest: any,
+    private readonly form: HTMLFormElement
   ) {}
 
   buildAddPayload(): any {
@@ -50,29 +50,31 @@ class InstructionPayloadBuilder {
 class ApiService {
   private errors: any = {};
 
-  constructor(private postUrl: string) {}
+  constructor(private readonly postUrl: string) {}
 
   async submit(payload: any): Promise<any> {
     this.errors = {};
+    let response: Response;
     try {
-      const response = await fetch(this.postUrl, {
+      response = await fetch(this.postUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(payload),
       });
-
-      if (!response.ok) {
-        const data = await response.json();
-        if (data.errors) {
-          this.errors = data.errors;
-          return null;
-        }
-        throw new Error(`HTTP ${response.status}`);
-      }
-      return await response.json();
     } catch (error) {
+      console.error(error);
       return null;
     }
+
+    if (!response.ok) {
+      const data = await response.json();
+      if (data.errors) {
+        this.errors = data.errors;
+        return null;
+      }
+      throw new Error(`HTTP ${response.status}`);
+    }
+    return await response.json();
   }
 
   getErrors(): any {
@@ -277,15 +279,15 @@ class UIRenderer {
 
 export class EditRequestManager {
   private editRequest: any = {};
-  private recordingId: string = '';
-  private apiService!: ApiService;
+  private readonly recordingId: string = '';
+  private readonly apiService!: ApiService;
   private payloadBuilder!: InstructionPayloadBuilder;
-  private renderer: UIRenderer = new UIRenderer();
+  private readonly renderer: UIRenderer = new UIRenderer();
   private selectedIndex: number | undefined;
   private isSubmitting: boolean = false;
 
   constructor($module: HTMLElement) {
-    const configData = $module.getAttribute('data-config');
+    const configData = $module.dataset['config'];
     if (!configData) {
       return;
     }
@@ -298,7 +300,7 @@ export class EditRequestManager {
       this.payloadBuilder = new InstructionPayloadBuilder(this.editRequest, this.getForm());
       this.init();
     } catch (error) {
-      // Error during initialization
+      console.error(error);
     }
   }
 
@@ -323,8 +325,8 @@ export class EditRequestManager {
       if (!submitter) {
         return;
       }
-      const action = submitter.getAttribute('data-edit-action');
-      const index = submitter.getAttribute('data-index') ? parseInt(submitter.getAttribute('data-index')) : undefined;
+      const action = submitter.dataset['editAction'];
+      const index = submitter.dataset['index'] ? Number.parseInt(submitter.dataset['index']) : undefined;
       this.handleAction(action, index);
     });
   }
@@ -343,13 +345,13 @@ export class EditRequestManager {
     const submitBtn = document.getElementById('submit-button');
     if (submitBtn) {
       submitBtn.addEventListener('click', e => {
-        if (!this.editRequest.edit_instructions || this.editRequest.edit_instructions.length === 0) {
+        if (!this.editRequest.edit_instructions?.length) {
           e.preventDefault();
           this.renderer.showSubmitError();
           return;
         }
         this.renderer.hideSubmitError();
-        window.location.href = `/edit-request/${this.recordingId}/view`;
+        globalThis.location.href = `/edit-request/${this.recordingId}/view`;
       });
     }
     this.updateSubmitButtonState();
@@ -473,7 +475,7 @@ export class EditRequestManager {
       const errors = this.apiService.getErrors();
 
       const row = document.getElementById('new-edit-reference-row') as HTMLElement;
-      if (row && row.hidden) {
+      if (row?.hidden) {
         row.hidden = false;
       }
 

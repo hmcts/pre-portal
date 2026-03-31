@@ -6,10 +6,12 @@ import { EditRequestView } from './edit-request-view';
 
 initAll();
 
-document.querySelectorAll('[data-module="edit-request"]').forEach(element => {
-  new EditRequestManager(element as HTMLElement);
-});
+export const editRequestManagers = Array.from(
+  document.querySelectorAll('[data-module="edit-request"]'),
+  element => new EditRequestManager(element as HTMLElement)
+);
 
-document.querySelectorAll('[data-module="edit-request-view"]').forEach(element => {
-  new EditRequestView(element as HTMLElement);
-});
+export const editRequestViews = Array.from(
+  document.querySelectorAll('[data-module="edit-request-view"]'),
+  element => new EditRequestView(element as HTMLElement)
+);

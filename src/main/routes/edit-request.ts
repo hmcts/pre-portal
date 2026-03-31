@@ -17,9 +17,9 @@ export const parseIsoDuration = (duration: string): number => {
     throw new Error('Invalid ISO 8601 duration format');
   }
 
-  const hours = Number.parseInt(matches[1] ?? 0, 10);
-  const minutes = Number.parseInt(matches[2] ?? 0, 10);
-  const seconds = Number.parseInt(matches[3] ?? 0);
+  const hours = Number.parseInt(matches[1] ?? '0', 10);
+  const minutes = Number.parseInt(matches[2] ?? '0', 10);
+  const seconds = Number.parseInt(matches[3] ?? '0', 10);
 
   return hours * 3600 + minutes * 60 + seconds;
 };
@@ -34,16 +34,16 @@ const validateInstruction = (instruction: PutEditInstruction, duration: string):
 
   const durationInSeconds = parseIsoDuration(duration);
 
-  const hhmmssFormat = '^(([01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d)$';
+  const hhmmssFormat = new RegExp(String.raw`^(([01]\d|2[0-3]):[0-5]\d:[0-5]\d)$`);
   if (instruction.start_of_cut === '') {
     errors['startTime'] = 'Please enter a valid time reference';
-  } else if (!instruction.start_of_cut.match(hhmmssFormat)) {
+  } else if (!hhmmssFormat.exec(instruction.start_of_cut)) {
     errors['startTime'] = 'The Start reference entered is not in the HH:MM:SS format';
   }
 
   if (instruction.end_of_cut === '') {
     errors['endTime'] = 'Please enter a valid time reference';
-  } else if (!instruction.end_of_cut.match(hhmmssFormat)) {
+  } else if (!hhmmssFormat.exec(instruction.end_of_cut)) {
     errors['endTime'] = 'The End reference entered is not in the HH:MM:SS format';
   } else if (startTotalSeconds >= endTotalSeconds) {
     errors['endTime'] = 'End reference cannot be equal or less than the Start reference';
@@ -89,8 +89,8 @@ export const validateRequest = (editRequest: PutEditRequest, duration: string): 
     return undefined;
   }
 
-  for (let instruction of editRequest.edit_instructions) {
-    let trimmedInstruction: PutEditInstruction = instruction;
+  for (const instruction of editRequest.edit_instructions) {
+    const trimmedInstruction: PutEditInstruction = instruction;
     trimmedInstruction.start_of_cut = instruction.start_of_cut.trim();
     trimmedInstruction.end_of_cut = instruction.end_of_cut.trim();
     const errors = validateInstruction(trimmedInstruction, duration);
@@ -105,7 +105,7 @@ export const validateRequest = (editRequest: PutEditRequest, duration: string): 
     end_of_cut: instruction.end_of_cut.trim(),
   }));
 
-  let errors = checkOverlappingInstructions(trimmedInstructions);
+  const errors = checkOverlappingInstructions(trimmedInstructions);
   if (errors) {
     return errors;
   }
@@ -226,7 +226,7 @@ function getEditRequestPage(app: Application): void {
       }
 
       const response = await client.putEditRequest(userPortalId, request);
-      if (response.status == 400) {
+      if (response.status === 400) {
         const errors = {};
         res.status(400);
         errors['startTime'] = response.data.message;
@@ -236,7 +236,7 @@ function getEditRequestPage(app: Application): void {
 
       res.json(await getCurrentEditRequest(client, userPortalId, req.params.id));
     } catch (e) {
-      console.log(e);
+      console.error(e);
       next(e);
     }
   });
