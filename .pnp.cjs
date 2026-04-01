@@ -80,7 +80,7 @@ const RAW_RUNTIME_STATE =
           ["html-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.6.6"],\
           ["husky", "npm:9.1.7"],\
           ["jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.2.0"],\
-          ["jest-html-reporter", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.3.0"],\
+          ["jest-html-reporter", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.4.0"],\
           ["jest-util", "npm:30.2.0"],\
           ["jose", "npm:6.1.3"],\
           ["lint-staged", "npm:16.2.7"],\
@@ -4256,7 +4256,7 @@ const RAW_RUNTIME_STATE =
           ["@jest/console", "npm:30.2.0"],\
           ["@jest/core", "virtual:48b0cca38bf3581a1301e22d906a79078ea948878a1ed408eda8889dd89fde298fe0112816421a2612adc43fe79ef3c53d1d8d5a0176c270b300b7280f1866c5#npm:30.2.0"],\
           ["@jest/pattern", "npm:30.0.1"],\
-          ["@jest/reporters", "virtual:a11a7f820840732f4b41af43898b8504ddad71a438d291f8610b6af6f586ce5787b5d4cd3ce8fc8823571018a1d06d4f28c22fb8460274fdb3ea33b102dc7133#npm:30.2.0"],\
+          ["@jest/reporters", "virtual:6c80a4b9308e49eb13eace5bf259410c23c8424016f7e1c3f3fcfdae6a37a79c993d1f2fbbe9fe652463f75d62168cc26fcebc53c0c1ec08cb0830b33f91bff8#npm:30.2.0"],\
           ["@jest/test-result", "npm:30.2.0"],\
           ["@jest/transform", "npm:30.2.0"],\
           ["@jest/types", "npm:30.2.0"],\
@@ -4425,12 +4425,12 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:a11a7f820840732f4b41af43898b8504ddad71a438d291f8610b6af6f586ce5787b5d4cd3ce8fc8823571018a1d06d4f28c22fb8460274fdb3ea33b102dc7133#npm:30.2.0", {\
-        "packageLocation": "./.yarn/__virtual__/@jest-reporters-virtual-47070f5576/0/cache/@jest-reporters-npm-30.2.0-c7f0144467-3848b59bf7.zip/node_modules/@jest/reporters/",\
+      ["virtual:6c80a4b9308e49eb13eace5bf259410c23c8424016f7e1c3f3fcfdae6a37a79c993d1f2fbbe9fe652463f75d62168cc26fcebc53c0c1ec08cb0830b33f91bff8#npm:30.2.0", {\
+        "packageLocation": "./.yarn/__virtual__/@jest-reporters-virtual-fbfcc4364b/0/cache/@jest-reporters-npm-30.2.0-c7f0144467-3848b59bf7.zip/node_modules/@jest/reporters/",\
         "packageDependencies": [\
           ["@bcoe/v8-coverage", "npm:0.2.3"],\
           ["@jest/console", "npm:30.2.0"],\
-          ["@jest/reporters", "virtual:a11a7f820840732f4b41af43898b8504ddad71a438d291f8610b6af6f586ce5787b5d4cd3ce8fc8823571018a1d06d4f28c22fb8460274fdb3ea33b102dc7133#npm:30.2.0"],\
+          ["@jest/reporters", "virtual:6c80a4b9308e49eb13eace5bf259410c23c8424016f7e1c3f3fcfdae6a37a79c993d1f2fbbe9fe652463f75d62168cc26fcebc53c0c1ec08cb0830b33f91bff8#npm:30.2.0"],\
           ["@jest/test-result", "npm:30.2.0"],\
           ["@jest/transform", "npm:30.2.0"],\
           ["@jest/types", "npm:30.2.0"],\
@@ -14176,34 +14176,30 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["jest-html-reporter", [\
-      ["npm:4.3.0", {\
-        "packageLocation": "./.yarn/cache/jest-html-reporter-npm-4.3.0-3482524918-4cd16891f0.zip/node_modules/jest-html-reporter/",\
+      ["npm:4.4.0", {\
+        "packageLocation": "./.yarn/cache/jest-html-reporter-npm-4.4.0-2fac32a427-6d3b8c3f06.zip/node_modules/jest-html-reporter/",\
         "packageDependencies": [\
-          ["jest-html-reporter", "npm:4.3.0"]\
+          ["jest-html-reporter", "npm:4.4.0"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.3.0", {\
-        "packageLocation": "./.yarn/__virtual__/jest-html-reporter-virtual-a11a7f8208/0/cache/jest-html-reporter-npm-4.3.0-3482524918-4cd16891f0.zip/node_modules/jest-html-reporter/",\
+      ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.4.0", {\
+        "packageLocation": "./.yarn/__virtual__/jest-html-reporter-virtual-6c80a4b930/0/cache/jest-html-reporter-npm-4.4.0-2fac32a427-6d3b8c3f06.zip/node_modules/jest-html-reporter/",\
         "packageDependencies": [\
-          ["@jest/reporters", "virtual:a11a7f820840732f4b41af43898b8504ddad71a438d291f8610b6af6f586ce5787b5d4cd3ce8fc8823571018a1d06d4f28c22fb8460274fdb3ea33b102dc7133#npm:30.2.0"],\
+          ["@jest/reporters", "virtual:6c80a4b9308e49eb13eace5bf259410c23c8424016f7e1c3f3fcfdae6a37a79c993d1f2fbbe9fe652463f75d62168cc26fcebc53c0c1ec08cb0830b33f91bff8#npm:30.2.0"],\
           ["@jest/test-result", "npm:30.2.0"],\
           ["@jest/types", "npm:30.2.0"],\
           ["@types/jest", "npm:30.0.0"],\
-          ["@types/typescript", null],\
           ["dateformat", "npm:3.0.2"],\
           ["jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.2.0"],\
-          ["jest-html-reporter", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.3.0"],\
+          ["jest-html-reporter", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.4.0"],\
           ["mkdirp", "npm:1.0.4"],\
           ["strip-ansi", "npm:6.0.1"],\
-          ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"],\
           ["xmlbuilder", "npm:15.0.0"]\
         ],\
         "packagePeers": [\
           "@types/jest",\
-          "@types/typescript",\
-          "jest",\
-          "typescript"\
+          "jest"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17307,7 +17303,7 @@ const RAW_RUNTIME_STATE =
           ["html-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.6.6"],\
           ["husky", "npm:9.1.7"],\
           ["jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.2.0"],\
-          ["jest-html-reporter", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.3.0"],\
+          ["jest-html-reporter", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.4.0"],\
           ["jest-util", "npm:30.2.0"],\
           ["jose", "npm:6.1.3"],\
           ["lint-staged", "npm:16.2.7"],\
