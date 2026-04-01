@@ -86,14 +86,13 @@ export async function setupEditRequestManagerDom(editInstructions: EditInstructi
 
 export async function setupEditRequestViewDom(
   options: {
-    jointlyAgreed?: 'yes' | 'no';
+    jointlyAgreed?: boolean;
     editRequest?: Record<string, unknown>;
   } = {}
 ): Promise<{
   moduleElement: HTMLElement;
   form: HTMLFormElement;
-  yesRadio: HTMLInputElement;
-  noRadio: HTMLInputElement;
+  jointlyAgreedCheckbox: HTMLInputElement;
   errorMessage: HTMLElement;
   formGroup: HTMLElement;
 }> {
@@ -110,22 +109,16 @@ export async function setupEditRequestViewDom(
 
   mountHtmlInDom(html);
 
-  const yesRadio = document.getElementById('jointlyAgreed-yes') as HTMLInputElement;
-  const noRadio = document.getElementById('jointlyAgreed-no') as HTMLInputElement;
+  const jointlyAgreedCheckbox = document.getElementById('jointlyAgreed') as HTMLInputElement;
 
-  if (jointlyAgreed === 'yes') {
-    yesRadio.checked = true;
-  }
-
-  if (jointlyAgreed === 'no') {
-    noRadio.checked = true;
+  if (jointlyAgreed) {
+    jointlyAgreedCheckbox.checked = true;
   }
 
   return {
     moduleElement: document.querySelector('[data-module="edit-request-view"]') as HTMLElement,
     form: document.querySelector('form[data-edit-submission]') as HTMLFormElement,
-    yesRadio,
-    noRadio,
+    jointlyAgreedCheckbox,
     errorMessage: document.getElementById('error-message') as HTMLElement,
     formGroup: document.getElementById('form-group') as HTMLElement,
   };

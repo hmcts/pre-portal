@@ -21,7 +21,7 @@ export class EditRequestView {
   private readonly onError = () => {
     const errorMessage = document.getElementById('error-message');
     if (errorMessage) {
-      errorMessage.innerHTML = '<span class="govuk-visually-hidden">Error:</span> Select an option';
+      errorMessage.innerHTML = '<span class="govuk-visually-hidden">Error:</span> Select the confirmation checkbox';
     }
 
     const formGroup = document.getElementById('form-group');
@@ -49,7 +49,7 @@ export class EditRequestView {
       },
       body: JSON.stringify({
         ...this.editRequest,
-        jointly_agreed: jointlyAgreed === 'yes',
+        jointly_agreed: Boolean(jointlyAgreed),
         status: 'SUBMITTED',
       }),
     })

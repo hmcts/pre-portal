@@ -35,29 +35,8 @@ describe('EditRequestView', () => {
 
     form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
 
-    expect(errorMessage.innerHTML).toContain('Select an option');
+    expect(errorMessage.innerHTML).toContain('Select the confirmation checkbox');
     expect(formGroup.classList.contains('govuk-form-group--error')).toBe(true);
-  });
-
-  it('posts jointly_agreed=false when no is selected', async () => {
-    const fetchMock = jest.fn().mockResolvedValue({ ok: true, json: async () => ({}) });
-    (global as any).fetch = fetchMock;
-    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-
-    const { moduleElement, form } = await setupEditRequestViewDom({
-      jointlyAgreed: 'no',
-      editRequest: { id: '123', status: 'DRAFT', edit_instructions: [] },
-    });
-
-    new EditRequestView(moduleElement);
-
-    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
-    await flushPromises();
-
-    const payload = JSON.parse(fetchMock.mock.calls[0][1].body);
-    expect(payload.jointly_agreed).toBe(false);
-    expect(payload.status).toBe('SUBMITTED');
-    errorSpy.mockRestore();
   });
 
   it('posts the submission payload when jointly agreed is selected', async () => {
@@ -66,7 +45,7 @@ describe('EditRequestView', () => {
     const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
     const { moduleElement, form } = await setupEditRequestViewDom({
-      jointlyAgreed: 'yes',
+      jointlyAgreed: true,
       editRequest: { id: '123', status: 'DRAFT', edit_instructions: [] },
     });
 
@@ -96,7 +75,7 @@ describe('EditRequestView', () => {
     const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
     const { moduleElement, form } = await setupEditRequestViewDom({
-      jointlyAgreed: 'yes',
+      jointlyAgreed: true,
       editRequest: { id: '123', status: 'DRAFT', edit_instructions: [] },
     });
 

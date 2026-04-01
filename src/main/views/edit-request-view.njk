@@ -63,21 +63,15 @@
   <form data-edit-submission>
     <div id="form-group" class="govuk-form-group" style="margin-top: 45px;">
       <fieldset class="govuk-fieldset">
-        <legend class="govuk-fieldset__legend">
-          I confirm that all of the above edits have been jointly agreed by defence and prosecution advocates.
+        <legend class="govuk-fieldset__legend govuk-visually-hidden">
+          Confirm jointly agreed edits
         </legend>
         <p id="error-message" class="govuk-error-message"></p>
-        <div class="govuk-radios" data-module="govuk-radios">
-          <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="jointlyAgreed-yes" name="jointlyAgreed" type="radio" value="yes">
-            <label class="govuk-label govuk-radios__label" for="jointlyAgreed-yes">
-              Yes
-            </label>
-          </div>
-          <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="jointlyAgreed-no" name="jointlyAgreed" type="radio" value="no">
-            <label class="govuk-label govuk-radios__label" for="jointlyAgreed-no">
-              No
+        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="jointlyAgreed" name="jointlyAgreed" type="checkbox" value="yes">
+            <label class="govuk-label govuk-checkboxes__label" for="jointlyAgreed">
+              I confirm that all of the above edits have been jointly agreed by defence and prosecution advocates.
             </label>
           </div>
         </div>
