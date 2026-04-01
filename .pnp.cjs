@@ -82,7 +82,7 @@ const RAW_RUNTIME_STATE =
           ["jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.2.0"],\
           ["jest-html-reporter", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.3.0"],\
           ["jest-util", "npm:30.2.0"],\
-          ["jose", "npm:6.1.3"],\
+          ["jose", "npm:6.2.2"],\
           ["lint-staged", "npm:16.2.7"],\
           ["lodash", "npm:4.17.23"],\
           ["marked", "npm:15.0.12"],\
@@ -14591,10 +14591,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:6.1.3", {\
-        "packageLocation": "./.yarn/cache/jose-npm-6.1.3-52219fd645-9626c51e8c.zip/node_modules/jose/",\
+      ["npm:6.2.2", {\
+        "packageLocation": "./.yarn/cache/jose-npm-6.2.2-ef66087bea-fd66f24916.zip/node_modules/jose/",\
         "packageDependencies": [\
-          ["jose", "npm:6.1.3"]\
+          ["jose", "npm:6.2.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17309,7 +17309,7 @@ const RAW_RUNTIME_STATE =
           ["jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.2.0"],\
           ["jest-html-reporter", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.3.0"],\
           ["jest-util", "npm:30.2.0"],\
-          ["jose", "npm:6.1.3"],\
+          ["jose", "npm:6.2.2"],\
           ["lint-staged", "npm:16.2.7"],\
           ["lodash", "npm:4.17.23"],\
           ["marked", "npm:15.0.12"],\
