@@ -83,7 +83,7 @@ const RAW_RUNTIME_STATE =
           ["jest-html-reporter", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.3.0"],\
           ["jest-util", "npm:30.2.0"],\
           ["jose", "npm:6.1.3"],\
-          ["lint-staged", "npm:16.2.7"],\
+          ["lint-staged", "npm:16.4.0"],\
           ["lodash", "npm:4.17.23"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.0"],\
@@ -14888,17 +14888,16 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["lint-staged", [\
-      ["npm:16.2.7", {\
-        "packageLocation": "./.yarn/cache/lint-staged-npm-16.2.7-9ab2185fb2-c1fd768530.zip/node_modules/lint-staged/",\
+      ["npm:16.4.0", {\
+        "packageLocation": "./.yarn/cache/lint-staged-npm-16.4.0-bc70d40d4b-eb7aa0d43e.zip/node_modules/lint-staged/",\
         "packageDependencies": [\
-          ["commander", "npm:14.0.2"],\
-          ["lint-staged", "npm:16.2.7"],\
+          ["commander", "npm:14.0.3"],\
+          ["lint-staged", "npm:16.4.0"],\
           ["listr2", "npm:9.0.5"],\
-          ["micromatch", "npm:4.0.8"],\
-          ["nano-spawn", "npm:2.0.0"],\
-          ["pidtree", "npm:0.6.0"],\
+          ["picomatch", "npm:4.0.4"],\
           ["string-argv", "npm:0.3.2"],\
-          ["yaml", "npm:2.8.2"]\
+          ["tinyexec", "npm:1.0.4"],\
+          ["yaml", "npm:2.8.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16105,15 +16104,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["nano-spawn", [\
-      ["npm:2.0.0", {\
-        "packageLocation": "./.yarn/cache/nano-spawn-npm-2.0.0-96abe72805-117d35d7bd.zip/node_modules/nano-spawn/",\
-        "packageDependencies": [\
-          ["nano-spawn", "npm:2.0.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["nanoid", [\
       ["npm:3.3.11", {\
         "packageLocation": "./.yarn/cache/nanoid-npm-3.3.11-f98c1f9ef6-73b5afe597.zip/node_modules/nanoid/",\
@@ -17013,15 +17003,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["pidtree", [\
-      ["npm:0.6.0", {\
-        "packageLocation": "./.yarn/cache/pidtree-npm-0.6.0-3d92e16117-ea67fb3159.zip/node_modules/pidtree/",\
-        "packageDependencies": [\
-          ["pidtree", "npm:0.6.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["pirates", [\
       ["npm:4.0.7", {\
         "packageLocation": "./.yarn/cache/pirates-npm-4.0.7-5e4ee2f078-2427f37136.zip/node_modules/pirates/",\
@@ -17310,7 +17291,7 @@ const RAW_RUNTIME_STATE =
           ["jest-html-reporter", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.3.0"],\
           ["jest-util", "npm:30.2.0"],\
           ["jose", "npm:6.1.3"],\
-          ["lint-staged", "npm:16.2.7"],\
+          ["lint-staged", "npm:16.4.0"],\
           ["lodash", "npm:4.17.23"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.0"],\
@@ -19345,6 +19326,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["tinyexec", [\
+      ["npm:1.0.4", {\
+        "packageLocation": "./.yarn/cache/tinyexec-npm-1.0.4-c1df9ff8b1-ccebe4044e.zip/node_modules/tinyexec/",\
+        "packageDependencies": [\
+          ["tinyexec", "npm:1.0.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["tinyglobby", [\
       ["npm:0.2.15", {\
         "packageLocation": "./.yarn/cache/tinyglobby-npm-0.2.15-0e783aadbd-d72bd826a8.zip/node_modules/tinyglobby/",\
@@ -20777,6 +20767,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/yaml-npm-2.8.2-6cbf7c73c4-4eab0074da.zip/node_modules/yaml/",\
         "packageDependencies": [\
           ["yaml", "npm:2.8.2"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:2.8.3", {\
+        "packageLocation": "./.yarn/cache/yaml-npm-2.8.3-dfea86f9e0-ecad41d39d.zip/node_modules/yaml/",\
+        "packageDependencies": [\
+          ["yaml", "npm:2.8.3"]\
         ],\
         "linkType": "HARD"\
       }]\
