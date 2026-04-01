@@ -40,7 +40,7 @@
         html: cjsmBannerHtml
       }) }}
     {% endif %}
-    
+
     {{ govukNotificationBanner({
       html: bannerHtml
     }) }}
@@ -103,7 +103,11 @@
                 {% endfor %}
               </td>
               <td class="govuk-table__cell">
-                {{ recording.version }}
+                {% if recording.version == "1" %}
+                  Original
+                {% else %}
+                  {{ recording.version }}
+                {% endif %}
               </td>
               <td class="govuk-table__cell">
                 {% if recording.capture_session.case_state == "OPEN" %}

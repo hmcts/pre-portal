@@ -198,6 +198,62 @@ describe('Browse route', () => {
     expect(response.status).toEqual(200);
     expect(response.text).toContain('Recordings 41 to 50 of 100');
   });
+
+  test('should render Original for version 1', async () => {
+    const app = require('express')();
+    new Nunjucks(false).enableFor(app);
+    const request = require('supertest');
+    const recordings = [
+      {
+        ...mockRecordings[0],
+        id: 'original-version',
+        case_reference: 'CASE-ORIGINAL',
+        version: 1,
+      },
+    ];
+
+    mockGetRecordings(recordings);
+
+    const browse = require('../../../main/routes/browse').default;
+    browse(app);
+
+    const response = await request(app).get('/browse');
+    expect(response.status).toEqual(200);
+
+    const text = response.text.replace(/\s+/g, ' ').trim();
+
+    expect(text).toMatch(
+      /id="recording-original-version"[\s\S]*?<td class="govuk-table__cell" style="position: sticky; left: 0; z-index: 1; background-color: #ffffff;"> CASE-ORIGINAL <\/td>[\s\S]*?<td class="govuk-table__cell"> Original <\/td>/
+    );
+  });
+
+  test('should render the version number for later versions', async () => {
+    const app = require('express')();
+    new Nunjucks(false).enableFor(app);
+    const request = require('supertest');
+    const recordings = [
+      {
+        ...mockRecordings[1],
+        id: 'updated-version',
+        case_reference: 'CASE-V2',
+        version: 2,
+      },
+    ];
+
+    mockGetRecordings(recordings);
+
+    const browse = require('../../../main/routes/browse').default;
+    browse(app);
+
+    const response = await request(app).get('/browse');
+    expect(response.status).toEqual(200);
+
+    const text = response.text.replace(/\s+/g, ' ').trim();
+
+    expect(text).toMatch(
+      /id="recording-updated-version"[\s\S]*?<td class="govuk-table__cell" style="position: sticky; left: 0; z-index: 1; background-color: #ffffff;"> CASE-V2 <\/td>[\s\S]*?<td class="govuk-table__cell"> 2 <\/td>/
+    );
+  });
 });
 
 describe('convertIsoToDate', () => {
