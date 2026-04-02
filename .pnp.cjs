@@ -7783,10 +7783,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@xmldom/xmldom", [\
-      ["npm:0.8.12", {\
-        "packageLocation": "./.yarn/cache/@xmldom-xmldom-npm-0.8.12-6aa6c42c90-0fc20bc72a.zip/node_modules/@xmldom/xmldom/",\
+      ["npm:0.9.9", {\
+        "packageLocation": "./.yarn/cache/@xmldom-xmldom-npm-0.9.9-3c2287237f-292e4a25e7.zip/node_modules/@xmldom/xmldom/",\
         "packageDependencies": [\
-          ["@xmldom/xmldom", "npm:0.8.12"]\
+          ["@xmldom/xmldom", "npm:0.9.9"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -9821,7 +9821,7 @@ const RAW_RUNTIME_STATE =
           ["@cucumber/cucumber-expressions", "npm:19.0.0"],\
           ["@cucumber/gherkin", "npm:39.0.0"],\
           ["@cucumber/messages", "npm:32.2.0"],\
-          ["@xmldom/xmldom", "npm:0.8.12"],\
+          ["@xmldom/xmldom", "npm:0.9.9"],\
           ["acorn", "npm:8.16.0"],\
           ["arrify", "npm:3.0.0"],\
           ["axios", "npm:1.13.5"],\
@@ -15998,7 +15998,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@babel/runtime", "npm:7.29.2"],\
           ["@videojs/vhs-utils", "npm:4.1.1"],\
-          ["@xmldom/xmldom", "npm:0.8.12"],\
+          ["@xmldom/xmldom", "npm:0.9.9"],\
           ["global", "npm:4.4.0"],\
           ["mpd-parser", "npm:1.3.1"]\
         ],\
