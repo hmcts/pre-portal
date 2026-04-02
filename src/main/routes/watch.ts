@@ -40,10 +40,8 @@ export const parseAppliedEdits = async (
       }) as unknown as AppliedEditInstruction
   );
 
-  let timeDifference = 0;
   for (const edit of appliedEdits) {
-    edit.runtimeReference = secondsToTimeString(edit.start - timeDifference);
-    timeDifference += edit.end - edit.start;
+    edit.runtimeReference = secondsToTimeString(edit.end - edit.start);
   }
 
   const editRequest = await client.getEditRequest(xUserId, editInstructions.editRequestId);
