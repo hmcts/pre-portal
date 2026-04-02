@@ -175,4 +175,36 @@ describe('parseAppliedEdits', () => {
       approvedAt: '1/1/2023',
     });
   });
+
+  test('should set runtimeReference to the removed duration for each edit', async () => {
+    const mockClient = PreClient.prototype;
+    const mockEditInstructions: RecordingAppliedEdits = {
+      editInstructions: {
+        requestedInstructions: [
+          { start_of_cut: '00:00:30', end_of_cut: '00:00:40', reason: 'Cut 10 seconds' },
+          { start_of_cut: '00:01:00', end_of_cut: '00:01:25', reason: 'Cut 25 seconds' },
+        ],
+      },
+      editRequestId: '12345678-1234-1234-1234-1234567890ab',
+    };
+
+    jest.spyOn(PreClient.prototype, 'getEditRequest').mockImplementation(async () => {
+      return {
+        id: '12345678-1234-1234-1234-1234567890ab',
+        status: 'COMPLETE',
+        edit_instructions: {
+          requestedInstructions: [],
+        },
+        approved_by: 'approver',
+        approved_at: '2023-01-01T00:00:00Z',
+        created_by: 'creator',
+        created_at: '2023-01-01T00:00:00Z',
+        modified_at: '2023-01-01T00:00:00Z',
+      };
+    });
+
+    const result = await parseAppliedEdits(JSON.stringify(mockEditInstructions), mockClient, 'user-id');
+
+    expect(result?.appliedEdits.map(edit => edit.runtimeReference)).toEqual(['00:00:10', '00:00:25']);
+  });
 });
