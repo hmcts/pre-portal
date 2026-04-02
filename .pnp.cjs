@@ -104,7 +104,7 @@ const RAW_RUNTIME_STATE =
           ["session-file-store", "npm:1.5.0"],\
           ["style-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.0.0"],\
           ["supertest", "npm:7.2.2"],\
-          ["ts-jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:29.4.6"],\
+          ["ts-jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:29.4.9"],\
           ["ts-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:9.5.4"],\
           ["ts-node", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:10.9.2"],\
           ["tsconfig-paths", "npm:4.2.0"],\
@@ -17331,7 +17331,7 @@ const RAW_RUNTIME_STATE =
           ["session-file-store", "npm:1.5.0"],\
           ["style-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:4.0.0"],\
           ["supertest", "npm:7.2.2"],\
-          ["ts-jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:29.4.6"],\
+          ["ts-jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:29.4.9"],\
           ["ts-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:9.5.4"],\
           ["ts-node", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:10.9.2"],\
           ["tsconfig-paths", "npm:4.2.0"],\
@@ -19463,15 +19463,15 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["ts-jest", [\
-      ["npm:29.4.6", {\
-        "packageLocation": "./.yarn/cache/ts-jest-npm-29.4.6-a9cc323ce9-e0ff9e13f6.zip/node_modules/ts-jest/",\
+      ["npm:29.4.9", {\
+        "packageLocation": "./.yarn/cache/ts-jest-npm-29.4.9-f23c1a0803-f5e81b1e13.zip/node_modules/ts-jest/",\
         "packageDependencies": [\
-          ["ts-jest", "npm:29.4.6"]\
+          ["ts-jest", "npm:29.4.9"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:29.4.6", {\
-        "packageLocation": "./.yarn/__virtual__/ts-jest-virtual-747a376276/0/cache/ts-jest-npm-29.4.6-a9cc323ce9-e0ff9e13f6.zip/node_modules/ts-jest/",\
+      ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:29.4.9", {\
+        "packageLocation": "./.yarn/__virtual__/ts-jest-virtual-2697389f8d/0/cache/ts-jest-npm-29.4.9-f23c1a0803-f5e81b1e13.zip/node_modules/ts-jest/",\
         "packageDependencies": [\
           ["@babel/core", "npm:7.29.0"],\
           ["@jest/transform", null],\
@@ -19495,7 +19495,7 @@ const RAW_RUNTIME_STATE =
           ["lodash.memoize", "npm:4.1.2"],\
           ["make-error", "npm:1.3.6"],\
           ["semver", "npm:7.7.3"],\
-          ["ts-jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:29.4.6"],\
+          ["ts-jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:29.4.9"],\
           ["type-fest", "npm:4.41.0"],\
           ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"],\
           ["yargs-parser", "npm:21.1.1"]\
