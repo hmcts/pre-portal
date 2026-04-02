@@ -84,7 +84,7 @@ const RAW_RUNTIME_STATE =
           ["jest-util", "npm:30.2.0"],\
           ["jose", "npm:6.1.3"],\
           ["lint-staged", "npm:16.2.7"],\
-          ["lodash", "npm:4.17.23"],\
+          ["lodash", "npm:4.18.0"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.0"],\
           ["multer", "npm:2.1.1"],\
@@ -4096,7 +4096,7 @@ const RAW_RUNTIME_STATE =
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.3.1"],\
           ["js-yaml", "npm:4.1.1"],\
-          ["lodash", "npm:4.17.23"]\
+          ["lodash", "npm:4.18.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8314,7 +8314,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/async-npm-2.6.4-3155e80151-df8e52817d.zip/node_modules/async/",\
         "packageDependencies": [\
           ["async", "npm:2.6.4"],\
-          ["lodash", "npm:4.17.23"]\
+          ["lodash", "npm:4.18.1"]\
         ],\
         "linkType": "HARD"\
       }],\
@@ -10758,7 +10758,7 @@ const RAW_RUNTIME_STATE =
           ["jest", null],\
           ["jest-environment-emit", "virtual:f5211d03eceb5c615629f746a3045d2fa91c38ed5392d5803bbd628fe39c1e446acff433cc73b52e3dd04db2cd7cd15da2104cc82362f80d1b6e17fa5edd6959#npm:1.2.0"],\
           ["json-cycle", "npm:1.5.0"],\
-          ["lodash", "npm:4.17.23"],\
+          ["lodash", "npm:4.18.1"],\
           ["multi-sort-stream", "npm:1.0.4"],\
           ["multipipe", "npm:4.0.0"],\
           ["node-ipc", "npm:9.2.1"],\
@@ -12854,7 +12854,7 @@ const RAW_RUNTIME_STATE =
           ["@types/webpack", null],\
           ["html-minifier-terser", "npm:6.1.0"],\
           ["html-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.6.6"],\
-          ["lodash", "npm:4.17.23"],\
+          ["lodash", "npm:4.18.1"],\
           ["pretty-error", "npm:4.0.0"],\
           ["tapable", "npm:2.3.0"],\
           ["webpack", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.105.4"]\
@@ -13166,7 +13166,7 @@ const RAW_RUNTIME_STATE =
           ["cli-width", "npm:3.0.0"],\
           ["figures", "npm:3.2.0"],\
           ["inquirer", "npm:8.2.7"],\
-          ["lodash", "npm:4.17.23"],\
+          ["lodash", "npm:4.18.1"],\
           ["mute-stream", "npm:0.0.8"],\
           ["ora", "npm:5.4.1"],\
           ["run-async", "npm:2.4.1"],\
@@ -14946,10 +14946,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["lodash", [\
-      ["npm:4.17.23", {\
-        "packageLocation": "./.yarn/cache/lodash-npm-4.17.23-50bdb1c01a-82504c8825.zip/node_modules/lodash/",\
+      ["npm:4.18.0", {\
+        "packageLocation": "./.yarn/cache/lodash-npm-4.18.0-9fb612718c-8f7f3c2013.zip/node_modules/lodash/",\
         "packageDependencies": [\
-          ["lodash", "npm:4.17.23"]\
+          ["lodash", "npm:4.18.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:4.18.1", {\
+        "packageLocation": "./.yarn/cache/lodash-npm-4.18.1-a64c3070ac-306fea53df.zip/node_modules/lodash/",\
+        "packageDependencies": [\
+          ["lodash", "npm:4.18.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17311,7 +17318,7 @@ const RAW_RUNTIME_STATE =
           ["jest-util", "npm:30.2.0"],\
           ["jose", "npm:6.1.3"],\
           ["lint-staged", "npm:16.2.7"],\
-          ["lodash", "npm:4.17.23"],\
+          ["lodash", "npm:4.18.0"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.0"],\
           ["multer", "npm:2.1.1"],\
@@ -17367,7 +17374,7 @@ const RAW_RUNTIME_STATE =
       ["npm:4.0.0", {\
         "packageLocation": "./.yarn/cache/pretty-error-npm-4.0.0-7cca1fe4ad-0212ad8742.zip/node_modules/pretty-error/",\
         "packageDependencies": [\
-          ["lodash", "npm:4.17.23"],\
+          ["lodash", "npm:4.18.1"],\
           ["pretty-error", "npm:4.0.0"],\
           ["renderkid", "npm:3.0.0"]\
         ],\
@@ -17979,7 +17986,7 @@ const RAW_RUNTIME_STATE =
           ["css-select", "npm:4.3.0"],\
           ["dom-converter", "npm:0.2.0"],\
           ["htmlparser2", "npm:6.1.0"],\
-          ["lodash", "npm:4.17.23"],\
+          ["lodash", "npm:4.18.1"],\
           ["renderkid", "npm:3.0.0"],\
           ["strip-ansi", "npm:6.0.1"]\
         ],\
