@@ -131,7 +131,6 @@
     "node-gyp/tar": "^7.5.10",
     "semver": "^7.7.4",
     "editorconfig@npm:1.0.4/minimatch": "9.0.7",
-    "path-to-regexp": "^8.4.2",
     "@xmldom/xmldom": "^0.9.9"
   },
   "husky": {
