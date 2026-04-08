@@ -120,7 +120,6 @@
     "webpack-dev-middleware": "7.4.5"
   },
   "resolutions": {
-    "lodash": "4.18.1",
     "@opentelemetry/instrumentation": "0.214.0",
     "axios": "1.14.0",
     "bfj": "9.1.3",
