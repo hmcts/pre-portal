@@ -54,6 +54,7 @@ export interface Recording {
   is_test_case: boolean;
   participants: Participant[];
   edit_status?: string;
+  edit_requests?: { id: string; status: string }[];
 }
 
 export interface Participant {

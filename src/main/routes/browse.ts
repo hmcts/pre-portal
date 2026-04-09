@@ -1,5 +1,5 @@
 import { PreClient } from '../services/pre-api/pre-client';
-import { SearchRecordingsRequest } from '../services/pre-api/types';
+import { Recording, SearchRecordingsRequest } from '../services/pre-api/types';
 import { SessionUser } from '../services/session-user/session-user';
 import { UserLevel } from '../types/user-level';
 
@@ -20,9 +20,24 @@ export const convertIsoToDate = (isoString?: string): string | undefined => {
   });
 };
 
+export const getEditRequestId = (editInstructions?: string): string | undefined => {
+  if (!editInstructions) return;
+  try {
+    const parsed = JSON.parse(editInstructions);
+    return parsed.editRequestId || parsed.edit_request_id || parsed.editRequest?.id;
+  } catch {
+    return;
+  }
+};
+
+type BrowseRecording = Recording & {
+  row_id?: string;
+};
+
 export default function (app: Application): void {
   app.get('/browse', requiresAuth(), async (req, res) => {
     const logger = Logger.getLogger('browse-route');
+    const userPortalId = await SessionUser.getLoggedInUserPortalId(req);
     const userProfileForCjsm = SessionUser.getLoggedInUserProfile(req);
     const primaryEmail = (userProfileForCjsm.user.email || '').toLowerCase();
     const alternativeEmail = (userProfileForCjsm.user.alternative_email || '').toLowerCase();
@@ -54,10 +69,7 @@ export default function (app: Application): void {
       size: 10,
     };
 
-    const { recordings, pagination } = await client.getRecordings(
-      await SessionUser.getLoggedInUserPortalId(req),
-      request
-    );
+    const { recordings, pagination } = await client.getRecordings(userPortalId, request);
 
     // Example 9 pages: <Previous 0 ... 2 3 |4| 5 6 ... 8 Next>
     // Page starts at 0
@@ -68,13 +80,44 @@ export default function (app: Application): void {
       SessionUser.getLoggedInUserProfile(req).app_access.filter(role => role.role.name === UserLevel.SUPER_USER)
         .length > 0;
 
-    const updatedRecordings = recordings.map(recording => ({
-      ...recording,
-      capture_session: {
-        ...recording.capture_session,
-        case_closed_at: convertIsoToDate(recording.capture_session.case_closed_at),
-      },
-    }));
+    // Collect all edit request statuses from recordings (V1 recordings carry these)
+    const editStatusByRequestId = new Map<string, string>();
+    for (const recording of recordings) {
+      for (const edit of recording.edit_requests || []) {
+        editStatusByRequestId.set(edit.id, edit.status);
+      }
+    }
+
+    const resolveEditStatus = (recording: Recording): string | undefined => {
+      if (recording.version === 1) return undefined; // V1 edit_status is wrong — it refers to the latest edit, not this version
+      const editRequestId = getEditRequestId(recording.edit_instructions);
+      return editStatusByRequestId.get(editRequestId || '') ?? recording.edit_status;
+    };
+
+    const getDraftRows = (recording: Recording, base: BrowseRecording): BrowseRecording[] => {
+      return (recording.edit_requests || [])
+        .filter(e => e.status === 'DRAFT')
+        .map(edit => ({
+          ...base,
+          version: recording.version + 1,
+          edit_status: 'DRAFT',
+          row_id: `${recording.id}-${edit.id}`,
+        }));
+    };
+
+    // Build the final list: each recording + synthetic rows for any DRAFT edit requests
+    const recordingsForView: BrowseRecording[] = recordings.flatMap(recording => {
+      const base: BrowseRecording = {
+        ...recording,
+        capture_session: {
+          ...recording.capture_session,
+          case_closed_at: convertIsoToDate(recording.capture_session.case_closed_at),
+        },
+        edit_status: resolveEditStatus(recording),
+      };
+
+      return [...getDraftRows(recording, base), base];
+    });
 
     const paginationLinks = {
       previous: {},
@@ -136,7 +179,7 @@ export default function (app: Application): void {
     }
 
     let title = 'Recordings';
-    if (updatedRecordings.length > 0) {
+    if (recordings.length > 0) {
       title = `Recordings ${pagination.currentPage * pagination.size + 1} to ${Math.min(
         (pagination.currentPage + 1) * pagination.size,
         pagination.totalElements
@@ -144,7 +187,7 @@ export default function (app: Application): void {
     }
 
     res.render('browse', {
-      recordings: updatedRecordings,
+      recordings: recordingsForView,
       paginationLinks,
       title,
       user: SessionUser.getLoggedInUserProfile(req).user,
