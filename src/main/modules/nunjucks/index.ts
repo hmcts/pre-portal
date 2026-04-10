@@ -21,7 +21,7 @@ export class Nunjucks {
         return new Date(date).toLocaleDateString('en-GB');
       })
       .addFilter('formatDateTime', (date: string) => {
-        return !!date ? new Date(date).toLocaleString('en-GB').replace(',', '') : '';
+        return !!date ? new Date(date).toLocaleString('en-GB', { timeZone: 'Europe/London' }).replace(',', '') : '';
       });
 
     app.use((req, res, next) => {
