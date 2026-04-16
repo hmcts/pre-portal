@@ -3,15 +3,15 @@ import { SessionUser } from '../services/session-user/session-user';
 
 import { Application } from 'express';
 
-import { marked } from 'marked';
+import markdownit from 'markdown-it';
 
 export default function (app: Application): void {
   app.get('/accept-terms-and-conditions', async (req, res) => {
     const client = new PreClient();
     const terms = await client.getLatestTermsAndConditions();
-
+    const md = markdownit();
     res.render('accept-terms-and-conditions', {
-      terms: marked(terms.html),
+      terms: md.render(terms.html),
       termsId: terms.id,
     });
   });
