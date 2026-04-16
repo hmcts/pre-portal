@@ -11404,12 +11404,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:^15.0.0":
-  version: 15.0.12
-  resolution: "marked@npm:15.0.12"
+"marked@npm:18.0.0":
+  version: 18.0.0
+  resolution: "marked@npm:18.0.0"
   bin:
     marked: bin/marked.js
-  checksum: 10/deeb619405c0c46af00c99b18b3365450abeb309104b24e3658f46142344f6b7c4117608c3b5834084d8738e92f81240c19f596e6ee369260f96e52b3457eaee
+  checksum: 10/eb746a1f6e9b570ccc174cbf339504a432681bb76a1419d8b8b036c487235a55cbf94f4fa2c1e3c347a1d3f5f3666d4395bb74ea4ea4960c89b66d3a948c96d0
   languageName: node
   linkType: hard
 
@@ -13224,7 +13224,7 @@ __metadata:
     jose: "npm:^6.2.2"
     lint-staged: "npm:16.4.0"
     lodash: "npm:4.18.1"
-    marked: "npm:^15.0.0"
+    marked: "npm:18.0.0"
     mini-css-extract-plugin: "npm:2.10.2"
     multer: "npm:^2.1.1"
     node-mocks-http: "npm:1.17.2"
