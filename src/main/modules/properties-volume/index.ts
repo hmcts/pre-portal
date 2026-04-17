@@ -71,7 +71,6 @@ export class PropertiesVolume {
     server.locals.dynatrace_jstag = process.env.DYNATRACE_JSTAG ?? '';
 
     this.logger.info('Redis host: {}', process.env.REDIS_HOST);
-    this.logger.info('Config redis: {}', config.get('session.redis.host'))
   }
 
   private setSecret(fromPath: string, toPath: string): void {
