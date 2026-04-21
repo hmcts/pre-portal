@@ -17,6 +17,8 @@ import favicon from 'serve-favicon';
 
 import 'dotenv/config';
 
+console.time("startup:app");
+
 const { setupDev } = require('./development');
 
 const { Logger } = require('@hmcts/nodejs-logging');
@@ -27,10 +29,12 @@ const developmentMode = env === 'development';
 export const app = express();
 app.locals.ENV = env;
 process.env.ALLOW_CONFIG_MUTATIONS = 'true';
-
+console.log('PID:', process.pid);
 const logger = Logger.getLogger('app');
 
+console.time("startup:properties-volume");
 new PropertiesVolume().enableFor(app);
+console.timeEnd("startup:properties-volume");
 new AppInsights().enable();
 new Nunjucks(developmentMode).enableFor(app);
 // secure the application by adding various HTTP headers to its responses
@@ -59,10 +63,12 @@ app.use((req, res, next) => {
   next();
 });
 
+console.time("startup:routes");
 glob
   .sync(__dirname + '/routes/**/*.+(ts|js)')
   .map(filename => require(filename))
   .forEach(route => route.default(app));
+console.timeEnd("startup:routes");
 
 setupDev(app, developmentMode);
 // returning "not found" page for requests with paths not resolved by the router
@@ -88,3 +94,5 @@ app.use((err: HTTPError, req: express.Request, res: express.Response, next: expr
   res.status(err.status ?? 500);
   res.render('error', { status: err.status, message: err.message });
 });
+
+console.timeEnd("startup:app");
