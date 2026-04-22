@@ -1,6 +1,8 @@
 nodejs:
   devmemoryLimits: 576Mi
   replicas: 2
+  cpuRequests: 500m
+  cpuLimits: 500m
   # Don't modify below here
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
