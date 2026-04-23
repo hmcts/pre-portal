@@ -7894,10 +7894,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@xmldom/xmldom", [\
-      ["npm:0.8.12", {\
-        "packageLocation": "./.yarn/cache/@xmldom-xmldom-npm-0.8.12-6aa6c42c90-0fc20bc72a.zip/node_modules/@xmldom/xmldom/",\
+      ["npm:0.9.10", {\
+        "packageLocation": "./.yarn/cache/@xmldom-xmldom-npm-0.9.10-69fe656037-8d39ed498b.zip/node_modules/@xmldom/xmldom/",\
         "packageDependencies": [\
-          ["@xmldom/xmldom", "npm:0.8.12"]\
+          ["@xmldom/xmldom", "npm:0.9.10"]\
         ],\
         "linkType": "HARD"\
       }],\
@@ -16251,7 +16251,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@babel/runtime", "npm:7.29.2"],\
           ["@videojs/vhs-utils", "npm:4.1.1"],\
-          ["@xmldom/xmldom", "npm:0.8.12"],\
+          ["@xmldom/xmldom", "npm:0.9.10"],\
           ["global", "npm:4.4.0"],\
           ["mpd-parser", "npm:1.3.1"]\
         ],\
