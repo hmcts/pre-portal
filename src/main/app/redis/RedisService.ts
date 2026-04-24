@@ -6,6 +6,7 @@ export class RedisService {
 
   public getClient(host: string, key: string, logger: Logger): unknown {
     logger.info('Redis host: {}', host);
+    console.time('startup:redis');
     const client = redis.createClient({
       socket: {
         host,
@@ -20,7 +21,16 @@ export class RedisService {
     client.connect().catch(this.logger.error);
     // not seeing error logs appear so adding this
     client.on('error', function (err) {
-      console.log(new Date().toLocaleString() + ' - ' + 'Could not connect to redis: ' + err);
+      logger.error(new Date().toLocaleString() + ' - ' + 'Could not connect to redis: ' + err);
+    });
+
+    client.on('reconnecting', () => {
+      logger.info('Redis is trying again to connect')
+    });
+
+    client.on('ready', () => {
+      logger.info('Redis has connected')
+      console.timeEnd('startup:redis');
     });
 
     return client;
