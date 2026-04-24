@@ -25,11 +25,11 @@ export class RedisService {
     });
 
     client.on('reconnecting', () => {
-      logger.info('Redis is trying again to connect')
+      logger.info('Redis is trying again to connect');
     });
 
     client.on('ready', () => {
-      logger.info('Redis has connected')
+      logger.info('Redis has connected');
       console.timeEnd('startup:redis');
     });
 

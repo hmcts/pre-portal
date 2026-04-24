@@ -54,7 +54,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 if (process.env.PORTAL_AUTH_DISABLED !== '1') {
   logger.info('Enabling Auth. Env: ' + env);
   new Auth().enableFor(app);
-  logger.info('Auth enabled.')
+  logger.info('Auth enabled.');
 } else {
   logger.warn('Disabling Auth PORTAL_AUTH_DISABLED === ' + process.env.PORTAL_AUTH_DISABLED);
 }
