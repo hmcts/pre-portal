@@ -32,9 +32,7 @@ process.env.ALLOW_CONFIG_MUTATIONS = 'true';
 console.log('PID:', process.pid);
 const logger = Logger.getLogger('app');
 
-console.time('startup:properties-volume');
 new PropertiesVolume().enableFor(app);
-console.timeEnd('startup:properties-volume');
 new AppInsights().enable();
 new Nunjucks(developmentMode).enableFor(app);
 // secure the application by adding various HTTP headers to its responses
