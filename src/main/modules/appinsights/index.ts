@@ -4,7 +4,6 @@ import { Logger } from '@hmcts/nodejs-logging';
 const appInsights = require('applicationinsights');
 
 export class AppInsights {
-
   private logger = Logger.getLogger('ApplicationInsights');
 
   enable(): void {

@@ -20,7 +20,7 @@ export class RedisService {
 
     client.connect().catch(this.logger.error);
     // not seeing error logs appear so adding this
-    client.on('error', (err) => {
+    client.on('error', err => {
       this.logger.error(new Date().toLocaleString() + ' - ' + 'Could not connect to redis: ' + err);
     });
 

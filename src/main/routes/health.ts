@@ -12,24 +12,24 @@ export default function (app: Application): void {
 
   const redis = app.locals.redisClient
     ? healthcheck.raw(async () => {
-      try {
-        await app.locals.redisClient.ping();
+        try {
+          await app.locals.redisClient.ping();
 
-        if (lastRedisReadiness !== 'up') {
-          logger.info('Readiness: Redis is UP');
-          lastRedisReadiness = 'up';
+          if (lastRedisReadiness !== 'up') {
+            logger.info('Readiness: Redis is UP');
+            lastRedisReadiness = 'up';
+          }
+
+          return healthcheck.up();
+        } catch (err) {
+          if (lastRedisReadiness !== 'down') {
+            logger.info('Readiness: Redis is DOWN');
+            lastRedisReadiness = 'down';
+          }
+
+          return healthcheck.down();
         }
-
-        return healthcheck.up();
-      } catch (err) {
-        if (lastRedisReadiness !== 'down') {
-          logger.info('Readiness: Redis is DOWN');
-          lastRedisReadiness = 'down';
-        }
-
-        return healthcheck.down();
-      }
-    })
+      })
     : null;
   healthcheck.addTo(app, {
     checks: {
