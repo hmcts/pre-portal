@@ -92,7 +92,7 @@
     "allure-commandline": "^2.38.1",
     "babel-jest": "^30.3.0",
     "chokidar": "3.6.0",
-    "codeceptjs": "3.7.8",
+    "codeceptjs": "3.7.9",
     "copy-webpack-plugin": "14.0.0",
     "css-loader": "7.1.4",
     "debug": "4.4.3",
