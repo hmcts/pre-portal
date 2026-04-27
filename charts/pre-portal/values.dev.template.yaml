@@ -1,5 +1,7 @@
 nodejs:
   devmemoryLimits: 576Mi
+  devcpuRequests: 25m
+  devcpuLimits: 1000m
   replicas: 2
   # Don't modify below here
   image: ${IMAGE_NAME}
