@@ -13,7 +13,6 @@ const logger = Logger.getLogger('server');
 const port: number = parseInt(process.env.PORT || '4551', 10);
 
 if (app.locals.ENV === 'development') {
-  logger.info('Environment is: ' + app.locals.ENV);
   const sslDirectory = path.join(__dirname, 'resources', 'localhost-ssl');
   const sslOptions = {
     cert: fs.readFileSync(path.join(sslDirectory, 'localhost.crt')),
@@ -24,7 +23,6 @@ if (app.locals.ENV === 'development') {
     logger.info(`Application started: https://localhost:${port}`);
   });
 } else {
-  logger.info('Environment is: ' + app.locals.ENV);
   app.listen(port, () => {
     logger.info(`Application started: http://localhost:${port}`);
   });
