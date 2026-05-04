@@ -8178,9 +8178,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express-openid-connect@npm:2.20.1":
-  version: 2.20.1
-  resolution: "express-openid-connect@npm:2.20.1"
+"express-openid-connect@npm:2.20.2":
+  version: 2.20.2
+  resolution: "express-openid-connect@npm:2.20.2"
   dependencies:
     base64url: "npm:^3.0.1"
     clone: "npm:^2.1.2"
@@ -8196,7 +8196,7 @@ __metadata:
     util-promisify: "npm:3.0.0"
   peerDependencies:
     express: ">= 4.17.0"
-  checksum: 10/1ed772ab558ceb4f31dc8c6f3d2ff8ccad3ca8998aa58722e15a4fac2c90eb732cf71ca1c5af07d785eb66ab5a8f7ad9f15a5d30d3b9a031034d0f1b94ffd1b8
+  checksum: 10/c90f75ce74c5b85e9282b6cd436f495afb9b62692b89384873ed429e5c2d40bce11709932fe8a3b76c5ba0ef470f14333a8410b5c4972b53c4520cdc3fe5b862
   languageName: node
   linkType: hard
 
@@ -13223,7 +13223,7 @@ __metadata:
     dotenv: "npm:^17.4.1"
     eslint: "npm:10.2.0"
     express: "npm:5.2.1"
-    express-openid-connect: "npm:2.20.1"
+    express-openid-connect: "npm:2.20.2"
     express-session: "npm:1.19.0"
     form-data: "npm:4.0.5"
     glob: "npm:13.0.6"
