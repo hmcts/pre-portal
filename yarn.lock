@@ -1655,7 +1655,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-env@npm:^7.29.4":
+"@babel/preset-env@npm:^7.29.5":
   version: 7.29.5
   resolution: "@babel/preset-env@npm:7.29.5"
   dependencies:
@@ -13206,7 +13206,7 @@ __metadata:
   resolution: "pre-portal@workspace:."
   dependencies:
     "@babel/core": "npm:^7.29.0"
-    "@babel/preset-env": "npm:^7.29.4"
+    "@babel/preset-env": "npm:^7.29.5"
     "@codeceptjs/configure": "npm:1.0.6"
     "@hmcts/cookie-manager": "npm:1.1.0"
     "@hmcts/info-provider": "npm:1.4.0"

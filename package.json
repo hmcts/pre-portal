@@ -82,7 +82,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
-    "@babel/preset-env": "^7.29.4",
+    "@babel/preset-env": "^7.29.5",
     "@codeceptjs/configure": "1.0.6",
     "@jest/globals": "30.3.0",
     "@types/jest": "30.0.0",
