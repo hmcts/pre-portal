@@ -3986,7 +3986,7 @@ const RAW_RUNTIME_STATE =
           ["@grpc/proto-loader", "npm:0.8.0"],\
           ["lodash.camelcase", "npm:4.3.0"],\
           ["long", "npm:5.3.2"],\
-          ["protobufjs", "npm:7.5.5"],\
+          ["protobufjs", "npm:7.5.8"],\
           ["yargs", "npm:17.7.2"]\
         ],\
         "linkType": "HARD"\
@@ -5753,7 +5753,7 @@ const RAW_RUNTIME_STATE =
           ["@opentelemetry/sdk-metrics", "virtual:2525e0dfa0bc29d132709579e6fc58180159b413066531a55262edc1e80870fa25bef77e2d04a50550d2b43176eaecc317bf28087850b6455942de017a3459a0#npm:2.2.0"],\
           ["@opentelemetry/sdk-trace-base", "virtual:2525e0dfa0bc29d132709579e6fc58180159b413066531a55262edc1e80870fa25bef77e2d04a50550d2b43176eaecc317bf28087850b6455942de017a3459a0#npm:2.2.0"],\
           ["@types/opentelemetry__api", null],\
-          ["protobufjs", "npm:7.5.5"]\
+          ["protobufjs", "npm:7.5.8"]\
         ],\
         "packagePeers": [\
           "@opentelemetry/api",\
@@ -6330,10 +6330,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@protobufjs/codegen", [\
-      ["npm:2.0.4", {\
-        "packageLocation": "./.yarn/cache/@protobufjs-codegen-npm-2.0.4-36e188bbe6-c6ee5fa172.zip/node_modules/@protobufjs/codegen/",\
+      ["npm:2.0.5", {\
+        "packageLocation": "./.yarn/cache/@protobufjs-codegen-npm-2.0.5-bb74ff329d-290335fa11.zip/node_modules/@protobufjs/codegen/",\
         "packageDependencies": [\
-          ["@protobufjs/codegen", "npm:2.0.4"]\
+          ["@protobufjs/codegen", "npm:2.0.5"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6374,6 +6374,13 @@ const RAW_RUNTIME_STATE =
           ["@protobufjs/inquire", "npm:1.1.0"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:1.1.1", {\
+        "packageLocation": "./.yarn/cache/@protobufjs-inquire-npm-1.1.1-1f267bc97f-504740e8ac.zip/node_modules/@protobufjs/inquire/",\
+        "packageDependencies": [\
+          ["@protobufjs/inquire", "npm:1.1.1"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["@protobufjs/path", [\
@@ -6395,10 +6402,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@protobufjs/utf8", [\
-      ["npm:1.1.0", {\
-        "packageLocation": "./.yarn/cache/@protobufjs-utf8-npm-1.1.0-02c590807c-131e289c57.zip/node_modules/@protobufjs/utf8/",\
+      ["npm:1.1.1", {\
+        "packageLocation": "./.yarn/cache/@protobufjs-utf8-npm-1.1.1-77a500f5e9-ed0c3f9ff1.zip/node_modules/@protobufjs/utf8/",\
         "packageDependencies": [\
-          ["@protobufjs/utf8", "npm:1.1.0"]\
+          ["@protobufjs/utf8", "npm:1.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17780,22 +17787,22 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["protobufjs", [\
-      ["npm:7.5.5", {\
-        "packageLocation": "./.yarn/unplugged/protobufjs-npm-7.5.5-73830b5abb/node_modules/protobufjs/",\
+      ["npm:7.5.8", {\
+        "packageLocation": "./.yarn/unplugged/protobufjs-npm-7.5.8-a1ce3bc6d1/node_modules/protobufjs/",\
         "packageDependencies": [\
           ["@protobufjs/aspromise", "npm:1.1.2"],\
           ["@protobufjs/base64", "npm:1.1.2"],\
-          ["@protobufjs/codegen", "npm:2.0.4"],\
+          ["@protobufjs/codegen", "npm:2.0.5"],\
           ["@protobufjs/eventemitter", "npm:1.1.0"],\
           ["@protobufjs/fetch", "npm:1.1.0"],\
           ["@protobufjs/float", "npm:1.0.2"],\
-          ["@protobufjs/inquire", "npm:1.1.0"],\
+          ["@protobufjs/inquire", "npm:1.1.1"],\
           ["@protobufjs/path", "npm:1.1.2"],\
           ["@protobufjs/pool", "npm:1.1.0"],\
-          ["@protobufjs/utf8", "npm:1.1.0"],\
+          ["@protobufjs/utf8", "npm:1.1.1"],\
           ["@types/node", "npm:25.0.3"],\
           ["long", "npm:5.3.2"],\
-          ["protobufjs", "npm:7.5.5"]\
+          ["protobufjs", "npm:7.5.8"]\
         ],\
         "linkType": "HARD"\
       }]\
