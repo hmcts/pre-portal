@@ -14,6 +14,14 @@ import { PreClient } from '../../../main/services/pre-api/pre-client';
 import { mockUser } from '../test-helper';
 import { RecordingAppliedEdits } from '../../../main/services/pre-api/types';
 
+jest.mock('../../../main/utils/helpers', () => {
+  const actual = jest.requireActual('../../../main/utils/helpers');
+  return {
+    ...actual,
+    isFlagEnabled: jest.fn().mockReturnValue(true),
+  };
+});
+
 mockUser();
 
 describe('Watch page failure', () => {
@@ -112,6 +120,90 @@ describe('Watch page success', () => {
         .get('/watch/12345678-1234-1234-1234-1234567890ab/playback')
         .expect(res => expect(res.status).toBe(200));
     });
+
+    test('should show in progress edit request button for V2 when parent has pending request', async () => {
+      const v2RecordingId = '11111111-1111-1111-1111-111111111111';
+      const parentRecordingId = '22222222-2222-2222-2222-222222222222';
+
+      jest.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (_xUserId: string, id: string) => {
+        if (id === v2RecordingId) {
+          return {
+            id: v2RecordingId,
+            parent_recording_id: parentRecordingId,
+            version: 2,
+            filename: 'v2.mp4',
+            duration: 'PT1H1M1S',
+            edit_instructions: '{}',
+            case_id: 'case-1',
+            case_reference: 'CASE-REF',
+            capture_session: {
+              id: '',
+              booking_id: '',
+              origin: '',
+              ingest_address: '',
+              live_output_url: '',
+              started_at: '',
+              started_by_user_id: '',
+              finished_at: '',
+              finished_by_user_id: '',
+              status: '',
+              deleted_at: '',
+              court_name: '',
+              case_state: 'OPEN',
+            },
+            deleted_at: '',
+            created_at: '',
+            is_test_case: false,
+            participants: [],
+          } as any;
+        }
+
+        if (id === parentRecordingId) {
+          return {
+            id: parentRecordingId,
+            parent_recording_id: parentRecordingId,
+            version: 1,
+            filename: 'v1.mp4',
+            duration: 'PT1H1M1S',
+            edit_instructions: '{}',
+            case_id: 'case-1',
+            case_reference: 'CASE-REF',
+            capture_session: {
+              id: '',
+              booking_id: '',
+              origin: '',
+              ingest_address: '',
+              live_output_url: '',
+              started_at: '',
+              started_by_user_id: '',
+              finished_at: '',
+              finished_by_user_id: '',
+              status: '',
+              deleted_at: '',
+              court_name: '',
+              case_state: 'OPEN',
+            },
+            deleted_at: '',
+            created_at: '',
+            is_test_case: false,
+            participants: [],
+            edit_status: 'SUBMITTED',
+          } as any;
+        }
+
+        return null;
+      });
+
+      mockGetRecordingPlaybackData();
+      mockPutAudit();
+
+      const response = await request(app).get(`/watch/${v2RecordingId}`);
+      expect(response.status).toBe(200);
+      expect(response.text).toContain('View in progress edit request');
+      expect(response.text).not.toContain('Make an edit request');
+      expect(response.text).toContain(`/edit-request/${parentRecordingId}`);
+    });
+
   });
 });
 
