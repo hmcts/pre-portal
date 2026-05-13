@@ -228,7 +228,7 @@ describe('Browse route', () => {
     );
   });
 
-  test('should render the version number for later versions', async () => {
+  test('should render the version number for complete later versions', async () => {
     const app = require('express')();
     new Nunjucks(false).enableFor(app);
     const request = require('supertest');
@@ -238,6 +238,7 @@ describe('Browse route', () => {
         id: 'updated-version',
         case_reference: 'CASE-V2',
         version: 2,
+        edit_status: 'COMPLETE',
       },
     ];
 
@@ -256,7 +257,7 @@ describe('Browse route', () => {
     );
   });
 
-  test('should use edit_status from recording for V2+ versions', async () => {
+  test('should show Pending for non-complete V2+ versions', async () => {
     const app = require('express')();
     new Nunjucks(false).enableFor(app);
     const request = require('supertest');
@@ -282,7 +283,7 @@ describe('Browse route', () => {
 
     const text = response.text.replace(/\s+/g, ' ').trim();
     expect(text).toContain('CASE-V2');
-    expect(text).toContain('<td class="govuk-table__cell"> 2 </td>');
+    expect(text).toContain('<td class="govuk-table__cell"> Pending </td>');
   });
 
   test('should show a draft version row when recording has a DRAFT edit request', async () => {
@@ -296,6 +297,7 @@ describe('Browse route', () => {
         id: 'source-v1',
         case_reference: 'CASE-DRAFT',
         version: 1,
+        total_version_count: 1,
         edit_requests: [
           { id: 'draft-request-1', status: 'DRAFT' },
         ],
@@ -312,7 +314,7 @@ describe('Browse route', () => {
 
     const text = response.text.replace(/\s+/g, ' ').trim();
     expect(text).toContain('recording-source-v1-draft-request-1');
-    expect(text).toContain('<td class="govuk-table__cell"> 2 </td>');
+    expect(text).toContain('<td class="govuk-table__cell"> Draft </td>');
   });
 });
 
