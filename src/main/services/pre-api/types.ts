@@ -55,6 +55,7 @@ export interface Recording {
   participants: Participant[];
   edit_status?: string;
   edit_requests?: { id: string; status: string }[];
+  total_version_count?: number;
 }
 
 export interface Participant {

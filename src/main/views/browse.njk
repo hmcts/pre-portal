@@ -105,8 +105,12 @@
               <td class="govuk-table__cell">
                 {% if recording.version == 1 %}
                   Original
-                {% else %}
+                {% elif recording.edit_status == "DRAFT" %}
+                  Draft
+                {% elif recording.edit_status == "COMPLETE" %}
                   {{ recording.version }}
+                {% else %}
+                  Pending
                 {% endif %}
               </td>
               <td class="govuk-table__cell">
@@ -129,15 +133,15 @@
                     <strong class="govuk-tag govuk-tag--grey">
                       Draft
                     </strong>
-                  {% elif recording.edit_status == "SUBMITTED" %}
-                    <strong class="govuk-tag govuk-tag--blue">
-                      Submitted
-                    </strong>
                   {% elif recording.edit_status == "REJECTED" %}
                     <strong class="govuk-tag govuk-tag--red">
                       Rejected
                     </strong>
-                  {% elif recording.edit_status in ["APPROVED", "PENDING", "PROCESSING", "COMPLETE"] %}
+                  {% elif recording.edit_status in ["SUBMITTED","APPROVED", "PENDING", "PROCESSING"] %}
+                    <strong class="govuk-tag govuk-tag--blue">
+                      {{ recording.edit_status | capitalize }}
+                    </strong>
+                  {% elif recording.edit_status == "COMPLETE" %}
                     <strong class="govuk-tag govuk-tag--green">
                       {{ recording.edit_status | capitalize }}
                     </strong>
@@ -150,14 +154,14 @@
                   {% endif %}
                 </td>
                 <td class="govuk-table__cell">
-                  {% if recording.version == 1 or recording.edit_status in ["APPROVED", "COMPLETE"] %}
+                  {% if recording.version == 1 or recording.edit_status == "COMPLETE" %}
                     <a class="govuk-link" href="/watch/{{ recording.id }}">
                       Play
                       <span class="sr-only" hidden>video case ref {{ recording.case_reference }}</span>
                     </a>
                   {% elif recording.edit_status == "DRAFT" %}
                     <a class="govuk-link" href="/edit-request/{{ recording.id }}">Edit</a>
-                  {% elif recording.edit_status in ["SUBMITTED", "REJECTED", "PROCESSING", "PENDING", "ERROR"] %}
+                  {% elif recording.edit_status in ["APPROVED", "SUBMITTED", "REJECTED", "PROCESSING", "PENDING", "ERROR"] %}
                     <a class="govuk-link" href="/edit-request/{{ recording.id }}/view">View</a>
                   {% endif %}
                 </td>
