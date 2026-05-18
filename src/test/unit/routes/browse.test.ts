@@ -34,7 +34,6 @@ describe('Browse route', () => {
     reset();
   });
 
-
   test('browse renders the browse template', async () => {
     jest.setTimeout(65000); // seems to be a slow page in tests for some reason
 
@@ -298,9 +297,7 @@ describe('Browse route', () => {
         case_reference: 'CASE-DRAFT',
         version: 1,
         total_version_count: 1,
-        edit_requests: [
-          { id: 'draft-request-1', status: 'DRAFT' },
-        ],
+        edit_requests: [{ id: 'draft-request-1', status: 'DRAFT' }],
       },
     ];
 

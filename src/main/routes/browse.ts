@@ -75,9 +75,9 @@ const buildBrowseRows = (recordings: Recording[]): BrowseRecording[] => {
 
   // Process each group of related recordings.
   for (const recordingsInGroup of recordingsByRootId.values()) {
-    const completedEditRequestRows: BrowseRecording[] = [];  // V2, V3, ... (Completed edits)
-    const pendingEditRequestRows: BrowseRecording[] = [];    // Edits in progress (submitted, approved, etc)
-    const draftEditRequestRows: BrowseRecording[] = [];      // Edits with status 'DRAFT'
+    const completedEditRequestRows: BrowseRecording[] = []; // V2, V3, ... (Completed edits)
+    const pendingEditRequestRows: BrowseRecording[] = []; // Edits in progress (submitted, approved, etc)
+    const draftEditRequestRows: BrowseRecording[] = []; // Edits with status 'DRAFT'
     let originalRecording: BrowseRecording | undefined;
 
     // Add rows for each real recording in the group.

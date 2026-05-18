@@ -96,14 +96,17 @@ export default function (app: Application): void {
       const mediaKindPlayerKey = config.get('pre.mediaKindPlayerKey');
       const enableAutomatedEditing = isFlagEnabled('pre.enableAutomatedEditing');
 
-      const editRequestRecordingId = recording.version === 1 ? recording.id : recording.parent_recording_id || recording.id;
+      const editRequestRecordingId =
+        recording.version === 1 ? recording.id : recording.parent_recording_id || recording.id;
 
       let editRequestStatus: string | undefined;
       if (recording.version === 1) {
         editRequestStatus = recording.edit_requests?.find(editRequest => editRequest.status !== 'COMPLETE')?.status;
       } else {
         const parentRecording = await client.getRecording(userPortalId, editRequestRecordingId);
-        editRequestStatus = parentRecording?.edit_requests?.find(editRequest => editRequest.status !== 'COMPLETE')?.status;
+        editRequestStatus = parentRecording?.edit_requests?.find(
+          editRequest => editRequest.status !== 'COMPLETE'
+        )?.status;
       }
 
       let parsedAppliedEdits = await parseAppliedEdits(recording.edit_instructions, client, userPortalId);

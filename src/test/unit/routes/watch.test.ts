@@ -203,7 +203,6 @@ describe('Watch page success', () => {
       expect(response.text).not.toContain('Make an edit request');
       expect(response.text).toContain(`/edit-request/${parentRecordingId}`);
     });
-
   });
 });
 
