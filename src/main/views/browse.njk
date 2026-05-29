@@ -129,6 +129,9 @@
               {% if enableAutomatedEditing == true %}
                 <td class="govuk-table__cell">
                   {% if recording.version == 1 %}
+                    <strong class="govuk-tag govuk-tag--green">
+                      Original
+                    </strong>
                   {% elif recording.edit_status == "DRAFT" %}
                     <strong class="govuk-tag govuk-tag--grey">
                       Draft
