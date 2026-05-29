@@ -232,35 +232,35 @@ function getEditRequestPage(app: Application): void {
         };
       }
 
-       const response = await client.putEditRequest(userPortalId, request);
-       if (response.status === 400) {
-         res.status(400);
-         const data = response.data || {};
-         let errorMessage = '';
+      const response = await client.putEditRequest(userPortalId, request);
+      if (response.status === 400) {
+        res.status(400);
+        const data = response.data || {};
+        let errorMessage = '';
 
-         if (data.errors && typeof data.errors === 'object') {
-           const normalizedError = (data.errors as Record<string, unknown>).error;
-           if (typeof normalizedError === 'string') {
-             errorMessage = normalizedError;
-           }
-         }
+        if (data.errors && typeof data.errors === 'object') {
+          const normalizedError = (data.errors as Record<string, unknown>).error;
+          if (typeof normalizedError === 'string') {
+            errorMessage = normalizedError;
+          }
+        }
 
-         if (!errorMessage && data.message) {
-           errorMessage = data.message;
-         } else if (!errorMessage && data.reason) {
-           errorMessage = data.reason;
-         }
+        if (!errorMessage && data.message) {
+          errorMessage = data.message;
+        } else if (!errorMessage && data.reason) {
+          errorMessage = data.reason;
+        }
 
-         if (!errorMessage) {
-           const errorReason = Object.values(data).find((val) => typeof val === 'string');
-           if (errorReason) {
-             errorMessage = errorReason as string;
-           }
-         }
+        if (!errorMessage) {
+          const errorReason = Object.values(data).find(val => typeof val === 'string');
+          if (errorReason) {
+            errorMessage = errorReason as string;
+          }
+        }
 
-         res.json({ errors: { error: errorMessage || 'An error occurred' } });
-         return;
-       }
+        res.json({ errors: { error: errorMessage || 'An error occurred' } });
+        return;
+      }
 
       res.json(await getCurrentEditRequest(client, userPortalId, req.params.id));
     } catch (e) {

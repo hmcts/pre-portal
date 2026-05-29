@@ -410,81 +410,81 @@ describe('edit-request route', () => {
       expect(putEditRequestSpy).toHaveBeenCalled();
     });
 
-     test('should return 400 when putEditRequest returns 400 status', async () => {
-       mockGetRecording();
-       jest.spyOn(PreClient.prototype, 'putEditRequest').mockImplementation(async (xUserId: string, body: any) => {
-         return {
-           status: 400,
-           data: {
-             message: 'Custom error message from API',
-           },
-         };
-       });
+    test('should return 400 when putEditRequest returns 400 status', async () => {
+      mockGetRecording();
+      jest.spyOn(PreClient.prototype, 'putEditRequest').mockImplementation(async (xUserId: string, body: any) => {
+        return {
+          status: 400,
+          data: {
+            message: 'Custom error message from API',
+          },
+        };
+      });
 
-       await request(app)
-         .post('/edit-request/12345678-1234-1234-1234-1234567890ab')
-         .set('Content-Type', 'application/json')
-         .send(
-           JSON.stringify({
-             id: '12345678-1234-1234-1234-1234567890ab',
-             source_recording_id: '12345678-1234-1234-1234-1234567890ab',
-             status: 'DRAFT',
-             edit_instructions: [
-               {
-                 start_of_cut: '00:00:00',
-                 end_of_cut: '00:00:01',
-               },
-             ],
-           })
-         )
-         .expect(res => expect(res.status).toBe(400))
-         .expect(res =>
-           expect(res.body).toStrictEqual({
-             errors: {
-               error: 'Custom error message from API',
-             },
-           })
-         );
-     });
+      await request(app)
+        .post('/edit-request/12345678-1234-1234-1234-1234567890ab')
+        .set('Content-Type', 'application/json')
+        .send(
+          JSON.stringify({
+            id: '12345678-1234-1234-1234-1234567890ab',
+            source_recording_id: '12345678-1234-1234-1234-1234567890ab',
+            status: 'DRAFT',
+            edit_instructions: [
+              {
+                start_of_cut: '00:00:00',
+                end_of_cut: '00:00:01',
+              },
+            ],
+          })
+        )
+        .expect(res => expect(res.status).toBe(400))
+        .expect(res =>
+          expect(res.body).toStrictEqual({
+            errors: {
+              error: 'Custom error message from API',
+            },
+          })
+        );
+    });
 
-     test('should return normalized 400 when putEditRequest returns nested errors.error', async () => {
-       mockGetRecording();
-       jest.spyOn(PreClient.prototype, 'putEditRequest').mockImplementation(async () => {
-         return {
-           status: 400,
-           data: {
-             errors: {
-               error: 'contains potentially malicious content',
-             },
-           },
-         };
-       });
+    test('should return normalized 400 when putEditRequest returns nested errors.error', async () => {
+      mockGetRecording();
+      jest.spyOn(PreClient.prototype, 'putEditRequest').mockImplementation(async () => {
+        return {
+          status: 400,
+          data: {
+            errors: {
+              error: 'contains potentially malicious content',
+            },
+          },
+        };
+      });
 
-       await request(app)
-         .post('/edit-request/12345678-1234-1234-1234-1234567890ab')
-         .set('Content-Type', 'application/json')
-         .send(
-           JSON.stringify({
-             id: '12345678-1234-1234-1234-1234567890ab',
-             source_recording_id: '12345678-1234-1234-1234-1234567890ab',
-             status: 'DRAFT',
-             edit_instructions: [
-               {
-                 start_of_cut: '00:00:00',
-                 end_of_cut: '00:00:01',
-               },
-             ],
-           })
-         )
-         .expect(res => expect(res.status).toBe(400))
-         .expect(res =>
-           expect(res.body).toStrictEqual({
-             errors: {
-               error: 'contains potentially malicious content',
-             },
-           })
-         );
-     });
+      await request(app)
+        .post('/edit-request/12345678-1234-1234-1234-1234567890ab')
+        .set('Content-Type', 'application/json')
+        .send(
+          JSON.stringify({
+            id: '12345678-1234-1234-1234-1234567890ab',
+            source_recording_id: '12345678-1234-1234-1234-1234567890ab',
+            status: 'DRAFT',
+            edit_instructions: [
+              {
+                start_of_cut: '00:00:00',
+                end_of_cut: '00:00:01',
+              },
+            ],
+          })
+        )
+        .expect(res => expect(res.status).toBe(400))
+        .expect(res =>
+          expect(res.body).toStrictEqual({
+            errors: {
+              error: 'contains potentially malicious content',
+            },
+          })
+        );
+    });
   });
 
   describe('parseIsoDuration validation', () => {
@@ -521,7 +521,6 @@ describe('edit-request route', () => {
     test('should handle zero values', () => {
       expect(parseIsoDuration('PT0H0M0S')).toBe(0);
     });
-
   });
 
   describe('validation for put', () => {
