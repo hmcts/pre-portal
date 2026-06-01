@@ -23,6 +23,9 @@ jest.mock('../../../main/services/session-user/session-user', () => {
       getLoggedInUserPortalId: jest.fn().mockImplementation((req: Express.Request) => {
         return '123';
       }),
+      getLoggedInUserBrowseId: jest.fn().mockImplementation((req: Express.Request) => {
+        return 'super-user-access-id';
+      }),
       getLoggedInUserProfile: jest.fn().mockImplementation((req: Express.Request) => {
         return mockeduser as UserProfile;
       }),
@@ -52,6 +55,10 @@ describe('Browse route', () => {
     expect(response.text).toContain('legitimate need and having full authorisation.');
     expect(response.text).toContain('Laptop and Desktop devices only.');
     expect(response.text).toContain('<a href="/logout" class="govuk-back-link">Sign out</a>');
+    expect(PreClient.prototype.getRecordings).toHaveBeenCalledWith(
+      'super-user-access-id',
+      expect.objectContaining({ size: 10 })
+    );
   });
 
   test('should return 500', async () => {

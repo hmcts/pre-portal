@@ -54,7 +54,7 @@ export default function (app: Application): void {
     };
 
     const { recordings, pagination } = await client.getRecordings(
-      await SessionUser.getLoggedInUserPortalId(req),
+      await SessionUser.getLoggedInUserBrowseId(req),
       request
     );
 
