@@ -21,11 +21,11 @@ export default function (app: Application): void {
     }
 
     try {
-      const userPortalId = await SessionUser.getLoggedInUserPortalId(req);
+      const userBrowseId = await SessionUser.getLoggedInUserBrowseId(req);
       const userProfile = SessionUser.getLoggedInUserProfile(req);
 
       const client = new PreClient();
-      const recording = await client.getRecording(await SessionUser.getLoggedInUserPortalId(req), req.params.id);
+      const recording = await client.getRecording(userBrowseId, req.params.id);
 
       if (recording === null) {
         res.status(404);
@@ -34,7 +34,7 @@ export default function (app: Application): void {
       }
       logger.info(`Recording ${recording.id} accessed by User ${userProfile.user.email}`);
 
-      await client.putAudit(userPortalId, {
+      await client.putAudit(userBrowseId, {
         id: uuid(),
         functional_area: 'Video Player',
         category: 'Recording',
@@ -69,9 +69,9 @@ export default function (app: Application): void {
 
     try {
       const client = new PreClient();
-      const userPortalId = await SessionUser.getLoggedInUserPortalId(req);
+      const userBrowseId = await SessionUser.getLoggedInUserBrowseId(req);
 
-      const recordingPlaybackData = await client.getRecordingPlaybackDataMk(userPortalId, req.params.id);
+      const recordingPlaybackData = await client.getRecordingPlaybackDataMk(userBrowseId, req.params.id);
 
       if (recordingPlaybackData === null) {
         res.status(404);

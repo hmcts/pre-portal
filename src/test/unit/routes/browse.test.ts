@@ -4,6 +4,7 @@ import { mockGetRecordings, reset, mockRecordings } from '../../mock-api';
 import { beforeAll, describe } from '@jest/globals';
 
 import { PreClient } from '../../../main/services/pre-api/pre-client';
+import { SessionUser } from '../../../main/services/session-user/session-user';
 import { UserProfile } from '../../../main/types/user-profile';
 import { mockeduser } from '../test-helper';
 import { convertIsoToDate } from '../../../main/routes/browse';
@@ -37,6 +38,12 @@ describe('Browse route', () => {
     reset();
   });
 
+  afterEach(() => {
+    (SessionUser.getLoggedInUserProfile as jest.Mock).mockImplementation(() => {
+      return mockeduser as UserProfile;
+    });
+  });
+
   test('browse renders the browse template', async () => {
     jest.setTimeout(65000); // seems to be a slow page in tests for some reason
 
@@ -55,6 +62,8 @@ describe('Browse route', () => {
     expect(response.text).toContain('legitimate need and having full authorisation.');
     expect(response.text).toContain('Laptop and Desktop devices only.');
     expect(response.text).toContain('<a href="/logout" class="govuk-back-link">Sign out</a>');
+    expect(response.text).toContain('Case reference');
+    expect(response.text).toContain('name="caseReference"');
     expect(PreClient.prototype.getRecordings).toHaveBeenCalledWith(
       'super-user-access-id',
       expect.objectContaining({ size: 10 })
@@ -75,6 +84,57 @@ describe('Browse route', () => {
 
     const response = await request(app).get('/browse');
     expect(response.status).toEqual(500);
+  });
+
+  test('super user can filter recordings by case reference', async () => {
+    const app = require('express')();
+    new Nunjucks(false).enableFor(app);
+    const request = require('supertest');
+    const recordings = Array(12).fill(mockRecordings[0]).flat();
+
+    mockGetRecordings(recordings, 1);
+
+    const browse = require('../../../main/routes/browse').default;
+    browse(app);
+
+    const response = await request(app).get('/browse?caseReference=ABC123&page=1');
+    expect(response.status).toEqual(200);
+    expect(response.text).toContain('value="ABC123"');
+    expect(response.text).toContain('Clear search');
+    expect(response.text).toContain('/browse?page=0&amp;caseReference=ABC123');
+    expect(PreClient.prototype.getRecordings).toHaveBeenCalledWith(
+      'super-user-access-id',
+      expect.objectContaining({ caseReference: 'ABC123' })
+    );
+  });
+
+  test('non-super user does not see or send case reference filter', async () => {
+    const nonSuperUser = {
+      ...mockeduser,
+      app_access: [],
+    } as UserProfile;
+
+    (SessionUser.getLoggedInUserProfile as jest.Mock).mockImplementation(() => {
+      return nonSuperUser;
+    });
+
+    const app = require('express')();
+    new Nunjucks(false).enableFor(app);
+    const request = require('supertest');
+
+    mockGetRecordings([]);
+
+    const browse = require('../../../main/routes/browse').default;
+    browse(app);
+
+    const response = await request(app).get('/browse?caseReference=ABC123');
+    expect(response.status).toEqual(200);
+    expect(response.text).not.toContain('name="caseReference"');
+    expect(response.text).not.toContain('value="ABC123"');
+    expect(PreClient.prototype.getRecordings).toHaveBeenCalledWith(
+      'super-user-access-id',
+      expect.objectContaining({ caseReference: undefined })
+    );
   });
 
   test('pagination should have a previous link', async () => {

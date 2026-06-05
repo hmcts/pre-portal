@@ -19,10 +19,23 @@ export const convertIsoToDate = (isoString?: string): string | undefined => {
   });
 };
 
+const getQueryString = (value: unknown): string | undefined => {
+  const queryValue = Array.isArray(value) ? value[0] : value;
+
+  if (typeof queryValue !== 'string') {
+    return undefined;
+  }
+
+  const trimmedQueryValue = queryValue.trim();
+  return trimmedQueryValue || undefined;
+};
+
 export default function (app: Application): void {
   app.get('/browse', requiresAuth(), async (req, res) => {
     const logger = Logger.getLogger('browse-route');
     const userProfileForCjsm = SessionUser.getLoggedInUserProfile(req);
+    const isSuperUser = userProfileForCjsm.app_access.some(role => role.role.name === UserLevel.SUPER_USER);
+    const caseReference = isSuperUser ? getQueryString(req.query.caseReference) : undefined;
     const primaryEmail = (userProfileForCjsm.user.email || '').toLowerCase();
     const alternativeEmail = (userProfileForCjsm.user.alternative_email || '').toLowerCase();
 
@@ -45,7 +58,7 @@ export default function (app: Application): void {
       participantId: req.query.participantId as string,
       witnessName: req.query.witnessName as string,
       defendantName: req.query.defendantName as string,
-      caseReference: req.query.caseReference as string,
+      caseReference,
       scheduledFor: req.query.scheduledFor as string,
       courtId: req.query.courtId as string,
       includeDeleted: req.query.includeDeleted as unknown as boolean,
@@ -63,10 +76,6 @@ export default function (app: Application): void {
     // Rolling window of 5 pages centered on the current page
     // The current page is 5 then 2 pages before and 2 pages after does not include the first+1 or last-1 pages so add in ellipsis
 
-    const isSuperUser =
-      SessionUser.getLoggedInUserProfile(req).app_access.filter(role => role.role.name === UserLevel.SUPER_USER)
-        .length > 0;
-
     const updatedRecordings = recordings.map(recording => ({
       ...recording,
       capture_session: {
@@ -81,23 +90,33 @@ export default function (app: Application): void {
       items: [] as ({ href: string; number: number; current: boolean } | { ellipsis: boolean })[],
     };
 
+    const buildPageUrl = (page: number) => {
+      const params = new URLSearchParams({ page: page.toString() });
+
+      if (caseReference) {
+        params.set('caseReference', caseReference);
+      }
+
+      return `/browse?${params.toString()}`;
+    };
+
     // Add previous link if not on the first page
     if (pagination.currentPage > 0) {
       paginationLinks.previous = {
-        href: `/browse?page=${pagination.currentPage - 1}`,
+        href: buildPageUrl(pagination.currentPage - 1),
       };
     }
 
     // Add next link if not on the last page
     if (pagination.currentPage < pagination.totalPages - 1) {
       paginationLinks.next = {
-        href: `/browse?page=${pagination.currentPage + 1}`,
+        href: buildPageUrl(pagination.currentPage + 1),
       };
     }
 
     // Always add the first page
     paginationLinks.items.push({
-      href: '/browse?page=0',
+      href: buildPageUrl(0),
       number: 1,
       current: 0 === pagination.currentPage,
     });
@@ -114,7 +133,7 @@ export default function (app: Application): void {
       i++
     ) {
       paginationLinks.items.push({
-        href: `/browse?page=${i}`,
+        href: buildPageUrl(i),
         number: i + 1,
         current: i === pagination.currentPage,
       });
@@ -128,7 +147,7 @@ export default function (app: Application): void {
     // Add the last page if there is more than one page (don't repeat the first page)
     if (pagination.totalPages > 1) {
       paginationLinks.items.push({
-        href: `/browse?page=${pagination.totalPages - 1}`,
+        href: buildPageUrl(pagination.totalPages - 1),
         number: pagination.totalPages,
         current: pagination.totalPages - 1 === pagination.currentPage,
       });
@@ -148,6 +167,7 @@ export default function (app: Application): void {
       title,
       user: SessionUser.getLoggedInUserProfile(req).user,
       isSuperUser: isSuperUser,
+      caseReference,
       pageUrl: req.url,
       showCjsmBanner,
     });
