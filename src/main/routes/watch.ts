@@ -103,13 +103,13 @@ export default function (app: Application): void {
       if (recording.version === 1) {
         editRequestStatus = recording.edit_requests?.find(editRequest => editRequest.status !== 'COMPLETE')?.status;
       } else {
-        const parentRecording = await client.getRecording(userPortalId, editRequestRecordingId);
+        const parentRecording = await client.getRecording(userBrowseId, editRequestRecordingId);
         editRequestStatus = parentRecording?.edit_requests?.find(
           editRequest => editRequest.status !== 'COMPLETE'
         )?.status;
       }
 
-      let parsedAppliedEdits = await parseAppliedEdits(recording.edit_instructions, client, userPortalId);
+      let parsedAppliedEdits = await parseAppliedEdits(recording.edit_instructions, client, userBrowseId);
       res.render('watch', {
         recording,
         recordingPlaybackDataUrl,
