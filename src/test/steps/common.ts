@@ -97,7 +97,7 @@ Then('recording is played', async () => {
   I.wait(5);
   I.click('Play/Pause');
   const currentTime = await I.grabTextFrom('.bmpui-ui-playbacktimelabel:nth-of-type(2)');
-  if (!currentTime.match(/^\d{2}:\d{2}$/)) {
+  if (!currentTime.match(/^\d{2}:\d{2}(:\d{2})?$/)) {
     throw new Error(`Invalid playback time format: ${currentTime}`);
   }
 
