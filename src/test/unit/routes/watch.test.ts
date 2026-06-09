@@ -119,6 +119,15 @@ describe('Watch page success', () => {
       await request(app)
         .get('/watch/12345678-1234-1234-1234-1234567890ab/playback')
         .expect(res => expect(res.status).toBe(200));
+      expect(PreClient.prototype.getRecording).toHaveBeenCalledWith(
+        'super-user-access-id',
+        '12345678-1234-1234-1234-1234567890ab'
+      );
+      expect(PreClient.prototype.putAudit).toHaveBeenCalledWith('super-user-access-id', expect.any(Object));
+      expect(PreClient.prototype.getRecordingPlaybackDataMk).toHaveBeenCalledWith(
+        'super-user-access-id',
+        '12345678-1234-1234-1234-1234567890ab'
+      );
     });
 
     test('should show in progress edit request button for V2 when parent has pending request', async () => {
