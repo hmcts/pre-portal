@@ -157,8 +157,18 @@ class UIRenderer {
 
   showErrors(errors: any): void {
     this.clearAllErrors();
-    if (errors['overlap']) {
-      this.showErrorSummary(errors['overlap']);
+    if (typeof errors === 'string') {
+      this.showErrorSummary(errors);
+      return;
+    }
+
+    if (errors['error'] || errors['overlap']) {
+      this.showErrorSummary(errors['error'] || errors['overlap']);
+      return;
+    }
+
+    if (errors['message'] || errors['reason']) {
+      this.showErrorSummary(errors['message'] || errors['reason']);
       return;
     }
 

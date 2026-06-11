@@ -441,7 +441,46 @@ describe('edit-request route', () => {
         .expect(res =>
           expect(res.body).toStrictEqual({
             errors: {
-              startTime: 'Custom error message from API',
+              error: 'Custom error message from API',
+            },
+          })
+        );
+    });
+
+    test('should return normalized 400 when putEditRequest returns nested errors.error', async () => {
+      mockGetRecording();
+      jest.spyOn(PreClient.prototype, 'putEditRequest').mockImplementation(async () => {
+        return {
+          status: 400,
+          data: {
+            errors: {
+              error: 'contains potentially malicious content',
+            },
+          },
+        };
+      });
+
+      await request(app)
+        .post('/edit-request/12345678-1234-1234-1234-1234567890ab')
+        .set('Content-Type', 'application/json')
+        .send(
+          JSON.stringify({
+            id: '12345678-1234-1234-1234-1234567890ab',
+            source_recording_id: '12345678-1234-1234-1234-1234567890ab',
+            status: 'DRAFT',
+            edit_instructions: [
+              {
+                start_of_cut: '00:00:00',
+                end_of_cut: '00:00:01',
+              },
+            ],
+          })
+        )
+        .expect(res => expect(res.status).toBe(400))
+        .expect(res =>
+          expect(res.body).toStrictEqual({
+            errors: {
+              error: 'contains potentially malicious content',
             },
           })
         );

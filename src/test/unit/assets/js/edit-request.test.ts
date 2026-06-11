@@ -147,7 +147,7 @@ describe('EditRequestManager', () => {
   it('shows overlap error summary and then clears it on cancel', async () => {
     (global as any).fetch = jest
       .fn()
-      .mockResolvedValue({ ok: false, json: async () => ({ errors: { overlap: 'Overlapping Instructions' } }) });
+      .mockResolvedValue({ ok: false, json: async () => ({ errors: { error: 'Overlapping Instructions' } }) });
 
     const { moduleElement, startInput, endInput, reasonInput, editRow } = await setupEditRequestManagerDom();
     const manager = new EditRequestManager(moduleElement) as any;
@@ -168,6 +168,54 @@ describe('EditRequestManager', () => {
     manager.handleAction('cancel');
     expect((document.getElementById('validation-error-summary') as HTMLElement).style.display).toBe('none');
     expect(editRow.hidden).toBe(true);
+  });
+
+  it('shows backend passthrough 400 message in the error summary without changing text', async () => {
+    (global as any).fetch = jest.fn().mockResolvedValue({
+      ok: false,
+      status: 400,
+      json: async () => ({ errors: { error: 'HTML content is not allowed' } }),
+    });
+
+    const { moduleElement, startInput, endInput, reasonInput } = await setupEditRequestManagerDom();
+    const manager = new EditRequestManager(moduleElement) as any;
+
+    startInput.value = '00:00:01';
+    endInput.value = '00:00:02';
+    reasonInput.value = '<a></a>';
+
+    manager.handleAction('save');
+    await flushPromises();
+
+    expect((document.getElementById('validation-error-summary') as HTMLElement).style.display).toBe('block');
+    expect((document.getElementById('validation-error-list') as HTMLElement).textContent).toContain(
+      'HTML content is not allowed'
+    );
+  });
+
+  it('shows backend field-specific 400 error without changing text', async () => {
+    (global as any).fetch = jest.fn().mockResolvedValue({
+      ok: false,
+      status: 400,
+      json: async () => ({
+        errors: { error: 'contains potentially malicious content' },
+      }),
+    });
+
+    const { moduleElement, startInput, endInput, reasonInput } = await setupEditRequestManagerDom();
+    const manager = new EditRequestManager(moduleElement) as any;
+
+    startInput.value = '00:00:01';
+    endInput.value = '00:00:02';
+    reasonInput.value = '<a></a>';
+
+    manager.handleAction('save');
+    await flushPromises();
+
+    expect((document.getElementById('validation-error-summary') as HTMLElement).style.display).toBe('block');
+    expect((document.getElementById('validation-error-list') as HTMLElement).textContent).toContain(
+      'contains potentially malicious content'
+    );
   });
 
   it('short-circuits form submit while already submitting and when submitter is absent', async () => {

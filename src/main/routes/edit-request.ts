@@ -24,8 +24,15 @@ export const parseIsoDuration = (duration: string): number => {
   return hours * 3600 + minutes * 60 + seconds;
 };
 
+const containsSpecialCharacters = (value: string): boolean => /[&<>]/.test(value);
+
 const validateInstruction = (instruction: PutEditInstruction, duration: string): Object => {
   const errors = {};
+
+  if (instruction.reason && containsSpecialCharacters(instruction.reason)) {
+    errors['error'] = 'Special characters not allowed: & < >';
+    return errors;
+  }
 
   const [h1, m1, s1] = instruction.start_of_cut.split(':').map(Number);
   const [h2, m2, s2] = instruction.end_of_cut.split(':').map(Number);
@@ -75,7 +82,7 @@ const checkOverlappingInstructions = (instructions: PutEditInstruction[]): Objec
 
       if (overlaps) {
         return {
-          overlap: `Overlapping Instructions: (${first.startFormatted} - ${first.endFormatted}) and (${second.startFormatted} - ${second.endFormatted}) have overlapping time ranges.`,
+          error: `Overlapping Instructions: (${first.startFormatted} - ${first.endFormatted}) and (${second.startFormatted} - ${second.endFormatted}) have overlapping time ranges.`,
         };
       }
     }
@@ -227,10 +234,31 @@ function getEditRequestPage(app: Application): void {
 
       const response = await client.putEditRequest(userPortalId, request);
       if (response.status === 400) {
-        const errors = {};
         res.status(400);
-        errors['startTime'] = response.data.message;
-        res.json({ errors });
+        const data = response.data || {};
+        let errorMessage = '';
+
+        if (data.errors && typeof data.errors === 'object') {
+          const normalizedError = (data.errors as Record<string, unknown>).error;
+          if (typeof normalizedError === 'string') {
+            errorMessage = normalizedError;
+          }
+        }
+
+        if (!errorMessage && data.message) {
+          errorMessage = data.message;
+        } else if (!errorMessage && data.reason) {
+          errorMessage = data.reason;
+        }
+
+        if (!errorMessage) {
+          const errorReason = Object.values(data).find(val => typeof val === 'string');
+          if (errorReason) {
+            errorMessage = errorReason as string;
+          }
+        }
+
+        res.json({ errors: { error: errorMessage || 'An error occurred' } });
         return;
       }
 

@@ -238,7 +238,40 @@ describe('edit-request route', () => {
 
       const result = validateRequest(request, 'PT1H0M0S');
       expect(result).toBeDefined();
-      expect(result && result['overlap']).toContain('Overlapping Instructions');
+      expect(result && result['error']).toContain('Overlapping Instructions');
+    });
+
+    it('should return error when reason contains &', () => {
+      const request: PutEditRequest = {
+        id: '123',
+        source_recording_id: '456',
+        status: 'DRAFT',
+        edit_instructions: [{ start_of_cut: '00:00:10', end_of_cut: '00:00:20', reason: 'noise & echo' }],
+      };
+      const result = validateRequest(request, 'PT1H0M0S');
+      expect(result).toEqual({ error: 'Special characters not allowed: & < >' });
+    });
+
+    it('should return error when reason contains <', () => {
+      const request: PutEditRequest = {
+        id: '123',
+        source_recording_id: '456',
+        status: 'DRAFT',
+        edit_instructions: [{ start_of_cut: '00:00:10', end_of_cut: '00:00:20', reason: '<script>' }],
+      };
+      const result = validateRequest(request, 'PT1H0M0S');
+      expect(result).toEqual({ error: 'Special characters not allowed: & < >' });
+    });
+
+    it('should return error when reason contains >', () => {
+      const request: PutEditRequest = {
+        id: '123',
+        source_recording_id: '456',
+        status: 'DRAFT',
+        edit_instructions: [{ start_of_cut: '00:00:10', end_of_cut: '00:00:20', reason: 'a > b' }],
+      };
+      const result = validateRequest(request, 'PT1H0M0S');
+      expect(result).toEqual({ error: 'Special characters not allowed: & < >' });
     });
 
     it('should trim whitespace from time references', () => {
