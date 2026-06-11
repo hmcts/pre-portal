@@ -143,7 +143,8 @@
     "@xmldom/xmldom@npm:0.9.8": "0.9.10",
     "@grpc/grpc-js": "1.14.4",
     "joi": "18.2.1",
-    "ws": "8.21.0"
+    "ws": "8.21.0",
+    "shell-quote": "1.8.4"
   },
   "husky": {
     "hooks": {

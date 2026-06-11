@@ -11284,7 +11284,7 @@ const RAW_RUNTIME_STATE =
           ["sanitize-filename", "npm:1.6.3"],\
           ["semver", "npm:7.7.4"],\
           ["serialize-error", "npm:8.1.0"],\
-          ["shell-quote", "npm:1.8.3"],\
+          ["shell-quote", "npm:1.8.4"],\
           ["signal-exit", "npm:3.0.7"],\
           ["stream-json", "npm:1.9.1"],\
           ["strip-ansi", "npm:6.0.1"],\
@@ -18348,7 +18348,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/react-devtools-core-npm-6.1.5-b0ab3c4460-0323f1d006.zip/node_modules/react-devtools-core/",\
         "packageDependencies": [\
           ["react-devtools-core", "npm:6.1.5"],\
-          ["shell-quote", "npm:1.8.3"],\
+          ["shell-quote", "npm:1.8.4"],\
           ["ws", "virtual:f5211d03eceb5c615629f746a3045d2fa91c38ed5392d5803bbd628fe39c1e446acff433cc73b52e3dd04db2cd7cd15da2104cc82362f80d1b6e17fa5edd6959#npm:8.21.0"]\
         ],\
         "linkType": "HARD"\
@@ -19212,10 +19212,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["shell-quote", [\
-      ["npm:1.8.3", {\
-        "packageLocation": "./.yarn/cache/shell-quote-npm-1.8.3-b29f851134-5473e35463.zip/node_modules/shell-quote/",\
+      ["npm:1.8.4", {\
+        "packageLocation": "./.yarn/cache/shell-quote-npm-1.8.4-13eacaabff-a3e3796385.zip/node_modules/shell-quote/",\
         "packageDependencies": [\
-          ["shell-quote", "npm:1.8.3"]\
+          ["shell-quote", "npm:1.8.4"]\
         ],\
         "linkType": "HARD"\
       }]\
