@@ -4018,10 +4018,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@grpc/grpc-js", [\
-      ["npm:1.14.3", {\
-        "packageLocation": "./.yarn/cache/@grpc-grpc-js-npm-1.14.3-4316f67c48-bb9bfe2f74.zip/node_modules/@grpc/grpc-js/",\
+      ["npm:1.14.4", {\
+        "packageLocation": "./.yarn/cache/@grpc-grpc-js-npm-1.14.4-27e11c00e7-f9cdbd81e7.zip/node_modules/@grpc/grpc-js/",\
         "packageDependencies": [\
-          ["@grpc/grpc-js", "npm:1.14.3"],\
+          ["@grpc/grpc-js", "npm:1.14.4"],\
           ["@grpc/proto-loader", "npm:0.8.0"],\
           ["@js-sdsl/ordered-map", "npm:4.4.2"]\
         ],\
@@ -4067,13 +4067,6 @@ const RAW_RUNTIME_STATE =
           ["@hapi/hoek", "npm:11.0.7"]\
         ],\
         "linkType": "HARD"\
-      }],\
-      ["npm:9.3.0", {\
-        "packageLocation": "./.yarn/cache/@hapi-hoek-npm-9.3.0-447eb8d274-ad83a22378.zip/node_modules/@hapi/hoek/",\
-        "packageDependencies": [\
-          ["@hapi/hoek", "npm:9.3.0"]\
-        ],\
-        "linkType": "HARD"\
       }]\
     ]],\
     ["@hapi/pinpoint", [\
@@ -4095,14 +4088,6 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@hapi/topo", [\
-      ["npm:5.1.0", {\
-        "packageLocation": "./.yarn/cache/@hapi-topo-npm-5.1.0-5e0b776809-084bfa6470.zip/node_modules/@hapi/topo/",\
-        "packageDependencies": [\
-          ["@hapi/hoek", "npm:9.3.0"],\
-          ["@hapi/topo", "npm:5.1.0"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
       ["npm:6.0.2", {\
         "packageLocation": "./.yarn/cache/@hapi-topo-npm-6.0.2-2ca029706c-ef959d3796.zip/node_modules/@hapi/topo/",\
         "packageDependencies": [\
@@ -5313,7 +5298,7 @@ const RAW_RUNTIME_STATE =
       ["virtual:86813c6619a0f23c04e420fa41e8d16a9a3dc192f1e564c6be7f1fcee880ad42df91849be108c26a99fb40b51e466a1cfd8f3d873db7ec0095935fc8069acc72#npm:0.217.0", {\
         "packageLocation": "./.yarn/__virtual__/@opentelemetry-exporter-logs-otlp-grpc-virtual-322a2107a6/0/cache/@opentelemetry-exporter-logs-otlp-grpc-npm-0.217.0-1aba175e82-1252008c53.zip/node_modules/@opentelemetry/exporter-logs-otlp-grpc/",\
         "packageDependencies": [\
-          ["@grpc/grpc-js", "npm:1.14.3"],\
+          ["@grpc/grpc-js", "npm:1.14.4"],\
           ["@opentelemetry/api", "npm:1.9.0"],\
           ["@opentelemetry/core", "virtual:760f78f935d4e037d0342f8c1730746f28c0c7bd47f642705712ad91685324b45d4e454ba9fb8eb12f0955b9ce25c7a13ec90e4c3ccf9e0a8e6a37c566975f97#npm:2.7.1"],\
           ["@opentelemetry/exporter-logs-otlp-grpc", "virtual:86813c6619a0f23c04e420fa41e8d16a9a3dc192f1e564c6be7f1fcee880ad42df91849be108c26a99fb40b51e466a1cfd8f3d873db7ec0095935fc8069acc72#npm:0.217.0"],\
@@ -5422,7 +5407,7 @@ const RAW_RUNTIME_STATE =
       ["virtual:86813c6619a0f23c04e420fa41e8d16a9a3dc192f1e564c6be7f1fcee880ad42df91849be108c26a99fb40b51e466a1cfd8f3d873db7ec0095935fc8069acc72#npm:0.217.0", {\
         "packageLocation": "./.yarn/__virtual__/@opentelemetry-exporter-metrics-otlp-grpc-virtual-6a05ab8be9/0/cache/@opentelemetry-exporter-metrics-otlp-grpc-npm-0.217.0-2a43c48f75-6f2af4efb0.zip/node_modules/@opentelemetry/exporter-metrics-otlp-grpc/",\
         "packageDependencies": [\
-          ["@grpc/grpc-js", "npm:1.14.3"],\
+          ["@grpc/grpc-js", "npm:1.14.4"],\
           ["@opentelemetry/api", "npm:1.9.0"],\
           ["@opentelemetry/core", "virtual:760f78f935d4e037d0342f8c1730746f28c0c7bd47f642705712ad91685324b45d4e454ba9fb8eb12f0955b9ce25c7a13ec90e4c3ccf9e0a8e6a37c566975f97#npm:2.7.1"],\
           ["@opentelemetry/exporter-metrics-otlp-grpc", "virtual:86813c6619a0f23c04e420fa41e8d16a9a3dc192f1e564c6be7f1fcee880ad42df91849be108c26a99fb40b51e466a1cfd8f3d873db7ec0095935fc8069acc72#npm:0.217.0"],\
@@ -5584,7 +5569,7 @@ const RAW_RUNTIME_STATE =
       ["virtual:86813c6619a0f23c04e420fa41e8d16a9a3dc192f1e564c6be7f1fcee880ad42df91849be108c26a99fb40b51e466a1cfd8f3d873db7ec0095935fc8069acc72#npm:0.217.0", {\
         "packageLocation": "./.yarn/__virtual__/@opentelemetry-exporter-trace-otlp-grpc-virtual-e72fea282f/0/cache/@opentelemetry-exporter-trace-otlp-grpc-npm-0.217.0-a227c92ff9-cf42d91999.zip/node_modules/@opentelemetry/exporter-trace-otlp-grpc/",\
         "packageDependencies": [\
-          ["@grpc/grpc-js", "npm:1.14.3"],\
+          ["@grpc/grpc-js", "npm:1.14.4"],\
           ["@opentelemetry/api", "npm:1.9.0"],\
           ["@opentelemetry/core", "virtual:760f78f935d4e037d0342f8c1730746f28c0c7bd47f642705712ad91685324b45d4e454ba9fb8eb12f0955b9ce25c7a13ec90e4c3ccf9e0a8e6a37c566975f97#npm:2.7.1"],\
           ["@opentelemetry/exporter-trace-otlp-grpc", "virtual:86813c6619a0f23c04e420fa41e8d16a9a3dc192f1e564c6be7f1fcee880ad42df91849be108c26a99fb40b51e466a1cfd8f3d873db7ec0095935fc8069acc72#npm:0.217.0"],\
@@ -5966,7 +5951,7 @@ const RAW_RUNTIME_STATE =
       ["virtual:322a2107a6aa310c2a06b3448cb9bb76d7bbf254e8660a79ccc09aa7c7484ea03bf1600695c5f1a72214540162ed6438abe5c04b57cef81244dfd24705486c1b#npm:0.217.0", {\
         "packageLocation": "./.yarn/__virtual__/@opentelemetry-otlp-grpc-exporter-base-virtual-0a8cecbaf1/0/cache/@opentelemetry-otlp-grpc-exporter-base-npm-0.217.0-a4173280f0-baf6217fa8.zip/node_modules/@opentelemetry/otlp-grpc-exporter-base/",\
         "packageDependencies": [\
-          ["@grpc/grpc-js", "npm:1.14.3"],\
+          ["@grpc/grpc-js", "npm:1.14.4"],\
           ["@opentelemetry/api", "npm:1.9.0"],\
           ["@opentelemetry/core", "virtual:760f78f935d4e037d0342f8c1730746f28c0c7bd47f642705712ad91685324b45d4e454ba9fb8eb12f0955b9ce25c7a13ec90e4c3ccf9e0a8e6a37c566975f97#npm:2.7.1"],\
           ["@opentelemetry/otlp-exporter-base", "virtual:86813c6619a0f23c04e420fa41e8d16a9a3dc192f1e564c6be7f1fcee880ad42df91849be108c26a99fb40b51e466a1cfd8f3d873db7ec0095935fc8069acc72#npm:0.217.0"],\
@@ -7085,34 +7070,6 @@ const RAW_RUNTIME_STATE =
         "packagePeers": [\
           "@redis/client",\
           "@types/redis__client"\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@sideway/address", [\
-      ["npm:4.1.5", {\
-        "packageLocation": "./.yarn/cache/@sideway-address-npm-4.1.5-a3852745c8-c4c73ac033.zip/node_modules/@sideway/address/",\
-        "packageDependencies": [\
-          ["@hapi/hoek", "npm:9.3.0"],\
-          ["@sideway/address", "npm:4.1.5"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@sideway/formula", [\
-      ["npm:3.0.1", {\
-        "packageLocation": "./.yarn/cache/@sideway-formula-npm-3.0.1-ee371b2ddf-8d3ee7f80d.zip/node_modules/@sideway/formula/",\
-        "packageDependencies": [\
-          ["@sideway/formula", "npm:3.0.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@sideway/pinpoint", [\
-      ["npm:2.0.0", {\
-        "packageLocation": "./.yarn/cache/@sideway-pinpoint-npm-2.0.0-66d94e687e-1ed2180012.zip/node_modules/@sideway/pinpoint/",\
-        "packageDependencies": [\
-          ["@sideway/pinpoint", "npm:2.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -10418,7 +10375,7 @@ const RAW_RUNTIME_STATE =
           ["html-minifier-terser", "npm:7.2.0"],\
           ["inquirer", "npm:8.2.7"],\
           ["invisi-data", "npm:1.2.0"],\
-          ["joi", "npm:18.1.2"],\
+          ["joi", "npm:18.2.1"],\
           ["js-beautify", "npm:1.15.4"],\
           ["lodash.clonedeep", "npm:4.5.0"],\
           ["lodash.merge", "npm:4.6.2"],\
@@ -12372,7 +12329,7 @@ const RAW_RUNTIME_STATE =
           ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.20.2"],\
           ["futoin-hkdf", "npm:1.5.3"],\
           ["http-errors", "npm:1.8.1"],\
-          ["joi", "npm:17.13.3"],\
+          ["joi", "npm:18.2.1"],\
           ["jose", "npm:2.0.7"],\
           ["on-headers", "npm:1.1.0"],\
           ["openid-client", "npm:4.9.1"],\
@@ -15243,20 +15200,8 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["joi", [\
-      ["npm:17.13.3", {\
-        "packageLocation": "./.yarn/cache/joi-npm-17.13.3-866dad5bc8-4c150db0c8.zip/node_modules/joi/",\
-        "packageDependencies": [\
-          ["@hapi/hoek", "npm:9.3.0"],\
-          ["@hapi/topo", "npm:5.1.0"],\
-          ["@sideway/address", "npm:4.1.5"],\
-          ["@sideway/formula", "npm:3.0.1"],\
-          ["@sideway/pinpoint", "npm:2.0.0"],\
-          ["joi", "npm:17.13.3"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:18.1.2", {\
-        "packageLocation": "./.yarn/cache/joi-npm-18.1.2-ccb86d5c83-a045c12e1f.zip/node_modules/joi/",\
+      ["npm:18.2.1", {\
+        "packageLocation": "./.yarn/cache/joi-npm-18.2.1-605c065693-1525745571.zip/node_modules/joi/",\
         "packageDependencies": [\
           ["@hapi/address", "npm:5.1.1"],\
           ["@hapi/formula", "npm:3.0.2"],\
@@ -15265,7 +15210,7 @@ const RAW_RUNTIME_STATE =
           ["@hapi/tlds", "npm:1.1.4"],\
           ["@hapi/topo", "npm:6.0.2"],\
           ["@standard-schema/spec", "npm:1.1.0"],\
-          ["joi", "npm:18.1.2"]\
+          ["joi", "npm:18.2.1"]\
         ],\
         "linkType": "HARD"\
       }]\
