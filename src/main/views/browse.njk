@@ -48,6 +48,31 @@
     <h2 class="govuk-heading-m">
       {{ title }}
     </h2>
+
+    {% if isSuperUser %}
+      <form method="GET" action="/browse" class="govuk-!-margin-bottom-6">
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="caseReference">
+            Case reference
+          </label>
+          <input
+            class="govuk-input govuk-input--width-20"
+            id="caseReference"
+            name="caseReference"
+            type="text"
+            value="{{ caseReference }}"
+          >
+        </div>
+
+        <button class="govuk-button" type="submit">
+          Search
+        </button>
+        {% if caseReference %}
+          <a class="govuk-link govuk-!-margin-left-3" href="/browse">Clear search</a>
+        {% endif %}
+      </form>
+    {% endif %}
+
     <div style="overflow-x: auto; width: 100%;">
       <table class="govuk-table">
         <thead class="govuk-table__head">
@@ -129,6 +154,9 @@
               {% if enableAutomatedEditing == true %}
                 <td class="govuk-table__cell">
                   {% if recording.version == 1 %}
+                    <strong class="govuk-tag govuk-tag--green">
+                      Original
+                    </strong>
                   {% elif recording.edit_status == "DRAFT" %}
                     <strong class="govuk-tag govuk-tag--grey">
                       Draft

@@ -25,29 +25,14 @@ When('I am on the {string} page', (path: string) => {
   I.amOnPage(url.toString());
 });
 
-Then('I sign in with valid credentials as the test user', () => {
+Then('I sign in with valid credentials as the test user', async () => {
   const login = config.b2c.testLogin;
-  signIn(login.email as string, login.password as string);
-
-  // handle dodgy B2C login where bounces back to login form 1 time...sometimes.
-  I.grabCurrentUrl().then(url => {
-    if (url.includes('/authorize')) {
-      const login = config.b2c.testLogin;
-      signIn(login.email as string, login.password as string);
-    }
-  });
+  await signInWithRetry(login.email as string, login.password as string);
 });
 
-Then('I sign in with valid credentials as a super user', () => {
+Then('I sign in with valid credentials as a super user', async () => {
   const login = config.b2c.testSuperUserLogin;
-  signIn(login.email as string, login.password as string);
-
-  I.grabCurrentUrl().then(url => {
-    if (url.includes('/authorize')) {
-      const login = config.b2c.testSuperUserLogin;
-      signIn(login.email as string, login.password as string);
-    }
-  });
+  await signInWithRetry(login.email as string, login.password as string);
 });
 
 Then('I accept the terms and conditions if I need to', async () => {
@@ -74,25 +59,18 @@ Then('I click the link {string}', (text: string) => {
   I.click(locate('a').withText(text));
 });
 
-Then('I enter a valid email address', () => {
+Then('I enter a valid email address', async () => {
   const login = config.b2c.testLogin;
-  sendVerifictionCode(login.email as string);
+  await sendVerifictionCode(login.email as string);
 });
 
-Then('I sign in with an unknown user', () => {
-  signIn('email@hmcts.net', 'this is a password');
+Then('I sign in with an unknown user', async () => {
+  await signInWithRetry('email@hmcts.net', 'this is a password');
 });
 
-Then('I sign in with the wrong password', () => {
+Then('I sign in with the wrong password', async () => {
   const login = config.b2c.testLogin;
-  signIn(login.email as string, 'this is not the password');
-
-  // handle dodgy B2C login where bounces back to login form 1 time...sometimes.
-  I.grabCurrentUrl().then(url => {
-    if (url.includes('/authorize')) {
-      signIn(login.email as string, 'this is not the password');
-    }
-  });
+  await signInWithRetry(login.email as string, 'this is not the password');
 });
 
 When('I click on play on a browse page', () => {
@@ -119,7 +97,7 @@ Then('recording is played', async () => {
   I.wait(5);
   I.click('Play/Pause');
   const currentTime = await I.grabTextFrom('.bmpui-ui-playbacktimelabel:nth-of-type(2)');
-  if (!currentTime.match(/^\d{2}:\d{2}$/)) {
+  if (!currentTime.match(/^\d{2}:\d{2}(:\d{2})?$/)) {
     throw new Error(`Invalid playback time format: ${currentTime}`);
   }
 
@@ -129,19 +107,36 @@ Then('recording is played', async () => {
   I.say('Video is playing successfully!');
 });
 
-function signIn(emailAddress: string, password: string) {
-  fillFieldWhenReady('signInName', emailAddress);
-  fillFieldWhenReady('password', password);
-  I.click('Sign in');
+async function signInWithRetry(emailAddress: string, password: string) {
+  await signIn(emailAddress, password);
+
+  // B2C occasionally bounces back to the login form once. Retry only when the form is still present.
+  await I.wait(3);
+  const shouldRetry = await I.executeScript(() => {
+    const url = window.location.href;
+    return (
+      url.includes('/authorize') && !!document.querySelector('#signInName') && !!document.querySelector('#password')
+    );
+  });
+
+  if (shouldRetry) {
+    await signIn(emailAddress, password);
+  }
 }
 
-function sendVerifictionCode(emailAddress: string) {
-  fillFieldWhenReady('email', emailAddress);
-  I.click('Send verification code');
+async function signIn(emailAddress: string, password: string) {
+  await fillFieldWhenReady('signInName', emailAddress);
+  await fillFieldWhenReady('password', password);
+  await I.click('Sign in');
 }
 
-function fillFieldWhenReady(id: string, value: string, timeout = 5) {
+async function sendVerifictionCode(emailAddress: string) {
+  await fillFieldWhenReady('email', emailAddress);
+  await I.click('Send verification code');
+}
+
+async function fillFieldWhenReady(id: string, value: string, timeout = 5) {
   const locator = { id: id };
-  I.waitForElement(locator, timeout);
-  I.fillField(locator, value);
+  await I.waitForElement(locator, timeout);
+  await I.fillField(locator, value);
 }

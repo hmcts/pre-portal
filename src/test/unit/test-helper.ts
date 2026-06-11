@@ -71,6 +71,9 @@ export function mockUser() {
         getLoggedInUserPortalId: jest.fn().mockImplementation((req: Express.Request) => {
           return '123';
         }),
+        getLoggedInUserBrowseId: jest.fn().mockImplementation((req: Express.Request) => {
+          return 'super-user-access-id';
+        }),
         getLoggedInUserProfile: jest.fn().mockImplementation((req: Express.Request) => {
           return mockeduser;
         }),
