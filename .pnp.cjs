@@ -38,7 +38,7 @@ const RAW_RUNTIME_STATE =
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.4.0"],\
           ["@jest/globals", "npm:30.3.0"],\
-          ["@mediakind/mkplayer", "npm:1.36.1"],\
+          ["@mediakind/mkplayer", "npm:1.39.0"],\
           ["@opentelemetry/api", "npm:1.9.1"],\
           ["@opentelemetry/context-async-hooks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.6.1"],\
           ["@types/body-parser", "npm:1.19.6"],\
@@ -5013,11 +5013,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@mediakind/mkplayer", [\
-      ["npm:1.36.1", {\
-        "packageLocation": "./.yarn/cache/@mediakind-mkplayer-npm-1.36.1-6789e630d4-0903a56e7d.zip/node_modules/@mediakind/mkplayer/",\
+      ["npm:1.39.0", {\
+        "packageLocation": "./.yarn/cache/@mediakind-mkplayer-npm-1.39.0-b412d079ba-bb1723be45.zip/node_modules/@mediakind/mkplayer/",\
         "packageDependencies": [\
-          ["@mediakind/mkplayer", "npm:1.36.1"],\
-          ["bitmovin-player", "npm:8.250.0"],\
+          ["@mediakind/mkplayer", "npm:1.39.0"],\
+          ["bitmovin-player", "npm:8.260.0"],\
           ["bitmovin-player-ui", "npm:3.105.3"]\
         ],\
         "linkType": "HARD"\
@@ -9499,10 +9499,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["bitmovin-player", [\
-      ["npm:8.250.0", {\
-        "packageLocation": "./.yarn/cache/bitmovin-player-npm-8.250.0-0e548b6d49-9ad6142612.zip/node_modules/bitmovin-player/",\
+      ["npm:8.260.0", {\
+        "packageLocation": "./.yarn/cache/bitmovin-player-npm-8.260.0-7365c62252-7ba2835840.zip/node_modules/bitmovin-player/",\
         "packageDependencies": [\
-          ["bitmovin-player", "npm:8.250.0"]\
+          ["bitmovin-player", "npm:8.260.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17886,7 +17886,7 @@ const RAW_RUNTIME_STATE =
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.4.0"],\
           ["@jest/globals", "npm:30.3.0"],\
-          ["@mediakind/mkplayer", "npm:1.36.1"],\
+          ["@mediakind/mkplayer", "npm:1.39.0"],\
           ["@opentelemetry/api", "npm:1.9.1"],\
           ["@opentelemetry/context-async-hooks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.6.1"],\
           ["@types/body-parser", "npm:1.19.6"],\
