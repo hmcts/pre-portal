@@ -5053,30 +5053,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["@npmcli/agent", [\
-      ["npm:4.0.0", {\
-        "packageLocation": "./.yarn/cache/@npmcli-agent-npm-4.0.0-502e5ae4f0-1a81573bec.zip/node_modules/@npmcli/agent/",\
-        "packageDependencies": [\
-          ["@npmcli/agent", "npm:4.0.0"],\
-          ["agent-base", "npm:7.1.4"],\
-          ["http-proxy-agent", "npm:7.0.2"],\
-          ["https-proxy-agent", "npm:7.0.6"],\
-          ["lru-cache", "npm:11.2.4"],\
-          ["socks-proxy-agent", "npm:8.0.5"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@npmcli/fs", [\
-      ["npm:5.0.0", {\
-        "packageLocation": "./.yarn/cache/@npmcli-fs-npm-5.0.0-9d737ae2f3-4935c7719d.zip/node_modules/@npmcli/fs/",\
-        "packageDependencies": [\
-          ["@npmcli/fs", "npm:5.0.0"],\
-          ["semver", "npm:7.7.4"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["@one-ini/wasm", [\
       ["npm:0.1.1", {\
         "packageLocation": "./.yarn/cache/@one-ini-wasm-npm-0.1.1-cee8120e33-673c11518d.zip/node_modules/@one-ini/wasm/",\
@@ -6555,7 +6531,7 @@ const RAW_RUNTIME_STATE =
           ["is-glob", "npm:4.0.3"],\
           ["micromatch", "npm:4.0.8"],\
           ["node-addon-api", "npm:7.1.1"],\
-          ["node-gyp", "npm:12.2.0"]\
+          ["node-gyp", "npm:12.4.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -9835,26 +9811,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["cacache", [\
-      ["npm:20.0.3", {\
-        "packageLocation": "./.yarn/cache/cacache-npm-20.0.3-5f244d5bdd-388a016997.zip/node_modules/cacache/",\
-        "packageDependencies": [\
-          ["@npmcli/fs", "npm:5.0.0"],\
-          ["cacache", "npm:20.0.3"],\
-          ["fs-minipass", "npm:3.0.3"],\
-          ["glob", "npm:13.0.0"],\
-          ["lru-cache", "npm:11.2.4"],\
-          ["minipass", "npm:7.1.2"],\
-          ["minipass-collect", "npm:2.0.1"],\
-          ["minipass-flush", "npm:1.0.5"],\
-          ["minipass-pipeline", "npm:1.2.4"],\
-          ["p-map", "npm:7.0.4"],\
-          ["ssri", "npm:13.0.0"],\
-          ["unique-filename", "npm:5.0.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["cacheable-lookup", [\
       ["npm:5.0.4", {\
         "packageLocation": "./.yarn/cache/cacheable-lookup-npm-5.0.4-8f13e8b44b-618a8b3eea.zip/node_modules/cacheable-lookup/",\
@@ -11488,7 +11444,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["dtrace-provider", "npm:0.8.8"],\
           ["nan", "npm:2.24.0"],\
-          ["node-gyp", "npm:12.2.0"]\
+          ["node-gyp", "npm:12.4.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -11640,16 +11596,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["encoding", [\
-      ["npm:0.1.13", {\
-        "packageLocation": "./.yarn/cache/encoding-npm-0.1.13-82a1837d30-bb98632f8f.zip/node_modules/encoding/",\
-        "packageDependencies": [\
-          ["encoding", "npm:0.1.13"],\
-          ["iconv-lite", "npm:0.6.3"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["encoding-sniffer", [\
       ["npm:0.2.1", {\
         "packageLocation": "./.yarn/cache/encoding-sniffer-npm-0.2.1-55db9e1e21-7d74723823.zip/node_modules/encoding-sniffer/",\
@@ -11753,13 +11699,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/err-code-npm-1.1.2-76c4ec5eff-f2bd853e35.zip/node_modules/err-code/",\
         "packageDependencies": [\
           ["err-code", "npm:1.1.2"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:2.0.3", {\
-        "packageLocation": "./.yarn/cache/err-code-npm-2.0.3-082e0ff9a7-1d20d825cd.zip/node_modules/err-code/",\
-        "packageDependencies": [\
-          ["err-code", "npm:2.0.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -12765,16 +12704,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["fs-minipass", [\
-      ["npm:3.0.3", {\
-        "packageLocation": "./.yarn/cache/fs-minipass-npm-3.0.3-d148d6ac19-af143246cf.zip/node_modules/fs-minipass/",\
-        "packageDependencies": [\
-          ["fs-minipass", "npm:3.0.3"],\
-          ["minipass", "npm:7.1.2"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["fs.realpath", [\
       ["npm:1.0.0", {\
         "packageLocation": "./.yarn/cache/fs.realpath-npm-1.0.0-c8f05d8126-e703107c28.zip/node_modules/fs.realpath/",\
@@ -12789,7 +12718,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/fsevents-patch-19706e7e35/node_modules/fsevents/",\
         "packageDependencies": [\
           ["fsevents", "patch:fsevents@npm%3A2.3.2#optional!builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"],\
-          ["node-gyp", "npm:12.2.0"]\
+          ["node-gyp", "npm:12.4.0"]\
         ],\
         "linkType": "HARD"\
       }],\
@@ -12797,7 +12726,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/fsevents-patch-6b67494872/node_modules/fsevents/",\
         "packageDependencies": [\
           ["fsevents", "patch:fsevents@npm%3A2.3.3#optional!builtin<compat/fsevents>::version=2.3.3&hash=df0bf1"],\
-          ["node-gyp", "npm:12.2.0"]\
+          ["node-gyp", "npm:12.4.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -13004,16 +12933,6 @@ const RAW_RUNTIME_STATE =
           ["minimatch", "npm:10.2.5"],\
           ["minipass", "npm:7.1.2"],\
           ["package-json-from-dist", "npm:1.0.1"],\
-          ["path-scurry", "npm:2.0.1"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:13.0.0", {\
-        "packageLocation": "./.yarn/cache/glob-npm-13.0.0-8e50143ca8-de390721d2.zip/node_modules/glob/",\
-        "packageDependencies": [\
-          ["glob", "npm:13.0.0"],\
-          ["minimatch", "npm:10.2.5"],\
-          ["minipass", "npm:7.1.2"],\
           ["path-scurry", "npm:2.0.1"]\
         ],\
         "linkType": "HARD"\
@@ -15860,26 +15779,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["make-fetch-happen", [\
-      ["npm:15.0.3", {\
-        "packageLocation": "./.yarn/cache/make-fetch-happen-npm-15.0.3-10a832fcad-78da4fc1df.zip/node_modules/make-fetch-happen/",\
-        "packageDependencies": [\
-          ["@npmcli/agent", "npm:4.0.0"],\
-          ["cacache", "npm:20.0.3"],\
-          ["http-cache-semantics", "npm:4.2.0"],\
-          ["make-fetch-happen", "npm:15.0.3"],\
-          ["minipass", "npm:7.1.2"],\
-          ["minipass-fetch", "npm:5.0.0"],\
-          ["minipass-flush", "npm:1.0.5"],\
-          ["minipass-pipeline", "npm:1.2.4"],\
-          ["negotiator", "npm:1.0.0"],\
-          ["proc-log", "npm:6.1.0"],\
-          ["promise-retry", "npm:2.0.1"],\
-          ["ssri", "npm:13.0.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["makeerror", [\
       ["npm:1.0.12", {\
         "packageLocation": "./.yarn/cache/makeerror-npm-1.0.12-69abf085d7-4c66ddfc65.zip/node_modules/makeerror/",\
@@ -16427,14 +16326,6 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["minipass", [\
-      ["npm:3.3.6", {\
-        "packageLocation": "./.yarn/cache/minipass-npm-3.3.6-b8d93a945b-a5c6ef069f.zip/node_modules/minipass/",\
-        "packageDependencies": [\
-          ["minipass", "npm:3.3.6"],\
-          ["yallist", "npm:4.0.0"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
       ["npm:7.1.2", {\
         "packageLocation": "./.yarn/cache/minipass-npm-7.1.2-3a5327d36d-c25f0ee819.zip/node_modules/minipass/",\
         "packageDependencies": [\
@@ -16446,59 +16337,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/minipass-npm-7.1.3-b73a16498d-175e4d5e20.zip/node_modules/minipass/",\
         "packageDependencies": [\
           ["minipass", "npm:7.1.3"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["minipass-collect", [\
-      ["npm:2.0.1", {\
-        "packageLocation": "./.yarn/cache/minipass-collect-npm-2.0.1-73d3907e40-b251bceea6.zip/node_modules/minipass-collect/",\
-        "packageDependencies": [\
-          ["minipass", "npm:7.1.2"],\
-          ["minipass-collect", "npm:2.0.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["minipass-fetch", [\
-      ["npm:5.0.0", {\
-        "packageLocation": "./.yarn/cache/minipass-fetch-npm-5.0.0-e53c2bae4c-4fb7dca630.zip/node_modules/minipass-fetch/",\
-        "packageDependencies": [\
-          ["encoding", "npm:0.1.13"],\
-          ["minipass", "npm:7.1.2"],\
-          ["minipass-fetch", "npm:5.0.0"],\
-          ["minipass-sized", "npm:1.0.3"],\
-          ["minizlib", "npm:3.1.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["minipass-flush", [\
-      ["npm:1.0.5", {\
-        "packageLocation": "./.yarn/cache/minipass-flush-npm-1.0.5-efe79d9826-56269a0b22.zip/node_modules/minipass-flush/",\
-        "packageDependencies": [\
-          ["minipass", "npm:3.3.6"],\
-          ["minipass-flush", "npm:1.0.5"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["minipass-pipeline", [\
-      ["npm:1.2.4", {\
-        "packageLocation": "./.yarn/cache/minipass-pipeline-npm-1.2.4-5924cb077f-b14240dac0.zip/node_modules/minipass-pipeline/",\
-        "packageDependencies": [\
-          ["minipass", "npm:3.3.6"],\
-          ["minipass-pipeline", "npm:1.2.4"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["minipass-sized", [\
-      ["npm:1.0.3", {\
-        "packageLocation": "./.yarn/cache/minipass-sized-npm-1.0.3-306d86f432-40982d8d83.zip/node_modules/minipass-sized/",\
-        "packageDependencies": [\
-          ["minipass", "npm:3.3.6"],\
-          ["minipass-sized", "npm:1.0.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16732,7 +16570,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/nan-npm-2.24.0-1c44df59f9/node_modules/nan/",\
         "packageDependencies": [\
           ["nan", "npm:2.24.0"],\
-          ["node-gyp", "npm:12.2.0"]\
+          ["node-gyp", "npm:12.4.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16823,25 +16661,25 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/node-addon-api-npm-7.1.1-bfb302df19/node_modules/node-addon-api/",\
         "packageDependencies": [\
           ["node-addon-api", "npm:7.1.1"],\
-          ["node-gyp", "npm:12.2.0"]\
+          ["node-gyp", "npm:12.4.0"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["node-gyp", [\
-      ["npm:12.2.0", {\
-        "packageLocation": "./.yarn/unplugged/node-gyp-npm-12.2.0-11f8fe84f1/node_modules/node-gyp/",\
+      ["npm:12.4.0", {\
+        "packageLocation": "./.yarn/unplugged/node-gyp-npm-12.4.0-f7babd45bd/node_modules/node-gyp/",\
         "packageDependencies": [\
           ["env-paths", "npm:2.2.1"],\
           ["exponential-backoff", "npm:3.1.3"],\
           ["graceful-fs", "npm:4.2.11"],\
-          ["make-fetch-happen", "npm:15.0.3"],\
-          ["node-gyp", "npm:12.2.0"],\
+          ["node-gyp", "npm:12.4.0"],\
           ["nopt", "npm:9.0.0"],\
           ["proc-log", "npm:6.1.0"],\
           ["semver", "npm:7.7.4"],\
           ["tar", "npm:7.5.13"],\
           ["tinyglobby", "npm:0.2.15"],\
+          ["undici", "npm:6.26.0"],\
           ["which", "npm:6.0.0"]\
         ],\
         "linkType": "HARD"\
@@ -17322,15 +17160,6 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["p-limit", "npm:3.1.0"],\
           ["p-locate", "npm:5.0.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["p-map", [\
-      ["npm:7.0.4", {\
-        "packageLocation": "./.yarn/cache/p-map-npm-7.0.4-39386109d0-ef48c3b2e4.zip/node_modules/p-map/",\
-        "packageDependencies": [\
-          ["p-map", "npm:7.0.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -18072,15 +17901,6 @@ const RAW_RUNTIME_STATE =
           ["err-code", "npm:1.1.2"],\
           ["promise-retry", "npm:1.1.1"],\
           ["retry", "npm:0.10.1"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:2.0.1", {\
-        "packageLocation": "./.yarn/cache/promise-retry-npm-2.0.1-871f0b01b7-96e1a82453.zip/node_modules/promise-retry/",\
-        "packageDependencies": [\
-          ["err-code", "npm:2.0.3"],\
-          ["promise-retry", "npm:2.0.1"],\
-          ["retry", "npm:0.12.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -19404,16 +19224,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["ssri", [\
-      ["npm:13.0.0", {\
-        "packageLocation": "./.yarn/cache/ssri-npm-13.0.0-f5fa93375d-fd59bfedf0.zip/node_modules/ssri/",\
-        "packageDependencies": [\
-          ["minipass", "npm:7.1.2"],\
-          ["ssri", "npm:13.0.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["stack-trace", [\
       ["npm:0.0.10", {\
         "packageLocation": "./.yarn/cache/stack-trace-npm-0.0.10-9460b173e1-7bd633f0e9.zip/node_modules/stack-trace/",\
@@ -20479,6 +20289,13 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["undici", [\
+      ["npm:6.26.0", {\
+        "packageLocation": "./.yarn/cache/undici-npm-6.26.0-aa9f162436-a1715ee430.zip/node_modules/undici/",\
+        "packageDependencies": [\
+          ["undici", "npm:6.26.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:7.25.0", {\
         "packageLocation": "./.yarn/cache/undici-npm-7.25.0-06372b6dbc-038d3568c7.zip/node_modules/undici/",\
         "packageDependencies": [\
@@ -20537,26 +20354,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/unicode-property-aliases-ecmascript-npm-2.2.0-55d7728914-0dd0f6e701.zip/node_modules/unicode-property-aliases-ecmascript/",\
         "packageDependencies": [\
           ["unicode-property-aliases-ecmascript", "npm:2.2.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["unique-filename", [\
-      ["npm:5.0.0", {\
-        "packageLocation": "./.yarn/cache/unique-filename-npm-5.0.0-605f54f18e-a5f67085ca.zip/node_modules/unique-filename/",\
-        "packageDependencies": [\
-          ["unique-filename", "npm:5.0.0"],\
-          ["unique-slug", "npm:6.0.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["unique-slug", [\
-      ["npm:6.0.0", {\
-        "packageLocation": "./.yarn/cache/unique-slug-npm-6.0.0-f26b186e99-b78ed9d5b0.zip/node_modules/unique-slug/",\
-        "packageDependencies": [\
-          ["imurmurhash", "npm:0.1.4"],\
-          ["unique-slug", "npm:6.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
