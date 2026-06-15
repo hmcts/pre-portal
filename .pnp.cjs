@@ -263,7 +263,7 @@ const RAW_RUNTIME_STATE =
           ["@azure/functions", "npm:3.5.1"],\
           ["iconv-lite", "npm:0.6.3"],\
           ["long", "npm:4.0.0"],\
-          ["uuid", "npm:8.3.2"]\
+          ["uuid", "npm:11.1.1"]\
         ],\
         "linkType": "HARD"\
       }],\
@@ -460,7 +460,7 @@ const RAW_RUNTIME_STATE =
           ["@azure/msal-common", "npm:15.13.3"],\
           ["@azure/msal-node", "npm:3.8.4"],\
           ["jsonwebtoken", "npm:9.0.3"],\
-          ["uuid", "npm:8.3.2"]\
+          ["uuid", "npm:11.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -10381,7 +10381,7 @@ const RAW_RUNTIME_STATE =
           ["promise-retry", "npm:1.1.1"],\
           ["resq", "npm:1.11.0"],\
           ["sprintf-js", "npm:1.1.3"],\
-          ["uuid", "npm:11.1.0"]\
+          ["uuid", "npm:11.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -20712,24 +20712,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["uuid", [\
-      ["npm:11.1.0", {\
-        "packageLocation": "./.yarn/cache/uuid-npm-11.1.0-61d0d08928-d2da43b49b.zip/node_modules/uuid/",\
-        "packageDependencies": [\
-          ["uuid", "npm:11.1.0"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
       ["npm:11.1.1", {\
         "packageLocation": "./.yarn/cache/uuid-npm-11.1.1-311687c807-16411d3dc1.zip/node_modules/uuid/",\
         "packageDependencies": [\
           ["uuid", "npm:11.1.1"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:8.3.2", {\
-        "packageLocation": "./.yarn/cache/uuid-npm-8.3.2-eca0baba53-9a5f7aa1d6.zip/node_modules/uuid/",\
-        "packageDependencies": [\
-          ["uuid", "npm:8.3.2"]\
         ],\
         "linkType": "HARD"\
       }]\
