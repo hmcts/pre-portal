@@ -123,7 +123,7 @@
   "resolutions": {
     "@azure/monitor-opentelemetry": "1.18.0",
     "@opentelemetry/instrumentation": "0.214.0",
-    "axios": "1.16.0",
+    "axios": "1.18.0",
     "basic-ftp": "5.3.1",
     "protobufjs": "^7.5.8",
     "bfj": "9.1.3",
