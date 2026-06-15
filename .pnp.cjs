@@ -53,7 +53,7 @@ const RAW_RUNTIME_STATE =
           ["@types/serve-favicon", "npm:2.5.7"],\
           ["@types/session-file-store", "npm:1.2.6"],\
           ["@types/supertest", "npm:7.2.0"],\
-          ["allure-commandline", "npm:2.38.1"],\
+          ["allure-commandline", "npm:2.42.1"],\
           ["applicationinsights", "npm:3.14.0"],\
           ["axios", "npm:1.16.0"],\
           ["babel-jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.3.0"],\
@@ -8593,10 +8593,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["allure-commandline", [\
-      ["npm:2.38.1", {\
-        "packageLocation": "./.yarn/unplugged/allure-commandline-npm-2.38.1-415f7d935e/node_modules/allure-commandline/",\
+      ["npm:2.42.1", {\
+        "packageLocation": "./.yarn/unplugged/allure-commandline-npm-2.42.1-88b31e6e62/node_modules/allure-commandline/",\
         "packageDependencies": [\
-          ["allure-commandline", "npm:2.38.1"]\
+          ["allure-commandline", "npm:2.42.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17901,7 +17901,7 @@ const RAW_RUNTIME_STATE =
           ["@types/serve-favicon", "npm:2.5.7"],\
           ["@types/session-file-store", "npm:1.2.6"],\
           ["@types/supertest", "npm:7.2.0"],\
-          ["allure-commandline", "npm:2.38.1"],\
+          ["allure-commandline", "npm:2.42.1"],\
           ["applicationinsights", "npm:3.14.0"],\
           ["axios", "npm:1.16.0"],\
           ["babel-jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.3.0"],\
