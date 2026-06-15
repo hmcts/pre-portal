@@ -1,0 +1,46 @@
+{
+  "id": "6b29ebfd-a7b9-4ba5-b288-061eff65f80b",
+  "parent_recording_id": "4edec90b-6b09-4d70-a87e-b54a6c50355b",
+  "version": 4,
+  "filename": "6b29ebfd-a7b9-4ba5-b288-061eff65_1280x720_4500k.mp4",
+  "duration": "PT1H54M29.3S",
+  "edit_instructions": "{\"ffmpegInstructions\": [{\"end\": 1200, \"start\": 0}, {\"end\": 7467, \"start\": 1800}], \"requestedInstructions\": [{\"end\": 1800, \"start\": 1200, \"reason\": \"Removing 10 minutes from version 1\", \"end_of_cut\": \"00:30:00\", \"start_of_cut\": \"00:20:00\"}]}",
+  "capture_session": {
+    "id": "141d20bb-ad7c-45bb-8596-a61a6435fb8e",
+    "booking_id": "109cf935-b4cf-446a-8fa4-4426b575298c",
+    "origin": "PRE",
+    "ingest_address": "rtmps://in-0af7c694-9c49-4fd9-bbc2-0344b5d5fec7.uksouth.streaming.mediakind.com:2935/a1f892c8-0416-4857-97fb-e9326bf43ee9",
+    "live_output_url": "https://ep-default-live-pre-mediakind-stg.uksouth.streaming.mediakind.com/141d20bbad7c45bb8596a61a6435fb8e/index.qfm/manifest(format=m3u8-cmaf)",
+    "started_at": "2025-07-03T14:39:53.277Z",
+    "started_by_user_id": "98dd94d3-9eb9-4b24-9afa-bb4365816e96",
+    "finished_at": "2025-07-03T16:51:04.236Z",
+    "finished_by_user_id": "98dd94d3-9eb9-4b24-9afa-bb4365816e96",
+    "status": "RECORDING_AVAILABLE",
+    "court_name": "Leeds Youth",
+    "case_state": "OPEN"
+  },
+  "created_at": "2025-08-22T12:49:10.934Z",
+  "case_id": "726614aa-a73b-4c4e-a223-18d8f89cec5c",
+  "case_reference": "DEV-LONGREC-1",
+  "is_test_case": false,
+  "participants": [
+    {
+      "id": "4ec6a3ff-e874-41a5-8ffe-e6a1cd30c7be",
+      "participant_type": "DEFENDANT",
+      "first_name": "Test",
+      "last_name": "Test1",
+      "created_at": "2025-07-03T14:31:37.929Z",
+      "modified_at": "2025-07-03T14:31:37.910Z"
+    },
+    {
+      "id": "5243463c-84f4-4603-af6f-1375661504cd",
+      "participant_type": "WITNESS",
+      "first_name": "Test",
+      "last_name": "",
+      "created_at": "2025-07-03T14:31:37.925Z",
+      "modified_at": "2025-07-03T14:31:37.907Z"
+    }
+  ],
+  "total_version_count": 4,
+  "edit_requests": []
+}
