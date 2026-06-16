@@ -130,7 +130,7 @@
     "cookie": "0.7.2",
     "fast-uri": "3.1.2",
     "ip-address": "10.2.0",
-    "js-yaml": "4.1.1",
+    "js-yaml": "4.2.0",
     "jsonwebtoken": "9.0.3",
     "mocha@npm:11.7.5/serialize-javascript": "7.0.5",
     "node-gyp": "12.4.0",
