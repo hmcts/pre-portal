@@ -4035,7 +4035,7 @@ const RAW_RUNTIME_STATE =
           ["@grpc/proto-loader", "npm:0.8.0"],\
           ["lodash.camelcase", "npm:4.3.0"],\
           ["long", "npm:5.3.2"],\
-          ["protobufjs", "npm:7.5.8"],\
+          ["protobufjs", "npm:7.6.4"],\
           ["yargs", "npm:17.7.2"]\
         ],\
         "linkType": "HARD"\
@@ -5969,7 +5969,7 @@ const RAW_RUNTIME_STATE =
           ["@opentelemetry/sdk-metrics", "virtual:2525e0dfa0bc29d132709579e6fc58180159b413066531a55262edc1e80870fa25bef77e2d04a50550d2b43176eaecc317bf28087850b6455942de017a3459a0#npm:2.2.0"],\
           ["@opentelemetry/sdk-trace-base", "virtual:2525e0dfa0bc29d132709579e6fc58180159b413066531a55262edc1e80870fa25bef77e2d04a50550d2b43176eaecc317bf28087850b6455942de017a3459a0#npm:2.2.0"],\
           ["@types/opentelemetry__api", null],\
-          ["protobufjs", "npm:7.5.8"]\
+          ["protobufjs", "npm:7.6.4"]\
         ],\
         "packagePeers": [\
           "@opentelemetry/api",\
@@ -5989,7 +5989,7 @@ const RAW_RUNTIME_STATE =
           ["@opentelemetry/sdk-metrics", "virtual:760f78f935d4e037d0342f8c1730746f28c0c7bd47f642705712ad91685324b45d4e454ba9fb8eb12f0955b9ce25c7a13ec90e4c3ccf9e0a8e6a37c566975f97#npm:2.7.1"],\
           ["@opentelemetry/sdk-trace-base", "virtual:760f78f935d4e037d0342f8c1730746f28c0c7bd47f642705712ad91685324b45d4e454ba9fb8eb12f0955b9ce25c7a13ec90e4c3ccf9e0a8e6a37c566975f97#npm:2.7.1"],\
           ["@types/opentelemetry__api", null],\
-          ["protobufjs", "npm:7.5.8"]\
+          ["protobufjs", "npm:7.6.4"]\
         ],\
         "packagePeers": [\
           "@opentelemetry/api",\
@@ -6699,21 +6699,20 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@protobufjs/eventemitter", [\
-      ["npm:1.1.0", {\
-        "packageLocation": "./.yarn/cache/@protobufjs-eventemitter-npm-1.1.0-029cc7d431-03af3e99f1.zip/node_modules/@protobufjs/eventemitter/",\
+      ["npm:1.1.1", {\
+        "packageLocation": "./.yarn/cache/@protobufjs-eventemitter-npm-1.1.1-dbe0dfc812-a54dc1aff4.zip/node_modules/@protobufjs/eventemitter/",\
         "packageDependencies": [\
-          ["@protobufjs/eventemitter", "npm:1.1.0"]\
+          ["@protobufjs/eventemitter", "npm:1.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["@protobufjs/fetch", [\
-      ["npm:1.1.0", {\
-        "packageLocation": "./.yarn/cache/@protobufjs-fetch-npm-1.1.0-ca857b7df4-67ae40572a.zip/node_modules/@protobufjs/fetch/",\
+      ["npm:1.1.1", {\
+        "packageLocation": "./.yarn/cache/@protobufjs-fetch-npm-1.1.1-b98d5396a8-427cf2da8c.zip/node_modules/@protobufjs/fetch/",\
         "packageDependencies": [\
           ["@protobufjs/aspromise", "npm:1.1.2"],\
-          ["@protobufjs/fetch", "npm:1.1.0"],\
-          ["@protobufjs/inquire", "npm:1.1.0"]\
+          ["@protobufjs/fetch", "npm:1.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6723,22 +6722,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@protobufjs-float-npm-1.0.2-5678f64d08-634c2c989d.zip/node_modules/@protobufjs/float/",\
         "packageDependencies": [\
           ["@protobufjs/float", "npm:1.0.2"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@protobufjs/inquire", [\
-      ["npm:1.1.0", {\
-        "packageLocation": "./.yarn/cache/@protobufjs-inquire-npm-1.1.0-3c7759e9ce-c09efa34a5.zip/node_modules/@protobufjs/inquire/",\
-        "packageDependencies": [\
-          ["@protobufjs/inquire", "npm:1.1.0"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:1.1.1", {\
-        "packageLocation": "./.yarn/cache/@protobufjs-inquire-npm-1.1.1-1f267bc97f-504740e8ac.zip/node_modules/@protobufjs/inquire/",\
-        "packageDependencies": [\
-          ["@protobufjs/inquire", "npm:1.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17943,22 +17926,21 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["protobufjs", [\
-      ["npm:7.5.8", {\
-        "packageLocation": "./.yarn/unplugged/protobufjs-npm-7.5.8-a1ce3bc6d1/node_modules/protobufjs/",\
+      ["npm:7.6.4", {\
+        "packageLocation": "./.yarn/unplugged/protobufjs-npm-7.6.4-97603a5239/node_modules/protobufjs/",\
         "packageDependencies": [\
           ["@protobufjs/aspromise", "npm:1.1.2"],\
           ["@protobufjs/base64", "npm:1.1.2"],\
           ["@protobufjs/codegen", "npm:2.0.5"],\
-          ["@protobufjs/eventemitter", "npm:1.1.0"],\
-          ["@protobufjs/fetch", "npm:1.1.0"],\
+          ["@protobufjs/eventemitter", "npm:1.1.1"],\
+          ["@protobufjs/fetch", "npm:1.1.1"],\
           ["@protobufjs/float", "npm:1.0.2"],\
-          ["@protobufjs/inquire", "npm:1.1.1"],\
           ["@protobufjs/path", "npm:1.1.2"],\
           ["@protobufjs/pool", "npm:1.1.0"],\
           ["@protobufjs/utf8", "npm:1.1.1"],\
           ["@types/node", "npm:25.0.3"],\
           ["long", "npm:5.3.2"],\
-          ["protobufjs", "npm:7.5.8"]\
+          ["protobufjs", "npm:7.6.4"]\
         ],\
         "linkType": "HARD"\
       }]\
