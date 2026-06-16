@@ -6679,7 +6679,7 @@ const RAW_RUNTIME_STATE =
           ["is-glob", "npm:4.0.3"],\
           ["micromatch", "npm:4.0.8"],\
           ["node-addon-api", "npm:7.1.1"],\
-          ["node-gyp", "npm:12.4.0"]\
+          ["node-gyp", "npm:13.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8449,10 +8449,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:4.0.0", {\
-        "packageLocation": "./.yarn/cache/abbrev-npm-4.0.0-7d848a1ef0-e2f0c6a670.zip/node_modules/abbrev/",\
+      ["npm:5.0.0", {\
+        "packageLocation": "./.yarn/cache/abbrev-npm-5.0.0-31d7ffe3c8-a32641fb7a.zip/node_modules/abbrev/",\
         "packageDependencies": [\
-          ["abbrev", "npm:4.0.0"]\
+          ["abbrev", "npm:5.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -11591,7 +11591,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["dtrace-provider", "npm:0.8.8"],\
           ["nan", "npm:2.24.0"],\
-          ["node-gyp", "npm:12.4.0"]\
+          ["node-gyp", "npm:13.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -12877,7 +12877,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/fsevents-patch-19706e7e35/node_modules/fsevents/",\
         "packageDependencies": [\
           ["fsevents", "patch:fsevents@npm%3A2.3.2#optional!builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"],\
-          ["node-gyp", "npm:12.4.0"]\
+          ["node-gyp", "npm:13.0.0"]\
         ],\
         "linkType": "HARD"\
       }],\
@@ -12885,7 +12885,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/fsevents-patch-6b67494872/node_modules/fsevents/",\
         "packageDependencies": [\
           ["fsevents", "patch:fsevents@npm%3A2.3.3#optional!builtin<compat/fsevents>::version=2.3.3&hash=df0bf1"],\
-          ["node-gyp", "npm:12.4.0"]\
+          ["node-gyp", "npm:13.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -14345,10 +14345,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:3.1.1", {\
-        "packageLocation": "./.yarn/cache/isexe-npm-3.1.1-9c0061eead-7fe1931ee4.zip/node_modules/isexe/",\
+      ["npm:4.0.0", {\
+        "packageLocation": "./.yarn/cache/isexe-npm-4.0.0-588229ad74-2ead327ef5.zip/node_modules/isexe/",\
         "packageDependencies": [\
-          ["isexe", "npm:3.1.1"]\
+          ["isexe", "npm:4.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16746,7 +16746,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/nan-npm-2.24.0-1c44df59f9/node_modules/nan/",\
         "packageDependencies": [\
           ["nan", "npm:2.24.0"],\
-          ["node-gyp", "npm:12.4.0"]\
+          ["node-gyp", "npm:13.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16837,26 +16837,26 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/node-addon-api-npm-7.1.1-bfb302df19/node_modules/node-addon-api/",\
         "packageDependencies": [\
           ["node-addon-api", "npm:7.1.1"],\
-          ["node-gyp", "npm:12.4.0"]\
+          ["node-gyp", "npm:13.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["node-gyp", [\
-      ["npm:12.4.0", {\
-        "packageLocation": "./.yarn/unplugged/node-gyp-npm-12.4.0-f7babd45bd/node_modules/node-gyp/",\
+      ["npm:13.0.0", {\
+        "packageLocation": "./.yarn/unplugged/node-gyp-npm-13.0.0-f910600f25/node_modules/node-gyp/",\
         "packageDependencies": [\
           ["env-paths", "npm:2.2.1"],\
           ["exponential-backoff", "npm:3.1.3"],\
           ["graceful-fs", "npm:4.2.11"],\
-          ["node-gyp", "npm:12.4.0"],\
-          ["nopt", "npm:9.0.0"],\
-          ["proc-log", "npm:6.1.0"],\
+          ["node-gyp", "npm:13.0.0"],\
+          ["nopt", "npm:10.0.1"],\
+          ["proc-log", "npm:7.0.0"],\
           ["semver", "npm:7.7.4"],\
           ["tar", "npm:7.5.16"],\
           ["tinyglobby", "npm:0.2.15"],\
           ["undici", "npm:6.27.0"],\
-          ["which", "npm:6.0.0"]\
+          ["which", "npm:7.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16954,19 +16954,19 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["nopt", [\
+      ["npm:10.0.1", {\
+        "packageLocation": "./.yarn/cache/nopt-npm-10.0.1-c09d426c63-8021371365.zip/node_modules/nopt/",\
+        "packageDependencies": [\
+          ["abbrev", "npm:5.0.0"],\
+          ["nopt", "npm:10.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:7.2.1", {\
         "packageLocation": "./.yarn/cache/nopt-npm-7.2.1-635b7da949-95a1f6dec8.zip/node_modules/nopt/",\
         "packageDependencies": [\
           ["abbrev", "npm:2.0.0"],\
           ["nopt", "npm:7.2.1"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:9.0.0", {\
-        "packageLocation": "./.yarn/cache/nopt-npm-9.0.0-81316ec15c-56a1ccd2ad.zip/node_modules/nopt/",\
-        "packageDependencies": [\
-          ["abbrev", "npm:4.0.0"],\
-          ["nopt", "npm:9.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -18025,10 +18025,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["proc-log", [\
-      ["npm:6.1.0", {\
-        "packageLocation": "./.yarn/cache/proc-log-npm-6.1.0-84e609b3f4-9033f30f16.zip/node_modules/proc-log/",\
+      ["npm:7.0.0", {\
+        "packageLocation": "./.yarn/cache/proc-log-npm-7.0.0-d836af0493-97cd9f4a8a.zip/node_modules/proc-log/",\
         "packageDependencies": [\
-          ["proc-log", "npm:6.1.0"]\
+          ["proc-log", "npm:7.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -21011,11 +21011,11 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:6.0.0", {\
-        "packageLocation": "./.yarn/cache/which-npm-6.0.0-48f25f0ec8-df19b2cd8a.zip/node_modules/which/",\
+      ["npm:7.0.0", {\
+        "packageLocation": "./.yarn/cache/which-npm-7.0.0-638dd00e77-913a43ac10.zip/node_modules/which/",\
         "packageDependencies": [\
-          ["isexe", "npm:3.1.1"],\
-          ["which", "npm:6.0.0"]\
+          ["isexe", "npm:4.0.0"],\
+          ["which", "npm:7.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
