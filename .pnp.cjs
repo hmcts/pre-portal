@@ -4035,7 +4035,7 @@ const RAW_RUNTIME_STATE =
           ["@grpc/proto-loader", "npm:0.8.0"],\
           ["lodash.camelcase", "npm:4.3.0"],\
           ["long", "npm:5.3.2"],\
-          ["protobufjs", "npm:7.5.8"],\
+          ["protobufjs", "npm:7.6.4"],\
           ["yargs", "npm:17.7.2"]\
         ],\
         "linkType": "HARD"\
@@ -4120,7 +4120,7 @@ const RAW_RUNTIME_STATE =
           ["@hmcts/info-provider", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.0"],\
           ["@types/express", "npm:5.0.6"],\
           ["express", "npm:5.2.1"],\
-          ["js-yaml", "npm:4.1.1"]\
+          ["js-yaml", "npm:4.2.0"]\
         ],\
         "packagePeers": [\
           "@types/express",\
@@ -4135,7 +4135,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@hmcts/nodejs-healthcheck", "npm:1.8.6"],\
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
-          ["js-yaml", "npm:4.1.1"],\
+          ["js-yaml", "npm:4.2.0"],\
           ["superagent", "npm:10.2.3"]\
         ],\
         "linkType": "HARD"\
@@ -4161,7 +4161,7 @@ const RAW_RUNTIME_STATE =
           ["@azure/keyvault-secrets", "npm:4.10.0"],\
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.4.0"],\
-          ["js-yaml", "npm:4.1.1"],\
+          ["js-yaml", "npm:4.2.0"],\
           ["lodash", "npm:4.18.1"]\
         ],\
         "linkType": "HARD"\
@@ -4278,7 +4278,7 @@ const RAW_RUNTIME_STATE =
           ["camelcase", "npm:5.3.1"],\
           ["find-up", "npm:4.1.0"],\
           ["get-package-type", "npm:0.1.0"],\
-          ["js-yaml", "npm:4.1.1"],\
+          ["js-yaml", "npm:4.2.0"],\
           ["resolve-from", "npm:5.0.0"]\
         ],\
         "linkType": "HARD"\
@@ -5969,7 +5969,7 @@ const RAW_RUNTIME_STATE =
           ["@opentelemetry/sdk-metrics", "virtual:2525e0dfa0bc29d132709579e6fc58180159b413066531a55262edc1e80870fa25bef77e2d04a50550d2b43176eaecc317bf28087850b6455942de017a3459a0#npm:2.2.0"],\
           ["@opentelemetry/sdk-trace-base", "virtual:2525e0dfa0bc29d132709579e6fc58180159b413066531a55262edc1e80870fa25bef77e2d04a50550d2b43176eaecc317bf28087850b6455942de017a3459a0#npm:2.2.0"],\
           ["@types/opentelemetry__api", null],\
-          ["protobufjs", "npm:7.5.8"]\
+          ["protobufjs", "npm:7.6.4"]\
         ],\
         "packagePeers": [\
           "@opentelemetry/api",\
@@ -5989,7 +5989,7 @@ const RAW_RUNTIME_STATE =
           ["@opentelemetry/sdk-metrics", "virtual:760f78f935d4e037d0342f8c1730746f28c0c7bd47f642705712ad91685324b45d4e454ba9fb8eb12f0955b9ce25c7a13ec90e4c3ccf9e0a8e6a37c566975f97#npm:2.7.1"],\
           ["@opentelemetry/sdk-trace-base", "virtual:760f78f935d4e037d0342f8c1730746f28c0c7bd47f642705712ad91685324b45d4e454ba9fb8eb12f0955b9ce25c7a13ec90e4c3ccf9e0a8e6a37c566975f97#npm:2.7.1"],\
           ["@types/opentelemetry__api", null],\
-          ["protobufjs", "npm:7.5.8"]\
+          ["protobufjs", "npm:7.6.4"]\
         ],\
         "packagePeers": [\
           "@opentelemetry/api",\
@@ -6699,21 +6699,20 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@protobufjs/eventemitter", [\
-      ["npm:1.1.0", {\
-        "packageLocation": "./.yarn/cache/@protobufjs-eventemitter-npm-1.1.0-029cc7d431-03af3e99f1.zip/node_modules/@protobufjs/eventemitter/",\
+      ["npm:1.1.1", {\
+        "packageLocation": "./.yarn/cache/@protobufjs-eventemitter-npm-1.1.1-dbe0dfc812-a54dc1aff4.zip/node_modules/@protobufjs/eventemitter/",\
         "packageDependencies": [\
-          ["@protobufjs/eventemitter", "npm:1.1.0"]\
+          ["@protobufjs/eventemitter", "npm:1.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["@protobufjs/fetch", [\
-      ["npm:1.1.0", {\
-        "packageLocation": "./.yarn/cache/@protobufjs-fetch-npm-1.1.0-ca857b7df4-67ae40572a.zip/node_modules/@protobufjs/fetch/",\
+      ["npm:1.1.1", {\
+        "packageLocation": "./.yarn/cache/@protobufjs-fetch-npm-1.1.1-b98d5396a8-427cf2da8c.zip/node_modules/@protobufjs/fetch/",\
         "packageDependencies": [\
           ["@protobufjs/aspromise", "npm:1.1.2"],\
-          ["@protobufjs/fetch", "npm:1.1.0"],\
-          ["@protobufjs/inquire", "npm:1.1.0"]\
+          ["@protobufjs/fetch", "npm:1.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6723,22 +6722,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@protobufjs-float-npm-1.0.2-5678f64d08-634c2c989d.zip/node_modules/@protobufjs/float/",\
         "packageDependencies": [\
           ["@protobufjs/float", "npm:1.0.2"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@protobufjs/inquire", [\
-      ["npm:1.1.0", {\
-        "packageLocation": "./.yarn/cache/@protobufjs-inquire-npm-1.1.0-3c7759e9ce-c09efa34a5.zip/node_modules/@protobufjs/inquire/",\
-        "packageDependencies": [\
-          ["@protobufjs/inquire", "npm:1.1.0"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:1.1.1", {\
-        "packageLocation": "./.yarn/cache/@protobufjs-inquire-npm-1.1.1-1f267bc97f-504740e8ac.zip/node_modules/@protobufjs/inquire/",\
-        "packageDependencies": [\
-          ["@protobufjs/inquire", "npm:1.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -10752,7 +10735,7 @@ const RAW_RUNTIME_STATE =
           ["cosmiconfig", "virtual:ecfdeec9bea8eb82c86773aa1866cfa93690ed5b3a18bb39a1bb63f0c4552608810503c74494501b4840f5b4036f82087ea7bf8530b6d51fa290ec31679faf5c#npm:9.0.0"],\
           ["env-paths", "npm:2.2.1"],\
           ["import-fresh", "npm:3.3.1"],\
-          ["js-yaml", "npm:4.1.1"],\
+          ["js-yaml", "npm:4.2.0"],\
           ["parse-json", "npm:5.2.0"],\
           ["typescript", null]\
         ],\
@@ -15230,11 +15213,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["js-yaml", [\
-      ["npm:4.1.1", {\
-        "packageLocation": "./.yarn/cache/js-yaml-npm-4.1.1-86ec786790-a52d0519f0.zip/node_modules/js-yaml/",\
+      ["npm:4.2.0", {\
+        "packageLocation": "./.yarn/cache/js-yaml-npm-4.2.0-0ab78512c1-51de2067a2.zip/node_modules/js-yaml/",\
         "packageDependencies": [\
           ["argparse", "npm:2.0.1"],\
-          ["js-yaml", "npm:4.1.1"]\
+          ["js-yaml", "npm:4.2.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16440,7 +16423,7 @@ const RAW_RUNTIME_STATE =
           ["glob", "npm:10.5.0"],\
           ["he", "npm:1.2.0"],\
           ["is-path-inside", "npm:3.0.3"],\
-          ["js-yaml", "npm:4.1.1"],\
+          ["js-yaml", "npm:4.2.0"],\
           ["log-symbols", "npm:4.1.0"],\
           ["minimatch", "npm:9.0.9"],\
           ["mocha", "npm:11.7.5"],\
@@ -17979,22 +17962,21 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["protobufjs", [\
-      ["npm:7.5.8", {\
-        "packageLocation": "./.yarn/unplugged/protobufjs-npm-7.5.8-a1ce3bc6d1/node_modules/protobufjs/",\
+      ["npm:7.6.4", {\
+        "packageLocation": "./.yarn/unplugged/protobufjs-npm-7.6.4-97603a5239/node_modules/protobufjs/",\
         "packageDependencies": [\
           ["@protobufjs/aspromise", "npm:1.1.2"],\
           ["@protobufjs/base64", "npm:1.1.2"],\
           ["@protobufjs/codegen", "npm:2.0.5"],\
-          ["@protobufjs/eventemitter", "npm:1.1.0"],\
-          ["@protobufjs/fetch", "npm:1.1.0"],\
+          ["@protobufjs/eventemitter", "npm:1.1.1"],\
+          ["@protobufjs/fetch", "npm:1.1.1"],\
           ["@protobufjs/float", "npm:1.0.2"],\
-          ["@protobufjs/inquire", "npm:1.1.1"],\
           ["@protobufjs/path", "npm:1.1.2"],\
           ["@protobufjs/pool", "npm:1.1.0"],\
           ["@protobufjs/utf8", "npm:1.1.1"],\
           ["@types/node", "npm:25.0.3"],\
           ["long", "npm:5.3.2"],\
-          ["protobufjs", "npm:7.5.8"]\
+          ["protobufjs", "npm:7.6.4"]\
         ],\
         "linkType": "HARD"\
       }]\
