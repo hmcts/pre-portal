@@ -42,6 +42,28 @@ jobs:
           redirect_uri+=("https://pre-portal-pr-${pr_number}.dev.platform.hmcts.net/callback")
           done
 
+          echo "PR numbers from GitHub"
+          gh pr list --json number | jq -r '.[].number'
+
+          echo "PR numbers stored in pr_ids list"
+          for pr_number in "${pr_ids[@]}"; do
+          echo "pr_ids item -> $pr_number"
+          done
+
+          echo "STEP 3: start/end values"
+          echo "start is: $start"
+          echo "end is: $end"
+
+          echo "Numbers seq"
+          for pr_number in $(seq $start $end); do
+          echo "seq item -> $pr_number"
+          done
+
+          echo "Redirect URIs:"
+          for uri in "${redirect_uri[@]}"; do
+          echo "redirect_uri item -> $uri"
+          done
+
           az ad app update --id $app_id --web-redirect-uris "${redirect_uri[@]}"
 
         env:
