@@ -66,7 +66,9 @@ jobs:
 
           az ad app update --id $app_id --web-redirect-uris "${redirect_uri[@]}"
 
-          echo "=== Azure redirect URIs now ==="
+          echo "Workflow app_id: $app_id"
+
+          echo "Azure redirect URIs now:"
           az ad app show --id "$app_id" --query "web.redirectUris" -o tsv
         env:
           REPO: ${{ github.event.repository.name }}
