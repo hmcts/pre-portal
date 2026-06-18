@@ -11385,7 +11385,7 @@ const RAW_RUNTIME_STATE =
           ["stream-json", "npm:1.9.1"],\
           ["strip-ansi", "npm:6.0.1"],\
           ["telnet-client", "npm:1.2.8"],\
-          ["tmp", "npm:0.2.5"],\
+          ["tmp", "npm:0.2.7"],\
           ["trace-event-lib", "npm:1.4.1"],\
           ["which", "npm:1.3.1"],\
           ["ws", "virtual:f5211d03eceb5c615629f746a3045d2fa91c38ed5392d5803bbd628fe39c1e446acff433cc73b52e3dd04db2cd7cd15da2104cc82362f80d1b6e17fa5edd6959#npm:8.21.0"],\
@@ -19990,10 +19990,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["tmp", [\
-      ["npm:0.2.5", {\
-        "packageLocation": "./.yarn/cache/tmp-npm-0.2.5-e146296d91-dd4b78b323.zip/node_modules/tmp/",\
+      ["npm:0.2.7", {\
+        "packageLocation": "./.yarn/cache/tmp-npm-0.2.7-a6fd3441a0-0a3bc90beb.zip/node_modules/tmp/",\
         "packageDependencies": [\
-          ["tmp", "npm:0.2.5"]\
+          ["tmp", "npm:0.2.7"]\
         ],\
         "linkType": "HARD"\
       }]\
