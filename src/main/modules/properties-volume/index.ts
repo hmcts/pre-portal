@@ -9,6 +9,7 @@ export class PropertiesVolume {
   private logger = Logger.getLogger('properties-volume');
 
   enableFor(server: Application): void {
+    console.time('startup:properties-volume');
     set(config, 'pre.portalUrl', process.env.PORTAL_URL ?? 'https://localhost:4551');
     set(config, 'pre.apiUrl', process.env.PRE_API_URL ?? 'https://localhost:4550');
     set(config, 'session.redis.host', process.env.REDIS_HOST ?? '');
@@ -71,6 +72,7 @@ export class PropertiesVolume {
     server.locals.dynatrace_jstag = process.env.DYNATRACE_JSTAG ?? '';
 
     this.logger.info('Redis host: {}', process.env.REDIS_HOST);
+    console.timeEnd('startup:properties-volume');
   }
 
   private setSecret(fromPath: string, toPath: string): void {

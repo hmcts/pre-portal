@@ -1,5 +1,6 @@
 import * as express from 'express';
 import helmet from 'helmet';
+import { Logger } from '@hmcts/nodejs-logging';
 
 const googleAnalyticsDomain = '*.google-analytics.com';
 const self = "'self'";
@@ -13,7 +14,11 @@ export class Helmet {
     this.developmentMode = developmentMode;
   }
 
+  private logger = Logger.getLogger('Helmet');
+
   public enableFor(app: express.Express): void {
+    console.time('startup:helmet');
+    this.logger.info('Enabling Helmet');
     const dynatraceDomain = 'https://*.dynatrace.com';
     const mkPlayer = 'https://mkplayer.azureedge.net';
     const bitmovinLicensing = 'https://licensing.bitmovin.com';
@@ -63,5 +68,7 @@ export class Helmet {
         crossOriginEmbedderPolicy: false,
       })
     );
+    this.logger.info('Helmet enabled');
+    console.timeEnd('startup:helmet');
   }
 }
