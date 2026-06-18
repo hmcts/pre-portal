@@ -15319,17 +15319,17 @@ const RAW_RUNTIME_STATE =
           ["editorconfig", "npm:1.0.4"],\
           ["glob", "npm:10.5.0"],\
           ["js-beautify", "npm:1.15.4"],\
-          ["js-cookie", "npm:3.0.5"],\
+          ["js-cookie", "npm:3.0.8"],\
           ["nopt", "npm:7.2.1"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["js-cookie", [\
-      ["npm:3.0.5", {\
-        "packageLocation": "./.yarn/cache/js-cookie-npm-3.0.5-8fc8fcc9b4-366494b163.zip/node_modules/js-cookie/",\
+      ["npm:3.0.8", {\
+        "packageLocation": "./.yarn/cache/js-cookie-npm-3.0.8-bf3f157352-6bc10dc1ef.zip/node_modules/js-cookie/",\
         "packageDependencies": [\
-          ["js-cookie", "npm:3.0.5"]\
+          ["js-cookie", "npm:3.0.8"]\
         ],\
         "linkType": "HARD"\
       }]\
