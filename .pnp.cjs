@@ -86,7 +86,7 @@ const RAW_RUNTIME_STATE =
           ["lodash", "npm:4.18.1"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.2"],\
-          ["multer", "npm:2.1.1"],\
+          ["multer", "npm:2.2.0"],\
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
           ["nodemon", "npm:3.1.14"],\
           ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
@@ -16678,6 +16678,17 @@ const RAW_RUNTIME_STATE =
           ["type-is", "npm:1.6.18"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:2.2.0", {\
+        "packageLocation": "./.yarn/cache/multer-npm-2.2.0-4ed181c78f-2452511377.zip/node_modules/multer/",\
+        "packageDependencies": [\
+          ["append-field", "npm:1.0.0"],\
+          ["busboy", "npm:1.6.0"],\
+          ["concat-stream", "npm:2.0.0"],\
+          ["multer", "npm:2.2.0"],\
+          ["type-is", "npm:1.6.18"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["multi-sort-stream", [\
@@ -17932,7 +17943,7 @@ const RAW_RUNTIME_STATE =
           ["lodash", "npm:4.18.1"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.2"],\
-          ["multer", "npm:2.1.1"],\
+          ["multer", "npm:2.2.0"],\
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
           ["nodemon", "npm:3.1.14"],\
           ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
