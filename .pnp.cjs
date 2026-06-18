@@ -16356,17 +16356,6 @@ const RAW_RUNTIME_STATE =
           ["type-is", "npm:1.6.18"]\
         ],\
         "linkType": "HARD"\
-      }],\
-      ["npm:2.2.0", {\
-        "packageLocation": "./.yarn/cache/multer-npm-2.2.0-4ed181c78f-2452511377.zip/node_modules/multer/",\
-        "packageDependencies": [\
-          ["append-field", "npm:1.0.0"],\
-          ["busboy", "npm:1.6.0"],\
-          ["concat-stream", "npm:2.0.0"],\
-          ["multer", "npm:2.2.0"],\
-          ["type-is", "npm:1.6.18"]\
-        ],\
-        "linkType": "HARD"\
       }]\
     ]],\
     ["multi-sort-stream", [\
