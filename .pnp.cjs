@@ -16136,7 +16136,7 @@ const RAW_RUNTIME_STATE =
           ["semver", "npm:7.7.4"],\
           ["tar", "npm:7.5.16"],\
           ["tinyglobby", "npm:0.2.15"],\
-          ["undici", "npm:6.26.0"],\
+          ["undici", "npm:6.27.0"],\
           ["which", "npm:7.0.0"]\
         ],\
         "linkType": "HARD"\
@@ -19745,10 +19745,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["undici", [\
-      ["npm:6.26.0", {\
-        "packageLocation": "./.yarn/cache/undici-npm-6.26.0-aa9f162436-a1715ee430.zip/node_modules/undici/",\
+      ["npm:6.27.0", {\
+        "packageLocation": "./.yarn/cache/undici-npm-6.27.0-00a86409ac-30c18cdb23.zip/node_modules/undici/",\
         "packageDependencies": [\
-          ["undici", "npm:6.26.0"]\
+          ["undici", "npm:6.27.0"]\
         ],\
         "linkType": "HARD"\
       }],\
