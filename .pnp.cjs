@@ -49,7 +49,7 @@ const RAW_RUNTIME_STATE =
           ["@types/multer", "npm:2.1.0"],\
           ["@types/node", "npm:25.9.3"],\
           ["@types/nunjucks", "npm:3.2.6"],\
-          ["@types/qs", "npm:6.15.0"],\
+          ["@types/qs", "npm:6.15.1"],\
           ["@types/serve-favicon", "npm:2.5.7"],\
           ["@types/session-file-store", "npm:1.2.6"],\
           ["@types/supertest", "npm:7.2.0"],\
@@ -6849,7 +6849,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/express-serve-static-core", "npm:5.1.0"],\
           ["@types/node", "npm:25.0.3"],\
-          ["@types/qs", "npm:6.14.0"],\
+          ["@types/qs", "npm:6.15.1"],\
           ["@types/range-parser", "npm:1.2.7"],\
           ["@types/send", "npm:1.2.1"]\
         ],\
@@ -7059,17 +7059,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/qs", [\
-      ["npm:6.14.0", {\
-        "packageLocation": "./.yarn/cache/@types-qs-npm-6.14.0-e27d9ca044-1909205514.zip/node_modules/@types/qs/",\
+      ["npm:6.15.1", {\
+        "packageLocation": "./.yarn/cache/@types-qs-npm-6.15.1-c9a47e894d-fd04a36c68.zip/node_modules/@types/qs/",\
         "packageDependencies": [\
-          ["@types/qs", "npm:6.14.0"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:6.15.0", {\
-        "packageLocation": "./.yarn/cache/@types-qs-npm-6.15.0-46c60df3d3-871162881f.zip/node_modules/@types/qs/",\
-        "packageDependencies": [\
-          ["@types/qs", "npm:6.15.0"]\
+          ["@types/qs", "npm:6.15.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17176,7 +17169,7 @@ const RAW_RUNTIME_STATE =
           ["@types/multer", "npm:2.1.0"],\
           ["@types/node", "npm:25.9.3"],\
           ["@types/nunjucks", "npm:3.2.6"],\
-          ["@types/qs", "npm:6.15.0"],\
+          ["@types/qs", "npm:6.15.1"],\
           ["@types/serve-favicon", "npm:2.5.7"],\
           ["@types/session-file-store", "npm:1.2.6"],\
           ["@types/supertest", "npm:7.2.0"],\
