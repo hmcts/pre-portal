@@ -9417,7 +9417,7 @@ const RAW_RUNTIME_STATE =
           ["parse5", "npm:7.3.0"],\
           ["parse5-htmlparser2-tree-adapter", "npm:7.1.0"],\
           ["parse5-parser-stream", "npm:7.1.2"],\
-          ["undici", "npm:7.25.0"],\
+          ["undici", "npm:7.28.0"],\
           ["whatwg-mimetype", "npm:4.0.0"]\
         ],\
         "linkType": "HARD"\
@@ -16136,7 +16136,7 @@ const RAW_RUNTIME_STATE =
           ["semver", "npm:7.7.4"],\
           ["tar", "npm:7.5.16"],\
           ["tinyglobby", "npm:0.2.15"],\
-          ["undici", "npm:6.26.0"],\
+          ["undici", "npm:6.27.0"],\
           ["which", "npm:7.0.0"]\
         ],\
         "linkType": "HARD"\
@@ -19745,17 +19745,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["undici", [\
-      ["npm:6.26.0", {\
-        "packageLocation": "./.yarn/cache/undici-npm-6.26.0-aa9f162436-a1715ee430.zip/node_modules/undici/",\
+      ["npm:6.27.0", {\
+        "packageLocation": "./.yarn/cache/undici-npm-6.27.0-00a86409ac-30c18cdb23.zip/node_modules/undici/",\
         "packageDependencies": [\
-          ["undici", "npm:6.26.0"]\
+          ["undici", "npm:6.27.0"]\
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:7.25.0", {\
-        "packageLocation": "./.yarn/cache/undici-npm-7.25.0-06372b6dbc-038d3568c7.zip/node_modules/undici/",\
+      ["npm:7.28.0", {\
+        "packageLocation": "./.yarn/cache/undici-npm-7.28.0-69d45b4a22-154423b280.zip/node_modules/undici/",\
         "packageDependencies": [\
-          ["undici", "npm:7.25.0"]\
+          ["undici", "npm:7.28.0"]\
         ],\
         "linkType": "HARD"\
       }]\
