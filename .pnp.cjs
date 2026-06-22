@@ -47,7 +47,7 @@ const RAW_RUNTIME_STATE =
           ["@types/express-session", "npm:1.19.0"],\
           ["@types/jest", "npm:30.0.0"],\
           ["@types/multer", "npm:2.1.0"],\
-          ["@types/node", "npm:25.9.3"],\
+          ["@types/node", "npm:25.9.4"],\
           ["@types/nunjucks", "npm:3.2.6"],\
           ["@types/qs", "npm:6.15.0"],\
           ["@types/serve-favicon", "npm:2.5.7"],\
@@ -7008,10 +7008,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:25.9.3", {\
-        "packageLocation": "./.yarn/cache/@types-node-npm-25.9.3-8c1909db0e-40c5f5c914.zip/node_modules/@types/node/",\
+      ["npm:25.9.4", {\
+        "packageLocation": "./.yarn/cache/@types-node-npm-25.9.4-71c450fde9-a58934de2e.zip/node_modules/@types/node/",\
         "packageDependencies": [\
-          ["@types/node", "npm:25.9.3"],\
+          ["@types/node", "npm:25.9.4"],\
           ["undici-types", "npm:7.24.6"]\
         ],\
         "linkType": "HARD"\
@@ -16175,7 +16175,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/__virtual__/node-mocks-http-virtual-8a992b5ce8/0/cache/node-mocks-http-npm-1.17.2-442310fd85-3ab97b5a7b.zip/node_modules/node-mocks-http/",\
         "packageDependencies": [\
           ["@types/express", "npm:5.0.6"],\
-          ["@types/node", "npm:25.9.3"],\
+          ["@types/node", "npm:25.9.4"],\
           ["accepts", "npm:1.3.8"],\
           ["content-disposition", "npm:0.5.4"],\
           ["depd", "npm:1.1.2"],\
@@ -17174,7 +17174,7 @@ const RAW_RUNTIME_STATE =
           ["@types/express-session", "npm:1.19.0"],\
           ["@types/jest", "npm:30.0.0"],\
           ["@types/multer", "npm:2.1.0"],\
-          ["@types/node", "npm:25.9.3"],\
+          ["@types/node", "npm:25.9.4"],\
           ["@types/nunjucks", "npm:3.2.6"],\
           ["@types/qs", "npm:6.15.0"],\
           ["@types/serve-favicon", "npm:2.5.7"],\
@@ -19484,7 +19484,7 @@ const RAW_RUNTIME_STATE =
           ["@tsconfig/node12", "npm:1.0.11"],\
           ["@tsconfig/node14", "npm:1.0.3"],\
           ["@tsconfig/node16", "npm:1.0.4"],\
-          ["@types/node", "npm:25.9.3"],\
+          ["@types/node", "npm:25.9.4"],\
           ["@types/swc__core", null],\
           ["@types/swc__wasm", null],\
           ["@types/typescript", null],\
