@@ -45,8 +45,8 @@ describe('Admin Status route', () => {
 
     const response = await request(app).get('/admin/status');
     expect(response.status).toEqual(200);
-    expect(response.text).toContain('Admin');
     expect(response.text).toContain('Status');
+    expect(response.text).toContain('Edit Request');
     expect(response.text).toContain('Audit');
   });
 
