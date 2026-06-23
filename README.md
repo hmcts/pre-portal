@@ -292,7 +292,7 @@ The sign in page is provided by Azure B2C. The code for it is in https://github.
 Sometimes you'll be making changes to B2C and you'll want a frontend available which points to it.
 
 To point the pre-portal at the dev B2C instance you simply need to add the tag `pr-values: devb2c`
-to the GitHub PR you are working on. Instructions on how this works can be found
+to the GitHub PR you are working on. Instructions on how this works can be found.
 [here](https://hmcts.github.io/cloud-native-platform/new-component/helm-chart.html#what-are-values-template-yaml-for).
 
 ## Troubleshooting
