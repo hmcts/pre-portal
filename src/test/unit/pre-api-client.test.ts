@@ -1,4 +1,5 @@
 import {
+  mockAuditLogs,
   mockedPaginatedAuditLogs,
   mockedPaginatedCourts,
   mockedPaginatedRecordings,
@@ -21,6 +22,8 @@ const preClient = new PreClient();
 const mockRecordingId = '12345678-1234-1234-1234-1234567890ab';
 const mockRecordingMissingId = '4f37c46f-142d-42df-953f-0b7ca3f87995';
 const mockRecordingNoPermsId = '4f37c46f-142d-42df-953f-0b7ca3f87996';
+const mockAuditNotFoundId = '4f37c46f-142d-42df-953f-0b7ca3f87997';
+const mockAuditNoPermsId = '4f37c46f-142d-42df-953f-0b7ca3f87998';
 jest.mock('axios');
 
 /* eslint-disable jest/expect-expect */
@@ -58,6 +61,36 @@ describe('PreClient', () => {
           },
         },
       });
+    }
+
+    if (url === `/audit/${mockAuditLogs[0].id}`) {
+      return Promise.resolve({
+        status: 200,
+        data: mockAuditLogs[0],
+      });
+    }
+
+    if (url === `/audit/${mockAuditNotFoundId}`) {
+      return Promise.reject({
+        response: {
+          status: 404,
+          data: {
+            message: `Not found: Audit: ${mockAuditNotFoundId}`,
+          },
+        },
+      });
+    }
+
+    if (url === `/audit/${mockAuditNoPermsId}`) {
+      return Promise.reject({
+        response: {
+          status: 403,
+        },
+      });
+    }
+
+    if (url === '/audit/nope') {
+      return Promise.reject('Network Error');
     }
 
     if (url === '/courts') {
@@ -365,6 +398,35 @@ describe('PreClient', () => {
     expect(error?.message).toEqual('Axios Put Error');
   });
 
+  test('get audit by id', async () => {
+    const audit = await preClient.getAudit(mockXUserId, mockAuditLogs[0].id);
+    expect(audit).toBeTruthy();
+    expect(audit?.id).toBe(mockAuditLogs[0].id);
+  });
+
+  test('get audit by id when not found', async () => {
+    const audit = await preClient.getAudit(mockXUserId, mockAuditNotFoundId);
+    expect(audit).toBeNull();
+  });
+
+  test('get audit by id when no permissions', async () => {
+    try {
+      await preClient.getAudit(mockXUserId, mockAuditNoPermsId);
+      expect(true).toBe(false); // shouldn't get here...
+    } catch (e) {
+      expect(e.response.status).toBe(403);
+    }
+  });
+
+  test('get audit by id network error', async () => {
+    try {
+      await preClient.getAudit(mockXUserId, 'nope');
+      expect(true).toBe(false); // shouldn't get here...
+    } catch (e) {
+      expect(e).toBe('Network Error');
+    }
+  });
+
   test('get audit logs', async () => {
     const request = {} as SearchAuditLogsRequest;
     const { auditLogs, pagination } = await preClient.getAuditLogs(mockXUserId, request);
@@ -392,7 +454,6 @@ describe('PreClient', () => {
   test('getRecordingPlaybackDataMk success', async () => {
     var result = await preClient.getRecordingPlaybackDataMk('456', '123');
     expect(result).toBeTruthy();
-    expect(result?.id).toEqual(mockRecordings[0].id);
   });
 
   test('getRecordingPlaybackDataMk 404', async () => {

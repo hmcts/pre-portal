@@ -10,6 +10,7 @@ import {
   Pagination,
   PutAuditRequest,
   Recording,
+  RecordingPlaybackData,
   SearchAuditLogsRequest,
   SearchRecordingsRequest,
 } from './types';
@@ -120,6 +121,24 @@ export class PreClient {
       });
     } catch (e) {
       this.logger.error(e.message);
+      throw e;
+    }
+  }
+
+  public async getAudit(xUserId: string, id: string): Promise<Audit | null> {
+    try {
+      const response = await axios.get('/audit/' + id, {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+      });
+
+      return response.data as Audit;
+    } catch (e) {
+      if (e.response?.status === 404) {
+        return null;
+      }
+      this.logger.error(e);
       throw e;
     }
   }
@@ -325,7 +344,7 @@ export class PreClient {
     }
   }
 
-  public async getRecordingPlaybackDataMk(xUserId: string, id: string): Promise<Recording | null> {
+  public async getRecordingPlaybackDataMk(xUserId: string, id: string): Promise<RecordingPlaybackData | null> {
     try {
       const response = await axios.get(`/media-service/vod?recordingId=${id}`, {
         headers: {
@@ -333,7 +352,7 @@ export class PreClient {
         },
       });
 
-      return response.data as Recording;
+      return response.data as RecordingPlaybackData;
     } catch (e) {
       if (e.response?.status === 404) {
         return null;

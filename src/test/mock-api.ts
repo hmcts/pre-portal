@@ -12,6 +12,7 @@ import {
 import { PreClient } from '../main/services/pre-api/pre-client';
 import { AxiosResponse } from 'axios';
 import { Terms } from '../main/types/terms';
+import { jest } from '@jest/globals';
 
 export const mockCourts: Court[] = [
   {
@@ -46,7 +47,7 @@ export const mockAuditLogs: Audit[] = [
     activity: 'Play',
     source: 'PORTAL',
     audit_details: {
-      recordingId: '12345678-1234-1234-1234-1234567890ab',
+      recordingId: '12245678-1234-1234-1234-1234567890ab',
     },
     created_by: {
       id: '12345678-1234-1234-1234-1234567890ab',
@@ -226,6 +227,18 @@ export function mockGetRecordings(recordings?: Recording[], page: number = 0) {
     });
 }
 
+export function mockGetAudit(audit?: Audit) {
+  if (audit !== undefined) {
+    jest.spyOn(PreClient.prototype, 'getAudit').mockImplementation(async (xUserId: string, id: string) => {
+      return Promise.resolve(audit);
+    });
+    return;
+  }
+  jest.spyOn(PreClient.prototype, 'getAudit').mockImplementation(async (xUserId: string, id: string) => {
+    return Promise.resolve(mockAuditLogs.find(r => r.id === id) || null);
+  });
+}
+
 export function mockGetAuditLogs(auditLogs?: Audit[], page: number = 0) {
   if (auditLogs !== undefined) {
     const pagination = {
@@ -246,8 +259,8 @@ export function mockGetAuditLogs(auditLogs?: Audit[], page: number = 0) {
 
   jest
     .spyOn(PreClient.prototype, 'getAuditLogs')
-    .mockImplementation(async (xUserId: string, req: SearchRecordingsRequest) => {
-      return Promise.resolve({ auditLogs: mockRecordings, pagination: mockPagination });
+    .mockImplementation(async (xUserId: string, req: SearchAuditLogsRequest) => {
+      return Promise.resolve({ auditLogs: mockAuditLogs, pagination: mockPagination });
     });
 }
 
@@ -260,13 +273,11 @@ export const mockPutAudit = () => {
   });
 };
 
-export function mockGetLatestTermsAndConditions(data?: Terms | null) {
+export function mockGetLatestTermsAndConditions(data?: Terms) {
   if (data !== undefined) {
-    jest
-      .spyOn(PreClient.prototype, 'getLatestTermsAndConditions')
-      .mockImplementation(async (xUserId: string, id: string) => {
-        return Promise.resolve(data);
-      });
+    jest.spyOn(PreClient.prototype, 'getLatestTermsAndConditions').mockImplementation(async () => {
+      return Promise.resolve(data);
+    });
   }
 }
 
@@ -327,4 +338,6 @@ export function reset() {
   jest.spyOn(PreClient.prototype, 'getRecordings').mockRestore();
   jest.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockRestore();
   jest.spyOn(PreClient.prototype, 'getCourts').mockRestore();
+  jest.spyOn(PreClient.prototype, 'getAuditLogs').mockRestore();
+  jest.spyOn(PreClient.prototype, 'getAudit').mockRestore();
 }

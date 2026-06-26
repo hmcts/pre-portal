@@ -1,0 +1,165 @@
+{% from "govuk/components/pagination/macro.njk" import govukPagination %}
+
+{% extends "admin/admin.njk" %}
+
+{% block pageTitle %}{{ title }} - PRE Admin Portal{% endblock %}
+
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block mainContent %}
+  <div class="govuk-!-margin-top-0 govuk-!-margin-bottom-8">
+    <h1 class="govuk-heading-xl">
+      {{ title }}
+    </h1>
+  <div>
+
+    <div id="filters" class="filters-box">
+      <h2 class="govuk-heading-l">Filters</h2>
+      <form>
+        <div class="govuk-form-group">
+          <div style="display: flex">
+            <div style="width: 50%; padding:0.5rem;">
+              <label class="govuk-label" for="after">Filter by created after</label>
+              <input class="govuk-input" id="after" name="after" type="datetime-local" value="{{ params.after }}"/>
+
+              <label class="govuk-label" for="source" style="margin-top: 0.5rem">Filter by source</label>
+              <select class="govuk-select" id="source" name="source" style="width: 100%;">
+                <option
+                  {% if params.source == "" or params.source is none %}selected{% endif %}
+                  value="">Select a Source</option>
+                {% set sources = [
+                  'APPLICATION',
+                  'PORTAL',
+                  'ADMIN',
+                  'AUTO'
+                ] %}
+                {% for s in sources %}
+                  <option
+                    {% if params.source == s %}selected{% endif %}
+                    value="{{ s }}">{{ s }}</option>
+                {% endfor %}
+              </select>
+
+              <label class="govuk-label" for="functionalArea" style="margin-top: 0.5rem">Filter by functional area</label>
+              <input class="govuk-input" id="functionalArea" name="functionalArea" type="text" placeholder="Functional area" value="{{ params.functionalArea }}"/>
+
+              <label class="govuk-label" for="userName" style="margin-top: 0.5rem">Filter by user name</label>
+              <input class="govuk-input" id="userName" name="userName" type="text" placeholder="User name" value="{{ params.userName }}"/>
+            </div>
+
+            <div style="width: 50%; padding:0.5rem;">
+              <label class="govuk-label" for="before">Filter by created before</label>
+              <input class="govuk-input" id="before" name="before" type="datetime-local" value="{{ params.before }}"/>
+
+              <label class="govuk-label" for="courtId" style="margin-top: 0.5rem">Filter by court</label>
+              <select class="govuk-select" id="courtId" name="courtId" style="width: 100%;">
+                <option
+                  {% if params.courtId == "" or params.courtId is none %}selected{% endif %}
+                  value="">Select a Court</option>
+                {% for court in courts %}
+                  <option
+                    {% if params.courtId == court.id %}selected{% endif %}
+                    value="{{ court.id }}">{{ court.name }}</option>
+                {% endfor %}
+              </select>
+
+              <label class="govuk-label" for="caseReference" style="margin-top: 0.5rem">Filter by case reference</label>
+              <input class="govuk-input" id="caseReference" name="caseReference" type="text" placeholder="Case reference" value="{{ params.caseReference }}"/>
+            </div>
+          </div>
+        </div>
+
+        <div id="filter-controls" style="width: 100%; text-align: right; height: 40px;">
+          <a class="govuk-button" href="?">Reset</a>
+          <button class="govuk-button">Apply</button>
+        </div>
+      </form>
+    </div>
+
+    <div style="overflow-x: auto; width: 100%;">
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header" style="position: sticky; left: 0; z-index: 1; background-color: #ffffff;">ID</th>
+          <th scope="col" class="govuk-table__header">Table Name</th>
+          <th scope="col" class="govuk-table__header">Table Record ID</th>
+          <th scope="col" class="govuk-table__header">Source</th>
+          <th scope="col" class="govuk-table__header">Category</th>
+          <th scope="col" class="govuk-table__header">Activity</th>
+          <th scope="col" class="govuk-table__header">Functional Area</th>
+          <th scope="col" class="govuk-table__header">Created By</th>
+          <th scope="col" class="govuk-table__header">Created At</th>
+          <th scope="col" class="govuk-table__header">Audit Details</th>
+          <th scope="col" class="govuk-table__header">Actions</th>
+        </tr>
+        </thead>
+        {% if auditLogs.length === 0 %}
+          <tbody
+            class="govuk-table__body"
+            data-testid="no-data-message">
+          <td>No audit logs found.</td>
+          </tbody>
+        {% else %}
+          <tbody class="govuk-table__body">
+          {% for auditLog in auditLogs %}
+            <tr
+              class="govuk-table__row"
+              id="audit-{{ auditLog.id }}">
+              <td class="govuk-table__cell" style="position: sticky; left: 0; z-index: 1; background-color: #ffffff;">
+                {{ auditLog.id }}
+              </td>
+              <td class="govuk-table__cell">
+                {{ auditLog.table_name }}
+              </td>
+              <td class="govuk-table__cell">
+                {{ auditLog.table_record_id }}
+              </td>
+              <td class="govuk-table__cell">
+                {{ auditLog.source }}
+              </td>
+              <td class="govuk-table__cell">
+                {{ auditLog.category }}
+              </td>
+              <td class="govuk-table__cell">
+                {{ auditLog.activity }}
+              </td>
+              <td class="govuk-table__cell">
+                {{ auditLog.functional_area }}
+              </td>
+              <td class="govuk-table__cell">
+                {% if auditLog.created_by.email %}
+                  <a
+                    class="govuk-link"
+                    href="/admin/users/{{ auditLog.created_by.id }}">
+                    {{ auditLog.created_by.first_name }} {{ auditLog.created_by.last_name }} ({{ auditLog.created_by.email }})
+                  </a>
+                {% elif auditLog.created_by.id  %}
+                  {{ auditLog.created_by.id }}
+                {% endif %}
+              </td>
+              <td class="govuk-table__cell">
+                {{ auditLog.created_at }}
+              </td>
+              <td class="govuk-table__cell">
+                <code class="govuk-code">{{ auditLog.audit_details | dump }}</code>
+              </td>
+              <td class="govuk-table__cell">
+                <a class="govuk-link"
+                   href="/admin/audit/{{ auditLog.id }}">
+                  View
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        {% endif %}
+      </table>
+    </div>
+    {% if paginationLinks.items.length > 1 %}
+      <div style="display: flex; justify-content: center;">
+        {{ govukPagination(paginationLinks) }}
+      </div>
+    {% endif %}
+{% endblock %}

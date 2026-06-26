@@ -81,7 +81,7 @@ describe('Accessibility', () => {
   test('admin/status page should have no accessibility errors', async () => {
     const browser = await puppeteer.launch({
       ignoreHTTPSErrors: true,
-      headless: true,
+      headless: false,
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
 
@@ -96,6 +96,39 @@ describe('Accessibility', () => {
 
     expect(result.issues).toEqual(expect.any(Array));
     expectNoErrors(result.issues);
+    await browser.close();
+  }, 65000);
+
+  test('admin/audit pages should have no accessibility errors', async () => {
+    const browser = await puppeteer.launch({
+      ignoreHTTPSErrors: true,
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
+
+    const page = await signInSuperUser(browser);
+    await page.waitForSelector('a[href^="/admin/status"]', { visible: true, timeout: 30000 });
+    await page.click('a[href^="/admin/status"]');
+    await page.waitForSelector('a[href^="/admin/audit"]', { visible: true, timeout: 30000 });
+    await page.click('a[href^="/admin/audit"]');
+
+    const resultsAuditSearch: Pa11yResult = await pa11y(page.url(), {
+      browser: browser,
+      screenCapture: `${screenshotDir}/admin-audit.png`,
+    });
+    expect(resultsAuditSearch.issues).toEqual(expect.any(Array));
+    expectNoErrors(resultsAuditSearch.issues);
+
+    await page.waitForSelector('a[href^="/admin/audit/"]', { visible: true, timeout: 30000 });
+    await page.click('a[href^="/admin/audit/"]');
+
+    const resultsAudit: Pa11yResult = await pa11y(page.url(), {
+      browser: browser,
+      screenCapture: `${screenshotDir}/admin-audit-id.png`,
+    });
+    expect(resultsAudit.issues).toEqual(expect.any(Array));
+    expectNoErrors(resultsAudit.issues);
+
     await browser.close();
   }, 65000);
 

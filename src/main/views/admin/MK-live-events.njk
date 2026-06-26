@@ -5,13 +5,13 @@
 {% block pageTitle %}MediaKind Live Events - PRE Portal{% endblock %}
 
 {% block mainContent %}
-<div class="gem-c-title govuk-!-margin-top-0 govuk-!-margin-bottom-8">
-    <h1 class="gem-c-title__text govuk-heading-xl">
+  <div class="govuk-!-margin-top-0 govuk-!-margin-bottom-8">
+    <h1 class="govuk-heading-xl">
       MediaKind Live Events
     </h1>
-    <div>
+  </div>
   <form method="GET" action="" class="govuk-grid-row govuk-!-margin-bottom-6">
-   <div class="govuk-grid-column-one-quarter">
+    <div class="govuk-grid-column-one-quarter">
             <div class="govuk-form-group">
                 <label class="govuk-label" for="id">ID</label>
                 <input class="govuk-input" id="id" name="id" type="text"
@@ -54,10 +54,8 @@
          <div class="govuk-grid-column-one-quarter">
              <button class="govuk-button govuk-button--secondary govuk-visually-hidden"" type="submit">Submit</button>
          </div>
-
-  </form>
-  <div>
-
+    </form>
+    <div>
     <div style="overflow-x: auto; width: 100%;">
       <table class="govuk-table" id="live-events-table">
         <caption class="govuk-table__caption govuk-table__caption--m"  tabindex="0">Live events</caption>
@@ -99,7 +97,7 @@
         {{ govukPagination(paginationLinks) }}
       </div>
     {% endif %}
-</div>
+  </div>
 
 <script>
 function filterTable() {
@@ -184,6 +182,4 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
-
-
 {% endblock %}
