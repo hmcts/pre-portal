@@ -4758,7 +4758,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@videojs/http-streaming@npm:^3.17.3, @videojs/http-streaming@npm:^3.17.4":
+"@videojs/http-streaming@npm:^3.17.4":
   version: 3.17.4
   resolution: "@videojs/http-streaming@npm:3.17.4"
   dependencies:
@@ -4776,6 +4776,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@videojs/http-streaming@npm:^3.17.5":
+  version: 3.17.5
+  resolution: "@videojs/http-streaming@npm:3.17.5"
+  dependencies:
+    "@babel/runtime": "npm:^7.12.5"
+    "@videojs/vhs-utils": "npm:^4.1.2"
+    aes-decrypter: "npm:^4.0.2"
+    global: "npm:^4.4.0"
+    m3u8-parser: "npm:^7.2.0"
+    mpd-parser: "npm:^1.4.0"
+    mux.js: "npm:7.1.0"
+    video.js: "npm:^7 || ^8"
+  peerDependencies:
+    video.js: ^8.19.0
+  checksum: 10/48863642e4e71ed5caadebe6b90d9959ce292e7fd3e6ff60ab27868525b66fcc6dd978eac92fd9a831b17090f32bfabd516b5e3dfe0fef44bd668d6e35e34328
+  languageName: node
+  linkType: hard
+
 "@videojs/vhs-utils@npm:^4.0.0, @videojs/vhs-utils@npm:^4.1.1":
   version: 4.1.1
   resolution: "@videojs/vhs-utils@npm:4.1.1"
@@ -4783,6 +4801,16 @@ __metadata:
     "@babel/runtime": "npm:^7.12.5"
     global: "npm:^4.4.0"
   checksum: 10/060b9e95aa75ed480bb597c2051b5ba362a9e1cfa5fdf6a51671bc00c8afe3ceee61ce2006157af40429799857d6637b72e5b9aeb7c20f6c999bd823715962b9
+  languageName: node
+  linkType: hard
+
+"@videojs/vhs-utils@npm:^4.1.2":
+  version: 4.1.2
+  resolution: "@videojs/vhs-utils@npm:4.1.2"
+  dependencies:
+    "@babel/runtime": "npm:^7.12.5"
+    global: "npm:^4.4.0"
+  checksum: 10/6bc2515fdfb973499c4cba1742c746b26ef5f876f8cc474774d149f226d2b939f23a1cdf67a2411df03139b279bba7ea4c9171e41ae16e88939c68cea817a10e
   languageName: node
   linkType: hard
 
@@ -5012,6 +5040,13 @@ __metadata:
   version: 0.9.10
   resolution: "@xmldom/xmldom@npm:0.9.10"
   checksum: 10/8d39ed498baf33dc8bbc82ec575e7448ddf08a0d6874bcc30a70c001b7519e6df6564f98d13c03836fa8be099c6d74cbc4078cfcfcbcf005681d4e67f1363412
+  languageName: node
+  linkType: hard
+
+"@xmldom/xmldom@npm:^0.8.3":
+  version: 0.8.13
+  resolution: "@xmldom/xmldom@npm:0.8.13"
+  checksum: 10/f8f3d56fa91d5026885c0c5c00b07eae47647bda0d742ecbf8e51e06bb287ab30222977b20529ee15c364031606225ebca58907a8ecc76a3add6b3f10e6ddfc6
   languageName: node
   linkType: hard
 
@@ -12010,6 +12045,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mpd-parser@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "mpd-parser@npm:1.4.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.12.5"
+    "@videojs/vhs-utils": "npm:^4.1.2"
+    "@xmldom/xmldom": "npm:^0.8.3"
+    global: "npm:^4.4.0"
+  bin:
+    mpd-to-m3u8-json: bin/parse.js
+  checksum: 10/226664225caa5cbc462194d88796cda92a29af4cadd9635878e8836488c7111cf393d79292fa2de906d4fad517673155ba53312454f6dbfb01cc324bd254481b
+  languageName: node
+  linkType: hard
+
 "ms@npm:2.0.0":
   version: 2.0.0
   resolution: "ms@npm:2.0.0"
@@ -13152,7 +13201,7 @@ __metadata:
     tsconfig-paths: "npm:4.2.0"
     typescript: "npm:5.9.3"
     uuid: "npm:^11.0.0"
-    video.js: "npm:8.23.7"
+    video.js: "npm:8.23.9"
     webpack: "npm:^5.105.4"
     webpack-cli: "npm:6.0.1"
     webpack-dev-middleware: "npm:7.4.5"
@@ -15621,23 +15670,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"video.js@npm:8.23.7":
-  version: 8.23.7
-  resolution: "video.js@npm:8.23.7"
+"video.js@npm:8.23.9":
+  version: 8.23.9
+  resolution: "video.js@npm:8.23.9"
   dependencies:
     "@babel/runtime": "npm:^7.28.4"
-    "@videojs/http-streaming": "npm:^3.17.3"
-    "@videojs/vhs-utils": "npm:^4.1.1"
+    "@videojs/http-streaming": "npm:^3.17.5"
+    "@videojs/vhs-utils": "npm:^4.1.2"
     "@videojs/xhr": "npm:2.7.0"
     aes-decrypter: "npm:^4.0.2"
     global: "npm:4.4.0"
     m3u8-parser: "npm:^7.2.0"
-    mpd-parser: "npm:^1.3.1"
+    mpd-parser: "npm:^1.4.0"
     mux.js: "npm:^7.0.1"
     videojs-contrib-quality-levels: "npm:4.1.0"
     videojs-font: "npm:4.2.0"
     videojs-vtt.js: "npm:0.15.5"
-  checksum: 10/62859ac85ab5bf186cbaf3c0538d9c62aed7bc900150ba88f0a466f3414d73b01ca57895723773ad7f43a666e9b676336c1af90e4d9786ca45e4d7ccff181049
+  checksum: 10/aa26543dea5c0138b1e0589dc6b049ca6572cdff186acae8c9eae5670d76c2a7afba66122a2c5cdce7b91dd0e903a85e1ff87be4dcea41746aefd6e914899252
   languageName: node
   linkType: hard
 
