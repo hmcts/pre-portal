@@ -110,7 +110,7 @@
     "nodemon": "3.1.14",
     "pa11y": "9.1.1",
     "playwright": "1.59.1",
-    "prettier": "3.8.3",
+    "prettier": "3.9.4",
     "sass": "1.99.0",
     "sass-loader": "16.0.8",
     "style-loader": "4.0.0",
