@@ -9755,7 +9755,7 @@ const RAW_RUNTIME_STATE =
           ["html-minifier-terser", "npm:7.2.0"],\
           ["inquirer", "npm:8.2.7"],\
           ["invisi-data", "npm:1.2.0"],\
-          ["joi", "npm:18.2.1"],\
+          ["joi", "npm:18.2.3"],\
           ["js-beautify", "npm:1.15.4"],\
           ["lodash.clonedeep", "npm:4.5.0"],\
           ["lodash.merge", "npm:4.6.2"],\
@@ -11692,7 +11692,7 @@ const RAW_RUNTIME_STATE =
           ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.20.2"],\
           ["futoin-hkdf", "npm:1.5.3"],\
           ["http-errors", "npm:1.8.1"],\
-          ["joi", "npm:18.2.1"],\
+          ["joi", "npm:18.2.3"],\
           ["jose", "npm:2.0.7"],\
           ["on-headers", "npm:1.1.0"],\
           ["openid-client", "npm:4.9.1"],\
@@ -14560,8 +14560,8 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["joi", [\
-      ["npm:18.2.1", {\
-        "packageLocation": "./.yarn/cache/joi-npm-18.2.1-605c065693-1525745571.zip/node_modules/joi/",\
+      ["npm:18.2.3", {\
+        "packageLocation": "./.yarn/cache/joi-npm-18.2.3-6481787ee4-95beb88e78.zip/node_modules/joi/",\
         "packageDependencies": [\
           ["@hapi/address", "npm:5.1.1"],\
           ["@hapi/formula", "npm:3.0.2"],\
@@ -14570,7 +14570,7 @@ const RAW_RUNTIME_STATE =
           ["@hapi/tlds", "npm:1.1.4"],\
           ["@hapi/topo", "npm:6.0.2"],\
           ["@standard-schema/spec", "npm:1.1.0"],\
-          ["joi", "npm:18.2.1"]\
+          ["joi", "npm:18.2.3"]\
         ],\
         "linkType": "HARD"\
       }]\
