@@ -1,0 +1,97 @@
+{% extends "admin/admin.njk" %}
+
+{% block pageTitle %}System Status - PRE Portal{% endblock %}
+
+
+{% block mainContent %}
+<div class="system-container">
+  <div class="gem-c-title govuk-!-margin-top-0 govuk-!-margin-bottom-8">
+    <h1 class="gem-c-title__text govuk-heading-xl">
+      System Status
+    </h1>
+   </div>
+{% if status and status | length > 0 %}
+  <div class="govuk-grid-row">
+    {% for service, serviceStatus in status %}
+      <div class="govuk-grid-column-one-half">
+        <div class="govuk-panel govuk-panel--confirmation" style="background:
+          {% if serviceStatus.status == 'OPERATIONAL' %}#00703c !important;
+          {% elif serviceStatus.status == 'DEGRADED' %}#ed7031 !important;
+          {% else %}#d4351c !important;
+          {% endif %}">
+          <h2 class="govuk-panel__title">
+            {% if service is string %}
+              {{ service | capitalize }}
+            {% else %}
+              {{ service }}
+            {% endif %}
+          </h2>
+          <div class="govuk-panel__body">
+            {% if serviceStatus.status is string %}
+              {{ serviceStatus.status | capitalize }}
+            {% else %}
+              {{ serviceStatus.status }}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-tabs" data-module="govuk-tabs">
+      <h2 class="govuk-tabs__title">
+        Contents
+      </h2>
+      <ul class="govuk-tabs__list">
+        {% for service, serviceStatus in status %}
+          <li class="govuk-tabs__list-item {% if loop.first %}govuk-tabs__list-item--selected{% endif %}" tabindex="0">
+            <a class="govuk-tabs__tab" href="#{{ service }}">
+              {% if service is string %}
+                {{ service | capitalize }}
+              {% else %}
+                {{ service }}
+              {% endif %}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+
+      {% for service, serviceStatus in status %}
+        <div class="govuk-tabs__panel {% if loop.first %}govuk-tabs__panel--selected{% endif %}" id="{{ service }}">
+          <h2 class="govuk-heading-l">Components</h2>
+          <ul class="govuk-task-list">
+            {% for component, componentStatus in serviceStatus.components %}
+              <li class="govuk-task-list__item govuk-task-list__item--with-link" tabindex="0">
+                <div class="govuk-task-list__name-and-hint">
+                  <span aria-describedby="{{ service }}-{{ component }}-status">
+                    {% if component is string %}
+                      {{ component | capitalize }}
+                    {% else %}
+                      {{ component }}
+                    {% endif %}
+                  </span>
+                </div>
+                <div class="govuk-task-list__status" id="{{service}}-{{component}}-status">
+                  <strong class="govuk-tag
+                    {% if componentStatus == 'UP' %}govuk-tag--green
+                    {% elif componentStatus == 'Degraded' %}govuk-tag--orange
+                    {% else %}govuk-tag--red
+                    {% endif %}">
+                      {% if componentStatus is string %}
+                        {{ componentStatus | capitalize }}
+                      {% else %}
+                        {{ componentStatus }}
+                      {% endif %}
+                  </strong>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+{% endblock %}
+

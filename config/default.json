@@ -12,9 +12,7 @@
     },
     "portalUrl": "https://localhost:4551",
     "mediaKindPlayerKey": "",
-    "tsAndCsRedirectEnabled": false,
-    "enableCaseStateColumn": false,
-    "removeWitnessLastName": false
+    "portalXUserId": ""
   },
   "session": {
     "redis": {
@@ -38,5 +36,9 @@
       "password": ""
     },
     "callbackHostname": "localhost:4551"
+  },
+  "health": {
+    "cvp": "https://status-kinly.pexip.com/api/v2/status.json",
+    "notify": "https://status.notifications.service.gov.uk/api/v2/status.json"
   }
 }

@@ -14,10 +14,14 @@ export default function (app: Application): void {
     checks: {
       // currently no API health check is possible for B2C
       ...(redis ? { redis } : {}),
-      'pre-api': healthcheck.raw(() => {
-        const client = new PreClient();
-        return client.healthCheck().then(healthcheck.up).catch(healthcheck.down);
-      }),
+      'pre-api': async () => {
+        return new PreClient()
+          .healthCheck()
+          .then(r => {
+            return r.data.status === 'UP' ? healthcheck.up() : healthcheck.down();
+          })
+          .catch(healthcheck.down);
+      },
     },
     ...(redis
       ? {

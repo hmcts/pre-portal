@@ -28,12 +28,18 @@
      navigation:
        [{
          href: '/browse',
-         text: "Home"
+         text: "Home",
+         active: '/browse' in pageUrl
        },
        {
-         href: '/admin',
-         text: "Admin"
-       }]
+         href: '/admin/status',
+         text: "Admin",
+         active: '/admin' in pageUrl
+       },
+       {
+       href: '/admin/edit-request',
+       text: "Edit Request"
+     }]
   }) }}
 {% endif %}
 {% endblock %}

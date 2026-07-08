@@ -22,6 +22,7 @@ export class RedisService {
     client.on('error', function (err) {
       console.log(new Date().toLocaleString() + ' - ' + 'Could not connect to redis: ' + err);
     });
+
     return client;
   }
 }

@@ -115,7 +115,7 @@ This diagram gives an overview of the PRE system which the pre-portal connects t
 
 Running the application requires the following tools to be installed in your environment:
 
-- [Node.js](https://nodejs.org/) v12.0.0 or later
+- [Node.js](https://nodejs.org/) v22.15.0 or later (due to ESM and CJS compatibility)
 - [yarn](https://yarnpkg.com/)
 - [Docker](https://www.docker.com)
 
@@ -192,8 +192,11 @@ yarn lint --write
 
 ### Running the tests
 
-This template app uses [Jest](https://jestjs.io//) as the test engine. You can run unit tests by executing
-the following command:
+This template app uses [Jest](https://jestjs.io//) as the test engine.
+
+Important: Currently, Jest is incompatible with ESM modules. Babel has been implemented to transform ESM modules to enable compatibility.
+
+You can run unit tests by executing the following command:
 
 #### Unit Tests
 
@@ -215,7 +218,17 @@ Running accessibility tests:
 yarn test:pa11y
 ```
 
-Make sure all the paths in your application are covered by accessibility tests (see [a11y.ts](src/test/a11y/a11y.ts)).
+Accessibility tests (see [a11y.ts](src/test/a11y/a11y.ts)) make use of the accessibility library Pa11y.
+All paths in PRE Portal should be tested for accessibility issues.
+
+**Puppeteer Usage Over Playwright**
+
+The accessibility tests use [Puppeteer](https://pptr.dev/) to run a headless browser. This is because pa11y does [not
+seem currently compatible](https://github.com/pa11y/pa11y/issues/656#issuecomment-1262418060) with Playwright browser
+contexts and the current tests have complexities (conditional logic, dynamic IDs, etc) that make them difficult to convert to Pa11y
+[actions](https://github.com/pa11y/pa11y?tab=readme-ov-file#actions).
+
+These will be converted to Playwright in upcoming work.
 
 ### Security
 
@@ -266,6 +279,18 @@ The application exposes a health endpoint (https://localhost:4551/health), creat
 in [health.ts](src/main/routes/health.ts) file. Make sure you adjust it correctly in your application.
 In particular, remember to replace the sample check with checks specific to your frontend app,
 e.g. the ones verifying the state of each service it depends on.
+
+### Altering the sign-in page
+
+The sign in page is provided by Azure B2C. The code for it is in https://github.com/hmcts/pre-shared-infrastructure/tree/master/b2c. Make sure you read the [README](https://github.com/hmcts/pre-shared-infrastructure/blob/master/b2c/README.md) first.
+
+### Testing with the DEV instance of B2C
+
+Sometimes you'll be making changes to B2C and you'll want a frontend available which points to it.
+
+To point the pre-portal at the dev B2C instance you simply need to add the tag `pr-values: devb2c`
+to the GitHub PR you are working on. Instructions on how this works can be found
+[here](https://hmcts.github.io/cloud-native-platform/new-component/helm-chart.html#what-are-values-template-yaml-for).
 
 ## Troubleshooting
 

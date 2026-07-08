@@ -1,0 +1,191 @@
+{% from "govuk/components/pagination/macro.njk" import govukPagination %}
+
+{% extends "admin/admin.njk" %}
+
+{% block pageTitle %}MediaKind Live Events - PRE Portal{% endblock %}
+
+{% block mainContent %}
+<div class="gem-c-title govuk-!-margin-top-0 govuk-!-margin-bottom-8">
+    <h1 class="gem-c-title__text govuk-heading-xl">
+      MediaKind Live Events
+    </h1>
+    <div>
+  <form method="GET" action="" class="govuk-grid-row govuk-!-margin-bottom-6">
+    <div class="govuk-grid-column-one-quarter">
+              <div class="govuk-form-group">
+                  <label class="govuk-label" for="case-reference">Case Reference</label>
+                  <input class="govuk-input" id="case-reference" name="case-reference" type="text"
+                         value="{{ request.query.name | default('') }}"
+                         placeholder="Enter Case Reference">
+              </div>
+          </div>
+   <div class="govuk-grid-column-one-quarter">
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="id">Live Event ID</label>
+                <input class="govuk-input" id="id" name="id" type="text"
+                       value="{{ request.query.name | default('') }}"
+                       placeholder="Enter ID">
+            </div>
+        </div>
+
+
+      <div class="govuk-grid-column-one-quarter">
+          <div class="govuk-form-group">
+              <label class="govuk-label" for="description">Description</label>
+              <input class="govuk-input" id="description" name="description" type="text"
+                     value="{{ request.query.description | default('') }}"
+                     placeholder="Enter description">
+          </div>
+      </div>
+
+      <div class="govuk-grid-column-one-quarter">
+          <div class="govuk-form-group">
+              <label class="govuk-label" for="resource-state">Resource State</label>
+              <select class="govuk-select" id="resource-state" name="resource_state">
+                  <option value="">All</option>
+                  <option value="running" {% if request.query.resource_state == 'running' %}selected{% endif %}>Running</option>
+                  <option value="stopped" {% if request.query.resource_state == 'stopped' %}selected{% endif %}>Stopped</option>
+              </select>
+          </div>
+      </div>
+
+        <div class="govuk-grid-column-one-quarter">
+              <button class="govuk-button govuk-button--secondary" type="reset" id="resetButton">Reset</button>
+          </div>
+         <div class="govuk-grid-column-one-quarter">
+             <button class="govuk-button govuk-button--secondary govuk-visually-hidden"" type="submit">Submit</button>
+         </div>
+
+  </form>
+  <div>
+
+    <div style="overflow-x: auto; width: 100%;">
+      <table class="govuk-table" id="resizable-table">
+        <caption class="govuk-table__caption govuk-table__caption--m"  tabindex="0">Live events</caption>
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header resizable"tabindex="0">Case Reference<div class="resizer"></div></th>
+            <th scope="col" class="govuk-table__header resizable"tabindex="0">ID <div class="resizer"></div></th>
+            <th scope="col" class="govuk-table__header resizable"tabindex="0">Description<div class="resizer"></div></th>
+            <th scope="col" class="govuk-table__header resizable"tabindex="0">Resource State<div class="resizer"></div></th>
+          </tr>
+        </thead>
+        {% if liveEvents.length === 0 %}
+           <tbody
+              class="govuk-table__body"
+              data-testid="no-data-message">
+              <td>No live events found.</td>
+            </tbody>
+        {% else %}
+          <tbody class="govuk-table__body" id="resizable-body">
+            {% for liveEvent in liveEvents %}
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell" tabindex="0">{{ liveEvent.caseReference }}</td>
+                <td class="govuk-table__cell "scope="row" tabindex="0">{{ liveEvent.id }} </td>
+                <td class="govuk-table__cell" tabindex="0">{{ liveEvent.description }}</td>
+                <td class="govuk-table__cell" tabindex="0">{{ liveEvent.status }}</td>
+              </tr>
+            {% endfor %}
+
+                <tr id="no-data-message" style="display: none; border-bottom: none;">
+                   <td colspan="4" class="govuk-table__cell" style="border-bottom: none;">No live events found matching search parameters</td>
+                 </tr>
+          </tbody>
+        {% endif %}
+      </table>
+    </div>
+
+    {% if paginationLinks.items.length > 1 %}
+      <div style="display: flex; justify-content: center;">
+        {{ govukPagination(paginationLinks) }}
+      </div>
+    {% endif %}
+</div>
+
+<script>
+function filterTable() {
+    const caseReferenceFilter = document.getElementById("case-reference").value.toLowerCase();
+    const idFilter = document.getElementById("id").value.toLowerCase();
+    const descriptionFilter = document.getElementById("description").value.toLowerCase();
+    const resourceStateFilter = document.getElementById("resource-state").value.toLowerCase();
+
+    const rows = document.querySelectorAll("#resizable-body .govuk-table__row");
+    let visibleRowCount = 0;
+
+    rows.forEach(row => {
+        const caseReference = row.children[0].textContent.toLowerCase();
+        const id = row.children[1].textContent.toLowerCase();
+
+        const description = row.children[2].textContent.toLowerCase();
+        const resourceState = row.children[3].textContent.toLowerCase();
+
+        if (
+            (caseReference.includes(caseReferenceFilter) || caseReferenceFilter === '') &&
+            (id.includes(idFilter) || idFilter === '') &&
+            (description.includes(descriptionFilter) || descriptionFilter === '') &&
+            (resourceState.includes(resourceStateFilter) || resourceStateFilter === '')
+        ) {
+            row.style.display = "";
+            visibleRowCount++;
+        } else {
+            row.style.display = "none";
+        }
+    });
+
+    const noDataMessage = document.getElementById("no-data-message");
+    if (visibleRowCount === 0) {
+        noDataMessage.style.display = "";
+    } else {
+        noDataMessage.style.display = "none";
+    }
+}
+
+document.getElementById("case-reference").addEventListener("input", filterTable);
+document.getElementById("id").addEventListener("input", filterTable);
+document.getElementById("description").addEventListener("input", filterTable);
+document.getElementById("resource-state").addEventListener("change", filterTable);
+
+document.getElementById("resetButton").addEventListener("click", function () {
+      document.getElementById("case-reference").value = "";
+      document.getElementById("id").value = "";
+      document.getElementById("description").value = "";
+      document.getElementById("resource-state").value = "";
+
+    filterTable();
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const resizers = document.querySelectorAll(".resizer");
+  resizers.forEach((resizer) => {
+    let startX, startWidth, column;
+
+    resizer.addEventListener("mousedown", function (e) {
+      column = resizer.parentElement;
+      startX = e.pageX;
+      startWidth = column.offsetWidth;
+
+      document.addEventListener("mousemove", resizeColumn);
+      document.addEventListener("mouseup", stopResizing);
+    });
+
+    function resizeColumn(e) {
+      const newWidth = Math.max(50, startWidth + (e.pageX - startX));
+      column.style.width = newWidth + "px";
+      const columnIndex = Array.from(column.parentElement.children).indexOf(column);
+
+      document.querySelectorAll(`#resizable-table tr td:nth-child(${columnIndex + 1})`).forEach(td => {
+        td.style.width = newWidth + "px";
+      });
+    }
+
+    function stopResizing() {
+      document.removeEventListener("mousemove", resizeColumn);
+      document.removeEventListener("mouseup", stopResizing);
+    }
+  });
+});
+</script>
+
+
+{% endblock %}

@@ -26,12 +26,12 @@ export const config = {
   helpers: {},
   b2c: {
     testLogin: {
-      email: sysConfig.get('b2c.testLogin.email'),
-      password: sysConfig.get('b2c.testLogin.password'),
+      email: process.env.TEST_USER || sysConfig.get('b2c.testLogin.email'),
+      password: process.env.PASSWORD || sysConfig.get('b2c.testLogin.password'),
     },
     testSuperUserLogin: {
-      email: sysConfig.get('b2c.testSuperUserLogin.email'),
-      password: sysConfig.get('b2c.testSuperUserLogin.password'),
+      email: process.env.TEST_USER || sysConfig.get('b2c.testSuperUserLogin.email'),
+      password: process.env.PASSWORD || sysConfig.get('b2c.testSuperUserLogin.password'),
     },
   },
   session: {
@@ -39,7 +39,7 @@ export const config = {
       key: '',
       host: '',
     },
-    maxAge: 3600,
+    maxAge: 86400000,
     secret: 'superlongrandomstringthatshouldbebetterinprod',
   },
 };

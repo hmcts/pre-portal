@@ -5,6 +5,7 @@ properties([
 pipelineTriggers([cron('H 07 * * 1-5')]),
 parameters([
     string(name: 'ENVIRONMENT', defaultValue: 'stg', description: 'Environment to test'),
+    string(name: 'SMOKEENVIRONMENT', defaultValue: 'prod', description: 'Environment to test'),
     string(name: 'TEST_URL', defaultValue: 'https://pre-portal.staging.platform.hmcts.net', description: 'The URL you want to run tests against'),
   ])
 ])
@@ -24,7 +25,15 @@ def secrets = [
       secret('b2c-test-super-user-password', 'B2C_TEST_SUPER_USER_LOGIN_PASSWORD')
     ]
 ]
-
+def smokescrets = [
+"pre-hmctskv-${params.SMOKEENVIRONMENT}":
+    [
+      secret('preprodsmoketest-b2c-email', 'B2C_TEST_LOGIN_EMAIL'),
+      secret('preprodsmoketest-b2c-password', 'B2C_TEST_LOGIN_PASSWORD'),
+      secret('b2c-test-super-user-email', 'B2C_TEST_SUPER_USER_LOGIN_EMAIL'),
+      secret('b2c-test-super-user-password', 'B2C_TEST_SUPER_USER_LOGIN_PASSWORD'),
+    ]
+]
 static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
   [ $class: 'AzureKeyVaultSecret',
     secretType: 'Secret',
@@ -65,6 +74,9 @@ withNightlyPipeline(type, product, component) {
           reportName           : "full Functional Test Report PRE-Portal"
       ]
       steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/functional/reports/**/*'
-    }
 
+    overrideVaultEnvironments(['ENVIRONMENT': params.SMOKEENVIRONMENT])
+    env.TEST_URL = "https://portal.pre-recorded-evidence.justice.gov.uk/"
+    yarnBuilder.yarn('test:smoketest')
+    }
 }

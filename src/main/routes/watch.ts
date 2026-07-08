@@ -57,7 +57,6 @@ export default function (app: Application): void {
         recording,
         recordingPlaybackDataUrl,
         mediaKindPlayerKey,
-        removeWitnessLastName: config.get('pre.removeWitnessLastName') === 'true',
       });
     } catch (e) {
       next(e);
