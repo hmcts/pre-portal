@@ -1,6 +1,6 @@
 import { mockedPaginatedRecordings, mockRecordings, mockXUserId } from '../mock-api';
 import { PreClient } from '../../main/services/pre-api/pre-client';
-import { PutAuditRequest, SearchRecordingsRequest } from '../../main/services/pre-api/types';
+import { PutAuditRequest, RecordingPlaybackData, SearchRecordingsRequest } from '../../main/services/pre-api/types';
 import { describe } from '@jest/globals';
 import axios from 'axios';
 import { mockeduser } from './test-helper';
@@ -11,6 +11,13 @@ const preClient = new PreClient();
 const mockRecordingId = '12345678-1234-1234-1234-1234567890ab';
 const mockRecordingMissingId = '4f37c46f-142d-42df-953f-0b7ca3f87995';
 const mockRecordingNoPermsId = '4f37c46f-142d-42df-953f-0b7ca3f87996';
+const mockPlaybackData = {
+  hls_url: 'https://streaming.example.test/playlist.m3u8',
+  token: 'playback-token',
+  src: 'https://streaming.example.test/playlist.m3u8',
+  type: 'application/vnd.apple.mpegurl',
+  protectionInfo: [],
+} as RecordingPlaybackData;
 jest.mock('axios');
 
 /* eslint-disable jest/expect-expect */
@@ -134,7 +141,7 @@ describe('PreClient', () => {
     if (url === '/media-service/vod?recordingId=123') {
       return Promise.resolve({
         status: 200,
-        data: mockRecordings[0],
+        data: mockPlaybackData,
       });
     }
     if (url === '/media-service/vod?recordingId=101112') {
@@ -293,7 +300,7 @@ describe('PreClient', () => {
   test('getRecordingPlaybackDataMk success', async () => {
     var result = await preClient.getRecordingPlaybackDataMk('456', '123');
     expect(result).toBeTruthy();
-    expect(result?.id).toEqual(mockRecordings[0].id);
+    expect(result?.hls_url).toEqual(mockPlaybackData.hls_url);
   });
 
   test('getRecordingPlaybackDataMk 404', async () => {

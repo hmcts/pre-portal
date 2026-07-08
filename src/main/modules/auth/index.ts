@@ -6,11 +6,23 @@ import config from 'config';
 import { Application } from 'express';
 import { ConfigParams, auth } from 'express-openid-connect';
 import session from 'express-session';
-import * as jose from 'jose';
 import FileStoreFactory from 'session-file-store';
 
 const FileStore = FileStoreFactory(session);
 import { RedisStore } from 'connect-redis';
+
+function decodeJwtClaims(idToken: string): Record<string, unknown> {
+  const parts = idToken.split('.');
+
+  if (parts.length < 2) {
+    throw new Error('Invalid id_token');
+  }
+
+  const payload = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+  const padding = payload.length % 4 === 0 ? '' : '='.repeat(4 - (payload.length % 4));
+
+  return JSON.parse(Buffer.from(`${payload}${padding}`, 'base64').toString('utf8')) as Record<string, unknown>;
+}
 
 export class Auth {
   public enableFor(app: Application): void {
@@ -42,7 +54,7 @@ export class Auth {
           config.get('pre.portalUrl')) as string,
       },
       afterCallback: async (req, res, s) => {
-        const claims = jose.decodeJwt(s.id_token);
+        const claims = decodeJwtClaims(s.id_token);
         // if loginEmail is set, use that, else use email
         const loggedInEmail = claims.loginEmail || claims.email;
         // @todo add jwt validation here

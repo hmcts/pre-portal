@@ -2,7 +2,7 @@ nodejs:
   applicationPort: 4551
   aadIdentityName: pre
   ingressHost: pre-portal.{{ .Values.global.environment }}.platform.hmcts.net
-  image: 'sdshmctspublic.azurecr.io/pre/portal:latest'
+  image: 'hmctsprod.azurecr.io/pre/portal:latest'
   keyVaults:
     pre-hmctskv:
       secrets:

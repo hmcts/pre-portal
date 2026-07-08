@@ -52,6 +52,28 @@ describe('Session Users', () => {
     expect(user).toBe('3fa85f64-5717-4562-b3fc-2c963f66afa6');
   });
 
+  test('getLoggedInUserBrowseId uses active super user app access when available', async () => {
+    const req = createRequest();
+    req['__session'] = {
+      userProfile: mockeduser as UserProfile,
+    };
+    const user = await SessionUser.getLoggedInUserBrowseId(req);
+    expect(user).toBe('5000e766-b50d-4473-85b2-0bb54785c169');
+  });
+
+  test('getLoggedInUserBrowseId falls back to portal access when super user app access is inactive', async () => {
+    const req = createRequest();
+    const userProfile = {
+      ...mockeduser,
+      app_access: mockeduser.app_access.map(access => ({ ...access, active: false })),
+    } as UserProfile;
+    req['__session'] = {
+      userProfile,
+    };
+    const user = await SessionUser.getLoggedInUserBrowseId(req);
+    expect(user).toBe('3fa85f64-5717-4562-b3fc-2c963f66afa6');
+  });
+
   test('getLoggedInUserProfile no session', () => {
     const t = () => {
       SessionUser.getLoggedInUserProfile({} as Express.Request);

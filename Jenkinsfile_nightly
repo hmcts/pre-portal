@@ -12,6 +12,8 @@ parameters([
 
 @Library("Infrastructure")
 
+def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
+
 def type = "nodejs"
 def product = "pre"
 def component = "portal"
@@ -59,9 +61,6 @@ withNightlyPipeline(type, product, component) {
 
       steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/cross-browser/reports/**/*'
      }
-      before('fullFunctionalTest') {
-        env.TEST_URL = "https://portal.pre-recorded-evidence.justice.gov.uk/"
-        }
 
       enableFullFunctionalTest(200)
       afterAlways('fullFunctionalTest') {
@@ -75,8 +74,8 @@ withNightlyPipeline(type, product, component) {
       ]
       steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/functional/reports/**/*'
 
-    overrideVaultEnvironments(['ENVIRONMENT': params.SMOKEENVIRONMENT])
-    env.TEST_URL = "https://portal.pre-recorded-evidence.justice.gov.uk/"
-    yarnBuilder.yarn('test:smoketest')
+      overrideVaultEnvironments(['ENVIRONMENT': params.SMOKEENVIRONMENT])
+      env.TEST_URL = "https://portal.pre-recorded-evidence.justice.gov.uk/"
+      yarnBuilder.yarn('test:smoketest')
     }
 }
