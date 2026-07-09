@@ -9,6 +9,7 @@ const loadingSpinner = path.resolve(images, 'loading-spinner.gif');
 const faqs = path.resolve(files, 'faqs.pdf');
 const processGuide = path.resolve(files, 'process-guide.pdf');
 const userGuide = path.resolve(files, 'user-guide.pdf');
+const editingRequestForm = path.resolve(files, 'pre-editing-request-form.xlsx');
 
 const copyCustomAssets = new CopyWebpackPlugin({
   patterns: [
@@ -16,6 +17,7 @@ const copyCustomAssets = new CopyWebpackPlugin({
     { from: faqs, to: 'assets/files' },
     { from: processGuide, to: 'assets/files' },
     { from: userGuide, to: 'assets/files' },
+    { from: editingRequestForm, to: 'assets/files' },
   ],
 });
 

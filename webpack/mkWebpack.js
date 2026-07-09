@@ -3,6 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const rootExport = require.resolve('@mediakind/mkplayer');
 const root = path.resolve(rootExport, '..');
+
 const copyMediaKindAssets = new CopyWebpackPlugin({
   patterns: [
     { from: `${root}/mkplayer.js`, to: 'assets/js' },
@@ -11,6 +12,5 @@ const copyMediaKindAssets = new CopyWebpackPlugin({
 });
 
 module.exports = {
-  paths: { template: root },
   plugins: [copyMediaKindAssets],
 };

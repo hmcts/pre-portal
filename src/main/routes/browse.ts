@@ -3,9 +3,9 @@ import { SearchRecordingsRequest } from '../services/pre-api/types';
 import { SessionUser } from '../services/session-user/session-user';
 import { UserLevel } from '../types/user-level';
 
+import { Logger } from '@hmcts/nodejs-logging';
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
-import config from 'config';
 
 export const convertIsoToDate = (isoString?: string): string | undefined => {
   if (!isoString) {
@@ -19,8 +19,37 @@ export const convertIsoToDate = (isoString?: string): string | undefined => {
   });
 };
 
+const getQueryString = (value: unknown): string | undefined => {
+  const queryValue = Array.isArray(value) ? value[0] : value;
+
+  if (typeof queryValue !== 'string') {
+    return undefined;
+  }
+
+  const trimmedQueryValue = queryValue.trim();
+  return trimmedQueryValue || undefined;
+};
+
 export default function (app: Application): void {
   app.get('/browse', requiresAuth(), async (req, res) => {
+    const logger = Logger.getLogger('browse-route');
+    const userProfileForCjsm = SessionUser.getLoggedInUserProfile(req);
+    const isSuperUser = userProfileForCjsm.app_access.some(role => role.role.name === UserLevel.SUPER_USER);
+    const caseReference = isSuperUser ? getQueryString(req.query.caseReference) : undefined;
+    const primaryEmail = (userProfileForCjsm.user.email || '').toLowerCase();
+    const alternativeEmail = (userProfileForCjsm.user.alternative_email || '').toLowerCase();
+
+    logger.info('Full userProfile.user:', JSON.stringify(userProfileForCjsm.user, null, 2));
+    logger.info('alternative_email value:', userProfileForCjsm.user.alternative_email);
+    logger.info('alternative_email type:', typeof userProfileForCjsm.user.alternative_email);
+
+    const hasCjsmInPrimary = primaryEmail.endsWith('cjsm.net');
+    const hasCjsmInAlt = alternativeEmail.endsWith('cjsm.net');
+    const showCjsmBanner = !hasCjsmInPrimary && hasCjsmInAlt;
+
+    logger.info('hasCjsmInPrimary:', hasCjsmInPrimary);
+    logger.info('hasCjsmInAlt:', hasCjsmInAlt);
+    logger.info('showCjsmBanner:', showCjsmBanner);
     const client = new PreClient();
 
     const request: SearchRecordingsRequest = {
@@ -29,7 +58,7 @@ export default function (app: Application): void {
       participantId: req.query.participantId as string,
       witnessName: req.query.witnessName as string,
       defendantName: req.query.defendantName as string,
-      caseReference: req.query.caseReference as string,
+      caseReference,
       scheduledFor: req.query.scheduledFor as string,
       courtId: req.query.courtId as string,
       includeDeleted: req.query.includeDeleted as unknown as boolean,
@@ -38,7 +67,7 @@ export default function (app: Application): void {
     };
 
     const { recordings, pagination } = await client.getRecordings(
-      await SessionUser.getLoggedInUserPortalId(req),
+      await SessionUser.getLoggedInUserBrowseId(req),
       request
     );
 
@@ -46,10 +75,6 @@ export default function (app: Application): void {
     // Page starts at 0
     // Rolling window of 5 pages centered on the current page
     // The current page is 5 then 2 pages before and 2 pages after does not include the first+1 or last-1 pages so add in ellipsis
-
-    const isSuperUser =
-      SessionUser.getLoggedInUserProfile(req).app_access.filter(role => role.role.name === UserLevel.SUPER_USER)
-        .length > 0;
 
     const updatedRecordings = recordings.map(recording => ({
       ...recording,
@@ -66,10 +91,10 @@ export default function (app: Application): void {
       paginationLinks,
       title,
       user: SessionUser.getLoggedInUserProfile(req).user,
-      enableCaseStateColumn: config.get('pre.enableCaseStateColumn') === 'true',
       isSuperUser: isSuperUser,
-      removeWitnessLastName: config.get('pre.removeWitnessLastName') === 'true',
+      caseReference,
       pageUrl: req.url,
+      showCjsmBanner,
     });
   });
 }

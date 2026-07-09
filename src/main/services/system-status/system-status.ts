@@ -102,9 +102,8 @@ export class SystemStatus {
   }
 
   private async getB2CStatus() {
-    const b2cUrl = ((config.get('b2c.endSessionEndpoint') as string) +
-      '?post_logout_redirect_uri=' +
-      config.get('pre.portalUrl')) as string;
+    const b2cUrl =
+      (config.get('b2c.endSessionEndpoint') as string) + '?post_logout_redirect_uri=' + config.get('pre.portalUrl');
 
     try {
       const response = await axios.get(b2cUrl);
@@ -114,6 +113,9 @@ export class SystemStatus {
       }
       return 'DOWN' as HealthStatus;
     } catch (error) {
+      this.logger.error(`Failed to reach B2C endpoint: ${b2cUrl}`, {
+        error: error instanceof Error ? error.message : error,
+      });
       return 'UNKNOWN' as HealthStatus;
     }
   }

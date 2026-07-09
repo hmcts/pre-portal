@@ -1,6 +1,15 @@
-<nav class="govuk-!-padding-bottom-6" aria-labelledby="side-navigation-label">
+<div id="side-nav-container" class="side-nav-container">
+
+
+ <div class="nav-content">
+<nav id="side-navigation"
+     class="side-nav collapsed govuk-!-padding-bottom-6 govuk-!-margin-top-0"
+     aria-labelledby="side-navigation-label">
   <h2 class="govuk-heading-m" id="side-navigation-label">Admin menu</h2>
   <ul class="govuk-list govuk-navigation-list">
+
+
+
     {% set navItems = [
       {
         "title": "Status",
@@ -14,7 +23,8 @@
         ]
       },
       { "title": "MediaKind live events", "url": "/admin/MK-live-events", "id": "live-events" },
-      { "title": "Audit", "url": "/admin/audit", "id": "audit" }
+      { "title": "Audit", "url": "/admin/audit", "id": "audit" },
+      { "title": "Migration", "url": "/admin/migration", "id": "migration" }
     ] %}
 
     {% for item in navItems %}
@@ -52,4 +62,5 @@
     {% endfor %}
   </ul>
 </nav>
-
+</div>
+</div>

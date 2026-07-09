@@ -46,6 +46,7 @@ export const mockeduser: UserProfile = {
     first_name: 'test',
     last_name: 'testy',
     email: 'test@testy.com',
+    alternative_email: null,
     phone_number: null,
     organisation: null,
     terms_accepted: {
@@ -69,6 +70,9 @@ export function mockUser() {
       SessionUser: {
         getLoggedInUserPortalId: jest.fn().mockImplementation((req: Express.Request) => {
           return '123';
+        }),
+        getLoggedInUserBrowseId: jest.fn().mockImplementation((req: Express.Request) => {
+          return 'super-user-access-id';
         }),
         getLoggedInUserProfile: jest.fn().mockImplementation((req: Express.Request) => {
           return mockeduser;

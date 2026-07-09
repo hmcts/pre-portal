@@ -12,16 +12,14 @@
     },
     "portalUrl": "https://localhost:4551",
     "mediaKindPlayerKey": "",
-    "tsAndCsRedirectEnabled": false,
-    "enableCaseStateColumn": false,
-    "removeWitnessLastName": false
+    "portalXUserId": ""
   },
   "session": {
     "redis": {
       "key": "",
       "host": ""
     },
-    "maxAge": 86400000,
+    "maxAge": 3600,
     "secret": "superlongrandomstringthatshouldbebetterinprod"
   },
   "b2c": {
