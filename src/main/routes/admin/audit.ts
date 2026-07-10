@@ -34,7 +34,8 @@ export default function (app: Application): void {
         pagination,
         'admin/audit',
         'Audit Logs',
-        auditLogs.length
+        auditLogs.length,
+        null
       );
 
       const courts = await getAllPaginatedCourts(client, userPortalId, { size: 50 });

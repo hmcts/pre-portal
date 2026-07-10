@@ -68,7 +68,8 @@ export class PreClient {
     pagination: Pagination,
     url: string,
     pageTitle: string,
-    resourceLength: number
+    resourceLength: number,
+    queryString?: { name: string; value: string } | null
   ): {
     paginationLinks: {
       previous: {};
@@ -83,23 +84,35 @@ export class PreClient {
       items: [] as ({ href: string; number: number; current: boolean } | { ellipsis: boolean })[],
     };
 
+    const buildPageUrl = (page: number) => {
+      const params = new URLSearchParams({ page: page.toString() });
+      let pageUrl = `/${url}`;
+
+      if (queryString) {
+        params.set(queryString.name, queryString.value);
+        pageUrl = `${pageUrl}?${params.toString()}`;
+      }
+
+      return pageUrl;
+    };
+
     // Add previous link if not on the first page
     if (pagination.currentPage > 0) {
       paginationLinks.previous = {
-        href: `/` + url + `?page=${pagination.currentPage - 1}`,
+        href: buildPageUrl(pagination.currentPage - 1),
       };
     }
 
     // Add next link if not on the last page
     if (pagination.currentPage < pagination.totalPages - 1) {
       paginationLinks.next = {
-        href: `/` + url + `?page=${pagination.currentPage + 1}`,
+        href: buildPageUrl(pagination.currentPage + 1),
       };
     }
 
     // Always add the first page
     paginationLinks.items.push({
-      href: '/' + url + '?page=0',
+      href: buildPageUrl(0),
       number: 1,
       current: 0 === pagination.currentPage,
     });
@@ -116,7 +129,7 @@ export class PreClient {
       i++
     ) {
       paginationLinks.items.push({
-        href: `/` + url + `?page=${i}`,
+        href: buildPageUrl(i),
         number: i + 1,
         current: i === pagination.currentPage,
       });
@@ -130,7 +143,7 @@ export class PreClient {
     // Add the last page if there is more than one page (don't repeat the first page)
     if (pagination.totalPages > 1) {
       paginationLinks.items.push({
-        href: `/` + url + `?page=${pagination.totalPages - 1}`,
+        href: buildPageUrl(pagination.totalPages - 1),
         number: pagination.totalPages,
         current: pagination.totalPages - 1 === pagination.currentPage,
       });
@@ -138,12 +151,10 @@ export class PreClient {
 
     let title = pageTitle;
     if (resourceLength > 0) {
-      title =
-        pageTitle +
-        ` ${pagination.currentPage * pagination.size + 1} to ${Math.min(
-          (pagination.currentPage + 1) * pagination.size,
-          pagination.totalElements
-        )} of ${pagination.totalElements}`;
+      title = `${pageTitle} ${pagination.currentPage * pagination.size + 1} to ${Math.min(
+        (pagination.currentPage + 1) * pagination.size,
+        pagination.totalElements
+      )} of ${pagination.totalElements}`;
     }
     return { paginationLinks, title };
   }

@@ -84,7 +84,14 @@ export default function (app: Application): void {
       },
     }));
 
-    const { paginationLinks, title } = client.createPagination(pagination, 'browse', 'Recordings', recordings.length);
+    const queryString = caseReference ? { name: 'caseReference', value: caseReference } : undefined;
+    const { paginationLinks, title } = client.createPagination(
+      pagination,
+      'browse',
+      'Recordings',
+      recordings.length,
+      queryString
+    );
 
     res.render('browse', {
       recordings: updatedRecordings,
