@@ -17,5 +17,7 @@ export const getAllPaginatedCourts = async (
     courts.push(...paginatedResponse.courts);
   }
 
+  courts.sort((a, b) => (a.name ?? '').localeCompare(b.name ?? '', 'en', { sensitivity: 'base' }))
+
   return courts;
 };
