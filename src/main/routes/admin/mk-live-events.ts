@@ -6,13 +6,13 @@ import { RequiresSuperUser } from '../../middleware/admin-middleware';
 import { LiveEventStatusService } from '../../services/system-status/live-events-status';
 
 export default function (app: Application): void {
-  app.get('/admin/MK-live-events', requiresAuth(), RequiresSuperUser, async (req, res) => {
+  app.get('/admin/mk-live-events', requiresAuth(), RequiresSuperUser, async (req, res) => {
     const client = new PreClient();
 
     const liveEventService = new LiveEventStatusService(req, client);
     const liveEvents = await liveEventService.getMediaKindLiveEventStatuses();
 
-    res.render('admin/MK-live-events', {
+    res.render('admin/mk-live-events', {
       isSuperUser: true,
       liveEvents,
       request: req,
