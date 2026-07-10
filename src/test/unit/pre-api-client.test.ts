@@ -1,4 +1,4 @@
-import { mockedPaginatedRecordings, mockRecordings, mockXUserId } from '../mock-api';
+import { mockedPaginatedAuditLogs, mockedPaginatedCourts, mockedPaginatedRecordings, mockRecordings, mockXUserId } from '../mock-api';
 import { PreClient } from '../../main/services/pre-api/pre-client';
 import { PaginatedRequest, PutAuditRequest, RecordingPlaybackData, SearchAuditLogsRequest, SearchRecordingsRequest } from '../../main/services/pre-api/types';
 import { describe } from '@jest/globals';
@@ -165,6 +165,50 @@ describe('PreClient', () => {
         },
       });
     }
+    if (url === '/audit') {
+      if (config['headers']['X-User-Id'] === mockXUserId) {
+        return Promise.resolve({
+          status: 200,
+          data: mockedPaginatedAuditLogs,
+        });
+      } else if (config['params']['caseReference'] == 'uhoh') {
+        return Promise.reject('Network Error');
+      }
+      return Promise.resolve({
+        status: 200,
+        data: {
+          page: {
+            size: 20,
+            totalElements: 0,
+            totalPages: 1,
+            number: 0,
+          },
+        },
+      });
+    }
+
+    if (url === '/courts') {
+      if (config['headers']['X-User-Id'] === mockXUserId) {
+        return Promise.resolve({
+          status: 200,
+          data: mockedPaginatedCourts,
+        });
+      } else if (config['params']['page'] == 999) {
+        return Promise.reject('Network Error');
+      }
+      return Promise.resolve({
+        status: 200,
+        data: {
+          page: {
+            size: 20,
+            totalElements: 0,
+            totalPages: 1,
+            number: 0,
+          },
+        },
+      });
+    }
+
     throw new Error('Invalid URL: ' + url);
   });
   mockedAxios.post.mockImplementation((url, data, _config) => {
@@ -443,14 +487,14 @@ describe('PreClient', () => {
 
   test('get courts with pagination', async () => {
     const request = {} as PaginatedRequest;
-    const { courts, pagination } = await preClient.getCourts(mockXUserId, request);
+    const { courts, pagination } = await preClient.getCourtsWithPagination(mockXUserId, request);
     expect(courts).toBeTruthy();
     expect(courts.length).toBe(2);
     expect(pagination).toBeTruthy();
   });
   test('get courts with pagination no results', async () => {
     const request = {} as PaginatedRequest;
-    const { courts, pagination } = await preClient.getCourts(otherXUserId, request);
+    const { courts, pagination } = await preClient.getCourtsWithPagination(otherXUserId, request);
     expect(courts).toBeTruthy();
     expect(courts.length).toBe(0);
     expect(pagination).toBeTruthy();
@@ -458,7 +502,7 @@ describe('PreClient', () => {
 
   test('get courts network error', async () => {
     try {
-      await preClient.getCourts(otherXUserId, { page: 999 } as PaginatedRequest);
+      await preClient.getCourtsWithPagination(otherXUserId, { page: 999 } as PaginatedRequest);
       expect(true).toBe(false); // shouldn't get here...
     } catch (e) {
       expect(e).toBe('Network Error');

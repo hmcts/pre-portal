@@ -6,6 +6,7 @@ import { RedisService } from '../../app/redis/RedisService';
 import { LiveEvent } from '../../types/live-event';
 import {
   Audit,
+  Court as ApiCourt,
   EditRequest,
   PaginatedRequest,
   Pagination,
@@ -633,7 +634,7 @@ export class PreClient {
   public async getCourtsWithPagination(
     xUserId: string,
     request: PaginatedRequest
-  ): Promise<{ courts: Court[]; pagination: Pagination }> {
+  ): Promise<{ courts: ApiCourt[]; pagination: Pagination }> {
     this.logger.debug('Getting courts with request: ' + JSON.stringify(request));
 
     try {
@@ -651,7 +652,7 @@ export class PreClient {
         size: response.data['page']['size'],
       } as Pagination;
       const courts =
-        response.data['page']['totalElements'] === 0 ? [] : (response.data['_embedded']['courtDTOList'] as Court[]);
+        response.data['page']['totalElements'] === 0 ? [] : (response.data['_embedded']['courtDTOList'] as ApiCourt[]);
 
       return { courts, pagination };
     } catch (e) {

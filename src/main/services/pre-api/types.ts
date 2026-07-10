@@ -139,3 +139,12 @@ export interface Audit {
   created_at: string;
   audit_details: { [key: string]: string };
 }
+
+export interface Court {
+  id: string;
+  name: string;
+  court_type: string;
+  location_code: string;
+  regions: { name: string }[];
+  rooms: { id: string; name: string }[];
+}
