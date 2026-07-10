@@ -602,6 +602,8 @@ export class PreClient {
         params: request,
       });
 
+      this.logger.info('getAuditLogs response.data: %s', JSON.stringify(response.data, null, 2));
+
       const pagination = {
         currentPage: response.data['page']['number'],
         totalPages: response.data['page']['totalPages'],
@@ -644,6 +646,10 @@ export class PreClient {
         },
         params: request,
       });
+
+      this.logger.info('getCourtsWithPagination response.data: %s', JSON.stringify(response.data, null, 2));
+
+      // console.log('courts response:', JSON.stringify(response, null, 2));
 
       const pagination = {
         currentPage: response.data['page']['number'],

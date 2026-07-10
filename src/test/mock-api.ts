@@ -312,21 +312,23 @@ export function mockGetCourts(courts?: Court[], page: number = 0) {
     const courtSubset = courts.slice(page * 10, (page + 1) * 10);
 
     jest
-      .spyOn(PreClient.prototype, 'getCourts')
+      .spyOn(PreClient.prototype, 'getCourtsWithPagination')
       .mockImplementation(async (xUserId: string, request: PaginatedRequest) => {
         return Promise.resolve({ courts: courtSubset, pagination });
       });
     return;
   }
 
-  jest.spyOn(PreClient.prototype, 'getCourts').mockImplementation(async (xUserId: string, req: PaginatedRequest) => {
-    return Promise.resolve({ courts: mockCourts, pagination: mockPagination });
-  });
+  jest
+    .spyOn(PreClient.prototype, 'getCourtsWithPagination')
+    .mockImplementation(async (xUserId: string, req: PaginatedRequest) => {
+      return Promise.resolve({ courts: mockCourts, pagination: mockPagination });
+    });
 }
 
 export function reset() {
   jest.spyOn(PreClient.prototype, 'getRecording').mockRestore();
   jest.spyOn(PreClient.prototype, 'getRecordings').mockRestore();
   jest.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockRestore();
-  jest.spyOn(PreClient.prototype, 'getCourts').mockRestore();
+  jest.spyOn(PreClient.prototype, 'getCourtsWithPagination').mockRestore();
 }
