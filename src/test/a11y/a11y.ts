@@ -111,7 +111,7 @@ describe('Accessibility', () => {
 
     test('admin/audit pages should have no accessibility errors', async () => {
       const browser = await puppeteer.launch({
-        ignoreHTTPSErrors: true,
+        acceptInsecureCerts: true,
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
       });
