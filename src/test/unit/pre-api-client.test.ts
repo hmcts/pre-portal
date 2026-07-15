@@ -411,7 +411,7 @@ describe('PreClient', () => {
   });
 
   test('getLatestTermsAndConditions error', async () => {
-    mockedAxios.get.mockRejectedValue(new Error('Axios Get Error'));
+    mockedAxios.get.mockRejectedValueOnce(new Error('Axios Get Error'));
     let error: { message: any } | undefined;
     try {
       await preClient.getLatestTermsAndConditions();
