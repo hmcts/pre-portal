@@ -1,18 +1,3 @@
-export interface PaginatedRequest {
-  page?: number;
-  size?: number;
-}
-
-export interface SearchAuditLogsRequest extends PaginatedRequest {
-  after?: string;
-  before?: string;
-  functionalArea?: string;
-  source?: string;
-  userName?: string;
-  courtId?: string;
-  caseReference?: string;
-}
-
 export interface SearchRecordingsRequest {
   captureSessionId?: string;
   parentRecordingId?: string;
@@ -23,6 +8,15 @@ export interface SearchRecordingsRequest {
   scheduledFor?: string;
   courtId?: string;
   includeDeleted?: boolean;
+  version?: number;
+  page?: number;
+  size?: number;
+}
+
+export interface SearchEditsRequest {
+  sourceRecordingId?: string;
+  lastModifiedAfter?: string;
+  lastModifiedBefore?: string;
   page?: number;
   size?: number;
 }
@@ -42,6 +36,7 @@ export interface CaptureSession {
   court_name: string;
   case_state: string;
   case_closed_at?: string;
+  case_reference?: string;
 }
 
 export interface Recording {
@@ -71,9 +66,13 @@ export interface Participant {
 }
 
 export interface RecordingPlaybackData {
-  src: string;
-  type: string;
-  protectionInfo: { [key: string]: string }[];
+  hls_url?: string;
+  token?: string;
+  src?: string;
+  type?: string;
+  authorization?: string;
+  headers?: { [key: string]: string };
+  protectionInfo?: { [key: string]: unknown }[];
 }
 
 export interface Pagination {
@@ -92,6 +91,33 @@ export interface PutAuditRequest {
   table_name?: string;
   table_record_id?: string;
   audit_details: { [key: string]: string };
+}
+
+export interface EditRequest {
+  id: string;
+  source_recording: Recording;
+  edit_instructions: string;
+  status: string;
+  started_at?: string;
+  started_by_user_id?: string;
+  finished_at?: string;
+  created_at?: string;
+  modified_at?: string;
+}
+
+export interface PaginatedRequest {
+  page?: number;
+  size?: number;
+}
+
+export interface SearchAuditLogsRequest extends PaginatedRequest {
+  after?: string;
+  before?: string;
+  functionalArea?: string;
+  source?: string;
+  userName?: string;
+  courtId?: string;
+  caseReference?: string;
 }
 
 export interface Audit {

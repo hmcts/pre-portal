@@ -18,12 +18,12 @@
 {% block header %}
   {{ govukHeader({
     classes: 'govuk-header--full-width-border',
+    rebrand: true,
     homepageUrl: "/",
     useTudorCrown: true,
     serviceName: "HMCTS Pre-Recorded Evidence Service",
     serviceUrl: "/"
   }) }}
-
 {% if isSuperUser %}
    {{ govukServiceNavigation({
      navigation:
@@ -36,7 +36,11 @@
          href: '/admin/status',
          text: "Admin",
          active: '/admin' in pageUrl
-       }]
+       },
+       {
+       href: '/admin/edit-request',
+       text: "Edit Request"
+     }]
   }) }}
 {% endif %}
 {% endblock %}
@@ -121,6 +125,7 @@
 
 {% block footer %}
   {{ govukFooter({
+    rebrand: true,
     meta: {
       items: [
         {
@@ -134,6 +139,13 @@
         {
           href: '/cookies',
           text: 'Cookies'
+        },
+        {
+          href: '/help',
+          text: 'Help',
+          attributes: {
+            target: '_blank'
+          }
         }
       ]
     }

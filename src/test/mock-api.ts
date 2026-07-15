@@ -273,11 +273,13 @@ export const mockPutAudit = () => {
   });
 };
 
-export function mockGetLatestTermsAndConditions(data?: Terms) {
+export function mockGetLatestTermsAndConditions(data?: Terms | null) {
   if (data !== undefined) {
-    jest.spyOn(PreClient.prototype, 'getLatestTermsAndConditions').mockImplementation(async () => {
-      return Promise.resolve(data);
-    });
+    jest
+      .spyOn(PreClient.prototype, 'getLatestTermsAndConditions')
+      .mockImplementation(async (xUserId: string, id: string) => {
+        return Promise.resolve(data);
+      });
   }
 }
 
@@ -303,8 +305,10 @@ export function mockGetRecordingPlaybackData(data?: RecordingPlaybackData | null
     .spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
     .mockImplementation(async (xUserId: string, id: string) => {
       return Promise.resolve({
-        src: 'src',
-        type: 'type',
+        hls_url: 'https://streaming.example.test/playlist.m3u8',
+        token: 'mock-token',
+        src: 'https://streaming.example.test/playlist.m3u8',
+        type: 'application/vnd.apple.mpegurl',
         protectionInfo: [],
       } as RecordingPlaybackData);
     });
@@ -321,23 +325,25 @@ export function mockGetCourts(courts?: Court[], page: number = 0) {
     const courtSubset = courts.slice(page * 10, (page + 1) * 10);
 
     jest
-      .spyOn(PreClient.prototype, 'getCourts')
+      .spyOn(PreClient.prototype, 'getCourtsWithPagination')
       .mockImplementation(async (xUserId: string, request: PaginatedRequest) => {
         return Promise.resolve({ courts: courtSubset, pagination });
       });
     return;
   }
 
-  jest.spyOn(PreClient.prototype, 'getCourts').mockImplementation(async (xUserId: string, req: PaginatedRequest) => {
-    return Promise.resolve({ courts: mockCourts, pagination: mockPagination });
-  });
+  jest
+    .spyOn(PreClient.prototype, 'getCourtsWithPagination')
+    .mockImplementation(async (xUserId: string, req: PaginatedRequest) => {
+      return Promise.resolve({ courts: mockCourts, pagination: mockPagination });
+    });
 }
 
 export function reset() {
   jest.spyOn(PreClient.prototype, 'getRecording').mockRestore();
   jest.spyOn(PreClient.prototype, 'getRecordings').mockRestore();
   jest.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockRestore();
-  jest.spyOn(PreClient.prototype, 'getCourts').mockRestore();
+  jest.spyOn(PreClient.prototype, 'getCourtsWithPagination').mockRestore();
   jest.spyOn(PreClient.prototype, 'getAuditLogs').mockRestore();
   jest.spyOn(PreClient.prototype, 'getAudit').mockRestore();
 }

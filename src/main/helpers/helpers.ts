@@ -8,14 +8,16 @@ export const getAllPaginatedCourts = async (
 ): Promise<Court[]> => {
   let courts: Court[] = [];
 
-  const response = await client.getCourts(xUserId, { ...request, page: 0 });
+  const response = await client.getCourtsWithPagination(xUserId, { ...request, page: 0 });
   courts.push(...response.courts);
 
   for (let i = 1; i < response.pagination.totalPages; i++) {
     const paginatedRequest = { ...request, page: i };
-    const paginatedResponse = await client.getCourts(xUserId, paginatedRequest);
+    const paginatedResponse = await client.getCourtsWithPagination(xUserId, paginatedRequest);
     courts.push(...paginatedResponse.courts);
   }
+
+  courts.sort((a, b) => (a.name ?? '').localeCompare(b.name ?? '', 'en', { sensitivity: 'base' }));
 
   return courts;
 };

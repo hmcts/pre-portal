@@ -1,4 +1,5 @@
 import { UserProfile } from '../../types/user-profile';
+import { UserLevel } from '../../types/user-level';
 import { PreClient } from '../pre-api/pre-client';
 
 export class SessionUser {
@@ -18,6 +19,17 @@ export class SessionUser {
     await client.getActiveUserByEmail(user.user.email);
 
     return user.portal_access[0].id;
+  }
+
+  public static async getLoggedInUserBrowseId(req: Express.Request): Promise<string> {
+    const user = this.getLoggedInUserProfile(req);
+    const superUserAccess = user.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER);
+
+    if (superUserAccess) {
+      return superUserAccess.id;
+    }
+
+    return this.getLoggedInUserPortalId(req);
   }
 
   public static getLoggedInUserProfile(req: Express.Request): UserProfile {

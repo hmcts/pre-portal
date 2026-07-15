@@ -3,14 +3,26 @@ import { PreClient } from '../../services/pre-api/pre-client';
 
 import { Logger } from '@hmcts/nodejs-logging';
 import config from 'config';
-import RedisStore from 'connect-redis';
 import { Application } from 'express';
 import { ConfigParams, auth } from 'express-openid-connect';
 import session from 'express-session';
-import * as jose from 'jose';
 import FileStoreFactory from 'session-file-store';
 
 const FileStore = FileStoreFactory(session);
+import { RedisStore } from 'connect-redis';
+
+function decodeJwtClaims(idToken: string): Record<string, unknown> {
+  const parts = idToken.split('.');
+
+  if (parts.length < 2) {
+    throw new Error('Invalid id_token');
+  }
+
+  const payload = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+  const padding = payload.length % 4 === 0 ? '' : '='.repeat(4 - (payload.length % 4));
+
+  return JSON.parse(Buffer.from(`${payload}${padding}`, 'base64').toString('utf8')) as Record<string, unknown>;
+}
 
 export class Auth {
   public enableFor(app: Application): void {
@@ -42,14 +54,16 @@ export class Auth {
           config.get('pre.portalUrl')) as string,
       },
       afterCallback: async (req, res, s) => {
-        const claims = jose.decodeJwt(s.id_token);
+        const claims = decodeJwtClaims(s.id_token);
+        // if loginEmail is set, use that, else use email
+        const loggedInEmail = claims.loginEmail || claims.email;
         // @todo add jwt validation here
 
         // check if the user is a new user
         const client = new PreClient();
         return {
           ...s,
-          userProfile: await client.getUserByClaimEmail(claims.email as string),
+          userProfile: await client.getUserByClaimEmail(loggedInEmail as string),
         };
       },
       session: {
@@ -60,7 +74,7 @@ export class Auth {
           sameSite: 'Lax', // required for the oauth2 redirect
           secure: true,
         },
-        rolling: true, // Renew the cookie for another 20 minutes on each request\
+        rolling: true, // Renew the cookie for another `rollingDuration` minutes on each request
         /* eslint-disable  @typescript-eslint/no-explicit-any */
         store: this.getSessionStore(app, logger) as any, // https://github.com/auth0/express-openid-connect/issues/234
       },
