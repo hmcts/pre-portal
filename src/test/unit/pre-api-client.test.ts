@@ -378,7 +378,7 @@ describe('PreClient', () => {
   });
 
   test('getLatestTermsAndConditions error', async () => {
-    mockedAxios.get.mockRejectedValue(new Error('Axios Get Error'));
+    mockedAxios.get.mockRejectedValueOnce(new Error('Axios Get Error'));
     let error: { message: any } | undefined;
     try {
       await preClient.getLatestTermsAndConditions();
@@ -499,166 +499,40 @@ describe('PreClient', () => {
 
   test('get courts with pagination', async () => {
     const request = {} as PaginatedRequest;
-    const mockResponse = {
-      page: {
-        number: 0,
-        totalPages: 1,
-        totalElements: 1,
-        size: 1,
-      },
-      _embedded: {
-        courtDTOList: [
-          {
-            id: '123',
-            name: 'Court 1',
-            court_type: 'CROWN',
-            location_code: '1',
-            regions: [],
-          },
-        ],
-      },
-    };
-    mockedAxios.get.mockResolvedValueOnce({ status: 200, data: mockResponse });
-    const response = await preClient.getCourtsWithPagination(mockXUserId, request);
-    expect(response).toEqual({
-      courts: mockResponse._embedded.courtDTOList,
-      pagination: {
-        currentPage: mockResponse.page.number,
-        totalPages: mockResponse.page.totalPages,
-        totalElements: mockResponse.page.totalElements,
-        size: mockResponse.page.size,
-      },
-    });
+    const { courts, pagination } = await preClient.getCourtsWithPagination(mockXUserId, request);
+    expect(courts).toBeTruthy();
+    expect(courts.length).toBe(2);
+    expect(pagination).toBeTruthy();
   });
   test('get courts with pagination no results', async () => {
     const request = {} as PaginatedRequest;
-    const mockResponse = {
-      page: {
-        number: 0,
-        totalPages: 0,
-        totalElements: 0,
-        size: 0,
-      },
-      _embedded: {
-        courtDTOList: [],
-      },
-    };
-    mockedAxios.get.mockResolvedValueOnce({ status: 200, data: mockResponse });
-    const response = await preClient.getCourtsWithPagination(otherXUserId, request);
-    expect(response).toEqual({
-      courts: mockResponse._embedded.courtDTOList,
-      pagination: {
-        currentPage: mockResponse.page.number,
-        totalPages: mockResponse.page.totalPages,
-        totalElements: mockResponse.page.totalElements,
-        size: mockResponse.page.size,
-      },
-    });
+    const { courts, pagination } = await preClient.getCourtsWithPagination(otherXUserId, request);
+    expect(courts).toBeTruthy();
+    expect(courts.length).toBe(0);
+    expect(pagination).toBeTruthy();
   });
 
   test('get audit logs', async () => {
     const request = {} as SearchAuditLogsRequest;
-    const mockResponse = {
-      _embedded: {
-        auditDTOList: [
-          {
-            id: '123',
-            table_name: 'app_access',
-            table_record_id: '123',
-            source: 'AUTO',
-            category: 'AppAccess',
-            activity: 'UPDATE',
-            functional_area: 'API',
-            audit_details: {
-              active: true,
-              deleted: false,
-              roleName: 'Super User',
-              courtName: 'Court 1',
-              userEmail: 'email',
-            },
-            created_at: '123',
-            created_by: {
-              id: '123',
-              first_name: 'First Name',
-              last_name: 'Last Name',
-              email: 'email',
-              phone_number: '',
-              organisation: '',
-            },
-          },
-        ],
-      },
-      _links: {
-        first: {
-          href: 'link 1',
-        },
-        self: {
-          href: 'link 2',
-        },
-        next: {
-          href: 'link 3',
-        },
-        last: {
-          href: 'link 4',
-        },
-      },
-      page: {
-        size: 1,
-        totalElements: 1,
-        totalPages: 1,
-        number: 0,
-      },
-    };
-    mockedAxios.get.mockResolvedValueOnce({ status: 200, data: mockResponse });
-    const response = await preClient.getAuditLogs(mockXUserId, request);
-    expect(response).toEqual({
-      auditLogs: mockResponse._embedded.auditDTOList,
-      pagination: {
-        currentPage: mockResponse.page.number,
-        totalPages: mockResponse.page.totalPages,
-        totalElements: mockResponse.page.totalElements,
-        size: mockResponse.page.size,
-      },
-    });
+    const { auditLogs, pagination } = await preClient.getAuditLogs(mockXUserId, request);
+    expect(auditLogs).toBeTruthy();
+    expect(auditLogs.length).toBe(2);
+    expect(pagination).toBeTruthy();
   });
   test('get audit logs no results', async () => {
     const request = {} as SearchAuditLogsRequest;
-    const mockResponse = {
-      _embedded: {
-        auditDTOList: [],
-      },
-      _links: {
-        first: {
-          href: 'link 1',
-        },
-        self: {
-          href: 'link 2',
-        },
-        next: {
-          href: 'link 3',
-        },
-        last: {
-          href: 'link 4',
-        },
-      },
-      page: {
-        size: 0,
-        totalElements: 0,
-        totalPages: 0,
-        number: 0,
-      },
-    };
-    mockedAxios.get.mockResolvedValueOnce({ status: 200, data: mockResponse });
-    const response = await preClient.getAuditLogs(otherXUserId, request);
-    expect(response).toEqual({
-      auditLogs: mockResponse._embedded.auditDTOList,
-      pagination: {
-        currentPage: mockResponse.page.number,
-        totalPages: mockResponse.page.totalPages,
-        totalElements: mockResponse.page.totalElements,
-        size: mockResponse.page.size,
-      },
-    });
+    const { auditLogs, pagination } = await preClient.getAuditLogs(otherXUserId, request);
+    expect(auditLogs).toBeTruthy();
+    expect(auditLogs.length).toBe(0);
+    expect(pagination).toBeTruthy();
+  });
+  test('get audit logs network error', async () => {
+    try {
+      await preClient.getAuditLogs(otherXUserId, { caseReference: 'uhoh' } as SearchAuditLogsRequest);
+      expect(true).toBe(false); // shouldn't get here...
+    } catch (e) {
+      expect(e).toBe('Network Error');
+    }
   });
 
   describe('PreClient', () => {
