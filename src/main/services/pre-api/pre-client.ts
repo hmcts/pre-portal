@@ -633,6 +633,24 @@ export class PreClient {
     }
   }
 
+  public async getAudit(xUserId: string, id: string): Promise<Audit | null> {
+    try {
+      const response = await axios.get('/audit/' + id, {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+      });
+
+      return response.data as Audit;
+    } catch (e) {
+      if (e.response?.status === 404) {
+        return null;
+      }
+      this.logger.error(e);
+      throw e;
+    }
+  }
+
   public async getCourts(xUserId: string, page: number = 0, size: number = 50): Promise<any> {
     const response = await axios.get(`/courts`, {
       headers: { 'X-User-Id': xUserId },

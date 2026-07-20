@@ -6,7 +6,7 @@ import { UserLevel } from '../../types/user-level';
 
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
-import { getAllPaginatedCourts, validateId } from '../../helpers/helpers';
+import { getAllPaginatedCourts } from '../../helpers/helpers';
 
 export default function (app: Application): void {
   app.get('/admin/audit', requiresAuth(), RequiresSuperUser, async (req, res) => {
@@ -32,15 +32,14 @@ export default function (app: Application): void {
       const { auditLogs, pagination } = await client.getAuditLogs(userPortalId, request);
       const { paginationLinks, title } = client.createPagination(
         pagination,
-        'admin/audit',
+        'admin/audits',
         'Audit Logs',
-        auditLogs.length,
-        null
+        auditLogs.length
       );
 
       const courts = await getAllPaginatedCourts(client, userPortalId, { size: 50 });
 
-      res.render('admin/audit', {
+      res.render('admin/audits', {
         auditLogs,
         paginationLinks,
         title,
@@ -53,40 +52,6 @@ export default function (app: Application): void {
             name: court.name,
           };
         }),
-      });
-    } catch (err) {
-      res.status(404);
-      res.render('not-found');
-      return;
-    }
-  });
-
-  app.get('/admin/audit/:id', requiresAuth(), RequiresSuperUser, async (req, res) => {
-    if (!validateId(req.params.id)) {
-      res.status(404);
-      res.render('not-found');
-      return;
-    }
-
-    const client = new PreClient();
-
-    try {
-      const audit = await client.getAudit(
-        SessionUser.getLoggedInUserProfile(req).app_access.filter(role => role.role.name === UserLevel.SUPER_USER)?.[0]
-          .id,
-        req.params.id as string
-      );
-
-      if (!audit) {
-        res.status(404);
-        res.render('not-found');
-        return;
-      }
-
-      res.render('admin/audit', {
-        audit,
-        pageUrl: req.url,
-        isSuperUser: true,
       });
     } catch (err) {
       res.status(404);
