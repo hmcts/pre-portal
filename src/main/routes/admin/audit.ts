@@ -6,11 +6,7 @@ import { UserLevel } from '../../types/user-level';
 
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
-import { getAllPaginatedCourts } from '../../helpers/helpers';
-
-function validateId(id: string): boolean {
-  return /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(id);
-}
+import { getAllPaginatedCourts, validateId } from '../../helpers/helpers';
 
 export default function (app: Application): void {
   app.get('/admin/audit', requiresAuth(), RequiresSuperUser, async (req, res) => {
