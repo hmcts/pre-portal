@@ -3730,7 +3730,7 @@ const RAW_RUNTIME_STATE =
           ["@grpc/proto-loader", "npm:0.8.0"],\
           ["lodash.camelcase", "npm:4.3.0"],\
           ["long", "npm:5.3.2"],\
-          ["protobufjs", "npm:7.6.4"],\
+          ["protobufjs", "npm:7.6.5"],\
           ["yargs", "npm:17.7.2"]\
         ],\
         "linkType": "HARD"\
@@ -17759,8 +17759,8 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["protobufjs", [\
-      ["npm:7.6.4", {\
-        "packageLocation": "./.yarn/unplugged/protobufjs-npm-7.6.4-97603a5239/node_modules/protobufjs/",\
+      ["npm:7.6.5", {\
+        "packageLocation": "./.yarn/unplugged/protobufjs-npm-7.6.5-ff4a872120/node_modules/protobufjs/",\
         "packageDependencies": [\
           ["@protobufjs/aspromise", "npm:1.1.2"],\
           ["@protobufjs/base64", "npm:1.1.2"],\
@@ -17773,7 +17773,7 @@ const RAW_RUNTIME_STATE =
           ["@protobufjs/utf8", "npm:1.1.1"],\
           ["@types/node", "npm:25.0.3"],\
           ["long", "npm:5.3.2"],\
-          ["protobufjs", "npm:7.6.4"]\
+          ["protobufjs", "npm:7.6.5"]\
         ],\
         "linkType": "HARD"\
       }]\
