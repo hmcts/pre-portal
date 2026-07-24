@@ -127,8 +127,6 @@
     "axios": "1.18.0",
     "@babel/core": "7.29.7",
     "basic-ftp": "5.3.1",
-    "brace-expansion@npm:^5.0.2": "5.0.6",
-    "brace-expansion@npm:^5.0.5": "5.0.6",
     "codeceptjs@npm:3.7.9/multer": "2.2.0",
     "protobufjs": "^7.6.4",
     "bfj": "9.1.3",
