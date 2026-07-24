@@ -139,8 +139,7 @@
     "js-yaml": "4.2.0",
     "jsonwebtoken": "9.0.3",
     "mocha@npm:11.7.5/serialize-javascript": "7.0.5",
-    "node-gyp": "13.0.0",
-    "node-gyp/tar": "^7.5.16",
+    "node-gyp": "13.0.1",
     "postcss": "8.5.14",
     "qs": "6.15.2",
     "semver": "^7.7.4",
@@ -153,7 +152,7 @@
     "undici@npm:6x": "6.27.0",
     "uuid": "^11.1.1",
     "ws": "8.21.0",
-    "shell-quote": "1.8.4"
+    "shell-quote": "1.10.0"
   },
   "husky": {
     "hooks": {
