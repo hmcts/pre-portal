@@ -9337,11 +9337,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["brace-expansion", [\
-      ["npm:1.1.13", {\
-        "packageLocation": "./.yarn/cache/brace-expansion-npm-1.1.13-551b297c64-b5f4329fdb.zip/node_modules/brace-expansion/",\
+      ["npm:1.1.17", {\
+        "packageLocation": "./.yarn/cache/brace-expansion-npm-1.1.17-52d7585d9f-1e2f59433d.zip/node_modules/brace-expansion/",\
         "packageDependencies": [\
           ["balanced-match", "npm:1.0.2"],\
-          ["brace-expansion", "npm:1.1.13"],\
+          ["brace-expansion", "npm:1.1.17"],\
           ["concat-map", "npm:0.0.1"]\
         ],\
         "linkType": "HARD"\
@@ -16094,7 +16094,7 @@ const RAW_RUNTIME_STATE =
       ["npm:3.1.5", {\
         "packageLocation": "./.yarn/cache/minimatch-npm-3.1.5-86958baf50-b11a7ee577.zip/node_modules/minimatch/",\
         "packageDependencies": [\
-          ["brace-expansion", "npm:1.1.13"],\
+          ["brace-expansion", "npm:1.1.17"],\
           ["minimatch", "npm:3.1.5"]\
         ],\
         "linkType": "HARD"\
