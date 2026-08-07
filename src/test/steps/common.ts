@@ -59,10 +59,6 @@ Then('I click the link {string}', (text: string) => {
   I.click(locate('a').withText(text));
 });
 
-When('I open the navigation menu', async () => {
-  I.click('#navToggle');
-});
-
 Then('I enter a valid email address', async () => {
   const login = config.b2c.testLogin;
   await sendVerifictionCode(login.email as string);
@@ -101,7 +97,7 @@ Then('recording is played', async () => {
   I.wait(5);
   I.click('Play/Pause');
   const currentTime = await I.grabTextFrom('.bmpui-ui-playbacktimelabel:nth-of-type(2)');
-  if (!currentTime.match(/^\d{2}:\d{2}$/)) {
+  if (!currentTime.match(/^\d{2}:\d{2}(:\d{2})?$/)) {
     throw new Error(`Invalid playback time format: ${currentTime}`);
   }
 

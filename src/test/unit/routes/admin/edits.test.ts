@@ -108,14 +108,14 @@ describe('Admin Edits Page', () => {
     });
   });
 
-  describe('POST /admin/edit-request/upload', () => {
+  describe('POST /edit-request/upload', () => {
     test('should return 400 when missing file or source_recording', async () => {
       if (mockeduser.app_access?.[0]?.role) {
         mockeduser.app_access[0].role.name = UserLevel.SUPER_USER;
       }
 
       const res = await request(app)
-        .post('/admin/edit-request/upload')
+        .post('/edit-request/upload')
         .field('source_recording', '')
         .attach('file-upload', Buffer.from('id,text\n1,edit'), 'test.csv');
 
@@ -131,7 +131,7 @@ describe('Admin Edits Page', () => {
       mockPostEditsFromCsv.mockResolvedValueOnce({ status: 200 });
 
       const res = await request(app)
-        .post('/admin/edit-request/upload')
+        .post('/edit-request/upload')
         .field('source_recording', 'e2ca657c-8f4f-4d41-b545-c434bb779f20')
         .attach('file-upload', Buffer.from('id,text\n1,edit'), 'test.csv');
 
@@ -145,7 +145,7 @@ describe('Admin Edits Page', () => {
       }
 
       const res = await request(app)
-        .post('/admin/edit-request/upload')
+        .post('/edit-request/upload')
         .field('source_recording', 'e2ca657c-8f4f-4d41-b545-c434bb779f20')
         .attach('file-upload', Buffer.from('id,text\n1,edit'), 'test.txt');
 
@@ -160,7 +160,7 @@ describe('Admin Edits Page', () => {
       mockPostEditsFromCsv.mockRejectedValueOnce(new Error('Processing failed'));
 
       const res = await request(app)
-        .post('/admin/edit-request/upload')
+        .post('/edit-request/upload')
         .field('source_recording', 'e2ca657c-8f4f-4d41-b545-c434bb779f20')
         .attach('file-upload', Buffer.from('invalid'), 'test.csv');
 
@@ -174,7 +174,7 @@ describe('Admin Edits Page', () => {
       }
 
       const res = await request(app)
-        .post('/admin/edit-request/upload')
+        .post('/edit-request/upload')
         .field('source_recording', 'e2ca657c-8f4f-4d41-b545-c434bb779f20')
         .attach('file-upload', Buffer.from('id,text\n1,edit'), 'test.csv');
 

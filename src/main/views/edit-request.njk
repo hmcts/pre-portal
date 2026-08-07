@@ -1,0 +1,250 @@
+{% extends "template.njk" %}
+
+{% block pageTitle %}Edit Recording {{ recording.id }} - PRE Portal{% endblock %}
+
+{% block head %}
+  {% include "webpack/css.njk" %}
+  <script type="text/javascript" src="/assets/js/mkplayer.js"></script>
+  <link rel="stylesheet" href="/assets/css/mkplayer-ui.css">
+{% endblock %}
+
+{% block beforeContent %}
+  {{
+    govukBackLink({
+      "href": "javascript:history.back()"
+    })
+  }}
+{% endblock %}
+
+{% block content %}
+
+  <h1 class="govuk-heading-xl">Edits for case reference {{ recording.case_reference }}</h1>
+
+  <div id="videoError" class="govuk-error-summary" data-module="govuk-error-summary" style="display: none;">
+    <div role="alert">
+      <h2 class="govuk-error-summary__title">
+        There is a problem
+      </h2>
+      <div class="govuk-error-summary__body">
+        <ul class="govuk-list govuk-error-summary__list">
+          <li class="govuk-error-message">
+            The recording is not currently available
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="loading" class="govuk-!-margin-bottom-2 loading-box" style="display: block;">
+    <div class="loading-container">
+      <img src="/assets/images/loading-spinner.gif" alt="Loading" />
+    </div>
+  </div>
+
+  <div id="videoWrapper" class="govuk-!-margin-bottom-2 video-wrapper" style="display: none;">
+    <div id="video-container"></div>
+  </div>
+  <div style="text-align: right;">
+    <button type="button" class="govuk-button" data-module="govuk-button" data-edit-action="add">Add Edit Reference</button>
+  </div>
+  <div
+    data-module="edit-request"
+    data-config='{"editRequest": {{ editRequest | dump | safe }}, "postUrl": "{{ editRequestPostUrl }}", "recordingId": "{{ recording.id }}"}'
+    style="display: none;"
+  ></div>
+
+  <div id="edit-request-loading" class="govuk-notification-banner edit-request-saving" role="status" aria-live="polite" style="display: none;" data-module="govuk-notification-banner">
+    <div class="govuk-notification-banner__header">
+      <h2 class="govuk-notification-banner__title">Saving changes</h2>
+    </div>
+    <div class="govuk-notification-banner__content">
+      <div style="display: inline-flex; align-items: center; gap: 8px;">
+        <img src="/assets/images/loading-spinner.gif" alt="Saving changes" style="width: 40px; height: 40px;" />
+        <div class="govuk-body">Please wait while we save your changes.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="validation-error-summary" class="govuk-error-summary" data-module="govuk-error-summary" style="display: none;">
+    <div role="alert">
+      <h2 class="govuk-error-summary__title">
+        There is a problem
+      </h2>
+      <div class="govuk-error-summary__body">
+        <ul id="validation-error-list" class="govuk-list govuk-error-summary__list">
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <form id="new-edit-reference-form">
+  <table class="govuk-table" style="table-layout: fixed; width: 100%;">
+    <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Start Time</th>
+      <th scope="col" class="govuk-table__header">End Time</th>
+      <th scope="col" class="govuk-table__header">Time Removed</th>
+      <th scope="col" class="govuk-table__header">Reason</th>
+      <th scope="col" class="govuk-table__header"></th>
+      <th scope="col" class="govuk-table__header"></th>
+    </tr>
+    </thead>
+    <tbody id="current-instructions" class="govuk-table__body">
+      <tr class="govuk-table__row" id="new-edit-reference-row" hidden>
+        <td class="govuk-table__cell" style="vertical-align: bottom;">
+          <label hidden for="start-time-input">Start Time</label>
+          <div id="start-form-group">
+            <input class="govuk-input govuk-input--width-10" id="start-time-input" name="startTime" type="text" placeholder="HH:MM:SS">
+          </div>
+        </td>
+        <td class="govuk-table__cell" style="vertical-align: bottom;">
+          <label hidden for="end-time-input">End Time</label>
+          <div id="end-form-group">
+            <input class="govuk-input govuk-input--width-10" id="end-time-input" name="endTime" type="text" placeholder="HH:MM:SS">
+          </div>
+        </td>
+        <td class="govuk-table__cell"></td>
+        <td class="govuk-table__cell" style="vertical-align: bottom;">
+          <label hidden for="reason-input">Reason</label>
+          <div id="reason-form-group">
+            <input class="govuk-input govuk-input--width-10" id="reason-input" name="reason" type="text" placeholder="Reason">
+          </div>
+        </td>
+        <td class="govuk-table__cell" style="text-align: right;">
+        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-edit-action="save">
+            Save
+          </button>
+        </td>
+        <td class="govuk-table__cell">
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-edit-action="cancel">
+            Cancel
+          </button>
+        </td>
+      </tr>
+        {% for instruction in editRequest.edit_instructions %}
+        <tr id="instruction-{{ loop.index0 }}" class="govuk-table__row">
+          <td class="govuk-table__cell"> {{ instruction.start_of_cut }}</td>
+          <td class="govuk-table__cell"> {{ instruction.end_of_cut }}</td>
+          <td class="govuk-table__cell"> {{ instruction.difference }}</td>
+          <td class="govuk-table__cell" style="overflow-wrap: break-word;"> {{ instruction.reason }}</td>
+          <td class="govuk-table__cell" style="text-align: right;">
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-edit-action="update" data-index="{{ loop.index0 }}">
+              Update
+            </button>
+          </td>
+          <td class="govuk-table__cell">
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" data-edit-action="delete" data-index="{{ loop.index0 }}">
+              Delete
+            </button>
+          </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+  </form>
+
+  <div id="submit-error-summary" class="govuk-error-summary" data-module="govuk-error-summary" style="display: none;">
+    <div role="alert">
+      <h2 class="govuk-error-summary__title">
+        There is a problem
+      </h2>
+      <div class="govuk-error-summary__body">
+        <ul class="govuk-list govuk-error-summary__list">
+          <li>
+            Please add at least one edit instruction before submitting
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: right;">
+    <button id="submit-button" class="govuk-button" data-module="govuk-button" data-testid="">Submit</button>
+  </div>
+
+  <style>
+    tr.delete-message-block {
+      & > td > div.delete-message-block {
+        border-left: 5px solid #d4351c;
+        padding-left: 15px;
+
+        & > p {
+          margin: 0;
+          color: #d4351c;
+        }
+      }
+
+      input:disabled {
+        border-color: #d4351c;
+        opacity: 1;
+        color: #00000080;
+      }
+    }
+  </style>
+
+  <script type="text/javascript" crossorigin="anonymous" data-testid="recording-video-script">
+    const videoContainer = document.getElementById("video-container");
+    var videoError = document.getElementById("videoError");
+
+    const playerConfig = {
+        key: "{{ mediaKindPlayerKey }}",
+        ui: true,
+        playback: {
+            muted: false,
+            autoplay: false,
+            preferredTech: [{ player: 'html5', streaming: 'hls'}]
+        }
+    };
+
+    let player = new mkplayer.MKPlayer(videoContainer, playerConfig);
+
+    fetch("{{ recordingPlaybackDataUrl }}", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    }).then(function (response) {
+      if (!response.ok) {
+        throw new Error(response);
+      }
+
+      return response.json();
+    }).then(async function (data) {
+      // wait for the url to be available
+      let hlsAvailable = false;
+      let retries = 120;
+      let time = 3000;
+      do {
+        await new Promise(r => setTimeout(r, time)); // sleep for `time`ms
+        const headResult = await fetch(data.hls_url, {
+          method: "HEAD"
+        });
+        hlsAvailable = headResult.status === 200;
+        retries--;
+        time -= 1000;
+        if (time < 1000) {
+          time = 500;
+        }
+      } while (hlsAvailable === false && retries > 0);
+      const sourceConfig = {
+        hls: data.hls_url,
+        drm: {
+          clearkey: {
+            LA_URL: 'HLS_AES',
+            headers: {
+              Authorization: 'Bearer=' + data.token || '',
+            },
+          },
+        }
+      };
+
+      player.load(sourceConfig);
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("videoWrapper").style.display = "block";
+    }).catch(function (error) {
+      console.error("Error:", error);
+      videoError.style.display = "block";
+      document.getElementById("loading").style.display = "none";
+    });
+  </script>
+{% endblock %}
