@@ -78,9 +78,7 @@ describe('/admin/audit/:id route', () => {
   });
 
   test('should display "Page is not available" when id is invalid', async () => {
-    if (mockeduser.app_access?.[0]?.role) {
-      mockeduser.app_access[0].role.name = UserLevel.SUPER_USER;
-    }
+    mockeduser.app_access[0].role.name = UserLevel.SUPER_USER;
 
     const response = await request(app).get('/admin/audit/invalid-id');
     expect(response.status).toEqual(404);
@@ -96,9 +94,7 @@ describe('/admin/audit/:id route', () => {
   ];
 
   test.each(nonSuperUserRoles)('should display "Page is not available" for non-super user role: %s', async role => {
-    if (mockeduser.app_access?.[0]?.role) {
-      mockeduser.app_access[0].role.name = UserLevel.ADMIN;
-    }
+    mockeduser.app_access[0].role.name = UserLevel.ADMIN;
 
     const response = await request(app).get('/admin/audit/12345678-1234-1234-1234-1234567890ab');
     expect(response.status).toEqual(404);
@@ -110,9 +106,7 @@ describe('/admin/audit/:id route', () => {
       throw new Error('error');
     });
 
-    if (mockeduser.app_access?.[0]?.role) {
-      mockeduser.app_access[0].role.name = UserLevel.SUPER_USER;
-    }
+    mockeduser.app_access[0].role.name = UserLevel.SUPER_USER;
 
     const response = await request(app).get('/admin/audit/12345678-1234-1234-1234-1234567890ab');
     expect(response.status).toEqual(404);
