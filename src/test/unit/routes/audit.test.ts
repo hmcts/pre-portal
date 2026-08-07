@@ -87,7 +87,15 @@ describe('/admin/audit/:id route', () => {
     expect(response.text).toContain('Page is not available');
   });
 
-  test('should display "Page is not available" for non-super user', async () => {
+  const nonSuperUserRoles = [
+    UserLevel.TECH_SUPPORT,
+    UserLevel.ADMIN,
+    UserLevel.INTERNAL_USER,
+    UserLevel.EXTERNAL_USER,
+    UserLevel.RESTRICTED_INTERNAL_USER,
+  ];
+
+  test.each(nonSuperUserRoles)('should display "Page is not available" for non-super user role: %s', async role => {
     if (mockeduser.app_access?.[0]?.role) {
       mockeduser.app_access[0].role.name = UserLevel.ADMIN;
     }
