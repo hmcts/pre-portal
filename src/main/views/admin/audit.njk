@@ -40,10 +40,7 @@
               </dt>
               <dd class="govuk-summary-list__value">
                 {% if value.email %}
-                  <a class="govuk-link"
-                     href="/admin/users/{{ value.id }}">
-                    {{value.first_name }} {{ value.last_name }} ({{ value.email }})
-                  </a>
+                  {{value.first_name }} {{ value.last_name }} ({{ value.email }})
                 {% elif value.id %}
                   {{ value.id }}
                 {% endif %}

@@ -130,11 +130,7 @@
               </td>
               <td class="govuk-table__cell">
                 {% if auditLog.created_by.email %}
-                  <a
-                    class="govuk-link"
-                    href="/admin/users/{{ auditLog.created_by.id }}">
-                    {{ auditLog.created_by.first_name }} {{ auditLog.created_by.last_name }} ({{ auditLog.created_by.email }})
-                  </a>
+                  {{ auditLog.created_by.first_name }} {{ auditLog.created_by.last_name }} ({{ auditLog.created_by.email }})
                 {% elif auditLog.created_by.id  %}
                   {{ auditLog.created_by.id }}
                 {% endif %}
