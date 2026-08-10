@@ -9,6 +9,7 @@ import {
 import { PreClient } from '../../main/services/pre-api/pre-client';
 import {
   PaginatedRequest,
+  Pagination,
   PutAuditRequest,
   RecordingPlaybackData,
   SearchAuditLogsRequest,
@@ -944,6 +945,51 @@ describe('PreClient', () => {
 
       expect(result).toBeTruthy();
       expect(mockedAxios.put).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('createPagination', () => {
+    test('createPagination returns correct result', () => {
+      const pagination = buildPagination();
+
+      const { paginationLinks, title } = preClient.createPagination(pagination, 'browse', 'Recordings', 12);
+
+      expect(paginationLinks).toBeTruthy();
+      expect(paginationLinks.items).toHaveLength(pagination.totalPages);
+      expect(paginationLinks.items).toEqual([
+        { href: '/browse?page=0', number: 1, current: true },
+        { href: '/browse?page=1', number: 2, current: false },
+      ]);
+      expect(title).toEqual('Recordings 1 to 10 of 12');
+    });
+
+    test('createPagination returns correct result with query string', () => {
+      const pagination = buildPagination();
+      const queryString = { name: 'caseReference', value: 'TEST-1' };
+
+      const { paginationLinks, title } = preClient.createPagination(
+        pagination,
+        'browse',
+        'Recordings',
+        12,
+        queryString
+      );
+
+      expect(paginationLinks).toBeTruthy();
+      expect(paginationLinks.items).toHaveLength(pagination.totalPages);
+      expect(paginationLinks.items).toEqual([
+        { href: '/browse?page=0&caseReference=TEST-1', number: 1, current: true },
+        { href: '/browse?page=1&caseReference=TEST-1', number: 2, current: false },
+      ]);
+      expect(title).toEqual('Recordings 1 to 10 of 12');
+    });
+
+    const buildPagination = (overrides: Partial<Pagination> = {}): Pagination => ({
+      currentPage: 0,
+      totalPages: 2,
+      totalElements: 12,
+      size: 10,
+      ...overrides,
     });
   });
 });

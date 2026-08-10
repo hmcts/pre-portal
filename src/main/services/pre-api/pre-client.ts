@@ -90,8 +90,11 @@ export class PreClient {
 
       if (queryString) {
         params.set(queryString.name, queryString.value);
-        pageUrl = `${pageUrl}?${params.toString()}`;
       }
+
+      pageUrl = `${pageUrl}?${params.toString()}`;
+
+      this.logger.info('pageUrl', pageUrl);
 
       return pageUrl;
     };

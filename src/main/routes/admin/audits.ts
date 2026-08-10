@@ -32,7 +32,7 @@ export default function (app: Application): void {
       const { auditLogs, pagination } = await client.getAuditLogs(userPortalId, request);
       const { paginationLinks, title } = client.createPagination(
         pagination,
-        'admin/audits',
+        'admin/audit',
         'Audit Logs',
         auditLogs.length
       );
