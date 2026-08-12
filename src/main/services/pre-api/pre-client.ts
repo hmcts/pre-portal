@@ -94,8 +94,6 @@ export class PreClient {
 
       pageUrl = `${pageUrl}?${params.toString()}`;
 
-      this.logger.info('pageUrl', pageUrl);
-
       return pageUrl;
     };
 
