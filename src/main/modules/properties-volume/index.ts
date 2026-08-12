@@ -10,7 +10,7 @@ export class PropertiesVolume {
 
   enableFor(server: Application): void {
     set(config, 'pre.portalUrl', process.env.PORTAL_URL ?? 'https://localhost:4551');
-    set(config, 'pre.apiUrl', process.env.API_URL ?? 'https://localhost:4550');
+    set(config, 'pre.apiUrl', process.env.PRE_API_URL ?? 'https://localhost:4550');
     set(config, 'session.redis.host', process.env.REDIS_HOST ?? '');
     set(config, 'b2c.appClientId', process.env.B2C_APP_CLIENT_ID ?? 'd20a7462-f222-46b8-a363-d2e30eb274eb');
     set(
