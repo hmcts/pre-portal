@@ -36,7 +36,7 @@ const RAW_RUNTIME_STATE =
           ["@hmcts/info-provider", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.0"],\
           ["@hmcts/nodejs-healthcheck", "npm:1.8.6"],\
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
-          ["@hmcts/properties-volume", "npm:1.4.0"],\
+          ["@hmcts/properties-volume", "npm:1.4.1"],\
           ["@jest/globals", "npm:30.3.0"],\
           ["@mediakind/mkplayer", "npm:1.36.1"],\
           ["@opentelemetry/api", "npm:1.9.1"],\
@@ -3849,13 +3849,13 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@hmcts/properties-volume", [\
-      ["npm:1.4.0", {\
-        "packageLocation": "./.yarn/cache/@hmcts-properties-volume-npm-1.4.0-c2be5d086e-2d5ecf1286.zip/node_modules/@hmcts/properties-volume/",\
+      ["npm:1.4.1", {\
+        "packageLocation": "./.yarn/cache/@hmcts-properties-volume-npm-1.4.1-b28ede9351-e5c532a5a4.zip/node_modules/@hmcts/properties-volume/",\
         "packageDependencies": [\
           ["@azure/identity", "npm:4.13.0"],\
           ["@azure/keyvault-secrets", "npm:4.10.0"],\
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
-          ["@hmcts/properties-volume", "npm:1.4.0"],\
+          ["@hmcts/properties-volume", "npm:1.4.1"],\
           ["js-yaml", "npm:4.3.1"],\
           ["lodash", "npm:4.18.1"]\
         ],\
@@ -17513,7 +17513,7 @@ const RAW_RUNTIME_STATE =
           ["@hmcts/info-provider", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.0"],\
           ["@hmcts/nodejs-healthcheck", "npm:1.8.6"],\
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
-          ["@hmcts/properties-volume", "npm:1.4.0"],\
+          ["@hmcts/properties-volume", "npm:1.4.1"],\
           ["@jest/globals", "npm:30.3.0"],\
           ["@mediakind/mkplayer", "npm:1.36.1"],\
           ["@opentelemetry/api", "npm:1.9.1"],\
