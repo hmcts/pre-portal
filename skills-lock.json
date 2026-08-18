@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "migrate-codeceptjs-4": {
+      "source": "codeceptjs/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/codeceptjs/skills/migrate-codeceptjs-4/SKILL.md",
+      "computedHash": "fc5e902b98bfe4897365056321f0d74bb0962af1d531b5094c2a774d59132002"
+    }
+  }
+}

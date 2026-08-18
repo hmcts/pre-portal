@@ -1,6 +1,5 @@
 import { config as testConfig } from './src/test/config';
-
-const { setHeadlessWhen } = require('@codeceptjs/configure');
+import { setHeadlessWhen } from '@codeceptjs/configure';
 
 setHeadlessWhen(testConfig.TestHeadlessBrowser);
 export const config: CodeceptJS.MainConfig = {
@@ -10,17 +9,14 @@ export const config: CodeceptJS.MainConfig = {
   helpers: testConfig.helpers,
   tests: './*_test.{js,ts}',
   plugins: {
-    pauseOnFail: {
+    pause: {
       enabled: !testConfig.TestHeadlessBrowser,
     },
     retryFailedStep: {
       enabled: true,
     },
     retry: 3,
-    tryTo: {
-      enabled: true,
-    },
-    screenshotOnFail: {
+    screenshot: {
       enabled: true,
       fullPageScreenshots: true,
     },

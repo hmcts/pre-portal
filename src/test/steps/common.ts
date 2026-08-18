@@ -2,9 +2,23 @@ import { config } from '../config';
 
 const { I } = inject();
 
-export const iAmOnPage = (text: string): void => {
-  const url = new URL(text, config.TEST_URL);
-  I.retry({ retries: 3, maxTimeout: 5000 }).amOnPage(url.toString());
+export const iAmOnPage = async (text: string): Promise<void> => {
+  const url = new URL(text, config.TEST_URL).toString();
+  let lastError: unknown;
+
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      await I.amOnPage(url);
+      return;
+    } catch (error) {
+      lastError = error;
+      if (attempt < 3) {
+        await I.wait(5);
+      }
+    }
+  }
+
+  throw lastError;
 };
 Given('I go to {string}', iAmOnPage);
 

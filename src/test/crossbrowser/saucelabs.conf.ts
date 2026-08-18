@@ -36,14 +36,10 @@ const setupConfig = {
       enabled: true,
       retries: 3,
     },
-    retryTo: {
-      enabled: true,
-    },
     allure: {
       enabled: true,
-      require: '@codeceptjs/allure-legacy',
     },
-    screenshotOnFail: {
+    screenshot: {
       enabled: true,
       fullPageScreenshots: true,
     },
@@ -61,4 +57,4 @@ const setupConfig = {
   },
 };
 
-exports.config = setupConfig;
+export const config = setupConfig;
