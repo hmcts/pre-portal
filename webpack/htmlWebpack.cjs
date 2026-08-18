@@ -20,4 +20,3 @@ const jsWebPackPlugin = new HtmlWebpackPlugin({
 module.exports = {
   plugins: [cssWebPackPlugin, jsWebPackPlugin],
 };
-

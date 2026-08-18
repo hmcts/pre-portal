@@ -1,8 +1,7 @@
 ---
 name: migrate-codeceptjs-4
-description: "Migrate a CodeceptJS '3.x' project to '4.x'. Trigger when 'package.json' pins 'codeceptjs' at '3.x' or is missing '\"type\": \"module\"', when test files still use CommonJS ('require()' / 'module.exports') against CodeceptJS APIs, when config references removed helpers ('Nightmare', 'Protractor', 'TestCafe', 'AI', 'SoftExpectHelper', 'Mochawesome') or removed plugins ('autoLogin', 'tryTo', 'retryTo', 'eachElement', 'commentStep', 'fakerTransform', 'enhancedRetryFailedStep', 'allure', 'htmlReporter', 'wdio', 'selenoid', 'screenshotOnFail', 'pauseOnFail', 'stepByStepReport'), or when '3.x' APIs are in use ('ai.request' function, Joi schemas in 'seeResponseMatchesJsonSchema', 'restart: 'browser'', 'I.retry()', 'I.limitTime()', Playwright 'customLocators'). Walks the project through Node + package upgrade, ESM conversion, helper/plugin replacements, AI/Zod/effects API changes, 'noGlobals: true' adoption, dependency bumps, and the post-upgrade verify pass."
+description: 'Migrate a CodeceptJS ''3.x'' project to ''4.x''. Trigger when ''package.json'' pins ''codeceptjs'' at ''3.x'' or is missing ''"type": "module"'', when test files still use CommonJS (''require()'' / ''module.exports'') against CodeceptJS APIs, when config references removed helpers (''Nightmare'', ''Protractor'', ''TestCafe'', ''AI'', ''SoftExpectHelper'', ''Mochawesome'') or removed plugins (''autoLogin'', ''tryTo'', ''retryTo'', ''eachElement'', ''commentStep'', ''fakerTransform'', ''enhancedRetryFailedStep'', ''allure'', ''htmlReporter'', ''wdio'', ''selenoid'', ''screenshotOnFail'', ''pauseOnFail'', ''stepByStepReport''), or when ''3.x'' APIs are in use (''ai.request'' function, Joi schemas in ''seeResponseMatchesJsonSchema'', ''restart: ''browser'''', ''I.retry()'', ''I.limitTime()'', Playwright ''customLocators''). Walks the project through Node + package upgrade, ESM conversion, helper/plugin replacements, AI/Zod/effects API changes, ''noGlobals: true'' adoption, dependency bumps, and the post-upgrade verify pass.'
 ---
-
 
 # Migrate CodeceptJS 3.x → 4.x
 
@@ -12,7 +11,7 @@ The authoritative reference is `node_modules/codeceptjs/docs/migration-4.md` (af
 
 ## When to trigger
 
-Detect *before* acting. Look for any of:
+Detect _before_ acting. Look for any of:
 
 - `package.json` lists `"codeceptjs": "^3"` / `"3.x"`, or has no `"type": "module"`.
 - Tests, page objects, helpers, or config use `require()` / `module.exports` against CodeceptJS.
@@ -44,20 +43,20 @@ Phases run in order. Commit at each boundary so any regression is bisectable.
 
 ### 3. Remove or replace deleted helpers and plugins
 
-| Old | Replacement |
-|---|---|
-| Helper `Nightmare` / `Protractor` / `TestCafe` | `Playwright`, `Puppeteer`, or `WebDriver`. |
-| Helper `AI` | Top-level `ai:` config + `aiTrace` plugin. |
-| Helper `SoftExpectHelper` | `import { hopeThat } from 'codeceptjs/effects'`; call `hopeThat.noErrors()` at end of scenario. |
-| Helper `Mochawesome` | **Stop and ask the user** — see "Mochawesome decision" below. Do not silently delete it. |
-| Plugin `autoLogin` | `auth` plugin (see the `codeceptjs-auth` skill). |
-| Plugin `tryTo` / `retryTo` | `import { tryTo, retryTo } from 'codeceptjs/effects'` |
-| Plugin `eachElement` | `import { eachElement } from 'codeceptjs/els'` |
-| Plugin `commentStep` | `import step from 'codeceptjs/steps'` → `step.section('name')` / `step.endSection()` |
-| Plugin `fakerTransform` | `import { faker } from '@faker-js/faker'` directly in tests. |
-| Plugin `enhancedRetryFailedStep` | Renamed to `retryFailedStep`. |
-| Plugin `allure` / `htmlReporter` | `@testomatio/reporter` (HTML pipe). For JUnit XML, the `junitReporter` plugin. |
-| Plugin `wdio` / `selenoid` | Configure via `helpers.WebDriver`, or run externally. |
+| Old                                                            | Replacement                                                                                                                |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Helper `Nightmare` / `Protractor` / `TestCafe`                 | `Playwright`, `Puppeteer`, or `WebDriver`.                                                                                 |
+| Helper `AI`                                                    | Top-level `ai:` config + `aiTrace` plugin.                                                                                 |
+| Helper `SoftExpectHelper`                                      | `import { hopeThat } from 'codeceptjs/effects'`; call `hopeThat.noErrors()` at end of scenario.                            |
+| Helper `Mochawesome`                                           | **Stop and ask the user** — see "Mochawesome decision" below. Do not silently delete it.                                   |
+| Plugin `autoLogin`                                             | `auth` plugin (see the `codeceptjs-auth` skill).                                                                           |
+| Plugin `tryTo` / `retryTo`                                     | `import { tryTo, retryTo } from 'codeceptjs/effects'`                                                                      |
+| Plugin `eachElement`                                           | `import { eachElement } from 'codeceptjs/els'`                                                                             |
+| Plugin `commentStep`                                           | `import step from 'codeceptjs/steps'` → `step.section('name')` / `step.endSection()`                                       |
+| Plugin `fakerTransform`                                        | `import { faker } from '@faker-js/faker'` directly in tests.                                                               |
+| Plugin `enhancedRetryFailedStep`                               | Renamed to `retryFailedStep`.                                                                                              |
+| Plugin `allure` / `htmlReporter`                               | `@testomatio/reporter` (HTML pipe). For JUnit XML, the `junitReporter` plugin.                                             |
+| Plugin `wdio` / `selenoid`                                     | Configure via `helpers.WebDriver`, or run externally.                                                                      |
 | Plugin `screenshotOnFail` / `pauseOnFail` / `stepByStepReport` | Renamed `screenshot` / `pause` / `screenshot` with `slides: true`. Old names still resolve but emit a deprecation warning. |
 
 #### Mochawesome decision

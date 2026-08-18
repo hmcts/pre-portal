@@ -25,4 +25,3 @@ module.exports = {
   paths: { template: root },
   plugins: [copyCustomAssets],
 };
-

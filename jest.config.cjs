@@ -15,4 +15,3 @@ module.exports = {
   coveragePathIgnorePatterns: ['/src/main/modules/properties-volume/*', '/src/main/assets/js/*'],
   testPathIgnorePatterns: ['(^|/)[^/]*helper\\.ts$'],
 };
-

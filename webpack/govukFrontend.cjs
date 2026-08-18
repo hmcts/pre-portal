@@ -28,4 +28,3 @@ module.exports = {
   paths: { template: root, components, sass, javascript, assets },
   plugins: [copyGovukTemplateAssets],
 };
-

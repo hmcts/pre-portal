@@ -16,4 +16,3 @@ const copyVideoPlayerAssets = new CopyWebpackPlugin({
 module.exports = {
   plugins: [copyVideoPlayerAssets],
 };
-

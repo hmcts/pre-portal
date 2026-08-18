@@ -14,4 +14,3 @@ const copyMediaKindAssets = new CopyWebpackPlugin({
 module.exports = {
   plugins: [copyMediaKindAssets],
 };
-
