@@ -5,4 +5,3 @@ const { auth, requiresAuth } = openIdConnect;
 
 export { auth, requiresAuth };
 export type { ConfigParams };
-
