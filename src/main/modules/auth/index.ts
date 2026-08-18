@@ -4,7 +4,7 @@ import { PreClient } from '../../services/pre-api/pre-client';
 import { Logger } from '@hmcts/nodejs-logging';
 import config from 'config';
 import { Application } from 'express';
-import { ConfigParams, auth } from 'express-openid-connect';
+import { ConfigParams, auth } from './express-openid-connect';
 import session from 'express-session';
 import FileStoreFactory from 'session-file-store';
 

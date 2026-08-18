@@ -5,7 +5,7 @@ import { RequiresSuperUser } from '../../middleware/admin-middleware';
 import { UserLevel } from '../../types/user-level';
 
 import { Application } from 'express';
-import { requiresAuth } from 'express-openid-connect';
+import { requiresAuth } from '../../modules/auth/express-openid-connect';
 import { getAllPaginatedCourts } from '../../helpers/helpers';
 
 export default function (app: Application): void {

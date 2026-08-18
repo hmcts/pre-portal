@@ -1,7 +1,11 @@
 import * as path from 'path';
+import { fileURLToPath } from 'url';
 
 import * as express from 'express';
-import * as nunjucks from 'nunjucks';
+import nunjucks from 'nunjucks';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export class Nunjucks {
   constructor(public developmentMode: boolean) {

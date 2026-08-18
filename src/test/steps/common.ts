@@ -62,15 +62,15 @@ Then('I see the text {string}', (text: string) => {
 });
 
 Then('I see the link {string}', (text: string) => {
-  I.seeElement(locate('a').withText(text));
+  I.seeElement(`//a[normalize-space()="${text}"]`);
 });
 
 Then('I do not see the link {string}', async (text: string) => {
-  I.dontSeeElement(locate('a').withText(text));
+  I.dontSeeElement(`//a[normalize-space()="${text}"]`);
 });
 
 Then('I click the link {string}', (text: string) => {
-  I.click(locate('a').withText(text));
+  I.click(`//a[normalize-space()="${text}"]`);
 });
 
 When('I open the navigation menu', async () => {

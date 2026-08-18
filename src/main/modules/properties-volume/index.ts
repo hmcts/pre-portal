@@ -3,8 +3,10 @@ import * as propertiesVolume from '@hmcts/properties-volume';
 import config from 'config';
 import { config as loadEnv } from 'dotenv';
 import { Application } from 'express';
-import { get, set } from 'lodash';
+import lodash from 'lodash';
 import * as process from 'node:process';
+
+const { get, set } = lodash;
 
 export class PropertiesVolume {
   private logger = Logger.getLogger('properties-volume');

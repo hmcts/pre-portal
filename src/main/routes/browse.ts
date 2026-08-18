@@ -5,7 +5,7 @@ import { UserLevel } from '../types/user-level';
 
 import { Logger } from '@hmcts/nodejs-logging';
 import { Application } from 'express';
-import { requiresAuth } from 'express-openid-connect';
+import { requiresAuth } from '../modules/auth/express-openid-connect';
 
 export const convertIsoToDate = (isoString?: string): string | undefined => {
   if (!isoString) {

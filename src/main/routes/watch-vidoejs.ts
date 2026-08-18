@@ -3,7 +3,7 @@ import { SessionUser } from '../services/session-user/session-user';
 
 import { Logger } from '@hmcts/nodejs-logging';
 import { Application } from 'express';
-import { requiresAuth } from 'express-openid-connect';
+import { requiresAuth } from '../modules/auth/express-openid-connect';
 import { v4 as uuid } from 'uuid';
 
 function validateId(id: string): boolean {

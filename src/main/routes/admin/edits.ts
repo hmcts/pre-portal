@@ -1,7 +1,7 @@
 import { SessionUser } from '../../services/session-user/session-user';
 import { UserLevel } from '../../types/user-level';
 import { Application } from 'express';
-import { requiresAuth } from 'express-openid-connect';
+import { requiresAuth } from '../../modules/auth/express-openid-connect';
 import path from 'path';
 import multer from 'multer';
 import { PreClient } from '../../services/pre-api/pre-client';

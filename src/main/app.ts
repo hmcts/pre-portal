@@ -1,11 +1,10 @@
 import * as path from 'path';
-import { fileURLToPath, pathToFileURL } from 'url';
 
-import { AppInsights } from './modules/appinsights';
-import { Auth } from './modules/auth';
-import { Helmet } from './modules/helmet';
-import { Nunjucks } from './modules/nunjucks';
-import { PropertiesVolume } from './modules/properties-volume';
+import { AppInsights } from './modules/appinsights/index';
+import { Auth } from './modules/auth/index';
+import { Helmet } from './modules/helmet/index';
+import { Nunjucks } from './modules/nunjucks/index';
+import { PropertiesVolume } from './modules/properties-volume/index';
 import { ForbiddenError, HTTPError, TermsNotAcceptedError, UnauthorizedError } from './types/errors';
 
 import axios from 'axios';
@@ -21,8 +20,7 @@ import 'dotenv/config';
 
 import { setupDev } from './development';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const appRoot = path.resolve(process.cwd(), 'src/main');
 
 const env = process.env.NODE_ENV || 'development';
 const developmentMode = env === 'development';
@@ -45,11 +43,11 @@ axios.defaults.baseURL = config.get('pre.apiUrl');
 axios.defaults.headers.common['Ocp-Apim-Subscription-Key'] = config.get('pre.apiKey.primary');
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-app.use(favicon(path.join(__dirname, '/public/assets/images/favicon.ico')));
+app.use(favicon(path.join(appRoot, 'public/assets/images/favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(appRoot, 'public')));
 if (process.env.PORTAL_AUTH_DISABLED !== '1') {
   logger.info('Enabling Auth. Env: ' + env);
   new Auth().enableFor(app);
@@ -62,35 +60,39 @@ app.use((req, res, next) => {
   next();
 });
 
-const routeFiles = glob.sync(path.join(__dirname, 'routes/**/*.+(ts|js)'));
-await Promise.all(
-  routeFiles.map(async filename => {
-    const routeModule = await import(pathToFileURL(filename).href);
-    routeModule.default(app);
-  })
-);
+async function configureApp(): Promise<void> {
+  const routeFiles = glob.sync(path.join(appRoot, 'routes/**/*.+(ts|js)'));
+  await Promise.all(
+    routeFiles.map(async filename => {
+      const routeModule = await import(filename);
+      routeModule.default(app);
+    })
+  );
 
-setupDev(app, developmentMode);
-// returning "not found" page for requests with paths not resolved by the router
-app.use((req, res) => {
-  res.status(404);
-  res.render('not-found');
-});
+  setupDev(app, developmentMode);
+  // returning "not found" page for requests with paths not resolved by the router
+  app.use((req, res) => {
+    res.status(404);
+    res.render('not-found');
+  });
 
-// error handler
-app.use((err: HTTPError, req: express.Request, res: express.Response, next: express.NextFunction) => {
-  logger.error(err.message);
+  // error handler
+  app.use((err: HTTPError, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    logger.error(err.message);
 
-  if (err instanceof TermsNotAcceptedError) {
-    res.redirect('/accept-terms-and-conditions');
-    return;
-  }
+    if (err instanceof TermsNotAcceptedError) {
+      res.redirect('/accept-terms-and-conditions');
+      return;
+    }
 
-  if (err instanceof UnauthorizedError || err instanceof ForbiddenError) {
-    res.redirect('/');
-    return;
-  }
+    if (err instanceof UnauthorizedError || err instanceof ForbiddenError) {
+      res.redirect('/');
+      return;
+    }
 
-  res.status(err.status ?? 500);
-  res.render('error', { status: err.status, message: err.message });
-});
+    res.status(err.status ?? 500);
+    res.render('error', { status: err.status, message: err.message });
+  });
+}
+
+export const appReady = configureApp();

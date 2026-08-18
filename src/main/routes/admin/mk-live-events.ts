@@ -1,6 +1,6 @@
 import { Application } from 'express';
 import { PreClient } from '../../services/pre-api/pre-client';
-import { requiresAuth } from 'express-openid-connect';
+import { requiresAuth } from '../../modules/auth/express-openid-connect';
 import { RequiresSuperUser } from '../../middleware/admin-middleware';
 
 import { LiveEventStatusService } from '../../services/system-status/live-events-status';
