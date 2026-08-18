@@ -1,6 +1,20 @@
-import { mockedPaginatedRecordings, mockRecordings, mockXUserId } from '../mock-api';
+import {
+  mockAuditLogs,
+  mockedPaginatedAuditLogs,
+  mockedPaginatedCourts,
+  mockedPaginatedRecordings,
+  mockRecordings,
+  mockXUserId,
+} from '../mock-api';
 import { PreClient } from '../../main/services/pre-api/pre-client';
-import { PutAuditRequest, RecordingPlaybackData, SearchRecordingsRequest } from '../../main/services/pre-api/types';
+import {
+  PaginatedRequest,
+  Pagination,
+  PutAuditRequest,
+  RecordingPlaybackData,
+  SearchAuditLogsRequest,
+  SearchRecordingsRequest,
+} from '../../main/services/pre-api/types';
 import { describe } from '@jest/globals';
 import axios from 'axios';
 import { mockeduser } from './test-helper';
@@ -11,6 +25,8 @@ const preClient = new PreClient();
 const mockRecordingId = '12345678-1234-1234-1234-1234567890ab';
 const mockRecordingMissingId = '4f37c46f-142d-42df-953f-0b7ca3f87995';
 const mockRecordingNoPermsId = '4f37c46f-142d-42df-953f-0b7ca3f87996';
+const mockAuditNotFoundId = '4f37c46f-142d-42df-953f-0b7ca3f87997';
+const mockAuditNoPermsId = '4f37c46f-142d-42df-953f-0b7ca3f87998';
 const mockPlaybackData = {
   hls_url: 'https://streaming.example.test/playlist.m3u8',
   token: 'playback-token',
@@ -165,6 +181,80 @@ describe('PreClient', () => {
         },
       });
     }
+    if (url === '/audit') {
+      if (config['headers']['X-User-Id'] === mockXUserId) {
+        return Promise.resolve({
+          status: 200,
+          data: mockedPaginatedAuditLogs,
+        });
+      } else if (config['params']['caseReference'] == 'uhoh') {
+        return Promise.reject('Network Error');
+      }
+      return Promise.resolve({
+        status: 200,
+        data: {
+          page: {
+            size: 20,
+            totalElements: 0,
+            totalPages: 1,
+            number: 0,
+          },
+        },
+      });
+    }
+
+    if (url === `/audit/${mockAuditLogs[0].id}`) {
+      return Promise.resolve({
+        status: 200,
+        data: mockAuditLogs[0],
+      });
+    }
+
+    if (url === `/audit/${mockAuditNotFoundId}`) {
+      return Promise.reject({
+        response: {
+          status: 404,
+          data: {
+            message: `Not found: Audit: ${mockAuditNotFoundId}`,
+          },
+        },
+      });
+    }
+
+    if (url === `/audit/${mockAuditNoPermsId}`) {
+      return Promise.reject({
+        response: {
+          status: 403,
+        },
+      });
+    }
+
+    if (url === '/audit/nope') {
+      return Promise.reject('Network Error');
+    }
+
+    if (url === '/courts') {
+      if (config['headers']['X-User-Id'] === mockXUserId) {
+        return Promise.resolve({
+          status: 200,
+          data: mockedPaginatedCourts,
+        });
+      } else if (config['params']['page'] == 999) {
+        return Promise.reject('Network Error');
+      }
+      return Promise.resolve({
+        status: 200,
+        data: {
+          page: {
+            size: 20,
+            totalElements: 0,
+            totalPages: 1,
+            number: 0,
+          },
+        },
+      });
+    }
+
     throw new Error('Invalid URL: ' + url);
   });
   mockedAxios.post.mockImplementation((url, data, _config) => {
@@ -322,7 +412,7 @@ describe('PreClient', () => {
   });
 
   test('getLatestTermsAndConditions error', async () => {
-    mockedAxios.get.mockRejectedValue(new Error('Axios Get Error'));
+    mockedAxios.get.mockRejectedValueOnce(new Error('Axios Get Error'));
     let error: { message: any } | undefined;
     try {
       await preClient.getLatestTermsAndConditions();
@@ -439,6 +529,73 @@ describe('PreClient', () => {
     await expect(preClient.postEditsFromCsv(mockXUserId, 'source-id-123', mockBuffer)).rejects.toThrow(
       'Invalid CSV format'
     );
+  });
+
+  test('get courts with pagination', async () => {
+    const request = {} as PaginatedRequest;
+    const { courts, pagination } = await preClient.getCourtsWithPagination(mockXUserId, request);
+    expect(courts).toBeTruthy();
+    expect(courts.length).toBe(2);
+    expect(pagination).toBeTruthy();
+  });
+  test('get courts with pagination no results', async () => {
+    const request = {} as PaginatedRequest;
+    const { courts, pagination } = await preClient.getCourtsWithPagination(otherXUserId, request);
+    expect(courts).toBeTruthy();
+    expect(courts.length).toBe(0);
+    expect(pagination).toBeTruthy();
+  });
+
+  test('get audit logs', async () => {
+    const request = {} as SearchAuditLogsRequest;
+    const { auditLogs, pagination } = await preClient.getAuditLogs(mockXUserId, request);
+    expect(auditLogs).toBeTruthy();
+    expect(auditLogs.length).toBe(2);
+    expect(pagination).toBeTruthy();
+  });
+  test('get audit logs no results', async () => {
+    const request = {} as SearchAuditLogsRequest;
+    const { auditLogs, pagination } = await preClient.getAuditLogs(otherXUserId, request);
+    expect(auditLogs).toBeTruthy();
+    expect(auditLogs.length).toBe(0);
+    expect(pagination).toBeTruthy();
+  });
+  test('get audit logs network error', async () => {
+    try {
+      await preClient.getAuditLogs(otherXUserId, { caseReference: 'uhoh' } as SearchAuditLogsRequest);
+      expect(true).toBe(false); // shouldn't get here...
+    } catch (e) {
+      expect(e).toBe('Network Error');
+    }
+  });
+
+  test('get audit by id', async () => {
+    const audit = await preClient.getAudit(mockXUserId, mockAuditLogs[0].id);
+    expect(audit).toBeTruthy();
+    expect(audit?.id).toBe(mockAuditLogs[0].id);
+  });
+
+  test('get audit by id when not found', async () => {
+    const audit = await preClient.getAudit(mockXUserId, mockAuditNotFoundId);
+    expect(audit).toBeNull();
+  });
+
+  test('get audit by id when no permissions', async () => {
+    try {
+      await preClient.getAudit(mockXUserId, mockAuditNoPermsId);
+      expect(true).toBe(false); // shouldn't get here...
+    } catch (e) {
+      expect(e.response.status).toBe(403);
+    }
+  });
+
+  test('get audit by id network error', async () => {
+    try {
+      await preClient.getAudit(mockXUserId, 'nope');
+      expect(true).toBe(false); // shouldn't get here...
+    } catch (e) {
+      expect(e).toBe('Network Error');
+    }
   });
 
   describe('PreClient', () => {
@@ -788,6 +945,51 @@ describe('PreClient', () => {
 
       expect(result).toBeTruthy();
       expect(mockedAxios.put).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('createPagination', () => {
+    test('createPagination returns correct result', () => {
+      const pagination = buildPagination();
+
+      const { paginationLinks, title } = preClient.createPagination(pagination, 'browse', 'Recordings', 12);
+
+      expect(paginationLinks).toBeTruthy();
+      expect(paginationLinks.items).toHaveLength(pagination.totalPages);
+      expect(paginationLinks.items).toEqual([
+        { href: '/browse?page=0', number: 1, current: true },
+        { href: '/browse?page=1', number: 2, current: false },
+      ]);
+      expect(title).toEqual('Recordings 1 to 10 of 12');
+    });
+
+    test('createPagination returns correct result with query string', () => {
+      const pagination = buildPagination();
+      const queryString = { name: 'caseReference', value: 'TEST-1' };
+
+      const { paginationLinks, title } = preClient.createPagination(
+        pagination,
+        'browse',
+        'Recordings',
+        12,
+        queryString
+      );
+
+      expect(paginationLinks).toBeTruthy();
+      expect(paginationLinks.items).toHaveLength(pagination.totalPages);
+      expect(paginationLinks.items).toEqual([
+        { href: '/browse?page=0&caseReference=TEST-1', number: 1, current: true },
+        { href: '/browse?page=1&caseReference=TEST-1', number: 2, current: false },
+      ]);
+      expect(title).toEqual('Recordings 1 to 10 of 12');
+    });
+
+    const buildPagination = (overrides: Partial<Pagination> = {}): Pagination => ({
+      currentPage: 0,
+      totalPages: 2,
+      totalElements: 12,
+      size: 10,
+      ...overrides,
     });
   });
 });

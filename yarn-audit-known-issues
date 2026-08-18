@@ -1,0 +1,1 @@
+{"value":"extract-zip","children":{"ID":1139346,"Issue":"extract-zip unvalidated symlink path traversal","URL":"https://github.com/advisories/GHSA-jmr9-qjv8-65gv","Severity":"high","Vulnerable Versions":"<=2.0.1","Tree Versions":["2.0.1"],"Dependents":["@puppeteer/browsers@npm:2.13.0"]}}

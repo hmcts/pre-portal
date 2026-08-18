@@ -5,11 +5,15 @@ import { UserProfile } from '../../types/user-profile';
 import { RedisService } from '../../app/redis/RedisService';
 import { LiveEvent } from '../../types/live-event';
 import {
+  Audit,
+  Court as ApiCourt,
   EditRequest,
+  PaginatedRequest,
   Pagination,
   PutAuditRequest,
   Recording,
   RecordingPlaybackData,
+  SearchAuditLogsRequest,
   SearchEditsRequest,
   SearchRecordingsRequest,
   CaptureSession,
@@ -58,6 +62,102 @@ export class PreClient {
     const data: T[] = response.data.page.totalElements === 0 ? [] : (response.data._embedded[embeddedKey] as T[]);
 
     return { data, pagination };
+  }
+
+  public createPagination(
+    pagination: Pagination,
+    url: string,
+    pageTitle: string,
+    resourceLength: number,
+    queryString?: { name: string; value: string } | null
+  ): {
+    paginationLinks: {
+      previous: {};
+      next: {};
+      items: ({ href: string; number: number; current: boolean } | { ellipsis: boolean })[];
+    };
+    title: string;
+  } {
+    const paginationLinks = {
+      previous: {},
+      next: {},
+      items: [] as ({ href: string; number: number; current: boolean } | { ellipsis: boolean })[],
+    };
+
+    const buildPageUrl = (page: number) => {
+      const params = new URLSearchParams({ page: page.toString() });
+      let pageUrl = `/${url}`;
+
+      if (queryString) {
+        params.set(queryString.name, queryString.value);
+      }
+
+      pageUrl = `${pageUrl}?${params.toString()}`;
+
+      return pageUrl;
+    };
+
+    // Add previous link if not on the first page
+    if (pagination.currentPage > 0) {
+      paginationLinks.previous = {
+        href: buildPageUrl(pagination.currentPage - 1),
+      };
+    }
+
+    // Add next link if not on the last page
+    if (pagination.currentPage < pagination.totalPages - 1) {
+      paginationLinks.next = {
+        href: buildPageUrl(pagination.currentPage + 1),
+      };
+    }
+
+    // Always add the first page
+    paginationLinks.items.push({
+      href: buildPageUrl(0),
+      number: 1,
+      current: 0 === pagination.currentPage,
+    });
+
+    // Add an ellipsis after the first page if the 2nd page is not in the window
+    if (pagination.currentPage > 3) {
+      paginationLinks.items.push({ ellipsis: true });
+    }
+
+    // Add the pages immediately 2 before and 2 after the current page to create a rolling window of 5 pages
+    for (
+      let i = Math.max(1, pagination.currentPage - 2);
+      i <= Math.min(pagination.currentPage + 2, pagination.totalPages - 2);
+      i++
+    ) {
+      paginationLinks.items.push({
+        href: buildPageUrl(i),
+        number: i + 1,
+        current: i === pagination.currentPage,
+      });
+    }
+
+    // Add an ellipsis before the last page if the 2nd last page is not in the window
+    if (pagination.currentPage < pagination.totalPages - 4) {
+      paginationLinks.items.push({ ellipsis: true });
+    }
+
+    // Add the last page if there is more than one page (don't repeat the first page)
+    if (pagination.totalPages > 1) {
+      paginationLinks.items.push({
+        href: buildPageUrl(pagination.totalPages - 1),
+        number: pagination.totalPages,
+        current: pagination.totalPages - 1 === pagination.currentPage,
+      });
+    }
+
+    let title = pageTitle;
+    if (resourceLength > 0) {
+      title = `${pageTitle} ${pagination.currentPage * pagination.size + 1} to ${Math.min(
+        (pagination.currentPage + 1) * pagination.size,
+        pagination.totalElements
+      )} of ${pagination.totalElements}`;
+    }
+    return { paginationLinks, title };
   }
 
   public async healthCheck(): Promise<AxiosResponse<HealthResponse>> {
@@ -500,6 +600,58 @@ export class PreClient {
     }
   }
 
+  public async getAuditLogs(
+    xUserId: string,
+    request: SearchAuditLogsRequest
+  ): Promise<{ auditLogs: Audit[]; pagination: Pagination }> {
+    this.logger.debug('Getting audit logs');
+
+    try {
+      const response = await axios.get('/audit', {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+        params: request,
+      });
+
+      const pagination = {
+        currentPage: response.data['page']['number'],
+        totalPages: response.data['page']['totalPages'],
+        totalElements: response.data['page']['totalElements'],
+        size: response.data['page']['size'],
+      } as Pagination;
+      const auditLogs =
+        response.data['page']['totalElements'] === 0 ? [] : (response.data['_embedded']['auditDTOList'] as Audit[]);
+
+      return { auditLogs, pagination };
+    } catch (e) {
+      // log the error
+      this.logger.info('path', e.response?.request.path);
+      this.logger.info('res headers', e.response?.headers);
+      this.logger.info('data', e.response?.data);
+      // rethrow the error for the UI
+      throw e;
+    }
+  }
+
+  public async getAudit(xUserId: string, id: string): Promise<Audit | null> {
+    try {
+      const response = await axios.get('/audit/' + id, {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+      });
+
+      return response.data as Audit;
+    } catch (e) {
+      if (e.response?.status === 404) {
+        return null;
+      }
+      this.logger.error(e);
+      throw e;
+    }
+  }
+
   public async getCourts(xUserId: string, page: number = 0, size: number = 50): Promise<any> {
     const response = await axios.get(`/courts`, {
       headers: { 'X-User-Id': xUserId },
@@ -507,5 +659,39 @@ export class PreClient {
     });
 
     return response.data as Court[];
+  }
+
+  public async getCourtsWithPagination(
+    xUserId: string,
+    request: PaginatedRequest
+  ): Promise<{ courts: ApiCourt[]; pagination: Pagination }> {
+    this.logger.debug('Getting courts with request: ' + JSON.stringify(request));
+
+    try {
+      const response = await axios.get('/courts', {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+        params: request,
+      });
+
+      const pagination = {
+        currentPage: response.data['page']['number'],
+        totalPages: response.data['page']['totalPages'],
+        totalElements: response.data['page']['totalElements'],
+        size: response.data['page']['size'],
+      } as Pagination;
+      const courts =
+        response.data['page']['totalElements'] === 0 ? [] : (response.data['_embedded']['courtDTOList'] as ApiCourt[]);
+
+      return { courts, pagination };
+    } catch (e) {
+      // log the error
+      this.logger.info('path', e.response?.request.path);
+      this.logger.info('res headers', e.response?.headers);
+      this.logger.info('data', e.response?.data);
+      // rethrow the error for the UI
+      throw e;
+    }
   }
 }
