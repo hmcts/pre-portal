@@ -2,10 +2,13 @@
 import * as fs from 'fs';
 import * as https from 'https';
 import * as path from 'path';
+import { fileURLToPath } from 'url';
 
 import { app } from './app';
+import { Logger } from '@hmcts/nodejs-logging';
 
-const { Logger } = require('@hmcts/nodejs-logging');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const logger = Logger.getLogger('server');
 

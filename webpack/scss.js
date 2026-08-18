@@ -1,44 +1,6 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import { createRequire } from 'node:module';
 
-const devMode = process.env.NODE_ENV !== 'production';
-const fileNameSuffix = devMode ? '-dev' : '.[contenthash]';
-const filename = `[name]${fileNameSuffix}.css`;
+const require = createRequire(import.meta.url);
+const config = require('./scss.cjs');
 
-const miniCss = new MiniCssExtractPlugin({
-  // Options similar to the same options in webpackOptions.output
-  // both options are optional
-  filename,
-  chunkFilename: '[id].css',
-});
-
-module.exports = {
-  rules: [
-    {
-      test: /\.scss$/,
-      use: [
-        'style-loader',
-        {
-          loader: MiniCssExtractPlugin.loader,
-          options: {
-            esModule: false,
-          },
-        },
-        {
-          loader: 'css-loader',
-          options: {
-            url: false,
-          },
-        },
-        {
-          loader: 'sass-loader',
-          options: {
-            sassOptions: {
-              quietDeps: true,
-            },
-          },
-        },
-      ],
-    },
-  ],
-  plugins: [miniCss],
-};
+export default config;

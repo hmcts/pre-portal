@@ -1,22 +1,6 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
-const cssPath = path.resolve(__dirname, '../src/main/views/webpack/css-template.njk');
-const jsPath = path.resolve(__dirname, '../src/main/views/webpack/js-template.njk');
+import { createRequire } from 'node:module';
 
-const cssWebPackPlugin = new HtmlWebpackPlugin({
-  template: cssPath,
-  publicPath: '/',
-  filename: cssPath.replace('-template', ''),
-  inject: false,
-});
+const require = createRequire(import.meta.url);
+const config = require('./htmlWebpack.cjs');
 
-const jsWebPackPlugin = new HtmlWebpackPlugin({
-  template: jsPath,
-  publicPath: '/',
-  filename: jsPath.replace('-template', ''),
-  inject: false,
-});
-
-module.exports = {
-  plugins: [cssWebPackPlugin, jsWebPackPlugin],
-};
+export default config;

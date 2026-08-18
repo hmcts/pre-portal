@@ -1,3 +1,1 @@
-require('ts-node').register({ project: 'src/test/tsconfig.json' });
-
-module.exports = require('./codecept.conf.ts');
+export { config } from './codecept.conf.ts';

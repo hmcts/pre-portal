@@ -1,6 +1,7 @@
 import { Logger } from '@hmcts/nodejs-logging';
 import * as propertiesVolume from '@hmcts/properties-volume';
 import config from 'config';
+import { config as loadEnv } from 'dotenv';
 import { Application } from 'express';
 import { get, set } from 'lodash';
 import * as process from 'node:process';
@@ -55,7 +56,7 @@ export class PropertiesVolume {
       this.logger.info('Done setting pre-portal-x-user-id from secrets');
     } else {
       this.logger.info('Loading properties from .env file');
-      require('dotenv').config();
+      loadEnv();
       set(config, 'pre.apiKey.primary', process.env.APIM_SUB_PORTAL_PRIMARY_KEY ?? 'pre.apiKey.primary');
       set(config, 'pre.apiKey.secondary', process.env.APIM_SUB_PORTAL_SECONDARY_KEY ?? 'pre.apiKey.secondary');
       set(config, 'b2c.appClientSecret', process.env.B2C_APP_CLIENT_SECRET ?? 'b2c.appClientSecret');

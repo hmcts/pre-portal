@@ -1,10 +1,10 @@
 import * as express from 'express';
+import webpack from 'webpack';
+import webpackDev from 'webpack-dev-middleware';
+import webpackconfig from '../../webpack.config.cjs';
 
-const setupDev = (app: express.Express, developmentMode: boolean): void => {
+export const setupDev = (app: express.Express, developmentMode: boolean): void => {
   if (developmentMode) {
-    const webpackDev = require('webpack-dev-middleware');
-    const webpack = require('webpack');
-    const webpackconfig = require('../../webpack.config');
     const compiler = webpack(webpackconfig);
     app.use(
       webpackDev(compiler, {
@@ -13,5 +13,3 @@ const setupDev = (app: express.Express, developmentMode: boolean): void => {
     );
   }
 };
-
-module.exports = { setupDev };

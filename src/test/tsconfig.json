@@ -6,7 +6,7 @@
     "target": "es2020",
     "lib": ["es2020", "dom", "dom.iterable"],
     "esModuleInterop": true,
-    "module": "commonjs",
+    "module": "ESNext",
     "strictNullChecks": true,
     "types": ["codeceptjs", "jest"]
   }

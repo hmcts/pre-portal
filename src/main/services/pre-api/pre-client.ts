@@ -21,8 +21,8 @@ import {
 
 import { Logger } from '@hmcts/nodejs-logging';
 import axios, { AxiosResponse } from 'axios';
+import config from 'config';
 import FormData from 'form-data';
-import config = require('config');
 import { HealthResponse } from '../../types/health';
 import { Court } from '../../types/court';
 import qs from 'qs';
