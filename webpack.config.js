@@ -1,44 +1,6 @@
-const path = require('path');
+import { createRequire } from 'node:module';
 
-const sourcePath = path.resolve(__dirname, 'src/main/assets/js');
-const govukFrontend = require(path.resolve(__dirname, 'webpack/govukFrontend'));
-const mkWebpack = require(path.resolve(__dirname, 'webpack/mkWebpack'));
-const videoPlayerWebpack = require(path.resolve(__dirname, 'webpack/videoPlayerWebpack'));
-const customAssets = require(path.resolve(__dirname, 'webpack/customAssets'));
-const scss = require(path.resolve(__dirname, 'webpack/scss'));
-const HtmlWebpack = require(path.resolve(__dirname, 'webpack/htmlWebpack'));
+const require = createRequire(import.meta.url);
+const config = require('./webpack.config.cjs');
 
-const devMode = process.env.NODE_ENV !== 'production';
-const fileNameSuffix = devMode ? '-dev' : '.[contenthash]';
-const filename = `[name]${fileNameSuffix}.js`;
-
-module.exports = {
-  plugins: [
-    ...govukFrontend.plugins,
-    ...mkWebpack.plugins,
-    ...videoPlayerWebpack.plugins,
-    ...scss.plugins,
-    ...HtmlWebpack.plugins,
-    ...customAssets.plugins,
-  ],
-  entry: path.resolve(sourcePath, 'index.ts'),
-  mode: devMode ? 'development' : 'production',
-  module: {
-    rules: [
-      ...scss.rules,
-      {
-        test: /\.ts$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
-      },
-    ],
-  },
-  resolve: {
-    extensions: ['.ts', '.js'],
-  },
-  output: {
-    path: path.resolve(__dirname, 'src/main/public/'),
-    publicPath: '',
-    filename,
-  },
-};
+export default config;

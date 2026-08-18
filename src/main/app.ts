@@ -1,4 +1,5 @@
 import * as path from 'path';
+import { fileURLToPath, pathToFileURL } from 'url';
 
 import { AppInsights } from './modules/appinsights';
 import { Auth } from './modules/auth';
@@ -9,17 +10,19 @@ import { ForbiddenError, HTTPError, TermsNotAcceptedError, UnauthorizedError } f
 
 import axios from 'axios';
 import * as bodyParser from 'body-parser';
-import config = require('config');
+import config from 'config';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import { glob } from 'glob';
 import favicon from 'serve-favicon';
+import { Logger } from '@hmcts/nodejs-logging';
 
 import 'dotenv/config';
 
-const { setupDev } = require('./development');
+import { setupDev } from './development';
 
-const { Logger } = require('@hmcts/nodejs-logging');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const env = process.env.NODE_ENV || 'development';
 const developmentMode = env === 'development';
@@ -59,10 +62,13 @@ app.use((req, res, next) => {
   next();
 });
 
-glob
-  .sync(__dirname + '/routes/**/*.+(ts|js)')
-  .map(filename => require(filename))
-  .forEach(route => route.default(app));
+const routeFiles = glob.sync(path.join(__dirname, 'routes/**/*.+(ts|js)'));
+await Promise.all(
+  routeFiles.map(async filename => {
+    const routeModule = await import(pathToFileURL(filename).href);
+    routeModule.default(app);
+  })
+);
 
 setupDev(app, developmentMode);
 // returning "not found" page for requests with paths not resolved by the router

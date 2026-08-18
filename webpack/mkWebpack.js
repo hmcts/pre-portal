@@ -1,16 +1,6 @@
-const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+import { createRequire } from 'node:module';
 
-const rootExport = require.resolve('@mediakind/mkplayer');
-const root = path.resolve(rootExport, '..');
+const require = createRequire(import.meta.url);
+const config = require('./mkWebpack.cjs');
 
-const copyMediaKindAssets = new CopyWebpackPlugin({
-  patterns: [
-    { from: `${root}/mkplayer.js`, to: 'assets/js' },
-    { from: `${root}/mkplayer-ui.css`, to: 'assets/css' },
-  ],
-});
-
-module.exports = {
-  plugins: [copyMediaKindAssets],
-};
+export default config;
