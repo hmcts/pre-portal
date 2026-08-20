@@ -108,7 +108,7 @@ const RAW_RUNTIME_STATE =
           ["ts-node", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:10.9.2"],\
           ["tsconfig-paths", "npm:4.2.0"],\
           ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"],\
-          ["uuid", "npm:11.1.1"],\
+          ["uuid", "npm:14.0.2"],\
           ["video.js", "npm:8.23.7"],\
           ["webpack", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.105.4"],\
           ["webpack-cli", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:6.0.1"],\
@@ -465,7 +465,7 @@ const RAW_RUNTIME_STATE =
           ["@azure/msal-common", "npm:15.13.3"],\
           ["@azure/msal-node", "npm:3.8.4"],\
           ["jsonwebtoken", "npm:9.0.3"],\
-          ["uuid", "npm:11.1.1"]\
+          ["uuid", "npm:14.0.2"]\
         ],\
         "linkType": "HARD"\
       }],\
@@ -10083,7 +10083,7 @@ const RAW_RUNTIME_STATE =
           ["promise-retry", "npm:1.1.1"],\
           ["resq", "npm:1.11.0"],\
           ["sprintf-js", "npm:1.1.3"],\
-          ["uuid", "npm:11.1.1"]\
+          ["uuid", "npm:14.0.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17578,7 +17578,7 @@ const RAW_RUNTIME_STATE =
           ["ts-node", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:10.9.2"],\
           ["tsconfig-paths", "npm:4.2.0"],\
           ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"],\
-          ["uuid", "npm:11.1.1"],\
+          ["uuid", "npm:14.0.2"],\
           ["video.js", "npm:8.23.7"],\
           ["webpack", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.105.4"],\
           ["webpack-cli", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:6.0.1"],\
@@ -20341,10 +20341,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["uuid", [\
-      ["npm:11.1.1", {\
-        "packageLocation": "./.yarn/cache/uuid-npm-11.1.1-311687c807-16411d3dc1.zip/node_modules/uuid/",\
+      ["npm:14.0.2", {\
+        "packageLocation": "./.yarn/cache/uuid-npm-14.0.2-f336308791-e8263a76ad.zip/node_modules/uuid/",\
         "packageDependencies": [\
-          ["uuid", "npm:11.1.1"]\
+          ["uuid", "npm:14.0.2"]\
         ],\
         "linkType": "HARD"\
       }]\
