@@ -52,7 +52,7 @@ const RAW_RUNTIME_STATE =
           ["@types/qs", "npm:6.15.1"],\
           ["@types/serve-favicon", "npm:2.5.7"],\
           ["@types/session-file-store", "npm:1.2.6"],\
-          ["@types/supertest", "npm:7.2.0"],\
+          ["@types/supertest", "npm:7.2.1"],\
           ["allure-commandline", "npm:2.42.1"],\
           ["applicationinsights", "npm:3.15.1"],\
           ["axios", "npm:1.19.0"],\
@@ -7464,12 +7464,12 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/supertest", [\
-      ["npm:7.2.0", {\
-        "packageLocation": "./.yarn/cache/@types-supertest-npm-7.2.0-dea36e6d28-5a322e29b8.zip/node_modules/@types/supertest/",\
+      ["npm:7.2.1", {\
+        "packageLocation": "./.yarn/cache/@types-supertest-npm-7.2.1-9fc07f4aac-d2b505d4c2.zip/node_modules/@types/supertest/",\
         "packageDependencies": [\
           ["@types/methods", "npm:1.1.4"],\
           ["@types/superagent", "npm:8.1.9"],\
-          ["@types/supertest", "npm:7.2.0"]\
+          ["@types/supertest", "npm:7.2.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17522,7 +17522,7 @@ const RAW_RUNTIME_STATE =
           ["@types/qs", "npm:6.15.1"],\
           ["@types/serve-favicon", "npm:2.5.7"],\
           ["@types/session-file-store", "npm:1.2.6"],\
-          ["@types/supertest", "npm:7.2.0"],\
+          ["@types/supertest", "npm:7.2.1"],\
           ["allure-commandline", "npm:2.42.1"],\
           ["applicationinsights", "npm:3.15.1"],\
           ["axios", "npm:1.19.0"],\
