@@ -144,7 +144,7 @@
     "qs": "6.15.2",
     "semver": "^7.7.4",
     "editorconfig@npm:1.0.4/minimatch": "9.0.7",
-    "@xmldom/xmldom": "0.9.11",
+    "@xmldom/xmldom": "0.9.12",
     "@grpc/grpc-js": "1.14.4",
     "joi": "18.2.3",
     "node-gyp@npm:13.0.1/undici": "8.10.0",
