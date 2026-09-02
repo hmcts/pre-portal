@@ -60,7 +60,7 @@ const RAW_RUNTIME_STATE =
           ["body-parser", "npm:2.3.0"],\
           ["chokidar", "npm:3.6.0"],\
           ["codeceptjs", "npm:3.7.9"],\
-          ["config", "npm:4.4.1"],\
+          ["config", "npm:4.4.2"],\
           ["connect-redis", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:9.0.0"],\
           ["cookie-parser", "npm:1.4.7"],\
           ["copy-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:14.0.0"],\
@@ -10263,10 +10263,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["config", [\
-      ["npm:4.4.1", {\
-        "packageLocation": "./.yarn/cache/config-npm-4.4.1-be9ff513c5-b237298b10.zip/node_modules/config/",\
+      ["npm:4.4.2", {\
+        "packageLocation": "./.yarn/cache/config-npm-4.4.2-68abb5bc52-57c321f94d.zip/node_modules/config/",\
         "packageDependencies": [\
-          ["config", "npm:4.4.1"],\
+          ["config", "npm:4.4.2"],\
           ["json5", "npm:2.2.3"]\
         ],\
         "linkType": "HARD"\
@@ -17530,7 +17530,7 @@ const RAW_RUNTIME_STATE =
           ["body-parser", "npm:2.3.0"],\
           ["chokidar", "npm:3.6.0"],\
           ["codeceptjs", "npm:3.7.9"],\
-          ["config", "npm:4.4.1"],\
+          ["config", "npm:4.4.2"],\
           ["connect-redis", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:9.0.0"],\
           ["cookie-parser", "npm:1.4.7"],\
           ["copy-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:14.0.0"],\
