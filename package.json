@@ -95,7 +95,7 @@
     "chokidar": "3.6.0",
     "codeceptjs": "3.7.9",
     "copy-webpack-plugin": "14.0.0",
-    "css-loader": "7.1.4",
+    "css-loader": "7.1.5",
     "debug": "4.4.3",
     "eslint": "10.5.0",
     "govuk-frontend": "5.11.2",
