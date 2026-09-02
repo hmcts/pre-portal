@@ -109,7 +109,7 @@ const RAW_RUNTIME_STATE =
           ["tsconfig-paths", "npm:4.2.0"],\
           ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"],\
           ["uuid", "npm:14.0.2"],\
-          ["video.js", "npm:8.23.7"],\
+          ["video.js", "npm:8.24.0"],\
           ["webpack", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.105.4"],\
           ["webpack-cli", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:6.0.1"],\
           ["webpack-dev-middleware", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.5"]\
@@ -7706,26 +7706,26 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@videojs/http-streaming", [\
-      ["npm:3.17.4", {\
-        "packageLocation": "./.yarn/cache/@videojs-http-streaming-npm-3.17.4-074e46eb48-9ee755ebec.zip/node_modules/@videojs/http-streaming/",\
+      ["npm:3.17.5", {\
+        "packageLocation": "./.yarn/cache/@videojs-http-streaming-npm-3.17.5-a58665bfcc-48863642e4.zip/node_modules/@videojs/http-streaming/",\
         "packageDependencies": [\
-          ["@videojs/http-streaming", "npm:3.17.4"]\
+          ["@videojs/http-streaming", "npm:3.17.5"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:7e157b5732988646a3a22e8596ab85a1683d74c058614c79224b67fbdeca96707f10ce7b6a37519224d312799190df1628b7f69718fd8323d3889d4492949316#npm:3.17.4", {\
-        "packageLocation": "./.yarn/__virtual__/@videojs-http-streaming-virtual-128f8fdc67/0/cache/@videojs-http-streaming-npm-3.17.4-074e46eb48-9ee755ebec.zip/node_modules/@videojs/http-streaming/",\
+      ["virtual:c1b83547f4b08ddfbe9fbce84df0d212b9069565fdef712f172f179ed6ff5265b157bede9f2c526a10a30072f07af3bc869fa2a587bba3753718413c27b3e733#npm:3.17.5", {\
+        "packageLocation": "./.yarn/__virtual__/@videojs-http-streaming-virtual-7231deb55a/0/cache/@videojs-http-streaming-npm-3.17.5-a58665bfcc-48863642e4.zip/node_modules/@videojs/http-streaming/",\
         "packageDependencies": [\
           ["@babel/runtime", "npm:7.29.2"],\
           ["@types/video.js", null],\
-          ["@videojs/http-streaming", "virtual:7e157b5732988646a3a22e8596ab85a1683d74c058614c79224b67fbdeca96707f10ce7b6a37519224d312799190df1628b7f69718fd8323d3889d4492949316#npm:3.17.4"],\
-          ["@videojs/vhs-utils", "npm:4.1.1"],\
+          ["@videojs/http-streaming", "virtual:c1b83547f4b08ddfbe9fbce84df0d212b9069565fdef712f172f179ed6ff5265b157bede9f2c526a10a30072f07af3bc869fa2a587bba3753718413c27b3e733#npm:3.17.5"],\
+          ["@videojs/vhs-utils", "npm:4.1.2"],\
           ["aes-decrypter", "npm:4.0.2"],\
           ["global", "npm:4.4.0"],\
           ["m3u8-parser", "npm:7.2.0"],\
-          ["mpd-parser", "npm:1.3.1"],\
+          ["mpd-parser", "npm:1.4.0"],\
           ["mux.js", "npm:7.1.0"],\
-          ["video.js", "npm:8.23.7"]\
+          ["video.js", "npm:8.24.0"]\
         ],\
         "packagePeers": [\
           "@types/video.js",\
@@ -7740,6 +7740,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@babel/runtime", "npm:7.29.2"],\
           ["@videojs/vhs-utils", "npm:4.1.1"],\
+          ["global", "npm:4.4.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:4.1.2", {\
+        "packageLocation": "./.yarn/cache/@videojs-vhs-utils-npm-4.1.2-77279576a7-6bc2515fdf.zip/node_modules/@videojs/vhs-utils/",\
+        "packageDependencies": [\
+          ["@babel/runtime", "npm:7.29.2"],\
+          ["@videojs/vhs-utils", "npm:4.1.2"],\
           ["global", "npm:4.4.0"]\
         ],\
         "linkType": "HARD"\
@@ -16263,14 +16272,14 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["mpd-parser", [\
-      ["npm:1.3.1", {\
-        "packageLocation": "./.yarn/cache/mpd-parser-npm-1.3.1-51727d193c-eaffe86a79.zip/node_modules/mpd-parser/",\
+      ["npm:1.4.0", {\
+        "packageLocation": "./.yarn/cache/mpd-parser-npm-1.4.0-283905f434-226664225c.zip/node_modules/mpd-parser/",\
         "packageDependencies": [\
           ["@babel/runtime", "npm:7.29.2"],\
-          ["@videojs/vhs-utils", "npm:4.1.1"],\
+          ["@videojs/vhs-utils", "npm:4.1.2"],\
           ["@xmldom/xmldom", "npm:0.9.12"],\
           ["global", "npm:4.4.0"],\
-          ["mpd-parser", "npm:1.3.1"]\
+          ["mpd-parser", "npm:1.4.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17381,7 +17390,7 @@ const RAW_RUNTIME_STATE =
           ["icss-utils", "virtual:24ebc730516a9b14e5055ce17a9fdd9f0649a414556f9352e4fb37b50928ed67414620cce36066c807821ab8c5ddfe43fe447b01cf305d827fa1ad531ea41ac0#npm:5.1.0"],\
           ["postcss", "npm:8.5.25"],\
           ["postcss-modules-local-by-default", "virtual:24ebc730516a9b14e5055ce17a9fdd9f0649a414556f9352e4fb37b50928ed67414620cce36066c807821ab8c5ddfe43fe447b01cf305d827fa1ad531ea41ac0#npm:4.2.0"],\
-          ["postcss-selector-parser", "npm:7.1.5"],\
+          ["postcss-selector-parser", "npm:7.1.1"],\
           ["postcss-value-parser", "npm:4.2.0"]\
         ],\
         "packagePeers": [\
@@ -17405,7 +17414,7 @@ const RAW_RUNTIME_STATE =
           ["@types/postcss", null],\
           ["postcss", "npm:8.5.25"],\
           ["postcss-modules-scope", "virtual:24ebc730516a9b14e5055ce17a9fdd9f0649a414556f9352e4fb37b50928ed67414620cce36066c807821ab8c5ddfe43fe447b01cf305d827fa1ad531ea41ac0#npm:3.2.1"],\
-          ["postcss-selector-parser", "npm:7.1.5"]\
+          ["postcss-selector-parser", "npm:7.1.1"]\
         ],\
         "packagePeers": [\
           "@types/postcss",\
@@ -17438,11 +17447,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["postcss-selector-parser", [\
-      ["npm:7.1.5", {\
-        "packageLocation": "./.yarn/cache/postcss-selector-parser-npm-7.1.5-041d44cfbb-ae66bbcb5d.zip/node_modules/postcss-selector-parser/",\
+      ["npm:7.1.1", {\
+        "packageLocation": "./.yarn/cache/postcss-selector-parser-npm-7.1.1-b4ce358dae-bb3c6455b2.zip/node_modules/postcss-selector-parser/",\
         "packageDependencies": [\
           ["cssesc", "npm:3.0.0"],\
-          ["postcss-selector-parser", "npm:7.1.5"],\
+          ["postcss-selector-parser", "npm:7.1.1"],\
           ["util-deprecate", "npm:1.0.2"]\
         ],\
         "linkType": "HARD"\
@@ -17579,7 +17588,7 @@ const RAW_RUNTIME_STATE =
           ["tsconfig-paths", "npm:4.2.0"],\
           ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"],\
           ["uuid", "npm:14.0.2"],\
-          ["video.js", "npm:8.23.7"],\
+          ["video.js", "npm:8.24.0"],\
           ["webpack", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.105.4"],\
           ["webpack-cli", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:6.0.1"],\
           ["webpack-dev-middleware", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.5"]\
@@ -20380,20 +20389,20 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["video.js", [\
-      ["npm:8.23.7", {\
-        "packageLocation": "./.yarn/cache/video.js-npm-8.23.7-7e157b5732-62859ac85a.zip/node_modules/video.js/",\
+      ["npm:8.24.0", {\
+        "packageLocation": "./.yarn/cache/video.js-npm-8.24.0-c1b83547f4-04ed993efd.zip/node_modules/video.js/",\
         "packageDependencies": [\
           ["@babel/runtime", "npm:7.29.2"],\
-          ["@videojs/http-streaming", "virtual:7e157b5732988646a3a22e8596ab85a1683d74c058614c79224b67fbdeca96707f10ce7b6a37519224d312799190df1628b7f69718fd8323d3889d4492949316#npm:3.17.4"],\
-          ["@videojs/vhs-utils", "npm:4.1.1"],\
+          ["@videojs/http-streaming", "virtual:c1b83547f4b08ddfbe9fbce84df0d212b9069565fdef712f172f179ed6ff5265b157bede9f2c526a10a30072f07af3bc869fa2a587bba3753718413c27b3e733#npm:3.17.5"],\
+          ["@videojs/vhs-utils", "npm:4.1.2"],\
           ["@videojs/xhr", "npm:2.7.0"],\
           ["aes-decrypter", "npm:4.0.2"],\
           ["global", "npm:4.4.0"],\
           ["m3u8-parser", "npm:7.2.0"],\
-          ["mpd-parser", "npm:1.3.1"],\
+          ["mpd-parser", "npm:1.4.0"],\
           ["mux.js", "npm:7.1.0"],\
-          ["video.js", "npm:8.23.7"],\
-          ["videojs-contrib-quality-levels", "virtual:7e157b5732988646a3a22e8596ab85a1683d74c058614c79224b67fbdeca96707f10ce7b6a37519224d312799190df1628b7f69718fd8323d3889d4492949316#npm:4.1.0"],\
+          ["video.js", "npm:8.24.0"],\
+          ["videojs-contrib-quality-levels", "virtual:c1b83547f4b08ddfbe9fbce84df0d212b9069565fdef712f172f179ed6ff5265b157bede9f2c526a10a30072f07af3bc869fa2a587bba3753718413c27b3e733#npm:4.1.0"],\
           ["videojs-font", "npm:4.2.0"],\
           ["videojs-vtt.js", "npm:0.15.5"]\
         ],\
@@ -20408,13 +20417,13 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:7e157b5732988646a3a22e8596ab85a1683d74c058614c79224b67fbdeca96707f10ce7b6a37519224d312799190df1628b7f69718fd8323d3889d4492949316#npm:4.1.0", {\
-        "packageLocation": "./.yarn/__virtual__/videojs-contrib-quality-levels-virtual-1d5283ddaf/0/cache/videojs-contrib-quality-levels-npm-4.1.0-1e51f22a8e-e8948607b7.zip/node_modules/videojs-contrib-quality-levels/",\
+      ["virtual:c1b83547f4b08ddfbe9fbce84df0d212b9069565fdef712f172f179ed6ff5265b157bede9f2c526a10a30072f07af3bc869fa2a587bba3753718413c27b3e733#npm:4.1.0", {\
+        "packageLocation": "./.yarn/__virtual__/videojs-contrib-quality-levels-virtual-16b2766e4a/0/cache/videojs-contrib-quality-levels-npm-4.1.0-1e51f22a8e-e8948607b7.zip/node_modules/videojs-contrib-quality-levels/",\
         "packageDependencies": [\
           ["@types/video.js", null],\
           ["global", "npm:4.4.0"],\
-          ["video.js", "npm:8.23.7"],\
-          ["videojs-contrib-quality-levels", "virtual:7e157b5732988646a3a22e8596ab85a1683d74c058614c79224b67fbdeca96707f10ce7b6a37519224d312799190df1628b7f69718fd8323d3889d4492949316#npm:4.1.0"]\
+          ["video.js", "npm:8.24.0"],\
+          ["videojs-contrib-quality-levels", "virtual:c1b83547f4b08ddfbe9fbce84df0d212b9069565fdef712f172f179ed6ff5265b157bede9f2c526a10a30072f07af3bc869fa2a587bba3753718413c27b3e733#npm:4.1.0"]\
         ],\
         "packagePeers": [\
           "@types/video.js",\
