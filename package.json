@@ -137,7 +137,7 @@
     "cookie": "0.7.2",
     "fast-uri@npm:3.1.5": "3.1.7",
     "form-data": "4.0.6",
-    "js-yaml": "4.3.1",
+    "js-yaml": "4.3.2",
     "jsonwebtoken": "9.0.3",
     "mocha@npm:11.7.5/serialize-javascript": "7.0.5",
     "node-gyp": "13.0.1",
