@@ -149,7 +149,7 @@
     "stream-json": "3.5.0",
     "@xmldom/xmldom": "0.9.12",
     "@grpc/grpc-js": "1.14.4",
-    "joi": "18.2.3",
+    "joi": "18.2.8",
     "node-gyp@npm:13.0.1/undici": "8.10.0",
     "cheerio@npm:1.2.0/undici": "7.29.0",
     "uuid": "^14.0.0",
