@@ -112,7 +112,7 @@ const RAW_RUNTIME_STATE =
           ["video.js", "npm:8.23.7"],\
           ["webpack", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.105.4"],\
           ["webpack-cli", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:6.0.1"],\
-          ["webpack-dev-middleware", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.5"]\
+          ["webpack-dev-middleware", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.6"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -17585,7 +17585,7 @@ const RAW_RUNTIME_STATE =
           ["video.js", "npm:8.23.7"],\
           ["webpack", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.105.4"],\
           ["webpack-cli", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:6.0.1"],\
-          ["webpack-dev-middleware", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.5"]\
+          ["webpack-dev-middleware", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.6"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -20607,15 +20607,15 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["webpack-dev-middleware", [\
-      ["npm:7.4.5", {\
-        "packageLocation": "./.yarn/cache/webpack-dev-middleware-npm-7.4.5-0258ddeb86-50e9b162d7.zip/node_modules/webpack-dev-middleware/",\
+      ["npm:7.4.6", {\
+        "packageLocation": "./.yarn/cache/webpack-dev-middleware-npm-7.4.6-3d297852b8-fd82b8338d.zip/node_modules/webpack-dev-middleware/",\
         "packageDependencies": [\
-          ["webpack-dev-middleware", "npm:7.4.5"]\
+          ["webpack-dev-middleware", "npm:7.4.6"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.5", {\
-        "packageLocation": "./.yarn/__virtual__/webpack-dev-middleware-virtual-d6bb6b04dd/0/cache/webpack-dev-middleware-npm-7.4.5-0258ddeb86-50e9b162d7.zip/node_modules/webpack-dev-middleware/",\
+      ["virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.6", {\
+        "packageLocation": "./.yarn/__virtual__/webpack-dev-middleware-virtual-0cd8367e0c/0/cache/webpack-dev-middleware-npm-7.4.6-3d297852b8-fd82b8338d.zip/node_modules/webpack-dev-middleware/",\
         "packageDependencies": [\
           ["@types/webpack", null],\
           ["colorette", "npm:2.0.20"],\
@@ -20625,7 +20625,7 @@ const RAW_RUNTIME_STATE =
           ["range-parser", "npm:1.2.1"],\
           ["schema-utils", "npm:4.3.3"],\
           ["webpack", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.105.4"],\
-          ["webpack-dev-middleware", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.5"]\
+          ["webpack-dev-middleware", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.6"]\
         ],\
         "packagePeers": [\
           "@types/webpack",\
