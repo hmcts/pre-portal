@@ -6348,7 +6348,7 @@ const RAW_RUNTIME_STATE =
           ["is-glob", "npm:4.0.3"],\
           ["micromatch", "npm:4.0.8"],\
           ["node-addon-api", "npm:7.1.1"],\
-          ["node-gyp", "npm:13.0.1"]\
+          ["node-gyp", "npm:13.0.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -11215,7 +11215,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["dtrace-provider", "npm:0.8.8"],\
           ["nan", "npm:2.24.0"],\
-          ["node-gyp", "npm:13.0.1"]\
+          ["node-gyp", "npm:13.0.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -12489,7 +12489,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/fsevents-patch-19706e7e35/node_modules/fsevents/",\
         "packageDependencies": [\
           ["fsevents", "patch:fsevents@npm%3A2.3.2#optional!builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"],\
-          ["node-gyp", "npm:13.0.1"]\
+          ["node-gyp", "npm:13.0.2"]\
         ],\
         "linkType": "HARD"\
       }],\
@@ -12497,7 +12497,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/fsevents-patch-6b67494872/node_modules/fsevents/",\
         "packageDependencies": [\
           ["fsevents", "patch:fsevents@npm%3A2.3.3#optional!builtin<compat/fsevents>::version=2.3.3&hash=df0bf1"],\
-          ["node-gyp", "npm:13.0.1"]\
+          ["node-gyp", "npm:13.0.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16373,7 +16373,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/nan-npm-2.24.0-1c44df59f9/node_modules/nan/",\
         "packageDependencies": [\
           ["nan", "npm:2.24.0"],\
-          ["node-gyp", "npm:13.0.1"]\
+          ["node-gyp", "npm:13.0.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16464,25 +16464,25 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/node-addon-api-npm-7.1.1-bfb302df19/node_modules/node-addon-api/",\
         "packageDependencies": [\
           ["node-addon-api", "npm:7.1.1"],\
-          ["node-gyp", "npm:13.0.1"]\
+          ["node-gyp", "npm:13.0.2"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["node-gyp", [\
-      ["npm:13.0.1", {\
-        "packageLocation": "./.yarn/unplugged/node-gyp-npm-13.0.1-b64b93933d/node_modules/node-gyp/",\
+      ["npm:13.0.2", {\
+        "packageLocation": "./.yarn/unplugged/node-gyp-npm-13.0.2-e24de51cbd/node_modules/node-gyp/",\
         "packageDependencies": [\
           ["env-paths", "npm:2.2.1"],\
           ["exponential-backoff", "npm:3.1.3"],\
           ["graceful-fs", "npm:4.2.11"],\
-          ["node-gyp", "npm:13.0.1"],\
+          ["node-gyp", "npm:13.0.2"],\
           ["nopt", "npm:10.0.1"],\
           ["proc-log", "npm:7.0.0"],\
           ["semver", "npm:7.7.4"],\
           ["tar", "npm:7.5.21"],\
           ["tinyglobby", "npm:0.2.15"],\
-          ["undici", "npm:8.10.0"],\
+          ["undici", "npm:8.10.1"],\
           ["which", "npm:7.0.0"]\
         ],\
         "linkType": "HARD"\
@@ -20160,10 +20160,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:8.10.0", {\
-        "packageLocation": "./.yarn/cache/undici-npm-8.10.0-83850c8bfa-254219966d.zip/node_modules/undici/",\
+      ["npm:8.10.1", {\
+        "packageLocation": "./.yarn/cache/undici-npm-8.10.1-663ee99ce2-7983c1a9ec.zip/node_modules/undici/",\
         "packageDependencies": [\
-          ["undici", "npm:8.10.0"]\
+          ["undici", "npm:8.10.1"]\
         ],\
         "linkType": "HARD"\
       }]\
