@@ -151,7 +151,7 @@
     "@grpc/grpc-js": "1.14.4",
     "joi": "18.2.3",
     "node-gyp@npm:13.0.1/undici": "8.10.0",
-    "cheerio@npm:1.2.0/undici": "7.29.0",
+    "cheerio@npm:1.2.0/undici": "7.29.1",
     "uuid": "^14.0.0",
     "ws": "8.21.0",
     "shell-quote": "1.10.0"
