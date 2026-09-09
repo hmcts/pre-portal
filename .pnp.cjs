@@ -3815,7 +3815,7 @@ const RAW_RUNTIME_STATE =
           ["@hmcts/info-provider", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.0"],\
           ["@types/express", "npm:5.0.6"],\
           ["express", "npm:5.2.1"],\
-          ["js-yaml", "npm:4.3.1"]\
+          ["js-yaml", "npm:4.3.2"]\
         ],\
         "packagePeers": [\
           "@types/express",\
@@ -3830,7 +3830,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@hmcts/nodejs-healthcheck", "npm:1.8.6"],\
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
-          ["js-yaml", "npm:4.3.1"],\
+          ["js-yaml", "npm:4.3.2"],\
           ["superagent", "npm:10.2.3"]\
         ],\
         "linkType": "HARD"\
@@ -3856,7 +3856,7 @@ const RAW_RUNTIME_STATE =
           ["@azure/keyvault-secrets", "npm:4.10.0"],\
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.4.1"],\
-          ["js-yaml", "npm:4.3.1"],\
+          ["js-yaml", "npm:4.3.2"],\
           ["lodash", "npm:4.18.1"]\
         ],\
         "linkType": "HARD"\
@@ -3984,7 +3984,7 @@ const RAW_RUNTIME_STATE =
           ["camelcase", "npm:5.3.1"],\
           ["find-up", "npm:4.1.0"],\
           ["get-package-type", "npm:0.1.0"],\
-          ["js-yaml", "npm:4.3.1"],\
+          ["js-yaml", "npm:4.3.2"],\
           ["resolve-from", "npm:5.0.0"]\
         ],\
         "linkType": "HARD"\
@@ -9698,7 +9698,7 @@ const RAW_RUNTIME_STATE =
           ["parse5", "npm:7.3.0"],\
           ["parse5-htmlparser2-tree-adapter", "npm:7.1.0"],\
           ["parse5-parser-stream", "npm:7.1.2"],\
-          ["undici", "npm:7.29.0"],\
+          ["undici", "npm:7.29.1"],\
           ["whatwg-mimetype", "npm:4.0.0"]\
         ],\
         "linkType": "HARD"\
@@ -10446,7 +10446,7 @@ const RAW_RUNTIME_STATE =
           ["cosmiconfig", "virtual:92fd92992dfdc21d9fb167942bef13212c6c35f909e882da59358005f7b7fca0ba70bc04ba25ba4ecc5fd1b5a261851b6064283cd32fc6810e0830bcec93db9b#npm:9.0.0"],\
           ["env-paths", "npm:2.2.1"],\
           ["import-fresh", "npm:3.3.1"],\
-          ["js-yaml", "npm:4.3.1"],\
+          ["js-yaml", "npm:4.3.2"],\
           ["parse-json", "npm:5.2.0"],\
           ["typescript", null]\
         ],\
@@ -14860,11 +14860,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["js-yaml", [\
-      ["npm:4.3.1", {\
-        "packageLocation": "./.yarn/cache/js-yaml-npm-4.3.1-6383f7fb93-2ce71b5d63.zip/node_modules/js-yaml/",\
+      ["npm:4.3.2", {\
+        "packageLocation": "./.yarn/cache/js-yaml-npm-4.3.2-d3b0efff68-05c44b9c73.zip/node_modules/js-yaml/",\
         "packageDependencies": [\
           ["argparse", "npm:2.0.1"],\
-          ["js-yaml", "npm:4.3.1"]\
+          ["js-yaml", "npm:4.3.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16048,7 +16048,7 @@ const RAW_RUNTIME_STATE =
           ["glob", "npm:10.5.0"],\
           ["he", "npm:1.2.0"],\
           ["is-path-inside", "npm:3.0.3"],\
-          ["js-yaml", "npm:4.3.1"],\
+          ["js-yaml", "npm:4.3.2"],\
           ["log-symbols", "npm:4.1.0"],\
           ["minimatch", "npm:9.0.9"],\
           ["mocha", "npm:11.7.5"],\
@@ -19865,10 +19865,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["undici", [\
-      ["npm:7.29.0", {\
-        "packageLocation": "./.yarn/cache/undici-npm-7.29.0-561de03d83-ca73639071.zip/node_modules/undici/",\
+      ["npm:7.29.1", {\
+        "packageLocation": "./.yarn/cache/undici-npm-7.29.1-e8955914fd-8b9eaf8361.zip/node_modules/undici/",\
         "packageDependencies": [\
-          ["undici", "npm:7.29.0"]\
+          ["undici", "npm:7.29.1"]\
         ],\
         "linkType": "HARD"\
       }],\
