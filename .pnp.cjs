@@ -52,7 +52,7 @@ const RAW_RUNTIME_STATE =
           ["@types/qs", "npm:6.15.1"],\
           ["@types/serve-favicon", "npm:2.5.7"],\
           ["@types/session-file-store", "npm:1.2.6"],\
-          ["@types/supertest", "npm:7.2.0"],\
+          ["@types/supertest", "npm:7.2.1"],\
           ["allure-commandline", "npm:2.42.1"],\
           ["applicationinsights", "npm:3.15.1"],\
           ["axios", "npm:1.19.0"],\
@@ -75,7 +75,7 @@ const RAW_RUNTIME_STATE =
           ["glob", "npm:13.0.6"],\
           ["govuk-frontend", "npm:5.11.2"],\
           ["helmet", "npm:8.1.0"],\
-          ["hls.js", "npm:1.6.16"],\
+          ["hls.js", "npm:1.7.2"],\
           ["html-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.6.8"],\
           ["husky", "npm:9.1.7"],\
           ["jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.3.0"],\
@@ -7475,12 +7475,12 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/supertest", [\
-      ["npm:7.2.0", {\
-        "packageLocation": "./.yarn/cache/@types-supertest-npm-7.2.0-dea36e6d28-5a322e29b8.zip/node_modules/@types/supertest/",\
+      ["npm:7.2.1", {\
+        "packageLocation": "./.yarn/cache/@types-supertest-npm-7.2.1-9fc07f4aac-d2b505d4c2.zip/node_modules/@types/supertest/",\
         "packageDependencies": [\
           ["@types/methods", "npm:1.1.4"],\
           ["@types/superagent", "npm:8.1.9"],\
-          ["@types/supertest", "npm:7.2.0"]\
+          ["@types/supertest", "npm:7.2.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -9477,7 +9477,7 @@ const RAW_RUNTIME_STATE =
           ["bunyamin", "virtual:6713259ae3cba5eadfff36c02f23f3252fd7c519bb98e435b76792a0c1bba4d81e0397838fb072d468b81e7d72ac303bc654b7612b1f66bed38dc2af435eb00a#npm:1.6.3"],\
           ["bunyan", "npm:2.0.5"],\
           ["multi-sort-stream", "npm:1.0.4"],\
-          ["stream-json", "npm:1.9.1"],\
+          ["stream-json", "npm:3.5.0"],\
           ["trace-event-lib", "npm:1.4.1"]\
         ],\
         "packagePeers": [\
@@ -11006,7 +11006,7 @@ const RAW_RUNTIME_STATE =
           ["serialize-error", "npm:8.1.0"],\
           ["shell-quote", "npm:1.10.0"],\
           ["signal-exit", "npm:3.0.7"],\
-          ["stream-json", "npm:1.9.1"],\
+          ["stream-json", "npm:3.5.0"],\
           ["strip-ansi", "npm:6.0.1"],\
           ["telnet-client", "npm:1.2.8"],\
           ["tmp", "npm:0.2.7"],\
@@ -11277,7 +11277,7 @@ const RAW_RUNTIME_STATE =
           ["@one-ini/wasm", "npm:0.1.1"],\
           ["commander", "npm:10.0.1"],\
           ["editorconfig", "npm:1.0.4"],\
-          ["minimatch", "npm:9.0.7"],\
+          ["minimatch", "npm:9.0.9"],\
           ["semver", "npm:7.7.4"]\
         ],\
         "linkType": "HARD"\
@@ -13023,10 +13023,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["hls.js", [\
-      ["npm:1.6.16", {\
-        "packageLocation": "./.yarn/cache/hls.js-npm-1.6.16-61e25149f8-478a4c29a4.zip/node_modules/hls.js/",\
+      ["npm:1.7.2", {\
+        "packageLocation": "./.yarn/cache/hls.js-npm-1.7.2-d7ee581ecc-6965eaedf4.zip/node_modules/hls.js/",\
         "packageDependencies": [\
-          ["hls.js", "npm:1.6.16"]\
+          ["hls.js", "npm:1.7.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16110,14 +16110,6 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:9.0.7", {\
-        "packageLocation": "./.yarn/cache/minimatch-npm-9.0.7-145dd43fbb-72b9ba4af3.zip/node_modules/minimatch/",\
-        "packageDependencies": [\
-          ["brace-expansion", "npm:5.0.9"],\
-          ["minimatch", "npm:9.0.7"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
       ["npm:9.0.9", {\
         "packageLocation": "./.yarn/cache/minimatch-npm-9.0.9-3ee8f15008-b91fad937d.zip/node_modules/minimatch/",\
         "packageDependencies": [\
@@ -17533,7 +17525,7 @@ const RAW_RUNTIME_STATE =
           ["@types/qs", "npm:6.15.1"],\
           ["@types/serve-favicon", "npm:2.5.7"],\
           ["@types/session-file-store", "npm:1.2.6"],\
-          ["@types/supertest", "npm:7.2.0"],\
+          ["@types/supertest", "npm:7.2.1"],\
           ["allure-commandline", "npm:2.42.1"],\
           ["applicationinsights", "npm:3.15.1"],\
           ["axios", "npm:1.19.0"],\
@@ -17556,7 +17548,7 @@ const RAW_RUNTIME_STATE =
           ["glob", "npm:13.0.6"],\
           ["govuk-frontend", "npm:5.11.2"],\
           ["helmet", "npm:8.1.0"],\
-          ["hls.js", "npm:1.6.16"],\
+          ["hls.js", "npm:1.7.2"],\
           ["html-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.6.8"],\
           ["husky", "npm:9.1.7"],\
           ["jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.3.0"],\
@@ -19152,20 +19144,20 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["stream-chain", [\
-      ["npm:2.2.5", {\
-        "packageLocation": "./.yarn/cache/stream-chain-npm-2.2.5-ad363478fb-f9c65fe212.zip/node_modules/stream-chain/",\
+      ["npm:4.2.5", {\
+        "packageLocation": "./.yarn/cache/stream-chain-npm-4.2.5-1ad4eb5420-a61dfdab1d.zip/node_modules/stream-chain/",\
         "packageDependencies": [\
-          ["stream-chain", "npm:2.2.5"]\
+          ["stream-chain", "npm:4.2.5"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["stream-json", [\
-      ["npm:1.9.1", {\
-        "packageLocation": "./.yarn/cache/stream-json-npm-1.9.1-067a312ba9-8c97d30781.zip/node_modules/stream-json/",\
+      ["npm:3.5.0", {\
+        "packageLocation": "./.yarn/cache/stream-json-npm-3.5.0-2fb300f0b3-7c144ddb42.zip/node_modules/stream-json/",\
         "packageDependencies": [\
-          ["stream-chain", "npm:2.2.5"],\
-          ["stream-json", "npm:1.9.1"]\
+          ["stream-chain", "npm:4.2.5"],\
+          ["stream-json", "npm:3.5.0"]\
         ],\
         "linkType": "HARD"\
       }]\
