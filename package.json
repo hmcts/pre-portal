@@ -68,7 +68,7 @@
     "marked": "^15.0.0",
     "multer": "^2.2.0",
     "nunjucks": "3.2.4",
-    "puppeteer": "^24.40.0",
+    "puppeteer": "^24.43.1",
     "qs": "^6.16.0",
     "redis": "^5.11.0",
     "serve-favicon": "2.5.1",
