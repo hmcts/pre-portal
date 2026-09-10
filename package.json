@@ -143,6 +143,7 @@
     "mocha@npm:11.7.5/serialize-javascript": "7.0.5",
     "node-gyp": "13.0.1",
     "postcss": "8.5.25",
+    "postcss-selector-parser": "7.1.6",
     "qs": "6.16.0",
     "semver": "^7.7.4",
     "editorconfig@npm:1.0.4/minimatch": "9.0.9",
