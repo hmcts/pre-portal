@@ -17,6 +17,8 @@ import favicon from 'serve-favicon';
 
 import 'dotenv/config';
 
+console.time('startup:app');
+
 const { setupDev } = require('./development');
 
 const { Logger } = require('@hmcts/nodejs-logging');
@@ -27,7 +29,7 @@ const developmentMode = env === 'development';
 export const app = express();
 app.locals.ENV = env;
 process.env.ALLOW_CONFIG_MUTATIONS = 'true';
-
+console.log('PID:', process.pid);
 const logger = Logger.getLogger('app');
 
 new PropertiesVolume().enableFor(app);
@@ -50,6 +52,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 if (process.env.PORTAL_AUTH_DISABLED !== '1') {
   logger.info('Enabling Auth. Env: ' + env);
   new Auth().enableFor(app);
+  logger.info('Auth enabled.');
 } else {
   logger.warn('Disabling Auth PORTAL_AUTH_DISABLED === ' + process.env.PORTAL_AUTH_DISABLED);
 }
@@ -59,10 +62,12 @@ app.use((req, res, next) => {
   next();
 });
 
+console.time('startup:routes');
 glob
   .sync(__dirname + '/routes/**/*.+(ts|js)')
   .map(filename => require(filename))
   .forEach(route => route.default(app));
+console.timeEnd('startup:routes');
 
 setupDev(app, developmentMode);
 // returning "not found" page for requests with paths not resolved by the router
@@ -88,3 +93,5 @@ app.use((err: HTTPError, req: express.Request, res: express.Response, next: expr
   res.status(err.status ?? 500);
   res.render('error', { status: err.status, message: err.message });
 });
+
+console.timeEnd('startup:app');

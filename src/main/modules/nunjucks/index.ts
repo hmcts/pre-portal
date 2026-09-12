@@ -2,13 +2,18 @@ import * as path from 'path';
 
 import * as express from 'express';
 import * as nunjucks from 'nunjucks';
+import { Logger } from '@hmcts/nodejs-logging';
 
 export class Nunjucks {
   constructor(public developmentMode: boolean) {
     this.developmentMode = developmentMode;
   }
 
+  private logger = Logger.getLogger('Nunjucks');
+
   enableFor(app: express.Express): void {
+    console.time('startup:nunjucks');
+    this.logger.info('Enabling Nunjucks');
     app.set('view engine', 'njk');
     nunjucks
       .configure(path.join(__dirname, '..', '..', 'views'), {
@@ -28,5 +33,7 @@ export class Nunjucks {
       res.locals.pagePath = req.path;
       next();
     });
+    this.logger.info('Nunjucks enabled');
+    console.timeEnd('startup:nunjucks');
   }
 }
