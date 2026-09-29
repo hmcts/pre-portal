@@ -75,7 +75,7 @@ const RAW_RUNTIME_STATE =
           ["glob", "npm:13.0.6"],\
           ["govuk-frontend", "npm:5.11.2"],\
           ["helmet", "npm:8.1.0"],\
-          ["hls.js", "npm:1.7.2"],\
+          ["hls.js", "npm:1.6.16"],\
           ["html-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.6.8"],\
           ["husky", "npm:9.1.7"],\
           ["jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.3.0"],\
@@ -109,7 +109,7 @@ const RAW_RUNTIME_STATE =
           ["tsconfig-paths", "npm:4.2.0"],\
           ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"],\
           ["uuid", "npm:14.0.2"],\
-          ["video.js", "npm:8.23.7"],\
+          ["video.js", "npm:8.24.0"],\
           ["webpack", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.105.4"],\
           ["webpack-cli", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:6.0.1"],\
           ["webpack-dev-middleware", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.5"]\
@@ -622,7 +622,7 @@ const RAW_RUNTIME_STATE =
           ["@babel/compat-data", "npm:7.28.6"],\
           ["@babel/helper-compilation-targets", "npm:7.28.6"],\
           ["@babel/helper-validator-option", "npm:7.27.1"],\
-          ["browserslist", "npm:4.28.8"],\
+          ["browserslist", "npm:4.28.9"],\
           ["lru-cache", "npm:5.1.1"],\
           ["semver", "npm:7.7.4"]\
         ],\
@@ -634,7 +634,7 @@ const RAW_RUNTIME_STATE =
           ["@babel/compat-data", "npm:7.29.7"],\
           ["@babel/helper-compilation-targets", "npm:7.29.7"],\
           ["@babel/helper-validator-option", "npm:7.29.7"],\
-          ["browserslist", "npm:4.28.8"],\
+          ["browserslist", "npm:4.28.9"],\
           ["lru-cache", "npm:5.1.1"],\
           ["semver", "npm:7.7.4"]\
         ],\
@@ -3815,7 +3815,7 @@ const RAW_RUNTIME_STATE =
           ["@hmcts/info-provider", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.4.0"],\
           ["@types/express", "npm:5.0.6"],\
           ["express", "npm:5.2.1"],\
-          ["js-yaml", "npm:4.3.1"]\
+          ["js-yaml", "npm:4.3.2"]\
         ],\
         "packagePeers": [\
           "@types/express",\
@@ -3830,7 +3830,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@hmcts/nodejs-healthcheck", "npm:1.8.6"],\
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
-          ["js-yaml", "npm:4.3.1"],\
+          ["js-yaml", "npm:4.3.2"],\
           ["superagent", "npm:10.2.3"]\
         ],\
         "linkType": "HARD"\
@@ -3856,7 +3856,7 @@ const RAW_RUNTIME_STATE =
           ["@azure/keyvault-secrets", "npm:4.10.0"],\
           ["@hmcts/nodejs-logging", "npm:4.0.4"],\
           ["@hmcts/properties-volume", "npm:1.4.1"],\
-          ["js-yaml", "npm:4.3.1"],\
+          ["js-yaml", "npm:4.3.2"],\
           ["lodash", "npm:4.18.1"]\
         ],\
         "linkType": "HARD"\
@@ -3984,7 +3984,7 @@ const RAW_RUNTIME_STATE =
           ["camelcase", "npm:5.3.1"],\
           ["find-up", "npm:4.1.0"],\
           ["get-package-type", "npm:0.1.0"],\
-          ["js-yaml", "npm:4.3.1"],\
+          ["js-yaml", "npm:4.3.2"],\
           ["resolve-from", "npm:5.0.0"]\
         ],\
         "linkType": "HARD"\
@@ -7717,26 +7717,26 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@videojs/http-streaming", [\
-      ["npm:3.17.4", {\
-        "packageLocation": "./.yarn/cache/@videojs-http-streaming-npm-3.17.4-074e46eb48-9ee755ebec.zip/node_modules/@videojs/http-streaming/",\
+      ["npm:3.17.5", {\
+        "packageLocation": "./.yarn/cache/@videojs-http-streaming-npm-3.17.5-a58665bfcc-48863642e4.zip/node_modules/@videojs/http-streaming/",\
         "packageDependencies": [\
-          ["@videojs/http-streaming", "npm:3.17.4"]\
+          ["@videojs/http-streaming", "npm:3.17.5"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:7e157b5732988646a3a22e8596ab85a1683d74c058614c79224b67fbdeca96707f10ce7b6a37519224d312799190df1628b7f69718fd8323d3889d4492949316#npm:3.17.4", {\
-        "packageLocation": "./.yarn/__virtual__/@videojs-http-streaming-virtual-128f8fdc67/0/cache/@videojs-http-streaming-npm-3.17.4-074e46eb48-9ee755ebec.zip/node_modules/@videojs/http-streaming/",\
+      ["virtual:c1b83547f4b08ddfbe9fbce84df0d212b9069565fdef712f172f179ed6ff5265b157bede9f2c526a10a30072f07af3bc869fa2a587bba3753718413c27b3e733#npm:3.17.5", {\
+        "packageLocation": "./.yarn/__virtual__/@videojs-http-streaming-virtual-7231deb55a/0/cache/@videojs-http-streaming-npm-3.17.5-a58665bfcc-48863642e4.zip/node_modules/@videojs/http-streaming/",\
         "packageDependencies": [\
           ["@babel/runtime", "npm:7.29.2"],\
           ["@types/video.js", null],\
-          ["@videojs/http-streaming", "virtual:7e157b5732988646a3a22e8596ab85a1683d74c058614c79224b67fbdeca96707f10ce7b6a37519224d312799190df1628b7f69718fd8323d3889d4492949316#npm:3.17.4"],\
-          ["@videojs/vhs-utils", "npm:4.1.1"],\
+          ["@videojs/http-streaming", "virtual:c1b83547f4b08ddfbe9fbce84df0d212b9069565fdef712f172f179ed6ff5265b157bede9f2c526a10a30072f07af3bc869fa2a587bba3753718413c27b3e733#npm:3.17.5"],\
+          ["@videojs/vhs-utils", "npm:4.1.2"],\
           ["aes-decrypter", "npm:4.0.2"],\
           ["global", "npm:4.4.0"],\
           ["m3u8-parser", "npm:7.2.0"],\
-          ["mpd-parser", "npm:1.3.1"],\
+          ["mpd-parser", "npm:1.4.0"],\
           ["mux.js", "npm:7.1.0"],\
-          ["video.js", "npm:8.23.7"]\
+          ["video.js", "npm:8.24.0"]\
         ],\
         "packagePeers": [\
           "@types/video.js",\
@@ -7751,6 +7751,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@babel/runtime", "npm:7.29.2"],\
           ["@videojs/vhs-utils", "npm:4.1.1"],\
+          ["global", "npm:4.4.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:4.1.2", {\
+        "packageLocation": "./.yarn/cache/@videojs-vhs-utils-npm-4.1.2-77279576a7-6bc2515fdf.zip/node_modules/@videojs/vhs-utils/",\
+        "packageDependencies": [\
+          ["@babel/runtime", "npm:7.29.2"],\
+          ["@videojs/vhs-utils", "npm:4.1.2"],\
           ["global", "npm:4.4.0"]\
         ],\
         "linkType": "HARD"\
@@ -9202,10 +9211,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["baseline-browser-mapping", [\
-      ["npm:2.11.20", {\
-        "packageLocation": "./.yarn/cache/baseline-browser-mapping-npm-2.11.20-7bd5070fa1-5263ac0e5f.zip/node_modules/baseline-browser-mapping/",\
+      ["npm:2.11.21", {\
+        "packageLocation": "./.yarn/cache/baseline-browser-mapping-npm-2.11.21-815e41ca09-b4d223df8d.zip/node_modules/baseline-browser-mapping/",\
         "packageDependencies": [\
-          ["baseline-browser-mapping", "npm:2.11.20"]\
+          ["baseline-browser-mapping", "npm:2.11.21"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -9380,15 +9389,15 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["browserslist", [\
-      ["npm:4.28.8", {\
-        "packageLocation": "./.yarn/cache/browserslist-npm-4.28.8-95f9f58626-9df1d87f91.zip/node_modules/browserslist/",\
+      ["npm:4.28.9", {\
+        "packageLocation": "./.yarn/cache/browserslist-npm-4.28.9-ecf274fb17-493e5e3c11.zip/node_modules/browserslist/",\
         "packageDependencies": [\
-          ["baseline-browser-mapping", "npm:2.11.20"],\
-          ["browserslist", "npm:4.28.8"],\
+          ["baseline-browser-mapping", "npm:2.11.21"],\
+          ["browserslist", "npm:4.28.9"],\
           ["caniuse-lite", "npm:1.0.30001810"],\
-          ["electron-to-chromium", "npm:1.5.420"],\
-          ["node-releases", "npm:2.0.54"],\
-          ["update-browserslist-db", "virtual:95f9f58626b262dac1adc8cb7d943dcb00411315fc304f34ffd5bf6e813870e1cc11ff4d3ae5d15ad953f880d2f3b63ee25ef93e7f98fcc5768d15cc491c6ece#npm:1.3.2"]\
+          ["electron-to-chromium", "npm:1.5.425"],\
+          ["node-releases", "npm:2.0.55"],\
+          ["update-browserslist-db", "virtual:ecf274fb176218f5e439bf661df8707db90ecfe2c62d28c88edf50be97cb56483947c7f8b1f4825a6f461d3350624a3b2be09f0bfaace49466f33e9ef337f26f#npm:1.3.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -9734,7 +9743,7 @@ const RAW_RUNTIME_STATE =
           ["parse5", "npm:7.3.0"],\
           ["parse5-htmlparser2-tree-adapter", "npm:7.1.0"],\
           ["parse5-parser-stream", "npm:7.1.2"],\
-          ["undici", "npm:7.29.0"],\
+          ["undici", "npm:7.29.1"],\
           ["whatwg-mimetype", "npm:4.0.0"]\
         ],\
         "linkType": "HARD"\
@@ -10079,7 +10088,7 @@ const RAW_RUNTIME_STATE =
           ["html-minifier-terser", "npm:7.2.0"],\
           ["inquirer", "npm:8.2.7"],\
           ["invisi-data", "npm:1.2.0"],\
-          ["joi", "npm:18.2.3"],\
+          ["joi", "npm:18.2.8"],\
           ["js-beautify", "npm:1.15.4"],\
           ["lodash.clonedeep", "npm:4.5.0"],\
           ["lodash.merge", "npm:4.6.2"],\
@@ -10467,7 +10476,7 @@ const RAW_RUNTIME_STATE =
       ["npm:3.48.0", {\
         "packageLocation": "./.yarn/cache/core-js-compat-npm-3.48.0-8341f6f99c-83c326dcfe.zip/node_modules/core-js-compat/",\
         "packageDependencies": [\
-          ["browserslist", "npm:4.28.8"],\
+          ["browserslist", "npm:4.28.9"],\
           ["core-js-compat", "npm:3.48.0"]\
         ],\
         "linkType": "HARD"\
@@ -10497,7 +10506,7 @@ const RAW_RUNTIME_STATE =
           ["cosmiconfig", "virtual:ecfdeec9bea8eb82c86773aa1866cfa93690ed5b3a18bb39a1bb63f0c4552608810503c74494501b4840f5b4036f82087ea7bf8530b6d51fa290ec31679faf5c#npm:9.0.0"],\
           ["env-paths", "npm:2.2.1"],\
           ["import-fresh", "npm:3.3.1"],\
-          ["js-yaml", "npm:4.3.1"],\
+          ["js-yaml", "npm:4.3.2"],\
           ["parse-json", "npm:5.2.0"],\
           ["typescript", null]\
         ],\
@@ -11302,10 +11311,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["electron-to-chromium", [\
-      ["npm:1.5.420", {\
-        "packageLocation": "./.yarn/cache/electron-to-chromium-npm-1.5.420-97a9f6fc38-9abf7840d9.zip/node_modules/electron-to-chromium/",\
+      ["npm:1.5.425", {\
+        "packageLocation": "./.yarn/cache/electron-to-chromium-npm-1.5.425-263de545d3-c8bf467e0b.zip/node_modules/electron-to-chromium/",\
         "packageDependencies": [\
-          ["electron-to-chromium", "npm:1.5.420"]\
+          ["electron-to-chromium", "npm:1.5.425"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -12023,7 +12032,7 @@ const RAW_RUNTIME_STATE =
           ["express-openid-connect", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.20.2"],\
           ["futoin-hkdf", "npm:1.5.3"],\
           ["http-errors", "npm:1.8.1"],\
-          ["joi", "npm:18.2.3"],\
+          ["joi", "npm:18.2.8"],\
           ["jose", "npm:2.0.7"],\
           ["on-headers", "npm:1.1.0"],\
           ["openid-client", "npm:4.9.1"],\
@@ -13023,10 +13032,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["hls.js", [\
-      ["npm:1.7.2", {\
-        "packageLocation": "./.yarn/cache/hls.js-npm-1.7.2-d7ee581ecc-6965eaedf4.zip/node_modules/hls.js/",\
+      ["npm:1.6.16", {\
+        "packageLocation": "./.yarn/cache/hls.js-npm-1.6.16-61e25149f8-478a4c29a4.zip/node_modules/hls.js/",\
         "packageDependencies": [\
-          ["hls.js", "npm:1.7.2"]\
+          ["hls.js", "npm:1.6.16"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -14921,8 +14930,8 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["joi", [\
-      ["npm:18.2.3", {\
-        "packageLocation": "./.yarn/cache/joi-npm-18.2.3-6481787ee4-95beb88e78.zip/node_modules/joi/",\
+      ["npm:18.2.8", {\
+        "packageLocation": "./.yarn/cache/joi-npm-18.2.8-d8a1f02795-430a89ff14.zip/node_modules/joi/",\
         "packageDependencies": [\
           ["@hapi/address", "npm:5.1.1"],\
           ["@hapi/formula", "npm:3.0.2"],\
@@ -14931,7 +14940,7 @@ const RAW_RUNTIME_STATE =
           ["@hapi/tlds", "npm:1.1.4"],\
           ["@hapi/topo", "npm:6.0.2"],\
           ["@standard-schema/spec", "npm:1.1.0"],\
-          ["joi", "npm:18.2.3"]\
+          ["joi", "npm:18.2.8"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -15005,11 +15014,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["js-yaml", [\
-      ["npm:4.3.1", {\
-        "packageLocation": "./.yarn/cache/js-yaml-npm-4.3.1-6383f7fb93-2ce71b5d63.zip/node_modules/js-yaml/",\
+      ["npm:4.3.2", {\
+        "packageLocation": "./.yarn/cache/js-yaml-npm-4.3.2-d3b0efff68-05c44b9c73.zip/node_modules/js-yaml/",\
         "packageDependencies": [\
           ["argparse", "npm:2.0.1"],\
-          ["js-yaml", "npm:4.3.1"]\
+          ["js-yaml", "npm:4.3.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16200,7 +16209,7 @@ const RAW_RUNTIME_STATE =
           ["glob", "npm:10.5.0"],\
           ["he", "npm:1.2.0"],\
           ["is-path-inside", "npm:3.0.3"],\
-          ["js-yaml", "npm:4.3.1"],\
+          ["js-yaml", "npm:4.3.2"],\
           ["log-symbols", "npm:4.1.0"],\
           ["minimatch", "npm:9.0.9"],\
           ["mocha", "npm:11.7.5"],\
@@ -16266,14 +16275,14 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["mpd-parser", [\
-      ["npm:1.3.1", {\
-        "packageLocation": "./.yarn/cache/mpd-parser-npm-1.3.1-51727d193c-eaffe86a79.zip/node_modules/mpd-parser/",\
+      ["npm:1.4.0", {\
+        "packageLocation": "./.yarn/cache/mpd-parser-npm-1.4.0-283905f434-226664225c.zip/node_modules/mpd-parser/",\
         "packageDependencies": [\
           ["@babel/runtime", "npm:7.29.2"],\
-          ["@videojs/vhs-utils", "npm:4.1.1"],\
+          ["@videojs/vhs-utils", "npm:4.1.2"],\
           ["@xmldom/xmldom", "npm:0.9.12"],\
           ["global", "npm:4.4.0"],\
-          ["mpd-parser", "npm:1.3.1"]\
+          ["mpd-parser", "npm:1.4.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16542,10 +16551,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["node-releases", [\
-      ["npm:2.0.54", {\
-        "packageLocation": "./.yarn/cache/node-releases-npm-2.0.54-bb06fd5c78-36380abbe4.zip/node_modules/node-releases/",\
+      ["npm:2.0.55", {\
+        "packageLocation": "./.yarn/cache/node-releases-npm-2.0.55-85af5b89fc-1ca12c725e.zip/node_modules/node-releases/",\
         "packageDependencies": [\
-          ["node-releases", "npm:2.0.54"]\
+          ["node-releases", "npm:2.0.55"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17384,7 +17393,7 @@ const RAW_RUNTIME_STATE =
           ["icss-utils", "virtual:ec088ffc2e0ab0fffba802cf7553b5bbe90b31c873fc43d10636124ca69071c35a778478de9ba5e8e044f1eef28379074e11231cf32c3a50709b594c3ad8a6c4#npm:5.1.0"],\
           ["postcss", "npm:8.5.28"],\
           ["postcss-modules-local-by-default", "virtual:ec088ffc2e0ab0fffba802cf7553b5bbe90b31c873fc43d10636124ca69071c35a778478de9ba5e8e044f1eef28379074e11231cf32c3a50709b594c3ad8a6c4#npm:4.2.0"],\
-          ["postcss-selector-parser", "npm:7.1.5"],\
+          ["postcss-selector-parser", "npm:7.1.6"],\
           ["postcss-value-parser", "npm:4.2.0"]\
         ],\
         "packagePeers": [\
@@ -17408,7 +17417,7 @@ const RAW_RUNTIME_STATE =
           ["@types/postcss", null],\
           ["postcss", "npm:8.5.28"],\
           ["postcss-modules-scope", "virtual:ec088ffc2e0ab0fffba802cf7553b5bbe90b31c873fc43d10636124ca69071c35a778478de9ba5e8e044f1eef28379074e11231cf32c3a50709b594c3ad8a6c4#npm:3.2.1"],\
-          ["postcss-selector-parser", "npm:7.1.5"]\
+          ["postcss-selector-parser", "npm:7.1.6"]\
         ],\
         "packagePeers": [\
           "@types/postcss",\
@@ -17441,11 +17450,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["postcss-selector-parser", [\
-      ["npm:7.1.5", {\
-        "packageLocation": "./.yarn/cache/postcss-selector-parser-npm-7.1.5-041d44cfbb-ae66bbcb5d.zip/node_modules/postcss-selector-parser/",\
+      ["npm:7.1.6", {\
+        "packageLocation": "./.yarn/cache/postcss-selector-parser-npm-7.1.6-7fb01458ca-8b00b63c8a.zip/node_modules/postcss-selector-parser/",\
         "packageDependencies": [\
           ["cssesc", "npm:3.0.0"],\
-          ["postcss-selector-parser", "npm:7.1.5"],\
+          ["postcss-selector-parser", "npm:7.1.6"],\
           ["util-deprecate", "npm:1.0.2"]\
         ],\
         "linkType": "HARD"\
@@ -17548,7 +17557,7 @@ const RAW_RUNTIME_STATE =
           ["glob", "npm:13.0.6"],\
           ["govuk-frontend", "npm:5.11.2"],\
           ["helmet", "npm:8.1.0"],\
-          ["hls.js", "npm:1.7.2"],\
+          ["hls.js", "npm:1.6.16"],\
           ["html-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.6.8"],\
           ["husky", "npm:9.1.7"],\
           ["jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.3.0"],\
@@ -17582,7 +17591,7 @@ const RAW_RUNTIME_STATE =
           ["tsconfig-paths", "npm:4.2.0"],\
           ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"],\
           ["uuid", "npm:14.0.2"],\
-          ["video.js", "npm:8.23.7"],\
+          ["video.js", "npm:8.24.0"],\
           ["webpack", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.105.4"],\
           ["webpack-cli", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:6.0.1"],\
           ["webpack-dev-middleware", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:7.4.5"]\
@@ -20153,10 +20162,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["undici", [\
-      ["npm:7.29.0", {\
-        "packageLocation": "./.yarn/cache/undici-npm-7.29.0-561de03d83-ca73639071.zip/node_modules/undici/",\
+      ["npm:7.29.1", {\
+        "packageLocation": "./.yarn/cache/undici-npm-7.29.1-e8955914fd-8b9eaf8361.zip/node_modules/undici/",\
         "packageDependencies": [\
-          ["undici", "npm:7.29.0"]\
+          ["undici", "npm:7.29.1"]\
         ],\
         "linkType": "HARD"\
       }],\
@@ -20284,14 +20293,14 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:95f9f58626b262dac1adc8cb7d943dcb00411315fc304f34ffd5bf6e813870e1cc11ff4d3ae5d15ad953f880d2f3b63ee25ef93e7f98fcc5768d15cc491c6ece#npm:1.3.2", {\
-        "packageLocation": "./.yarn/__virtual__/update-browserslist-db-virtual-de9922e5fd/0/cache/update-browserslist-db-npm-1.3.2-2e0fa362e5-ca883e9d0f.zip/node_modules/update-browserslist-db/",\
+      ["virtual:ecf274fb176218f5e439bf661df8707db90ecfe2c62d28c88edf50be97cb56483947c7f8b1f4825a6f461d3350624a3b2be09f0bfaace49466f33e9ef337f26f#npm:1.3.2", {\
+        "packageLocation": "./.yarn/__virtual__/update-browserslist-db-virtual-34f53bad0b/0/cache/update-browserslist-db-npm-1.3.2-2e0fa362e5-ca883e9d0f.zip/node_modules/update-browserslist-db/",\
         "packageDependencies": [\
           ["@types/browserslist", null],\
-          ["browserslist", "npm:4.28.8"],\
+          ["browserslist", "npm:4.28.9"],\
           ["escalade", "npm:3.2.0"],\
           ["picocolors", "npm:1.1.1"],\
-          ["update-browserslist-db", "virtual:95f9f58626b262dac1adc8cb7d943dcb00411315fc304f34ffd5bf6e813870e1cc11ff4d3ae5d15ad953f880d2f3b63ee25ef93e7f98fcc5768d15cc491c6ece#npm:1.3.2"]\
+          ["update-browserslist-db", "virtual:ecf274fb176218f5e439bf661df8707db90ecfe2c62d28c88edf50be97cb56483947c7f8b1f4825a6f461d3350624a3b2be09f0bfaace49466f33e9ef337f26f#npm:1.3.2"]\
         ],\
         "packagePeers": [\
           "@types/browserslist",\
@@ -20405,20 +20414,20 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["video.js", [\
-      ["npm:8.23.7", {\
-        "packageLocation": "./.yarn/cache/video.js-npm-8.23.7-7e157b5732-62859ac85a.zip/node_modules/video.js/",\
+      ["npm:8.24.0", {\
+        "packageLocation": "./.yarn/cache/video.js-npm-8.24.0-c1b83547f4-04ed993efd.zip/node_modules/video.js/",\
         "packageDependencies": [\
           ["@babel/runtime", "npm:7.29.2"],\
-          ["@videojs/http-streaming", "virtual:7e157b5732988646a3a22e8596ab85a1683d74c058614c79224b67fbdeca96707f10ce7b6a37519224d312799190df1628b7f69718fd8323d3889d4492949316#npm:3.17.4"],\
-          ["@videojs/vhs-utils", "npm:4.1.1"],\
+          ["@videojs/http-streaming", "virtual:c1b83547f4b08ddfbe9fbce84df0d212b9069565fdef712f172f179ed6ff5265b157bede9f2c526a10a30072f07af3bc869fa2a587bba3753718413c27b3e733#npm:3.17.5"],\
+          ["@videojs/vhs-utils", "npm:4.1.2"],\
           ["@videojs/xhr", "npm:2.7.0"],\
           ["aes-decrypter", "npm:4.0.2"],\
           ["global", "npm:4.4.0"],\
           ["m3u8-parser", "npm:7.2.0"],\
-          ["mpd-parser", "npm:1.3.1"],\
+          ["mpd-parser", "npm:1.4.0"],\
           ["mux.js", "npm:7.1.0"],\
-          ["video.js", "npm:8.23.7"],\
-          ["videojs-contrib-quality-levels", "virtual:7e157b5732988646a3a22e8596ab85a1683d74c058614c79224b67fbdeca96707f10ce7b6a37519224d312799190df1628b7f69718fd8323d3889d4492949316#npm:4.1.0"],\
+          ["video.js", "npm:8.24.0"],\
+          ["videojs-contrib-quality-levels", "virtual:c1b83547f4b08ddfbe9fbce84df0d212b9069565fdef712f172f179ed6ff5265b157bede9f2c526a10a30072f07af3bc869fa2a587bba3753718413c27b3e733#npm:4.1.0"],\
           ["videojs-font", "npm:4.2.0"],\
           ["videojs-vtt.js", "npm:0.15.5"]\
         ],\
@@ -20433,13 +20442,13 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:7e157b5732988646a3a22e8596ab85a1683d74c058614c79224b67fbdeca96707f10ce7b6a37519224d312799190df1628b7f69718fd8323d3889d4492949316#npm:4.1.0", {\
-        "packageLocation": "./.yarn/__virtual__/videojs-contrib-quality-levels-virtual-1d5283ddaf/0/cache/videojs-contrib-quality-levels-npm-4.1.0-1e51f22a8e-e8948607b7.zip/node_modules/videojs-contrib-quality-levels/",\
+      ["virtual:c1b83547f4b08ddfbe9fbce84df0d212b9069565fdef712f172f179ed6ff5265b157bede9f2c526a10a30072f07af3bc869fa2a587bba3753718413c27b3e733#npm:4.1.0", {\
+        "packageLocation": "./.yarn/__virtual__/videojs-contrib-quality-levels-virtual-16b2766e4a/0/cache/videojs-contrib-quality-levels-npm-4.1.0-1e51f22a8e-e8948607b7.zip/node_modules/videojs-contrib-quality-levels/",\
         "packageDependencies": [\
           ["@types/video.js", null],\
           ["global", "npm:4.4.0"],\
-          ["video.js", "npm:8.23.7"],\
-          ["videojs-contrib-quality-levels", "virtual:7e157b5732988646a3a22e8596ab85a1683d74c058614c79224b67fbdeca96707f10ce7b6a37519224d312799190df1628b7f69718fd8323d3889d4492949316#npm:4.1.0"]\
+          ["video.js", "npm:8.24.0"],\
+          ["videojs-contrib-quality-levels", "virtual:c1b83547f4b08ddfbe9fbce84df0d212b9069565fdef712f172f179ed6ff5265b157bede9f2c526a10a30072f07af3bc869fa2a587bba3753718413c27b3e733#npm:4.1.0"]\
         ],\
         "packagePeers": [\
           "@types/video.js",\
@@ -20536,7 +20545,7 @@ const RAW_RUNTIME_STATE =
           ["@webassemblyjs/wasm-parser", "npm:1.14.1"],\
           ["acorn", "npm:8.16.0"],\
           ["acorn-import-phases", "virtual:754d831237625788686e91532a503c6538359fdf3c35ef1e32d9e943e2b6da2a88e52a59969e472ce08ca5edc3a04c39092dc972c4b398b72d3f23e2747f8711#npm:1.0.4"],\
-          ["browserslist", "npm:4.28.8"],\
+          ["browserslist", "npm:4.28.9"],\
           ["chrome-trace-event", "npm:1.0.4"],\
           ["enhanced-resolve", "npm:5.20.1"],\
           ["es-module-lexer", "npm:2.0.0"],\
