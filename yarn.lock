@@ -13822,7 +13822,7 @@ __metadata:
     typescript: "npm:5.9.3"
     uuid: "npm:^14.0.0"
     video.js: "npm:8.24.0"
-    webpack: "npm:^5.105.4"
+    webpack: "npm:^5.111.1"
     webpack-cli: "npm:6.0.1"
     webpack-dev-middleware: "npm:7.4.6"
   languageName: unknown
@@ -16580,7 +16580,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.105.4":
+"webpack@npm:^5.111.1":
   version: 5.111.1
   resolution: "webpack@npm:5.111.1"
   dependencies:
