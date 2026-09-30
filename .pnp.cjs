@@ -8741,7 +8741,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["ajv", "npm:8.17.1"],\
           ["fast-deep-equal", "npm:3.1.3"],\
-          ["fast-uri", "npm:3.1.7"],\
+          ["fast-uri", "npm:3.1.8"],\
           ["json-schema-traverse", "npm:1.0.0"],\
           ["require-from-string", "npm:2.0.2"]\
         ],\
@@ -8752,7 +8752,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["ajv", "npm:8.20.0"],\
           ["fast-deep-equal", "npm:3.1.3"],\
-          ["fast-uri", "npm:3.1.7"],\
+          ["fast-uri", "npm:3.1.8"],\
           ["json-schema-traverse", "npm:1.0.0"],\
           ["require-from-string", "npm:2.0.2"]\
         ],\
@@ -9799,14 +9799,6 @@ const RAW_RUNTIME_STATE =
           ["brace-expansion", "npm:5.0.12"]\
         ],\
         "linkType": "HARD"\
-      }],\
-      ["npm:5.0.9", {\
-        "packageLocation": "./.yarn/cache/brace-expansion-npm-5.0.9-2717df6b49-d8683d6129.zip/node_modules/brace-expansion/",\
-        "packageDependencies": [\
-          ["balanced-match", "npm:4.0.4"],\
-          ["brace-expansion", "npm:5.0.9"]\
-        ],\
-        "linkType": "HARD"\
       }]\
     ]],\
     ["braces", [\
@@ -10206,7 +10198,7 @@ const RAW_RUNTIME_STATE =
           ["parse5", "npm:7.3.0"],\
           ["parse5-htmlparser2-tree-adapter", "npm:7.1.0"],\
           ["parse5-parser-stream", "npm:7.1.2"],\
-          ["undici", "npm:7.29.1"],\
+          ["undici", "npm:8.10.2"],\
           ["whatwg-mimetype", "npm:4.0.0"]\
         ],\
         "linkType": "HARD"\
@@ -12559,10 +12551,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["fast-uri", [\
-      ["npm:3.1.7", {\
-        "packageLocation": "./.yarn/cache/fast-uri-npm-3.1.7-3de8444a6d-6d62ea8188.zip/node_modules/fast-uri/",\
+      ["npm:3.1.8", {\
+        "packageLocation": "./.yarn/cache/fast-uri-npm-3.1.8-9315bdcd40-d3dfa29fd2.zip/node_modules/fast-uri/",\
         "packageDependencies": [\
-          ["fast-uri", "npm:3.1.7"]\
+          ["fast-uri", "npm:3.1.8"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16516,7 +16508,7 @@ const RAW_RUNTIME_STATE =
       ["npm:10.2.4", {\
         "packageLocation": "./.yarn/cache/minimatch-npm-10.2.4-11f0605299-aea4874e52.zip/node_modules/minimatch/",\
         "packageDependencies": [\
-          ["brace-expansion", "npm:5.0.9"],\
+          ["brace-expansion", "npm:5.0.12"],\
           ["minimatch", "npm:10.2.4"]\
         ],\
         "linkType": "HARD"\
@@ -16524,7 +16516,7 @@ const RAW_RUNTIME_STATE =
       ["npm:10.2.5", {\
         "packageLocation": "./.yarn/cache/minimatch-npm-10.2.5-f1c8297822-19e87a931a.zip/node_modules/minimatch/",\
         "packageDependencies": [\
-          ["brace-expansion", "npm:5.0.9"],\
+          ["brace-expansion", "npm:5.0.12"],\
           ["minimatch", "npm:10.2.5"]\
         ],\
         "linkType": "HARD"\
@@ -17025,7 +17017,7 @@ const RAW_RUNTIME_STATE =
           ["semver", "npm:7.7.4"],\
           ["tar", "npm:7.5.21"],\
           ["tinyglobby", "npm:0.2.15"],\
-          ["undici", "npm:8.10.0"],\
+          ["undici", "npm:8.10.2"],\
           ["which", "npm:7.0.0"]\
         ],\
         "linkType": "HARD"\
@@ -20727,17 +20719,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["undici", [\
-      ["npm:7.29.1", {\
-        "packageLocation": "./.yarn/cache/undici-npm-7.29.1-e8955914fd-8b9eaf8361.zip/node_modules/undici/",\
+      ["npm:8.10.2", {\
+        "packageLocation": "./.yarn/cache/undici-npm-8.10.2-8fc19cba7c-90f7ba3d3e.zip/node_modules/undici/",\
         "packageDependencies": [\
-          ["undici", "npm:7.29.1"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:8.10.0", {\
-        "packageLocation": "./.yarn/cache/undici-npm-8.10.0-83850c8bfa-254219966d.zip/node_modules/undici/",\
-        "packageDependencies": [\
-          ["undici", "npm:8.10.0"]\
+          ["undici", "npm:8.10.2"]\
         ],\
         "linkType": "HARD"\
       }]\
