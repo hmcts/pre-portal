@@ -8355,7 +8355,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["ajv", "npm:8.17.1"],\
           ["fast-deep-equal", "npm:3.1.3"],\
-          ["fast-uri", "npm:3.1.7"],\
+          ["fast-uri", "npm:3.1.8"],\
           ["json-schema-traverse", "npm:1.0.0"],\
           ["require-from-string", "npm:2.0.2"]\
         ],\
@@ -12125,10 +12125,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["fast-uri", [\
-      ["npm:3.1.7", {\
-        "packageLocation": "./.yarn/cache/fast-uri-npm-3.1.7-3de8444a6d-6d62ea8188.zip/node_modules/fast-uri/",\
+      ["npm:3.1.8", {\
+        "packageLocation": "./.yarn/cache/fast-uri-npm-3.1.8-9315bdcd40-d3dfa29fd2.zip/node_modules/fast-uri/",\
         "packageDependencies": [\
-          ["fast-uri", "npm:3.1.7"]\
+          ["fast-uri", "npm:3.1.8"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -13497,10 +13497,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["ip-address", [\
-      ["npm:10.4.0", {\
-        "packageLocation": "./.yarn/cache/ip-address-npm-10.4.0-6a90d50243-8a286dd112.zip/node_modules/ip-address/",\
+      ["npm:10.7.2", {\
+        "packageLocation": "./.yarn/cache/ip-address-npm-10.7.2-c11033b133-3a051cb523.zip/node_modules/ip-address/",\
         "packageDependencies": [\
-          ["ip-address", "npm:10.4.0"]\
+          ["ip-address", "npm:10.7.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -18993,7 +18993,7 @@ const RAW_RUNTIME_STATE =
       ["npm:2.8.7", {\
         "packageLocation": "./.yarn/cache/socks-npm-2.8.7-d1d20aae19-d19366c959.zip/node_modules/socks/",\
         "packageDependencies": [\
-          ["ip-address", "npm:10.4.0"],\
+          ["ip-address", "npm:10.7.2"],\
           ["smart-buffer", "npm:4.2.0"],\
           ["socks", "npm:2.8.7"]\
         ],\
