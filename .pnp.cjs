@@ -46,7 +46,6 @@ const RAW_RUNTIME_STATE =
           ["@types/express", "npm:5.0.6"],\
           ["@types/express-session", "npm:1.19.0"],\
           ["@types/jest", "npm:30.0.0"],\
-          ["@types/multer", "npm:2.1.0"],\
           ["@types/node", "npm:25.9.5"],\
           ["@types/nunjucks", "npm:3.2.6"],\
           ["@types/qs", "npm:6.15.1"],\
@@ -86,7 +85,6 @@ const RAW_RUNTIME_STATE =
           ["lodash", "npm:4.18.1"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.2"],\
-          ["multer", "npm:2.4.0"],\
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
           ["nodemon", "npm:3.1.14"],\
           ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\
@@ -7290,16 +7288,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@types-methods-npm-1.1.4-8565dc8af4-ad2a717848.zip/node_modules/@types/methods/",\
         "packageDependencies": [\
           ["@types/methods", "npm:1.1.4"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@types/multer", [\
-      ["npm:2.1.0", {\
-        "packageLocation": "./.yarn/cache/@types-multer-npm-2.1.0-1eaf9e22a4-405298b6b0.zip/node_modules/@types/multer/",\
-        "packageDependencies": [\
-          ["@types/express", "npm:5.0.6"],\
-          ["@types/multer", "npm:2.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16314,16 +16302,6 @@ const RAW_RUNTIME_STATE =
           ["type-is", "npm:1.6.18"]\
         ],\
         "linkType": "HARD"\
-      }],\
-      ["npm:2.4.0", {\
-        "packageLocation": "./.yarn/cache/multer-npm-2.4.0-799b65b343-644efb2eef.zip/node_modules/multer/",\
-        "packageDependencies": [\
-          ["append-field", "npm:1.0.0"],\
-          ["busboy", "npm:1.6.0"],\
-          ["multer", "npm:2.4.0"],\
-          ["type-is", "npm:1.6.18"]\
-        ],\
-        "linkType": "HARD"\
       }]\
     ]],\
     ["multi-sort-stream", [\
@@ -17538,7 +17516,6 @@ const RAW_RUNTIME_STATE =
           ["@types/express", "npm:5.0.6"],\
           ["@types/express-session", "npm:1.19.0"],\
           ["@types/jest", "npm:30.0.0"],\
-          ["@types/multer", "npm:2.1.0"],\
           ["@types/node", "npm:25.9.5"],\
           ["@types/nunjucks", "npm:3.2.6"],\
           ["@types/qs", "npm:6.15.1"],\
@@ -17578,7 +17555,6 @@ const RAW_RUNTIME_STATE =
           ["lodash", "npm:4.18.1"],\
           ["marked", "npm:15.0.12"],\
           ["mini-css-extract-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:2.10.2"],\
-          ["multer", "npm:2.4.0"],\
           ["node-mocks-http", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:1.17.2"],\
           ["nodemon", "npm:3.1.14"],\
           ["nunjucks", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:3.2.4"],\

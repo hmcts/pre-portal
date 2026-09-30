@@ -4596,15 +4596,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/multer@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "@types/multer@npm:2.1.0"
-  dependencies:
-    "@types/express": "npm:*"
-  checksum: 10/405298b6b0b6f4007c87b7bcd69074a96fba8d5a0efcc149788af9bdb45fb9d0ab367ddebec4840eaaa45d05ba682b2a8c3a71101e9e51d6cfaa624034339c1a
-  languageName: node
-  linkType: hard
-
 "@types/mysql@npm:2.15.27":
   version: 2.15.27
   resolution: "@types/mysql@npm:2.15.27"
@@ -12294,17 +12285,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"multer@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "multer@npm:2.4.0"
-  dependencies:
-    append-field: "npm:^1.0.0"
-    busboy: "npm:^1.6.0"
-    type-is: "npm:^1.6.18"
-  checksum: 10/644efb2eefa60079866c3ed9eb549e76c93bd642af2790c2579b224de9a4a4e0545d8e36aeafca21207445b6d2505e85779dca365351eb6f45fca8ce44a8e605
-  languageName: node
-  linkType: hard
-
 "multi-sort-stream@npm:^1.0.3, multi-sort-stream@npm:^1.0.4":
   version: 1.0.4
   resolution: "multi-sort-stream@npm:1.0.4"
@@ -13359,7 +13339,6 @@ __metadata:
     "@types/express": "npm:5.0.6"
     "@types/express-session": "npm:1.19.0"
     "@types/jest": "npm:30.0.0"
-    "@types/multer": "npm:^2.1.0"
     "@types/node": "npm:25.9.5"
     "@types/nunjucks": "npm:3.2.6"
     "@types/qs": "npm:^6.15.0"
@@ -13399,7 +13378,6 @@ __metadata:
     lodash: "npm:4.18.1"
     marked: "npm:^15.0.0"
     mini-css-extract-plugin: "npm:2.10.2"
-    multer: "npm:^2.4.0"
     node-mocks-http: "npm:1.17.2"
     nodemon: "npm:3.1.14"
     nunjucks: "npm:3.2.4"
