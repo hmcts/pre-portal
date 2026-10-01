@@ -12,7 +12,7 @@
 !config/
 !config/**
 !package.json
-!src/main
+!src
 !src/main/
 !src/main/**
 !tsconfig.json
