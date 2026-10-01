@@ -3,15 +3,22 @@
 *
 
 # exceptions from `exclude all` rule
-
-!package.json
-!yarn.lock
-!.yarn/**
-!.yarnrc.yml
 !.pnp.cjs
-
-!tsconfig.json
-!webpack/**
-!src/main/**
+!.yarn
+!.yarn/**
+!.yarn/plugins/
+!.yarn/releases/
+!.yarnrc.yml
+!config/
 !config/**
+!package.json
+!src
+!src/main/
+!src/main/**
+!tsconfig.json
 !webpack.config.js
+!webpack/
+!webpack/**
+!yarn.lock
+.yarn/cache
+.yarn/install-state.gz
