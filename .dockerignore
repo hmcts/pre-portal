@@ -9,13 +9,9 @@
 !.yarn/plugins/
 !.yarn/releases/
 !.yarnrc.yml
-!app
-!app/**
 !config/
 !config/**
 !package.json
-!public
-!public/**!docker
 !src/
 !src/main/
 !src/main/**
