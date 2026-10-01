@@ -15,3 +15,7 @@
 !src/main/**
 !config/**
 !webpack.config.js
+
+!app
+!public
+!.yarn
