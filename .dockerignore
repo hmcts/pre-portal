@@ -21,3 +21,11 @@
 !.yarn
 !app/**
 !public/**!docker
+!.yarn/plugins/
+!.yarn/releases/
+!src/
+!src/main/
+!config/
+!webpack/
+.yarn/cache
+.yarn/install-state.gz
