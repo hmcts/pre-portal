@@ -15249,12 +15249,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stream-json@npm:3.5.0":
-  version: 3.5.0
-  resolution: "stream-json@npm:3.5.0"
+"stream-json@npm:3.6.0":
+  version: 3.6.0
+  resolution: "stream-json@npm:3.6.0"
   dependencies:
     stream-chain: "npm:^4.2.5"
-  checksum: 10/7c144ddb42887d2ccbe57c686ccddfefafe97a49c4fe26b78482a56ec2c355e8834e0201dcafefa34f708f6a1e73592d09822a83e4a7617e97da8a7f974c40cf
+  checksum: 10/74b90a3ad58ffc3e7149d5e84d447f8c0db89959dab8560da1bedb94ca1d15eeb5c4910c6558d4fa8ca1d18c04519b4b6d24840c346a660df37144cecb1c01e5
   languageName: node
   linkType: hard
 
