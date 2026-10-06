@@ -45,12 +45,12 @@ withNightlyPipeline(type, product, component) {
         allowMissing         : true,
         alwaysLinkToLastBuild: true,
         keepAll              : true,
-        reportDir            : "functional-output/cross-browser/allure",
+        reportDir            : "functional-output/crossbrowser/allure",
         reportFiles          : "index.html",
         reportName           : "Cross Browser Test Report PRE-Portal"
       ]
 
-      steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/cross-browser/reports/**/*'
+      steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/crossbrowser/reports/**/*'
      }
     enableFullFunctionalTest(200)
       afterAlways('fullFunctionalTest') {
