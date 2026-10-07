@@ -28,7 +28,7 @@ const setupConfig = {
     features: '../functional/features/**/browse.feature',
     steps: ['../steps/common.ts'],
   },
-  output: '../../../functional-output/cross-browser/reports',
+  output: '../../../functional-output/crossbrowser/reports',
   helpers: testConfig.helpers,
   tests: './*_test.{js,ts}',
   plugins: {
