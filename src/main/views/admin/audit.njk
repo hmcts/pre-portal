@@ -1,0 +1,75 @@
+{% from "govuk/components/pagination/macro.njk" import govukPagination %}
+
+{% extends "admin/admin.njk" %}
+
+{% block pageTitle %}Audit {{ audit.id }} - PRE Admin Portal{% endblock %}
+
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block mainContent %}
+  <div class="govuk-!-margin-top-0 govuk-!-margin-bottom-8">
+    <h1 class="govuk-heading-l">
+      Audit: {{ audit.id }}
+    </h1>
+  </div>
+
+  <div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h2 class="govuk-summary-card__title">
+        Audit
+      </h2>
+    </div>
+    <div class="govuk-summary-card__content">
+      <dl class="govuk-summary-list">
+        {% for key, value in audit %}
+          {% if key not in ['created_by', 'audit_details'] %}
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                {{ key | replace("_", " ") | title }}
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ value }}
+              </dd>
+            </div>
+          {% elif key === 'created_by' %}
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Created By
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if value.email %}
+                  {{value.first_name }} {{ value.last_name }} ({{ value.email }})
+                {% elif value.id %}
+                  {{ value.id }}
+                {% endif %}
+              </dd>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </dl>
+    </div>
+    {% if audit | length > 0 %}
+      <div class="govuk-summary-card__title-wrapper" style="border-top: 1px solid #b1b4b6">
+        <h2 class="govuk-summary-card__title">
+          Audit Details
+        </h2>
+      </div>
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          {% for key, value in audit.audit_details %}
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                {{ key }}
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ value }}
+              </dd>
+            </div>
+          {% endfor %}
+        </dl>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

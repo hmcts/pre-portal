@@ -6,7 +6,7 @@ module.exports = {
     '^.+\\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.json' }],
     '^.+\\.[cm]?jsx?$': 'babel-jest',
   },
-  transformIgnorePatterns: ['/node_modules/(?!(jose)/)'],
+  transformIgnorePatterns: ['/node_modules/(?!(jose|uuid)/)'],
   moduleNameMapper: {
     '^router/(.*)$': '<rootDir>/src/main/router/$1',
     '^routes/(.*)$': '<rootDir>/src/main/routes/$1',
