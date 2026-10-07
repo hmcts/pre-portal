@@ -160,7 +160,7 @@ export const mockedPaginatedRecordings = {
   },
 };
 
-export const mockedEditRequest = {
+export const mockedEditRequest: EditRequest = {
   id: '12345678-1234-1234-1234-1234567890ac',
   source_recording: mockRecordings[0],
   status: 'DRAFT',
@@ -176,7 +176,10 @@ export const mockedEditRequest = {
         end_of_cut: '00:00:11',
       },
     ],
-  }
+  },
+  created_by: '12345678-1234-1234-1234-1234567890ac',
+  created_at: '2021-09-01T12:00:00Z',
+  modified_at: ''
 };
 
 export const mockedPaginatedAuditLogs = {
@@ -240,7 +243,7 @@ export function mockGetEditRequest(editRequest?: EditRequest | null) {
     jest
       .spyOn(PreClient.prototype, 'getEditRequest')
       .mockImplementation(async (_xUserId: string, _sourceRecordingId: string) => {
-        return Promise.resolve([mockedEditRequest]);
+        return Promise.resolve(mockedEditRequest);
       });
   }
   return;
