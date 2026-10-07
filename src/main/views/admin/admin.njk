@@ -4,72 +4,14 @@
 
 {% block pageTitle %}{{ title }} - PRE Portal{% endblock %}
  {% block main %}
-       <div class="full-width-container">
-{% block beforeContent %}
-<div class="govuk-grid-row admin-container">
-  {{
-    govukBackLink({
-      "text": "Sign out",
-      "href": "/logout"
-    })
-  }}
-  </div>
-   {% endblock %}
-   {% block content %}
+      <div class="full-width-container">
 
- <div class="govuk-grid-row admin-container">
- <div id="side-overlay" class="overlay hidden"></div>
-  <button id="navToggle" class="govuk-button govuk-button--secondary">☰</button>
-    <nav id="side-nav" class="side-nav hidden">
-      {% include "components/side-navigation.njk" %}
-    </nav>
-
-    <main id="main-content" class="govuk-main-wrapper" style="margin-top: 0px !important; padding-top: 0px !important;">
-         {% block mainContent %}{% endblock %}
-       </main>
-     </div>
+      {% block content %}
+         <div class="govuk-grid-row admin-container">
+            <main id="main-content" class="govuk-main-wrapper" style="margin-top: 0px !important; padding-top: 0px !important;">
+                 {% block mainContent %}{% endblock %}
+               </main>
+         </div>
      {% endblock %}
-
-
-    <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const navToggle = document.getElementById('navToggle');
-    const sideNav = document.getElementById('side-nav');
-    const sideOverlay = document.getElementById('side-overlay');
-    const body = document.body;
-
-    function openNav() {
-      sideNav.classList.remove('hidden');
-      sideOverlay.classList.remove('hidden');
-      body.classList.add('no-scroll');
-      navToggle.classList.add('fixed');
-      navToggle.textContent = '✖';
-      navToggle.setAttribute('aria-expanded', 'true');
-    }
-
-    function closeNav() {
-      sideNav.classList.add('hidden');
-      sideOverlay.classList.add('hidden');
-      body.classList.remove('no-scroll');
-      navToggle.classList.remove('fixed');
-      navToggle.textContent = '☰';
-      navToggle.setAttribute('aria-expanded', 'false');
-    }
-
-    navToggle.addEventListener('click', () => {
-      if (sideNav.classList.contains('hidden')) {
-        openNav();
-      } else {
-        closeNav();
-      }
-    });
-
-    sideOverlay.addEventListener('click', closeNav);
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeNav();
-    });
-  });
-
-  </script>
-  {% endblock %}
-</div>
+    </div>
+ {% endblock %}
