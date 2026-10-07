@@ -9927,7 +9927,7 @@ const RAW_RUNTIME_STATE =
           ["bunyamin", "virtual:6713259ae3cba5eadfff36c02f23f3252fd7c519bb98e435b76792a0c1bba4d81e0397838fb072d468b81e7d72ac303bc654b7612b1f66bed38dc2af435eb00a#npm:1.6.3"],\
           ["bunyan", "npm:2.0.5"],\
           ["multi-sort-stream", "npm:1.0.4"],\
-          ["stream-json", "npm:3.5.0"],\
+          ["stream-json", "npm:3.6.0"],\
           ["trace-event-lib", "npm:1.4.1"]\
         ],\
         "packagePeers": [\
@@ -11472,7 +11472,7 @@ const RAW_RUNTIME_STATE =
           ["serialize-error", "npm:8.1.0"],\
           ["shell-quote", "npm:1.11.0"],\
           ["signal-exit", "npm:3.0.7"],\
-          ["stream-json", "npm:3.5.0"],\
+          ["stream-json", "npm:3.6.0"],\
           ["strip-ansi", "npm:6.0.1"],\
           ["telnet-client", "npm:1.2.8"],\
           ["tmp", "npm:0.2.7"],\
@@ -19703,11 +19703,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["stream-json", [\
-      ["npm:3.5.0", {\
-        "packageLocation": "./.yarn/cache/stream-json-npm-3.5.0-2fb300f0b3-7c144ddb42.zip/node_modules/stream-json/",\
+      ["npm:3.6.0", {\
+        "packageLocation": "./.yarn/cache/stream-json-npm-3.6.0-8359846a75-74b90a3ad5.zip/node_modules/stream-json/",\
         "packageDependencies": [\
           ["stream-chain", "npm:4.2.5"],\
-          ["stream-json", "npm:3.5.0"]\
+          ["stream-json", "npm:3.6.0"]\
         ],\
         "linkType": "HARD"\
       }]\
