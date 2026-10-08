@@ -13788,7 +13788,7 @@ __metadata:
     tsconfig-paths: "npm:4.2.0"
     typescript: "npm:5.9.3"
     uuid: "npm:^14.0.0"
-    video.js: "npm:8.24.0"
+    video.js: "npm:8.24.1"
     webpack: "npm:^5.111.1"
     webpack-cli: "npm:6.0.1"
     webpack-dev-middleware: "npm:7.4.6"
@@ -16365,9 +16365,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"video.js@npm:8.24.0":
-  version: 8.24.0
-  resolution: "video.js@npm:8.24.0"
+"video.js@npm:8.24.1":
+  version: 8.24.1
+  resolution: "video.js@npm:8.24.1"
   dependencies:
     "@babel/runtime": "npm:^7.28.4"
     "@videojs/http-streaming": "npm:^3.17.5"
@@ -16381,7 +16381,7 @@ __metadata:
     videojs-contrib-quality-levels: "npm:4.1.0"
     videojs-font: "npm:4.2.0"
     videojs-vtt.js: "npm:0.15.5"
-  checksum: 10/04ed993efd19d6f5305e3ddbe58b678b491c062cce02d960070065ffffcfa3efa3728bf06857daf6495654e8b9190e22935c1aaf0d401abeb523b6346b27a32b
+  checksum: 10/f2416f0e2906d856e2d9eb172e39294ae78711ba9e22ddccfafa9ce3fb571af62ff9b399a80a6080e0b1ce96ec7b0776f70c03be88411900ef2323be0b8380f5
   languageName: node
   linkType: hard
 
