@@ -2241,30 +2241,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@humanfs/core@npm:^0.19.2":
-  version: 0.19.2
-  resolution: "@humanfs/core@npm:0.19.2"
+"@humanfs/core@npm:^0.20.0":
+  version: 0.20.0
+  resolution: "@humanfs/core@npm:0.20.0"
   dependencies:
-    "@humanfs/types": "npm:^0.15.0"
-  checksum: 10/c6c0273721ec8df3d36a57c390a11a168d0a2f513d78bceb25165bded4fcb73609b1a317edc6c8f331cefd4b47285dde0b1e6679e08ef7f062232ec14fe05312
+    "@humanfs/types": "npm:^0.16.0"
+  checksum: 10/52dcd0a58811b6ed3cbb625c665762cb0476d510b042cce2210613e697ffcc20a5b21d66df41ff24275910fdf5b38419a7bf2d0d1c1c5af4e251108abf8eca12
   languageName: node
   linkType: hard
 
-"@humanfs/node@npm:0.16.8":
-  version: 0.16.8
-  resolution: "@humanfs/node@npm:0.16.8"
+"@humanfs/node@npm:0.17.0":
+  version: 0.17.0
+  resolution: "@humanfs/node@npm:0.17.0"
   dependencies:
-    "@humanfs/core": "npm:^0.19.2"
-    "@humanfs/types": "npm:^0.15.0"
+    "@humanfs/core": "npm:^0.20.0"
+    "@humanfs/types": "npm:^0.16.0"
     "@humanwhocodes/retry": "npm:^0.4.0"
-  checksum: 10/ed01b3c066d9cec7526d139b9e71ca00ee4a30b3b5f5f5c198eb069c3509a3e167e180ba7e1e5a83b9571e906c4908bd20402b47586887452311af7354995e95
+  checksum: 10/01d8b0ea4785e4130a518a2b6a9c45317e09e563aa3c406c2b49b881b192aef3ad4e31ed4e2c8bf63efdfd4d80e0844024927e23b4c7ae460049925214a26944
   languageName: node
   linkType: hard
 
-"@humanfs/types@npm:^0.15.0":
-  version: 0.15.0
-  resolution: "@humanfs/types@npm:0.15.0"
-  checksum: 10/dea3cc7fd8f8d4d088ed8d0a9921cf12bd8e1cdf40a6133106b03a6e2aebcc9a6f1771b3643b7ec71baae90d08245db34069dfcc861da8d678662741e6c3c986
+"@humanfs/types@npm:^0.16.0":
+  version: 0.16.0
+  resolution: "@humanfs/types@npm:0.16.0"
+  checksum: 10/6c14f15202666aaa84c135b6df01db3ccf185daebe546f74138cf68cb60f6c0fabcce2928f92873380049c2f2446258c4ff74ddecacbc389c9402667119bec64
   languageName: node
   linkType: hard
 
