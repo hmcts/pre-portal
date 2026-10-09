@@ -3779,10 +3779,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@grpc/grpc-js", [\
-      ["npm:1.14.5", {\
-        "packageLocation": "./.yarn/cache/@grpc-grpc-js-npm-1.14.5-c688c33830-3be7fe0105.zip/node_modules/@grpc/grpc-js/",\
+      ["npm:1.14.6", {\
+        "packageLocation": "./.yarn/cache/@grpc-grpc-js-npm-1.14.6-7a5372a85c-cd1bf7fc03.zip/node_modules/@grpc/grpc-js/",\
         "packageDependencies": [\
-          ["@grpc/grpc-js", "npm:1.14.5"],\
+          ["@grpc/grpc-js", "npm:1.14.6"],\
           ["@grpc/proto-loader", "npm:0.8.0"],\
           ["@js-sdsl/ordered-map", "npm:4.4.2"]\
         ],\
@@ -5783,7 +5783,7 @@ const RAW_RUNTIME_STATE =
       ["virtual:1453e3432af084d00df8c115240cee74de35f74040b062add7dd90156870da42c30d49386467b7b26a84dc4bff081993f745daff1abd8859c5b8290d526eeb95#npm:0.221.0", {\
         "packageLocation": "./.yarn/__virtual__/@opentelemetry-otlp-grpc-exporter-base-virtual-27686ff1cd/0/cache/@opentelemetry-otlp-grpc-exporter-base-npm-0.221.0-3fd4af3267-c496d8bc87.zip/node_modules/@opentelemetry/otlp-grpc-exporter-base/",\
         "packageDependencies": [\
-          ["@grpc/grpc-js", "npm:1.14.5"],\
+          ["@grpc/grpc-js", "npm:1.14.6"],\
           ["@opentelemetry/api", "npm:1.9.1"],\
           ["@opentelemetry/core", "virtual:27ed75ecad9a74b361f1295ab467a6bddd627403b15be73b86929dfadfe68371137a766e66701635de305dda1d9e924af09ef41fe25724e47512a35d16b39a61#npm:2.10.0"],\
           ["@opentelemetry/otlp-exporter-base", "virtual:1453e3432af084d00df8c115240cee74de35f74040b062add7dd90156870da42c30d49386467b7b26a84dc4bff081993f745daff1abd8859c5b8290d526eeb95#npm:0.221.0"],\
