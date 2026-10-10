@@ -153,7 +153,7 @@
     "editorconfig@npm:1.0.4/minimatch": "9.0.9",
     "stream-json": "3.6.0",
     "@xmldom/xmldom": "0.9.12",
-    "@grpc/grpc-js": "1.14.5",
+    "@grpc/grpc-js": "1.14.6",
     "joi": "18.2.9",
     "node-gyp@npm:13.0.1/undici": "8.10.2",
     "cheerio@npm:1.2.0/undici": "8.10.2",
