@@ -138,7 +138,7 @@
     "cookie": "0.7.2",
     "fast-uri": "3.1.8",
     "form-data": "4.0.6",
-    "@humanfs/node": "0.16.8",
+    "@humanfs/node": "0.17.0",
     "http-cache-semantics": "4.3.0",
     "js-yaml": "4.3.2",
     "jsonwebtoken": "9.0.3",

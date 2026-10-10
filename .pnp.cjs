@@ -3929,32 +3929,32 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@humanfs/core", [\
-      ["npm:0.19.2", {\
-        "packageLocation": "./.yarn/cache/@humanfs-core-npm-0.19.2-ad081ed090-c6c0273721.zip/node_modules/@humanfs/core/",\
+      ["npm:0.20.0", {\
+        "packageLocation": "./.yarn/cache/@humanfs-core-npm-0.20.0-1dd023368e-52dcd0a588.zip/node_modules/@humanfs/core/",\
         "packageDependencies": [\
-          ["@humanfs/core", "npm:0.19.2"],\
-          ["@humanfs/types", "npm:0.15.0"]\
+          ["@humanfs/core", "npm:0.20.0"],\
+          ["@humanfs/types", "npm:0.16.0"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["@humanfs/node", [\
-      ["npm:0.16.8", {\
-        "packageLocation": "./.yarn/cache/@humanfs-node-npm-0.16.8-80d1509ded-ed01b3c066.zip/node_modules/@humanfs/node/",\
+      ["npm:0.17.0", {\
+        "packageLocation": "./.yarn/cache/@humanfs-node-npm-0.17.0-7e82cbf2e0-01d8b0ea47.zip/node_modules/@humanfs/node/",\
         "packageDependencies": [\
-          ["@humanfs/core", "npm:0.19.2"],\
-          ["@humanfs/node", "npm:0.16.8"],\
-          ["@humanfs/types", "npm:0.15.0"],\
+          ["@humanfs/core", "npm:0.20.0"],\
+          ["@humanfs/node", "npm:0.17.0"],\
+          ["@humanfs/types", "npm:0.16.0"],\
           ["@humanwhocodes/retry", "npm:0.4.3"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["@humanfs/types", [\
-      ["npm:0.15.0", {\
-        "packageLocation": "./.yarn/cache/@humanfs-types-npm-0.15.0-e47e8568ba-dea3cc7fd8.zip/node_modules/@humanfs/types/",\
+      ["npm:0.16.0", {\
+        "packageLocation": "./.yarn/cache/@humanfs-types-npm-0.16.0-6048431067-6c14f15202.zip/node_modules/@humanfs/types/",\
         "packageDependencies": [\
-          ["@humanfs/types", "npm:0.15.0"]\
+          ["@humanfs/types", "npm:0.16.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -12124,7 +12124,7 @@ const RAW_RUNTIME_STATE =
           ["@eslint/config-helpers", "npm:0.7.0"],\
           ["@eslint/core", "npm:1.2.1"],\
           ["@eslint/plugin-kit", "npm:0.7.3"],\
-          ["@humanfs/node", "npm:0.16.8"],\
+          ["@humanfs/node", "npm:0.17.0"],\
           ["@humanwhocodes/module-importer", "npm:1.0.1"],\
           ["@humanwhocodes/retry", "npm:0.4.3"],\
           ["@types/estree", "npm:1.0.8"],\
