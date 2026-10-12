@@ -1,0 +1,21 @@
+{{ govukServiceNavigation({
+     navigation:
+       [
+         {
+            href: '/system/status',
+            text: "Status",
+            active: '/system/status' in pageUrl
+         },
+        {
+          href: '/system/MK-live-events',
+          text: "MediaKind live events",
+          active: '/system/MK-live-events' in pageUrl
+        },
+        {
+           href: '/system/capture-sessions',
+           text: "Today's sessions",
+           active: '/system/capture-sessions' in pageUrl
+        }
+
+      ]
+}) }}

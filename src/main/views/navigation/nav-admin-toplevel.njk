@@ -1,0 +1,33 @@
+{{ govukServiceNavigation({
+     navigation:
+       [{
+         href: '/browse',
+         text: "Recordings",
+         active: '/browse' in pageUrl
+       },
+        {
+          href: '/user-admin/onboarding',
+          text: "User Admin",
+          active: '/user-admin' in pageUrl
+        },
+        {
+          href: '/support/edit-request',
+          text: "Support",
+          active: '/support/edit-request' in pageUrl
+        },
+        {
+          href: '/system/status',
+          text: "System Status",
+          active: '/system' in pageUrl
+        },
+        {
+           href: '/management/reports',
+           text: "Reports",
+           active: '/management' in pageUrl
+        },
+        {
+           "text": "Sign out",
+           "href": "/logout"
+         }
+      ]
+}) }}

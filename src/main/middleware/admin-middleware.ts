@@ -9,7 +9,7 @@ export function RequiresSuperUser(req: Request, res: Response, next: NextFunctio
 
   if (!isSuperUser) {
     res.status(404);
-    return res.render('not-found');
+    return res.render('utility/not-found');
   }
 
   next();

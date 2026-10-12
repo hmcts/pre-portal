@@ -60,7 +60,7 @@ async function signInSuperUserAndAcceptTCs(browser: Browser): Promise<Page> {
   await page.type('#signInName', process.env.B2C_TEST_SUPER_USER_LOGIN_EMAIL as string);
   await page.type('#password', process.env.B2C_TEST_SUPER_USER_LOGIN_PASSWORD as string);
   await page.click('#next');
-  await page.waitForSelector('a[href^="/admin/status"]', {visible: true, timeout: 30000});
+  await page.waitForSelector('a[href^="/system/status"]', {visible: true, timeout: 30000});
   if (page.url().includes('/accept-terms-and-conditions')) {
     await page.click('input#terms');
     await page.click('button[type="submit"]');
@@ -85,13 +85,13 @@ async function verifyPa11yTests(url: string, browser: Browser) {
 describe('Accessibility', () => {
   const signedOutUrls = ['/accessibility-statement', '/cookies', '/not-found', '/'];
   const signedInAsAdminUrls = [
-    '/admin/edit-request',
-    '/admin/status',
-    '/admin/MK-live-events',
-    '/admin/audit',
-    '/admin/migration',
+    '/suppprt/edit-request',
+    '/system/status',
+    '/system/MK-live-events',
+    '/management/audit',
+    '/support/migration',
   ];
-  const signedInAsNormalUserUrls = ['/edit-request', '/watch', '/browse', '/terms-and-conditions'];
+  const signedInAsNormalUserUrls = ['/help', '/watch', '/browse', '/terms-and-conditions'];
 
   let browser: Browser;
 

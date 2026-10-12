@@ -40,7 +40,7 @@ describe('Admin Page Access', () => {
 
     const response = await request(app).get('/admin');
     expect(response.status).toEqual(302);
-    expect(response.text).toContain('Found. Redirecting to admin/status');
+    expect(response.text).toContain('Found. Redirecting to system/status');
   });
 
   test('should display "Page Not Found" for non-super user', async () => {

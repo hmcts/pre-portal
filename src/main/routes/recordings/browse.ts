@@ -1,0 +1,107 @@
+import { PreClient } from '../../services/pre-api/pre-client';
+import { SearchRecordingsRequest } from '../../services/pre-api/types';
+import { SessionUser } from '../../services/session-user/session-user';
+import { UserLevel } from '../../types/user-level';
+
+import { Logger } from '@hmcts/nodejs-logging';
+import { Application } from 'express';
+import { requiresAuth } from 'express-openid-connect';
+
+export const convertIsoToDate = (isoString?: string): string | undefined => {
+  if (!isoString) {
+    return;
+  }
+  return new Date(isoString).toLocaleString('en-GB', {
+    timeZone: 'Europe/London',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  });
+};
+
+const getQueryString = (value: unknown): string | undefined => {
+  const queryValue = Array.isArray(value) ? value[0] : value;
+
+  if (typeof queryValue !== 'string') {
+    return undefined;
+  }
+
+  const trimmedQueryValue = queryValue.trim();
+  return trimmedQueryValue || undefined;
+};
+
+export default function (app: Application): void {
+  app.get('/browse', requiresAuth(), async (req, res) => {
+    const logger = Logger.getLogger('browse-route');
+    const userProfileForCjsm = SessionUser.getLoggedInUserProfile(req);
+    const isSuperUser = userProfileForCjsm.app_access.some(role => role.role.name === UserLevel.SUPER_USER);
+    const caseReference = isSuperUser ? getQueryString(req.query.caseReference) : undefined;
+    const primaryEmail = (userProfileForCjsm.user.email || '').toLowerCase();
+    const alternativeEmail = (userProfileForCjsm.user.alternative_email || '').toLowerCase();
+
+    logger.info('Full userProfile.user:', JSON.stringify(userProfileForCjsm.user, null, 2));
+    logger.info('alternative_email value:', userProfileForCjsm.user.alternative_email);
+    logger.info('alternative_email type:', typeof userProfileForCjsm.user.alternative_email);
+
+    const hasCjsmInPrimary = primaryEmail.endsWith('cjsm.net');
+    const hasCjsmInAlt = alternativeEmail.endsWith('cjsm.net');
+    const showCjsmBanner = !hasCjsmInPrimary && hasCjsmInAlt;
+
+    logger.info('hasCjsmInPrimary:', hasCjsmInPrimary);
+    logger.info('hasCjsmInAlt:', hasCjsmInAlt);
+    logger.info('showCjsmBanner:', showCjsmBanner);
+    const client = new PreClient();
+
+    const request: SearchRecordingsRequest = {
+      captureSessionId: req.query.captureSessionId as string,
+      parentRecordingId: req.query.parentRecordingId as string,
+      participantId: req.query.participantId as string,
+      witnessName: req.query.witnessName as string,
+      defendantName: req.query.defendantName as string,
+      caseReference,
+      scheduledFor: req.query.scheduledFor as string,
+      courtId: req.query.courtId as string,
+      includeDeleted: req.query.includeDeleted as unknown as boolean,
+      page: req.query.page as unknown as number,
+      size: 10,
+    };
+
+    const { recordings, pagination } = await client.getRecordings(
+      await SessionUser.getLoggedInUserBrowseId(req),
+      request
+    );
+
+    // Example 9 pages: <Previous 0 ... 2 3 |4| 5 6 ... 8 Next>
+    // Page starts at 0
+    // Rolling window of 5 pages centered on the current page
+    // The current page is 5 then 2 pages before and 2 pages after does not include the first+1 or last-1 pages so add in ellipsis
+
+    const updatedRecordings = recordings.map(recording => ({
+      ...recording,
+      capture_session: {
+        ...recording.capture_session,
+        case_closed_at: convertIsoToDate(recording.capture_session.case_closed_at),
+      },
+    }));
+
+    const queryString = caseReference ? { name: 'caseReference', value: caseReference } : undefined;
+    const { paginationLinks, title } = client.createPagination(
+      pagination,
+      'browse',
+      'Recordings',
+      recordings.length,
+      queryString
+    );
+
+    res.render('recordings/browse', {
+      recordings: updatedRecordings,
+      paginationLinks,
+      title,
+      user: SessionUser.getLoggedInUserProfile(req).user,
+      isSuperUser: isSuperUser,
+      caseReference,
+      pageUrl: req.url,
+      showCjsmBanner,
+    });
+  });
+}
