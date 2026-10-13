@@ -1,6 +1,21 @@
 import { mockGetLatestTermsAndConditions } from '../../../mock-api';
 import { Terms } from '../../../../main/types/terms';
 import { Nunjucks } from '../../../../main/modules/nunjucks';
+import { mockeduser } from '../../test-helper';
+import { UserProfile } from '../../../../main/types/user-profile';
+
+jest.mock('../../../../main/services/session-user/session-user', () => {
+  return {
+    SessionUser: {
+      getLoggedInUserPortalId: jest.fn().mockImplementation((req: Express.Request) => {
+        return '123';
+      }),
+      getLoggedInUserProfile: jest.fn().mockImplementation((req: Express.Request) => {
+        return mockeduser as UserProfile;
+      }),
+    },
+  };
+});
 
 /* eslint-disable jest/expect-expect */
 describe('Terms and Conditions page', () => {
