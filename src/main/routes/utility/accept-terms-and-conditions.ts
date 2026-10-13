@@ -4,20 +4,16 @@ import { SessionUser } from '../../services/session-user/session-user';
 import { Application } from 'express';
 
 import { marked } from 'marked';
-import { UserLevel } from '../../types/user-level';
 
 export default function (app: Application): void {
   app.get('/accept-terms-and-conditions', async (req, res) => {
     const client = new PreClient();
     const terms = await client.getLatestTermsAndConditions();
 
-    const userProfileForCjsm = SessionUser.getLoggedInUserProfile(req);
-    const isSuperUser = userProfileForCjsm.app_access.some(role => role.role.name === UserLevel.SUPER_USER);
-
     res.render('utility/accept-terms-and-conditions', {
       terms: marked(terms.html),
       termsId: terms.id,
-      isSuperUser: isSuperUser,
+      isSuperUser: SessionUser.isLoggedInSuperUser(req),
       pageUrl: req.url,
     });
   });

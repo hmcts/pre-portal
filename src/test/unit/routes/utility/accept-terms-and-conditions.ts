@@ -2,30 +2,14 @@ import { mockGetLatestTermsAndConditions, mockAcceptTermsAndConditions } from '.
 import { Terms } from '../../../../main/types/terms';
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { describe } from '@jest/globals';
-import { mockeduser } from '../../test-helper';
-import { UserProfile } from '../../../../main/types/user-profile';
+import { mockeduser, mockUser } from '../../test-helper';
+import { UserLevel } from '../../../../main/types/user-level';
 
-jest.mock('express-openid-connect', () => {
-  return {
-    requiresAuth: jest.fn().mockImplementation(() => {
-      return (req: any, res: any, next: any) => {
-        next();
-      };
-    }),
-  };
-});
-jest.mock('../../../../main/services/session-user/session-user', () => {
-  return {
-    SessionUser: {
-      getLoggedInUserPortalId: jest.fn().mockImplementation((req: Express.Request) => {
-        return '123';
-      }),
-      getLoggedInUserProfile: jest.fn().mockImplementation((req: Express.Request) => {
-        return mockeduser as UserProfile;
-      }),
-    },
-  };
-});
+if (mockeduser.app_access?.[0]?.role) {
+  mockeduser.app_access[0].role.name = UserLevel.EXTERNAL_USER;
+}
+
+mockUser();
 
 /* eslint-disable jest/expect-expect */
 describe('Accept Terms and Conditions page', () => {

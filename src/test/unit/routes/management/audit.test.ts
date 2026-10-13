@@ -1,33 +1,11 @@
-import { mockeduser } from '../../test-helper';
-import { UserProfile } from '../../../../main/types/user-profile';
+import { mockeduser, mockUser } from '../../test-helper';
 import { describe, test } from '@jest/globals';
 import { mockGetAudit, reset } from '../../../mock-api';
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { UserLevel } from '../../../../main/types/user-level';
 import { PreClient } from '../../../../main/services/pre-api/pre-client';
 
-jest.mock('express-openid-connect', () => {
-  return {
-    requiresAuth: jest.fn().mockImplementation(() => {
-      return (req: any, res: any, next: any) => {
-        next();
-      };
-    }),
-  };
-});
-
-jest.mock('../../../../main/services/session-user/session-user', () => {
-  return {
-    SessionUser: {
-      getLoggedInUserPortalId: jest.fn().mockImplementation((req: Express.Request) => {
-        return '123';
-      }),
-      getLoggedInUserProfile: jest.fn().mockImplementation((req: Express.Request) => {
-        return mockeduser as UserProfile;
-      }),
-    },
-  };
-});
+mockUser();
 
 describe('/management/audit/:id route', () => {
   const app = require('express')();

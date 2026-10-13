@@ -30,6 +30,9 @@ jest.mock('../../../../main/services/session-user/session-user', () => {
       getLoggedInUserProfile: jest.fn().mockImplementation((req: Express.Request) => {
         return mockeduser as UserProfile;
       }),
+      isLoggedInSuperUser: jest.fn().mockImplementation((req: Express.Request) => {
+        return true;
+      }),
     },
   };
 });
@@ -118,6 +121,10 @@ describe('Browse route', () => {
 
     (SessionUser.getLoggedInUserProfile as jest.Mock).mockImplementation(() => {
       return nonSuperUser;
+    });
+
+    (SessionUser.isLoggedInSuperUser as jest.Mock).mockImplementation(() => {
+      return false;
     });
 
     const app = require('express')();

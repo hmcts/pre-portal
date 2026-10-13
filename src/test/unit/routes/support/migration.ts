@@ -9,33 +9,15 @@ jest.mock('../../../../main/services/pre-api/pre-client', () => {
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { beforeAll, describe, test } from '@jest/globals';
 import { MigrationRecordService } from '../../../../main/services/system-status/migration-status';
-import { mockeduser } from '../../test-helper';
+import { mockeduser, mockUser } from '../../test-helper';
 import { UserLevel } from '../../../../main/types/user-level';
-
-jest.mock('express-openid-connect', () => {
-  return {
-    requiresAuth: jest.fn().mockImplementation(() => {
-      return (req: any, res: any, next: any) => {
-        next();
-      };
-    }),
-  };
-});
-
-jest.mock('../../../../main/services/session-user/session-user', () => {
-  return {
-    SessionUser: {
-      getLoggedInUserPortalId: jest.fn().mockImplementation(() => '123'),
-      getLoggedInUserProfile: jest.fn().mockImplementation(() => mockeduser),
-    },
-  };
-});
 
 jest.mock('../../../../main/services/system-status/migration-status');
 
 describe('Migration route', () => {
   beforeAll(() => {
     jest.resetAllMocks();
+    mockUser();
   });
 
   test('should display migration page for super user', async () => {

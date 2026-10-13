@@ -1,7 +1,6 @@
 import { PreClient } from '../../services/pre-api/pre-client';
 import { SearchRecordingsRequest } from '../../services/pre-api/types';
 import { SessionUser } from '../../services/session-user/session-user';
-import { UserLevel } from '../../types/user-level';
 
 import { Logger } from '@hmcts/nodejs-logging';
 import { Application } from 'express';
@@ -34,8 +33,9 @@ export default function (app: Application): void {
   app.get('/browse', requiresAuth(), async (req, res) => {
     const logger = Logger.getLogger('browse-route');
     const userProfileForCjsm = SessionUser.getLoggedInUserProfile(req);
-    const isSuperUser = userProfileForCjsm.app_access.some(role => role.role.name === UserLevel.SUPER_USER);
-    const caseReference = isSuperUser ? getQueryString(req.query.caseReference) : undefined;
+    const loggedInSuperUser = SessionUser.isLoggedInSuperUser(req);
+    const caseReference = loggedInSuperUser ? getQueryString(req.query.caseReference) : undefined;
+
     const primaryEmail = (userProfileForCjsm.user.email || '').toLowerCase();
     const alternativeEmail = (userProfileForCjsm.user.alternative_email || '').toLowerCase();
 
@@ -98,7 +98,7 @@ export default function (app: Application): void {
       paginationLinks,
       title,
       user: SessionUser.getLoggedInUserProfile(req).user,
-      isSuperUser: isSuperUser,
+      isSuperUser: SessionUser.isLoggedInSuperUser(req),
       caseReference,
       pageUrl: req.url,
       showCjsmBanner,

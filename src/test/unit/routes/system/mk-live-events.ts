@@ -1,27 +1,10 @@
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { beforeAll, describe, test } from '@jest/globals';
 import { LiveEventStatusService } from '../../../../main/services/system-status/live-events-status';
-import { mockeduser } from '../../test-helper';
+import { mockeduser, mockUser } from '../../test-helper';
 import { UserLevel } from '../../../../main/types/user-level';
 
-jest.mock('express-openid-connect', () => {
-  return {
-    requiresAuth: jest.fn().mockImplementation(() => {
-      return (req: any, res: any, next: any) => {
-        next();
-      };
-    }),
-  };
-});
-
-jest.mock('../../../../main/services/session-user/session-user', () => {
-  return {
-    SessionUser: {
-      getLoggedInUserPortalId: jest.fn().mockImplementation(() => '123'),
-      getLoggedInUserProfile: jest.fn().mockImplementation(() => mockeduser),
-    },
-  };
-});
+mockUser();
 
 jest.mock('../../../../main/services/system-status/live-events-status');
 

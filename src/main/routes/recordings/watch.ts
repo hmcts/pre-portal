@@ -6,7 +6,6 @@ import config from 'config';
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
 import { v4 as uuid } from 'uuid';
-import { UserLevel } from '../../types/user-level';
 
 function validateId(id: string): boolean {
   return /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(id);
@@ -16,13 +15,10 @@ export default function (app: Application): void {
   const logger = Logger.getLogger('watch');
 
   app.get('/recordings/watch/:id', requiresAuth(), async (req, res, next) => {
-    const userProfileForCjsm = SessionUser.getLoggedInUserProfile(req);
-    const isSuperUser = userProfileForCjsm.app_access.some(role => role.role.name === UserLevel.SUPER_USER);
-
     if (!validateId(req.params.id)) {
       res.status(404);
       res.render('utility/not-found', {
-        isSuperUser: isSuperUser,
+        isSuperUser: SessionUser.isLoggedInSuperUser(req),
         pageUrl: req.url,
       });
       return;
@@ -38,7 +34,7 @@ export default function (app: Application): void {
       if (recording === null) {
         res.status(404);
         res.render('utility/not-found', {
-          isSuperUser: isSuperUser,
+          isSuperUser: SessionUser.isLoggedInSuperUser(req),
           pageUrl: req.url,
         });
         return;
@@ -66,7 +62,7 @@ export default function (app: Application): void {
         res.render('recordings/watch-videojs', {
           recording,
           recordingPlaybackDataUrl,
-          isSuperUser: isSuperUser,
+          isSuperUser: SessionUser.isLoggedInSuperUser(req),
           pageUrl: req.url,
         });
       } else {
@@ -75,7 +71,7 @@ export default function (app: Application): void {
           recording,
           recordingPlaybackDataUrl,
           mediaKindPlayerKey,
-          isSuperUser: isSuperUser,
+          isSuperUser: SessionUser.isLoggedInSuperUser(req),
           pageUrl: req.url,
         });
       }

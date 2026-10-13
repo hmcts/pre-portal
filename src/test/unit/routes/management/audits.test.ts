@@ -4,31 +4,11 @@ import { mockGetAuditLogs, mockAuditLogs, reset, mockGetCourts } from '../../../
 import { beforeAll, describe } from '@jest/globals';
 
 import { PreClient } from '../../../../main/services/pre-api/pre-client';
-import { UserProfile } from '../../../../main/types/user-profile';
-import { mockeduser } from '../../test-helper';
+import { mockeduser, mockUser } from '../../test-helper';
 import { UserLevel } from '../../../../main/types/user-level';
 
-jest.mock('express-openid-connect', () => {
-  return {
-    requiresAuth: jest.fn().mockImplementation(() => {
-      return (req: any, res: any, next: any) => {
-        next();
-      };
-    }),
-  };
-});
-jest.mock('../../../../main/services/session-user/session-user', () => {
-  return {
-    SessionUser: {
-      getLoggedInUserPortalId: jest.fn().mockImplementation((req: Express.Request) => {
-        return '123';
-      }),
-      getLoggedInUserProfile: jest.fn().mockImplementation((req: Express.Request) => {
-        return mockeduser as UserProfile;
-      }),
-    },
-  };
-});
+mockUser();
+
 describe('Audit route', () => {
   beforeAll(() => {
     reset();

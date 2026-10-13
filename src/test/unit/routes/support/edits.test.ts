@@ -1,25 +1,6 @@
-import { mockeduser } from '../../test-helper';
+import { mockeduser, mockUser } from '../../test-helper';
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { UserLevel } from '../../../../main/types/user-level';
-
-jest.mock('express-openid-connect', () => {
-  return {
-    requiresAuth: jest.fn().mockImplementation(() => {
-      return (req, res, next) => {
-        next();
-      };
-    }),
-  };
-});
-
-jest.mock('../../../../main/services/session-user/session-user', () => {
-  return {
-    SessionUser: {
-      getLoggedInUserPortalId: jest.fn().mockImplementation(() => '123'),
-      getLoggedInUserProfile: jest.fn().mockImplementation(() => mockeduser),
-    },
-  };
-});
 
 const mockGetEditRequests = jest.fn();
 const mockGetRecordings = jest.fn();
@@ -32,6 +13,8 @@ jest.mock('../../../../main/services/pre-api/pre-client', () => ({
     postEditsFromCsv: mockPostEditsFromCsv,
   })),
 }));
+
+mockUser();
 
 describe('Admin Edits Page', () => {
   let app;

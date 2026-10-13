@@ -1,15 +1,7 @@
 import { Application } from 'express';
-import { SessionUser } from '../../services/session-user/session-user';
-import { UserLevel } from '../../types/user-level';
 
 export default function (app: Application): void {
   app.get('/accessibility-statement', (req, res) => {
-    const userProfileForCjsm = SessionUser.getLoggedInUserProfile(req);
-    const isSuperUser = userProfileForCjsm.app_access.some(role => role.role.name === UserLevel.SUPER_USER);
-
-    res.render('utility/accessibility-statement', {
-      isSuperUser: isSuperUser,
-      pageUrl: req.url,
-    });
+    res.render('utility/accessibility-statement');
   });
 }
