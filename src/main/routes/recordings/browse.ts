@@ -29,7 +29,7 @@ const getQueryString = (value: unknown): string | undefined => {
   return trimmedQueryValue || undefined;
 };
 
-export default function (app: Application): void {
+export default function browse(app: Application): void {
   app.get('/browse', requiresAuth(), async (req, res) => {
     const logger = Logger.getLogger('browse-route');
     const userProfileForCjsm = SessionUser.getLoggedInUserProfile(req);

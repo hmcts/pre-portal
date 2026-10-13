@@ -5,7 +5,7 @@ import { Application } from 'express';
 
 import { marked } from 'marked';
 
-export default function (app: Application): void {
+export default function acceptTermsAndConditions(app: Application): void {
   app.get('/accept-terms-and-conditions', async (req, res) => {
     const client = new PreClient();
     const terms = await client.getLatestTermsAndConditions();

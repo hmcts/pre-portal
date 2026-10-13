@@ -7,10 +7,12 @@ import { UserLevel } from '../../types/user-level';
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
 import { getAllPaginatedCourts } from '../../helpers/helpers';
+import {Logger} from "@hmcts/nodejs-logging";
 
-export default function (app: Application): void {
+export default function audits(app: Application): void {
   app.get('/management/audit', requiresAuth(), RequiresSuperUser, async (req, res) => {
     const client = new PreClient();
+    const logger = Logger.getLogger('audits');
 
     try {
       const request: SearchAuditLogsRequest = {
@@ -54,6 +56,7 @@ export default function (app: Application): void {
         }),
       });
     } catch (err) {
+      logger.error(err.message);
       res.status(404);
       res.render('utility/not-found', {
         isSuperUser: true,

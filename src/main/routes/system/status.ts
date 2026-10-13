@@ -4,7 +4,7 @@ import { requiresAuth } from 'express-openid-connect';
 import { RequiresSuperUser } from '../../middleware/admin-middleware';
 import { SystemStatus } from '../../services/system-status/system-status';
 
-export default function (app: Application): void {
+export default function statusRoute(app: Application): void {
   app.get('/system/status', requiresAuth(), RequiresSuperUser, async (req, res) => {
     try {
       const client = new PreClient();

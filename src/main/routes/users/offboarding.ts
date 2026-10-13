@@ -1,7 +1,7 @@
 import { Application } from 'express';
 import { SessionUser } from '../../services/session-user/session-user';
 
-export default function (app: Application): void {
+export default function offboarding(app: Application): void {
   app.get('/user-admin/offboarding', (req, res) => {
     res.render('utility/under-development', {
       isSuperUser: SessionUser.isLoggedInSuperUser(req),

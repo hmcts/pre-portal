@@ -36,7 +36,7 @@ const getDateOneWeekAgo = (): string => {
   return `${year}-${month}-${day}`;
 };
 
-export default function (app: Application): void {
+export default function editRequests(app: Application): void {
   app.get('/support/edit-request', requiresAuth(), async (req, res) => {
     const superUserId = getSuperUserId(req);
     if (!superUserId) {

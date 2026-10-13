@@ -11,7 +11,7 @@ function validateId(id: string): boolean {
   return /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(id);
 }
 
-export default function (app: Application): void {
+export default function watch(app: Application): void {
   const logger = Logger.getLogger('watch');
 
   app.get('/recordings/watch/:id', requiresAuth(), async (req, res, next) => {

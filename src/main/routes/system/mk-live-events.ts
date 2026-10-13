@@ -5,7 +5,7 @@ import { RequiresSuperUser } from '../../middleware/admin-middleware';
 
 import { LiveEventStatusService } from '../../services/system-status/live-events-status';
 
-export default function (app: Application): void {
+export default function mkLiveEvents(app: Application): void {
   app.get('/system/mk-live-events', requiresAuth(), RequiresSuperUser, async (req, res) => {
     const client = new PreClient();
 

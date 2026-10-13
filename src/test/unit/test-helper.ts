@@ -78,6 +78,9 @@ export function mockUser() {
         getLoggedInUserProfile: jest.fn().mockImplementation((req: Express.Request) => {
           return mockeduser;
         }),
+        getSuperUserId: jest.fn().mockImplementation((req: Express.Request) => {
+          return mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER)?.id;
+        }),
         isLoggedInSuperUser: jest.fn().mockImplementation(() => {
           return mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER);
         }),

@@ -8,7 +8,7 @@ import { CourtService } from '../../services/system-status/courts';
 import { formatDateToDDMMYYYY, toIsoDateString } from '../../utils/convert-date';
 import { formatDuration } from '../../utils/format-duration';
 
-export default function (app: Application): void {
+export default function migration(app: Application): void {
   app.get('/support/migration', requiresAuth(), RequiresSuperUser, async (req, res) => {
     const client = new PreClient();
 

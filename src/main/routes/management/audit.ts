@@ -1,13 +1,16 @@
-import { PreClient } from '../../services/pre-api/pre-client';
-import { SessionUser } from '../../services/session-user/session-user';
-import { RequiresSuperUser } from '../../middleware/admin-middleware';
-import { UserLevel } from '../../types/user-level';
+import {PreClient} from '../../services/pre-api/pre-client';
+import {SessionUser} from '../../services/session-user/session-user';
+import {RequiresSuperUser} from '../../middleware/admin-middleware';
+import {UserLevel} from '../../types/user-level';
 
-import { Application } from 'express';
-import { requiresAuth } from 'express-openid-connect';
-import { validateId } from '../../helpers/helpers';
+import {Application} from 'express';
+import {requiresAuth} from 'express-openid-connect';
+import {validateId} from '../../helpers/helpers';
+import {Logger} from "@hmcts/nodejs-logging";
 
-export default function (app: Application): void {
+export default function audit(app: Application): void {
+
+  const logger = Logger.getLogger('audit');
   app.get('/management/audit/:id', requiresAuth(), RequiresSuperUser, async (req, res) => {
     if (!validateId(req.params.id)) {
       res.status(404);
@@ -42,6 +45,7 @@ export default function (app: Application): void {
         isSuperUser: true,
       });
     } catch (err) {
+      logger.error(err.message);
       res.status(404);
       res.render('utility/not-found', {
         pageUrl: req.url,
