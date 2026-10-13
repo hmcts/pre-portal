@@ -1,0 +1,30 @@
+  {{ govukHeader({
+    classes: 'govuk-header--full-width-border',
+    rebrand: true,
+    homepageUrl: "/",
+    useTudorCrown: true,
+    serviceName: "HMCTS Pre-Recorded Evidence Service",
+    serviceUrl: "/"
+  }) }}
+  {% if isSuperUser %}
+     {% include "navigation/nav-admin-toplevel.njk" %}
+
+     {% if pageUrl.startsWith('/system') %}
+        {% include "navigation/admin-nav-system.njk" %}
+      {% endif %}
+
+      {% if pageUrl.startsWith('/user-admin')  %}
+        {% include "navigation/admin-nav-users.njk" %}
+      {% endif %}
+
+      {% if pageUrl.startsWith('/management')  %}
+        {% include "navigation/admin-nav-mgmt.njk" %}
+      {% endif %}
+
+      {% if pageUrl.startsWith('/support')  %}
+        {% include "navigation/admin-nav-support.njk" %}
+      {% endif %}
+
+   {% else %}
+      {% include "navigation/nav-standard-toplevel.njk" %}
+   {% endif %}

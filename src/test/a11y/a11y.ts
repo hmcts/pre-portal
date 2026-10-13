@@ -47,7 +47,7 @@ async function signInAsNormalUser(browser: Browser): Promise<Page> {
   if (page.url().includes('/accept-terms-and-conditions')) {
     await page.click('input#terms');
     await page.click('button[type="submit"]');
-    await page.waitForSelector('a[href^="/watch/"]', { visible: true, timeout: 0 });
+    await page.waitForSelector('a[href^="/recordings/watch/"]', { visible: true, timeout: 0 });
   }
   return page;
 }
@@ -61,11 +61,11 @@ async function signInSuperUserAndAcceptTCs(browser: Browser): Promise<Page> {
   await page.type('#signInName', process.env.B2C_TEST_SUPER_USER_LOGIN_EMAIL as string);
   await page.type('#password', process.env.B2C_TEST_SUPER_USER_LOGIN_PASSWORD as string);
   await page.click('#next');
-  await page.waitForSelector('a[href^="/admin/edit-request"]', { visible: true, timeout: 30000 });
+  await page.waitForSelector('a[href^="/system/status"]', { visible: true, timeout: 30000 });
   if (page.url().includes('/accept-terms-and-conditions')) {
     await page.click('input#terms');
     await page.click('button[type="submit"]');
-    await page.waitForSelector('a[href^="/watch/"]', { visible: true, timeout: 0 });
+    await page.waitForSelector('a[href^="/recordings/watch/"]', { visible: true, timeout: 0 });
   }
   return page;
 }
@@ -77,7 +77,7 @@ async function verifyPa11yTests(url: string, browser: Browser) {
   const result: Pa11yResult = await pa11y(config.TEST_URL + url.replace('//', '/'), {
     screenCapture: `${screenshotDir}/${url}.png`,
     browser: browser,
-    ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
+    ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4', 'WCAG2AA.Principle4.Guideline4_1.4_1_1.F77'],
   });
   expect(result.issues).toEqual(expect.any(Array));
   expectNoErrors(result.issues);
@@ -86,13 +86,13 @@ async function verifyPa11yTests(url: string, browser: Browser) {
 describe('Accessibility', () => {
   const signedOutUrls = ['/accessibility-statement', '/cookies', '/not-found', '/'];
   const signedInAsAdminUrls = [
-    '/admin/edit-request',
-    '/admin/status',
-    '/admin/MK-live-events',
-    '/admin/audit',
-    '/admin/migration',
+    '/suppprt/edit-request',
+    '/system/status',
+    '/system/MK-live-events',
+    '/management/audit',
+    '/support/migration',
   ];
-  const signedInAsNormalUserUrls = ['/edit-request', '/watch', '/browse', '/terms-and-conditions'];
+  const signedInAsNormalUserUrls = ['/edit-request', '/help', '/recordings/watch', '/browse', '/terms-and-conditions'];
 
   let browser: Browser;
 

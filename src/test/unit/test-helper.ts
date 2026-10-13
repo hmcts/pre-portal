@@ -1,5 +1,6 @@
 import { AccessStatus } from '../../main/types/access-status';
 import { UserProfile } from '../../main/types/user-profile';
+import { UserLevel } from '../../main/types/user-level';
 
 export const mockeduser: UserProfile = {
   app_access: [
@@ -76,6 +77,12 @@ export function mockUser() {
         }),
         getLoggedInUserProfile: jest.fn().mockImplementation((req: Express.Request) => {
           return mockeduser;
+        }),
+        getSuperUserId: jest.fn().mockImplementation((req: Express.Request) => {
+          return mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER)?.id;
+        }),
+        isLoggedInSuperUser: jest.fn().mockImplementation(() => {
+          return mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER);
         }),
       },
     };

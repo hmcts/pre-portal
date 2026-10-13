@@ -1,0 +1,15 @@
+{{ govukServiceNavigation({
+     navigation:
+       [
+        {
+           href: '/management/reports',
+           text: "Reports",
+           active: '/management/reports' in pageUrl
+        },
+        {
+           href: '/management/audit',
+           text: "Audits",
+           active: '/management/audit' in pageUrl
+        }
+      ]
+}) }}

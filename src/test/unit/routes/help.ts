@@ -7,7 +7,7 @@ describe('Help page', () => {
     new Nunjucks(false).enableFor(app);
     const request = require('supertest');
 
-    const help = require('../../../main/routes/help').default;
+    const help = require('../../../main/routes/utility/help').default;
     help(app);
 
     const response = await request(app).get('/help');

@@ -32,6 +32,19 @@ export class SessionUser {
     return this.getLoggedInUserPortalId(req);
   }
 
+  public static isLoggedInSuperUser(req: Express.Request): boolean {
+    if (!req['__session']) {
+      return false;
+    }
+    if (!req['__session'].userProfile) {
+      return false;
+    }
+
+    return req['__session'].userProfile.app_access?.find(
+      access => access.active && access.role.name === UserLevel.SUPER_USER
+    );
+  }
+
   public static getLoggedInUserProfile(req: Express.Request): UserProfile {
     if (!req['__session']) {
       throw new Error('No session found');
