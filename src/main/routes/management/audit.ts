@@ -1,15 +1,14 @@
-import {PreClient} from '../../services/pre-api/pre-client';
-import {SessionUser} from '../../services/session-user/session-user';
-import {RequiresSuperUser} from '../../middleware/admin-middleware';
-import {UserLevel} from '../../types/user-level';
+import { PreClient } from '../../services/pre-api/pre-client';
+import { SessionUser } from '../../services/session-user/session-user';
+import { RequiresSuperUser } from '../../middleware/admin-middleware';
+import { UserLevel } from '../../types/user-level';
 
-import {Application} from 'express';
-import {requiresAuth} from 'express-openid-connect';
-import {validateId} from '../../helpers/helpers';
-import {Logger} from "@hmcts/nodejs-logging";
+import { Application } from 'express';
+import { requiresAuth } from 'express-openid-connect';
+import { validateId } from '../../helpers/helpers';
+import { Logger } from '@hmcts/nodejs-logging';
 
 export default function audit(app: Application): void {
-
   const logger = Logger.getLogger('audit');
   app.get('/management/audit/:id', requiresAuth(), RequiresSuperUser, async (req, res) => {
     if (!validateId(req.params.id)) {
