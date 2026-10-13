@@ -6,7 +6,7 @@
 # 3. If it doesn't work first time, set your git hooks path: git config --local core.hooksPath .git/hooks
 
 echo "Running checkstyle analysis..."
-yarn prettier --check
+yarn lint && yarn prettier --check
 
 if [ $? -ne 0 ]; then
   echo 1>&2 "Checkstyle failed! Fix then before pushing your code"
