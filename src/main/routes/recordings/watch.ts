@@ -13,12 +13,13 @@ function validateId(id: string): boolean {
 }
 
 export default function (app: Application): void {
-  const userProfileForCjsm = SessionUser.getLoggedInUserProfile(req);
-  const isSuperUser = userProfileForCjsm.app_access.some(role => role.role.name === UserLevel.SUPER_USER);
 
   const logger = Logger.getLogger('watch');
 
   app.get('/watch/:id', requiresAuth(), async (req, res, next) => {
+    const userProfileForCjsm = SessionUser.getLoggedInUserProfile(req);
+    const isSuperUser = userProfileForCjsm.app_access.some(role => role.role.name === UserLevel.SUPER_USER);
+
     if (!validateId(req.params.id)) {
       res.status(404);
       res.render('utility/not-found', {
