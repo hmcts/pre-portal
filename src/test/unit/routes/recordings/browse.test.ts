@@ -290,7 +290,7 @@ describe('Browse route', () => {
 
     mockGetRecordings(recordings);
 
-    const browse = require('../../../main/routes/browse').default;
+    const browse = require('../../../../main/routes/recordings/browse').default;
     browse(app);
 
     const response = await request(app).get('/browse');
@@ -319,7 +319,7 @@ describe('Browse route', () => {
 
     mockGetRecordings(recordings);
 
-    const browse = require('../../../main/routes/browse').default;
+    const browse = require('../../../../main/routes/recordings/browse').default;
     browse(app);
 
     const response = await request(app).get('/browse');
@@ -350,7 +350,7 @@ describe('Browse route', () => {
 
     mockGetRecordings(recordings);
 
-    const browse = require('../../../main/routes/browse').default;
+    const browse = require('../../../../main/routes/recordings/browse').default;
     browse(app);
 
     const response = await request(app).get('/browse');
@@ -379,7 +379,7 @@ describe('Browse route', () => {
 
     mockGetRecordings(recordings);
 
-    const browse = require('../../../main/routes/browse').default;
+    const browse = require('../../../../main/routes/recordings/browse').default;
     browse(app);
 
     const response = await request(app).get('/browse');

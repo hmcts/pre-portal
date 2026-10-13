@@ -1,14 +1,21 @@
 /* eslint-disable jest/expect-expect */
 import { Nunjucks } from '../../../../main/modules/nunjucks';
-import { mockedEditRequest, mockGetEditRequest, mockGetRecording, mockGetRecordingPlaybackData, mockPutAudit, reset } from '../../../mock-api';
+import {
+  mockedEditRequest,
+  mockGetEditRequest,
+  mockGetRecording,
+  mockGetRecordingPlaybackData,
+  mockPutAudit,
+  reset,
+} from '../../../mock-api';
 import { beforeAll, describe } from '@jest/globals';
 
 import { PreClient } from '../../../../main/services/pre-api/pre-client';
 import { mockUser } from '../../test-helper';
 import { RecordingAppliedEdits } from '../../../../main/services/pre-api/types';
 
-jest.mock('../../../main/utils/helpers', () => {
-  const actual = jest.requireActual('../../../main/utils/helpers');
+jest.mock('../../../../main/utils/helpers', () => {
+  const actual = jest.requireActual('../../../../main/utils/helpers');
   return {
     ...actual,
     isFlagEnabled: jest.fn().mockReturnValue(true),
@@ -199,7 +206,7 @@ describe('Watch page success', () => {
       mockGetRecordingPlaybackData();
       mockPutAudit();
 
-      const response = await request(app).get(`/watch/${v2RecordingId}`);
+      const response = await request(app).get(`/recordings/watch/${v2RecordingId}`);
       expect(response.status).toBe(200);
       // TODO: Fix
       // expect(response.text).toContain('View in progress edit request');
@@ -214,7 +221,7 @@ describe('parseAppliedEdits', () => {
     reset();
   });
 
-  const parseAppliedEdits = require('../../../main/routes/watch').parseAppliedEdits;
+  const parseAppliedEdits = require('../../../../main/routes/recordings/watch').parseAppliedEdits;
 
   test('should return undefined if edits is empty', async () => {
     const mockClient = PreClient.prototype;

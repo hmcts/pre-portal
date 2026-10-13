@@ -179,7 +179,7 @@ export const mockedEditRequest: EditRequest = {
   },
   created_by: '12345678-1234-1234-1234-1234567890ac',
   created_at: '2021-09-01T12:00:00Z',
-  modified_at: ''
+  modified_at: '',
 };
 
 export const mockedPaginatedAuditLogs = {
