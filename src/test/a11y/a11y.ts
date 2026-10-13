@@ -3,8 +3,8 @@ This file remains on Puppeteer because Pa11y is not compatible with Playwright a
 to convert whole file to Pa11y actions.
  */
 
-import puppeteer, {Browser, Page} from 'puppeteer';
-import {config} from '../config';
+import puppeteer, { Browser, Page } from 'puppeteer';
+import { config } from '../config';
 
 import * as process from 'node:process';
 
@@ -36,17 +36,17 @@ function expectNoErrors(messages: PallyIssue[]): void {
 
 async function signInAsNormalUser(browser: Browser): Promise<Page> {
   const page = await browser.newPage();
-  await page.goto(config.TEST_URL as string, {waitUntil: 'networkidle2'});
-  await page.waitForSelector('#signInName', {visible: true, timeout: 30000});
+  await page.goto(config.TEST_URL as string, { waitUntil: 'networkidle2' });
+  await page.waitForSelector('#signInName', { visible: true, timeout: 30000 });
   await page.type('#signInName', process.env.B2C_TEST_LOGIN_EMAIL as string);
   await page.type('#password', process.env.B2C_TEST_LOGIN_PASSWORD as string);
   await page.click('#next');
-  await page.waitForSelector('a[href^="/logout"]', {visible: true, timeout: 30000});
+  await page.waitForSelector('a[href^="/logout"]', { visible: true, timeout: 30000 });
 
   if (page.url().includes('/accept-terms-and-conditions')) {
     await page.click('input#terms');
     await page.click('button[type="submit"]');
-    await page.waitForSelector('a[href^="/watch/"]', {visible: true, timeout: 0});
+    await page.waitForSelector('a[href^="/watch/"]', { visible: true, timeout: 0 });
   }
   return page;
 }
@@ -55,16 +55,16 @@ jest.setTimeout(15000);
 
 async function signInSuperUserAndAcceptTCs(browser: Browser): Promise<Page> {
   const page = await browser.newPage();
-  await page.goto(config.TEST_URL as string, {waitUntil: 'networkidle2'});
-  await page.waitForSelector('#signInName', {visible: true, timeout: 30000});
+  await page.goto(config.TEST_URL as string, { waitUntil: 'networkidle2' });
+  await page.waitForSelector('#signInName', { visible: true, timeout: 30000 });
   await page.type('#signInName', process.env.B2C_TEST_SUPER_USER_LOGIN_EMAIL as string);
   await page.type('#password', process.env.B2C_TEST_SUPER_USER_LOGIN_PASSWORD as string);
   await page.click('#next');
-  await page.waitForSelector('a[href^="/system/status"]', {visible: true, timeout: 30000});
+  await page.waitForSelector('a[href^="/system/status"]', { visible: true, timeout: 30000 });
   if (page.url().includes('/accept-terms-and-conditions')) {
     await page.click('input#terms');
     await page.click('button[type="submit"]');
-    await page.waitForSelector('a[href^="/watch/"]', {visible: true, timeout: 0});
+    await page.waitForSelector('a[href^="/watch/"]', { visible: true, timeout: 0 });
   }
   return page;
 }
@@ -135,4 +135,3 @@ describe('Accessibility', () => {
     }, 65000);
   });
 });
-

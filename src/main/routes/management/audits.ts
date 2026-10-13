@@ -55,7 +55,10 @@ export default function (app: Application): void {
       });
     } catch (err) {
       res.status(404);
-      res.render('utility/not-found');
+      res.render('utility/not-found', {
+        isSuperUser: true,
+        pageUrl: req.url,
+      });
       return;
     }
   });

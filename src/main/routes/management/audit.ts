@@ -11,7 +11,10 @@ export default function (app: Application): void {
   app.get('/management/audit/:id', requiresAuth(), RequiresSuperUser, async (req, res) => {
     if (!validateId(req.params.id)) {
       res.status(404);
-      res.render('utility/not-found');
+      res.render('utility/not-found', {
+        isSuperUser: true,
+        pageUrl: req.url,
+      });
       return;
     }
 
@@ -26,7 +29,10 @@ export default function (app: Application): void {
 
       if (!audit) {
         res.status(404);
-        res.render('utility/not-found');
+        res.render('utility/not-found', {
+          isSuperUser: true,
+          pageUrl: req.url,
+        });
         return;
       }
 

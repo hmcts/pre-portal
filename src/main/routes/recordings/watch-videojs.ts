@@ -5,6 +5,7 @@ import { Logger } from '@hmcts/nodejs-logging';
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
 import { v4 as uuid } from 'uuid';
+import { UserLevel } from '../../types/user-level';
 
 function validateId(id: string): boolean {
   return /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(id);
@@ -14,9 +15,14 @@ export default function (app: Application): void {
   const logger = Logger.getLogger('watch-videojs');
 
   app.get('/recordings/watch-videojs/:id', requiresAuth(), async (req, res, next) => {
+    const userProfileForCjsm = SessionUser.getLoggedInUserProfile(req);
+    const isSuperUser = userProfileForCjsm.app_access.some(role => role.role.name === UserLevel.SUPER_USER);
     if (!validateId(req.params.id)) {
       res.status(404);
-      res.render('utility/not-found');
+      res.render('utility/not-found', {
+        isSuperUser: isSuperUser,
+        pageUrl: req.url,
+      });
       return;
     }
 
@@ -29,7 +35,10 @@ export default function (app: Application): void {
 
       if (recording === null) {
         res.status(404);
-        res.render('utility/not-found');
+        res.render('utility/not-found', {
+          isSuperUser: isSuperUser,
+          pageUrl: req.url,
+        });
         return;
       }
       logger.info(`Recording ${recording.id} accessed by User ${userProfile.user.email}`);
@@ -54,6 +63,8 @@ export default function (app: Application): void {
       res.render('recordings/watch-videojs', {
         recording,
         recordingPlaybackDataUrl,
+        isSuperUser: isSuperUser,
+        pageUrl: req.url,
       });
     } catch (e) {
       next(e);

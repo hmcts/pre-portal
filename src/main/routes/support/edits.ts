@@ -41,7 +41,9 @@ export default function (app: Application): void {
     const superUserId = getSuperUserId(req);
     if (!superUserId) {
       res.status(404);
-      res.render('utility/not-found');
+      res.render('utility/not-found', {
+        isSuperUser: false,
+      });
       return;
     }
 
@@ -68,7 +70,7 @@ export default function (app: Application): void {
     const superUserId = getSuperUserId(req);
     if (!superUserId) {
       res.status(404);
-      res.render('utility/not-found');
+      res.render('utility/not-found', { isSuperUser: false });
       return;
     }
 
@@ -92,7 +94,7 @@ export default function (app: Application): void {
     const superUserId = getSuperUserId(req);
     if (!superUserId) {
       res.status(404);
-      res.render('utility/not-found');
+      res.render('utility/not-found', { isSuperUser: false });
       return;
     }
 
