@@ -13,7 +13,6 @@ function validateId(id: string): boolean {
 }
 
 export default function (app: Application): void {
-
   const logger = Logger.getLogger('watch');
 
   app.get('/watch/:id', requiresAuth(), async (req, res, next) => {
