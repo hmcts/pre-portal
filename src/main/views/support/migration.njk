@@ -538,7 +538,7 @@
           submitRecordsButton.textContent = 'Submitting...';
 
           try {
-            const res = await fetch('/admin/migration/submit', {
+            const res = await fetch('/support/migration/submit', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -833,7 +833,7 @@
               }
               updated.status = 'FAILED';
 
-              const response = await fetch(`/admin/migration/${recordId}`, {
+              const response = await fetch(`/support/migration/${recordId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updated),
@@ -914,7 +914,7 @@
           }
 
           try {
-            const response = await fetch(`/admin/migration/${recordId}`, {
+            const response = await fetch(`/support/migration/${recordId}`, {
               method: 'PUT',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(updated),
@@ -941,7 +941,7 @@
               },
             };
 
-            const auditResponse = await fetch(`/admin/migration/${recordId}/audit`, {
+            const auditResponse = await fetch(`/support/migration/${recordId}/audit`, {
               method: 'PUT',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(auditPayload),
@@ -1043,7 +1043,7 @@
           const payload = mapDto(row);
 
           try {
-            const response = await fetch(`/admin/migration/${recordId}`, {
+            const response = await fetch(`/support/migration/${recordId}`, {
               method: 'PUT',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(payload),
