@@ -48,8 +48,9 @@ describe('/management/audit/:id route', () => {
 
     expect(response.text).toContain('Audit: 12345678-1234-1234-1234-1234567890ab');
 
-    expect(response.text.toString().replace(/\s/g, "")).toContain(
-      '<aclass="govuk-service-navigation__link"href="/logout">Signout</a>');
+    expect(response.text.toString().replace(/\s/g, '')).toContain(
+      '<aclass="govuk-service-navigation__link"href="/logout">Signout</a>'
+    );
 
     expect(response.text).toMatch(/<dt\s+class=["']govuk-summary-list__key["']\s*>[\s\n]*Id[\s\n]*<\/dt>/);
     expect(response.text).toMatch(

@@ -61,8 +61,9 @@ describe('Browse route', () => {
     expect(response.text).toContain('Welcome back,');
     expect(response.text).toContain('legitimate need and having full authorisation.');
     expect(response.text).toContain('Laptop and Desktop devices only.');
-    expect(response.text.toString().replace(/\s/g, "")).toContain(
-      '<aclass="govuk-service-navigation__link"href="/logout">Signout</a>');
+    expect(response.text.toString().replace(/\s/g, '')).toContain(
+      '<aclass="govuk-service-navigation__link"href="/logout">Signout</a>'
+    );
     expect(response.text).toContain('Case reference');
     expect(response.text).toContain('name="caseReference"');
     expect(PreClient.prototype.getRecordings).toHaveBeenCalledWith(

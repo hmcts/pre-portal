@@ -49,8 +49,9 @@ describe('Audit route', () => {
     const response = await request(app).get('/management/audit');
     expect(response.status).toEqual(200);
     expect(response.text).toContain('Audit Logs');
-    expect(response.text.toString().replace(/\s/g, "")).toContain(
-      '<aclass="govuk-service-navigation__link"href="/logout">Signout</a>');
+    expect(response.text.toString().replace(/\s/g, '')).toContain(
+      '<aclass="govuk-service-navigation__link"href="/logout">Signout</a>'
+    );
   });
 
   test('should display "Page is not available" for non-super user', async () => {
