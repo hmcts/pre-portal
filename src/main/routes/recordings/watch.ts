@@ -15,7 +15,7 @@ function validateId(id: string): boolean {
 export default function (app: Application): void {
   const logger = Logger.getLogger('watch');
 
-  app.get('/watch/:id', requiresAuth(), async (req, res, next) => {
+  app.get('/recordings/watch/:id', requiresAuth(), async (req, res, next) => {
     const userProfileForCjsm = SessionUser.getLoggedInUserProfile(req);
     const isSuperUser = userProfileForCjsm.app_access.some(role => role.role.name === UserLevel.SUPER_USER);
 
@@ -61,21 +61,30 @@ export default function (app: Application): void {
         },
       });
 
-      const recordingPlaybackDataUrl = `/watch/${req.params.id}/playback`;
-      const mediaKindPlayerKey = config.get('pre.mediaKindPlayerKey');
-      res.render('recordings/watch', {
-        recording,
-        recordingPlaybackDataUrl,
-        mediaKindPlayerKey,
-        isSuperUser: isSuperUser,
-        pageUrl: req.url,
-      });
+      const recordingPlaybackDataUrl = `/recordings/watch/${req.params.id}/playback`;
+      if (req.query.flavour == 'videojs') {
+        res.render('recordings/watch-videojs', {
+          recording,
+          recordingPlaybackDataUrl,
+          isSuperUser: isSuperUser,
+          pageUrl: req.url,
+        });
+      } else {
+        const mediaKindPlayerKey = config.get('pre.mediaKindPlayerKey');
+        res.render('recordings/watch', {
+          recording,
+          recordingPlaybackDataUrl,
+          mediaKindPlayerKey,
+          isSuperUser: isSuperUser,
+          pageUrl: req.url,
+        });
+      }
     } catch (e) {
       next(e);
     }
   });
 
-  app.get('/watch/:id/playback', requiresAuth(), async (req, res) => {
+  app.get('/recordings/watch/:id/playback', requiresAuth(), async (req, res) => {
     if (!validateId(req.params.id)) {
       res.status(404);
       res.json({ message: 'Not found' });

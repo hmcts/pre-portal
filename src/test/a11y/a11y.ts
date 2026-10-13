@@ -46,7 +46,7 @@ async function signInAsNormalUser(browser: Browser): Promise<Page> {
   if (page.url().includes('/accept-terms-and-conditions')) {
     await page.click('input#terms');
     await page.click('button[type="submit"]');
-    await page.waitForSelector('a[href^="/watch/"]', { visible: true, timeout: 0 });
+    await page.waitForSelector('a[href^="/recordings/watch/"]', { visible: true, timeout: 0 });
   }
   return page;
 }
@@ -64,7 +64,7 @@ async function signInSuperUserAndAcceptTCs(browser: Browser): Promise<Page> {
   if (page.url().includes('/accept-terms-and-conditions')) {
     await page.click('input#terms');
     await page.click('button[type="submit"]');
-    await page.waitForSelector('a[href^="/watch/"]', { visible: true, timeout: 0 });
+    await page.waitForSelector('a[href^="/recordings/watch/"]', { visible: true, timeout: 0 });
   }
   return page;
 }
@@ -91,7 +91,7 @@ describe('Accessibility', () => {
     '/management/audit',
     '/support/migration',
   ];
-  const signedInAsNormalUserUrls = ['/help', '/watch', '/browse', '/terms-and-conditions'];
+  const signedInAsNormalUserUrls = ['/help', '/recordings/watch', '/browse', '/terms-and-conditions'];
 
   let browser: Browser;
 

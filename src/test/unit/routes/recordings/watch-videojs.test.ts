@@ -18,32 +18,32 @@ describe('Watch videojs page failure', () => {
     new Nunjucks(false).enableFor(app);
     const request = require('supertest');
 
-    const watchVideojs = require('../../../../main/routes/recordings/watch-videojs').default;
+    const watchVideojs = require('../../../../main/routes/recordings/watch').default;
     watchVideojs(app);
 
     test('should return 404 when getRecording returns null', async () => {
       mockGetRecording(null);
       await request(app)
-        .get('/recordings/watch-videojs/12345678-1234-1234-1234-1234567890ff')
+        .get('/recordings/watch/12345678-1234-1234-1234-1234567890ff?flavour=videojs')
         .expect(res => expect(res.status).toBe(404));
     });
     test('should return 404 when getRecordingPlaybackDataMk returns null', async () => {
       mockGetRecordingPlaybackData(null);
       await request(app)
-        .get('/recordings/watch-videojs/12345678-1234-1234-1234-1234567890ff/playback')
+        .get('/recordings/watch/12345678-1234-1234-1234-1234567890ff/playback?flavour=videojs')
         .expect(res => expect(res.status).toBe(404));
     });
 
     test('should return 404 when getRecording id is invalid', async () => {
       mockGetRecording(null);
       await request(app)
-        .get('/recordings/watch-videojs/something')
+        .get('/recordings/watch/something?flavour=videojs')
         .expect(res => expect(res.status).toBe(404));
     });
     test('should return 404 when getRecordingPlaybackDataMk id is invalid', async () => {
       mockGetRecordingPlaybackData(null);
       await request(app)
-        .get('/recordings/watch-videojs/something/playback')
+        .get('/recordings/watch/something/playback?flavour=videojs')
         .expect(res => expect(res.status).toBe(404));
     });
 
@@ -52,7 +52,7 @@ describe('Watch videojs page failure', () => {
         throw new Error('Error');
       });
       await request(app)
-        .get('/recordings/watch-videojs/12345678-1234-1234-1234-1234567890ab')
+        .get('/recordings/watch/12345678-1234-1234-1234-1234567890ab?flavour=videojs')
         .expect(res => expect(res.status).toBe(500));
     });
     test('should return 500 when getRecordingPlaybackDataMk fails', async () => {
@@ -62,7 +62,7 @@ describe('Watch videojs page failure', () => {
           throw new Error('Error');
         });
       await request(app)
-        .get('/recordings/watch-videojs/12345678-1234-1234-1234-1234567890ab/playback')
+        .get('/recordings/watch/12345678-1234-1234-1234-1234567890ab/playback?flavour=videojs')
         .expect(res => expect(res.status).toBe(500));
     });
   });
@@ -78,7 +78,7 @@ describe('Watch videojs page success', () => {
     new Nunjucks(false).enableFor(app);
     const request = require('supertest');
 
-    const watchVideojs = require('../../../../main/routes/recordings/watch-videojs').default;
+    const watchVideojs = require('../../../../main/routes/recordings/watch').default;
     watchVideojs(app);
 
     test('should return 200 when getRecording and getRecordingPlaybackDataMk succeed', async () => {
@@ -86,7 +86,7 @@ describe('Watch videojs page success', () => {
       mockGetRecordingPlaybackData();
       mockPutAudit();
       await request(app)
-        .get('/recordings/watch-videojs/12345678-1234-1234-1234-1234567890ab')
+        .get('/recordings/watch/12345678-1234-1234-1234-1234567890ab?flavour=videojs')
         .expect(res => expect(res.status).toBe(200))
         .expect(res => expect(res.text).toContain('legitimate need and having full authorisation.'))
         .expect(res => expect(res.text).toContain('Laptop and Desktop devices only.'))
@@ -96,7 +96,7 @@ describe('Watch videojs page success', () => {
         .expect(res => expect(res.text).toContain('/drm/clear-key'))
         .expect(res => expect(res.text).not.toContain('/assets/js/mkplayer.js'));
       await request(app)
-        .get('/recordings/watch-videojs/12345678-1234-1234-1234-1234567890ab/playback')
+        .get('/recordings/watch/12345678-1234-1234-1234-1234567890ab/playback?flavour=videojs')
         .expect(res => expect(res.status).toBe(200));
       expect(PreClient.prototype.getRecording).toHaveBeenCalledWith(
         'super-user-access-id',
