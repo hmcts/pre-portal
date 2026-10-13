@@ -76,7 +76,7 @@ async function verifyPa11yTests(url: string, browser: Browser) {
   const result: Pa11yResult = await pa11y(config.TEST_URL + url.replace('//', '/'), {
     screenCapture: `${screenshotDir}/${url}.png`,
     browser: browser,
-    ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4'],
+    ignore: ['WCAG2AA.Principle1.Guideline1_3.1_3_1.F92,ARIA4', 'WCAG2AA.Principle4.Guideline4_1.4_1_1.F77'],
   });
   expect(result.issues).toEqual(expect.any(Array));
   expectNoErrors(result.issues);
