@@ -104,7 +104,7 @@ export async function setupEditRequestViewDom(
       case_reference: 'CASE-123',
     },
     editRequest,
-    postUrl: '/edit-request',
+    postUrl: '/support/edit-request',
   });
 
   mountHtmlInDom(html);

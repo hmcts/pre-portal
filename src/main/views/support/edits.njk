@@ -1,6 +1,6 @@
 {% from "govuk/components/pagination/macro.njk" import govukPagination %}
 
-{% extends "admin/admin.njk" %}
+{% extends "full-width.njk" %}
 
 {% block pageTitle %}{{ title }} - PRE Portal{% endblock %}
 
@@ -132,7 +132,7 @@
       }
 
       try {
-        const res = await fetch(`/edits/recordings?case_reference=${encodeURIComponent(caseReference)}`);
+        const res = await fetch(`/support/edits/recordings?case_reference=${encodeURIComponent(caseReference)}`);
         if (!res.ok) {
           throw new Error('Failed to fetch recordings');
         }

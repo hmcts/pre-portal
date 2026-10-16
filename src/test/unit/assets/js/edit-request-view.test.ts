@@ -54,7 +54,7 @@ describe('EditRequestView', () => {
     form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
     await flushPromises();
 
-    expect(fetchMock).toHaveBeenCalledWith('/edit-request', {
+    expect(fetchMock).toHaveBeenCalledWith('/support/edit-request', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

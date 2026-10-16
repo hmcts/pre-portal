@@ -98,7 +98,6 @@ export default function watch(app: Application): void {
         },
       });
 
-      const mediaKindPlayerKey = config.get('pre.mediaKindPlayerKey');
       const enableAutomatedEditing = isFlagEnabled('pre.enableAutomatedEditing');
 
       const editRequestRecordingId =
@@ -116,15 +115,7 @@ export default function watch(app: Application): void {
 
       let parsedAppliedEdits = await parseAppliedEdits(recording.edit_instructions, client, userBrowseId);
       const recordingPlaybackDataUrl = `/recordings/watch/${req.params.id}/playback`;
-      res.render('watch', {
-        recording,
-        recordingPlaybackDataUrl,
-        mediaKindPlayerKey,
-        appliedEdits: enableAutomatedEditing ? parsedAppliedEdits : undefined,
-        enableAutomatedEditing,
-        editRequestStatus,
-        editRequestRecordingId,
-      });
+
       if (req.query.flavour == 'videojs') {
         res.render('recordings/watch-videojs', {
           recording,
@@ -149,6 +140,7 @@ export default function watch(app: Application): void {
           editRequestStatus,
           editRequestRecordingId,
         });
+
       }
     } catch (e) {
       next(e);
