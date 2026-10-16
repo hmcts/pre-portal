@@ -140,7 +140,6 @@ export default function watch(app: Application): void {
           editRequestStatus,
           editRequestRecordingId,
         });
-
       }
     } catch (e) {
       next(e);
