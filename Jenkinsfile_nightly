@@ -38,20 +38,7 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 
 withNightlyPipeline(type, product, component) {
     loadVaultSecrets(secrets)
-    enableCrossBrowserTest()
 
-     afterAlways('crossBrowserTest') {
-      publishHTML target: [
-        allowMissing         : true,
-        alwaysLinkToLastBuild: true,
-        keepAll              : true,
-        reportDir            : "functional-output/cross-browser/allure",
-        reportFiles          : "index.html",
-        reportName           : "Cross Browser Test Report PRE-Portal"
-      ]
-
-      steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/cross-browser/reports/**/*'
-     }
     enableFullFunctionalTest(200)
       afterAlways('fullFunctionalTest') {
         publishHTML target: [
