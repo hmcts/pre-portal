@@ -14,10 +14,6 @@ Feature: View Admin Page
     Then I click the link 'User Admin'
     Then I am on the '/user-admin/onboarding' page
     Then the page title should include "under development"
-    Then I see the link 'Offboard users'
-    Then I click the link 'Offboard users'
-    Then I am on the '/user-admin/offboarding' page
-    Then the page title should include "under development"
     # System nav (3LS + super user)
     Then I see the link 'System Status'
     Then I click the link 'System Status'
@@ -35,10 +31,6 @@ Feature: View Admin Page
     # Management nav (Service)
     Then I see the link 'Management'
     Then I click the link 'Management'
-    Then I am on the '/management/reports' page
-    Then the page title should include "Page is under development"
-    Then I see the link 'Audits'
-    Then I click the link 'Audits'
     Then I am on the '/management/audit' page
     Then the page title should include "Audit Logs"
     Then I go to '/'
@@ -63,8 +55,6 @@ Feature: View Admin Page
     Then the page should include 'Page is not available'
     # These pages should be 'not available' to standard users after implementation
     Given I go to '/user-admin/onboarding'
-    Then the page should include 'under development'
-    Given I go to '/user-admin/offboarding'
     Then the page should include 'under development'
 
 
