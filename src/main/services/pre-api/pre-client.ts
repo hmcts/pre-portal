@@ -1,9 +1,9 @@
-import {AccessStatus} from '../../types/access-status';
-import {TermsNotAcceptedError} from '../../types/errors';
-import {Terms} from '../../types/terms';
-import {UserProfile} from '../../types/user-profile';
-import {RedisService} from '../../app/redis/RedisService';
-import {LiveEvent} from '../../types/live-event';
+import { AccessStatus } from '../../types/access-status';
+import { TermsNotAcceptedError } from '../../types/errors';
+import { Terms } from '../../types/terms';
+import { UserProfile } from '../../types/user-profile';
+import { RedisService } from '../../app/redis/RedisService';
+import { LiveEvent } from '../../types/live-event';
 import {
   Audit,
   CaptureSession,
@@ -19,13 +19,13 @@ import {
   SearchRecordingsRequest,
 } from './types';
 
-import {Logger} from '@hmcts/nodejs-logging';
-import axios, {AxiosResponse} from 'axios';
+import { Logger } from '@hmcts/nodejs-logging';
+import axios, { AxiosResponse } from 'axios';
 import FormData from 'form-data';
-import {HealthResponse} from '../../types/health';
-import {Court} from '../../types/court';
+import { HealthResponse } from '../../types/health';
+import { Court } from '../../types/court';
 import qs from 'qs';
-import {UpdateUser} from '../../types/update-user';
+import { UpdateUser } from '../../types/update-user';
 import config = require('config');
 
 export class PreClient {
@@ -450,7 +450,7 @@ export class PreClient {
 
     const response = await axios.get('/capture-sessions', {
       headers: { 'X-User-Id': xUserId },
-      params: { 'size': 100,  'scheduledFor': dateToday },
+      params: { size: 100, scheduledFor: dateToday },
     });
 
     let captureSessionsList = response.data._embedded?.['captureSessionDTOList'];

@@ -1,9 +1,9 @@
-import {PreClient} from '../pre-api/pre-client';
-import {CaptureSession} from '../pre-api/types'; // Ensure this import is correct
-import {SessionUser} from '../session-user/session-user';
-import {UserLevel} from '../../types/user-level';
-import {Request} from 'express';
-import {Logger} from "@hmcts/nodejs-logging";
+import { PreClient } from '../pre-api/pre-client';
+import { CaptureSession } from '../pre-api/types'; // Ensure this import is correct
+import { SessionUser } from '../session-user/session-user';
+import { UserLevel } from '../../types/user-level';
+import { Request } from 'express';
+import { Logger } from '@hmcts/nodejs-logging';
 
 export class CaptureSessionService {
   logger = Logger.getLogger('capture-session-service');
@@ -18,8 +18,14 @@ export class CaptureSessionService {
   }
 
   public async getCaptureSessionsForToday(): Promise<
-    { captureSessionId: string; captureSessionStatus: string; court: string; bookingId: string;
-      liveEventId: string; caseReference: string }[]
+    {
+      captureSessionId: string;
+      captureSessionStatus: string;
+      court: string;
+      bookingId: string;
+      liveEventId: string;
+      caseReference: string;
+    }[]
   > {
     if (!this.user) {
       throw new Error('User not authorized to access live events.');
