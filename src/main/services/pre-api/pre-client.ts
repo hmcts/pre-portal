@@ -1,11 +1,12 @@
-import { AccessStatus } from '../../types/access-status';
-import { TermsNotAcceptedError } from '../../types/errors';
-import { Terms } from '../../types/terms';
-import { UserProfile } from '../../types/user-profile';
-import { RedisService } from '../../app/redis/RedisService';
-import { LiveEvent } from '../../types/live-event';
+import {AccessStatus} from '../../types/access-status';
+import {TermsNotAcceptedError} from '../../types/errors';
+import {Terms} from '../../types/terms';
+import {UserProfile} from '../../types/user-profile';
+import {RedisService} from '../../app/redis/RedisService';
+import {LiveEvent} from '../../types/live-event';
 import {
   Audit,
+  CaptureSession,
   Court as ApiCourt,
   EditRequest,
   PaginatedRequest,
@@ -16,17 +17,16 @@ import {
   SearchAuditLogsRequest,
   SearchEditsRequest,
   SearchRecordingsRequest,
-  CaptureSession,
 } from './types';
 
-import { Logger } from '@hmcts/nodejs-logging';
-import axios, { AxiosResponse } from 'axios';
+import {Logger} from '@hmcts/nodejs-logging';
+import axios, {AxiosResponse} from 'axios';
 import FormData from 'form-data';
-import config = require('config');
-import { HealthResponse } from '../../types/health';
-import { Court } from '../../types/court';
+import {HealthResponse} from '../../types/health';
+import {Court} from '../../types/court';
 import qs from 'qs';
-import { UpdateUser } from '../../types/update-user';
+import {UpdateUser} from '../../types/update-user';
+import config = require('config');
 
 export class PreClient {
   logger = Logger.getLogger('pre-client');
@@ -429,11 +429,34 @@ export class PreClient {
     }
   }
 
+  public async getCaptureSessionsToday(xUserId: string): Promise<CaptureSession[]> {
+    try {
+      return await this.fetchCaptureSessionsForToday(xUserId);
+    } catch (e) {
+      this.logger.error('Error fetching capture sessions:', e);
+      throw new Error(`Failed to fetch capture sessions: ${e.message || e}`);
+    }
+  }
+
   private async fetchLiveEventsFromAPI(xUserId: string): Promise<LiveEvent[]> {
     const response = await axios.get('/media-service/live-events', {
       headers: { 'X-User-Id': xUserId },
     });
     return response.data as LiveEvent[];
+  }
+
+  private async fetchCaptureSessionsForToday(xUserId: string): Promise<CaptureSession[]> {
+    const dateToday = new Date().toISOString().split('T')[0];
+
+    const response = await axios.get('/capture-sessions', {
+      headers: { 'X-User-Id': xUserId },
+      params: { 'size': 100,  'scheduledFor': dateToday },
+    });
+
+    let captureSessionsList = response.data._embedded?.['captureSessionDTOList'];
+    this.logger.info('Capture sessions list for ' + dateToday + ': ' + JSON.stringify(captureSessionsList));
+
+    return captureSessionsList as CaptureSession[];
   }
 
   public async getCaptureSession(liveEventId: string, xUserId: string): Promise<CaptureSession> {

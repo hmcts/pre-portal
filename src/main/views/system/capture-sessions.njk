@@ -1,0 +1,170 @@
+{% from "govuk/components/pagination/macro.njk" import govukPagination %}
+
+{% extends "full-width.njk" %}
+
+{% block pageTitle %}Capture Sessions today - PRE Portal{% endblock %}
+
+{% block mainContent %}
+<div class="gem-c-title govuk-!-margin-top-0 govuk-!-margin-bottom-8">
+    <h1 class="gem-c-title__text govuk-heading-xl">
+      Capture Sessions Today
+    </h1>
+    <div>
+  <form method="GET" action="" class="govuk-grid-row govuk-!-margin-bottom-6">
+    <div class="govuk-grid-column-one-quarter">
+      <div class="govuk-form-group">
+          <label class="govuk-label" for="caseReference">Case Reference</label>
+          <input class="govuk-input" id="caseReference" name="caseReference" type="text"
+                 value="{{ request.query.caseReference | default('') }}"
+                 placeholder="Enter Case Reference">
+      </div>
+      </div>
+
+      <div class="govuk-grid-column-one-quarter">
+          <div class="govuk-form-group">
+              <label class="govuk-label" for="recordingStatus">Status</label>
+              <select class="govuk-select" id="recordingStatus" name="recordingStatus">
+                  <option value="">All</option>
+                  <option value="STANDBY" {% if request.query.status == 'STANDBY' %}selected{% endif %}>Standby</option>
+                  <option value="INITIALISING" {% if request.query.status == 'INITIALISING' %}selected{% endif %}>Initialising</option>
+                  <option value="PROCESSING" {% if request.query.status == 'PROCESSING' %}selected{% endif %}>Processing</option>
+                  <option value="RECORDING" {% if request.query.status == 'RECORDING' %}selected{% endif %}>Recording</option>
+                  <option value="NO_RECORDING" {% if request.query.status == 'NO_RECORDING' %}selected{% endif %}>No recording</option>
+                  <option value="FAILURE" {% if request.query.status == 'FAILURE' %}selected{% endif %}>Failure</option>
+                  <option value="RECORDING_AVAILABLE" {% if request.query.status == 'RECORDING_AVAILABLE' %}selected{% endif %}>Recording available</option>
+              </select>
+          </div>
+      </div>
+
+        <div class="govuk-grid-column-full">
+              <button class="govuk-button govuk-button--secondary" type="reset" id="resetButton">Reset</button>
+        </div>
+
+  </form>
+  <div>
+
+    <div style="overflow-x: auto; width: 100%;">
+      <table class="govuk-table" id="resizable-table">
+        <caption class="govuk-table__caption govuk-table__caption--m"  tabindex="0">Capture Sessions</caption>
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header resizable">Case Reference<div class="resizer"></div></th>
+            <th scope="col" class="govuk-table__header resizable">Court<div class="resizer"></div></th>
+            <th scope="col" class="govuk-table__header resizable">Start Time<div class="resizer"></div></th>
+            <th scope="col" class="govuk-table__header resizable">Status<div class="resizer"></div></th>
+            <th scope="col" class="govuk-table__header resizable">Capture Session ID<div class="resizer"></div></th>
+            <th scope="col" class="govuk-table__header resizable">Booking ID<div class="resizer"></div></th>
+            <th scope="col" class="govuk-table__header resizable">Live Event ID <div class="resizer"></div></th>
+          </tr>
+        </thead>
+        {% if captureSessions.length === 0 %}
+           <tbody
+              class="govuk-table__body"
+              data-testid="no-data-message">
+              <td>No capture sessions found.</td>
+            </tbody>
+        {% else %}
+          <tbody class="govuk-table__body" id="resizable-body">
+            {% for captureSession in captureSessions %}
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">{{ captureSession.caseReference }}</td>
+                <td class="govuk-table__cell">{{ captureSession.court }}</td>
+                <td class="govuk-table__cell">{{ captureSession.startTime }}</td>
+                <td class="govuk-table__cell">{{ captureSession.captureSessionStatus }}</td>
+                <td class="govuk-table__cell">{{ captureSession.captureSessionId }}</td>
+                <td class="govuk-table__cell">{{ captureSession.bookingId }}</td>
+                <td class="govuk-table__cell">{{ captureSession.liveEventId }} </td>
+              </tr>
+            {% endfor %}
+
+                <tr id="no-data-message" style="display: none; border-bottom: none;">
+                   <td colspan="4" class="govuk-table__cell" style="border-bottom: none;">No capture sessions for today</td>
+                 </tr>
+          </tbody>
+        {% endif %}
+      </table>
+    </div>
+
+    {% if paginationLinks.items.length > 1 %}
+      <div style="display: flex; justify-content: center;">
+        {{ govukPagination(paginationLinks) }}
+      </div>
+    {% endif %}
+</div>
+
+<script>
+function filterTable() {
+    const caseReferenceFilter = document.getElementById("caseReference").value.toLowerCase();
+    const recordingStatus = document.getElementById("recordingStatus").value.toLowerCase();
+
+    const rows = document.querySelectorAll("#resizable-body .govuk-table__row");
+    let visibleRowCount = 0;
+
+    rows.forEach(row => {
+        const caseReference = row.children[0].textContent.toLowerCase();
+        const status = row.children[3].textContent.toLowerCase();
+
+        if (
+            (caseReference.includes(caseReferenceFilter) || caseReferenceFilter === '') &&
+            (status.includes(recordingStatus) || recordingStatus === '')
+        ) {
+            row.style.display = "";
+            visibleRowCount++;
+        } else {
+            row.style.display = "none";
+        }
+    });
+
+    const noDataMessage = document.getElementById("no-data-message");
+    if (visibleRowCount === 0) {
+        noDataMessage.style.display = "";
+    } else {
+        noDataMessage.style.display = "none";
+    }
+}
+
+document.getElementById("caseReference").addEventListener("input", filterTable);
+document.getElementById("recordingStatus").addEventListener("change", filterTable);
+
+document.getElementById("resetButton").addEventListener("click", function () {
+      document.getElementById("caseReference").value = "";
+      document.getElementById("recordingStatus").value = "";
+
+    filterTable();
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const resizers = document.querySelectorAll(".resizer");
+  resizers.forEach((resizer) => {
+    let startX, startWidth, column;
+
+    resizer.addEventListener("mousedown", function (e) {
+      column = resizer.parentElement;
+      startX = e.pageX;
+      startWidth = column.offsetWidth;
+
+      document.addEventListener("mousemove", resizeColumn);
+      document.addEventListener("mouseup", stopResizing);
+    });
+
+    function resizeColumn(e) {
+      const newWidth = Math.max(50, startWidth + (e.pageX - startX));
+      column.style.width = newWidth + "px";
+      const columnIndex = Array.from(column.parentElement.children).indexOf(column);
+
+      document.querySelectorAll(`#resizable-table tr td:nth-child(${columnIndex + 1})`).forEach(td => {
+        td.style.width = newWidth + "px";
+      });
+    }
+
+    function stopResizing() {
+      document.removeEventListener("mousemove", resizeColumn);
+      document.removeEventListener("mouseup", stopResizing);
+    }
+  });
+});
+</script>
+
+
+{% endblock %}
