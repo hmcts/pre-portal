@@ -12662,7 +12662,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"multer@npm:2.5.0":
+"multer@npm:2.5.0, multer@npm:^2.5.0":
   version: 2.5.0
   resolution: "multer@npm:2.5.0"
   dependencies:
@@ -12670,17 +12670,6 @@ __metadata:
     busboy: "npm:^1.6.0"
     type-is: "npm:^1.6.18"
   checksum: 10/c5b968f51f69df631059bb01088c15d0e670853fcfed029af3cf8167ef50f798bb6344143eb1884708bd0de34317d1b4696d74aa93c482390e7d291172958ae9
-  languageName: node
-  linkType: hard
-
-"multer@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "multer@npm:2.4.0"
-  dependencies:
-    append-field: "npm:^1.0.0"
-    busboy: "npm:^1.6.0"
-    type-is: "npm:^1.6.18"
-  checksum: 10/644efb2eefa60079866c3ed9eb549e76c93bd642af2790c2579b224de9a4a4e0545d8e36aeafca21207445b6d2505e85779dca365351eb6f45fca8ce44a8e605
   languageName: node
   linkType: hard
 
@@ -13784,7 +13773,7 @@ __metadata:
     lodash: "npm:4.18.1"
     marked: "npm:^15.0.0"
     mini-css-extract-plugin: "npm:2.10.2"
-    multer: "npm:^2.4.0"
+    multer: "npm:^2.5.0"
     node-mocks-http: "npm:1.18.1"
     nodemon: "npm:3.1.14"
     nunjucks: "npm:3.2.4"
@@ -17025,9 +17014,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.24.1":
-  version: 3.25.76
-  resolution: "zod@npm:3.25.76"
-  checksum: 10/f0c963ec40cd96858451d1690404d603d36507c1fc9682f2dae59ab38b578687d542708a7fdbf645f77926f78c9ed558f57c3d3aa226c285f798df0c4da16995
+"zod@npm:4.6.6":
+  version: 4.6.6
+  resolution: "zod@npm:4.6.6"
+  checksum: 10/ce628fb33400b531f48b63ad1bd9b5ab95ec3ac60d4e8025892d90af9ca5d03b168aaaf74071928345ad1b1bcd735a7d5cf33230ece7de885240bb0f2b7bb492
   languageName: node
   linkType: hard
