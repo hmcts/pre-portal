@@ -1,0 +1,17 @@
+{% from "govuk/components/pagination/macro.njk" import govukPagination %}
+{% from "govuk/components/service-navigation/macro.njk" import govukServiceNavigation %}
+{% extends "template.njk" %}
+
+{% block pageTitle %}{{ title }} - PRE Portal{% endblock %}
+ {% block main %}
+      <div class="full-width-container">
+
+      {% block content %}
+         <div class="govuk-grid-row admin-container">
+            <main id="main-content" class="govuk-main-wrapper" style="margin-top: 0px !important; padding-top: 0px !important;">
+                 {% block mainContent %}{% endblock %}
+               </main>
+         </div>
+     {% endblock %}
+    </div>
+ {% endblock %}

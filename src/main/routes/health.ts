@@ -5,7 +5,7 @@ import { PreClient } from '../services/pre-api/pre-client';
 import healthcheck from '@hmcts/nodejs-healthcheck';
 import { Application } from 'express';
 
-export default function (app: Application): void {
+export default function health(app: Application): void {
   const redis = app.locals.redisClient
     ? healthcheck.raw(() => app.locals.redisClient.ping().then(healthcheck.up).catch(healthcheck.down))
     : null;

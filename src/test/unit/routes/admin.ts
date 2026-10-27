@@ -1,26 +1,9 @@
 import { Nunjucks } from '../../../main/modules/nunjucks';
 import { beforeAll, describe, test, jest } from '@jest/globals';
-import { mockeduser } from '../test-helper';
+import { mockeduser, mockUser } from '../test-helper';
 import { UserLevel } from '../../../main/types/user-level';
 
-jest.mock('express-openid-connect', () => {
-  return {
-    requiresAuth: jest.fn().mockImplementation(() => {
-      return (req: any, res: any, next: any) => {
-        next();
-      };
-    }),
-  };
-});
-
-jest.mock('../../../main/services/session-user/session-user', () => {
-  return {
-    SessionUser: {
-      getLoggedInUserPortalId: jest.fn().mockImplementation(() => '123'),
-      getLoggedInUserProfile: jest.fn().mockImplementation(() => mockeduser),
-    },
-  };
-});
+mockUser();
 
 describe('Admin Page Access', () => {
   beforeAll(() => {
@@ -39,10 +22,8 @@ describe('Admin Page Access', () => {
     }
 
     const response = await request(app).get('/admin');
-    expect(response.status).toEqual(200);
-    expect(response.text).toContain('Admin');
-    expect(response.text).toContain('Status');
-    expect(response.text).toContain('Audit');
+    expect(response.status).toEqual(302);
+    expect(response.text).toContain('Found. Redirecting to system/status');
   });
 
   test('should display "Page Not Found" for non-super user', async () => {
