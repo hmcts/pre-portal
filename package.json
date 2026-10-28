@@ -121,6 +121,7 @@
     "webpack-dev-middleware": "7.4.6"
   },
   "resolutions": {
+    "@azure/identity@npm:4.13.1/@azure/msal-node": "7.1.2",
     "@opentelemetry/core": "2.10.0",
     "@opentelemetry/sdk-node": "^0.221.0",
     "@opentelemetry/sdk-node@npm:0.219.0/@opentelemetry/propagator-jaeger": "2.9.0",
