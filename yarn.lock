@@ -13781,6 +13781,7 @@ __metadata:
     playwright: "npm:1.59.1"
     prettier: "npm:3.9.9"
     puppeteer: "npm:^24.40.0"
+    qs: "npm:^6.16.1"
     redis: "npm:^5.12.1"
     sass: "npm:1.105.1"
     sass-loader: "npm:16.0.8"

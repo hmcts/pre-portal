@@ -69,6 +69,7 @@
     "multer": "^2.5.0",
     "nunjucks": "3.2.4",
     "puppeteer": "^24.40.0",
+    "qs": "^6.16.1",
     "redis": "^5.12.1",
     "serve-favicon": "2.5.1",
     "session-file-store": "^1.5.0",
@@ -77,8 +78,7 @@
     "tsconfig-paths": "4.2.0",
     "typescript": "5.9.3",
     "uuid": "^14.0.0",
-    "video.js": "8.24.0",
-    "qs": "^6.16.1"
+    "video.js": "8.24.0"
   },
   "devDependencies": {
     "@azure/logger": "1.4.0",

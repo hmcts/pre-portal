@@ -95,6 +95,7 @@ const RAW_RUNTIME_STATE =
           ["pre-portal", "workspace:."],\
           ["prettier", "npm:3.9.9"],\
           ["puppeteer", "npm:24.40.0"],\
+          ["qs", "npm:6.17.1"],\
           ["redis", "npm:5.12.1"],\
           ["sass", "npm:1.105.1"],\
           ["sass-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:16.0.8"],\
@@ -18091,6 +18092,7 @@ const RAW_RUNTIME_STATE =
           ["pre-portal", "workspace:."],\
           ["prettier", "npm:3.9.9"],\
           ["puppeteer", "npm:24.40.0"],\
+          ["qs", "npm:6.17.1"],\
           ["redis", "npm:5.12.1"],\
           ["sass", "npm:1.105.1"],\
           ["sass-loader", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:16.0.8"],\
