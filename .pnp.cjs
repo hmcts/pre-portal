@@ -9229,10 +9229,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["bfj", [\
-      ["npm:9.1.3", {\
-        "packageLocation": "./.yarn/cache/bfj-npm-9.1.3-92711cd618-33119ebc52.zip/node_modules/bfj/",\
+      ["npm:9.1.4", {\
+        "packageLocation": "./.yarn/cache/bfj-npm-9.1.4-ec7e398298-07e3617898.zip/node_modules/bfj/",\
         "packageDependencies": [\
-          ["bfj", "npm:9.1.3"],\
+          ["bfj", "npm:9.1.4"],\
           ["check-types", "npm:11.2.3"],\
           ["hoopy", "npm:0.1.4"],\
           ["tryer", "npm:1.0.1"]\
@@ -17040,7 +17040,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@pa11y/html_codesniffer", "npm:2.6.0"],\
           ["axe-core", "npm:4.11.1"],\
-          ["bfj", "npm:9.1.3"],\
+          ["bfj", "npm:9.1.4"],\
           ["commander", "npm:14.0.3"],\
           ["envinfo", "npm:7.21.0"],\
           ["kleur", "npm:4.1.5"],\
