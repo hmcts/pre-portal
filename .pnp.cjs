@@ -8709,7 +8709,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/axios-npm-1.21.0-69fd520960-1d350436e2.zip/node_modules/axios/",\
         "packageDependencies": [\
           ["axios", "npm:1.21.0"],\
-          ["follow-redirects", "virtual:69fd520960149f72a3b465ab7c853fd7f62af9877540c683a9ade76a8714a7ca1f9ad6b16ebe7bf2d4c28c180f71b5a099479abee1d723fbf142fdc710ee43ce#npm:1.16.2"],\
+          ["follow-redirects", "virtual:69fd520960149f72a3b465ab7c853fd7f62af9877540c683a9ade76a8714a7ca1f9ad6b16ebe7bf2d4c28c180f71b5a099479abee1d723fbf142fdc710ee43ce#npm:1.16.3"],\
           ["form-data", "npm:4.0.6"],\
           ["https-proxy-agent", "npm:5.0.1"],\
           ["proxy-from-env", "npm:2.1.0"]\
@@ -12311,19 +12311,19 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["follow-redirects", [\
-      ["npm:1.16.2", {\
-        "packageLocation": "./.yarn/cache/follow-redirects-npm-1.16.2-fb70e4b665-3303addfa9.zip/node_modules/follow-redirects/",\
+      ["npm:1.16.3", {\
+        "packageLocation": "./.yarn/cache/follow-redirects-npm-1.16.3-4551c9ce14-ac3b15f7d1.zip/node_modules/follow-redirects/",\
         "packageDependencies": [\
-          ["follow-redirects", "npm:1.16.2"]\
+          ["follow-redirects", "npm:1.16.3"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:69fd520960149f72a3b465ab7c853fd7f62af9877540c683a9ade76a8714a7ca1f9ad6b16ebe7bf2d4c28c180f71b5a099479abee1d723fbf142fdc710ee43ce#npm:1.16.2", {\
-        "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-36833c885a/0/cache/follow-redirects-npm-1.16.2-fb70e4b665-3303addfa9.zip/node_modules/follow-redirects/",\
+      ["virtual:69fd520960149f72a3b465ab7c853fd7f62af9877540c683a9ade76a8714a7ca1f9ad6b16ebe7bf2d4c28c180f71b5a099479abee1d723fbf142fdc710ee43ce#npm:1.16.3", {\
+        "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-ec8f9ac4e8/0/cache/follow-redirects-npm-1.16.3-4551c9ce14-ac3b15f7d1.zip/node_modules/follow-redirects/",\
         "packageDependencies": [\
           ["@types/debug", null],\
           ["debug", null],\
-          ["follow-redirects", "virtual:69fd520960149f72a3b465ab7c853fd7f62af9877540c683a9ade76a8714a7ca1f9ad6b16ebe7bf2d4c28c180f71b5a099479abee1d723fbf142fdc710ee43ce#npm:1.16.2"]\
+          ["follow-redirects", "virtual:69fd520960149f72a3b465ab7c853fd7f62af9877540c683a9ade76a8714a7ca1f9ad6b16ebe7bf2d4c28c180f71b5a099479abee1d723fbf142fdc710ee43ce#npm:1.16.3"]\
         ],\
         "packagePeers": [\
           "@types/debug",\
