@@ -55,7 +55,7 @@ const RAW_RUNTIME_STATE =
           ["@types/supertest", "npm:7.2.1"],\
           ["allure-commandline", "npm:2.46.1"],\
           ["applicationinsights", "npm:3.17.0"],\
-          ["axios", "npm:1.21.0"],\
+          ["axios", "npm:1.21.1"],\
           ["babel-jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.5.2"],\
           ["body-parser", "npm:2.4.0"],\
           ["chokidar", "npm:3.6.0"],\
@@ -8705,11 +8705,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["axios", [\
-      ["npm:1.21.0", {\
-        "packageLocation": "./.yarn/cache/axios-npm-1.21.0-69fd520960-1d350436e2.zip/node_modules/axios/",\
+      ["npm:1.21.1", {\
+        "packageLocation": "./.yarn/cache/axios-npm-1.21.1-e35860632d-9018790ab5.zip/node_modules/axios/",\
         "packageDependencies": [\
-          ["axios", "npm:1.21.0"],\
-          ["follow-redirects", "virtual:69fd520960149f72a3b465ab7c853fd7f62af9877540c683a9ade76a8714a7ca1f9ad6b16ebe7bf2d4c28c180f71b5a099479abee1d723fbf142fdc710ee43ce#npm:1.16.2"],\
+          ["axios", "npm:1.21.1"],\
+          ["follow-redirects", "virtual:e35860632d9df39b54fd2b76eb992f6e6329033870a11ae6cc12a00a0dc532c1051df3dc48e175a57c3152930d2e44301de8d6d8a3c7e01ad0ea092280754cfd#npm:1.16.2"],\
           ["form-data", "npm:4.0.6"],\
           ["https-proxy-agent", "npm:5.0.1"],\
           ["proxy-from-env", "npm:2.1.0"]\
@@ -10093,7 +10093,7 @@ const RAW_RUNTIME_STATE =
           ["@xmldom/xmldom", "npm:0.9.12"],\
           ["acorn", "npm:8.16.0"],\
           ["arrify", "npm:3.0.0"],\
-          ["axios", "npm:1.21.0"],\
+          ["axios", "npm:1.21.1"],\
           ["chalk", "npm:4.1.2"],\
           ["cheerio", "npm:1.2.0"],\
           ["chokidar", "npm:4.0.3"],\
@@ -12318,12 +12318,12 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:69fd520960149f72a3b465ab7c853fd7f62af9877540c683a9ade76a8714a7ca1f9ad6b16ebe7bf2d4c28c180f71b5a099479abee1d723fbf142fdc710ee43ce#npm:1.16.2", {\
-        "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-36833c885a/0/cache/follow-redirects-npm-1.16.2-fb70e4b665-3303addfa9.zip/node_modules/follow-redirects/",\
+      ["virtual:e35860632d9df39b54fd2b76eb992f6e6329033870a11ae6cc12a00a0dc532c1051df3dc48e175a57c3152930d2e44301de8d6d8a3c7e01ad0ea092280754cfd#npm:1.16.2", {\
+        "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-1733bfe105/0/cache/follow-redirects-npm-1.16.2-fb70e4b665-3303addfa9.zip/node_modules/follow-redirects/",\
         "packageDependencies": [\
           ["@types/debug", null],\
           ["debug", null],\
-          ["follow-redirects", "virtual:69fd520960149f72a3b465ab7c853fd7f62af9877540c683a9ade76a8714a7ca1f9ad6b16ebe7bf2d4c28c180f71b5a099479abee1d723fbf142fdc710ee43ce#npm:1.16.2"]\
+          ["follow-redirects", "virtual:e35860632d9df39b54fd2b76eb992f6e6329033870a11ae6cc12a00a0dc532c1051df3dc48e175a57c3152930d2e44301de8d6d8a3c7e01ad0ea092280754cfd#npm:1.16.2"]\
         ],\
         "packagePeers": [\
           "@types/debug",\
@@ -17611,7 +17611,7 @@ const RAW_RUNTIME_STATE =
           ["@types/supertest", "npm:7.2.1"],\
           ["allure-commandline", "npm:2.46.1"],\
           ["applicationinsights", "npm:3.17.0"],\
-          ["axios", "npm:1.21.0"],\
+          ["axios", "npm:1.21.1"],\
           ["babel-jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.5.2"],\
           ["body-parser", "npm:2.4.0"],\
           ["chokidar", "npm:3.6.0"],\
