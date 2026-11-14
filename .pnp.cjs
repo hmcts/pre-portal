@@ -75,7 +75,7 @@ const RAW_RUNTIME_STATE =
           ["glob", "npm:14.0.4"],\
           ["govuk-frontend", "npm:5.14.0"],\
           ["helmet", "npm:8.3.0"],\
-          ["hls.js", "npm:1.7.3"],\
+          ["hls.js", "npm:1.7.4"],\
           ["html-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.6.8"],\
           ["husky", "npm:9.1.7"],\
           ["jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.5.2"],\
@@ -13002,10 +13002,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["hls.js", [\
-      ["npm:1.7.3", {\
-        "packageLocation": "./.yarn/cache/hls.js-npm-1.7.3-b99e8ef187-73d92ff83e.zip/node_modules/hls.js/",\
+      ["npm:1.7.4", {\
+        "packageLocation": "./.yarn/cache/hls.js-npm-1.7.4-18ab735b70-54f74ed2fd.zip/node_modules/hls.js/",\
         "packageDependencies": [\
-          ["hls.js", "npm:1.7.3"]\
+          ["hls.js", "npm:1.7.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17631,7 +17631,7 @@ const RAW_RUNTIME_STATE =
           ["glob", "npm:14.0.4"],\
           ["govuk-frontend", "npm:5.14.0"],\
           ["helmet", "npm:8.3.0"],\
-          ["hls.js", "npm:1.7.3"],\
+          ["hls.js", "npm:1.7.4"],\
           ["html-webpack-plugin", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:5.6.8"],\
           ["husky", "npm:9.1.7"],\
           ["jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.5.2"],\
