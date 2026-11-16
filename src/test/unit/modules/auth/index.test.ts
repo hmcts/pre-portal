@@ -7,6 +7,7 @@ import { Logger } from '@hmcts/nodejs-logging';
 import axios from 'axios';
 import { OpenidRequest, OpenidResponse, Session } from 'express-openid-connect';
 import { AccessStatus } from '../../../../main/types/access-status';
+import express from 'express';
 
 jest.mock('axios');
 jest.mock('jose', () => {
@@ -19,7 +20,7 @@ jest.mock('jose', () => {
 
 describe('Auth Module', () => {
   test('test redis config is loaded when there is a redisHost', async () => {
-    const app = require('express')();
+    const app = express();
     const auth = new Auth();
     _.set(config, 'session.redis.host', 'http://localhost:6379');
     _.set(config, 'session.redis.key', 'rediskey');
@@ -109,7 +110,7 @@ describe('Auth Module', () => {
         });
       }
     });
-    const app = require('express')();
+    const app = express();
     const auth = new Auth();
     const logger = Logger.getLogger('auth-module-test');
     const configParams = auth['getConfigParams'](app, logger);

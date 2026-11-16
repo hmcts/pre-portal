@@ -6,7 +6,9 @@ import { beforeAll, describe } from '@jest/globals';
 import { PreClient } from '../../../main/services/pre-api/pre-client';
 import { UserProfile } from '../../../main/types/user-profile';
 import { mockeduser } from '../test-helper';
-import { convertIsoToDate } from '../../../main/routes/browse';
+import browse, { convertIsoToDate } from '../../../main/routes/browse';
+import express from 'express';
+import request from 'supertest';
 
 jest.mock('express-openid-connect', () => {
   return {
@@ -37,12 +39,11 @@ describe('Browse route', () => {
   test('browse renders the browse template', async () => {
     jest.setTimeout(65000); // seems to be a slow page in tests for some reason
 
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
+
     mockGetRecordings([]);
 
-    const browse = require('../../../main/routes/browse').default;
     browse(app);
 
     const response = await request(app).get('/browse');
@@ -59,11 +60,9 @@ describe('Browse route', () => {
       throw new Error('error');
     });
 
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
 
-    const browse = require('../../../main/routes/browse').default;
     browse(app);
 
     const response = await request(app).get('/browse');
@@ -71,14 +70,13 @@ describe('Browse route', () => {
   });
 
   test('pagination should have a previous link', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
+
     const recordings = Array(12).fill(mockRecordings[0]).flat();
 
     mockGetRecordings(recordings, 1);
 
-    const browse = require('../../../main/routes/browse').default;
     browse(app);
 
     const response = await request(app).get('/browse?page=1');
@@ -88,14 +86,13 @@ describe('Browse route', () => {
   });
 
   test('pagination should have a next link', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
+
     const recordings = Array(12).fill(mockRecordings[0]).flat();
 
     mockGetRecordings(recordings, 0);
 
-    const browse = require('../../../main/routes/browse').default;
     browse(app);
 
     const response = await request(app).get('/browse?page=0');
@@ -105,14 +102,13 @@ describe('Browse route', () => {
   });
 
   test('pagination should have a filler ellipsis when more than 2 pages from the start', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
+
     const recordings = Array(50).fill(mockRecordings[0]).flat();
 
     mockGetRecordings(recordings, 4);
 
-    const browse = require('../../../main/routes/browse').default;
     browse(app);
 
     const response = await request(app).get('/browse?page=4');
@@ -122,14 +118,13 @@ describe('Browse route', () => {
   });
 
   test('pagination should have a filler ellipsis when more than 2 pages from the end', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
+
     const recordings = Array(50).fill(mockRecordings[0]).flat();
 
     mockGetRecordings(recordings, 0);
 
-    const browse = require('../../../main/routes/browse').default;
     browse(app);
 
     const response = await request(app).get('/browse?page=0');
@@ -139,14 +134,13 @@ describe('Browse route', () => {
   });
 
   test('pagination should show 2 pages either side of the current page', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
+
     const recordings = Array(90).fill(mockRecordings[0]).flat();
 
     mockGetRecordings(recordings, 4);
 
-    const browse = require('../../../main/routes/browse').default;
     browse(app);
 
     const response = await request(app).get('/browse?page=4');
@@ -163,14 +157,13 @@ describe('Browse route', () => {
   });
 
   test('pagination should show all the page numbers', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
+
     const recordings = Array(40).fill(mockRecordings[0]).flat();
 
     mockGetRecordings(recordings, 1);
 
-    const browse = require('../../../main/routes/browse').default;
     browse(app);
 
     const response = await request(app).get('/browse?page=1');
@@ -184,14 +177,13 @@ describe('Browse route', () => {
   });
 
   test('heading should contain current page, max page and number of recordings', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
+
     const recordings = Array(100).fill(mockRecordings[0]).flat();
 
     mockGetRecordings(recordings, 4);
 
-    const browse = require('../../../main/routes/browse').default;
     browse(app);
 
     const response = await request(app).get('/browse?page=4');

@@ -4,6 +4,9 @@ import { Nunjucks } from '../../../main/modules/nunjucks';
 import { describe } from '@jest/globals';
 import { mockeduser } from '../test-helper';
 import { UserProfile } from '../../../main/types/user-profile';
+import express from 'express';
+import request from 'supertest';
+import acceptTermsAndConditions from '../../../main/routes/accept-terms-and-conditions';
 
 jest.mock('express-openid-connect', () => {
   return {
@@ -30,9 +33,8 @@ jest.mock('../../../main/services/session-user/session-user', () => {
 /* eslint-disable jest/expect-expect */
 describe('Accept Terms and Conditions page', () => {
   test('should return 200 when viewing page', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
 
     mockGetLatestTermsAndConditions({
       id: '1234',
@@ -41,7 +43,6 @@ describe('Accept Terms and Conditions page', () => {
       created_at: '2024-10-02T16:30:00.000Z',
     } as Terms);
 
-    const acceptTermsAndConditions = require('../../../main/routes/accept-terms-and-conditions').default;
     acceptTermsAndConditions(app);
 
     const response = await request(app).get('/accept-terms-and-conditions');
@@ -50,14 +51,12 @@ describe('Accept Terms and Conditions page', () => {
   });
 
   test('should return 200 when posting to accept terms', async () => {
-    const app = require('express')();
+    const app = express();
     app.use(require('body-parser').urlencoded({ extended: true }));
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
 
     mockAcceptTermsAndConditions();
 
-    const acceptTermsAndConditions = require('../../../main/routes/accept-terms-and-conditions').default;
     acceptTermsAndConditions(app);
 
     const payload = new URLSearchParams();

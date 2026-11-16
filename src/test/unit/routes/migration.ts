@@ -1,3 +1,5 @@
+import express from 'express';
+
 jest.mock('../../../main/services/pre-api/pre-client', () => {
   return {
     PreClient: jest.fn().mockImplementation(() => ({
@@ -11,6 +13,8 @@ import { beforeAll, describe, test } from '@jest/globals';
 import { MigrationRecordService } from '../../../main/services/system-status/migration-status';
 import { mockeduser } from '../test-helper';
 import { UserLevel } from '../../../main/types/user-level';
+import migration from '../../../main/routes/admin/migration';
+import request from 'supertest';
 
 jest.mock('express-openid-connect', () => {
   return {
@@ -39,10 +43,8 @@ describe('Migration route', () => {
   });
 
   test('should display migration page for super user', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
-    const migration = require('../../../main/routes/admin/migration').default;
     migration(app);
 
     MigrationRecordService.prototype.getMigrationRecords = jest.fn().mockResolvedValue({
@@ -94,10 +96,9 @@ describe('Migration route', () => {
   });
 
   test('should display "Page Not Found" for non-super user', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
-    const migration = require('../../../main/routes/admin/migration').default;
+
     migration(app);
 
     if (mockeduser.app_access?.[0]?.role) {
@@ -110,12 +111,11 @@ describe('Migration route', () => {
     expect(response.text).toContain('Page is not available');
   });
   test('PUT /admin/migration/:id should update migration record successfully', async () => {
-    const express = require('express');
     const app = express();
     app.use(express.json());
 
     new Nunjucks(false).enableFor(app);
-    const migration = require('../../../main/routes/admin/migration').default;
+
     migration(app);
 
     mockeduser.app_access = [
@@ -143,7 +143,6 @@ describe('Migration route', () => {
     const mockRecordId = 'record-123';
     MigrationRecordService.prototype.updateMigrationRecord = jest.fn().mockResolvedValue(undefined);
 
-    const request = require('supertest');
     const response = await request(app).put(`/admin/migration/${mockRecordId}`).send({ status: 'READY' });
 
     expect(response.status).toEqual(204);
@@ -153,12 +152,11 @@ describe('Migration route', () => {
   });
 
   test('PUT /admin/migration/:id should return 400 when update fails', async () => {
-    const express = require('express');
     const app = express();
     app.use(express.json());
 
     new Nunjucks(false).enableFor(app);
-    const migration = require('../../../main/routes/admin/migration').default;
+
     migration(app);
 
     mockeduser.app_access = [
@@ -188,7 +186,6 @@ describe('Migration route', () => {
       response: { status: 400, data: { message: 'Bad request' } },
     });
 
-    const request = require('supertest');
     const response = await request(app).put(`/admin/migration/${mockRecordId}`).send({ status: 'READY' });
 
     expect(response.status).toEqual(400);
@@ -196,12 +193,11 @@ describe('Migration route', () => {
   });
 
   test('POST /admin/migration/submit should submit migration records successfully', async () => {
-    const express = require('express');
     const app = express();
     app.use(express.json());
 
     new Nunjucks(false).enableFor(app);
-    const migration = require('../../../main/routes/admin/migration').default;
+
     migration(app);
 
     mockeduser.app_access = [
@@ -228,7 +224,6 @@ describe('Migration route', () => {
 
     MigrationRecordService.prototype.submitMigrationRecords = jest.fn().mockResolvedValue({ undefined });
 
-    const request = require('supertest');
     const response = await request(app).post('/admin/migration/submit');
 
     expect(response.status).toEqual(204);
@@ -236,12 +231,11 @@ describe('Migration route', () => {
   });
 
   test('POST /admin/migration/submit should return 500 when submission fails', async () => {
-    const express = require('express');
     const app = express();
     app.use(express.json());
 
     new Nunjucks(false).enableFor(app);
-    const migration = require('../../../main/routes/admin/migration').default;
+
     migration(app);
 
     mockeduser.app_access = [
@@ -270,7 +264,6 @@ describe('Migration route', () => {
       response: { status: 500, data: { message: 'Server error' } },
     });
 
-    const request = require('supertest');
     const response = await request(app).post('/admin/migration/submit');
 
     expect(response.status).toEqual(500);
