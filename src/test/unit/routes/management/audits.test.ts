@@ -1,11 +1,10 @@
-
 vi.mock('express-openid-connect', () => ({
   __esModule: true,
   default: {
     requiresAuth: () => (req: any, _res: any, next: any) => {
       req.oidc = {
         isAuthenticated: () => true,
-        user: {email: 'test@test.com'},
+        user: { email: 'test@test.com' },
       };
       next();
     },
@@ -36,7 +35,7 @@ vi.mock('../../main/services/session-user/session-user', () => {
 /* eslint-disable vi/expect-expect */
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { mockGetAuditLogs, mockAuditLogs, reset, mockGetCourts } from '../../../mock-api';
-import { describe, expect, test, vi, beforeAll } from 'vitest';;
+import { describe, expect, test, vi, beforeAll } from 'vitest';
 
 import { PreClient } from '../../../../main/services/pre-api/pre-client';
 import { mockeduser } from '../../test-helper';

@@ -8,7 +8,7 @@ vi.mock('express-openid-connect', () => ({
     requiresAuth: () => (req: any, _res: any, next: any) => {
       req.oidc = {
         isAuthenticated: () => true,
-        user: {email: 'test@test.com'},
+        user: { email: 'test@test.com' },
       };
       next();
     },
@@ -36,7 +36,6 @@ vi.mock('../../main/services/session-user/session-user', () => {
   };
 });
 
-
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { mockGetRecording, mockGetRecordingPlaybackData, mockPutAudit, reset } from '../../../mock-api';
 
@@ -45,7 +44,7 @@ import { PreClient } from '../../../../main/services/pre-api/pre-client';
 import express from 'express';
 import watch from '../../../../main/routes/recordings/watch';
 import request from 'supertest';
-import {UserLevel} from "../../../../main/types/user-level";
+import { UserLevel } from '../../../../main/types/user-level';
 
 describe('Watch videojs page failure', () => {
   beforeAll(() => {
@@ -93,11 +92,11 @@ describe('Watch videojs page failure', () => {
         .expect(res => expect(res.status).toBe(500));
     });
     test('should return 500 when getRecordingPlaybackDataMk fails', async () => {
-      vi
-        .spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
-        .mockImplementation(async (xUserId: string, id: string) => {
+      vi.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockImplementation(
+        async (xUserId: string, id: string) => {
           throw new Error('Error');
-        });
+        }
+      );
       await request(app)
         .get('/recordings/watch/12345678-1234-1234-1234-1234567890ab/playback?flavour=videojs')
         .expect(res => expect(res.status).toBe(500));

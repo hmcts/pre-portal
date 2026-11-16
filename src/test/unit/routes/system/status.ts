@@ -7,10 +7,9 @@ import { UserLevel } from '../../../../main/types/user-level';
 
 vi.mock('express-openid-connect', () => ({
   default: {
-    requiresAuth: vi.fn(() => (_req: express.Request, _res: express.Response, next: express.NextFunction) => next())
+    requiresAuth: vi.fn(() => (_req: express.Request, _res: express.Response, next: express.NextFunction) => next()),
   },
 }));
-
 
 vi.mock('../../../main/services/session-user/session-user', () => ({
   SessionUser: {

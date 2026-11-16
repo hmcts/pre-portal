@@ -1,4 +1,3 @@
-
 vi.mock('express-openid-connect', () => {
   return {
     requiresAuth: vi.fn().mockImplementation(() => {
@@ -27,7 +26,6 @@ vi.mock('../../../../main/services/session-user/session-user', () => {
     },
   };
 });
-
 
 /* eslint-disable vitest/expect-expect */
 import { Nunjucks } from '../../../../main/modules/nunjucks';

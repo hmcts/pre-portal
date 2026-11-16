@@ -1,11 +1,10 @@
-
 vi.mock('express-openid-connect', () => ({
   __esModule: true,
   default: {
     requiresAuth: () => (req: any, _res: any, next: any) => {
       req.oidc = {
         isAuthenticated: () => true,
-        user: {email: 'test@test.com'},
+        user: { email: 'test@test.com' },
       };
       next();
     },

@@ -9,7 +9,7 @@ vi.mock('express-openid-connect', () => ({
     requiresAuth: () => (req: any, _res: any, next: any) => {
       req.oidc = {
         isAuthenticated: () => true,
-        user: {email: 'test@test.com'},
+        user: { email: 'test@test.com' },
       };
       next();
     },
@@ -90,4 +90,3 @@ export const mockeduser: UserProfile = {
     },
   },
 };
-

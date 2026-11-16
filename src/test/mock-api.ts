@@ -13,6 +13,7 @@ import {
 import { PreClient } from '../main/services/pre-api/pre-client';
 import { AxiosResponse } from 'axios';
 import { Terms } from '../main/types/terms';
+import { LiveEvent } from '../main/types/live-event';
 
 export const mockCourts: Court[] = [
   {
@@ -37,6 +38,15 @@ export const mockCourts: Court[] = [
       },
     ],
   } as Court,
+];
+
+export const mockLiveEvents: LiveEvent[] = [
+  {
+    id: '12345678-1234-1234-1234-1234567890ab',
+    name: 'Example Live Event',
+    description: 'Example Live Event Description',
+    resource_state: 'RUNNING',
+  } as LiveEvent,
 ];
 
 export const mockAuditLogs: Audit[] = [
@@ -335,6 +345,12 @@ export function mockGetCourts(courts?: Court[], page: number = 0) {
       return Promise.resolve({ courts: mockCourts, pagination: mockPagination });
     }
   );
+}
+
+export function mockGetLiveEvents() {
+  vi.spyOn(PreClient.prototype, 'getLiveEvents').mockImplementation(async (xUserId: string) => {
+    return Promise.resolve(mockLiveEvents);
+  });
 }
 
 export function reset() {
