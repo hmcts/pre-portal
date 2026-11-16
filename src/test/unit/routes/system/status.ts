@@ -27,7 +27,7 @@ describe('Admin Status route', () => {
       mockeduser.app_access[0].role.name = UserLevel.SUPER_USER;
     }
 
-    const response: Response = await request(app).get('/system/status');
+    const response = await request(app).get('/system/status');
     expect(response.status).toEqual(200);
     expect(response.text).toContain('Admin');
     expect(response.text).toContain('Status');

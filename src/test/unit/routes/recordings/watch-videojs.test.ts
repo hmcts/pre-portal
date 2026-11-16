@@ -5,9 +5,9 @@ import { beforeAll, describe } from '@jest/globals';
 
 import { PreClient } from '../../../../main/services/pre-api/pre-client';
 import { mockUser } from '../../test-helper';
-import express from "express";
-import watch from "../../../../main/routes/recordings/watch";
-import request from "supertest";
+import express from 'express';
+import watch from '../../../../main/routes/recordings/watch';
+import request from 'supertest';
 
 mockUser();
 

@@ -1,6 +1,6 @@
 import { Nunjucks } from '../../../main/modules/nunjucks';
 import express from 'express';
-import help from '../../../main/routes/help';
+import help from '../../../main/routes/utility/help';
 import request from 'supertest';
 
 /* eslint-disable jest/expect-expect */

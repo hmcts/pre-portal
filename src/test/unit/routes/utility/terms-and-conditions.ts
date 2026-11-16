@@ -1,7 +1,7 @@
 import { mockGetLatestTermsAndConditions } from '../../../mock-api';
 import { Terms } from '../../../../main/types/terms';
 import { Nunjucks } from '../../../../main/modules/nunjucks';
-import termsAndConditions from '../../../../main/routes/terms-and-conditions';
+import termsAndConditions from '../../../../main/routes/utility/terms-and-conditions';
 import express from 'express';
 import request from 'supertest';
 

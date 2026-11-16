@@ -94,8 +94,7 @@ export default function watch(app: Application): void {
       const client = new PreClient();
       const userBrowseId = await SessionUser.getLoggedInUserBrowseId(req);
 
-      const recordingPlaybackData = await client.getRecordingPlaybackDataMk(userBrowseId,
-        getSingleId(req.params.id));
+      const recordingPlaybackData = await client.getRecordingPlaybackDataMk(userBrowseId, getSingleId(req.params.id));
 
       if (recordingPlaybackData === null) {
         res.status(404);

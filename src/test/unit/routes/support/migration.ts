@@ -1,6 +1,6 @@
 import express from 'express';
 
-jest.mock('../../../main/services/pre-api/pre-client', () => {
+jest.mock('../../../../main/services/pre-api/pre-client', () => {
   return {
     PreClient: jest.fn().mockImplementation(() => ({
       getCourts: jest.fn().mockResolvedValue([{ id: '123', name: 'Birmingham Youth Court' }]),

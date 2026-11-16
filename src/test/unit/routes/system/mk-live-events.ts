@@ -1,9 +1,9 @@
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { beforeAll, describe, test } from '@jest/globals';
-import { LiveEventStatusService } from '../../../main/services/system-status/live-events-status';
+import { LiveEventStatusService } from '../../../../main/services/system-status/live-events-status';
 import { mockeduser, mockUser } from '../../test-helper';
-import { UserLevel } from '../../../main/types/user-level';
-import mkLiveEvents from '../../../main/routes/admin/mk-live-events';
+import { UserLevel } from '../../../../main/types/user-level';
+import mkLiveEvents from '../../../../main/routes/system/mk-live-events';
 import express from 'express';
 import request from 'supertest';
 

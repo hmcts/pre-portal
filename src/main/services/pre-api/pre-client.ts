@@ -22,7 +22,7 @@ import {
 import { Logger } from '@hmcts/nodejs-logging';
 import axios, { AxiosResponse } from 'axios';
 import FormData from 'form-data';
-import config from "config";
+import config from 'config';
 import { HealthResponse } from '../../types/health';
 import { Court } from '../../types/court';
 import qs from 'qs';

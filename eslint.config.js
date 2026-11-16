@@ -61,6 +61,7 @@ export default {
     ],
     'jest/prefer-to-have-length': 'error',
     'jest/valid-expect': 'off',
+    'jest/expect-expect': 'off',
     'linebreak-style': ['error', 'unix'],
     'no-console': 'warn',
     'no-prototype-builtins': 'off',

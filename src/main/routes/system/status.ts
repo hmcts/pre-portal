@@ -2,7 +2,7 @@ import { Application } from 'express';
 import { PreClient } from '../../services/pre-api/pre-client';
 import { RequiresSuperUser } from '../../middleware/admin-middleware';
 import { SystemStatus } from '../../services/system-status/system-status';
-import openidConnect from "express-openid-connect";
+import openidConnect from 'express-openid-connect';
 
 export default function statusRoute(app: Application): void {
   app.get('/system/status', openidConnect.requiresAuth(), RequiresSuperUser, async (req, res) => {

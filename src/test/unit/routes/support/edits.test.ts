@@ -2,7 +2,7 @@ import { mockeduser, mockUser } from '../../test-helper';
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { UserLevel } from '../../../../main/types/user-level';
 import express from 'express';
-import edits from '../../../../main/routes/admin/edits';
+import edits from '../../../../main/routes/support/edits';
 
 const mockGetEditRequests = jest.fn();
 const mockGetRecordings = jest.fn();

@@ -6,7 +6,7 @@ import { UserLevel } from '../../../../main/types/user-level';
 import { PreClient } from '../../../../main/services/pre-api/pre-client';
 import express from 'express';
 import request from 'supertest';
-import audit from "../../../../main/routes/management/audit";
+import audit from '../../../../main/routes/management/audit';
 
 mockUser();
 

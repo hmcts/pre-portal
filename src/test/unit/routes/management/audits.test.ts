@@ -8,8 +8,8 @@ import { mockeduser, mockUser } from '../../test-helper';
 import { UserLevel } from '../../../../main/types/user-level';
 
 import express from 'express';
-import audits from "../../../../main/routes/management/audits";
-import request from "supertest";
+import audits from '../../../../main/routes/management/audits';
+import request from 'supertest';
 
 mockUser();
 

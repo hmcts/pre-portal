@@ -90,27 +90,32 @@ export default function editRequests(app: Application): void {
     res.json(recordings);
   });
 
-  app.post('/support/edit-request/upload', openidConnect.requiresAuth(), upload.single('file-upload'), async (req, res) => {
-    const superUserId = getSuperUserId(req);
-    if (!superUserId) {
-      res.status(404);
-      res.render('utility/not-found', { isSuperUser: false });
-      return;
-    }
-
-    try {
-      const file = req.file;
-      const sourceRecordingId = req.body.source_recording;
-
-      if (!file || !sourceRecordingId) {
-        res.status(400).json({ message: 'Missing file or source recording id' });
+  app.post(
+    '/support/edit-request/upload',
+    openidConnect.requiresAuth(),
+    upload.single('file-upload'),
+    async (req, res) => {
+      const superUserId = getSuperUserId(req);
+      if (!superUserId) {
+        res.status(404);
+        res.render('utility/not-found', { isSuperUser: false });
         return;
       }
 
-      await new PreClient().postEditsFromCsv(superUserId, sourceRecordingId, file.buffer);
-      res.redirect('/support/edit-request');
-    } catch (error) {
-      res.status(400).json({ message: error.message });
+      try {
+        const file = req.file;
+        const sourceRecordingId = req.body.source_recording;
+
+        if (!file || !sourceRecordingId) {
+          res.status(400).json({ message: 'Missing file or source recording id' });
+          return;
+        }
+
+        await new PreClient().postEditsFromCsv(superUserId, sourceRecordingId, file.buffer);
+        res.redirect('/support/edit-request');
+      } catch (error) {
+        res.status(400).json({ message: error.message });
+      }
     }
-  });
+  );
 }

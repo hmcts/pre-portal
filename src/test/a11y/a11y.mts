@@ -3,10 +3,11 @@ This file remains on Puppeteer because Pa11y is not compatible with Playwright a
 to convert whole file to Pa11y actions.
  */
 
-import puppeteer, { Browser, Page } from 'puppeteer';
-import { config } from '../config';
-
+import { fileURLToPath } from 'node:url';
+import puppeteer, { type Browser, type Page } from 'puppeteer';
 import pa11y from 'pa11y';
+import { afterEach, beforeEach, describe, expect, jest, test } from '@jest/globals';
+import { config } from '../config.js';
 
 interface Pa11yResult {
   documentTitle: string;
@@ -68,7 +69,8 @@ async function signInSuperUserAndAcceptTCs(browser: Browser): Promise<Page> {
 }
 
 jest.setTimeout(65000);
-const screenshotDir = `${__dirname}/../../../functional-output/pa11y`;
+
+const screenshotDir = fileURLToPath(new URL('../../../functional-output/pa11y/', import.meta.url));
 
 async function verifyPa11yTests(url: string, browser: Browser) {
   const result: Pa11yResult = await pa11y(config.TEST_URL + url.replace('//', '/'), {

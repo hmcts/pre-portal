@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
     "outDir": "./src/",
-    "module": "ESNext",
+    "module": "ES2020",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "target": "ES2020",
     "strict": true,
     "noImplicitAny": false,
     "noImplicitThis": false,
-    "moduleResolution": "node",
     "noUnusedLocals": true,
     "experimentalDecorators": true,
     "useUnknownInCatchVariables": false,
