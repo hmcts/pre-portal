@@ -1,26 +1,44 @@
-import { mockeduser, mockUser } from '../../test-helper';
+import { mockeduser } from '../../test-helper';
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { UserLevel } from '../../../../main/types/user-level';
 import express from 'express';
 import edits from '../../../../main/routes/support/edits';
+import { describe, expect, test, vi, beforeAll } from 'vitest';
+import request from 'supertest';
 
-const mockGetEditRequests = jest.fn();
-const mockGetRecordings = jest.fn();
-const mockPostEditsFromCsv = jest.fn();
+vi.mock('express-openid-connect', () => {
+  return {
+    requiresAuth: vi.fn().mockImplementation(() => {
+      return (req, res, next) => {
+        next();
+      };
+    }),
+  };
+});
 
-jest.mock('../../../../main/services/pre-api/pre-client', () => ({
-  PreClient: jest.fn().mockImplementation(() => ({
-    getEditRequests: mockGetEditRequests,
-    getRecordings: mockGetRecordings,
-    postEditsFromCsv: mockPostEditsFromCsv,
-  })),
+vi.mock('../../../../main/services/session-user/session-user', () => {
+  return {
+    SessionUser: {
+      getLoggedInUserPortalId: vi.fn().mockImplementation(() => '123'),
+      getLoggedInUserProfile: vi.fn().mockImplementation(() => mockeduser),
+    },
+  };
+});
+
+const mockGetEditRequests = vi.fn();
+const mockGetRecordings = vi.fn();
+const mockPostEditsFromCsv = vi.fn();
+
+vi.mock('../../../../main/services/pre-api/pre-client', () => ({
+  PreClient: vi.fn(function (this: any) {
+    this.getEditRequests = mockGetEditRequests;
+    this.getRecordings = mockGetRecordings;
+    this.postEditsFromCsv = mockPostEditsFromCsv;
+  }),
 }));
-
-mockUser();
 
 describe('Admin Edits Page', () => {
   let app;
-  let request;
 
   beforeAll(() => {
     app = express();

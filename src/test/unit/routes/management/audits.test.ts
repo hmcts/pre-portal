@@ -1,17 +1,50 @@
-/* eslint-disable jest/expect-expect */
+
+vi.mock('express-openid-connect', () => ({
+  __esModule: true,
+  default: {
+    requiresAuth: () => (req: any, _res: any, next: any) => {
+      req.oidc = {
+        isAuthenticated: () => true,
+        user: {email: 'test@test.com'},
+      };
+      next();
+    },
+  },
+}));
+vi.mock('../../main/services/session-user/session-user', () => {
+  return {
+    SessionUser: {
+      getLoggedInUserPortalId: vi.fn().mockImplementation((req: Express.Request) => {
+        return '123';
+      }),
+      getLoggedInUserBrowseId: vi.fn().mockImplementation((req: Express.Request) => {
+        return 'super-user-access-id';
+      }),
+      getLoggedInUserProfile: vi.fn().mockImplementation((req: Express.Request) => {
+        return mockeduser;
+      }),
+      getSuperUserId: vi.fn().mockImplementation((req: Express.Request) => {
+        return mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER)?.id;
+      }),
+      isLoggedInSuperUser: vi.fn().mockImplementation(() => {
+        return mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER);
+      }),
+    },
+  };
+});
+
+/* eslint-disable vi/expect-expect */
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { mockGetAuditLogs, mockAuditLogs, reset, mockGetCourts } from '../../../mock-api';
-import { beforeAll, describe } from '@jest/globals';
+import { describe, expect, test, vi, beforeAll } from 'vitest';;
 
 import { PreClient } from '../../../../main/services/pre-api/pre-client';
-import { mockeduser, mockUser } from '../../test-helper';
+import { mockeduser } from '../../test-helper';
 import { UserLevel } from '../../../../main/types/user-level';
 
 import express from 'express';
 import audits from '../../../../main/routes/management/audits';
 import request from 'supertest';
-
-mockUser();
 
 describe('Audit route', () => {
   beforeAll(() => {
@@ -19,8 +52,6 @@ describe('Audit route', () => {
   });
 
   test('audit renders the audit template', async () => {
-    jest.setTimeout(65000); // seems to be a slow page in tests for some reason
-
     const app = express();
     new Nunjucks(false).enableFor(app);
     mockGetAuditLogs([]);
@@ -51,7 +82,7 @@ describe('Audit route', () => {
   });
 
   test('should display "Page is not available" for super user', async () => {
-    jest.spyOn(PreClient.prototype, 'getAuditLogs').mockImplementation(() => {
+    vi.spyOn(PreClient.prototype, 'getAuditLogs').mockImplementation(() => {
       throw new Error('error');
     });
 

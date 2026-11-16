@@ -1,14 +1,19 @@
+import { describe, expect, test } from 'vitest';
 import { Nunjucks } from '../../../main/modules/nunjucks';
 import express from 'express';
-import help from '../../../main/routes/utility/help';
 import request from 'supertest';
 
-/* eslint-disable jest/expect-expect */
+const registerRoute = async (app: express.Express) => {
+  const { default: help } = await import('../../../main/routes/utility/help');
+  help(app);
+};
+
+/* eslint-disable vitest/expect-expect */
 describe('Help page', () => {
   test('should return 200', async () => {
     const app = express();
     new Nunjucks(false).enableFor(app);
-    help(app);
+    await registerRoute(app);
 
     const response = await request(app).get('/help');
     expect(response.status).toBe(200);

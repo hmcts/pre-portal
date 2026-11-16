@@ -15,7 +15,7 @@ import {
   SearchAuditLogsRequest,
   SearchRecordingsRequest,
 } from '../../main/services/pre-api/types';
-import { describe } from '@jest/globals';
+import { describe, expect, test, vi } from 'vitest';
 import axios from 'axios';
 import { mockeduser } from './test-helper';
 import { AccessStatus } from '../../main/types/access-status';
@@ -34,14 +34,15 @@ const mockPlaybackData = {
   type: 'application/vnd.apple.mpegurl',
   protectionInfo: [],
 } as RecordingPlaybackData;
-jest.mock('axios');
 
-/* eslint-disable jest/expect-expect */
+vi.mock('axios');
+
+/* eslint-disable vitest/expect-expect */
 describe('PreClient', () => {
-  const mockedAxios = axios as jest.Mocked<typeof axios>;
+  const mockedAxios = axios as any;
 
   // @ts-ignore
-  mockedAxios.put.mockImplementation((url: string, data: object, config: object) => {
+  mockedAxios.put.mockImplementation((url: string, _data: object, _config: object) => {
     if (url.startsWith('/audit/')) {
       return Promise.resolve({
         status: 201,
@@ -600,7 +601,7 @@ describe('PreClient', () => {
 
   describe('PreClient', () => {
     let client: PreClient;
-    const mockRedisClient = { get: jest.fn(), setEx: jest.fn() };
+    const mockRedisClient = { get: vi.fn(), setEx: vi.fn() };
 
     beforeEach(() => {
       client = new PreClient();
@@ -620,7 +621,7 @@ describe('PreClient', () => {
 
     test('getLiveEvents fetches from API if no cache', async () => {
       mockRedisClient.get.mockResolvedValue(null);
-      const mockAxios = axios as jest.Mocked<typeof axios>;
+      const mockAxios = axios as any;
       mockAxios.get.mockResolvedValue({ data: [{ id: 'event2', name: 'API Event', resource_state: 'Stopped' }] });
 
       const events = await client.getLiveEvents('user2');
@@ -630,7 +631,7 @@ describe('PreClient', () => {
 
     test('getCaptureSession formats UUID and fetches', async () => {
       const liveEventId = '123456781234123412341234567890ab';
-      const mockAxios = axios as jest.Mocked<typeof axios>;
+      const mockAxios = axios as any;
       mockAxios.get.mockResolvedValue({ data: { case_reference: 'CASE123' } });
 
       const session = await client.getCaptureSession(liveEventId, 'user1');
@@ -768,7 +769,7 @@ describe('PreClient', () => {
 
   describe('getUserByEmail', () => {
     beforeEach(() => {
-      jest.clearAllMocks();
+      vi.clearAllMocks();
     });
 
     test('returns user profile for regular email', async () => {

@@ -1,10 +1,40 @@
-/* eslint-disable jest/expect-expect */
+
+vi.mock('express-openid-connect', () => {
+  return {
+    requiresAuth: vi.fn().mockImplementation(() => {
+      return (req: any, res: any, next: any) => {
+        next();
+      };
+    }),
+  };
+});
+
+vi.mock('../../../../main/services/session-user/session-user', () => {
+  return {
+    SessionUser: {
+      getLoggedInUserPortalId: vi.fn().mockImplementation((_req: Express.Request) => {
+        return '123';
+      }),
+      getLoggedInUserBrowseId: vi.fn().mockImplementation((req: Express.Request) => {
+        return 'super-user-access-id';
+      }),
+      getLoggedInUserProfile: vi.fn().mockImplementation((_req: Express.Request) => {
+        return mockeduser as UserProfile;
+      }),
+      isLoggedInSuperUser: vi.fn().mockImplementation((req: Express.Request) => {
+        return true;
+      }),
+    },
+  };
+});
+
+
+/* eslint-disable vitest/expect-expect */
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { mockGetRecordings, reset, mockRecordings } from '../../../mock-api';
-import { beforeAll, describe } from '@jest/globals';
+import { describe, expect, test, vi, beforeAll } from 'vitest';
 
 import { PreClient } from '../../../../main/services/pre-api/pre-client';
-import { SessionUser } from '../../../../main/services/session-user/session-user';
 import { UserProfile } from '../../../../main/types/user-profile';
 import { mockeduser } from '../../test-helper';
 import browse, { convertIsoToDate } from '../../../../main/routes/recordings/browse';
@@ -12,50 +42,14 @@ import browse, { convertIsoToDate } from '../../../../main/routes/recordings/bro
 import express from 'express';
 import request from 'supertest';
 
-jest.mock('express-openid-connect', () => {
-  return {
-    requiresAuth: jest.fn().mockImplementation(() => {
-      return (req: any, res: any, next: any) => {
-        next();
-      };
-    }),
-  };
-});
-jest.mock('../../../../main/services/session-user/session-user', () => {
-  return {
-    SessionUser: {
-      getLoggedInUserPortalId: jest.fn().mockImplementation((req: Express.Request) => {
-        return '123';
-      }),
-      getLoggedInUserBrowseId: jest.fn().mockImplementation((req: Express.Request) => {
-        return 'super-user-access-id';
-      }),
-      getLoggedInUserProfile: jest.fn().mockImplementation((req: Express.Request) => {
-        return mockeduser as UserProfile;
-      }),
-      isLoggedInSuperUser: jest.fn().mockImplementation((req: Express.Request) => {
-        return true;
-      }),
-    },
-  };
-});
 describe('Browse route', () => {
   beforeAll(() => {
     reset();
   });
 
-  afterEach(() => {
-    (SessionUser.getLoggedInUserProfile as jest.Mock).mockImplementation(() => {
-      return mockeduser as UserProfile;
-    });
-  });
-
   test('browse renders the browse template', async () => {
-    jest.setTimeout(65000); // seems to be a slow page in tests for some reason
-
     const app = express();
     new Nunjucks(false).enableFor(app);
-
     mockGetRecordings([]);
 
     browse(app);
@@ -78,7 +72,7 @@ describe('Browse route', () => {
   });
 
   test('should return 500', async () => {
-    jest.spyOn(PreClient.prototype, 'getRecordings').mockImplementation(() => {
+    vi.spyOn(PreClient.prototype, 'getRecordings').mockImplementation(() => {
       throw new Error('error');
     });
 
@@ -117,12 +111,17 @@ describe('Browse route', () => {
       app_access: [],
     } as UserProfile;
 
-    (SessionUser.getLoggedInUserProfile as jest.Mock).mockImplementation(() => {
-      return nonSuperUser;
-    });
-
-    (SessionUser.isLoggedInSuperUser as jest.Mock).mockImplementation(() => {
-      return false;
+    vi.mock('../../../../main/services/session-user/session-user', () => {
+      return {
+        SessionUser: {
+          getLoggedInUserProfile: vi.fn().mockImplementation((_req: Express.Request) => {
+            return nonSuperUser as UserProfile;
+          }),
+          isLoggedInSuperUser: vi.fn().mockImplementation((req: Express.Request) => {
+            return false;
+          }),
+        },
+      };
     });
 
     const app = express();
@@ -160,7 +159,6 @@ describe('Browse route', () => {
   test('pagination should have a next link', async () => {
     const app = express();
     new Nunjucks(false).enableFor(app);
-
     const recordings = Array(12).fill(mockRecordings[0]).flat();
 
     mockGetRecordings(recordings, 0);
@@ -176,7 +174,6 @@ describe('Browse route', () => {
   test('pagination should have a filler ellipsis when more than 2 pages from the start', async () => {
     const app = express();
     new Nunjucks(false).enableFor(app);
-
     const recordings = Array(50).fill(mockRecordings[0]).flat();
 
     mockGetRecordings(recordings, 4);
@@ -208,7 +205,6 @@ describe('Browse route', () => {
   test('pagination should show 2 pages either side of the current page', async () => {
     const app = express();
     new Nunjucks(false).enableFor(app);
-
     const recordings = Array(90).fill(mockRecordings[0]).flat();
 
     mockGetRecordings(recordings, 4);
@@ -231,7 +227,6 @@ describe('Browse route', () => {
   test('pagination should show all the page numbers', async () => {
     const app = express();
     new Nunjucks(false).enableFor(app);
-
     const recordings = Array(40).fill(mockRecordings[0]).flat();
 
     mockGetRecordings(recordings, 1);
@@ -251,7 +246,6 @@ describe('Browse route', () => {
   test('heading should contain current page, max page and number of recordings', async () => {
     const app = express();
     new Nunjucks(false).enableFor(app);
-
     const recordings = Array(100).fill(mockRecordings[0]).flat();
 
     mockGetRecordings(recordings, 4);
