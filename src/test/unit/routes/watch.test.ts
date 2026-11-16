@@ -77,9 +77,7 @@ describe('Watch page success', () => {
   describe('on GET', () => {
     const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
 
-    const watch = require('../../../main/routes/watch').default;
     watch(app);
 
     test('should return 200 when getRecording and getRecordingPlaybackDataMk succeed', async () => {

@@ -1,14 +1,18 @@
+/// <reference types="codeceptjs" />
+
 import { config as testConfig } from './src/test/config';
 
-const { setHeadlessWhen } = require('@codeceptjs/configure');
+import { setHeadlessWhen } from '@codeceptjs/configure';
 
 setHeadlessWhen(testConfig.TestHeadlessBrowser);
+
 export const config: CodeceptJS.MainConfig = {
   name: 'functional',
   gherkin: testConfig.Gherkin,
   output: './functional-output/functional/reports',
   helpers: testConfig.helpers,
   tests: './*_test.{js,ts}',
+  noGlobals: true,
   plugins: {
     pauseOnFail: {
       enabled: !testConfig.TestHeadlessBrowser,
@@ -25,4 +29,6 @@ export const config: CodeceptJS.MainConfig = {
       fullPageScreenshots: true,
     },
   },
+
+  require: ['tsx/esm'],
 };

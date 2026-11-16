@@ -1,16 +1,17 @@
 import { config } from '../config';
+import { locate } from 'codeceptjs';
 
 const { I } = inject();
 
 export const iAmOnPage = (text: string): void => {
   const url = new URL(text, config.TEST_URL);
-  I.retry({ retries: 3, maxTimeout: 5000 }).amOnPage(url.toString());
+  I.amOnPage(url.toString()).retry(3).timeout(5000);
 };
 Given('I go to {string}', iAmOnPage);
 
 Then('the page URL should be {string}', (url: string) => {
   const expectedUrl = `${config.TEST_URL}${url}`;
-  I.retry({ retries: 3, maxTimeout: 5000 }).waitInUrl(expectedUrl);
+  I.waitInUrl(expectedUrl).retry(3).timeout(5000);
 });
 
 Then('the page should include {string}', (text: string) => {

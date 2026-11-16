@@ -5,11 +5,14 @@ import { Application } from 'express';
 import openidConnect from 'express-openid-connect';
 import config from 'config';
 import { v4 as uuid } from 'uuid';
+
 import { Logger } from '@hmcts/nodejs-logging';
+import { getSingleId } from '../utils/helpers';
 
 const logger = Logger.getLogger('watch');
 
-function validateId(id: string): boolean {
+function validateId(input: string | string[]): boolean {
+  const id = getSingleId(input);
   return /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(id);
 }
 
@@ -26,7 +29,10 @@ export default function (app: Application): void {
       const userProfile = SessionUser.getLoggedInUserProfile(req);
 
       const client = new PreClient();
-      const recording = await client.getRecording(await SessionUser.getLoggedInUserPortalId(req), req.params.id);
+      const recording = await client.getRecording(
+        await SessionUser.getLoggedInUserPortalId(req),
+        getSingleId(req.params.id)
+      );
 
       if (recording === null) {
         res.status(404);
@@ -74,7 +80,7 @@ export default function (app: Application): void {
       const client = new PreClient();
       const userPortalId = await SessionUser.getLoggedInUserPortalId(req);
 
-      const recordingPlaybackData = await client.getRecordingPlaybackDataMk(userPortalId, req.params.id);
+      const recordingPlaybackData = await client.getRecordingPlaybackDataMk(userPortalId, getSingleId(req.params.id));
 
       if (recordingPlaybackData === null) {
         res.status(404);
@@ -84,8 +90,9 @@ export default function (app: Application): void {
 
       res.json(recordingPlaybackData);
     } catch (e) {
+      const newMessage = e instanceof Error ? e.message : 'Internal server error';
       res.status(500);
-      res.json({ message: e.message });
+      res.json({ message: newMessage });
     }
   });
 }

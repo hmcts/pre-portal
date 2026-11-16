@@ -7,6 +7,7 @@ import { MigrationRecordService } from '../../services/system-status/migration-s
 import { CourtService } from '../../services/system-status/courts';
 import { formatDateToDDMMYYYY, toIsoDateString } from '../../utils/convert-date';
 import { formatDuration } from '../../utils/format-duration';
+import { getSingleId } from '../../utils/helpers';
 
 export default function (app: Application): void {
   app.get('/admin/migration', openidConnect.requiresAuth(), RequiresSuperUser, async (req, res) => {
@@ -201,7 +202,7 @@ export default function (app: Application): void {
     const recordId = req.params.id;
 
     try {
-      await migrationRecordService.updateMigrationRecord(recordId, req.body);
+      await migrationRecordService.updateMigrationRecord(getSingleId(recordId), req.body);
       res.status(204).send();
     } catch (e: any) {
       console.error('Error updating migration record:', e.response?.data || e.message);
