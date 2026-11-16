@@ -1,9 +1,11 @@
 /* eslint-disable jest/expect-expect */
+import express from 'express';
+import home from '../../../main/routes/home';
+import request from 'supertest';
+
 describe('Home route', () => {
   test('home redirects to /browse', async () => {
-    const app = require('express')();
-    const request = require('supertest');
-    const home = require('../../../main/routes/home').default;
+    const app = express();
     home(app);
     const response = await request(app).get('/');
     expect(response.status).toEqual(302);

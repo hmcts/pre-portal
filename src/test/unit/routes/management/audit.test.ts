@@ -4,14 +4,15 @@ import { mockGetAudit, reset } from '../../../mock-api';
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { UserLevel } from '../../../../main/types/user-level';
 import { PreClient } from '../../../../main/services/pre-api/pre-client';
+import express from 'express';
+import request from 'supertest';
+import audit from "../../../../main/routes/management/audit";
 
 mockUser();
 
 describe('/management/audit/:id route', () => {
-  const app = require('express')();
+  const app = express();
   new Nunjucks(false).enableFor(app);
-  const request = require('supertest');
-  const audit = require('../../../../main/routes/./management/audit').default;
   audit(app);
 
   beforeAll(() => {
@@ -21,7 +22,7 @@ describe('/management/audit/:id route', () => {
   test('audit renders the audit template', async () => {
     mockGetAudit();
 
-    const response: Response = await request(app).get('/management/audit/12345678-1234-1234-1234-1234567890ab');
+    const response = await request(app).get('/management/audit/12345678-1234-1234-1234-1234567890ab');
     expect(response.status).toEqual(200);
 
     expect(response.text).toContain('Audit: 12345678-1234-1234-1234-1234567890ab');

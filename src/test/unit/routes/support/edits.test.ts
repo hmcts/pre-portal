@@ -1,6 +1,8 @@
 import { mockeduser, mockUser } from '../../test-helper';
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { UserLevel } from '../../../../main/types/user-level';
+import express from 'express';
+import edits from '../../../../main/routes/admin/edits';
 
 const mockGetEditRequests = jest.fn();
 const mockGetRecordings = jest.fn();
@@ -21,11 +23,9 @@ describe('Admin Edits Page', () => {
   let request;
 
   beforeAll(() => {
-    app = require('express')();
+    app = express();
     new Nunjucks(false).enableFor(app);
-    request = require('supertest');
-    const editRoute = require('../../../../main/routes/support/edits').default;
-    editRoute(app);
+    edits(app);
   });
 
   describe('GET /support/edit-request', () => {

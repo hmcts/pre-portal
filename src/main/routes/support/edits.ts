@@ -1,7 +1,7 @@
 import { SessionUser } from '../../services/session-user/session-user';
 import { UserLevel } from '../../types/user-level';
 import { Application } from 'express';
-import { requiresAuth } from 'express-openid-connect';
+import openidConnect from 'express-openid-connect';
 import path from 'path';
 import multer from 'multer';
 import { PreClient } from '../../services/pre-api/pre-client';
@@ -37,7 +37,7 @@ const getDateOneWeekAgo = (): string => {
 };
 
 export default function editRequests(app: Application): void {
-  app.get('/support/edit-request', requiresAuth(), async (req, res) => {
+  app.get('/support/edit-request', openidConnect.requiresAuth(), async (req, res) => {
     const superUserId = getSuperUserId(req);
     if (!superUserId) {
       res.status(404);
@@ -66,7 +66,7 @@ export default function editRequests(app: Application): void {
     });
   });
 
-  app.get('/edits/recordings', requiresAuth(), async (req, res) => {
+  app.get('/edits/recordings', openidConnect.requiresAuth(), async (req, res) => {
     const superUserId = getSuperUserId(req);
     if (!superUserId) {
       res.status(404);
@@ -90,7 +90,7 @@ export default function editRequests(app: Application): void {
     res.json(recordings);
   });
 
-  app.post('/support/edit-request/upload', requiresAuth(), upload.single('file-upload'), async (req, res) => {
+  app.post('/support/edit-request/upload', openidConnect.requiresAuth(), upload.single('file-upload'), async (req, res) => {
     const superUserId = getSuperUserId(req);
     if (!superUserId) {
       res.status(404);

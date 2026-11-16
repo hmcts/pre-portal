@@ -1,15 +1,17 @@
 import { Application } from 'express';
 import { PreClient } from '../../services/pre-api/pre-client';
-import { requiresAuth } from 'express-openid-connect';
 import { RequiresSuperUser } from '../../middleware/admin-middleware';
 
 import { MigrationRecordService } from '../../services/system-status/migration-status';
 import { CourtService } from '../../services/system-status/courts';
 import { formatDateToDDMMYYYY, toIsoDateString } from '../../utils/convert-date';
 import { formatDuration } from '../../utils/format-duration';
+import { getSingleId } from '../../utils/helpers';
+
+import openidConnect from 'express-openid-connect';
 
 export default function migration(app: Application): void {
-  app.get('/support/migration', requiresAuth(), RequiresSuperUser, async (req, res) => {
+  app.get('/support/migration', openidConnect.requiresAuth(), RequiresSuperUser, async (req, res) => {
     const client = new PreClient();
 
     let resourceState: string | undefined;
@@ -195,13 +197,13 @@ export default function migration(app: Application): void {
     });
   });
 
-  app.put('/support/migration/:id', requiresAuth(), RequiresSuperUser, async (req, res) => {
+  app.put('/support/migration/:id', openidConnect.requiresAuth(), RequiresSuperUser, async (req, res) => {
     const client = new PreClient();
     const migrationRecordService = new MigrationRecordService(req, client);
     const recordId = req.params.id;
 
     try {
-      await migrationRecordService.updateMigrationRecord(recordId, req.body);
+      await migrationRecordService.updateMigrationRecord(getSingleId(recordId), req.body);
       res.status(204).send();
     } catch (e: any) {
       console.error('Error updating migration record:', e.response?.data || e.message);
@@ -209,7 +211,7 @@ export default function migration(app: Application): void {
     }
   });
 
-  app.put('/support/migration/:id/audit', requiresAuth(), RequiresSuperUser, async (req, res) => {
+  app.put('/support/migration/:id/audit', openidConnect.requiresAuth(), RequiresSuperUser, async (req, res) => {
     const client = new PreClient();
     const migrationRecordService = new MigrationRecordService(req, client);
 
@@ -223,7 +225,8 @@ export default function migration(app: Application): void {
       res.status(e.response?.status || 500).json({ error: e.response?.data || e.message });
     }
   });
-  app.post('/support/migration/submit', requiresAuth(), RequiresSuperUser, async (req, res) => {
+
+  app.post('/support/migration/submit', openidConnect.requiresAuth(), RequiresSuperUser, async (req, res) => {
     const client = new PreClient();
     const migrationRecordService = new MigrationRecordService(req, client);
 

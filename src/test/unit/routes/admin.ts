@@ -2,6 +2,9 @@ import { Nunjucks } from '../../../main/modules/nunjucks';
 import { beforeAll, describe, test, jest } from '@jest/globals';
 import { mockeduser, mockUser } from '../test-helper';
 import { UserLevel } from '../../../main/types/user-level';
+import express from 'express';
+import admin from '../../../main/routes/admin/admin';
+import request from 'supertest';
 
 mockUser();
 
@@ -11,11 +14,9 @@ describe('Admin Page Access', () => {
   });
 
   test('should display admin page for super user', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
-    const adminRoute = require('../../../main/routes/admin/admin').default;
-    adminRoute(app);
+    admin(app);
 
     if (mockeduser.app_access?.[0]?.role) {
       mockeduser.app_access[0].role.name = UserLevel.SUPER_USER;
@@ -27,11 +28,9 @@ describe('Admin Page Access', () => {
   });
 
   test('should display "Page Not Found" for non-super user', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
-    const adminRoute = require('../../../main/routes/admin/admin').default;
-    adminRoute(app);
+    admin(app);
 
     if (mockeduser.app_access?.[0]?.role) {
       mockeduser.app_access[0].role.name = UserLevel.ADMIN;

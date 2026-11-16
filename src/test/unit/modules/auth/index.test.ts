@@ -2,11 +2,12 @@
 
 import { Auth } from '../../../../main/modules/auth';
 import config from 'config';
-import { set } from 'lodash';
+import _ from 'lodash';
 import { Logger } from '@hmcts/nodejs-logging';
 import axios from 'axios';
 import { OpenidRequest, OpenidResponse, Session } from 'express-openid-connect';
 import { AccessStatus } from '../../../../main/types/access-status';
+import express from 'express';
 
 jest.mock('axios');
 
@@ -18,14 +19,14 @@ function buildIdToken(claims: Record<string, string>): string {
 
 describe('Auth Module', () => {
   test('test redis config is loaded when there is a redisHost', async () => {
-    const app = require('express')();
+    const app = express();
     const auth = new Auth();
-    set(config, 'session.redis.host', 'http://localhost:6379');
-    set(config, 'session.redis.key', 'rediskey');
-    set(config, 'b2c.appClientSecret', 'appClientSecret');
-    set(config, 'b2c.appClientId', 'appClientId');
-    set(config, 'b2c.baseUrl', 'https://baseUrl.local/');
-    set(config, 'b2c.endSessionEndpoint', 'https://endSessionEndpoint.local/');
+    _.set(config, 'session.redis.host', 'http://localhost:6379');
+    _.set(config, 'session.redis.key', 'rediskey');
+    _.set(config, 'b2c.appClientSecret', 'appClientSecret');
+    _.set(config, 'b2c.appClientId', 'appClientId');
+    _.set(config, 'b2c.baseUrl', 'https://baseUrl.local/');
+    _.set(config, 'b2c.endSessionEndpoint', 'https://endSessionEndpoint.local/');
     auth.enableFor(app);
     expect(app.locals.redisClient).toBeDefined();
   });
@@ -108,7 +109,7 @@ describe('Auth Module', () => {
         });
       }
     });
-    const app = require('express')();
+    const app = express();
     const auth = new Auth();
     const logger = Logger.getLogger('auth-module-test');
     const configParams = auth['getConfigParams'](app, logger);
@@ -151,7 +152,7 @@ describe('Auth Module', () => {
       }
     });
 
-    const app = require('express')();
+    const app = express();
     const auth = new Auth();
     const logger = Logger.getLogger('auth-module-test');
     const configParams = auth['getConfigParams'](app, logger);
@@ -194,7 +195,7 @@ describe('Auth Module', () => {
       }
     });
 
-    const app = require('express')();
+    const app = express();
     const auth = new Auth();
     const logger = Logger.getLogger('auth-module-test');
     const configParams = auth['getConfigParams'](app, logger);

@@ -75,3 +75,9 @@ export const generatePaginatedTitle = (pagination: Pagination, title: string) =>
     pagination.totalElements
   )} of ${pagination.totalElements}`;
 };
+
+export const getSingleId = (value: string | string[]): string => {
+  if (typeof value === 'string') return value;
+  if (Array.isArray(value) && value.length == 1) return value[0];
+  throw new Error('Expected a single string value');
+};

@@ -14,6 +14,7 @@ process.on('unhandledRejection', reason => {
 
 import sysConfig from 'config';
 export const config = {
+  require: ['tsx/esm'],
   TEST_URL: process.env.TEST_URL || sysConfig.get('pre.portalUrl'),
   TestHeadlessBrowser: process.env.TEST_HEADLESS ? process.env.TEST_HEADLESS === 'true' : true,
   TestSlowMo: 250,

@@ -7,6 +7,10 @@ import { PreClient } from '../../../../main/services/pre-api/pre-client';
 import { mockeduser, mockUser } from '../../test-helper';
 import { UserLevel } from '../../../../main/types/user-level';
 
+import express from 'express';
+import audits from "../../../../main/routes/management/audits";
+import request from "supertest";
+
 mockUser();
 
 describe('Audit route', () => {
@@ -17,14 +21,12 @@ describe('Audit route', () => {
   test('audit renders the audit template', async () => {
     jest.setTimeout(65000); // seems to be a slow page in tests for some reason
 
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
     mockGetAuditLogs([]);
     mockGetCourts();
 
-    const audit = require('../../../../main/routes/./management/audits').default;
-    audit(app);
+    audits(app);
 
     const response = await request(app).get('/management/audit');
     expect(response.status).toEqual(200);
@@ -35,11 +37,9 @@ describe('Audit route', () => {
   });
 
   test('should display "Page is not available" for non-super user', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
-    const audit = require('../../../../main/routes/./management/audits').default;
-    audit(app);
+    audits(app);
 
     if (mockeduser.app_access?.[0]?.role) {
       mockeduser.app_access[0].role.name = UserLevel.ADMIN;
@@ -59,28 +59,23 @@ describe('Audit route', () => {
       mockeduser.app_access[0].role.name = UserLevel.SUPER_USER;
     }
 
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
-
-    const audit = require('../../../../main/routes/./management/audits').default;
-    audit(app);
+    audits(app);
 
     const response = await request(app).get('/management/audit');
     expect(response.status).toEqual(404);
   });
 
   test('pagination should have a previous link', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
     const auditLogs = Array(12).fill(mockAuditLogs[0]).flat();
 
     mockGetAuditLogs(auditLogs, 1);
     mockGetCourts();
 
-    const audit = require('../../../../main/routes/./management/audits').default;
-    audit(app);
+    audits(app);
 
     const response = await request(app).get('/management/audit?page=1');
     expect(response.status).toEqual(200);
@@ -89,16 +84,14 @@ describe('Audit route', () => {
   });
 
   test('pagination should have a next link', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
     const auditLogs = Array(12).fill(mockAuditLogs[0]).flat();
 
     mockGetAuditLogs(auditLogs, 0);
     mockGetCourts();
 
-    const audit = require('../../../../main/routes/./management/audits').default;
-    audit(app);
+    audits(app);
 
     const response = await request(app).get('/management/audit?page=0');
     expect(response.status).toEqual(200);
@@ -107,16 +100,14 @@ describe('Audit route', () => {
   });
 
   test('pagination should have a filler ellipsis when more than 2 pages from the start', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
     const auditLogs = Array(50).fill(mockAuditLogs[0]).flat();
 
     mockGetAuditLogs(auditLogs, 4);
     mockGetCourts();
 
-    const audit = require('../../../../main/routes/./management/audits').default;
-    audit(app);
+    audits(app);
 
     const response = await request(app).get('/management/audit?page=4');
     expect(response.status).toEqual(200);
@@ -125,16 +116,14 @@ describe('Audit route', () => {
   });
 
   test('pagination should have a filler ellipsis when more than 2 pages from the end', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
     const auditLogs = Array(50).fill(mockAuditLogs[0]).flat();
 
     mockGetAuditLogs(auditLogs, 0);
     mockGetCourts();
 
-    const audit = require('../../../../main/routes/./management/audits').default;
-    audit(app);
+    audits(app);
 
     const response = await request(app).get('/management/audit?page=0');
     expect(response.status).toEqual(200);
@@ -143,16 +132,14 @@ describe('Audit route', () => {
   });
 
   test('pagination should show 2 pages either side of the current page', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
     const auditLogs = Array(90).fill(mockAuditLogs[0]).flat();
 
     mockGetAuditLogs(auditLogs, 4);
     mockGetCourts();
 
-    const audit = require('../../../../main/routes/./management/audits').default;
-    audit(app);
+    audits(app);
 
     const response = await request(app).get('/management/audit?page=4');
     const text = response.text.replace(/\s+/g, ' ').trim();
@@ -168,16 +155,14 @@ describe('Audit route', () => {
   });
 
   test('pagination should show all the page numbers', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
     const auditLogs = Array(40).fill(mockAuditLogs[0]).flat();
 
     mockGetAuditLogs(auditLogs, 1);
     mockGetCourts();
 
-    const audit = require('../../../../main/routes/./management/audits').default;
-    audit(app);
+    audits(app);
 
     const response = await request(app).get('/management/audit?page=1');
     const text = response.text.replace(/\s+/g, ' ').trim();
@@ -190,16 +175,14 @@ describe('Audit route', () => {
   });
 
   test('heading should contain current page, max page and number of auditLogs', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
     const auditLogs = Array(100).fill(mockAuditLogs[0]).flat();
 
     mockGetAuditLogs(auditLogs, 4);
     mockGetCourts();
 
-    const audit = require('../../../../main/routes/./management/audits').default;
-    audit(app);
+    audits(app);
 
     const response = await request(app).get('/management/audit?page=4');
     expect(response.status).toEqual(200);
@@ -207,16 +190,14 @@ describe('Audit route', () => {
   });
 
   test('should contain current filters in the search form', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
     const auditLogs = Array(100).fill(mockAuditLogs[0]).flat();
 
     mockGetAuditLogs(auditLogs, 4);
     mockGetCourts();
 
-    const audit = require('../../../../main/routes/./management/audits').default;
-    audit(app);
+    audits(app);
 
     const response = await request(app).get(
       '/management/audit?page=0&userName=test&caseReference=123&courtId=12345678-1234-1234-1234-1234567890ab&functionalArea=area&source=AUTO&after=2021-01-01T00%3A00&before=2021-01-02T00%3A00'

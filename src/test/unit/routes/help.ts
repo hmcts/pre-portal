@@ -1,13 +1,13 @@
 import { Nunjucks } from '../../../main/modules/nunjucks';
+import express from 'express';
+import help from '../../../main/routes/help';
+import request from 'supertest';
 
 /* eslint-disable jest/expect-expect */
 describe('Help page', () => {
   test('should return 200', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
-
-    const help = require('../../../main/routes/utility/help').default;
     help(app);
 
     const response = await request(app).get('/help');

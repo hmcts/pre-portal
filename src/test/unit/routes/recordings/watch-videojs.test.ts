@@ -5,6 +5,9 @@ import { beforeAll, describe } from '@jest/globals';
 
 import { PreClient } from '../../../../main/services/pre-api/pre-client';
 import { mockUser } from '../../test-helper';
+import express from "express";
+import watch from "../../../../main/routes/recordings/watch";
+import request from "supertest";
 
 mockUser();
 
@@ -14,12 +17,10 @@ describe('Watch videojs page failure', () => {
   });
 
   describe('on GET', () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
 
-    const watchVideojs = require('../../../../main/routes/recordings/watch').default;
-    watchVideojs(app);
+    watch(app);
 
     test('should return 404 when getRecording returns null', async () => {
       mockGetRecording(null);
@@ -74,12 +75,10 @@ describe('Watch videojs page success', () => {
   });
 
   describe('on GET', () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
 
-    const watchVideojs = require('../../../../main/routes/recordings/watch').default;
-    watchVideojs(app);
+    watch(app);
 
     test('should return 200 when getRecording and getRecordingPlaybackDataMk succeed', async () => {
       mockGetRecording();

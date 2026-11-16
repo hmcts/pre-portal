@@ -1,8 +1,11 @@
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { beforeAll, describe, test } from '@jest/globals';
-import { LiveEventStatusService } from '../../../../main/services/system-status/live-events-status';
+import { LiveEventStatusService } from '../../../main/services/system-status/live-events-status';
 import { mockeduser, mockUser } from '../../test-helper';
-import { UserLevel } from '../../../../main/types/user-level';
+import { UserLevel } from '../../../main/types/user-level';
+import mkLiveEvents from '../../../main/routes/admin/mk-live-events';
+import express from 'express';
+import request from 'supertest';
 
 mockUser();
 
@@ -14,10 +17,8 @@ describe('MK Live Events route', () => {
   });
 
   test('should display live events page for super user', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
-    const mkLiveEvents = require('../../../../main/routes/system/mk-live-events').default;
     mkLiveEvents(app);
 
     LiveEventStatusService.prototype.getMediaKindLiveEventStatuses = jest.fn().mockResolvedValue([
@@ -39,10 +40,8 @@ describe('MK Live Events route', () => {
   });
 
   test('should display "Page Not Found" for non-super user', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
-    const mkLiveEvents = require('../../../../main/routes/system/mk-live-events').default;
     mkLiveEvents(app);
 
     if (mockeduser.app_access?.[0]?.role) {

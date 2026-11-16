@@ -1,6 +1,5 @@
 import config from 'config';
-
-const appInsights = require('applicationinsights');
+import appInsights from 'applicationinsights';
 
 export class AppInsights {
   enable(): void {

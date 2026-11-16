@@ -1,12 +1,12 @@
 import { Application } from 'express';
 import { PreClient } from '../../services/pre-api/pre-client';
-import { requiresAuth } from 'express-openid-connect';
 import { RequiresSuperUser } from '../../middleware/admin-middleware';
 
 import { LiveEventStatusService } from '../../services/system-status/live-events-status';
+import openidConnect from "express-openid-connect";
 
 export default function mkLiveEvents(app: Application): void {
-  app.get('/system/mk-live-events', requiresAuth(), RequiresSuperUser, async (req, res) => {
+  app.get('/system/mk-live-events', openidConnect.requiresAuth(), RequiresSuperUser, async (req, res) => {
     const client = new PreClient();
 
     const liveEventService = new LiveEventStatusService(req, client);
