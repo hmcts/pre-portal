@@ -7,7 +7,7 @@ import { Application } from 'express';
 import openidConnect from 'express-openid-connect';
 import { validateId } from '../../helpers/helpers';
 import { Logger } from '@hmcts/nodejs-logging';
-import {getSingleId} from "../../utils/helpers";
+import { getSingleId } from '../../utils/helpers';
 
 export default function audit(app: Application): void {
   const logger = Logger.getLogger('audit');
