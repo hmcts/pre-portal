@@ -1,5 +1,6 @@
 /* eslint-disable jest/expect-expect */
 import { Nunjucks } from '../../../../main/modules/nunjucks';
+
 import {
   mockedEditRequest,
   mockGetEditRequest,

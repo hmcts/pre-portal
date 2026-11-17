@@ -7,6 +7,7 @@ import config from 'config';
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
 import { v4 as uuid } from 'uuid';
+
 import { AppliedEditInstruction, PutEditInstruction, RecordingAppliedEdits } from '../../services/pre-api/types';
 
 export const parseAppliedEdits = async (
