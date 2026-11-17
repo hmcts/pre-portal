@@ -5,7 +5,7 @@ import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { mockeduser } from '../../test-helper';
 import { UserLevel } from '../../../../main/types/user-level';
 import { SystemStatus } from '../../../../main/services/system-status/system-status';
-import axios from "axios";
+import axios from 'axios';
 
 vi.mock('express-openid-connect', () => ({
   default: {
@@ -113,7 +113,6 @@ describe('Admin Status route', () => {
       });
     }
   });
-
 
   test('should display status page for super user', async () => {
     const app = express();
