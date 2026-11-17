@@ -4,7 +4,6 @@ import { describe, expect, test, vi, beforeAll } from 'vitest';
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { mockeduser } from '../../test-helper';
 import { UserLevel } from '../../../../main/types/user-level';
-import { SystemStatus } from '../../../../main/services/system-status/system-status';
 import axios from 'axios';
 
 vi.mock('express-openid-connect', () => ({
