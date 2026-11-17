@@ -54,7 +54,7 @@ const RAW_RUNTIME_STATE =
           ["@types/session-file-store", "npm:1.2.6"],\
           ["@types/supertest", "npm:7.2.1"],\
           ["allure-commandline", "npm:2.46.1"],\
-          ["applicationinsights", "npm:3.17.0"],\
+          ["applicationinsights", "npm:3.17.1"],\
           ["axios", "npm:1.21.0"],\
           ["babel-jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.5.2"],\
           ["body-parser", "npm:2.4.0"],\
@@ -8503,8 +8503,8 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["applicationinsights", [\
-      ["npm:3.17.0", {\
-        "packageLocation": "./.yarn/cache/applicationinsights-npm-3.17.0-920766dd03-58dc0a508c.zip/node_modules/applicationinsights/",\
+      ["npm:3.17.1", {\
+        "packageLocation": "./.yarn/cache/applicationinsights-npm-3.17.1-94ccce3b48-c64a10e282.zip/node_modules/applicationinsights/",\
         "packageDependencies": [\
           ["@azure/core-auth", "npm:1.10.1"],\
           ["@azure/functions", "npm:4.11.2"],\
@@ -8526,7 +8526,7 @@ const RAW_RUNTIME_STATE =
           ["@opentelemetry/sdk-trace-base", "virtual:c2802d502f12a66fe7e1c4ec7fd1c35ff6f7a3d513e0372f776eadef1e5a68229098f0a370c4f094fc10fb19983fcb7c98ed1300ca951aecd0ed9ec196ecf716#npm:2.11.0"],\
           ["@opentelemetry/sdk-trace-node", "virtual:43d67484ecd37052d3047a80a1f8735f182458ba8bd2af464497a56ca96d1127bedebf15d5544fe043d91541a93ab4c1874d1012d513784c2064ad15d15a44fe#npm:2.11.0"],\
           ["@opentelemetry/semantic-conventions", "npm:1.43.0"],\
-          ["applicationinsights", "npm:3.17.0"]\
+          ["applicationinsights", "npm:3.17.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17610,7 +17610,7 @@ const RAW_RUNTIME_STATE =
           ["@types/session-file-store", "npm:1.2.6"],\
           ["@types/supertest", "npm:7.2.1"],\
           ["allure-commandline", "npm:2.46.1"],\
-          ["applicationinsights", "npm:3.17.0"],\
+          ["applicationinsights", "npm:3.17.1"],\
           ["axios", "npm:1.21.0"],\
           ["babel-jest", "virtual:16701266ea8f9c4c47e5d4e7d6e5f60f5b90bd85760be31472205688a0f541b309f8b385bcdfaeae586863ad36065412b38f52d324d6841d21abacc4b09d6704#npm:30.5.2"],\
           ["body-parser", "npm:2.4.0"],\
