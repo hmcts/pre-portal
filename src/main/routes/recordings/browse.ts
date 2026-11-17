@@ -4,7 +4,7 @@ import { SessionUser } from '../../services/session-user/session-user';
 
 import { Logger } from '@hmcts/nodejs-logging';
 import { Application } from 'express';
-import { requiresAuth } from 'express-openid-connect';
+import openidConnect from 'express-openid-connect';
 
 export const convertIsoToDate = (isoString?: string): string | undefined => {
   if (!isoString) {
@@ -30,7 +30,7 @@ const getQueryString = (value: unknown): string | undefined => {
 };
 
 export default function browse(app: Application): void {
-  app.get('/browse', requiresAuth(), async (req, res) => {
+  app.get('/browse', openidConnect.requiresAuth(), async (req, res) => {
     const logger = Logger.getLogger('browse-route');
     const userProfileForCjsm = SessionUser.getLoggedInUserProfile(req);
     const loggedInSuperUser = SessionUser.isLoggedInSuperUser(req);

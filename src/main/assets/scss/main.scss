@@ -1,8 +1,8 @@
-@import 'govuk-frontend';
+@use 'govuk-frontend' as govuk;
 
 .video-wrapper {
   background: #0b0c0c;
-  border: 4px solid $govuk-input-border-colour;
+  border: 4px solid govuk.$govuk-input-border-colour;
   margin-bottom: 30px;
   padding: 4px;
   position: relative;
@@ -29,7 +29,7 @@
 
 .loading-box {
   aspect-ratio: 16 / 9;
-  border: 4px solid $govuk-input-border-colour;
+  border: 4px solid govuk.$govuk-input-border-colour;
   width: 100%;
 
   img {

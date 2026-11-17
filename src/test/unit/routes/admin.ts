@@ -1,21 +1,35 @@
 import { Nunjucks } from '../../../main/modules/nunjucks';
-import { beforeAll, describe, test, jest } from '@jest/globals';
-import { mockeduser, mockUser } from '../test-helper';
+import { describe, expect, test, vi, beforeAll } from 'vitest';
+import { mockeduser } from '../test-helper';
 import { UserLevel } from '../../../main/types/user-level';
+import express from 'express';
+import request from 'supertest';
 
-mockUser();
+vi.mock('express-openid-connect', () => ({
+  requiresAuth: vi.fn(() => (_req: express.Request, _res: express.Response, next: express.NextFunction) => next()),
+}));
+
+vi.mock('../../../main/services/session-user/session-user', () => ({
+  SessionUser: {
+    getLoggedInUserPortalId: vi.fn().mockReturnValue('123'),
+    getLoggedInUserProfile: vi.fn().mockReturnValue(mockeduser),
+  },
+}));
+
+const registerRoute = async (app: express.Express) => {
+  const { default: adminRoute } = await import('../../../main/routes/admin/admin');
+  adminRoute(app);
+};
 
 describe('Admin Page Access', () => {
   beforeAll(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   test('should display admin page for super user', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
-    const adminRoute = require('../../../main/routes/admin/admin').default;
-    adminRoute(app);
+    await registerRoute(app);
 
     if (mockeduser.app_access?.[0]?.role) {
       mockeduser.app_access[0].role.name = UserLevel.SUPER_USER;
@@ -27,11 +41,9 @@ describe('Admin Page Access', () => {
   });
 
   test('should display "Page Not Found" for non-super user', async () => {
-    const app = require('express')();
+    const app = express();
     new Nunjucks(false).enableFor(app);
-    const request = require('supertest');
-    const adminRoute = require('../../../main/routes/admin/admin').default;
-    adminRoute(app);
+    await registerRoute(app);
 
     if (mockeduser.app_access?.[0]?.role) {
       mockeduser.app_access[0].role.name = UserLevel.ADMIN;

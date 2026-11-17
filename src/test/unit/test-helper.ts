@@ -1,6 +1,41 @@
+import { vi } from 'vitest';
 import { AccessStatus } from '../../main/types/access-status';
 import { UserProfile } from '../../main/types/user-profile';
 import { UserLevel } from '../../main/types/user-level';
+
+vi.mock('express-openid-connect', () => ({
+  __esModule: true,
+  default: {
+    requiresAuth: () => (req: any, _res: any, next: any) => {
+      req.oidc = {
+        isAuthenticated: () => true,
+        user: { email: 'test@test.com' },
+      };
+      next();
+    },
+  },
+}));
+vi.mock('../../main/services/session-user/session-user', () => {
+  return {
+    SessionUser: {
+      getLoggedInUserPortalId: vi.fn().mockImplementation((req: Express.Request) => {
+        return '123';
+      }),
+      getLoggedInUserBrowseId: vi.fn().mockImplementation((req: Express.Request) => {
+        return 'super-user-access-id';
+      }),
+      getLoggedInUserProfile: vi.fn().mockImplementation((req: Express.Request) => {
+        return mockeduser;
+      }),
+      getSuperUserId: vi.fn().mockImplementation((req: Express.Request) => {
+        return mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER)?.id;
+      }),
+      isLoggedInSuperUser: vi.fn().mockImplementation(() => {
+        return mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER);
+      }),
+    },
+  };
+});
 
 export const mockeduser: UserProfile = {
   app_access: [
@@ -55,36 +90,3 @@ export const mockeduser: UserProfile = {
     },
   },
 };
-
-export function mockUser() {
-  jest.mock('express-openid-connect', () => {
-    return {
-      requiresAuth: jest.fn().mockImplementation(() => {
-        return (req: any, res: any, next: any) => {
-          next();
-        };
-      }),
-    };
-  });
-  jest.mock('../../main/services/session-user/session-user', () => {
-    return {
-      SessionUser: {
-        getLoggedInUserPortalId: jest.fn().mockImplementation((req: Express.Request) => {
-          return '123';
-        }),
-        getLoggedInUserBrowseId: jest.fn().mockImplementation((req: Express.Request) => {
-          return 'super-user-access-id';
-        }),
-        getLoggedInUserProfile: jest.fn().mockImplementation((req: Express.Request) => {
-          return mockeduser;
-        }),
-        getSuperUserId: jest.fn().mockImplementation((req: Express.Request) => {
-          return mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER)?.id;
-        }),
-        isLoggedInSuperUser: jest.fn().mockImplementation(() => {
-          return mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER);
-        }),
-      },
-    };
-  });
-}

@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import {
   Audit,
   Court,
@@ -12,7 +13,7 @@ import {
 import { PreClient } from '../main/services/pre-api/pre-client';
 import { AxiosResponse } from 'axios';
 import { Terms } from '../main/types/terms';
-import { jest } from '@jest/globals';
+import { LiveEvent } from '../main/types/live-event';
 
 export const mockCourts: Court[] = [
   {
@@ -37,6 +38,15 @@ export const mockCourts: Court[] = [
       },
     ],
   } as Court,
+];
+
+export const mockLiveEvents: LiveEvent[] = [
+  {
+    id: '12345678-1234-1234-1234-1234567890ab',
+    name: 'Example Live Event',
+    description: 'Example Live Event Description',
+    resource_state: 'RUNNING',
+  } as LiveEvent,
 ];
 
 export const mockAuditLogs: Audit[] = [
@@ -191,13 +201,13 @@ export function mock() {
 
 export function mockGetRecording(recording?: Recording | null) {
   if (recording !== undefined) {
-    jest.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (xUserId: string, id: string) => {
+    vi.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (xUserId: string, id: string) => {
       return Promise.resolve(recording);
     });
     return;
   }
 
-  jest.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (xUserId: string, id: string) => {
+  vi.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (xUserId: string, id: string) => {
     return Promise.resolve(mockRecordings.find(r => r.id === id) || null);
   });
 }
@@ -212,29 +222,29 @@ export function mockGetRecordings(recordings?: Recording[], page: number = 0) {
     } as Pagination;
     const recordingSubset = recordings.slice(page * 10, (page + 1) * 10);
 
-    jest
-      .spyOn(PreClient.prototype, 'getRecordings')
-      .mockImplementation(async (xUserId: string, request: SearchRecordingsRequest) => {
+    vi.spyOn(PreClient.prototype, 'getRecordings').mockImplementation(
+      async (xUserId: string, request: SearchRecordingsRequest) => {
         return Promise.resolve({ recordings: recordingSubset, pagination });
-      });
+      }
+    );
     return;
   }
 
-  jest
-    .spyOn(PreClient.prototype, 'getRecordings')
-    .mockImplementation(async (xUserId: string, req: SearchRecordingsRequest) => {
+  vi.spyOn(PreClient.prototype, 'getRecordings').mockImplementation(
+    async (xUserId: string, req: SearchRecordingsRequest) => {
       return Promise.resolve({ recordings: mockRecordings, pagination: mockPagination });
-    });
+    }
+  );
 }
 
 export function mockGetAudit(audit?: Audit) {
   if (audit !== undefined) {
-    jest.spyOn(PreClient.prototype, 'getAudit').mockImplementation(async (xUserId: string, id: string) => {
+    vi.spyOn(PreClient.prototype, 'getAudit').mockImplementation(async (xUserId: string, id: string) => {
       return Promise.resolve(audit);
     });
     return;
   }
-  jest.spyOn(PreClient.prototype, 'getAudit').mockImplementation(async (xUserId: string, id: string) => {
+  vi.spyOn(PreClient.prototype, 'getAudit').mockImplementation(async (xUserId: string, id: string) => {
     return Promise.resolve(mockAuditLogs.find(r => r.id === id) || null);
   });
 }
@@ -249,23 +259,23 @@ export function mockGetAuditLogs(auditLogs?: Audit[], page: number = 0) {
     } as Pagination;
     const auditLogsSubset = auditLogs.slice(page * 10, (page + 1) * 10);
 
-    jest
-      .spyOn(PreClient.prototype, 'getAuditLogs')
-      .mockImplementation(async (xUserId: string, request: SearchAuditLogsRequest) => {
+    vi.spyOn(PreClient.prototype, 'getAuditLogs').mockImplementation(
+      async (xUserId: string, request: SearchAuditLogsRequest) => {
         return Promise.resolve({ auditLogs: auditLogsSubset, pagination });
-      });
+      }
+    );
     return;
   }
 
-  jest
-    .spyOn(PreClient.prototype, 'getAuditLogs')
-    .mockImplementation(async (xUserId: string, req: SearchAuditLogsRequest) => {
+  vi.spyOn(PreClient.prototype, 'getAuditLogs').mockImplementation(
+    async (xUserId: string, req: SearchAuditLogsRequest) => {
       return Promise.resolve({ auditLogs: mockAuditLogs, pagination: mockPagination });
-    });
+    }
+  );
 }
 
 export const mockPutAudit = () => {
-  jest.spyOn(PreClient.prototype, 'putAudit').mockImplementation(async (xUserId: string, request: PutAuditRequest) => {
+  vi.spyOn(PreClient.prototype, 'putAudit').mockImplementation(async (xUserId: string, request: PutAuditRequest) => {
     return Promise.resolve({
       status: 201,
       statusText: 'CREATED',
@@ -275,33 +285,32 @@ export const mockPutAudit = () => {
 
 export function mockGetLatestTermsAndConditions(data?: Terms) {
   if (data !== undefined) {
-    jest.spyOn(PreClient.prototype, 'getLatestTermsAndConditions').mockImplementation(async () => {
+    vi.spyOn(PreClient.prototype, 'getLatestTermsAndConditions').mockImplementation(async () => {
       return Promise.resolve(data);
     });
   }
 }
 
 export function mockAcceptTermsAndConditions() {
-  jest
-    .spyOn(PreClient.prototype, 'acceptTermsAndConditions')
-    .mockImplementation(async (xUserId: string, termsId: string) => {
+  vi.spyOn(PreClient.prototype, 'acceptTermsAndConditions').mockImplementation(
+    async (xUserId: string, termsId: string) => {
       return Promise.resolve();
-    });
+    }
+  );
 }
 
 export function mockGetRecordingPlaybackData(data?: RecordingPlaybackData | null) {
   if (data !== undefined) {
-    jest
-      .spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
-      .mockImplementation(async (xUserId: string, id: string) => {
+    vi.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockImplementation(
+      async (xUserId: string, id: string) => {
         return Promise.resolve(data);
-      });
+      }
+    );
     return;
   }
 
-  jest
-    .spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk')
-    .mockImplementation(async (xUserId: string, id: string) => {
+  vi.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockImplementation(
+    async (xUserId: string, id: string) => {
       return Promise.resolve({
         hls_url: 'https://streaming.example.test/playlist.m3u8',
         token: 'mock-token',
@@ -309,7 +318,8 @@ export function mockGetRecordingPlaybackData(data?: RecordingPlaybackData | null
         type: 'application/vnd.apple.mpegurl',
         protectionInfo: [],
       } as RecordingPlaybackData);
-    });
+    }
+  );
 }
 
 export function mockGetCourts(courts?: Court[], page: number = 0) {
@@ -322,26 +332,32 @@ export function mockGetCourts(courts?: Court[], page: number = 0) {
     } as Pagination;
     const courtSubset = courts.slice(page * 10, (page + 1) * 10);
 
-    jest
-      .spyOn(PreClient.prototype, 'getCourtsWithPagination')
-      .mockImplementation(async (xUserId: string, request: PaginatedRequest) => {
+    vi.spyOn(PreClient.prototype, 'getCourtsWithPagination').mockImplementation(
+      async (xUserId: string, request: PaginatedRequest) => {
         return Promise.resolve({ courts: courtSubset, pagination });
-      });
+      }
+    );
     return;
   }
 
-  jest
-    .spyOn(PreClient.prototype, 'getCourtsWithPagination')
-    .mockImplementation(async (xUserId: string, req: PaginatedRequest) => {
+  vi.spyOn(PreClient.prototype, 'getCourtsWithPagination').mockImplementation(
+    async (xUserId: string, req: PaginatedRequest) => {
       return Promise.resolve({ courts: mockCourts, pagination: mockPagination });
-    });
+    }
+  );
+}
+
+export function mockGetLiveEvents() {
+  vi.spyOn(PreClient.prototype, 'getLiveEvents').mockImplementation(async (xUserId: string) => {
+    return Promise.resolve(mockLiveEvents);
+  });
 }
 
 export function reset() {
-  jest.spyOn(PreClient.prototype, 'getRecording').mockRestore();
-  jest.spyOn(PreClient.prototype, 'getRecordings').mockRestore();
-  jest.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockRestore();
-  jest.spyOn(PreClient.prototype, 'getCourtsWithPagination').mockRestore();
-  jest.spyOn(PreClient.prototype, 'getAuditLogs').mockRestore();
-  jest.spyOn(PreClient.prototype, 'getAudit').mockRestore();
+  vi.spyOn(PreClient.prototype, 'getRecording').mockRestore();
+  vi.spyOn(PreClient.prototype, 'getRecordings').mockRestore();
+  vi.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockRestore();
+  vi.spyOn(PreClient.prototype, 'getCourtsWithPagination').mockRestore();
+  vi.spyOn(PreClient.prototype, 'getAuditLogs').mockRestore();
+  vi.spyOn(PreClient.prototype, 'getAudit').mockRestore();
 }

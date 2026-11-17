@@ -1,5 +1,6 @@
 import { Pagination } from '../../../main/services/pre-api/types';
 import { generatePaginatedTitle, generatePaginationLinks } from '../../../main/utils/helpers';
+import { describe, expect, it } from 'vitest';
 
 describe('generatePaginationLinks', () => {
   const route = '/test-route';

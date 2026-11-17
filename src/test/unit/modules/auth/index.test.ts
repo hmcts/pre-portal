@@ -1,14 +1,14 @@
-/* eslint-disable jest/expect-expect */
+/* eslint-disable vitest/expect-expect */
 
+import { describe, expect, test, vi } from 'vitest';
 import { Auth } from '../../../../main/modules/auth';
 import config from 'config';
-import { set } from 'lodash';
+import _ from 'lodash';
 import { Logger } from '@hmcts/nodejs-logging';
 import axios from 'axios';
 import { OpenidRequest, OpenidResponse, Session } from 'express-openid-connect';
 import { AccessStatus } from '../../../../main/types/access-status';
-
-jest.mock('axios');
+import express from 'express';
 
 function buildIdToken(claims: Record<string, string>): string {
   const encode = (value: object) => Buffer.from(JSON.stringify(value)).toString('base64url');
@@ -16,22 +16,31 @@ function buildIdToken(claims: Record<string, string>): string {
   return `${encode({ alg: 'none', typ: 'JWT' })}.${encode(claims)}.signature`;
 }
 
+vi.mock('axios');
+vi.mock('jose', () => {
+  return {
+    decodeJwt: vi.fn().mockImplementation((_s: string) => {
+      return { email: 'test@testy.com' };
+    }),
+  };
+});
+
 describe('Auth Module', () => {
   test('test redis config is loaded when there is a redisHost', async () => {
-    const app = require('express')();
+    const app = express();
     const auth = new Auth();
-    set(config, 'session.redis.host', 'http://localhost:6379');
-    set(config, 'session.redis.key', 'rediskey');
-    set(config, 'b2c.appClientSecret', 'appClientSecret');
-    set(config, 'b2c.appClientId', 'appClientId');
-    set(config, 'b2c.baseUrl', 'https://baseUrl.local/');
-    set(config, 'b2c.endSessionEndpoint', 'https://endSessionEndpoint.local/');
+    _.set(config, 'session.redis.host', 'http://localhost:6379');
+    _.set(config, 'session.redis.key', 'rediskey');
+    _.set(config, 'b2c.appClientSecret', 'appClientSecret');
+    _.set(config, 'b2c.appClientId', 'appClientId');
+    _.set(config, 'b2c.baseUrl', 'https://baseUrl.local/');
+    _.set(config, 'b2c.endSessionEndpoint', 'https://endSessionEndpoint.local/');
     auth.enableFor(app);
     expect(app.locals.redisClient).toBeDefined();
   });
 
   test('Checks if a user is newly invited during callback', async () => {
-    const mockedAxios = axios as jest.Mocked<typeof axios>;
+    const mockedAxios = axios as any;
     // @ts-ignore
     mockedAxios.get.mockImplementation((url: string, config: object) => {
       if (url === '/invites' && config['params']['email'] === 'test@testy.com') {
@@ -100,7 +109,7 @@ describe('Auth Module', () => {
       }
     });
     // @ts-ignore
-    mockedAxios.post.mockImplementation((url: string, config: object) => {
+    mockedAxios.post.mockImplementation((url: string, _config: object) => {
       if (url === '/invites/redeem/test@testy.com') {
         return Promise.resolve({
           status: 200,
@@ -108,7 +117,7 @@ describe('Auth Module', () => {
         });
       }
     });
-    const app = require('express')();
+    const app = express();
     const auth = new Auth();
     const logger = Logger.getLogger('auth-module-test');
     const configParams = auth['getConfigParams'](app, logger);
@@ -123,7 +132,7 @@ describe('Auth Module', () => {
   });
 
   test('Uses loginEmail when available during callback', async () => {
-    const mockedAxios = axios as jest.Mocked<typeof axios>;
+    const mockedAxios = axios as any;
     // @ts-ignore
     mockedAxios.get.mockImplementation((url: string, config: object) => {
       if (url === '/invites' && config['params']['email'] === 'login@testy.com') {
@@ -151,7 +160,7 @@ describe('Auth Module', () => {
       }
     });
 
-    const app = require('express')();
+    const app = express();
     const auth = new Auth();
     const logger = Logger.getLogger('auth-module-test');
     const configParams = auth['getConfigParams'](app, logger);
@@ -166,7 +175,7 @@ describe('Auth Module', () => {
   });
 
   test('Falls back to email when loginEmail is not set during callback', async () => {
-    const mockedAxios = axios as jest.Mocked<typeof axios>;
+    const mockedAxios = axios as any;
     // @ts-ignore
     mockedAxios.get.mockImplementation((url: string, config: object) => {
       if (url === '/invites' && config['params']['email'] === 'fallback@testy.com') {
@@ -194,7 +203,7 @@ describe('Auth Module', () => {
       }
     });
 
-    const app = require('express')();
+    const app = express();
     const auth = new Auth();
     const logger = Logger.getLogger('auth-module-test');
     const configParams = auth['getConfigParams'](app, logger);

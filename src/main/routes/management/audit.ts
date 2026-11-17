@@ -4,14 +4,15 @@ import { RequiresSuperUser } from '../../middleware/admin-middleware';
 import { UserLevel } from '../../types/user-level';
 
 import { Application } from 'express';
-import { requiresAuth } from 'express-openid-connect';
+import openidConnect from 'express-openid-connect';
 import { validateId } from '../../helpers/helpers';
 import { Logger } from '@hmcts/nodejs-logging';
+import { getSingleId } from '../../utils/helpers';
 
 export default function audit(app: Application): void {
   const logger = Logger.getLogger('audit');
-  app.get('/management/audit/:id', requiresAuth(), RequiresSuperUser, async (req, res) => {
-    if (!validateId(req.params.id)) {
+  app.get('/management/audit/:id', openidConnect.requiresAuth(), RequiresSuperUser, async (req, res) => {
+    if (!validateId(getSingleId(req.params.id))) {
       res.status(404);
       res.render('utility/not-found', {
         isSuperUser: true,

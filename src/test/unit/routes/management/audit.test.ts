@@ -1,17 +1,50 @@
-import { mockeduser, mockUser } from '../../test-helper';
-import { describe, test } from '@jest/globals';
+vi.mock('express-openid-connect', () => ({
+  __esModule: true,
+  default: {
+    requiresAuth: () => (req: any, _res: any, next: any) => {
+      req.oidc = {
+        isAuthenticated: () => true,
+        user: { email: 'test@test.com' },
+      };
+      next();
+    },
+  },
+}));
+vi.mock('../../main/services/session-user/session-user', () => {
+  return {
+    SessionUser: {
+      getLoggedInUserPortalId: vi.fn().mockImplementation((req: Express.Request) => {
+        return '123';
+      }),
+      getLoggedInUserBrowseId: vi.fn().mockImplementation((req: Express.Request) => {
+        return 'super-user-access-id';
+      }),
+      getLoggedInUserProfile: vi.fn().mockImplementation((req: Express.Request) => {
+        return mockeduser;
+      }),
+      getSuperUserId: vi.fn().mockImplementation((req: Express.Request) => {
+        return mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER)?.id;
+      }),
+      isLoggedInSuperUser: vi.fn().mockImplementation(() => {
+        return mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER);
+      }),
+    },
+  };
+});
+
+import { mockeduser } from '../../test-helper';
+import { describe, expect, test, vi, beforeAll } from 'vitest';
 import { mockGetAudit, reset } from '../../../mock-api';
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { UserLevel } from '../../../../main/types/user-level';
 import { PreClient } from '../../../../main/services/pre-api/pre-client';
-
-mockUser();
+import express from 'express';
+import request from 'supertest';
+import audit from '../../../../main/routes/management/audit';
 
 describe('/management/audit/:id route', () => {
-  const app = require('express')();
+  const app = express();
   new Nunjucks(false).enableFor(app);
-  const request = require('supertest');
-  const audit = require('../../../../main/routes/./management/audit').default;
   audit(app);
 
   beforeAll(() => {
@@ -21,7 +54,7 @@ describe('/management/audit/:id route', () => {
   test('audit renders the audit template', async () => {
     mockGetAudit();
 
-    const response: Response = await request(app).get('/management/audit/12345678-1234-1234-1234-1234567890ab');
+    const response = await request(app).get('/management/audit/12345678-1234-1234-1234-1234567890ab');
     expect(response.status).toEqual(200);
 
     expect(response.text).toContain('Audit: 12345678-1234-1234-1234-1234567890ab');
@@ -83,7 +116,7 @@ describe('/management/audit/:id route', () => {
   });
 
   test('should display "Page is not available" for super user', async () => {
-    jest.spyOn(PreClient.prototype, 'getAudit').mockImplementation(() => {
+    vi.spyOn(PreClient.prototype, 'getAudit').mockImplementation(() => {
       throw new Error('error');
     });
 

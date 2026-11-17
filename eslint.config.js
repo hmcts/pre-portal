@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   root: true,
   files: ['.js', '.jsx', '.ts', '.tsx'],
   ignorePatterns: [
@@ -12,17 +12,18 @@ module.exports = {
     '.eslintrc.js',
     'src/test/config.ts',
     '**/*.js',
-    'src/test/**/*.ts],',
+    'src/test/**/*.ts',
   ],
   env: { browser: true, es6: true, node: true },
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'import', 'jest'],
+  plugins: ['@typescript-eslint', 'import', 'jest', 'vitest'],
   extends: [
     'eslint:recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
     'plugin:jest/recommended',
+    'plugin:vitest/recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier',
@@ -61,6 +62,9 @@ module.exports = {
     ],
     'jest/prefer-to-have-length': 'error',
     'jest/valid-expect': 'off',
+    'jest/expect-expect': 'off',
+    'vitest/prefer-to-have-length': 'error',
+    'vitest/valid-expect': 'off',
     'linebreak-style': ['error', 'unix'],
     'no-console': 'warn',
     'no-prototype-builtins': 'off',

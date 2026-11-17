@@ -4,17 +4,20 @@ import { SessionUser } from '../../services/session-user/session-user';
 import { Logger } from '@hmcts/nodejs-logging';
 import config from 'config';
 import { Application } from 'express';
-import { requiresAuth } from 'express-openid-connect';
+import openidConnect from 'express-openid-connect';
 import { v4 as uuid } from 'uuid';
 
-function validateId(id: string): boolean {
+import { getSingleId } from '../../utils/helpers';
+
+const logger = Logger.getLogger('watch');
+
+function validateId(input: string | string[]): boolean {
+  const id = getSingleId(input);
   return /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(id);
 }
 
 export default function watch(app: Application): void {
-  const logger = Logger.getLogger('watch');
-
-  app.get('/recordings/watch/:id', requiresAuth(), async (req, res, next) => {
+  app.get('/recordings/watch/:id', openidConnect.requiresAuth(), async (req, res, next) => {
     if (!validateId(req.params.id)) {
       res.status(404);
       res.render('utility/not-found', {
@@ -29,7 +32,7 @@ export default function watch(app: Application): void {
       const userProfile = SessionUser.getLoggedInUserProfile(req);
 
       const client = new PreClient();
-      const recording = await client.getRecording(userBrowseId, req.params.id);
+      const recording = await client.getRecording(userBrowseId, getSingleId(req.params.id));
 
       if (recording === null) {
         res.status(404);
@@ -80,7 +83,7 @@ export default function watch(app: Application): void {
     }
   });
 
-  app.get('/recordings/watch/:id/playback', requiresAuth(), async (req, res) => {
+  app.get('/recordings/watch/:id/playback', openidConnect.requiresAuth(), async (req, res) => {
     if (!validateId(req.params.id)) {
       res.status(404);
       res.json({ message: 'Not found' });
@@ -91,7 +94,7 @@ export default function watch(app: Application): void {
       const client = new PreClient();
       const userBrowseId = await SessionUser.getLoggedInUserBrowseId(req);
 
-      const recordingPlaybackData = await client.getRecordingPlaybackDataMk(userBrowseId, req.params.id);
+      const recordingPlaybackData = await client.getRecordingPlaybackDataMk(userBrowseId, getSingleId(req.params.id));
 
       if (recordingPlaybackData === null) {
         res.status(404);
@@ -101,8 +104,9 @@ export default function watch(app: Application): void {
 
       res.json(recordingPlaybackData);
     } catch (e) {
+      const newMessage = e instanceof Error ? e.message : 'Internal server error';
       res.status(500);
-      res.json({ message: e.message });
+      res.json({ message: newMessage });
     }
   });
 }

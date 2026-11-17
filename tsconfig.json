@@ -1,23 +1,25 @@
 {
   "compilerOptions": {
-    "outDir": "./src/",
-    "module": "commonjs",
+    "module": "ES2020",
+    "target": "ES2020",
+    "moduleResolution": "bundler",
+
+    "rootDir": "./",
+    "outDir": "./dist",
+
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ES2020",
     "strict": true,
     "noImplicitAny": false,
     "noImplicitThis": false,
-    "moduleResolution": "node",
     "noUnusedLocals": true,
     "experimentalDecorators": true,
     "useUnknownInCatchVariables": false,
     "skipLibCheck": true,
     "lib": ["es2020", "dom", "dom.iterable"],
-    "baseUrl": "src/main",
     "paths": {
-      "router/*": ["router/*"],
-      "routes/*": ["routes/*"]
+      "router/*": ["./src/main/router/*"],
+      "routes/*": ["./src/main/routes/*"]
     }
   },
   "exclude": ["**/*.test.ts", "**/codecept.conf.ts", "**/__mocks__/*", "**/saucelabs.conf.ts"]

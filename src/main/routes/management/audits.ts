@@ -5,12 +5,12 @@ import { RequiresSuperUser } from '../../middleware/admin-middleware';
 import { UserLevel } from '../../types/user-level';
 
 import { Application } from 'express';
-import { requiresAuth } from 'express-openid-connect';
+import openidConnect from 'express-openid-connect';
 import { getAllPaginatedCourts } from '../../helpers/helpers';
 import { Logger } from '@hmcts/nodejs-logging';
 
 export default function audits(app: Application): void {
-  app.get('/management/audit', requiresAuth(), RequiresSuperUser, async (req, res) => {
+  app.get('/management/audit', openidConnect.requiresAuth(), RequiresSuperUser, async (req, res) => {
     const client = new PreClient();
     const logger = Logger.getLogger('audits');
 
