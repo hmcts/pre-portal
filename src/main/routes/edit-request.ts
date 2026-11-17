@@ -8,6 +8,7 @@ import { requiresAuth } from 'express-openid-connect';
 import { Logger } from '@hmcts/nodejs-logging';
 import { v4 as uuid } from 'uuid';
 import config from 'config';
+import { AxiosResponse } from 'axios';
 
 export const parseIsoDuration = (duration: string): number => {
   const regex = /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?/;
@@ -192,6 +193,33 @@ function getEditRequestPage(app: Application): void {
     }
   });
 
+  function getErrorMessage(response: AxiosResponse): string {
+    const data = response.data || {};
+    let errorMessage = '';
+
+    if (data.errors && typeof data.errors === 'object') {
+      const normalizedError = (data.errors as Record<string, unknown>).error;
+      if (typeof normalizedError === 'string') {
+        errorMessage = normalizedError;
+      }
+    }
+
+    if (!errorMessage && data.message) {
+      errorMessage = data.message;
+    } else if (!errorMessage && data.reason) {
+      errorMessage = data.reason;
+    }
+
+    if (!errorMessage) {
+      const errorReason = Object.values(data).find(val => typeof val === 'string');
+      if (errorReason) {
+        errorMessage = errorReason as string;
+      }
+    }
+
+    return errorMessage || 'An error occurred';
+  }
+
   app.post('/edit-request/:id', requiresAuth(), async (req, res, next) => {
     if (!validateId(req.params.id)) {
       res.status(404);
@@ -235,31 +263,7 @@ function getEditRequestPage(app: Application): void {
       const response = await client.putEditRequest(userPortalId, request);
       if (response.status === 400) {
         res.status(400);
-        const data = response.data || {};
-        let errorMessage = '';
-
-        if (data.errors && typeof data.errors === 'object') {
-          const normalizedError = (data.errors as Record<string, unknown>).error;
-          if (typeof normalizedError === 'string') {
-            errorMessage = normalizedError;
-          }
-        }
-
-        if (!errorMessage && data.message) {
-          errorMessage = data.message;
-        } else if (!errorMessage && data.reason) {
-          errorMessage = data.reason;
-        }
-
-        if (!errorMessage) {
-          const errorReason = Object.values(data).find(val => typeof val === 'string');
-          if (errorReason) {
-            errorMessage = errorReason as string;
-          }
-        }
-
-        res.json({ errors: { error: errorMessage || 'An error occurred' } });
-        return;
+        res.json({ errors: { error: getErrorMessage(response) } });
       }
 
       res.json(await getCurrentEditRequest(client, userPortalId, req.params.id));
