@@ -1,4 +1,4 @@
-import { describe, expect, test, vi, beforeEach } from 'vitest';
+import { describe, expect, test, vi, beforeEach, it } from 'vitest';
 import type { Mock } from 'vitest';
 import { MigrationRecordService } from '../../../../main/services/system-status/migration-status';
 import { Request } from 'express';

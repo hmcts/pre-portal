@@ -1,4 +1,5 @@
 import { formatDuration } from '../../../main/utils/format-duration';
+import { describe, expect, it } from 'vitest';
 
 describe('formatDuration', () => {
   it('should return empty string for null or undefined', () => {

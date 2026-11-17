@@ -14,10 +14,9 @@
     "useUnknownInCatchVariables": false,
     "skipLibCheck": true,
     "lib": ["es2020", "dom", "dom.iterable"],
-    "baseUrl": "src/main",
     "paths": {
-      "router/*": ["router/*"],
-      "routes/*": ["routes/*"]
+      "router/*": ["./src/main/router/*"],
+      "routes/*": ["./src/main/routes/*"]
     }
   },
   "exclude": ["**/*.test.ts", "**/codecept.conf.ts", "**/__mocks__/*", "**/saucelabs.conf.ts"]
