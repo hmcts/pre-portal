@@ -1,9 +1,10 @@
 {% from "govuk/components/pagination/macro.njk" import govukPagination %}
-{% extends "template.njk" %}
+
+{% extends "full-width.njk" %}
 
 {% block pageTitle %}{{ title }} - PRE Portal{% endblock %}
 
-{% block content %}
+{% block mainContent %}
   <h1 class="govuk-heading-xl">Edit Request</h1>
 
   <form action="/support/edit-request/upload" method="POST" enctype="multipart/form-data">
@@ -131,7 +132,7 @@
       }
 
       try {
-        const res = await fetch(`/edits/recordings?case_reference=${encodeURIComponent(caseReference)}`);
+        const res = await fetch(`/support/edits/recordings?case_reference=${encodeURIComponent(caseReference)}`);
         if (!res.ok) {
           throw new Error('Failed to fetch recordings');
         }

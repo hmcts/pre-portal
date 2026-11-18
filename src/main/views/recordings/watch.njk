@@ -142,6 +142,37 @@
       </dd>
     </div>
   </dl>
+
+  {% if enableAutomatedEditing %}
+    {% if appliedEdits %}
+      <h2 class="govuk-heading-m">Edit details</h2>
+      <p class="govuk-body" style="font-weight: bold; margin: 0;">Approved By: {{ appliedEdits.approvedBy }}</p>
+      <p class="govuk-body" style="font-weight: bold">Approved At: {{ appliedEdits.approvedAt }}</p>
+
+      <table class="govuk-table" style="table-layout: fixed; width: 100%;">
+        <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Start Time</th>
+          <th scope="col" class="govuk-table__header">End Time</th>
+          <th scope="col" class="govuk-table__header">Runtime Reference</th>
+          <th scope="col" class="govuk-table__header">Reason</th>
+        </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+        {% for instruction in appliedEdits.appliedEdits %}
+          <tr id="instruction-{{ loop.index0 }}" class="govuk-table__row">
+            <td class="govuk-table__cell">{{ instruction.startOfCut }}</td>
+            <td class="govuk-table__cell">{{ instruction.endOfCut }}</td>
+            <td class="govuk-table__cell">{{ instruction.runtimeReference }}</td>
+            <td class="govuk-table__cell" style="overflow-wrap: break-word;">{{ instruction.reason }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+    {% endif %}
+  {% endif %}
+
   <script type="text/javascript" crossorigin="anonymous" data-testid="recording-video-script">
     const videoContainer = document.getElementById("video-container");
     var videoError = document.getElementById("videoError");
@@ -207,4 +238,31 @@
       document.getElementById("loading").style.display = "none";
     });
   </script>
+
+  {% if enableAutomatedEditing %}
+    <div style="display: flex; justify-content: flex-end; margin-top: 2rem;">
+      <div style="text-align: right;">
+        {% if editRequestStatus and editRequestStatus != "DRAFT" and editRequestStatus != "COMPLETE" %}
+          <p class="govuk-hint" style="max-width: 400px;">
+            There is an edit request in progress.
+          </p>
+          <a href="/edit-request/{{ editRequestRecordingId or recording.id }}" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+            View in progress edit request
+          </a>
+        {% elseif editRequestStatus == "DRAFT" %}
+          <p class="govuk-hint" style="max-width: 400px;">
+            A draft edit request already exists.
+          </p>
+            <a href="/edit-request/{{ editRequestRecordingId or recording.id }}" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+              View draft edit request
+            </a>
+        {% else %}
+          <a href="/edit-request/{{ editRequestRecordingId or recording.id }}" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+            Make an edit request
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+
 {% endblock %}

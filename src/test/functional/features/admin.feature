@@ -47,14 +47,17 @@ Feature: View Admin Page
     Then I do not see the link 'User Admin'
     Then I do not see the link 'Support'
     Then I do not see the link 'Management'
-    Given I go to '/support/edit-request'
-    Then the page should include 'Page is not available'
     Given I go to '/system/status'
     Then the page should include 'Page is not available'
     Given I go to '/system/MK-live-events'
     Then the page should include 'Page is not available'
+    # This page should be available to standard users after implementation
+    Given I go to '/support/edit-request'
+    Then the page should include 'Page is not available'
     # These pages should be 'not available' to standard users after implementation
     Given I go to '/user-admin/onboarding'
+    Then the page should include 'under development'
+    Given I go to '/user-admin/offboarding'
     Then the page should include 'under development'
 
 

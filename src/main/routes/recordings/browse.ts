@@ -1,10 +1,11 @@
 import { PreClient } from '../../services/pre-api/pre-client';
-import { SearchRecordingsRequest } from '../../services/pre-api/types';
+import { Recording, SearchRecordingsRequest } from '../../services/pre-api/types';
 import { SessionUser } from '../../services/session-user/session-user';
 
 import { Logger } from '@hmcts/nodejs-logging';
 import { Application } from 'express';
 import { requiresAuth } from 'express-openid-connect';
+import config from 'config';
 
 export const convertIsoToDate = (isoString?: string): string | undefined => {
   if (!isoString) {
@@ -27,6 +28,129 @@ const getQueryString = (value: unknown): string | undefined => {
 
   const trimmedQueryValue = queryValue.trim();
   return trimmedQueryValue || undefined;
+};
+
+export const getEditRequestId = (editInstructions?: string): string | undefined => {
+  if (!editInstructions) return;
+  try {
+    const parsed = JSON.parse(editInstructions);
+    return parsed.editRequestId || parsed.edit_request_id || parsed.editRequest?.id;
+  } catch {
+    return;
+  }
+};
+
+type BrowseRecording = Recording & {
+  row_id?: string;
+};
+
+// Find which edit requests should NOT show as pending rows because they've already been applied.
+const getNonPendingEditRequestIds = (recordings: Recording[]): Set<string> => {
+  const nonPendingEditRequestIds = new Set<string>();
+  for (const recording of recordings) {
+    if (recording.version > 1) {
+      const editRequestId = getEditRequestId(recording.edit_instructions);
+      if (editRequestId) nonPendingEditRequestIds.add(editRequestId);
+    }
+  }
+  return nonPendingEditRequestIds;
+};
+
+const getRecordingsByRootId = (recordings: Recording[]): Map<string, Recording[]> => {
+  const recordingsByRootId = new Map<string, Recording[]>();
+  for (const recording of recordings) {
+    const rootId = recording.parent_recording_id || recording.id;
+    if (!recordingsByRootId.has(rootId)) recordingsByRootId.set(rootId, []);
+    recordingsByRootId.get(rootId)!.push(recording);
+  }
+  return recordingsByRootId;
+};
+
+// Look up an edit request's current status by searching all recordings.
+const findEditRequestStatus = (recordings: Recording[], editRequestId: string): string | undefined => {
+  for (const recording of recordings) {
+    for (const editRequest of recording.edit_requests || []) {
+      if (editRequest.id === editRequestId) return editRequest.status;
+    }
+  }
+};
+
+// Create a display row, apply formatting and property overrides.
+const createBrowseRow = (recording: Recording, overrides?: Partial<BrowseRecording>): BrowseRecording => ({
+  ...recording,
+  ...overrides,
+  capture_session: {
+    ...recording.capture_session,
+    case_closed_at: convertIsoToDate(recording.capture_session.case_closed_at),
+  },
+});
+
+const getRecordingsInOrderOfEditRequestStatus = (recordingsByRootId: Map<string, Recording[]>) => {
+  const result: BrowseRecording[] = [];
+
+  // Process each group of related recordings.
+  for (const recordingsInGroup of recordingsByRootId.values()) {
+    const completedEditRequestRows: BrowseRecording[] = []; // V2, V3, ... (Completed edits)
+    const pendingEditRequestRows: BrowseRecording[] = []; // Edits in progress (submitted, approved, etc)
+    const draftEditRequestRows: BrowseRecording[] = []; // Edits with status 'DRAFT'
+    let originalRecording: BrowseRecording | undefined;
+
+    // Add rows for each real recording in the group.
+    for (const recording of recordingsInGroup) {
+      let statusToDisplay: string | undefined;
+      if (recording.version === 1) {
+        statusToDisplay = undefined; // Original recordings don't show an edit status.
+      } else {
+        const editRequestId = getEditRequestId(recording.edit_instructions);
+        statusToDisplay =
+          (editRequestId ? findEditRequestStatus(recordingsInGroup, editRequestId) : undefined) ??
+          recording.edit_status;
+      }
+
+      const recordingRow = createBrowseRow(recording, { edit_status: statusToDisplay });
+
+      if (recording.version === 1) {
+        originalRecording = recordingRow;
+      } else {
+        completedEditRequestRows.push(recordingRow);
+      }
+
+      const nonPendingEditRequestIds = getNonPendingEditRequestIds(recordingsInGroup);
+
+      // Create rows for edit requests that aren't complete.
+      for (const editRequest of recording.edit_requests || []) {
+        if (editRequest.status === 'COMPLETE') continue;
+        if (nonPendingEditRequestIds.has(editRequest.id)) continue;
+
+        const editRequestRow = createBrowseRow(recording, {
+          version: (recording.total_version_count ?? recording.version) + 1,
+          edit_status: editRequest.status,
+          row_id: `${recording.id}-${editRequest.id}`,
+        });
+
+        if (editRequest.status === 'DRAFT') {
+          draftEditRequestRows.push(editRequestRow);
+        } else {
+          pendingEditRequestRows.push(editRequestRow);
+        }
+      }
+    }
+
+    // Sort completed edit request rows by version number (newest first).
+    completedEditRequestRows.sort((a, b) => b.version - a.version);
+
+    // Add rows in order: completed edits → pending edits → drafts → original.
+    result.push(...completedEditRequestRows, ...pendingEditRequestRows, ...draftEditRequestRows);
+    if (originalRecording) result.push(originalRecording);
+  }
+
+  return result;
+};
+
+const buildBrowseRows = (recordings: Recording[]): BrowseRecording[] => {
+  // Group recordings by their root ID (V1 uses its own ID. Pending and V2+ uses parent_recording_id).
+  const recordingsByRootId: Map<string, Recording[]> = getRecordingsByRootId(recordings);
+  return getRecordingsInOrderOfEditRequestStatus(recordingsByRootId);
 };
 
 export default function browse(app: Application): void {
@@ -76,13 +200,7 @@ export default function browse(app: Application): void {
     // Rolling window of 5 pages centered on the current page
     // The current page is 5 then 2 pages before and 2 pages after does not include the first+1 or last-1 pages so add in ellipsis
 
-    const updatedRecordings = recordings.map(recording => ({
-      ...recording,
-      capture_session: {
-        ...recording.capture_session,
-        case_closed_at: convertIsoToDate(recording.capture_session.case_closed_at),
-      },
-    }));
+    const recordingsForView = buildBrowseRows(recordings);
 
     const queryString = caseReference ? { name: 'caseReference', value: caseReference } : undefined;
     const { paginationLinks, title } = client.createPagination(
@@ -94,10 +212,11 @@ export default function browse(app: Application): void {
     );
 
     res.render('recordings/browse', {
-      recordings: updatedRecordings,
+      recordings: recordingsForView,
       paginationLinks,
       title,
       user: SessionUser.getLoggedInUserProfile(req).user,
+      enableAutomatedEditing: config.get('pre.enableAutomatedEditing') === 'true',
       isSuperUser: SessionUser.isLoggedInSuperUser(req),
       caseReference,
       pageUrl: req.url,

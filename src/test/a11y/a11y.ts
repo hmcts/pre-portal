@@ -6,6 +6,7 @@ to convert whole file to Pa11y actions.
 import puppeteer, { Browser, Page } from 'puppeteer';
 import { config } from '../config';
 
+import { isFlagEnabled } from '../../main/utils/helpers';
 import * as process from 'node:process';
 
 const pa11y = require('pa11y');
@@ -91,7 +92,7 @@ describe('Accessibility', () => {
     '/management/audit',
     '/support/migration',
   ];
-  const signedInAsNormalUserUrls = ['/help', '/recordings/watch', '/browse', '/terms-and-conditions'];
+  const signedInAsNormalUserUrls = ['/edit-request', '/help', '/recordings/watch', '/browse', '/terms-and-conditions'];
 
   let browser: Browser;
 
@@ -134,4 +135,42 @@ describe('Accessibility', () => {
       await browser.close();
     }, 65000);
   });
+
+  test('/edit-request/:id page', async () => {
+    if (!isFlagEnabled('pre.enableAutomatedEditing')) {
+      return;
+    }
+
+    const page = await signInAsNormalUser(browser);
+
+    try {
+      await page.click('a[href^="/edit-request/"]:not([href$="/view"])');
+    } catch (e) {
+      console.error('Error: No editable requests found for user ' + process.env.B2C_TEST_LOGIN_EMAIL);
+      throw e;
+    }
+    const editUrl = page.url();
+
+    console.log('Testing landing edit request page');
+    await verifyPa11yTests(editUrl, browser);
+
+    console.log('Testing edit request submit page');
+    await page.waitForSelector('button[id^="submit-button"]', { visible: true, timeout: 0 });
+    await page.click('button[id^="submit-button"]');
+
+    await verifyPa11yTests(page.url(), browser);
+
+    console.log('Testing landing edit request view page');
+    try {
+      // Go back to home page
+      await page.goto(config.TEST_URL as string, { waitUntil: 'networkidle2' });
+      await page.waitForSelector('a[href^="/watch/"]', { visible: true, timeout: 0 });
+
+      await page.click('a[href^="/edit-request/"][href$="/view"]');
+    } catch (e) {
+      console.error('Error: No viewable edit requests found for user ' + process.env.B2C_TEST_LOGIN_EMAIL);
+      throw e;
+    }
+    await verifyPa11yTests(page.url(), browser);
+  }, 65000);
 });
