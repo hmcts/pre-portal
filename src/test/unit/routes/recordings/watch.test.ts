@@ -274,7 +274,7 @@ describe('parseAppliedEdits', () => {
         },
       ],
       approvedBy: 'approver',
-      approvedAt: '1/1/2023',
+      approvedAt: '01/01/2023',
     });
   });
 

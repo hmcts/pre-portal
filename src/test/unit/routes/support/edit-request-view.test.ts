@@ -1,10 +1,10 @@
-import { Nunjucks } from '../../../main/modules/nunjucks';
+import { Nunjucks } from '../../../../main/modules/nunjucks';
 import config from 'config';
-import { mockUser } from '../test-helper';
+import { mockUser } from '../../test-helper';
 import { set } from 'lodash';
-import { mockedEditRequest, mockGetCurrentEditRequest, mockGetRecording, reset } from '../../mock-api';
+import { mockedEditRequest, mockGetCurrentEditRequest, mockGetRecording, reset } from '../../../mock-api';
 import { describe } from '@jest/globals';
-import { PreClient } from '../../../main/services/pre-api/pre-client';
+import { PreClient } from '../../../../main/services/pre-api/pre-client';
 
 mockUser();
 set(config, 'pre.enableAutomatedEditing', 'true');
@@ -19,8 +19,8 @@ describe('edit-request-view route', () => {
     new Nunjucks(false).enableFor(app);
     const request = require('supertest');
 
-    const watch = require('../../../main/routes/edit-request-view').default;
-    watch(app);
+    const editRequestViewRoute = require('../../../../main/routes/edit-request-view').default;
+    editRequestViewRoute(app);
 
     it('should render edit-request-view with submit button when status is DRAFT', async () => {
       mockGetRecording();
@@ -107,8 +107,8 @@ describe('edit-request-view route', () => {
     new Nunjucks(false).enableFor(app);
     const request = require('supertest');
 
-    const watch = require('../../../main/routes/edit-request-view').default;
-    watch(app);
+    const editRequestViewRoute = require('../../../../main/routes/edit-request-view').default;
+    editRequestViewRoute(app);
 
     test('should return 404 when id is invalid', async () => {
       await request(app)

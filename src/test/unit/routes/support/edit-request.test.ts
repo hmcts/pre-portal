@@ -10,14 +10,293 @@ import {
   reset,
 } from '../../../mock-api';
 import { describe } from '@jest/globals';
+import { PutEditRequest } from '../../../../main/services/pre-api/types';
 import { PreClient } from '../../../../main/services/pre-api/pre-client';
 
 mockUser();
 set(config, 'pre.enableAutomatedEditing', 'true');
+const { parseIsoDuration, validateRequest } = require('../../../../main/routes/edit-request');
 
 describe('edit-request route', () => {
   beforeAll(() => {
     reset();
+  });
+
+  describe('parseIsoDuration', () => {
+    it('should parse ISO 8601 duration with hours, minutes and seconds', () => {
+      const duration = 'PT1H30M45S';
+      const result = parseIsoDuration(duration);
+      expect(result).toBe(3600 + 30 * 60 + 45); // 5445 seconds
+    });
+
+    it('should parse ISO 8601 duration with only hours', () => {
+      const duration = 'PT2H';
+      const result = parseIsoDuration(duration);
+      expect(result).toBe(2 * 3600); // 7200 seconds
+    });
+
+    it('should parse ISO 8601 duration with only minutes', () => {
+      const duration = 'PT45M';
+      const result = parseIsoDuration(duration);
+      expect(result).toBe(45 * 60); // 2700 seconds
+    });
+
+    it('should parse ISO 8601 duration with only seconds', () => {
+      const duration = 'PT30S';
+      const result = parseIsoDuration(duration);
+      expect(result).toBe(30);
+    });
+
+    it('should parse ISO 8601 duration with decimal seconds', () => {
+      const duration = 'PT1M30.5S';
+      const result = parseIsoDuration(duration);
+      // Note: parseIsoDuration uses Number.parseInt which truncates decimal seconds
+      expect(result).toBe(60 + 30); // 90 seconds (decimal part is truncated)
+    });
+
+    it('should throw error for invalid ISO 8601 duration format', () => {
+      const duration = 'INVALID';
+      expect(() => parseIsoDuration(duration)).toThrow('Invalid ISO 8601 duration format');
+    });
+
+    it('should parse zero duration', () => {
+      const duration = 'PT0S';
+      const result = parseIsoDuration(duration);
+      expect(result).toBe(0);
+    });
+  });
+
+  describe('validateRequest', () => {
+    it('should return undefined for valid request with edit instructions', () => {
+      const request: PutEditRequest = {
+        id: '123',
+        source_recording_id: '456',
+        status: 'DRAFT',
+        edit_instructions: [
+          {
+            start_of_cut: '00:00:10',
+            end_of_cut: '00:00:20',
+            reason: 'test reason',
+          },
+        ],
+      };
+
+      const result = validateRequest(request, 'PT1H0M0S');
+      expect(result).toBeUndefined();
+    });
+
+    it('should return undefined for empty edit instructions', () => {
+      const request: PutEditRequest = {
+        id: '123',
+        source_recording_id: '456',
+        status: 'DRAFT',
+        edit_instructions: [],
+      };
+
+      const result = validateRequest(request, 'PT1H0M0S');
+      expect(result).toBeUndefined();
+    });
+
+    it('should return undefined for undefined edit instructions', () => {
+      const request: PutEditRequest = {
+        id: '123',
+        source_recording_id: '456',
+        status: 'DRAFT',
+        edit_instructions: undefined as any,
+      };
+
+      const result = validateRequest(request, 'PT1H0M0S');
+      expect(result).toBeUndefined();
+    });
+
+    it('should return error for empty start_of_cut', () => {
+      const request: PutEditRequest = {
+        id: '123',
+        source_recording_id: '456',
+        status: 'DRAFT',
+        edit_instructions: [
+          {
+            start_of_cut: '',
+            end_of_cut: '00:00:20',
+            reason: 'test reason',
+          },
+        ],
+      };
+
+      const result = validateRequest(request, 'PT1H0M0S');
+      expect(result).toBeDefined();
+      expect(result && result['startTime']).toBe('Please enter a valid time reference');
+    });
+
+    it('should return error for invalid start_of_cut format', () => {
+      const request: PutEditRequest = {
+        id: '123',
+        source_recording_id: '456',
+        status: 'DRAFT',
+        edit_instructions: [
+          {
+            start_of_cut: '25:00:00',
+            end_of_cut: '00:00:20',
+            reason: 'test reason',
+          },
+        ],
+      };
+
+      const result = validateRequest(request, 'PT1H0M0S');
+      expect(result).toBeDefined();
+      expect(result && result['startTime']).toBe('The Start reference entered is not in the HH:MM:SS format');
+    });
+
+    it('should return error for empty end_of_cut', () => {
+      const request: PutEditRequest = {
+        id: '123',
+        source_recording_id: '456',
+        status: 'DRAFT',
+        edit_instructions: [
+          {
+            start_of_cut: '00:00:10',
+            end_of_cut: '',
+            reason: 'test reason',
+          },
+        ],
+      };
+
+      const result = validateRequest(request, 'PT1H0M0S');
+      expect(result).toBeDefined();
+      expect(result && result['endTime']).toBe('Please enter a valid time reference');
+    });
+
+    it('should return error when end_of_cut equals start_of_cut', () => {
+      const request: PutEditRequest = {
+        id: '123',
+        source_recording_id: '456',
+        status: 'DRAFT',
+        edit_instructions: [
+          {
+            start_of_cut: '00:00:10',
+            end_of_cut: '00:00:10',
+            reason: 'test reason',
+          },
+        ],
+      };
+
+      const result = validateRequest(request, 'PT1H0M0S');
+      expect(result).toBeDefined();
+      expect(result && result['endTime']).toBe('End reference cannot be equal or less than the Start reference');
+    });
+
+    it('should return error when end_of_cut is less than start_of_cut', () => {
+      const request: PutEditRequest = {
+        id: '123',
+        source_recording_id: '456',
+        status: 'DRAFT',
+        edit_instructions: [
+          {
+            start_of_cut: '00:00:30',
+            end_of_cut: '00:00:10',
+            reason: 'test reason',
+          },
+        ],
+      };
+
+      const result = validateRequest(request, 'PT1H0M0S');
+      expect(result).toBeDefined();
+      expect(result && result['endTime']).toBe('End reference cannot be equal or less than the Start reference');
+    });
+
+    it('should return error when end_of_cut exceeds duration', () => {
+      const request: PutEditRequest = {
+        id: '123',
+        source_recording_id: '456',
+        status: 'DRAFT',
+        edit_instructions: [
+          {
+            start_of_cut: '00:00:10',
+            end_of_cut: '02:00:00',
+            reason: 'test reason',
+          },
+        ],
+      };
+
+      const result = validateRequest(request, 'PT1H0M0S');
+      expect(result).toBeDefined();
+      expect(result && result['endTime']).toBe('References cannot be greater than the duration of the recording');
+    });
+
+    it('should return error for overlapping instructions', () => {
+      const request: PutEditRequest = {
+        id: '123',
+        source_recording_id: '456',
+        status: 'DRAFT',
+        edit_instructions: [
+          {
+            start_of_cut: '00:00:10',
+            end_of_cut: '00:00:30',
+            reason: 'first instruction',
+          },
+          {
+            start_of_cut: '00:00:20',
+            end_of_cut: '00:00:40',
+            reason: 'overlapping instruction',
+          },
+        ],
+      };
+
+      const result = validateRequest(request, 'PT1H0M0S');
+      expect(result).toBeDefined();
+      expect(result && result['error']).toContain('Overlapping Instructions');
+    });
+
+    it('should return error when reason contains &', () => {
+      const request: PutEditRequest = {
+        id: '123',
+        source_recording_id: '456',
+        status: 'DRAFT',
+        edit_instructions: [{ start_of_cut: '00:00:10', end_of_cut: '00:00:20', reason: 'noise & echo' }],
+      };
+      const result = validateRequest(request, 'PT1H0M0S');
+      expect(result).toEqual({ error: 'Special characters not allowed: & < >' });
+    });
+
+    it('should return error when reason contains <', () => {
+      const request: PutEditRequest = {
+        id: '123',
+        source_recording_id: '456',
+        status: 'DRAFT',
+        edit_instructions: [{ start_of_cut: '00:00:10', end_of_cut: '00:00:20', reason: '<script>' }],
+      };
+      const result = validateRequest(request, 'PT1H0M0S');
+      expect(result).toEqual({ error: 'Special characters not allowed: & < >' });
+    });
+
+    it('should return error when reason contains >', () => {
+      const request: PutEditRequest = {
+        id: '123',
+        source_recording_id: '456',
+        status: 'DRAFT',
+        edit_instructions: [{ start_of_cut: '00:00:10', end_of_cut: '00:00:20', reason: 'a > b' }],
+      };
+      const result = validateRequest(request, 'PT1H0M0S');
+      expect(result).toEqual({ error: 'Special characters not allowed: & < >' });
+    });
+
+    it('should trim whitespace from time references', () => {
+      const request: PutEditRequest = {
+        id: '123',
+        source_recording_id: '456',
+        status: 'DRAFT',
+        edit_instructions: [
+          {
+            start_of_cut: '  00:00:10  ',
+            end_of_cut: '  00:00:20  ',
+            reason: 'test reason',
+          },
+        ],
+      };
+
+      const result = validateRequest(request, 'PT1H0M0S');
+      expect(result).toBeUndefined();
+    });
   });
 
   describe('on GET', () => {
@@ -25,10 +304,11 @@ describe('edit-request route', () => {
     new Nunjucks(false).enableFor(app);
     const request = require('supertest');
 
-    const watch = require('../../../../main/routes/edit-request').default;
-    watch(app);
+    const editRequestRoute = require('../../../../main/routes/edit-request').default;
+    editRequestRoute(app);
 
     test('should return 500 when getCurrentEditRequest fails', async () => {
+      mockGetRecording();
       jest
         .spyOn(PreClient.prototype, 'getMostRecentEditRequests')
         .mockImplementation(async (xUserId: string, sourceRecordingId: string) => {
@@ -36,7 +316,7 @@ describe('edit-request route', () => {
         });
       await request(app)
         .get('/edit-request/12345678-1234-1234-1234-1234567890ab')
-        .expect(res => expect(res.status).toBe(500));
+        .expect((res: { status: any }) => expect(res.status).toBe(500));
     });
 
     test('should return 500 when calculateTimeRemoved fails', async () => {
@@ -65,11 +345,11 @@ describe('edit-request route', () => {
         .expect(res => expect(res.status).toBe(500));
     });
 
-    test('should return 404 when getRecording returns null', async () => {
+    test('should return 404 when recording is not found', async () => {
       mockGetRecording(null);
       await request(app)
         .get('/edit-request/12345678-1234-1234-1234-1234567890ff')
-        .expect(res => expect(res.status).toBe(404));
+        .expect((res: { status: any }) => expect(res.status).toBe(404));
     });
 
     test('should return 404 when getRecordingPlaybackData returns null', async () => {
@@ -83,7 +363,7 @@ describe('edit-request route', () => {
       mockGetRecording(null);
       await request(app)
         .get('/edit-request/something')
-        .expect(res => expect(res.status).toBe(404));
+        .expect((res: { status: any }) => expect(res.status).toBe(404));
     });
 
     test('should return 404 when edit request is not found', async () => {
@@ -91,7 +371,7 @@ describe('edit-request route', () => {
       mockGetCurrentEditRequest(null);
       await request(app)
         .get('/edit-request/12345678-1234-1234-1234-1234567890ab')
-        .expect(res => expect(res.status).toBe(404));
+        .expect((res: { status: any }) => expect(res.status).toBe(404));
     });
 
     test('should return 404 when getRecordingPlaybackData id is invalid', async () => {
@@ -102,12 +382,12 @@ describe('edit-request route', () => {
     });
 
     test('should return 500 when getRecording fails', async () => {
-      jest.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async (xUserId: string, id: string) => {
+      jest.spyOn(PreClient.prototype, 'getRecording').mockImplementation(async () => {
         throw new Error('Error');
       });
       await request(app)
         .get('/edit-request/12345678-1234-1234-1234-1234567890ab')
-        .expect(res => expect(res.status).toBe(500));
+        .expect((res: { status: any }) => expect(res.status).toBe(500));
     });
 
     test('should redirect to /edit-request/:id/view when getRecording and getCurrentEditRequest succeed', async () => {
@@ -123,8 +403,10 @@ describe('edit-request route', () => {
       ]);
       await request(app)
         .get('/edit-request/12345678-1234-1234-1234-1234567890ab')
-        .expect(res => expect(res.status).toBe(302))
-        .expect(res => expect(res.header.location).toBe('/edit-request/12345678-1234-1234-1234-1234567890ab/view'));
+        .expect((res: { status: any }) => expect(res.status).toBe(302))
+        .expect((res: { header: { location: any } }) =>
+          expect(res.header.location).toBe('/edit-request/12345678-1234-1234-1234-1234567890ab/view')
+        );
     });
 
     test('should render edit-request page with DRAFT status and log audit', async () => {
@@ -146,7 +428,8 @@ describe('edit-request route', () => {
       const res = await request(app).get('/edit-request/12345678-1234-1234-1234-1234567890ab').expect(200);
 
       expect(putAuditSpy).toHaveBeenCalled();
-      expect(res.text).toContain('edit-request');
+      expect(res.text).toContain('/watch/12345678-1234-1234-1234-1234567890ab/playback');
+      expect(res.text).toContain('/edit-request/12345678-1234-1234-1234-1234567890ab');
     });
   });
 
@@ -156,8 +439,8 @@ describe('edit-request route', () => {
     new Nunjucks(false).enableFor(app);
     const request = require('supertest');
 
-    const watch = require('../../../../main/routes/edit-request').default;
-    watch(app);
+    const editRequestRoute = require('../../../../main/routes/edit-request').default;
+    editRequestRoute(app);
 
     test('should return 404 when id is invalid', async () => {
       await request(app)
