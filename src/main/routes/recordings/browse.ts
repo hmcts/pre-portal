@@ -1,10 +1,10 @@
-import {PreClient} from '../../services/pre-api/pre-client';
-import {Recording, SearchRecordingsRequest} from '../../services/pre-api/types';
-import {SessionUser} from '../../services/session-user/session-user';
+import { PreClient } from '../../services/pre-api/pre-client';
+import { Recording, SearchRecordingsRequest } from '../../services/pre-api/types';
+import { SessionUser } from '../../services/session-user/session-user';
 
-import {Logger} from '@hmcts/nodejs-logging';
-import {Application} from 'express';
-import {requiresAuth} from 'express-openid-connect';
+import { Logger } from '@hmcts/nodejs-logging';
+import { Application } from 'express';
+import { requiresAuth } from 'express-openid-connect';
 import config from 'config';
 
 export const convertIsoToDate = (isoString?: string): string | undefined => {
@@ -54,7 +54,7 @@ const getNonPendingEditRequestIds = (recordings: Recording[]): Set<string> => {
     }
   }
   return nonPendingEditRequestIds;
-}
+};
 
 const getRecordingsByRootId = (recordings: Recording[]): Map<string, Recording[]> => {
   const recordingsByRootId = new Map<string, Recording[]>();
@@ -64,7 +64,7 @@ const getRecordingsByRootId = (recordings: Recording[]): Map<string, Recording[]
     recordingsByRootId.get(rootId)!.push(recording);
   }
   return recordingsByRootId;
-}
+};
 
 // Look up an edit request's current status by searching all recordings.
 const findEditRequestStatus = (recordings: Recording[], editRequestId: string): string | undefined => {
@@ -102,7 +102,9 @@ const getRecordingsInOrderOfEditRequestStatus = (recordingsByRootId: Map<string,
         statusToDisplay = undefined; // Original recordings don't show an edit status.
       } else {
         const editRequestId = getEditRequestId(recording.edit_instructions);
-        statusToDisplay = (editRequestId ? findEditRequestStatus(recordingsInGroup, editRequestId) : undefined) ?? recording.edit_status;
+        statusToDisplay =
+          (editRequestId ? findEditRequestStatus(recordingsInGroup, editRequestId) : undefined) ??
+          recording.edit_status;
       }
 
       const recordingRow = createBrowseRow(recording, { edit_status: statusToDisplay });
@@ -143,7 +145,7 @@ const getRecordingsInOrderOfEditRequestStatus = (recordingsByRootId: Map<string,
   }
 
   return result;
-}
+};
 
 const buildBrowseRows = (recordings: Recording[]): BrowseRecording[] => {
   // Group recordings by their root ID (V1 uses its own ID. Pending and V2+ uses parent_recording_id).
