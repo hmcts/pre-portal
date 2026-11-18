@@ -49,7 +49,7 @@ export const parseAppliedEdits = async (
   return {
     appliedEdits,
     approvedBy: editRequest?.approved_by || '',
-    approvedAt: editRequest?.approved_at ? new Date(editRequest.approved_at).toLocaleDateString() : '',
+    approvedAt: editRequest?.approved_at ? new Date(editRequest.approved_at).toLocaleDateString("en-GB") : '',
   };
 };
 
