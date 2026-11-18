@@ -109,15 +109,58 @@ describe('edit-request route', () => {
       expect(result).toBeUndefined();
     });
 
-    it('should return error for empty start_of_cut', () => {
+    it.each([
+      {
+        scenario: 'empty start_of_cut',
+        start_of_cut: '',
+        end_of_cut: '00:00:20',
+        errorField: 'startTime',
+        expectedError: 'Please enter a valid time reference',
+      },
+      {
+        scenario: 'invalid start_of_cut format',
+        start_of_cut: '25:00:00',
+        end_of_cut: '00:00:20',
+        errorField: 'startTime',
+        expectedError: 'The Start reference entered is not in the HH:MM:SS format',
+      },
+      {
+        scenario: 'empty end_of_cut',
+        start_of_cut: '00:00:10',
+        end_of_cut: '',
+        errorField: 'endTime',
+        expectedError: 'Please enter a valid time reference',
+      },
+      {
+        scenario: 'end_of_cut equals start_of_cut',
+        start_of_cut: '00:00:10',
+        end_of_cut: '00:00:10',
+        errorField: 'endTime',
+        expectedError: 'End reference cannot be equal or less than the Start reference',
+      },
+      {
+        scenario: 'end_of_cut is less than start_of_cut',
+        start_of_cut: '00:00:30',
+        end_of_cut: '00:00:10',
+        errorField: 'endTime',
+        expectedError: 'End reference cannot be equal or less than the Start reference',
+      },
+      {
+        scenario: 'end_of_cut exceeds duration',
+        start_of_cut: '00:00:10',
+        end_of_cut: '02:00:00',
+        errorField: 'endTime',
+        expectedError: 'References cannot be greater than the duration of the recording',
+      },
+    ])('should return error when $scenario', ({ start_of_cut, end_of_cut, errorField, expectedError }) => {
       const request: PutEditRequest = {
         id: '123',
         source_recording_id: '456',
         status: 'DRAFT',
         edit_instructions: [
           {
-            start_of_cut: '',
-            end_of_cut: '00:00:20',
+            start_of_cut,
+            end_of_cut,
             reason: 'test reason',
           },
         ],
@@ -125,102 +168,7 @@ describe('edit-request route', () => {
 
       const result = validateRequest(request, 'PT1H0M0S');
       expect(result).toBeDefined();
-      expect(result && result['startTime']).toBe('Please enter a valid time reference');
-    });
-
-    it('should return error for invalid start_of_cut format', () => {
-      const request: PutEditRequest = {
-        id: '123',
-        source_recording_id: '456',
-        status: 'DRAFT',
-        edit_instructions: [
-          {
-            start_of_cut: '25:00:00',
-            end_of_cut: '00:00:20',
-            reason: 'test reason',
-          },
-        ],
-      };
-
-      const result = validateRequest(request, 'PT1H0M0S');
-      expect(result).toBeDefined();
-      expect(result && result['startTime']).toBe('The Start reference entered is not in the HH:MM:SS format');
-    });
-
-    it('should return error for empty end_of_cut', () => {
-      const request: PutEditRequest = {
-        id: '123',
-        source_recording_id: '456',
-        status: 'DRAFT',
-        edit_instructions: [
-          {
-            start_of_cut: '00:00:10',
-            end_of_cut: '',
-            reason: 'test reason',
-          },
-        ],
-      };
-
-      const result = validateRequest(request, 'PT1H0M0S');
-      expect(result).toBeDefined();
-      expect(result && result['endTime']).toBe('Please enter a valid time reference');
-    });
-
-    it('should return error when end_of_cut equals start_of_cut', () => {
-      const request: PutEditRequest = {
-        id: '123',
-        source_recording_id: '456',
-        status: 'DRAFT',
-        edit_instructions: [
-          {
-            start_of_cut: '00:00:10',
-            end_of_cut: '00:00:10',
-            reason: 'test reason',
-          },
-        ],
-      };
-
-      const result = validateRequest(request, 'PT1H0M0S');
-      expect(result).toBeDefined();
-      expect(result && result['endTime']).toBe('End reference cannot be equal or less than the Start reference');
-    });
-
-    it('should return error when end_of_cut is less than start_of_cut', () => {
-      const request: PutEditRequest = {
-        id: '123',
-        source_recording_id: '456',
-        status: 'DRAFT',
-        edit_instructions: [
-          {
-            start_of_cut: '00:00:30',
-            end_of_cut: '00:00:10',
-            reason: 'test reason',
-          },
-        ],
-      };
-
-      const result = validateRequest(request, 'PT1H0M0S');
-      expect(result).toBeDefined();
-      expect(result && result['endTime']).toBe('End reference cannot be equal or less than the Start reference');
-    });
-
-    it('should return error when end_of_cut exceeds duration', () => {
-      const request: PutEditRequest = {
-        id: '123',
-        source_recording_id: '456',
-        status: 'DRAFT',
-        edit_instructions: [
-          {
-            start_of_cut: '00:00:10',
-            end_of_cut: '02:00:00',
-            reason: 'test reason',
-          },
-        ],
-      };
-
-      const result = validateRequest(request, 'PT1H0M0S');
-      expect(result).toBeDefined();
-      expect(result && result['endTime']).toBe('References cannot be greater than the duration of the recording');
+      expect(result?.[errorField]).toBe(expectedError);
     });
 
     it('should return error for overlapping instructions', () => {
