@@ -45,7 +45,7 @@ export class EditRequestView {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        accept: 'application/json',
+        Accept: 'application/json',
       },
       body: JSON.stringify({
         ...this.editRequest,
@@ -55,12 +55,15 @@ export class EditRequestView {
     })
       .then(async response => {
         if (!response.ok) {
-          throw new Error(response as any);
+          const errorData = await response.json().catch(() => ({}));
+          const message = errorData.message || `Request failed with status ${response.status}`;
+          throw new Error(message);
         }
+
         globalThis.location.href = '/browse';
       })
       .catch(error => {
-        console.error(error);
+        console.error('Edit request submission failed:', error);
       });
   };
 }

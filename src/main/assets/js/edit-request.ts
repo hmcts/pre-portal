@@ -417,7 +417,7 @@ export class EditRequestManager {
       this.selectedIndex !== undefined
         ? this.payloadBuilder.buildUpdatePayload(this.selectedIndex)
         : this.payloadBuilder.buildAddPayload();
-    this.submitPayload(payload);
+    this.submitPayload(payload).then(r => {});
   }
 
   private edit(index: number): void {
@@ -459,7 +459,7 @@ export class EditRequestManager {
 
   private delete(index: number): void {
     const payload = this.payloadBuilder.buildDeletePayload(index);
-    this.submitPayload(payload);
+    this.submitPayload(payload).then(r => {});
   }
 
   private cancel(): void {

@@ -42,7 +42,7 @@ const validateInstruction = (instruction: PutEditInstruction, duration: string):
 
   const durationInSeconds = parseIsoDuration(duration);
 
-  const hhmmssFormat = new RegExp(String.raw`^(([01]\d|2[0-3]):[0-5]\d:[0-5]\d)$`);
+  const hhmmssFormat = /^([01]\d|2[0-3]):[0-5]\d:[0-5]\d$/;
   if (instruction.start_of_cut === '') {
     errors['startTime'] = 'Please enter a valid time reference';
   } else if (!hhmmssFormat.exec(instruction.start_of_cut)) {
@@ -121,6 +121,33 @@ export const validateRequest = (editRequest: PutEditRequest, duration: string): 
 
 export default getEditRequestPage;
 
+function getErrorMessage(response: AxiosResponse): string {
+  const data = response.data || {};
+  let errorMessage = '';
+
+  if (data.errors && typeof data.errors === 'object') {
+    const normalizedError = (data.errors as Record<string, unknown>).error;
+    if (typeof normalizedError === 'string') {
+      errorMessage = normalizedError;
+    }
+  }
+
+  if (!errorMessage && data.message) {
+    errorMessage = data.message;
+  } else if (!errorMessage && data.reason) {
+    errorMessage = data.reason;
+  }
+
+  if (!errorMessage) {
+    const errorReason = Object.values(data).find(val => typeof val === 'string');
+    if (errorReason) {
+      errorMessage = errorReason as string;
+    }
+  }
+
+  return errorMessage || 'An error occurred';
+}
+
 function getEditRequestPage(app: Application): void {
   if (!isFlagEnabled('pre.enableAutomatedEditing')) {
     return;
@@ -192,33 +219,6 @@ function getEditRequestPage(app: Application): void {
       next(e);
     }
   });
-
-  function getErrorMessage(response: AxiosResponse): string {
-    const data = response.data || {};
-    let errorMessage = '';
-
-    if (data.errors && typeof data.errors === 'object') {
-      const normalizedError = (data.errors as Record<string, unknown>).error;
-      if (typeof normalizedError === 'string') {
-        errorMessage = normalizedError;
-      }
-    }
-
-    if (!errorMessage && data.message) {
-      errorMessage = data.message;
-    } else if (!errorMessage && data.reason) {
-      errorMessage = data.reason;
-    }
-
-    if (!errorMessage) {
-      const errorReason = Object.values(data).find(val => typeof val === 'string');
-      if (errorReason) {
-        errorMessage = errorReason as string;
-      }
-    }
-
-    return errorMessage || 'An error occurred';
-  }
 
   app.post('/edit-request/:id', requiresAuth(), async (req, res, next) => {
     if (!validateId(req.params.id)) {
