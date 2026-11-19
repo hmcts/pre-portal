@@ -8,7 +8,7 @@
     "strict": true,
     "noImplicitAny": false,
     "noImplicitThis": false,
-    "moduleResolution": "node",
+    "moduleResolution": "node10",
     "noUnusedLocals": true,
     "experimentalDecorators": true,
     "useUnknownInCatchVariables": false,
