@@ -11279,7 +11279,7 @@ const RAW_RUNTIME_STATE =
           ["@one-ini/wasm", "npm:0.1.1"],\
           ["commander", "npm:10.0.1"],\
           ["editorconfig", "npm:1.0.4"],\
-          ["minimatch", "npm:9.0.9"],\
+          ["minimatch", "npm:11.0.1"],\
           ["semver", "npm:7.7.4"]\
         ],\
         "linkType": "HARD"\
@@ -16070,6 +16070,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["brace-expansion", "npm:5.0.12"],\
           ["minimatch", "npm:10.2.6"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:11.0.1", {\
+        "packageLocation": "./.yarn/cache/minimatch-npm-11.0.1-eb20b95c63-93f7925d97.zip/node_modules/minimatch/",\
+        "packageDependencies": [\
+          ["@isaacs/nonrecursive-glob-match", "npm:1.1.0"],\
+          ["brace-expansion", "npm:5.0.12"],\
+          ["minimatch", "npm:11.0.1"]\
         ],\
         "linkType": "HARD"\
       }],\
