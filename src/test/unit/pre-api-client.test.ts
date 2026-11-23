@@ -16,7 +16,7 @@ import {
   SearchRecordingsRequest,
 } from '../../main/services/pre-api/types';
 import { describe } from '@jest/globals';
-import axios from 'axios';
+import axios, {AxiosResponse} from 'axios';
 import { mockeduser } from './test-helper';
 import { AccessStatus } from '../../main/types/access-status';
 import FormData from 'form-data';
@@ -35,6 +35,7 @@ const mockPlaybackData = {
   protectionInfo: [],
 } as RecordingPlaybackData;
 jest.mock('axios');
+
 
 /* eslint-disable jest/expect-expect */
 describe('PreClient', () => {
@@ -990,6 +991,102 @@ describe('PreClient', () => {
       totalElements: 12,
       size: 10,
       ...overrides,
+    });
+  });
+
+  describe('mapUserBasicInfo', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    const makeResponse = (users: any[]): AxiosResponse =>
+      ({
+        data: { _embedded: { userDTOList: users } },
+        status: 200,
+        statusText: 'OK',
+        headers: {},
+        config: {} as any,
+      }) as AxiosResponse;
+
+    it('returns empty array when no users exist', () => {
+      const response = { data: {} } as AxiosResponse;
+      expect(preClient.mapUserBasicInfo(response, 'court-1')).toEqual([]);
+    });
+
+    it('returns only users with matching court access', () => {
+      const response = makeResponse([
+        {
+          first_name: 'Alice',
+          last_name: 'Smith',
+          email: 'alice@test.com',
+          app_access: [
+            {
+              court: { id: 'court-1' },
+              role: { name: 'Judge' },
+              active: true,
+              last_access: '2026-11-21T10:00:00Z',
+            },
+          ],
+        },
+        {
+          first_name: 'Bob',
+          last_name: 'Jones',
+          email: 'bob@test.com',
+          app_access: [
+            {
+              court: { id: 'court-2' },
+              role: { name: 'Clerk' },
+              active: true,
+              last_access: '2026-11-20T10:00:00Z',
+            },
+          ],
+        },
+      ]);
+
+      expect(preClient.mapUserBasicInfo(response, 'court-1')).toEqual([
+        {
+          first_name: 'Alice',
+          last_name: 'Smith',
+          email: 'alice@test.com',
+          access: {
+            court_id: 'court-1',
+            last_access: '21/11/2026 10:00:00',
+            role_name: 'Judge',
+            active: true,
+          },
+        },
+      ]);
+    });
+
+    it('skips users with missing/empty app_access', () => {
+      const response = makeResponse([
+        { first_name: 'A', last_name: 'B', email: 'a@test.com', app_access: [] },
+        { first_name: 'C', last_name: 'D', email: 'c@test.com', app_access: null },
+      ]);
+
+      expect(preClient.mapUserBasicInfo(response, 'court-1')).toEqual([]);
+    });
+
+    it('uses "None recorded" when formatted date is empty', () => {
+      const response = makeResponse([
+        {
+          first_name: 'Alice',
+          last_name: 'Smith',
+          email: 'alice@test.com',
+          app_access: [
+            {
+              court: { id: 'court-1' },
+              role: { name: 'Judge' },
+              active: false,
+              last_access: null,
+            },
+          ],
+        },
+      ]);
+
+      const result = preClient.mapUserBasicInfo(response, 'court-1');
+
+      expect(result[0].access.last_access).toBe('None recorded');
     });
   });
 });

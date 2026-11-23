@@ -31,37 +31,6 @@ import { UserBasicAccessInfo } from '../../types/user-by-court';
 import config = require('config');
 import { formatDateToDDMMYYYY } from '../../utils/convert-date';
 
-function mapUserBasicInfo(response: AxiosResponse, requestedCourtId: string): UserBasicAccessInfo[] {
-  const users = response.data['_embedded']?.['userDTOList'] ?? [];
-  return users.flatMap((user: { app_access: any[]; first_name: string; last_name: string; email: string }) => {
-    if (!user.app_access || user.app_access.length === 0) {
-      return [];
-    }
-
-    const matchingAccess = user.app_access.find(access => access.court?.id === requestedCourtId);
-
-    if (!matchingAccess) {
-      return [];
-    }
-
-    const lastAccess: string = formatDateToDDMMYYYY(matchingAccess.last_access) || 'None recorded';
-
-    const mappedUser: UserBasicAccessInfo = {
-      first_name: user.first_name,
-      last_name: user.last_name,
-      email: user.email,
-      access: {
-        court_id: matchingAccess.court.id,
-        last_access: lastAccess,
-        role_name: matchingAccess.role.name,
-        active: matchingAccess.active,
-      },
-    };
-
-    return [mappedUser];
-  });
-}
-
 export class PreClient {
   logger = Logger.getLogger('pre-client');
   private readonly redisService = new RedisService();
@@ -298,7 +267,7 @@ export class PreClient {
 
     let mappedUsers: UserBasicAccessInfo[] = [];
 
-    const user: UserBasicAccessInfo[] = mapUserBasicInfo(response, requestedCourtId);
+    const user: UserBasicAccessInfo[] = this.mapUserBasicInfo(response, requestedCourtId);
     mappedUsers.push(...user);
 
     for (let pageNumber = 1; pageNumber < pagination.totalPages; pageNumber++) {
@@ -307,7 +276,7 @@ export class PreClient {
         headers: { 'X-User-Id': xUserId },
         params: request,
       });
-      let user = mapUserBasicInfo(paginatedResponse, requestedCourtId);
+      let user = this.mapUserBasicInfo(paginatedResponse, requestedCourtId);
       mappedUsers.push(...user);
     }
 
@@ -791,5 +760,36 @@ export class PreClient {
     return new Map<string, string>(
       [...courtIdAndNameMap.entries()].sort(([, nameA], [, nameB]) => nameA.localeCompare(nameB))
     );
+  }
+
+  public mapUserBasicInfo(response: AxiosResponse, requestedCourtId: string): UserBasicAccessInfo[] {
+    const users = response.data['_embedded']?.['userDTOList'] ?? [];
+    return users.flatMap((user: { app_access: any[]; first_name: string; last_name: string; email: string }) => {
+      if (!user.app_access || user.app_access.length === 0) {
+        return [];
+      }
+
+      const matchingAccess = user.app_access.find(access => access.court?.id === requestedCourtId);
+
+      if (!matchingAccess) {
+        return [];
+      }
+
+      const lastAccess: string = formatDateToDDMMYYYY(matchingAccess.last_access) || 'None recorded';
+
+      const mappedUser: UserBasicAccessInfo = {
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email,
+        access: {
+          court_id: matchingAccess.court.id,
+          last_access: lastAccess,
+          role_name: matchingAccess.role.name,
+          active: matchingAccess.active,
+        },
+      };
+
+      return [mappedUser];
+    });
   }
 }
