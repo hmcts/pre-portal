@@ -6,6 +6,7 @@ import { RedisService } from '../../app/redis/RedisService';
 import { LiveEvent } from '../../types/live-event';
 import {
   Audit,
+  CaptureSession,
   Court as ApiCourt,
   EditRequest,
   PaginatedRequest,
@@ -16,17 +17,50 @@ import {
   SearchAuditLogsRequest,
   SearchEditsRequest,
   SearchRecordingsRequest,
-  CaptureSession,
+  SearchUsersRequest,
 } from './types';
 
 import { Logger } from '@hmcts/nodejs-logging';
 import axios, { AxiosResponse } from 'axios';
 import FormData from 'form-data';
-import config = require('config');
 import { HealthResponse } from '../../types/health';
 import { Court } from '../../types/court';
 import qs from 'qs';
 import { UpdateUser } from '../../types/update-user';
+import { UserBasicAccessInfo } from '../../types/user-by-court';
+import config = require('config');
+import { formatDateToDDMMYYYY } from '../../utils/convert-date';
+
+function mapUserBasicInfo(response: AxiosResponse, requestedCourtId: string): UserBasicAccessInfo[] {
+  const users = response.data['_embedded']?.['userDTOList'] ?? [];
+  return users.flatMap((user: { app_access: any[]; first_name: string; last_name: string; email: string }) => {
+    if (!user.app_access || user.app_access.length === 0) {
+      return [];
+    }
+
+    const matchingAccess = user.app_access.find(access => access.court?.id === requestedCourtId);
+
+    if (!matchingAccess) {
+      return [];
+    }
+
+    const lastAccess: string = formatDateToDDMMYYYY(matchingAccess.last_access) || 'None recorded';
+
+    const mappedUser: UserBasicAccessInfo = {
+      first_name: user.first_name,
+      last_name: user.last_name,
+      email: user.email,
+      access: {
+        court_id: matchingAccess.court.id,
+        last_access: lastAccess,
+        role_name: matchingAccess.role.name,
+        active: matchingAccess.active,
+      },
+    };
+
+    return [mappedUser];
+  });
+}
 
 export class PreClient {
   logger = Logger.getLogger('pre-client');
@@ -42,6 +76,7 @@ export class PreClient {
     const redisKey = config.get('session.redis.key') as string;
     await this.initializeRedisClient(redisHost, redisKey);
   }
+
   private async initializeRedisClient(redisHost: string, redisKey: string) {
     try {
       this.redisClient = await this.redisService.getClient(redisHost, redisKey, this.logger);
@@ -239,6 +274,44 @@ export class PreClient {
         },
       }
     );
+  }
+
+  public async getUsersByCourt(xUserId: string, requestedCourtId: string): Promise<UserBasicAccessInfo[]> {
+    let request: SearchUsersRequest = {
+      courtId: requestedCourtId,
+    };
+    const response: AxiosResponse = await axios.get('/users', {
+      headers: { 'X-User-Id': xUserId },
+      params: request,
+    });
+
+    const pagination = {
+      currentPage: response.data['page']['number'],
+      totalPages: response.data['page']['totalPages'],
+      totalElements: response.data['page']['totalElements'],
+      size: response.data['page']['size'],
+    } as Pagination;
+
+    if (pagination.totalElements === 0) {
+      return [];
+    }
+
+    let mappedUsers: UserBasicAccessInfo[] = [];
+
+    const user: UserBasicAccessInfo[] = mapUserBasicInfo(response, requestedCourtId);
+    mappedUsers.push(...user);
+
+    for (let pageNumber = 1; pageNumber < pagination.totalPages; pageNumber++) {
+      request.page = pageNumber;
+      const paginatedResponse = await axios.get('/users?page=' + pageNumber, {
+        headers: { 'X-User-Id': xUserId },
+        params: request,
+      });
+      let user = mapUserBasicInfo(paginatedResponse, requestedCourtId);
+      mappedUsers.push(...user);
+    }
+
+    return mappedUsers;
   }
 
   public async getUserByEmail(email: string): Promise<UserProfile> {
@@ -569,6 +642,7 @@ export class PreClient {
       throw e;
     }
   }
+
   public async submitMigrationRecords(xUserId: string): Promise<void> {
     try {
       await axios.post('/vf-migration-records/submit', null, {
@@ -693,5 +767,29 @@ export class PreClient {
       // rethrow the error for the UI
       throw e;
     }
+  }
+
+  public async getCourtIdsAndNames(xUserId: string): Promise<Map<string, string>> {
+    let page = 0;
+    let hasNext = true;
+    const courtIdAndNameMap = new Map<string, string>();
+
+    while (hasNext) {
+      const courtsResponse = await this.getCourts(xUserId, page, 100);
+      const courtList: Court[] = courtsResponse?._embedded?.courtDTOList ?? [];
+
+      for (const court of courtList) {
+        if (court.id !== undefined && court.id !== null && court.name) {
+          courtIdAndNameMap.set(String(court.id), court.name);
+        }
+      }
+
+      hasNext = Boolean(courtsResponse?._links?.next) && courtList.length > 0;
+      page++;
+    }
+
+    return new Map<string, string>(
+      [...courtIdAndNameMap.entries()].sort(([, nameA], [, nameB]) => nameA.localeCompare(nameB))
+    );
   }
 }
