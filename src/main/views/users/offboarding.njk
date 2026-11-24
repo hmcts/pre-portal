@@ -29,14 +29,6 @@
   </form>
 
   <div style="overflow-x: auto; width: 100%;">
-      <form method="POST" action="/users">
-
-    <input
-      type="hidden"
-      name="courtId"
-      value="{{ selectedCourt }}"
-    >
-
         <table class="govuk-table" id="usersTable">
           <thead class="govuk-table__head">
            <tr class="govuk-table__row">
@@ -63,51 +55,45 @@
         {% else %}
           <tbody class="govuk-table__body" id="resizable-body">
             {% for user in users %}
+            <form method="POST" action="/user-admin/offboarding" id="usersForm">
+            <input type="hidden" name="userId" value="{{ user.user_id }}">
+            <input type="hidden" name="courtId" value="{{ selectedCourtId }}">
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">
                 {{ user.first_name }} {{ user.last_name }}
-                <input
-                  type="hidden"
-                  name="users[{{ loop.index0 }}][id]"
-                  value="{{ user.id }}"
-                >
               </td>
 
               <td class="govuk-table__cell">{{ user.email }}</td>
 
               <td class="govuk-table__cell">
                 <select
-                  name="users[{{ loop.index0 }}][access]"
+                  name="roleId"
                   class="govuk-select"
                   aria-label="Access level for {{ user.first_name }} {{ user.last_name }}"
+                  onchange="this.form.submit()"
                 >
-                  <option value="Level 2"
-                    {% if user.access == "Level 2" %}selected{% endif %}>
-                    STANDARD
+                {% for role in roles %}
+                  <option value="{{ role.id }}"
+                    {% if user.access == role.name %}selected{% endif %}>
+                    {{ role.name }}
                   </option>
-                  <option value="Level 4"
-                    {% if user.access == "Level 4" %}selected{% endif %}>
-                    RESTRICTED
-                  </option>
-                  <option value="Level 1"
-                    {% if user.access == "Level 1" %}selected{% endif %}>
-                    COURT ADMIN
-                  </option>
+                {% endfor %}
                 </select>
               </td>
 
               <td class="govuk-table__cell">
-                <select
-                  name="users[{{ loop.index0 }}][access.active]"
+              <select
+                name="active"
                   class="govuk-select"
                   aria-label="Active status for {{ user.first_name }} {{ user.last_name }}"
+                   onchange="this.form.submit()"
                 >
-                  <option value="Yes"
-                    {% if user.access.active == "Yes" %}selected{% endif %}>
+                  <option value="True"
+                    {% if user.access.active == true %}selected{% endif %}>
                     Yes
                   </option>
-                  <option value="No"
-                    {% if user.access.active == "No" %}selected{% endif %}>
+                  <option value="False"
+                    {% if user.access.active == false %}selected{% endif %}>
                     No
                   </option>
                 </select>
@@ -115,22 +101,12 @@
 
                <td class="govuk-table__cell">{{ user.access.last_access }}</td>
             </tr>
+            </form>
             {% endfor %}
           </tbody>
         {% endif %}
         </table>
 
-    <div class="govuk-button-group">
-
-          <button
-                id="submitUsersBtn"
-                 type="submit"
-                class="govuk-button"
-                data-module="govuk-button"
-              >
-            Save Changes
-          </button>
-        </div>
       </form>
 
 </div>

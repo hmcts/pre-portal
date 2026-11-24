@@ -82,6 +82,19 @@ export interface Pagination {
   size: number;
 }
 
+export interface Role {
+  id: string;
+  name: string;
+}
+
+export interface PutUserAccessRequest {
+  user_id: string;
+  court_id: string;
+  role_id: string;
+  active: boolean;
+  default_court?: boolean;
+}
+
 export interface PutAuditRequest {
   id: string;
   category: string;

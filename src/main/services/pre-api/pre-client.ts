@@ -11,9 +11,9 @@ import {
   EditRequest,
   PaginatedRequest,
   Pagination,
-  PutAuditRequest,
+  PutAuditRequest, PutUserAccessRequest,
   Recording,
-  RecordingPlaybackData,
+  RecordingPlaybackData, Role,
   SearchAuditLogsRequest,
   SearchEditsRequest,
   SearchRecordingsRequest,
@@ -175,6 +175,21 @@ export class PreClient {
   public async putAudit(xUserId: string, request: PutAuditRequest): Promise<AxiosResponse> {
     try {
       return await axios.put('/audit/' + request.id, request, {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+      });
+    } catch (e) {
+      this.logger.error(e.message);
+      throw e;
+    }
+  }
+
+  public async putUserAccess(xUserId: string, request: PutUserAccessRequest): Promise<AxiosResponse> {
+    const logger = Logger.getLogger('put-user-access');
+    try {
+      logger.info("About to call: PUT /users/access/" + request.user_id, { request });
+      return await axios.put('/users/access/' + request.user_id, request, {
         headers: {
           'X-User-Id': xUserId,
         },
@@ -678,6 +693,20 @@ export class PreClient {
     }
   }
 
+  public async getRoles(xUserId: string): Promise<Role[] | null> {
+    try {
+      const response = await axios.get('/roles', {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+      });
+      return response.data as any;
+    } catch (e) {
+      this.logger.error(e);
+      throw e;
+    }
+  }
+
   public async getAudit(xUserId: string, id: string): Promise<Audit | null> {
     try {
       const response = await axios.get('/audit/' + id, {
@@ -765,7 +794,7 @@ export class PreClient {
 
   public mapUserBasicInfo(response: AxiosResponse, requestedCourtId: string): UserBasicAccessInfo[] {
     const users = response.data['_embedded']?.['userDTOList'] ?? [];
-    return users.flatMap((user: { app_access: any[]; first_name: string; last_name: string; email: string }) => {
+    return users.flatMap((user: { id: string; app_access: any[]; first_name: string; last_name: string; email: string }) => {
       if (!user.app_access || user.app_access.length === 0) {
         return [];
       }
@@ -779,6 +808,7 @@ export class PreClient {
       const lastAccess: string = formatDateToDDMMYYYY(matchingAccess.last_access) || 'None recorded';
 
       const mappedUser: UserBasicAccessInfo = {
+        user_id: user.id,
         first_name: user.first_name,
         last_name: user.last_name,
         email: user.email,
