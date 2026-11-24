@@ -263,16 +263,22 @@ export class PreClient {
 
     let mappedUsers: UserBasicAccessInfo[] = [];
 
-    const user: UserBasicAccessInfo[] = this.mapUserBasicInfo(response, requestedCourtId);
-    mappedUsers.push(...user);
+    mappedUsers.push(...this.mapUserBasicInfo(response, requestedCourtId));
 
-    for (let pageNumber = pagination.currentPage + 1; pageNumber < pagination.totalPages; pageNumber++) {
-      const paginatedResponse = await axios.get('/users?page=' + pageNumber, {
-        headers: { 'X-User-Id': xUserId },
-        params: { courtId: requestedCourtId, page: pageNumber },
-      });
-      let user = this.mapUserBasicInfo(paginatedResponse, requestedCourtId);
-      mappedUsers.push(...user);
+    const startPage = pagination.currentPage + 1;
+    const pageNumbers = Array.from({ length: Math.max(0, pagination.totalPages - startPage) }, (_, i) => startPage + i);
+
+    const paginatedResponses = await Promise.all(
+      pageNumbers.map(pageNumber =>
+        axios.get('/users', {
+          headers: { 'X-User-Id': xUserId },
+          params: { courtId: requestedCourtId, page: pageNumber },
+        })
+      )
+    );
+
+    for (const paginatedResponse of paginatedResponses) {
+      mappedUsers.push(...this.mapUserBasicInfo(paginatedResponse, requestedCourtId));
     }
 
     return mappedUsers;

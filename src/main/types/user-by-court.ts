@@ -1,7 +1,7 @@
 export interface UserBasicAccessInfo {
   access: {
     court_id: string;
-    last_access: string | 'None recorded';
+    last_access: string;
     role_name: string;
     active: boolean;
   };

@@ -1168,11 +1168,11 @@ describe('PreClient', () => {
         headers: { 'X-User-Id': 'x-user' },
         params: { courtId: 'court-1', page: 0 },
       });
-      expect(mockedAxios.get).toHaveBeenNthCalledWith(2, '/users?page=1', {
+      expect(mockedAxios.get).toHaveBeenNthCalledWith(2, '/users', {
         headers: { 'X-User-Id': 'x-user' },
         params: { courtId: 'court-1', page: 1 },
       });
-      expect(mockedAxios.get).toHaveBeenNthCalledWith(3, '/users?page=2', {
+      expect(mockedAxios.get).toHaveBeenNthCalledWith(3, '/users', {
         headers: { 'X-User-Id': 'x-user' },
         params: { courtId: 'court-1', page: 2 },
       });
