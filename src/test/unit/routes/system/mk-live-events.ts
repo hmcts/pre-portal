@@ -12,12 +12,16 @@ vi.mock('../../../../main/services/session-user/session-user', () => ({
     getLoggedInUserPortalId: vi.fn().mockReturnValue('123'),
     getLoggedInUserBrowseId: vi.fn().mockReturnValue('super-user-access-id'),
     getLoggedInUserProfile: vi.fn().mockImplementation(() => mockeduser),
-    getSuperUserId: vi.fn().mockImplementation(
-      () => mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER)?.id,
-    ),
-    isLoggedInSuperUser: vi.fn().mockImplementation(
-      () => mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER),
-    ),
+    getSuperUserId: vi
+      .fn()
+      .mockImplementation(
+        () => mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER)?.id
+      ),
+    isLoggedInSuperUser: vi
+      .fn()
+      .mockImplementation(() =>
+        mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER)
+      ),
   },
 }));
 

@@ -119,7 +119,7 @@ describe('Browse route', () => {
     expect(response.text).not.toContain('value="ABC123"');
     expect(PreClient.prototype.getRecordings).toHaveBeenCalledWith(
       'super-user-access-id',
-      expect.objectContaining({ caseReference: undefined }),
+      expect.objectContaining({ caseReference: undefined })
     );
   });
 
