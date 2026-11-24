@@ -1,36 +1,25 @@
 vi.mock('express-openid-connect', () => ({
-  __esModule: true,
-  default: {
-    requiresAuth: () => (req: any, _res: any, next: any) => {
-      req.oidc = {
-        user: { email: 'test@test.com' },
-      };
-      next();
-    },
-  },
+  requiresAuth: vi.fn(() => (req: express.Request, _res: express.Response, next: express.NextFunction) => {
+    req.oidc = {
+      user: { email: 'test@test.com' },
+    } as typeof req.oidc;
+    next();
+  }),
 }));
 
-vi.mock('../../main/services/session-user/session-user', () => {
-  return {
-    SessionUser: {
-      getLoggedInUserPortalId: vi.fn().mockReturnValue(() => {
-        return '123';
-      }),
-      getLoggedInUserBrowseId: vi.fn().mockImplementation(() => {
-        return 'super-user-access-id';
-      }),
-      getLoggedInUserProfile: vi.fn().mockImplementation(() => {
-        return mockeduser;
-      }),
-      getSuperUserId: vi.fn().mockImplementation(() => {
-        return mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER)?.id;
-      }),
-      isLoggedInSuperUser: vi.fn().mockImplementation(() => {
-        return mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER);
-      }),
-    },
-  };
-});
+vi.mock('../../../../main/services/session-user/session-user', () => ({
+  SessionUser: {
+    getLoggedInUserPortalId: vi.fn().mockReturnValue('123'),
+    getLoggedInUserBrowseId: vi.fn().mockReturnValue('super-user-access-id'),
+    getLoggedInUserProfile: vi.fn().mockImplementation(() => mockeduser),
+    getSuperUserId: vi.fn().mockImplementation(
+      () => mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER)?.id,
+    ),
+    isLoggedInSuperUser: vi.fn().mockImplementation(
+      () => mockeduser.app_access?.find(access => access.active && access.role.name === UserLevel.SUPER_USER),
+    ),
+  },
+}));
 
 import express from 'express';
 import request from 'supertest';
@@ -55,10 +44,6 @@ describe('MK Live Events route', () => {
   });
 
   test('should display live events page for super user', async () => {
-    const app = express();
-    new Nunjucks(false).enableFor(app);
-    await registerRoute(app);
-
     vi.spyOn(LiveEventStatusService.prototype, 'getMediaKindLiveEventStatuses').mockResolvedValue([
       {
         id: '123',
@@ -68,6 +53,10 @@ describe('MK Live Events route', () => {
         caseReference: 'ABC123',
       },
     ]);
+
+    const app = express();
+    new Nunjucks(false).enableFor(app);
+    await registerRoute(app);
 
     if (mockeduser.app_access?.[0]?.role) {
       mockeduser.app_access[0].role.name = UserLevel.SUPER_USER;

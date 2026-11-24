@@ -8,29 +8,9 @@ vi.mock('express-openid-connect', () => {
   };
 });
 
-vi.mock('../../../../main/services/session-user/session-user', () => {
-  return {
-    SessionUser: {
-      getLoggedInUserPortalId: vi.fn().mockImplementation((_req: Express.Request) => {
-        return '123';
-      }),
-      getLoggedInUserBrowseId: vi.fn().mockImplementation((req: Express.Request) => {
-        return 'super-user-access-id';
-      }),
-      getLoggedInUserProfile: vi.fn().mockImplementation((_req: Express.Request) => {
-        return mockeduser as UserProfile;
-      }),
-      isLoggedInSuperUser: vi.fn().mockImplementation((req: Express.Request) => {
-        return true;
-      }),
-    },
-  };
-});
-
-/* eslint-disable vitest/expect-expect */
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { mockGetRecordings, reset, mockRecordings } from '../../../mock-api';
-import { describe, expect, test, vi, beforeAll } from 'vitest';
+import { describe, expect, test, vi, beforeAll, beforeEach } from 'vitest';
 
 import { PreClient } from '../../../../main/services/pre-api/pre-client';
 import { UserProfile } from '../../../../main/types/user-profile';
@@ -39,10 +19,23 @@ import browse, { convertIsoToDate } from '../../../../main/routes/recordings/bro
 
 import express from 'express';
 import request from 'supertest';
+import { SessionUser } from '../../../../main/services/session-user/session-user';
+
+vi.mock('../../../../main/services/session-user/session-user', () => ({
+  SessionUser: {
+    getLoggedInUserPortalId: vi.fn(),
+    getLoggedInUserBrowseId: vi.fn(),
+    getLoggedInUserProfile: vi.fn(),
+    getSuperUserId: vi.fn(),
+    isLoggedInSuperUser: vi.fn(),
+  },
+}));
 
 describe('Browse route', () => {
-  beforeAll(() => {
-    reset();
+  beforeEach(() => {
+    vi.mocked(SessionUser.getLoggedInUserProfile).mockReturnValue(mockeduser);
+    vi.mocked(SessionUser.getLoggedInUserBrowseId).mockReturnValue('super-user-access-id');
+    vi.mocked(SessionUser.isLoggedInSuperUser).mockReturnValue(true);
   });
 
   test('browse renders the browse template', async () => {
@@ -109,18 +102,8 @@ describe('Browse route', () => {
       app_access: [],
     } as UserProfile;
 
-    vi.mock('../../../../main/services/session-user/session-user', () => {
-      return {
-        SessionUser: {
-          getLoggedInUserProfile: vi.fn().mockImplementation((_req: Express.Request) => {
-            return nonSuperUser as UserProfile;
-          }),
-          isLoggedInSuperUser: vi.fn().mockImplementation((req: Express.Request) => {
-            return false;
-          }),
-        },
-      };
-    });
+    vi.mocked(SessionUser.getLoggedInUserProfile).mockReturnValue(nonSuperUser);
+    vi.mocked(SessionUser.isLoggedInSuperUser).mockReturnValue(false);
 
     const app = express();
     new Nunjucks(false).enableFor(app);
@@ -130,12 +113,13 @@ describe('Browse route', () => {
     browse(app);
 
     const response = await request(app).get('/browse?caseReference=ABC123');
+
     expect(response.status).toEqual(200);
     expect(response.text).not.toContain('name="caseReference"');
     expect(response.text).not.toContain('value="ABC123"');
     expect(PreClient.prototype.getRecordings).toHaveBeenCalledWith(
       'super-user-access-id',
-      expect.objectContaining({ caseReference: undefined })
+      expect.objectContaining({ caseReference: undefined }),
     );
   });
 
