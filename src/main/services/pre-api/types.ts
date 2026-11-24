@@ -13,11 +13,6 @@ export interface SearchRecordingsRequest {
   size?: number;
 }
 
-export interface SearchUsersRequest {
-  courtId?: string;
-  page?: number;
-}
-
 export interface SearchEditsRequest {
   sourceRecordingId?: string;
   lastModifiedAfter?: string;

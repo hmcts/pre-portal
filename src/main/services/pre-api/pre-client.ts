@@ -17,7 +17,6 @@ import {
   SearchAuditLogsRequest,
   SearchEditsRequest,
   SearchRecordingsRequest,
-  SearchUsersRequest,
 } from './types';
 
 import { Logger } from '@hmcts/nodejs-logging';
@@ -246,12 +245,9 @@ export class PreClient {
   }
 
   public async getUsersByCourt(xUserId: string, requestedCourtId: string): Promise<UserBasicAccessInfo[]> {
-    let request: SearchUsersRequest = {
-      courtId: requestedCourtId,
-    };
     const response: AxiosResponse = await axios.get('/users', {
       headers: { 'X-User-Id': xUserId },
-      params: request,
+      params: { courtId: requestedCourtId, page: 0 },
     });
 
     const pagination = {
@@ -270,11 +266,10 @@ export class PreClient {
     const user: UserBasicAccessInfo[] = this.mapUserBasicInfo(response, requestedCourtId);
     mappedUsers.push(...user);
 
-    for (let pageNumber = 1; pageNumber < pagination.totalPages; pageNumber++) {
-      request.page = pageNumber;
+    for (let pageNumber = pagination.currentPage + 1; pageNumber < pagination.totalPages; pageNumber++) {
       const paginatedResponse = await axios.get('/users?page=' + pageNumber, {
         headers: { 'X-User-Id': xUserId },
-        params: request,
+        params: { courtId: requestedCourtId, page: pageNumber },
       });
       let user = this.mapUserBasicInfo(paginatedResponse, requestedCourtId);
       mappedUsers.push(...user);

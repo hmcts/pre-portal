@@ -16,10 +16,11 @@ import {
   SearchRecordingsRequest,
 } from '../../main/services/pre-api/types';
 import { describe } from '@jest/globals';
-import axios, {AxiosResponse} from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { mockeduser } from './test-helper';
 import { AccessStatus } from '../../main/types/access-status';
 import FormData from 'form-data';
+import { UserBasicAccessInfo } from '../../main/types/user-by-court';
 
 const preClient = new PreClient();
 const mockRecordingId = '12345678-1234-1234-1234-1234567890ab';
@@ -35,7 +36,6 @@ const mockPlaybackData = {
   protectionInfo: [],
 } as RecordingPlaybackData;
 jest.mock('axios');
-
 
 /* eslint-disable jest/expect-expect */
 describe('PreClient', () => {
@@ -1087,6 +1087,95 @@ describe('PreClient', () => {
       const result = preClient.mapUserBasicInfo(response, 'court-1');
 
       expect(result[0].access.last_access).toBe('None recorded');
+    });
+  });
+
+  describe('PreClient.getUsersByCourt', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('returns an empty array when no users are found', async () => {
+      mockedAxios.get.mockResolvedValueOnce({
+        data: {
+          page: {
+            number: 0,
+            totalPages: 1,
+            totalElements: 0,
+            size: 25,
+          },
+        },
+      } as any);
+
+      const result = await preClient.getUsersByCourt('x-user', 'court-1');
+
+      expect(result).toEqual([]);
+      expect(mockedAxios.get).toHaveBeenCalledTimes(1);
+      expect(mockedAxios.get).toHaveBeenCalledWith('/users', {
+        headers: { 'X-User-Id': 'x-user' },
+        params: { courtId: 'court-1', page: 0 },
+      });
+    });
+
+    it('fetches all pages and aggregates mapped users', async () => {
+      mockedAxios.get
+        .mockResolvedValueOnce({
+          data: {
+            page: {
+              number: 0,
+              totalPages: 3,
+              totalElements: 3,
+              size: 1,
+            },
+          },
+        } as any)
+        .mockResolvedValueOnce({
+          data: {
+            page: {
+              number: 1,
+              totalPages: 3,
+              totalElements: 3,
+              size: 1,
+            },
+          },
+        } as any)
+        .mockResolvedValueOnce({
+          data: {
+            page: {
+              number: 2,
+              totalPages: 3,
+              totalElements: 3,
+              size: 1,
+            },
+          },
+        } as any);
+
+      const user1 = { email: 'a@test.com' } as UserBasicAccessInfo;
+      const user2 = { email: 'b@test.com' } as UserBasicAccessInfo;
+      const user3 = { email: 'c@test.com' } as UserBasicAccessInfo;
+
+      jest
+        .spyOn(preClient, 'mapUserBasicInfo')
+        .mockReturnValueOnce([user1])
+        .mockReturnValueOnce([user2])
+        .mockReturnValueOnce([user3]);
+
+      const result = await preClient.getUsersByCourt('x-user', 'court-1');
+
+      expect(result).toEqual([user1, user2, user3]);
+      expect(mockedAxios.get).toHaveBeenCalledTimes(3);
+      expect(mockedAxios.get).toHaveBeenNthCalledWith(1, '/users', {
+        headers: { 'X-User-Id': 'x-user' },
+        params: { courtId: 'court-1', page: 0 },
+      });
+      expect(mockedAxios.get).toHaveBeenNthCalledWith(2, '/users?page=1', {
+        headers: { 'X-User-Id': 'x-user' },
+        params: { courtId: 'court-1', page: 1 },
+      });
+      expect(mockedAxios.get).toHaveBeenNthCalledWith(3, '/users?page=2', {
+        headers: { 'X-User-Id': 'x-user' },
+        params: { courtId: 'court-1', page: 2 },
+      });
     });
   });
 });
