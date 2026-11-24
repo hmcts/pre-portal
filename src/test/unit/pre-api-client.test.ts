@@ -1178,4 +1178,74 @@ describe('PreClient', () => {
       });
     });
   });
+
+  describe('PreClient.getCourtIdsAndNames', () => {
+    let client: PreClient;
+
+    beforeEach(() => {
+      client = new PreClient();
+    });
+
+    it('collects courts across pages, filters invalid entries, and sorts by name', async () => {
+      jest
+        .spyOn(client, 'getCourts')
+        .mockResolvedValueOnce({
+          _embedded: {
+            courtDTOList: [
+              { id: 2, name: 'York' },
+              { id: null, name: 'Invalid' }, // filtered
+              { id: 1, name: 'Bristol' },
+            ],
+          },
+          _links: { next: { href: '/courts?page=1' } },
+        })
+        .mockResolvedValueOnce({
+          _embedded: {
+            courtDTOList: [{ id: 3, name: 'Leeds' }],
+          },
+          _links: {}, // no next page
+        });
+
+      const result = await client.getCourtIdsAndNames('user-1');
+
+      expect(client.getCourts).toHaveBeenNthCalledWith(1, 'user-1', 0, 100);
+      expect(client.getCourts).toHaveBeenNthCalledWith(2, 'user-1', 1, 100);
+
+      expect([...result.entries()]).toEqual([
+        ['1', 'Bristol'],
+        ['3', 'Leeds'],
+        ['2', 'York'],
+      ]);
+    });
+
+    it('returns empty map when API returns no courts', async () => {
+      jest.spyOn(client, 'getCourts').mockResolvedValueOnce({
+        _embedded: { courtDTOList: [] },
+        _links: {},
+      });
+
+      const result = await client.getCourtIdsAndNames('user-1');
+
+      expect(result.size).toBe(0);
+      expect(client.getCourts).toHaveBeenCalledTimes(1);
+    });
+
+    it('stops pagination when next link exists but page is empty', async () => {
+      jest
+        .spyOn(client, 'getCourts')
+        .mockResolvedValueOnce({
+          _embedded: { courtDTOList: [{ id: 10, name: 'Alpha' }] },
+          _links: { next: { href: '/courts?page=1' } },
+        })
+        .mockResolvedValueOnce({
+          _embedded: { courtDTOList: [] },
+          _links: { next: { href: '/courts?page=2' } }, // should still stop due to empty list
+        });
+
+      const result = await client.getCourtIdsAndNames('user-1');
+
+      expect(client.getCourts).toHaveBeenCalledTimes(2);
+      expect([...result.entries()]).toEqual([['10', 'Alpha']]);
+    });
+  });
 });
