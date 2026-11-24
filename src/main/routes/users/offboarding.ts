@@ -54,12 +54,9 @@ export default function offboarding(app: Application): void {
           return;
         }
 
-        const courtLevelRoles = roles.filter(role => role.name === 'Level 2'
-          || role.name === 'Level 1' || role.name === 'Level 4');
-
         res.render('users/offboarding.njk', {
           users: userList,
-          roles: courtLevelRoles,
+          roles: roles,
           courtList,
           selectedCourtId,
           selectedCourtName,
