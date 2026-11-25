@@ -5,7 +5,7 @@ import { UserBasicAccessInfo } from '../../types/user-by-court';
 import { Logger } from '@hmcts/nodejs-logging';
 import { requiresAuth } from 'express-openid-connect';
 import { RequiresSuperUser } from '../../middleware/admin-middleware';
-import {PutUserAccessRequest} from "../../services/pre-api/types";
+import { PutUserAccessRequest } from '../../services/pre-api/types';
 
 export default function offboarding(app: Application): void {
   app.get(
@@ -99,14 +99,14 @@ export default function offboarding(app: Application): void {
           user_id: userId,
           role_id: roleId,
           court_id: courtId,
-          active: req.body.active
+          active: req.body.active,
         };
 
         logger.info('Received request to update user access', {
           accessRequest,
         });
 
-        if (!accessRequest.user_id || !accessRequest.court_id || !accessRequest.role_id ) {
+        if (!accessRequest.user_id || !accessRequest.court_id || !accessRequest.role_id) {
           logger.error('Missing required fields in user access update request', { accessRequest });
           res.status(400).send('Missing required fields');
           return;
@@ -114,7 +114,7 @@ export default function offboarding(app: Application): void {
 
         await client.putUserAccess(requestingUserId, accessRequest);
 
-        logger.info("Successfully updated user access", { accessRequest });
+        logger.info('Successfully updated user access', { accessRequest });
 
         res.redirect('/user-admin/offboarding' + (courtId ? `?courtId=${encodeURIComponent(courtId)}` : ''));
         return;

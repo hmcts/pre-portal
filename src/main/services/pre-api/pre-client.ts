@@ -11,9 +11,11 @@ import {
   EditRequest,
   PaginatedRequest,
   Pagination,
-  PutAuditRequest, PutUserAccessRequest,
+  PutAuditRequest,
+  PutUserAccessRequest,
   Recording,
-  RecordingPlaybackData, Role,
+  RecordingPlaybackData,
+  Role,
   SearchAuditLogsRequest,
   SearchEditsRequest,
   SearchRecordingsRequest,
@@ -188,7 +190,7 @@ export class PreClient {
   public async putUserAccess(xUserId: string, request: PutUserAccessRequest): Promise<AxiosResponse> {
     const logger = Logger.getLogger('put-user-access');
     try {
-      logger.info("About to call: PUT /users/access/" + request.user_id, { request });
+      logger.info('About to call: PUT /users/access/' + request.user_id, { request });
       return await axios.put('/users/access/' + request.user_id, request, {
         headers: {
           'X-User-Id': xUserId,
@@ -765,33 +767,35 @@ export class PreClient {
   }
 
   public mapUserBasicInfo(response: AxiosResponse, requestedCourtId: string): UserBasicAccessInfo[] {
-    return response.data.flatMap((user: { id: string; app_access: any[]; first_name: string; last_name: string; email: string }) => {
-      if (!user.app_access || user.app_access.length === 0) {
-        return [];
+    return response.data.flatMap(
+      (user: { id: string; app_access: any[]; first_name: string; last_name: string; email: string }) => {
+        if (!user.app_access || user.app_access.length === 0) {
+          return [];
+        }
+
+        const matchingAccess = user.app_access.find(access => access.court?.id === requestedCourtId);
+
+        if (!matchingAccess) {
+          return [];
+        }
+
+        const lastAccess: string = formatDateToDDMMYYYY(matchingAccess.last_access) || 'None recorded';
+
+        const mappedUser: UserBasicAccessInfo = {
+          user_id: user.id,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          email: user.email,
+          access: {
+            court_id: matchingAccess.court.id,
+            last_access: lastAccess,
+            role_name: matchingAccess.role.name,
+            active: matchingAccess.active,
+          },
+        };
+
+        return [mappedUser];
       }
-
-      const matchingAccess = user.app_access.find(access => access.court?.id === requestedCourtId);
-
-      if (!matchingAccess) {
-        return [];
-      }
-
-      const lastAccess: string = formatDateToDDMMYYYY(matchingAccess.last_access) || 'None recorded';
-
-      const mappedUser: UserBasicAccessInfo = {
-        user_id: user.id,
-        first_name: user.first_name,
-        last_name: user.last_name,
-        email: user.email,
-        access: {
-          court_id: matchingAccess.court.id,
-          last_access: lastAccess,
-          role_name: matchingAccess.role.name,
-          active: matchingAccess.active,
-        },
-      };
-
-      return [mappedUser];
-    });
+    );
   }
 }
