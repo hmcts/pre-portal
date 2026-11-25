@@ -40,7 +40,8 @@ describe('Migration route', () => {
   beforeAll(() => {
     vi.clearAllMocks();
 
-    vi.mocked(SessionUser.getLoggedInUserPortalId).mockReturnValue('123');
+    vi.mocked(SessionUser.getLoggedInUserPortalId).mockResolvedValue('123');
+
     vi.mocked(SessionUser.getLoggedInUserProfile).mockReturnValue(mockeduser);
     vi.mocked(SessionUser.isLoggedInSuperUser).mockImplementation(
       () => mockeduser.app_access?.some(access => access.active && access.role.name === UserLevel.SUPER_USER) ?? false
