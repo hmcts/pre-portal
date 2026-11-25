@@ -260,41 +260,13 @@ export class PreClient {
   }
 
   public async getUsersByCourt(xUserId: string, requestedCourtId: string): Promise<UserBasicAccessInfo[]> {
-    const response: AxiosResponse = await axios.get('/users', {
+    const response: AxiosResponse = await axios.get('/users/by-court/' + requestedCourtId, {
       headers: { 'X-User-Id': xUserId },
-      params: { courtId: requestedCourtId, page: 0 },
     });
-
-    const pagination = {
-      currentPage: response.data['page']['number'],
-      totalPages: response.data['page']['totalPages'],
-      totalElements: response.data['page']['totalElements'],
-      size: response.data['page']['size'],
-    } as Pagination;
-
-    if (pagination.totalElements === 0) {
-      return [];
-    }
 
     let mappedUsers: UserBasicAccessInfo[] = [];
 
     mappedUsers.push(...this.mapUserBasicInfo(response, requestedCourtId));
-
-    const startPage = pagination.currentPage + 1;
-    const pageNumbers = Array.from({ length: Math.max(0, pagination.totalPages - startPage) }, (_, i) => startPage + i);
-
-    const paginatedResponses = await Promise.all(
-      pageNumbers.map(pageNumber =>
-        axios.get('/users', {
-          headers: { 'X-User-Id': xUserId },
-          params: { courtId: requestedCourtId, page: pageNumber },
-        })
-      )
-    );
-
-    for (const paginatedResponse of paginatedResponses) {
-      mappedUsers.push(...this.mapUserBasicInfo(paginatedResponse, requestedCourtId));
-    }
 
     return mappedUsers;
   }
@@ -793,8 +765,7 @@ export class PreClient {
   }
 
   public mapUserBasicInfo(response: AxiosResponse, requestedCourtId: string): UserBasicAccessInfo[] {
-    const users = response.data['_embedded']?.['userDTOList'] ?? [];
-    return users.flatMap((user: { id: string; app_access: any[]; first_name: string; last_name: string; email: string }) => {
+    return response.data.flatMap((user: { id: string; app_access: any[]; first_name: string; last_name: string; email: string }) => {
       if (!user.app_access || user.app_access.length === 0) {
         return [];
       }

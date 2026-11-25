@@ -73,10 +73,18 @@
                   onchange="this.form.submit()"
                 >
                 {% for role in roles %}
-                  <option value="{{ role.id }}"
-                    {% if user.access.role_name === role.name %}selected{% endif %}>
-                    {{ role.name }}
-                  </option>
+                  {% if role.name != "Level 2" and role.name != "Level 4" and role.name != "Level 1" %}
+                    <option disabled
+                      value="{{ role.id }}"
+                      {% if user.access.role_name === role.name %}selected{% endif %}>
+                      {{ role.name }}
+                    </option>
+                  {% else %}
+                    <option value="{{ role.id }}"
+                      {% if user.access.role_name === role.name %}selected{% endif %}>
+                      {{ role.name }}
+                    </option>
+                   {% endif %}
                 {% endfor %}
                 </select>
               </td>
