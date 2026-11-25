@@ -88,6 +88,14 @@ describe('Watch page failure', () => {
         .get('/recordings/watch/12345678-1234-1234-1234-1234567890ab/playback')
         .expect(res => expect(res.status).toBe(500));
     });
+    test('should return a generic 500 response when playback fails with a non-Error value', async () => {
+      vi.spyOn(PreClient.prototype, 'getRecordingPlaybackDataMk').mockRejectedValue('failure');
+
+      await request(app)
+        .get('/recordings/watch/12345678-1234-1234-1234-1234567890ab/playback')
+        .expect(500)
+        .expect({ message: 'Internal server error' });
+    });
   });
 });
 

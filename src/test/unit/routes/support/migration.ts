@@ -1,45 +1,50 @@
 import express from 'express';
-
-vi.mock('../../../main/services/pre-api/pre-client', () => {
-  return {
-    PreClient: vi.fn().mockImplementation(() => ({
-      getCourts: vi.fn().mockResolvedValue([{ id: '123', name: 'Birmingham Youth Court' }]),
-    })),
-  };
-});
-
 import { Nunjucks } from '../../../../main/modules/nunjucks';
 import { describe, expect, test, vi, beforeAll } from 'vitest';
 import { MigrationRecordService } from '../../../../main/services/system-status/migration-status';
+import { SessionUser } from '../../../../main/services/session-user/session-user';
 import { mockeduser } from '../../test-helper';
 import { UserLevel } from '../../../../main/types/user-level';
 import migration from '../../../../main/routes/support/migration';
 import request from 'supertest';
 
-vi.mock('express-openid-connect', () => {
+vi.mock('../../../../main/services/pre-api/pre-client', () => {
   return {
-    requiresAuth: vi.fn().mockImplementation(() => {
-      return (req: any, res: any, next: any) => {
-        next();
+    PreClient: vi.fn(function () {
+      return {
+        getCourts: vi.fn().mockResolvedValue([{ id: '123', name: 'Birmingham Youth Court' }]),
       };
     }),
   };
 });
 
-vi.mock('../../../main/services/session-user/session-user', () => {
+vi.mock('express-openid-connect', () => ({
+  default: {
+    requiresAuth: vi.fn(() => (_req: express.Request, _res: express.Response, next: express.NextFunction) => next()),
+  },
+}));
+
+vi.mock('../../../../main/services/session-user/session-user', () => {
   return {
     SessionUser: {
-      getLoggedInUserPortalId: vi.fn().mockImplementation(() => '123'),
-      getLoggedInUserProfile: vi.fn().mockImplementation(() => mockeduser),
+      getLoggedInUserPortalId: vi.fn(),
+      getLoggedInUserProfile: vi.fn(),
+      isLoggedInSuperUser: vi.fn(),
     },
   };
 });
 
-vi.mock('../../../main/services/system-status/migration-status');
+vi.mock('../../../../main/services/system-status/migration-status');
 
-describe.skip('Migration route', () => {
+describe('Migration route', () => {
   beforeAll(() => {
-    vi.resetAllMocks();
+    vi.clearAllMocks();
+
+    vi.mocked(SessionUser.getLoggedInUserPortalId).mockReturnValue('123');
+    vi.mocked(SessionUser.getLoggedInUserProfile).mockReturnValue(mockeduser);
+    vi.mocked(SessionUser.isLoggedInSuperUser).mockImplementation(
+      () => mockeduser.app_access?.some(access => access.active && access.role.name === UserLevel.SUPER_USER) ?? false
+    );
   });
 
   test('should display migration page for super user', async () => {

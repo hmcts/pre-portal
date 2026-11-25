@@ -1,5 +1,5 @@
 import { Pagination } from '../../../main/services/pre-api/types';
-import { generatePaginatedTitle, generatePaginationLinks } from '../../../main/utils/helpers';
+import { generatePaginatedTitle, generatePaginationLinks, getSingleId } from '../../../main/utils/helpers';
 import { describe, expect, it } from 'vitest';
 
 describe('generatePaginationLinks', () => {
@@ -100,5 +100,23 @@ describe('generatePaginatedTitle', () => {
     const title = generatePaginatedTitle(pagination, 'Overview');
 
     expect(title).toBe('Overview 41 to 47 of 47');
+  });
+});
+
+describe('getSingleId', () => {
+  test('returns a string unchanged', () => {
+    expect(getSingleId('record-id')).toBe('record-id');
+  });
+
+  test('returns the only value from an array', () => {
+    expect(getSingleId(['record-id'])).toBe('record-id');
+  });
+
+  test('throws for an empty array', () => {
+    expect(() => getSingleId([])).toThrow('Expected a single string value');
+  });
+
+  test('throws for an array containing multiple values', () => {
+    expect(() => getSingleId(['first', 'second'])).toThrow('Expected a single string value');
   });
 });
