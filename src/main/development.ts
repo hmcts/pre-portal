@@ -6,9 +6,7 @@ let webpackConfigPromise: Promise<Configuration> | null = null;
 
 async function getWebpackConfig(): Promise<Configuration> {
   if (!webpackConfigPromise) {
-    webpackConfigPromise = import('../../webpack.config.js').then(
-      m => (m.default || m) as Configuration
-    );
+    webpackConfigPromise = import('../../webpack.config.js').then(m => (m.default || m) as Configuration);
   }
 
   return webpackConfigPromise;
