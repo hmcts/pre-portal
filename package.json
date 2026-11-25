@@ -132,7 +132,8 @@
   },
   "resolutions": {
     "@hmcts/properties-volume@npm:1.4.1/@azure/identity": "4.13.1",
-    "@azure/identity@npm:4.13.1/@azure/msal-node": "7.2.2"
+    "@azure/identity@npm:4.13.1/@azure/msal-node": "7.2.2",
+    "@typespec/ts-http-runtime": "0.3.11"
   },
   "husky": {
     "hooks": {
