@@ -11,8 +11,9 @@ RUN yarn build:prod
 
 # ---- Runtime image ----
 FROM build as runtime
-RUN rm -rf webpack/ webpack.config.js
 COPY --from=build $WORKDIR/src/main ./src/main
 RUN yarn build:ts
+
+RUN rm -rf webpack/ webpack.config.js
 
 EXPOSE 4551

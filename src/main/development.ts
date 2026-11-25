@@ -1,12 +1,16 @@
 import * as express from 'express';
 import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpack from 'webpack';
+import webpack, { Configuration } from 'webpack';
 
-let webpackConfigPromise: Promise<any> | null = null;
-async function getWebpackConfig() {
+let webpackConfigPromise: Promise<Configuration> | null = null;
+
+async function getWebpackConfig(): Promise<Configuration> {
   if (!webpackConfigPromise) {
-    webpackConfigPromise = import('../../webpack.config.js').then(m => m.default || m);
+    webpackConfigPromise = import('../../webpack.config.js').then(
+      m => (m.default || m) as Configuration
+    );
   }
+
   return webpackConfigPromise;
 }
 
