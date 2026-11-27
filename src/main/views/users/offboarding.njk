@@ -1,0 +1,117 @@
+
+{% extends "full-width.njk" %}
+
+{% block pageTitle %}Users at court - PRE Portal{% endblock %}
+
+{% block mainContent %}
+  <h1 class="govuk-heading-xl">User Management</h1>
+
+  <form method="GET" action="/user-admin/offboarding" id="courtSelectorForm">
+    <div class="govuk-form-group">
+      <select required class="govuk-select"
+      style="width: 50%" id="courtNameSelector"
+      name="courtId"
+      aria-describedby="select-court-by-name"
+      onchange="this.form.submit()"
+      >
+        <option value="{{ selectedCourtId or '' }}">{{ selectedCourtName or 'Choose court name' }}</option>
+        {% for court in courtList %}
+          {% if ((court.id or '') | string) != ((selectedCourtId or '') | string) %}
+            <option value="{{ court.id }}">
+              {{ court.name }}
+            </option>
+          {% endif %}
+        {% endfor %}
+      </select>
+    </div>
+  </form>
+
+  <div style="overflow-x: auto; width: 100%;">
+        <table class="govuk-table" id="usersTable">
+          <thead class="govuk-table__head">
+           <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header resizable">User Name</th>
+              <th scope="col" class="govuk-table__header resizable">User Email</th>
+              <th scope="col" class="govuk-table__header resizable">Access Level</th>
+              <th scope="col" class="govuk-table__header resizable">Active</th>
+              <th scope="col" class="govuk-table__header resizable">Last active</th>
+            </tr>
+          </thead>
+         {% if users.length === 0 %}
+           <tbody
+              class="govuk-table__body"
+              data-testid="no-data-message"
+              >
+              <tr class="govuk-table__row">
+              <td
+                class="govuk-table__cell"
+              >
+              No users found.
+              </td>
+              </tr>
+            </tbody>
+        {% else %}
+          <tbody class="govuk-table__body" id="resizable-body">
+            {% for user in users %}
+            <form method="POST" action="/user-admin/offboarding" id="usersForm">
+            <input type="hidden" name="userId" value="{{ user.user_id }}">
+            <input type="hidden" name="courtId" value="{{ selectedCourtId }}">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                {{ user.first_name }} {{ user.last_name }}
+              </td>
+
+              <td class="govuk-table__cell">{{ user.email }}</td>
+
+              <td class="govuk-table__cell">
+                <select
+                  name="roleId"
+                  class="govuk-select"
+                  aria-label="Access level for {{ user.first_name }} {{ user.last_name }}"
+                  onchange="this.form.submit()"
+                >
+                {% for role in roles %}
+                  {% if role.name != "Level 2" and role.name != "Level 4" and role.name != "Level 1" %}
+                    <option disabled
+                      value="{{ role.id }}"
+                      {% if user.access.role_name === role.name %}selected{% endif %}>{{ role.name }}
+                    </option>
+                  {% else %}
+                    <option value="{{ role.id }}"
+                      {% if user.access.role_name === role.name %}selected{% endif %}>{{ role.name }}
+                    </option>
+                   {% endif %}
+                {% endfor %}
+                </select>
+              </td>
+
+              <td class="govuk-table__cell">
+              <select
+                name="active"
+                  class="govuk-select"
+                  aria-label="Active status for {{ user.first_name }} {{ user.last_name }}"
+                   onchange="this.form.submit()"
+                >
+                  <option value="True"
+                    {% if user.access.active == true %}selected{% endif %}>
+                    Yes
+                  </option>
+                  <option value="False"
+                    {% if user.access.active == false %}selected{% endif %}>
+                    No
+                  </option>
+                </select>
+              </td>
+
+               <td class="govuk-table__cell">{{ user.access.last_access }}</td>
+            </tr>
+            </form>
+            {% endfor %}
+          </tbody>
+        {% endif %}
+        </table>
+
+      </form>
+
+</div>
+{% endblock %}

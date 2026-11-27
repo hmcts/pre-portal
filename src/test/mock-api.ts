@@ -6,6 +6,7 @@ import {
   PutAuditRequest,
   Recording,
   RecordingPlaybackData,
+  Role,
   SearchAuditLogsRequest,
   SearchRecordingsRequest,
 } from '../main/services/pre-api/types';
@@ -13,6 +14,7 @@ import { PreClient } from '../main/services/pre-api/pre-client';
 import { AxiosResponse } from 'axios';
 import { Terms } from '../main/types/terms';
 import { jest } from '@jest/globals';
+import { UserBasicAccessInfo } from '../main/types/user-by-court';
 
 export const mockCourts: Court[] = [
   {
@@ -237,6 +239,35 @@ export function mockGetAudit(audit?: Audit) {
   jest.spyOn(PreClient.prototype, 'getAudit').mockImplementation(async (xUserId: string, id: string) => {
     return Promise.resolve(mockAuditLogs.find(r => r.id === id) || null);
   });
+}
+
+export function mockGetUsersByCourt(users?: UserBasicAccessInfo[]) {
+  if (users !== undefined) {
+    jest
+      .spyOn(PreClient.prototype, 'getUsersByCourt')
+      .mockImplementation(async (xUserId: string, requestedCourtId: string) => {
+        return Promise.resolve(users);
+      });
+    return;
+  }
+}
+
+export function mockGetCourtIdsAndNames(courtMap?: Map<string, string>) {
+  if (courtMap !== undefined) {
+    jest.spyOn(PreClient.prototype, 'getCourtIdsAndNames').mockImplementation(async (xUserId: string) => {
+      return Promise.resolve(courtMap);
+    });
+    return;
+  }
+}
+
+export function mockGetRoles(roles?: Role[]) {
+  if (roles !== undefined) {
+    jest.spyOn(PreClient.prototype, 'getRoles').mockImplementation(async (xUserId: string) => {
+      return Promise.resolve(roles);
+    });
+    return;
+  }
 }
 
 export function mockGetAuditLogs(auditLogs?: Audit[], page: number = 0) {

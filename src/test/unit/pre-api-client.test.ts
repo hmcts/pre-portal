@@ -16,7 +16,7 @@ import {
   SearchRecordingsRequest,
 } from '../../main/services/pre-api/types';
 import { describe } from '@jest/globals';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { mockeduser } from './test-helper';
 import { AccessStatus } from '../../main/types/access-status';
 import FormData from 'form-data';
@@ -990,6 +990,199 @@ describe('PreClient', () => {
       totalElements: 12,
       size: 10,
       ...overrides,
+    });
+  });
+
+  describe('mapUserBasicInfo', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    const makeResponse = (users: any[]): AxiosResponse =>
+      ({
+        data: { _embedded: { userDTOList: users } },
+        status: 200,
+        statusText: 'OK',
+        headers: {},
+        config: {} as any,
+      }) as AxiosResponse;
+
+    it('returns empty array when no users exist', () => {
+      const response = { data: {} } as AxiosResponse;
+      expect(preClient.mapUserBasicInfo(response, 'court-1')).toEqual([]);
+    });
+
+    it('returns only users with matching court access', () => {
+      const response = makeResponse([
+        {
+          first_name: 'Alice',
+          last_name: 'Smith',
+          email: 'alice@test.com',
+          app_access: [
+            {
+              court: { id: 'court-1' },
+              role: { name: 'Judge' },
+              active: true,
+              last_access: '2026-11-21T10:00:00Z',
+            },
+          ],
+        },
+        {
+          first_name: 'Bob',
+          last_name: 'Jones',
+          email: 'bob@test.com',
+          app_access: [
+            {
+              court: { id: 'court-2' },
+              role: { name: 'Clerk' },
+              active: true,
+              last_access: '2026-11-20T10:00:00Z',
+            },
+          ],
+        },
+      ]);
+
+      expect(preClient.mapUserBasicInfo(response, 'court-1')).toEqual([
+        {
+          first_name: 'Alice',
+          last_name: 'Smith',
+          email: 'alice@test.com',
+          access: {
+            court_id: 'court-1',
+            last_access: '21/11/2026 10:00:00',
+            role_name: 'Judge',
+            active: true,
+          },
+        },
+      ]);
+    });
+
+    it('skips users with missing/empty app_access', () => {
+      const response = makeResponse([
+        { first_name: 'A', last_name: 'B', email: 'a@test.com', app_access: [] },
+        { first_name: 'C', last_name: 'D', email: 'c@test.com', app_access: null },
+      ]);
+
+      expect(preClient.mapUserBasicInfo(response, 'court-1')).toEqual([]);
+    });
+
+    it('uses "None recorded" when formatted date is empty', () => {
+      const response = makeResponse([
+        {
+          first_name: 'Alice',
+          last_name: 'Smith',
+          email: 'alice@test.com',
+          app_access: [
+            {
+              court: { id: 'court-1' },
+              role: { name: 'Judge' },
+              active: false,
+              last_access: null,
+            },
+          ],
+        },
+      ]);
+
+      const result = preClient.mapUserBasicInfo(response, 'court-1');
+
+      expect(result[0].access.last_access).toBe('None recorded');
+    });
+  });
+
+  describe('PreClient.getUsersByCourt', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('returns an empty array when no users are found', async () => {
+      mockedAxios.get.mockResolvedValueOnce({
+        data: {
+          page: {
+            number: 0,
+            totalPages: 1,
+            totalElements: 0,
+            size: 25,
+          },
+        },
+      } as any);
+
+      const result = await preClient.getUsersByCourt('x-user', 'court-1');
+
+      expect(result).toEqual([]);
+      expect(mockedAxios.get).toHaveBeenCalledTimes(1);
+      expect(mockedAxios.get).toHaveBeenCalledWith('/users/by-court/court-1', {
+        headers: { 'X-User-Id': 'x-user' },
+      });
+    });
+  });
+
+  describe('PreClient.getCourtIdsAndNames', () => {
+    let client: PreClient;
+
+    beforeEach(() => {
+      client = new PreClient();
+    });
+
+    it('collects courts across pages, filters invalid entries, and sorts by name', async () => {
+      jest
+        .spyOn(client, 'getCourts')
+        .mockResolvedValueOnce({
+          _embedded: {
+            courtDTOList: [
+              { id: 2, name: 'York' },
+              { id: null, name: 'Invalid' }, // filtered
+              { id: 1, name: 'Bristol' },
+            ],
+          },
+          _links: { next: { href: '/courts?page=1' } },
+        })
+        .mockResolvedValueOnce({
+          _embedded: {
+            courtDTOList: [{ id: 3, name: 'Leeds' }],
+          },
+          _links: {}, // no next page
+        });
+
+      const result = await client.getCourtIdsAndNames('user-1');
+
+      expect(client.getCourts).toHaveBeenNthCalledWith(1, 'user-1', 0, 100);
+      expect(client.getCourts).toHaveBeenNthCalledWith(2, 'user-1', 1, 100);
+
+      expect([...result.entries()]).toEqual([
+        ['1', 'Bristol'],
+        ['3', 'Leeds'],
+        ['2', 'York'],
+      ]);
+    });
+
+    it('returns empty map when API returns no courts', async () => {
+      jest.spyOn(client, 'getCourts').mockResolvedValueOnce({
+        _embedded: { courtDTOList: [] },
+        _links: {},
+      });
+
+      const result = await client.getCourtIdsAndNames('user-1');
+
+      expect(result.size).toBe(0);
+      expect(client.getCourts).toHaveBeenCalledTimes(1);
+    });
+
+    it('stops pagination when next link exists but page is empty', async () => {
+      jest
+        .spyOn(client, 'getCourts')
+        .mockResolvedValueOnce({
+          _embedded: { courtDTOList: [{ id: 10, name: 'Alpha' }] },
+          _links: { next: { href: '/courts?page=1' } },
+        })
+        .mockResolvedValueOnce({
+          _embedded: { courtDTOList: [] },
+          _links: { next: { href: '/courts?page=2' } }, // should still stop due to empty list
+        });
+
+      const result = await client.getCourtIdsAndNames('user-1');
+
+      expect(client.getCourts).toHaveBeenCalledTimes(2);
+      expect([...result.entries()]).toEqual([['10', 'Alpha']]);
     });
   });
 });

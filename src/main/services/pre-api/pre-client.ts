@@ -6,27 +6,31 @@ import { RedisService } from '../../app/redis/RedisService';
 import { LiveEvent } from '../../types/live-event';
 import {
   Audit,
+  CaptureSession,
   Court as ApiCourt,
   EditRequest,
   PaginatedRequest,
   Pagination,
   PutAuditRequest,
+  PutUserAccessRequest,
   Recording,
   RecordingPlaybackData,
+  Role,
   SearchAuditLogsRequest,
   SearchEditsRequest,
   SearchRecordingsRequest,
-  CaptureSession,
 } from './types';
 
 import { Logger } from '@hmcts/nodejs-logging';
 import axios, { AxiosResponse } from 'axios';
 import FormData from 'form-data';
-import config = require('config');
 import { HealthResponse } from '../../types/health';
 import { Court } from '../../types/court';
 import qs from 'qs';
 import { UpdateUser } from '../../types/update-user';
+import { UserBasicAccessInfo } from '../../types/user-by-court';
+import config = require('config');
+import { formatDateToDDMMYYYY } from '../../utils/convert-date';
 
 export class PreClient {
   logger = Logger.getLogger('pre-client');
@@ -42,6 +46,7 @@ export class PreClient {
     const redisKey = config.get('session.redis.key') as string;
     await this.initializeRedisClient(redisHost, redisKey);
   }
+
   private async initializeRedisClient(redisHost: string, redisKey: string) {
     try {
       this.redisClient = await this.redisService.getClient(redisHost, redisKey, this.logger);
@@ -182,6 +187,21 @@ export class PreClient {
     }
   }
 
+  public async putUserAccess(xUserId: string, request: PutUserAccessRequest): Promise<AxiosResponse> {
+    const logger = Logger.getLogger('put-user-access');
+    try {
+      logger.info('About to call: PUT /users/access/' + request.user_id, { request });
+      return await axios.put('/users/access/' + request.user_id, request, {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+      });
+    } catch (e) {
+      this.logger.error(e.message);
+      throw e;
+    }
+  }
+
   public async getUserByClaimEmail(email: string): Promise<UserProfile> {
     let userProfile: UserProfile;
     try {
@@ -239,6 +259,18 @@ export class PreClient {
         },
       }
     );
+  }
+
+  public async getUsersByCourt(xUserId: string, requestedCourtId: string): Promise<UserBasicAccessInfo[]> {
+    const response: AxiosResponse = await axios.get('/users/by-court/' + requestedCourtId, {
+      headers: { 'X-User-Id': xUserId },
+    });
+
+    let mappedUsers: UserBasicAccessInfo[] = [];
+
+    mappedUsers.push(...this.mapUserBasicInfo(response, requestedCourtId));
+
+    return mappedUsers;
   }
 
   public async getUserByEmail(email: string): Promise<UserProfile> {
@@ -569,6 +601,7 @@ export class PreClient {
       throw e;
     }
   }
+
   public async submitMigrationRecords(xUserId: string): Promise<void> {
     try {
       await axios.post('/vf-migration-records/submit', null, {
@@ -634,6 +667,20 @@ export class PreClient {
     }
   }
 
+  public async getRoles(xUserId: string): Promise<Role[] | null> {
+    try {
+      const response = await axios.get('/roles', {
+        headers: {
+          'X-User-Id': xUserId,
+        },
+      });
+      return response.data as any;
+    } catch (e) {
+      this.logger.error(e);
+      throw e;
+    }
+  }
+
   public async getAudit(xUserId: string, id: string): Promise<Audit | null> {
     try {
       const response = await axios.get('/audit/' + id, {
@@ -693,5 +740,63 @@ export class PreClient {
       // rethrow the error for the UI
       throw e;
     }
+  }
+
+  public async getCourtIdsAndNames(xUserId: string): Promise<Map<string, string>> {
+    let page = 0;
+    let hasNext = true;
+    const courtIdAndNameMap = new Map<string, string>();
+
+    while (hasNext) {
+      const courtsResponse = await this.getCourts(xUserId, page, 100);
+      const courtList: Court[] = courtsResponse?._embedded?.courtDTOList ?? [];
+
+      for (const court of courtList) {
+        if (court.id !== undefined && court.id !== null && court.name) {
+          courtIdAndNameMap.set(String(court.id), court.name);
+        }
+      }
+
+      hasNext = Boolean(courtsResponse?._links?.next) && courtList.length > 0;
+      page++;
+    }
+
+    return new Map<string, string>(
+      [...courtIdAndNameMap.entries()].sort(([, nameA], [, nameB]) => nameA.localeCompare(nameB))
+    );
+  }
+
+  public mapUserBasicInfo(response: AxiosResponse, requestedCourtId: string): UserBasicAccessInfo[] {
+    const users = response.data?._embedded?.userDTOList ?? [];
+    return users.flatMap(
+      (user: { id: string; app_access: any[]; first_name: string; last_name: string; email: string }) => {
+        if (!user.app_access || user.app_access.length === 0) {
+          return [];
+        }
+
+        const matchingAccess = user.app_access.find(access => access.court?.id === requestedCourtId);
+
+        if (!matchingAccess) {
+          return [];
+        }
+
+        const lastAccess: string = formatDateToDDMMYYYY(matchingAccess.last_access) || 'None recorded';
+
+        const mappedUser: UserBasicAccessInfo = {
+          user_id: user.id,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          email: user.email,
+          access: {
+            court_id: matchingAccess.court.id,
+            last_access: lastAccess,
+            role_name: matchingAccess.role.name,
+            active: matchingAccess.active,
+          },
+        };
+
+        return [mappedUser];
+      }
+    );
   }
 }
