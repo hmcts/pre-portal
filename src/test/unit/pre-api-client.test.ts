@@ -1114,7 +1114,6 @@ describe('PreClient', () => {
         headers: { 'X-User-Id': 'x-user' },
       });
     });
-
   });
 
   describe('PreClient.getCourtIdsAndNames', () => {

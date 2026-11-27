@@ -1,8 +1,8 @@
-import {Nunjucks} from "../../../../main/modules/nunjucks";
-import {mockGetCourtIdsAndNames, mockGetRoles, mockGetUsersByCourt} from "../../../mock-api";
-import {Role} from "../../../../main/services/pre-api/types";
-import {mockeduser} from "../../test-helper";
-import {UserProfile} from "../../../../main/types/user-profile";
+import { Nunjucks } from '../../../../main/modules/nunjucks';
+import { mockGetCourtIdsAndNames, mockGetRoles, mockGetUsersByCourt } from '../../../mock-api';
+import { Role } from '../../../../main/services/pre-api/types';
+import { mockeduser } from '../../test-helper';
+import { UserProfile } from '../../../../main/types/user-profile';
 
 jest.mock('express-openid-connect', () => {
   return {
@@ -49,22 +49,22 @@ describe('offboarding route', () => {
         last_access: '2026-01-01T12:00:00Z',
         role_name: 'Admin',
         active: true,
-      }
+      },
     };
 
     mockGetUsersByCourt([mockUser]);
     mockGetCourtIdsAndNames(new Map([['1abc2', 'Example Court']]));
 
-    let mockRoles: Role[] = [{
-      id: 'A1',
-      name: 'Admin'
-    }];
+    let mockRoles: Role[] = [
+      {
+        id: 'A1',
+        name: 'Admin',
+      },
+    ];
     mockGetRoles(mockRoles);
 
     const offboarding = require('../../../../main/routes/users/offboarding').default;
     offboarding(app);
-
-
   });
 
   test('Users not visible until court is selected', async () => {
@@ -104,5 +104,4 @@ describe('offboarding route', () => {
     expect(adminOption).toContain('disabled');
     expect(adminOption).toContain('selected');
   });
-
 });
