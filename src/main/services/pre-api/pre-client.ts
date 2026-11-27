@@ -767,7 +767,8 @@ export class PreClient {
   }
 
   public mapUserBasicInfo(response: AxiosResponse, requestedCourtId: string): UserBasicAccessInfo[] {
-    return response.data.flatMap(
+    const users = response.data?._embedded?.userDTOList ?? [];
+    return users.flatMap(
       (user: { id: string; app_access: any[]; first_name: string; last_name: string; email: string }) => {
         if (!user.app_access || user.app_access.length === 0) {
           return [];

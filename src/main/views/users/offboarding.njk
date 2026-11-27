@@ -14,9 +14,7 @@
       aria-describedby="select-court-by-name"
       onchange="this.form.submit()"
       >
-        <option value="{{ selectedCourtId or '' }}">
-          {{ selectedCourtName or 'Choose court name' }}
-        </option>
+        <option value="{{ selectedCourtId or '' }}">{{ selectedCourtName or 'Choose court name' }}</option>
         {% for court in courtList %}
           {% if ((court.id or '') | string) != ((selectedCourtId or '') | string) %}
             <option value="{{ court.id }}">
@@ -76,13 +74,11 @@
                   {% if role.name != "Level 2" and role.name != "Level 4" and role.name != "Level 1" %}
                     <option disabled
                       value="{{ role.id }}"
-                      {% if user.access.role_name === role.name %}selected{% endif %}>
-                      {{ role.name }}
+                      {% if user.access.role_name === role.name %}selected{% endif %}>{{ role.name }}
                     </option>
                   {% else %}
                     <option value="{{ role.id }}"
-                      {% if user.access.role_name === role.name %}selected{% endif %}>
-                      {{ role.name }}
+                      {% if user.access.role_name === role.name %}selected{% endif %}>{{ role.name }}
                     </option>
                    {% endif %}
                 {% endfor %}

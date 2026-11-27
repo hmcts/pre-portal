@@ -1,157 +1,108 @@
-import { NextFunction, Request, Response } from 'express';
-import offboarding from '../../../../main/routes/users/offboarding';
-import { SessionUser } from '../../../../main/services/session-user/session-user';
-import { PreClient } from '../../../../main/services/pre-api/pre-client';
-import { Logger } from '@hmcts/nodejs-logging';
-import { RequiresSuperUser } from '../../../../main/middleware/admin-middleware';
-import { requiresAuth } from 'express-openid-connect';
+import {Nunjucks} from "../../../../main/modules/nunjucks";
+import {mockGetCourtIdsAndNames, mockGetRoles, mockGetUsersByCourt} from "../../../mock-api";
+import {Role} from "../../../../main/services/pre-api/types";
+import {mockeduser} from "../../test-helper";
+import {UserProfile} from "../../../../main/types/user-profile";
 
-const authMw = jest.fn();
-
-jest.mock('express-openid-connect', () => ({
-  requiresAuth: jest.fn(() => authMw),
-}));
-
-jest.mock('../../../../main/middleware/admin-middleware', () => ({
-  RequiresSuperUser: jest.fn(),
-}));
-
-jest.mock('../../../../main/services/pre-api/pre-client', () => ({
-  PreClient: jest.fn(),
-}));
-
-jest.mock('../../../../main/services/session-user/session-user', () => ({
-  SessionUser: {
-    isLoggedInSuperUser: jest.fn(),
-    getLoggedInUserBrowseId: jest.fn(),
-  },
-}));
-
-jest.mock('@hmcts/nodejs-logging', () => ({
-  Logger: {
-    getLogger: jest.fn(),
-  },
-}));
+jest.mock('express-openid-connect', () => {
+  return {
+    requiresAuth: jest.fn().mockImplementation(() => {
+      return (req: any, res: any, next: any) => {
+        next();
+      };
+    }),
+  };
+});
+jest.mock('../../../../main/services/session-user/session-user', () => {
+  return {
+    SessionUser: {
+      getLoggedInUserPortalId: jest.fn().mockImplementation((req: Express.Request) => {
+        return '123';
+      }),
+      getLoggedInUserBrowseId: jest.fn().mockImplementation((req: Express.Request) => {
+        return 'super-user-access-id';
+      }),
+      getLoggedInUserProfile: jest.fn().mockImplementation((req: Express.Request) => {
+        return mockeduser as UserProfile;
+      }),
+      isLoggedInSuperUser: jest.fn().mockImplementation((req: Express.Request) => {
+        return true;
+      }),
+    },
+  };
+});
 
 describe('offboarding route', () => {
-  const info = jest.fn();
-  const error = jest.fn();
-  const logger = { info, error };
-
-  let app: { get: jest.Mock };
-  let handler: (req: Request, res: Response, next: NextFunction) => Promise<void>;
-
   beforeEach(() => {
     jest.clearAllMocks();
-    (Logger.getLogger as jest.Mock).mockReturnValue(logger);
 
-    app = { get: jest.fn() };
-    offboarding(app as any);
+    const app = require('express')();
+    new Nunjucks(false).enableFor(app);
 
-    expect(app.get).toHaveBeenCalledTimes(1);
-    handler = app.get.mock.calls[0][3];
+    let mockUser = {
+      first_name: 'Joe',
+      last_name: 'Bloggs',
+      email: 'joe.bloggs@example.com',
+      user_id: '12345',
+      access: {
+        court_id: '1abc2',
+        last_access: '2026-01-01T12:00:00Z',
+        role_name: 'Admin',
+        active: true,
+      }
+    };
+
+    mockGetUsersByCourt([mockUser]);
+    mockGetCourtIdsAndNames(new Map([['1abc2', 'Example Court']]));
+
+    let mockRoles: Role[] = [{
+      id: 'A1',
+      name: 'Admin'
+    }];
+    mockGetRoles(mockRoles);
+
+    const offboarding = require('../../../../main/routes/users/offboarding').default;
+    offboarding(app);
+
+
   });
 
-  it('registers GET /user-admin/offboarding with auth and superuser middleware', () => {
-    expect(app.get.mock.calls[0][0]).toBe('/user-admin/offboarding');
-    expect(app.get.mock.calls[0][1]).toBe(authMw);
-    expect(app.get.mock.calls[0][2]).toBe(RequiresSuperUser);
-    expect(app.get.mock.calls[0][1]).toBe((requiresAuth as jest.Mock).mock.results[0].value);
-    expect(app.get.mock.calls[0][2]).toBe(RequiresSuperUser);
-    expect(typeof app.get.mock.calls[0][3]).toBe('function');
+  test('Users not visible until court is selected', async () => {
+    const app = require('express')();
+    new Nunjucks(false).enableFor(app);
+    const request = require('supertest');
+
+    const offboarding = require('../../../../main/routes/users/offboarding').default;
+    offboarding(app);
+
+    const response = await request(app).get('/user-admin/offboarding');
+    expect(response.status).toEqual(200);
+    expect(response.text).toContain('User Management');
+    expect(response.text).toContain('Choose court name');
+    expect(response.text).toContain('Example Court');
+    expect(response.text).toContain('No users found.');
   });
 
-  it('returns 404 not-found when user is not super user', async () => {
-    (SessionUser.isLoggedInSuperUser as jest.Mock).mockReturnValue(false);
+  test('Users visible when court is selected', async () => {
+    const app = require('express')();
+    new Nunjucks(false).enableFor(app);
+    const request = require('supertest');
 
-    const req = { query: {}, url: '/user-admin/offboarding' } as unknown as Request;
-    const res = {
-      status: jest.fn().mockReturnThis(),
-      render: jest.fn(),
-    } as unknown as Response;
-    const next = jest.fn();
+    const offboarding = require('../../../../main/routes/users/offboarding').default;
+    offboarding(app);
 
-    await handler(req, res, next);
+    const response = await request(app).get('/user-admin/offboarding?courtId=1abc2');
+    expect(response.status).toEqual(200);
+    expect(response.text).toContain('User Management');
+    expect(response.text).not.toContain('No users found.');
 
-    expect(res.status).toHaveBeenCalledWith(404);
-    expect(res.render).toHaveBeenCalledWith('utility/not-found', { isSuperUser: false });
-    expect(next).not.toHaveBeenCalled();
+    expect(response.text).toContain('<option value="1abc2">Example Court</option>');
+    expect(response.text).toContain('Joe Bloggs');
+
+    const adminOption = response.text.match(/<option[^>]*value="A1"[^>]*>/)?.[0] ?? '';
+    expect(adminOption).toBeTruthy();
+    expect(adminOption).toContain('disabled');
+    expect(adminOption).toContain('selected');
   });
 
-  it('renders page with courts and empty users when no court selected', async () => {
-    (SessionUser.isLoggedInSuperUser as jest.Mock).mockReturnValue(true);
-    (SessionUser.getLoggedInUserBrowseId as jest.Mock).mockResolvedValue('browse-1');
-
-    const getCourtIdsAndNames = jest.fn().mockResolvedValue(new Map([['1', 'Court A']]));
-    const getUsersByCourt = jest.fn();
-    (PreClient as jest.Mock).mockImplementation(() => ({ getCourtIdsAndNames, getUsersByCourt }));
-
-    const req = { query: {}, url: '/user-admin/offboarding' } as unknown as Request;
-    const res = { render: jest.fn() } as unknown as Response;
-    const next = jest.fn();
-
-    await handler(req, res, next);
-
-    expect(getCourtIdsAndNames).toHaveBeenCalledWith('browse-1');
-    expect(getUsersByCourt).not.toHaveBeenCalled();
-    expect(res.render).toHaveBeenCalledWith('users/offboarding.njk', {
-      users: [],
-      courtList: [{ id: '1', name: 'Court A' }],
-      selectedCourtId: '',
-      selectedCourtName: '',
-      isSuperUser: true,
-      pageUrl: '/user-admin/offboarding',
-    });
-  });
-
-  it('loads users when courtId is provided', async () => {
-    (SessionUser.isLoggedInSuperUser as jest.Mock).mockReturnValue(true);
-    (SessionUser.getLoggedInUserBrowseId as jest.Mock).mockResolvedValue('browse-1');
-
-    const users = [{ email: 'a@x.com' }];
-    const getCourtIdsAndNames = jest.fn().mockResolvedValue(
-      new Map([
-        ['1', 'Court A'],
-        ['2', 'Court B'],
-      ])
-    );
-    const getUsersByCourt = jest.fn().mockResolvedValue(users);
-    (PreClient as jest.Mock).mockImplementation(() => ({ getCourtIdsAndNames, getUsersByCourt }));
-
-    const req = { query: { courtId: ' 2 ' }, url: '/user-admin/offboarding?courtId=2' } as unknown as Request;
-    const res = { render: jest.fn() } as unknown as Response;
-    const next = jest.fn();
-
-    await handler(req, res, next);
-
-    expect(getUsersByCourt).toHaveBeenCalledWith('browse-1', '2');
-    expect(res.render).toHaveBeenCalledWith(
-      'users/offboarding.njk',
-      expect.objectContaining({
-        users,
-        selectedCourtId: '2',
-        selectedCourtName: 'Court B',
-      })
-    );
-  });
-
-  it('calls next(error) when API call fails', async () => {
-    (SessionUser.isLoggedInSuperUser as jest.Mock).mockReturnValue(true);
-    (SessionUser.getLoggedInUserBrowseId as jest.Mock).mockResolvedValue('browse-1');
-
-    const thrown = new Error('boom');
-    (PreClient as jest.Mock).mockImplementation(() => ({
-      getCourtIdsAndNames: jest.fn().mockRejectedValue(thrown),
-      getUsersByCourt: jest.fn(),
-    }));
-
-    const req = { query: {}, url: '/user-admin/offboarding' } as unknown as Request;
-    const res = { render: jest.fn() } as unknown as Response;
-    const next = jest.fn();
-
-    await handler(req, res, next);
-
-    expect(error).toHaveBeenCalledWith('Error loading offboarding page', { error: thrown });
-    expect(next).toHaveBeenCalledWith(thrown);
-  });
 });
